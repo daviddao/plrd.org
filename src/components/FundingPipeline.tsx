@@ -14,7 +14,6 @@ interface Stage {
   desc: string
   retro: boolean
   tracks: Track[] | null
-  placeholder?: string
 }
 
 const stages: Stage[] = [
@@ -25,8 +24,6 @@ const stages: Stage[] = [
     desc: 'Primitives & Research',
     retro: false,
     tracks: null,
-    placeholder:
-      'Tracks could map to the 4× Opportunity Spaces — DPI, PGF, MRV, and Governance Primitives.',
   },
   {
     number: '02',
@@ -170,7 +167,7 @@ export default function FundingPipeline() {
                 <p className="text-xs text-gray-500 mb-3">{stage.desc}</p>
 
                 {/* Expand hint */}
-                {(stage.tracks || stage.placeholder) && (
+                {stage.tracks && (
                   <div className="flex items-center gap-1 text-xs text-gray-500 group-hover:text-blue transition-colors">
                     <span>{isOpen ? 'Hide tracks' : 'Show tracks'}</span>
                     <svg
@@ -194,7 +191,7 @@ export default function FundingPipeline() {
               </button>
 
               {/* Tracks — expandable */}
-              {(stage.tracks || stage.placeholder) && (
+              {stage.tracks && (
                 <div
                   className={[
                     'overflow-hidden transition-all duration-300',
@@ -203,21 +200,15 @@ export default function FundingPipeline() {
                   style={{ maxHeight: isOpen ? '600px' : '0px' }}
                 >
                   <div className="mt-3 flex flex-col gap-2">
-                    {stage.tracks ? (
-                      stage.tracks.map((track, j) => (
-                        <div
-                          key={j}
-                          className="bg-white border border-gray-100 border-l-2 border-l-transparent hover:border-l-blue hover:border-blue/30 hover:translate-x-1 transition-all p-4 rounded-lg"
-                        >
-                          <PartnerLabel partner={track.partner} />
-                          <p className="text-xs text-gray-500 mt-0.5">{track.type}</p>
-                        </div>
-                      ))
-                    ) : (
-                      <p className="text-xs text-gray-500 italic leading-relaxed px-1">
-                        {stage.placeholder}
-                      </p>
-                    )}
+                    {stage.tracks.map((track, j) => (
+                      <div
+                        key={j}
+                        className="bg-white border border-gray-100 border-l-2 border-l-transparent hover:border-l-blue hover:border-blue/30 hover:translate-x-1 transition-all p-4 rounded-lg"
+                      >
+                        <PartnerLabel partner={track.partner} />
+                        <p className="text-xs text-gray-500 mt-0.5">{track.type}</p>
+                      </div>
+                    ))}
                   </div>
                 </div>
               )}
