@@ -2,6 +2,7 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 import AuthorCard from '@/components/AuthorCard'
 import Breadcrumb from '@/components/Breadcrumb'
+import FundingPipeline from '@/components/FundingPipeline'
 
 export const metadata: Metadata = {
   title: 'Economies & Governance',
@@ -135,6 +136,12 @@ export default function FA2MainPage() {
           title="Dependency Graph"
           description="Strategic dependency trees across 4 inflection points."
         />
+      </div>
+
+      {/* Grants */}
+      <div className="mt-16 mb-12 pb-12 border-b border-gray-100">
+        <h2 className="text-sm text-gray-500 uppercase tracking-wide mb-6">Grants</h2>
+        <FundingPipeline />
       </div>
 
       {/* How to Engage */}
