@@ -23,7 +23,12 @@ const stages: Stage[] = [
     amount: '$5–10K',
     desc: 'Primitives & Research',
     retro: false,
-    tracks: null,
+    tracks: [
+      { partner: 'Sovereign DPI', type: 'Sovereign Digital Public Infrastructure' },
+      { partner: 'Public Goods Funding', type: 'AI & Crypto-Native PGF at Nation-Scale' },
+      { partner: 'Governance', type: 'Crypto-Native Governance & Democracy' },
+      { partner: 'Climate', type: 'Decentralized Climate Infrastructure & Finance' },
+    ],
   },
   {
     number: '02',
@@ -33,6 +38,8 @@ const stages: Stage[] = [
     retro: true,
     tracks: [
       { partner: 'PL × EF', type: 'Academic Research Paper' },
+      { partner: 'PL × Octant', type: 'XYZ' },
+      { partner: 'PL × NEAR', type: 'XYZ' },
     ],
   },
   {
