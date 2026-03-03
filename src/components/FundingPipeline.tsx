@@ -33,9 +33,6 @@ const stages: Stage[] = [
     retro: true,
     tracks: [
       { partner: 'PL × EF', type: 'Academic Research Paper' },
-      { partner: 'PL × Octant', type: 'XYZ' },
-      { partner: 'PL × NEAR', type: 'XYZ' },
-      { partner: 'PL × [Partner]', type: 'XYZ' },
     ],
   },
   {
@@ -46,8 +43,6 @@ const stages: Stage[] = [
     retro: true,
     tracks: [
       { partner: 'PL × UNDP', type: 'Country Track' },
-      { partner: 'PL × [Country]', type: 'Track' },
-      { partner: 'PL × [Country]', type: 'Track' },
     ],
   },
   {
@@ -58,7 +53,6 @@ const stages: Stage[] = [
     retro: false,
     tracks: [
       { partner: 'PL Capital', type: 'Direct Investment' },
-      { partner: 'PL × [VC Partner]', type: 'Track' },
     ],
   },
 ]
