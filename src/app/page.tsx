@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { publications, talks } from '@/lib/content'
+import { publications, talks, blogPosts } from '@/lib/content'
 import { formatDate } from '@/lib/format'
 import { AreaIcon } from '@/components/AreaIcons'
 import { GeoIllustration } from '@/components/GeoIllustration'
@@ -32,7 +32,16 @@ function getLatestUpdates(count: number): UpdateItem[] {
     areas: (t.areas || []).filter(Boolean) as string[],
   }))
 
-  return [...pubs, ...talkItems]
+  const blogItems = blogPosts.map((b) => ({
+    title: b.title || b.slug,
+    date: b.date || '',
+    type: 'Blog',
+    permalink: b.external_url || `/blog/${b.slug}`,
+    slug: b.slug,
+    areas: [],
+  }))
+
+  return [...pubs, ...talkItems, ...blogItems]
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .slice(0, count)
 }
