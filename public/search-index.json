@@ -1064,6 +1064,13 @@
     "relpermalink": "/authors/dario-catalano/"
   },
   {
+    "title": "David A. Markowitz",
+    "summary": "Neuro Advisor",
+    "date": "",
+    "type": "author",
+    "relpermalink": "/authors/david-markowitz/"
+  },
+  {
     "title": "David Dalrymple",
     "summary": "Research Scientist · Distributed Systems · Economics · Type Theory · Category Theory · AGI Ethics · Neuroinformatics",
     "date": "",
@@ -1099,6 +1106,20 @@
     "relpermalink": "/authors/dennis-trautwein/"
   },
   {
+    "title": "Doris Tsao",
+    "summary": "Neuro Advisor",
+    "date": "",
+    "type": "author",
+    "relpermalink": "/authors/doris-tsao/"
+  },
+  {
+    "title": "Edward Chang, M.D.",
+    "summary": "Neuro Advisor",
+    "date": "",
+    "type": "author",
+    "relpermalink": "/authors/edward-chang/"
+  },
+  {
     "title": "Evan Miyazono",
     "summary": "Research Team Lead",
     "date": "",
@@ -1111,6 +1132,13 @@
     "date": "",
     "type": "author",
     "relpermalink": "/authors/friedel-ziegelmayer/"
+  },
+  {
+    "title": "Greg Wayne, Ph.D.",
+    "summary": "Neuro Advisor",
+    "date": "",
+    "type": "author",
+    "relpermalink": "/authors/greg-wayne/"
   },
   {
     "title": "Guillaume Michel",
@@ -1146,6 +1174,13 @@
     "date": "",
     "type": "author",
     "relpermalink": "/authors/henrique-moniz/"
+  },
+  {
+    "title": "Ilan Gur",
+    "summary": "Neuro Advisor",
+    "date": "",
+    "type": "author",
+    "relpermalink": "/authors/ilan-gur/"
   },
   {
     "title": "Ioannis Caragiannis",
@@ -1265,6 +1300,20 @@
     "date": "",
     "type": "author",
     "relpermalink": "/authors/matteo-campanelli/"
+  },
+  {
+    "title": "Matthew Botvinick",
+    "summary": "Neuro Advisor",
+    "date": "",
+    "type": "author",
+    "relpermalink": "/authors/matthew-botvinick/"
+  },
+  {
+    "title": "Max Hodak",
+    "summary": "Neuro Advisor",
+    "date": "",
+    "type": "author",
+    "relpermalink": "/authors/max-hodak/"
   },
   {
     "title": "Michael Hammersley",

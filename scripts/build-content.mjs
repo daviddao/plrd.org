@@ -211,6 +211,7 @@ function buildAreas() {
     date: a.date || '',
     summary: a.summary || '',
     leads: a.leads || [],
+    advisors: a.advisors || [],
     html: renderMd(a.content),
   }))
   return items

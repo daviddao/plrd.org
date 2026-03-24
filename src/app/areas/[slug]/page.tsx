@@ -67,6 +67,18 @@ export default async function AreaPage({ params }: Props) {
         )}
       </div>
 
+      {/* Advisors */}
+      {area.advisors && area.advisors.length > 0 && (
+        <div className="relative z-10 mt-10 mb-2">
+          <h2 className="text-sm text-gray-500 uppercase tracking-wide mb-4">Advisors</h2>
+          <div className="flex flex-wrap gap-3">
+            {area.advisors.map((authorSlug) => (
+              <AuthorCard key={authorSlug} slug={authorSlug} variant="advisor" />
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* Content */}
       {area.html && (
         <div className="mb-12 pb-12 border-b border-gray-100">

@@ -805,6 +805,23 @@
     "html": "<p>Dario is a professor at University of Catania. Before joining the University of Catania as faculty member, he was a full-time researcher at the French CNRS. There he was part of the Crypto Team at the Laboratoire d’Informatique de l’Ecole Normale Supérieure in Paris for five years: one year as a postdoc, and four as a CNRS researcher.</p>\n<p>Dario's main research interests are in the area of cryptography, and more specifically, on questions related to reducing the gap between theory and practice in cryptography. His most recent works address the realization of advanced yet efficient encryption mechanisms and the design of secure distributed digital signature schemes.</p>\n"
   },
   {
+    "slug": "david-markowitz",
+    "name": "David A. Markowitz",
+    "role": "Neuro Advisor",
+    "groups": [
+      "IARPA"
+    ],
+    "user_groups": [
+      "Neuro Advisors"
+    ],
+    "interests": [],
+    "quote": "",
+    "social": [],
+    "education": null,
+    "avatarPath": "/images/authors/david-markowitz/avatar.webp",
+    "html": "<p>David is a scientist and engineer with over a decade of experience leading applied research in neuroscience, biotechnology, and computing. As an IARPA Program Manager, he designed and led moonshot research programs delivering transformative capabilities for national security, commercial industry, and academic research. Prior to public service, he contributed advances in computational neuroscience and neural engineering as an academic research scientist, earning a 2019 Presidential Early Career Award for Scientists and Engineers (PECASE).</p>\n<p>He received his Ph.D. in Molecular Biology and Neuroscience from Princeton University as a DOE Computational Science Graduate Fellow and holds a degree in management from MIT.</p>\n"
+  },
+  {
     "slug": "david-dalrymple",
     "name": "David Dalrymple",
     "role": "Research Scientist",
@@ -1053,6 +1070,40 @@
     "html": "<p>Dennis has been a Research Engineer at Protocol Labs since 2022, living in Switzerland. He completed his Bachelor’s degree in extraterrestrial Physics and his Master’s in solid-state Physics at the <a href=\"https://www.uni-kiel.de/\">CAU in Kiel</a> before building the real-time event supply of the Daimler Mercedes Me backend at <a href=\"https://freiheit.com/\">freiheit.com</a> in Hamburg. Now, he is working on his PhD in Computer Science at the Georg-August-Universität in Göttingen, combining formal physics education with computer science by performing measurements in decentralized, networked systems within <a href=\"/groups/probelab/\">ProbeLab @Protocol Labs</a>. In 2023, Dennis received the Applied Network Research Prize (<a href=\"https://irtf.org/anrp/\">ANRP</a>) for his joint work on the paper <a href=\"/publications/design-and-evaluation-of-ipfs-a-storage-layer-for-the-decentralized-web/\">Design and Evaluation of IPFS: A Storage Layer for the Decentralized Web</a>.</p>\n"
   },
   {
+    "slug": "doris-tsao",
+    "name": "Doris Tsao",
+    "role": "Neuro Advisor",
+    "groups": [
+      "Astera Institute"
+    ],
+    "user_groups": [
+      "Neuro Advisors"
+    ],
+    "interests": [],
+    "quote": "",
+    "social": [],
+    "education": null,
+    "avatarPath": "/images/authors/doris-tsao/avatar.webp",
+    "html": "<p>Doris is Chief Scientist for Neuro at Astera Institute. Previously, she was a professor at UC Berkeley in the Neuroscience Department and a Howard Hughes Medical Institute Investigator. She is known for elucidating the anatomical and coding principles of the primate face-processing system and demonstrating its integration into a broader map of object space. Her theoretical work proposes a topological account of how object representations emerge in the visual system.</p>\n"
+  },
+  {
+    "slug": "edward-chang",
+    "name": "Edward Chang, M.D.",
+    "role": "Neuro Advisor",
+    "groups": [
+      "UCSF"
+    ],
+    "user_groups": [
+      "Neuro Advisors"
+    ],
+    "interests": [],
+    "quote": "",
+    "social": [],
+    "education": null,
+    "avatarPath": "/images/authors/edward-chang/avatar.webp",
+    "html": "<p>Edward is the Joan and Sanford Weill Chair of Neurological Surgery at UCSF, specializing in epilepsy, brain tumors, and advanced brain mapping. He co-directs the Center for Neural Engineering and Prostheses, a UCSF–UC Berkeley collaboration developing biomedical technology to restore function for patients with paralysis and speech disorders.</p>\n<p>His research focuses on the neural mechanisms of speech, movement, and emotion. He earned the Blavatnik National Laureate for Life Sciences in 2015 and was inducted into the National Academy of Medicine (2020) and National Academy of Sciences (2025).</p>\n"
+  },
+  {
     "slug": "evan-miyazono",
     "name": "Evan Miyazono",
     "role": "Research Team Lead",
@@ -1137,6 +1188,23 @@
     },
     "avatarPath": "/images/authors/friedel-ziegelmayer/avatar.jpg",
     "html": ""
+  },
+  {
+    "slug": "greg-wayne",
+    "name": "Greg Wayne, Ph.D.",
+    "role": "Neuro Advisor",
+    "groups": [
+      "Google DeepMind"
+    ],
+    "user_groups": [
+      "Neuro Advisors"
+    ],
+    "interests": [],
+    "quote": "",
+    "social": [],
+    "education": null,
+    "avatarPath": "/images/authors/greg-wayne/avatar.webp",
+    "html": "<p>Greg is a Distinguished Scientist at Google DeepMind. He co-authored a 2016 Nature paper on neural networks with external memory and was recognized with the MIT 35 Under 35 Inventor award. His research has spanned neural architectures, humanoid motor control, long-term credit assignment in RL, navigation, and embodied language use in virtual robots. Since 2021, he has led Google's Project Astra, a multimodal dialogue research program to develop a universal AI assistant.</p>\n"
   },
   {
     "slug": "guillaume-michel",
@@ -1371,6 +1439,23 @@
     },
     "avatarPath": "/images/authors/henrique-moniz/avatar.png",
     "html": "<p>Henrique is a mix of Research Scientist and Software Engineer. He obtained his PhD from the University of Lisbon in 2010 and has since worked at multiple companies like Microsoft Research, Google, JPMorgan Chase, and Dune Analytics.</p>\n<p>As a research scientist, his work has been on distributed computing and the consensus problem. He designed the IBFT/QBFT consensus algorithm, which was widely adopted in the blockchain industry (Quorum, Hyperledger Besu, Polygon Edge, and also SSV Networks and Obol Tech for Shared Ethereum validators).</p>\n<p>As a software engineer, he led teams at Google and Dune Analytics, solving distributed computing problems at scale (e.g., storage of Google Docs, distributed query execution).</p>\n"
+  },
+  {
+    "slug": "ilan-gur",
+    "name": "Ilan Gur",
+    "role": "Neuro Advisor",
+    "groups": [
+      "ARIA"
+    ],
+    "user_groups": [
+      "Neuro Advisors"
+    ],
+    "interests": [],
+    "quote": "",
+    "social": [],
+    "education": null,
+    "avatarPath": "/images/authors/ilan-gur/avatar.webp",
+    "html": "<p>Ilan recently completed his term as Founding CEO of the Advanced Research and Invention Agency (ARIA). Previously, he was Founder and CEO of Activate.org, a fellowship enabling entrepreneurial scientists and engineers to transform research into world-changing products. He received Ph.D., M.S., and B.S. degrees in Materials Science and Engineering from UC Berkeley, founded two science-based startups, and served as Senior Advisor &#x26; Program Director at ARPA-E.</p>\n"
   },
   {
     "slug": "ioannis-caragiannis",
@@ -2134,6 +2219,40 @@
     },
     "avatarPath": "/images/authors/matteo-campanelli/avatar.png",
     "html": "<p>Matteo is interested in the science and applications of succinct cryptographic proofs (how can I convince you that I know a potentially huge---and potentially secret---piece of data with a very very tiny proof).</p>\n<p>He joined Protocol Labs in 2022. In a previous life, he had the privilege of being a post-doctoral researcher at <a href=\"https://www.au.dk/\">Aarhus University</a> (with <a href=\"https://cs.au.dk/~orlandi/\">Claudio Orlandi</a>) and at the  <a href=\"https://software.imdea.org/index.html\">IMDEA Software Institute</a> (with <a href=\"http://www.dariofiore.it/\">Dario Fiore</a>). In 2018 his advisor, <a href=\"/authors/rosario-gennaro\">Rosario Gennaro</a>, and the City University of New York made the careless blunder of giving him a PhD.</p>\n<p>Matteo has a totally seriously-named <a href=\"http://binarywhales.com\">website</a>.</p>\n"
+  },
+  {
+    "slug": "matthew-botvinick",
+    "name": "Matthew Botvinick",
+    "role": "Neuro Advisor",
+    "groups": [
+      "Anthropic"
+    ],
+    "user_groups": [
+      "Neuro Advisors"
+    ],
+    "interests": [],
+    "quote": "",
+    "social": [],
+    "education": null,
+    "avatarPath": "/images/authors/matthew-botvinick/avatar.webp",
+    "html": "<p>Matthew is a member of technical staff at Anthropic and former Senior Director of Research at Google DeepMind. His move into AI came after twenty years in academia, starting with a Ph.D. in the Neural Basis of Cognition from Carnegie Mellon, followed by faculty positions at University of Pennsylvania and Princeton. He has authored over 150 peer-reviewed articles spanning AI, deep learning, reinforcement learning, and computational neuroscience. He holds an M.D. from Cornell with board certification in Psychiatry and is currently a Resident Fellow at Yale Law School.</p>\n"
+  },
+  {
+    "slug": "max-hodak",
+    "name": "Max Hodak",
+    "role": "Neuro Advisor",
+    "groups": [
+      "Science Corporation"
+    ],
+    "user_groups": [
+      "Neuro Advisors"
+    ],
+    "interests": [],
+    "quote": "",
+    "social": [],
+    "education": null,
+    "avatarPath": "/images/authors/max-hodak/avatar.webp",
+    "html": "<p>Max is the Founder and CEO of Science Corporation, focused on restoring vision, cognition, and mobility. Science's PRIMA retina implant has completed pivotal clinical trials with over 80% of patients achieving significant visual acuity improvements—the first BCI technology to restore functional vision. Science's biohybrid BCI uses living neurons to connect to the brain, circumventing the constraints of traditional neural interfaces.</p>\n<p>Prior to founding Science, Max was president and co-founder of Neuralink (2016) and co-founded Transcriptic, a robotic cloud laboratory for the life sciences.</p>\n"
   },
   {
     "slug": "michael-hammersley",

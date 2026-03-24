@@ -72,6 +72,7 @@ export type Area = {
   date: string
   summary: string
   leads: string[]
+  advisors: string[]
   html: string
 }
 

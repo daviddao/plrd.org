@@ -4,6 +4,15 @@ date: 2024-03-15
 summary: "Accelerate neurotechnologies to benefit humanity, focusing on breakthroughs in brain-computer interfaces (BCI)."
 leads:
   - sean-escola
+advisors:
+  - adam-marblestone
+  - david-markowitz
+  - doris-tsao
+  - edward-chang
+  - greg-wayne
+  - ilan-gur
+  - matthew-botvinick
+  - max-hodak
 ---
 Neurotechnology and AI will qualitatively change the human experience of life. Within five years, the treatment of brain disorders will be completely restructured by brain–computer interfaces (BCIs) that restore sensory or motor, and by the closed-loop control of brain states like mood via neuromodulation. Within a decade, neural augmentation will become feasible, with read/write interfaces that enable humans and machines to co-process information—expanding cognitive capabilities rather than merely compensating for deficits. Looking further ahead, we will build biologically inspired AI that spans the full range of human cognition, improving on the jagged intelligence of today's models while requiring far less energy than conventional data-center approaches. Ultimately, high-fidelity simulations of individual brains—potentially down to cellular or molecular detail—will enable our successor species: human minds in digital form.
 

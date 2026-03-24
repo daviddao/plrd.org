@@ -7,6 +7,7 @@
     "leads": [
       "molly-mackinlay"
     ],
+    "advisors": [],
     "html": "<p>This focus area encompasses AI, Robotics, and other nascent technological breakthroughs. We are exploring diverse areas of computing that promise radical transformations in how we interact with the world, including Artificial General Intelligence (AGI), Augmented Reality (AR), and Virtual Reality (VR).</p>\n<p>Our goal is to ensure responsible advancement in these fields by fostering effective resource allocation and a robust R&#x26;D pipeline. By accelerating the innovation network, we aim to overcome challenges faster than conventional systems and shape a future where these transformative technologies empower humanity.</p>\n"
   },
   {
@@ -17,6 +18,7 @@
     "leads": [
       "will-scott"
     ],
+    "advisors": [],
     "html": "<p>Digital Human Rights is centered on building a foundation of freedom and safety in the digital age. Our mission is to improve the internet by developing web3 networks, infrastructure, and new primitives that promote human agency.</p>\n<p>By making the internet more decentralized, verifiable, and secure, we aim to protect against digital totalitarianism and create better infrastructure that enshrines human rights through mathematics, incentives, and robust global governance. This involves constructing an underlying infrastructure layer with public internet digital utilities that ensure universal access and consistent connectivity for all humans worldwide.</p>\n"
   },
   {
@@ -25,6 +27,7 @@
     "date": "2024-03-15T00:00:00.000Z",
     "summary": "Creating more efficient and equitable structures for global progress through crypto-native infrastructure.",
     "leads": [],
+    "advisors": [],
     "html": "<p>This focus area is building the field of crypto-native economic and governance infrastructure, aiming to rectify the inadequacies of current macro systems which often struggle to coordinate and solve monumental challenges like climate change.</p>\n<p>By leveraging cryptoeconomics and improved governance tools, we are rethinking how capital is formed and deployed (e.g., Public Goods Funding). This movement harnesses mechanism design to align millions of people worldwide toward shared goals, creating more efficient and equitable structures that can allocate resources at the scale of nation-states for the benefit of all humanity.</p>\n"
   },
   {
@@ -34,6 +37,16 @@
     "summary": "Accelerate neurotechnologies to benefit humanity, focusing on breakthroughs in brain-computer interfaces (BCI).",
     "leads": [
       "sean-escola"
+    ],
+    "advisors": [
+      "adam-marblestone",
+      "david-markowitz",
+      "doris-tsao",
+      "edward-chang",
+      "greg-wayne",
+      "ilan-gur",
+      "matthew-botvinick",
+      "max-hodak"
     ],
     "html": "<p>Neurotechnology and AI will qualitatively change the human experience of life. Within five years, the treatment of brain disorders will be completely restructured by brain–computer interfaces (BCIs) that restore sensory or motor, and by the closed-loop control of brain states like mood via neuromodulation. Within a decade, neural augmentation will become feasible, with read/write interfaces that enable humans and machines to co-process information—expanding cognitive capabilities rather than merely compensating for deficits. Looking further ahead, we will build biologically inspired AI that spans the full range of human cognition, improving on the jagged intelligence of today's models while requiring far less energy than conventional data-center approaches. Ultimately, high-fidelity simulations of individual brains—potentially down to cellular or molecular detail—will enable our successor species: human minds in digital form.</p>\n<p>This technological future is within reach, but the certainty and timeline of its realization are subject to the choices taken by the individuals and institutions in the neurotechnology and NeuroAI ecosystem. Through venture funding, grantmaking, and field building Protocol Labs Neuro aims to influence those choices and accelerate progress to benefit millions of people.</p>\n"
   }
