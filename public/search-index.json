@@ -553,6 +553,34 @@
     "relpermalink": "/talks/voc-anastasia-gamick/"
   },
   {
+    "title": "Reversing Aging: Making 90 the New 50 with Epigenetic Rejuvenation",
+    "summary": "Yuri Deigin (CEO of YouthBio Therapeutics) presents the case for partial cellular reprogramming as a path to reversing biological ageing. He explains how Yamanaka factors can reset the epigenetic clock in cells without causing dedifferentiation, the evidence from mouse studies showing lifespan extension and tissue rejuvenation, and the translation challenges toward human therapies. Deigin also covers the landscape of longevity biotech startups, the role of VitaDAO in funding pre-clinical researc",
+    "date": "2024-11-08T00:00:00.000Z",
+    "type": "talk",
+    "relpermalink": "/talks/labweek24-yuri-deigin/"
+  },
+  {
+    "title": "Machine Consciousness",
+    "summary": "Joscha Bach (LiquidAI, formerly MIT Media Lab and Harvard) lays out a computational theory of consciousness — arguing that mind is best understood as a self-organising model that a system builds of itself and its environment. He examines what it would take for a machine to be conscious, the distinction between sentience and sapience, and why current large language models are neither. A rigorous framework connecting neuroscience, cognitive science, and AI that is essential reading for anyone buil",
+    "date": "2024-06-13T00:00:00.000Z",
+    "type": "talk",
+    "relpermalink": "/talks/labweek24-joscha-bach/"
+  },
+  {
+    "title": "Technologies for Stimulating and Simulating the Brain",
+    "summary": "Ed Boyden, inventor of optogenetics and expansion microscopy at MIT and HHMI, presents cutting-edge techniques for mapping and manipulating brain circuits at nanoscale resolution. He covers how expansion microscopy — swelling brain tissue with superabsorbent polymers to physically magnify it — enables imaging of individual synapses and molecular complexes. He also discusses optogenetic tools for controlling specific neuron populations, and how these technologies together open paths toward whole-",
+    "date": "2024-06-12T00:00:00.000Z",
+    "type": "talk",
+    "relpermalink": "/talks/labweek24-ed-boyden/"
+  },
+  {
+    "title": "Neurotechnology: Past, Present, and Future",
+    "summary": "Sumner Norman (Buck Institute for Research on Aging, formerly Caltech) delivers a comprehensive survey of neurotechnology from early EEG and deep brain stimulation through today's high-density electrode arrays and closed-loop BCI systems. He covers the engineering limits that have shaped the field — spatial resolution, biocompatibility, longevity of implants — and where breakthroughs in materials science, wireless transmission, and machine learning are opening new possibilities. A clear-eyed ass",
+    "date": "2024-06-11T00:00:00.000Z",
+    "type": "talk",
+    "relpermalink": "/talks/labweek24-sumner-norman/"
+  },
+  {
     "title": "F3 and GossipBFT: Fast finality on longest-chain protocols",
     "summary": "We present F3, a finality component designed to bring fast finality to Filecoin. F3 leverages a novel consensus protocol, GossiPBFT,  that runs on the side and finalizes tipsets in tens of seconds instead of hours, while laying the basis for verifiable cross-chain bridging.",
     "date": "2024-02-27T00:00:00.000Z",
@@ -586,6 +614,27 @@
     "date": "2023-03-29T00:00:00.000Z",
     "type": "talk",
     "relpermalink": "/talks/wipo23-jorge/"
+  },
+  {
+    "title": "Combatting Orwellian Systems with Technology",
+    "summary": "Max Tegmark (MIT, Future of Life Institute) and Juan Benet explore how powerful AI and surveillance technologies could enable authoritarian control at civilisational scale — and what technical and institutional interventions can prevent it. Tegmark draws on his AI safety research and work with the Future of Life Institute to argue that open, privacy-preserving, decentralised infrastructure is a prerequisite for preserving human agency in an AI-enabled world. Direct and practical on the connectio",
+    "date": "2023-03-01T00:00:00.000Z",
+    "type": "talk",
+    "relpermalink": "/talks/bic23-max-tegmark/"
+  },
+  {
+    "title": "Path to AGI, AI Alignment, and Digital Minds",
+    "summary": "Nick Bostrom (Oxford Future of Humanity Institute, author of Superintelligence) and Juan Benet discuss the most plausible paths to artificial general intelligence, what alignment actually requires technically, and the philosophical status of digital minds. Bostrom examines why the alignment problem is so hard, what orthogonality and instrumental convergence imply for AI risk, and how human-level AI might arrive suddenly via recursive self-improvement. A foundational conversation on the civilisat",
+    "date": "2023-02-15T00:00:00.000Z",
+    "type": "talk",
+    "relpermalink": "/talks/bic23-nick-bostrom/"
+  },
+  {
+    "title": "The Advancement of Neurotechnology",
+    "summary": "Adam Marblestone (Convergent Research, Schmidt Futures) and Juan Benet map the neurotechnology landscape and the research infrastructure needed to accelerate it. Marblestone, who served as Chief Strategy Officer at Kernel before co-founding Convergent Research, surveys the current state of BCIs, brain mapping, and NeuroAI — and explains why Focused Research Organizations (FROs) are uniquely suited to tackling the coordination bottlenecks that slow the field. A strategic overview of where the fie",
+    "date": "2023-01-18T00:00:00.000Z",
+    "type": "talk",
+    "relpermalink": "/talks/bic23-adam-marblestone/"
   },
   {
     "title": "Interplanetary Consensus: Now playing in Eudico near you",
