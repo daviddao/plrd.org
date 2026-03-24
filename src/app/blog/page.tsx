@@ -19,23 +19,37 @@ export default function BlogPage() {
         </p>
       </div>
 
-      {/* Markdown blog posts */}
+      {/* Blog posts */}
       {blogPosts.length > 0 && (
         <div className="divide-y divide-gray-200">
-          {blogPosts.map((post) => (
-            <div key={post.slug} className="py-4">
-              <div className="flex items-baseline gap-3 mb-1">
-                <span className="text-xs text-gray-400">Blog</span>
-                <span className="text-xs text-gray-400">{formatDate(post.date)}</span>
+          {blogPosts.map((post) => {
+            const href = post.external_url || `/blog/${post.slug}/`
+            const isExternal = !!post.external_url
+            return (
+              <div key={post.slug} className="py-4">
+                <div className="flex items-baseline gap-3 mb-1">
+                  {isExternal ? (
+                    <span className="text-xs text-gray-400">protocol.ai</span>
+                  ) : (
+                    <span className="text-xs text-gray-400">PL R&D</span>
+                  )}
+                  <span className="text-xs text-gray-400">{formatDate(post.date)}</span>
+                </div>
+                <Link
+                  href={href}
+                  target={isExternal ? '_blank' : undefined}
+                  rel={isExternal ? 'noopener noreferrer' : undefined}
+                  className="text-black font-medium leading-snug hover:text-blue transition-colors"
+                >
+                  {post.title}
+                  {isExternal && <span className="text-gray-400 text-xs ml-1.5">↗</span>}
+                </Link>
+                {post.summary && (
+                  <p className="text-sm text-gray-600 mt-1">{post.summary}</p>
+                )}
               </div>
-              <Link href={`/blog/${post.slug}/`} className="text-black font-medium leading-snug hover:text-blue transition-colors">
-                {post.title}
-              </Link>
-              {post.summary && (
-                <p className="text-sm text-gray-600 mt-1">{post.summary}</p>
-              )}
-            </div>
-          ))}
+            )
+          })}
         </div>
       )}
 

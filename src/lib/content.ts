@@ -63,6 +63,7 @@ export type BlogPost = {
   date: string
   summary: string
   authors: string[]
+  external_url: string
   html: string
 }
 

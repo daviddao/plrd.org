@@ -1,12 +1,13 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { sections, publications, talks, tutorials } from '@/lib/content'
+import { sections, publications, talks, tutorials, blogPosts } from '@/lib/content'
 import Breadcrumb from '@/components/Breadcrumb'
 
 export const metadata: Metadata = { title: 'Insights' }
 
 export default function InsightsPage() {
   const recentPubs = publications.slice(0, 10)
+  const recentPosts = blogPosts.slice(0, 5)
 
   return (
     <div className="max-w-6xl mx-auto px-6 pt-8 pb-16">
@@ -50,6 +51,42 @@ export default function InsightsPage() {
       {sections.research?.html && (
         <div className="mb-12 pb-12 border-b border-gray-100">
           <div className="page-content text-base text-gray-700 leading-relaxed max-w-3xl" dangerouslySetInnerHTML={{ __html: sections.research.html }} />
+        </div>
+      )}
+
+      {/* Recent Posts */}
+      {recentPosts.length > 0 && (
+        <div className="mb-12 pb-12 border-b border-gray-100">
+          <h2 className="text-sm text-gray-500 uppercase tracking-wide mb-6">From the Blog</h2>
+          <div className="divide-y divide-gray-100">
+            {recentPosts.map((post) => {
+              const href = post.external_url || `/blog/${post.slug}/`
+              const isExternal = !!post.external_url
+              return (
+                <div key={post.slug} className="py-4">
+                  <Link
+                    href={href}
+                    target={isExternal ? '_blank' : undefined}
+                    rel={isExternal ? 'noopener noreferrer' : undefined}
+                    className="text-base text-black hover:text-blue transition-colors"
+                  >
+                    {post.title}
+                    {isExternal && <span className="text-gray-400 text-xs ml-1.5">↗</span>}
+                  </Link>
+                  {post.summary && (
+                    <p className="text-sm text-gray-500 mt-1 max-w-2xl">{post.summary}</p>
+                  )}
+                  <div className="text-xs text-gray-400 mt-1">
+                    {post.date && new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                    {isExternal && <span className="ml-2">· protocol.ai</span>}
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+          <Link href="/blog" className="text-sm text-blue hover:underline mt-6 inline-block">
+            All posts →
+          </Link>
         </div>
       )}
 

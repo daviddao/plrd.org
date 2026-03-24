@@ -7,6 +7,70 @@
     "authors": [
       "david-dao"
     ],
+    "external_url": "",
     "html": "<p>Welcome to the Protocol Labs Research blog. This is where we will share updates on our focus areas, research progress, and insights from across the team.</p>\n<p>Stay tuned for more posts.</p>\n"
+  },
+  {
+    "slug": "data-sovereignty-privacy",
+    "title": "Data Sovereignty in a Privacy-First Future",
+    "date": "2025-11-07T00:00:00.000Z",
+    "summary": "Builders redefining privacy and sovereignty — where control of data, identity, and computation is real, not just promised. Highlights from the teams working at the frontier of digital human rights.",
+    "authors": [],
+    "external_url": "https://protocol.ai/blog/data-sovereignty-in-a-privacy-first-future/",
+    "html": ""
+  },
+  {
+    "slug": "attestation-tls",
+    "title": "Can Attestation Follow in the Footsteps of TLS?",
+    "date": "2025-10-29T00:00:00.000Z",
+    "summary": "Attestation could follow TLS's path: standardize trust signals, clarify roles, and mature tooling. A look at what it would take for remote attestation to become infrastructure-grade.",
+    "authors": [],
+    "external_url": "https://protocol.ai/blog/attestation-follow-in-the-footsteps-of-tls/",
+    "html": ""
+  },
+  {
+    "slug": "cypherpunk-retreat-2025",
+    "title": "Threads From the 2025 Cypherpunk Retreat",
+    "date": "2025-10-03T00:00:00.000Z",
+    "summary": "Key takeaways from the Cypherpunk Retreat, where 100 leading builders advanced privacy-tech coordination. Themes included TEEs, MPC, and the next generation of private computation.",
+    "authors": [],
+    "external_url": "https://protocol.ai/blog/threads-from-the-2025-cypherpunk-retreat/",
+    "html": ""
+  },
+  {
+    "slug": "bitrobot-embodied-ai",
+    "title": "BitRobot and the Future of Embodied AI",
+    "date": "2025-04-29T00:00:00.000Z",
+    "summary": "Exploring how crypto incentives and decentralized infrastructure can accelerate embodied AI and robotics — and why open coordination matters for the next wave of physical AI.",
+    "authors": [],
+    "external_url": "https://protocol.ai/blog/bit-robot-and-the-future-of-embodied-ai/",
+    "html": ""
+  },
+  {
+    "slug": "pl-innovation-impact-2024",
+    "title": "Driving Breakthroughs: The Impact of Our Innovation Network",
+    "date": "2025-01-29T00:00:00.000Z",
+    "summary": "Reflecting on Protocol Labs' 2024 impact across neurotech, digital human rights, AI, and economies — and the vision for 2025 and beyond.",
+    "authors": [],
+    "external_url": "https://protocol.ai/blog/the-impact-of-our-innovation-network/",
+    "html": ""
+  },
+  {
+    "slug": "transformative-power-neurotech",
+    "title": "The Transformative Power of Neurotechnology",
+    "date": "2024-06-05T00:00:00.000Z",
+    "summary": "A deep dive into neurotechnology's potential to reshape treatment of brain disorders, augment human cognition, and accelerate our understanding of the brain. Why Protocol Labs is investing in this frontier.",
+    "authors": [],
+    "external_url": "https://protocol.ai/blog/the-transformative-power-of-neurotechnology/",
+    "html": ""
+  },
+  {
+    "slug": "pl-vision-breakthroughs",
+    "title": "PL Vision: Driving Breakthroughs in Computing to Push Humanity Forward",
+    "date": "2024-03-15T00:00:00.000Z",
+    "summary": "At a crossroads of technological capability and institutional inadequacy, Protocol Labs articulates its mission: building the infrastructure for a more open, equitable, and resilient internet.",
+    "authors": [],
+    "external_url": "https://protocol.ai/blog/transcription-pl-vision-driving-a-breakthroughs-in-computing-to-push-humanity-forward/",
+    "html": ""
   }
 ]

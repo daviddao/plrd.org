@@ -151,6 +151,7 @@ function buildBlog() {
     date: b.date || '',
     summary: b.summary || '',
     authors: b.authors || [],
+    external_url: b.external_url || '',
     html: renderMd(b.content),
   })).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
   return items
