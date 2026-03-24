@@ -7,6 +7,42 @@
     <atom:link href="https://plresearch.org/feed.xml" rel="self" type="application/rss+xml"/>
     
     <item>
+      <title><![CDATA[Universal Data Income: Paying Contributors on-Chain]]></title>
+      <link>https://plresearch.org/talks/voc-david-dao/</link>
+      <pubDate>Wed, 08 Oct 2025 00:00:00 GMT</pubDate>
+      <description><![CDATA[AI was trained on us. How do we value data and pay the people who create it? David Dao, co-founder and Chief Scientist of GainForest, unpacks data valuation, Shapley values as a mechanism for attributing data contributions, and how a green data marketplace could fund conservation while improving AI ]]></description>
+    </item>
+    <item>
+      <title><![CDATA[AI Safety and Governance: Hard Rules, Real Evaluations, and Risk]]></title>
+      <link>https://plresearch.org/talks/voc-evan-miyazono/</link>
+      <pubDate>Wed, 01 Oct 2025 00:00:00 GMT</pubDate>
+      <description><![CDATA[Evan Miyazono, founder and CEO of Atlas Computing, discusses how US and Chinese approaches to AI regulation are diverging and what that means for global AI safety. While the US moves toward a largely unregulated model, China requires mandatory evaluations for large-scale AI training runs. The conver]]></description>
+    </item>
+    <item>
+      <title><![CDATA[Quantum Computing and Bitcoin: The Security Threat No One's Talking About]]></title>
+      <link>https://plresearch.org/talks/voc-quantum-bitcoin/</link>
+      <pubDate>Wed, 24 Sep 2025 00:00:00 GMT</pubDate>
+      <description><![CDATA[Bolton Bailey, a researcher specializing in post-quantum cryptography, explains how Grover's algorithm could enable a quantum-powered miner to dominate the Bitcoin network, rewrite transaction history, and undermine its consensus mechanism — not by stealing private keys, but by breaking the proof-of]]></description>
+    </item>
+    <item>
+      <title><![CDATA[How Edge Cities Could Redesign Human Civilization]]></title>
+      <link>https://plresearch.org/talks/voc-timour-kosters/</link>
+      <pubDate>Wed, 24 Sep 2025 00:00:00 GMT</pubDate>
+      <description><![CDATA[Timour Kosters, co-founder of Edge City, discusses why current institutions are too rigid to adapt to accelerating technological change and why humanity needs new frontiers to flourish. He explores designing governance systems from first principles, the role of experimental pop-up cities as living l]]></description>
+    </item>
+    <item>
+      <title><![CDATA[Applying Indigenous Wisdom to Create Sustainable Tech]]></title>
+      <link>https://plresearch.org/talks/voc-keolu-fox/</link>
+      <pubDate>Thu, 09 Jan 2025 00:00:00 GMT</pubDate>
+      <description><![CDATA[Keolu Fox, the first Native Hawaiian to earn a PhD in genome sciences, shares a visionary approach to technology inspired by Indigenous knowledge systems like the Hawaiian ahupuaʻa land management system. He applies the wisdom of circular, balanced systems perfected over generations to modern challe]]></description>
+    </item>
+    <item>
+      <title><![CDATA[FROs: The New Approach Solving Big Scientific Challenges]]></title>
+      <link>https://plresearch.org/talks/voc-anastasia-gamick/</link>
+      <pubDate>Thu, 12 Dec 2024 00:00:00 GMT</pubDate>
+      <description><![CDATA[Anastasia Gamick, co-founder and COO of Convergent Research, explains how Focused Research Organizations (FROs) address critical scientific and technological bottlenecks that fall between academic research and commercial markets. Examples include E11 Bio for neural mapping at scale and [C]Worthy for]]></description>
+    </item>
+    <item>
       <title><![CDATA[F3 and GossipBFT: Fast finality on longest-chain protocols]]></title>
       <link>https://plresearch.org/talks/ethdenver24-alejandro/</link>
       <pubDate>Tue, 27 Feb 2024 00:00:00 GMT</pubDate>
@@ -55,12 +91,6 @@
       <description><![CDATA[We present a practical construction and implementation of timelock encryption, in which a ciphertext is guaranteed to be decryptable only after some specified time has passed. We employ an existing threshold network, the League of Entropy, implementing threshold BLS in the context of Boneh and Frank]]></description>
     </item>
     <item>
-      <title><![CDATA[A metaverse of walled gardens?]]></title>
-      <link>https://plresearch.org/talks/wipo23-jorge/</link>
-      <pubDate>Wed, 29 Mar 2023 00:00:00 GMT</pubDate>
-      <description><![CDATA[The way in which the development and commercialisation of the metaverse unfold may result in an open architecture for collaborative innovation and participation, or in a series of silos tightly controlled by a small number of commercial entities. But does the outcome even matter? And, if so, how can]]></description>
-    </item>
-    <item>
       <title><![CDATA[SpaceVDF: Verifiable delay functions using cryptographic satellites]]></title>
       <link>https://plresearch.org/publications/winetraub2023/</link>
       <pubDate>Tue, 21 Mar 2023 00:00:00 GMT</pubDate>
@@ -95,36 +125,6 @@
       <link>https://plresearch.org/publications/monteiro2022/</link>
       <pubDate>Tue, 13 Dec 2022 00:00:00 GMT</pubDate>
       <description><![CDATA[]]></description>
-    </item>
-    <item>
-      <title><![CDATA[Interplanetary Consensus: Now playing in Eudico near you]]></title>
-      <link>https://plresearch.org/talks/consensuslabsummit22-alfonso/</link>
-      <pubDate>Mon, 21 Nov 2022 00:00:00 GMT</pubDate>
-      <description><![CDATA[Alfonso de la Rocha, Research Engineer at ConsensusLab, describes the technical details of interplanetary consensus.]]></description>
-    </item>
-    <item>
-      <title><![CDATA[Interplanetary Consensus: Scaling blockchains with subnets in an easy-to-trust model]]></title>
-      <link>https://plresearch.org/talks/consensuslabsummit22-guy/</link>
-      <pubDate>Mon, 21 Nov 2022 00:00:00 GMT</pubDate>
-      <description><![CDATA[Guy Goren, Research Scientist at ConsensusLab, presents a simplified subnet model for blockchain scaling.]]></description>
-    </item>
-    <item>
-      <title><![CDATA[Applications of Interplanetary Consensus]]></title>
-      <link>https://plresearch.org/talks/consensuslabsummit22-juan/</link>
-      <pubDate>Mon, 21 Nov 2022 00:00:00 GMT</pubDate>
-      <description><![CDATA[Juan Benet, CEO of Protocol Labs, outlines the scaling requirements of web3 and the many applications of IPC.]]></description>
-    </item>
-    <item>
-      <title><![CDATA[Realising web3: 15 months of ConsensusLab]]></title>
-      <link>https://plresearch.org/talks/consensuslabsummit22-marko/</link>
-      <pubDate>Mon, 21 Nov 2022 00:00:00 GMT</pubDate>
-      <description><![CDATA[Marko Vukolic, ConsensusLab lead at Protocol Labs, reviews the work done by ConsensusLab since its creation and its future directions.]]></description>
-    </item>
-    <item>
-      <title><![CDATA[Building modular and scalable BFT consensus using the Mir framework]]></title>
-      <link>https://plresearch.org/talks/consensuslabsummit22-matej/</link>
-      <pubDate>Mon, 21 Nov 2022 00:00:00 GMT</pubDate>
-      <description><![CDATA[Matej Pavlovic, Research Scientist at ConsensusLab, introduces the Mir framework and the work being done at ConsensusLab implementing performant BFT consensus.]]></description>
     </item>
     <item>
       <title><![CDATA[To the InterPlanetary File System – and beyond!: Peer-to-peer file sharing would make the Internet far more efficient]]></title>

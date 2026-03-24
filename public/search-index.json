@@ -511,6 +511,48 @@
     "relpermalink": "/publications/benet2014/"
   },
   {
+    "title": "Universal Data Income: Paying Contributors on-Chain",
+    "summary": "AI was trained on us. How do we value data and pay the people who create it? David Dao, co-founder and Chief Scientist of GainForest, unpacks data valuation, Shapley values as a mechanism for attributing data contributions, and how a green data marketplace could fund conservation while improving AI training pipelines.",
+    "date": "2025-10-08T00:00:00.000Z",
+    "type": "talk",
+    "relpermalink": "/talks/voc-david-dao/"
+  },
+  {
+    "title": "AI Safety and Governance: Hard Rules, Real Evaluations, and Risk",
+    "summary": "Evan Miyazono, founder and CEO of Atlas Computing, discusses how US and Chinese approaches to AI regulation are diverging and what that means for global AI safety. While the US moves toward a largely unregulated model, China requires mandatory evaluations for large-scale AI training runs. The conversation explores hard rules versus flexible governance, what rigorous AI evaluations actually look like, and where the greatest systemic risks lie.",
+    "date": "2025-10-01T00:00:00.000Z",
+    "type": "talk",
+    "relpermalink": "/talks/voc-evan-miyazono/"
+  },
+  {
+    "title": "Quantum Computing and Bitcoin: The Security Threat No One's Talking About",
+    "summary": "Bolton Bailey, a researcher specializing in post-quantum cryptography, explains how Grover's algorithm could enable a quantum-powered miner to dominate the Bitcoin network, rewrite transaction history, and undermine its consensus mechanism — not by stealing private keys, but by breaking the proof-of-work foundation itself. A deep look at the timeline for quantum threats to cryptographic infrastructure and what post-quantum migration paths exist.",
+    "date": "2025-09-24T00:00:00.000Z",
+    "type": "talk",
+    "relpermalink": "/talks/voc-quantum-bitcoin/"
+  },
+  {
+    "title": "How Edge Cities Could Redesign Human Civilization",
+    "summary": "Timour Kosters, co-founder of Edge City, discusses why current institutions are too rigid to adapt to accelerating technological change and why humanity needs new frontiers to flourish. He explores designing governance systems from first principles, the role of experimental pop-up cities as living laboratories for new societal models, and how the world's leading scientists, researchers, and entrepreneurs are using Edge Cities to prototype what comes next.",
+    "date": "2025-09-24T00:00:00.000Z",
+    "type": "talk",
+    "relpermalink": "/talks/voc-timour-kosters/"
+  },
+  {
+    "title": "Applying Indigenous Wisdom to Create Sustainable Tech",
+    "summary": "Keolu Fox, the first Native Hawaiian to earn a PhD in genome sciences, shares a visionary approach to technology inspired by Indigenous knowledge systems like the Hawaiian ahupuaʻa land management system. He applies the wisdom of circular, balanced systems perfected over generations to modern challenges including genome data sovereignty, sustainable data centers, Earth-friendly computation, and ensuring marginalized communities retain control over their own biological data.",
+    "date": "2025-01-09T00:00:00.000Z",
+    "type": "talk",
+    "relpermalink": "/talks/voc-keolu-fox/"
+  },
+  {
+    "title": "FROs: The New Approach Solving Big Scientific Challenges",
+    "summary": "Anastasia Gamick, co-founder and COO of Convergent Research, explains how Focused Research Organizations (FROs) address critical scientific and technological bottlenecks that fall between academic research and commercial markets. Examples include E11 Bio for neural mapping at scale and [C]Worthy for carbon sequestration tools. FROs are purpose-built, time-limited entities that can focus on groundbreaking infrastructure problems with long time horizons — work that neither a startup nor a universi",
+    "date": "2024-12-12T00:00:00.000Z",
+    "type": "talk",
+    "relpermalink": "/talks/voc-anastasia-gamick/"
+  },
+  {
     "title": "F3 and GossipBFT: Fast finality on longest-chain protocols",
     "summary": "We present F3, a finality component designed to bring fast finality to Filecoin. F3 leverages a novel consensus protocol, GossiPBFT,  that runs on the side and finalizes tipsets in tens of seconds instead of hours, while laying the basis for verifiable cross-chain bridging.",
     "date": "2024-02-27T00:00:00.000Z",

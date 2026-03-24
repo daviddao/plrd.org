@@ -1,5 +1,94 @@
 [
   {
+    "slug": "voc-david-dao",
+    "title": "Universal Data Income: Paying Contributors on-Chain",
+    "date": "2025-10-08T00:00:00.000Z",
+    "venue": "Velocity of Change",
+    "venue_url": "https://www.youtube.com/@ProtocolLabs",
+    "venue_location": "Protocol Labs Podcast",
+    "authors": [
+      "david-dao"
+    ],
+    "areas": [
+      "economies-governance"
+    ],
+    "abstract": "AI was trained on us. How do we value data and pay the people who create it? David Dao, co-founder and Chief Scientist of GainForest, unpacks data valuation, Shapley values as a mechanism for attributing data contributions, and how a green data marketplace could fund conservation while improving AI training pipelines.",
+    "html": "<p>{{&#x3C; youtube lVELLVwWYFU >}}</p>\n"
+  },
+  {
+    "slug": "voc-evan-miyazono",
+    "title": "AI Safety and Governance: Hard Rules, Real Evaluations, and Risk",
+    "date": "2025-10-01T00:00:00.000Z",
+    "venue": "Velocity of Change",
+    "venue_url": "https://www.youtube.com/@ProtocolLabs",
+    "venue_location": "Protocol Labs Podcast",
+    "authors": [
+      "evan-miyazono"
+    ],
+    "areas": [
+      "ai-robotics"
+    ],
+    "abstract": "Evan Miyazono, founder and CEO of Atlas Computing, discusses how US and Chinese approaches to AI regulation are diverging and what that means for global AI safety. While the US moves toward a largely unregulated model, China requires mandatory evaluations for large-scale AI training runs. The conversation explores hard rules versus flexible governance, what rigorous AI evaluations actually look like, and where the greatest systemic risks lie.",
+    "html": "<p>{{&#x3C; youtube hibsjb5eb6U >}}</p>\n"
+  },
+  {
+    "slug": "voc-quantum-bitcoin",
+    "title": "Quantum Computing and Bitcoin: The Security Threat No One's Talking About",
+    "date": "2025-09-24T00:00:00.000Z",
+    "venue": "Velocity of Change",
+    "venue_url": "https://www.youtube.com/@ProtocolLabs",
+    "venue_location": "Protocol Labs Podcast",
+    "authors": [],
+    "areas": [
+      "digital-human-rights"
+    ],
+    "abstract": "Bolton Bailey, a researcher specializing in post-quantum cryptography, explains how Grover's algorithm could enable a quantum-powered miner to dominate the Bitcoin network, rewrite transaction history, and undermine its consensus mechanism — not by stealing private keys, but by breaking the proof-of-work foundation itself. A deep look at the timeline for quantum threats to cryptographic infrastructure and what post-quantum migration paths exist.",
+    "html": "<p>{{&#x3C; youtube 4rkvDJlkD28 >}}</p>\n"
+  },
+  {
+    "slug": "voc-timour-kosters",
+    "title": "How Edge Cities Could Redesign Human Civilization",
+    "date": "2025-09-24T00:00:00.000Z",
+    "venue": "Velocity of Change",
+    "venue_url": "https://www.youtube.com/@ProtocolLabs",
+    "venue_location": "Protocol Labs Podcast",
+    "authors": [],
+    "areas": [
+      "economies-governance"
+    ],
+    "abstract": "Timour Kosters, co-founder of Edge City, discusses why current institutions are too rigid to adapt to accelerating technological change and why humanity needs new frontiers to flourish. He explores designing governance systems from first principles, the role of experimental pop-up cities as living laboratories for new societal models, and how the world's leading scientists, researchers, and entrepreneurs are using Edge Cities to prototype what comes next.",
+    "html": "<p>{{&#x3C; youtube 3kHy0kA3tas >}}</p>\n"
+  },
+  {
+    "slug": "voc-keolu-fox",
+    "title": "Applying Indigenous Wisdom to Create Sustainable Tech",
+    "date": "2025-01-09T00:00:00.000Z",
+    "venue": "Velocity of Change",
+    "venue_url": "https://www.youtube.com/@ProtocolLabs",
+    "venue_location": "Protocol Labs Podcast",
+    "authors": [],
+    "areas": [
+      "digital-human-rights"
+    ],
+    "abstract": "Keolu Fox, the first Native Hawaiian to earn a PhD in genome sciences, shares a visionary approach to technology inspired by Indigenous knowledge systems like the Hawaiian ahupuaʻa land management system. He applies the wisdom of circular, balanced systems perfected over generations to modern challenges including genome data sovereignty, sustainable data centers, Earth-friendly computation, and ensuring marginalized communities retain control over their own biological data.",
+    "html": "<p>{{&#x3C; youtube pe24QWB7w8Q >}}</p>\n"
+  },
+  {
+    "slug": "voc-anastasia-gamick",
+    "title": "FROs: The New Approach Solving Big Scientific Challenges",
+    "date": "2024-12-12T00:00:00.000Z",
+    "venue": "Velocity of Change",
+    "venue_url": "https://www.youtube.com/@ProtocolLabs",
+    "venue_location": "Protocol Labs Podcast",
+    "authors": [],
+    "areas": [
+      "neurotech",
+      "ai-robotics"
+    ],
+    "abstract": "Anastasia Gamick, co-founder and COO of Convergent Research, explains how Focused Research Organizations (FROs) address critical scientific and technological bottlenecks that fall between academic research and commercial markets. Examples include E11 Bio for neural mapping at scale and [C]Worthy for carbon sequestration tools. FROs are purpose-built, time-limited entities that can focus on groundbreaking infrastructure problems with long time horizons — work that neither a startup nor a university lab can sustain.",
+    "html": "<p>{{&#x3C; youtube H2HP0Nme98U >}}</p>\n"
+  },
+  {
     "slug": "ethdenver24-alejandro",
     "title": "F3 and GossipBFT: Fast finality on longest-chain protocols",
     "date": "2024-02-27T00:00:00.000Z",
