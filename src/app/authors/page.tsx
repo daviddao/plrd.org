@@ -7,10 +7,12 @@ import { authors } from '@/lib/content'
 const LEADS = ['juan-benet', 'molly-mackinlay', 'will-scott', 'sean-escola', 'david-dao', 'james-tunningley']
 
 const leadership = LEADS.map(slug => authors.find(a => a.slug === slug)).filter(Boolean) as typeof authors
-const alumni = authors.filter(a => !LEADS.includes(a.slug))
+const advisors = authors.filter(a => a.user_groups.includes('Neuro Advisors'))
+const alumni = authors.filter(a => !LEADS.includes(a.slug) && !a.user_groups.includes('Neuro Advisors'))
 
 const TABS = [
   { id: 'leadership', label: 'Leadership' },
+  { id: 'advisors',   label: 'Advisors' },
   { id: 'alumni',     label: 'Alumni' },
 ]
 
@@ -60,6 +62,31 @@ export default function AuthorsPage() {
             ))}
           </div>
 
+        </div>
+      )}
+
+      {/* Advisors */}
+      {activeTab === 'advisors' && (
+        <div>
+          <p className="text-sm text-gray-500 uppercase tracking-wide mb-2">
+            PL Neuro · External Advisors
+          </p>
+          <p className="text-sm text-gray-400 mb-10 max-w-xl">
+            Leading scientists, engineers, and entrepreneurs advising Protocol Labs on neurotechnology, NeuroAI, and brain-computer interfaces.
+          </p>
+          <div
+            className="flex gap-6 overflow-x-auto pb-4 -mx-6 px-6 snap-x snap-mandatory scroll-smooth"
+            style={{ scrollbarWidth: 'none' }}
+          >
+            {advisors.map(author => (
+              <AdvisorCard key={author.slug} author={author} />
+            ))}
+          </div>
+          <div className="mt-8 pt-8 border-t border-gray-100">
+            <p className="text-xs text-gray-400 max-w-xl leading-relaxed">
+              Advisors contribute strategic guidance and field expertise to PL Neuro's research direction, investment thesis, and field-building efforts. They are not employees of Protocol Labs.
+            </p>
+          </div>
         </div>
       )}
 
@@ -133,6 +160,38 @@ function LeaderCard({ author }: { author: typeof authors[number] }) {
         </div>
       )}
     </div>
+  )
+}
+
+// ── Carousel card for Advisors ──────────────────────────────────────────────
+
+function AdvisorCard({ author }: { author: typeof authors[number] }) {
+  const affiliation = author.groups?.[0] ?? ''
+  return (
+    <Link
+      href={`/authors/${author.slug}`}
+      className="group flex-shrink-0 snap-start w-48 flex flex-col"
+    >
+      <div className="w-full aspect-square overflow-hidden rounded-xl bg-gray-100 mb-3">
+        {author.avatarPath ? (
+          <img
+            src={author.avatarPath}
+            alt={author.name}
+            className="w-full h-full object-cover object-top group-hover:scale-[1.03] transition-transform duration-500"
+          />
+        ) : (
+          <div className="w-full h-full bg-gray-200 flex items-center justify-center text-2xl font-semibold text-gray-400">
+            {author.name.charAt(0)}
+          </div>
+        )}
+      </div>
+      <div className="text-sm font-medium text-black group-hover:text-blue transition-colors leading-snug">
+        {author.name}
+      </div>
+      {affiliation && (
+        <div className="text-xs text-gray-400 mt-0.5 leading-tight">{affiliation}</div>
+      )}
+    </Link>
   )
 }
 
