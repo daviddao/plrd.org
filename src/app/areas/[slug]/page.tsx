@@ -58,6 +58,28 @@ export default async function AreaPage({ params }: Props) {
             {area.summary}
           </p>
         )}
+        <div className="relative z-10 flex flex-wrap gap-4 mb-10">
+          <Link
+            href={`/areas/${slug}/opportunity-spaces/`}
+            className="inline-flex items-center gap-2 px-5 py-2.5 bg-blue text-white rounded-full hover:bg-blue/90 transition-colors font-medium"
+          >
+            Opportunity Spaces
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </Link>
+          <a
+            href="https://grants.plresearch.org"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-5 py-2.5 border border-blue/30 text-blue rounded-full hover:bg-blue/5 transition-colors font-medium"
+          >
+            Apply for Grants
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
+            </svg>
+          </a>
+        </div>
         {area.leads.length > 0 && (
           <div className="relative z-10 flex flex-wrap gap-4">
             {area.leads.map((authorSlug) => (

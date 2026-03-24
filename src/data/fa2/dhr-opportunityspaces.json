@@ -1,0 +1,156 @@
+{
+  "meta": {
+    "title": "Opportunity Spaces",
+    "subtitle": "Four strategic convergence zones where PL R&D can catalyze the most durable structural change in digital human rights—before adversarial forces lock in the alternative."
+  },
+  "opportunities": [
+    {
+      "id": "censorship-resistant-communications",
+      "title": "Censorship-Resistant Communications & Media",
+      "tagline": "Resilient protocols for speech, publishing, and information that cannot be deplatformed",
+      "image": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200&q=80",
+      "description": "Speech, association, and information distribution are the first rights constrained in adversarial environments. Resilient messaging, portable social graphs, and censorship-resistant publishing must become the default infrastructure—not the exception. The goal is not to build a better social app but to build protocols and data primitives that make deplatforming non-fatal.",
+      "inflectionPoint": "A major incident of takedown or suppression fails because content and coordination survive across decentralized networks, demonstrating that deplatforming is no longer a viable tool of control at low cost.",
+      "tippingSignals": [
+        "Activists and journalists rely on censorship-resistant networks in practice",
+        "Social and messaging protocols achieve meaningful cross-platform portability",
+        "Tooling works in low-connectivity and adversarial environments",
+        "Users preserve social graphs independent of any single platform",
+        "Diverse discovery and search platforms prevent capturable chokepoints"
+      ],
+      "shift": "Free expression moves from platform tolerance to network-embedded resilience. Deplatforming becomes less final—speech infrastructure can no longer be centrally turned off at low cost.",
+      "subfields": ["Censorship Resistance", "Decentralized Social", "Resilient Infrastructure", "Durable Storage"],
+      "keyAssumptions": [
+        "Current speech infrastructure is fragile by design. Centralized platforms remain the single point of failure for billions of users' access to information, organizing, and association. A single moderation decision, court order, or infrastructure outage can silence communities at scale.",
+        "IPFS, libp2p, and content-addressed data provide strong foundations for this area. PL's existing infrastructure is uniquely positioned to underpin censorship-resistant communication protocols without rebuilding from scratch.",
+        "Protocol-layer neutrality is compatible with application-layer moderation. A resilient protocol does not require abandoning content moderation—it requires separating protocol-level censorship resistance from app-level filtering choices.",
+        "Global demand is real and growing. From journalists under authoritarian regimes to activists coordinating across borders, the demand for communication infrastructure that cannot be centrally turned off is not niche—it is a precondition for political participation in much of the world."
+      ],
+      "observations": [
+        "Decentralized social protocols exist but haven't crossed the mainstream threshold. AT Protocol, Nostr, and ActivityPub have demonstrated technical viability but remain at the margins of adoption. Network effects still overwhelmingly favor centralized incumbents.",
+        "No clean separation between protocol and app. The field lacks modular abstractions between protocol-level censorship resistance and application-layer moderation, making it hard to build products that are both resilient and safe.",
+        "Low-connectivity environments remain underserved. Tooling for partitioned, adversarial, or low-bandwidth environments is fragmented and difficult to deploy at scale for the communities that need it most.",
+        "Durable storage for journalism and civic memory is unsolved. Investigative archives, scientific records, and civil society documentation regularly disappear when platforms change policies, shut down, or face legal pressure."
+      ],
+      "theOpportunity": "Resilient messaging, publishing, and social graph primitives become standard infrastructure—used by activists, journalists, communities, and everyday users alike. Content survives takedowns. Audiences survive deplatforming. PL-aligned protocols underpin the next generation of speech infrastructure, making censorship prohibitively expensive rather than trivially easy.",
+      "fieldSignals": [
+        { "kpi": "Protocol Adoptions", "measurement": "# of apps and services using censorship-resistant messaging or publishing protocols in production" },
+        { "kpi": "Deplatforming Survivals", "measurement": "# of documented incidents where censorship-resistant infrastructure preserved access" },
+        { "kpi": "Cross-Platform Portability", "measurement": "# of protocols enabling portable social graphs across services" },
+        { "kpi": "Adversarial Deployments", "measurement": "# of active users in low-connectivity or censored environments using resilient tooling" },
+        { "kpi": "Durable Archives", "measurement": "# of journalism, scientific, and civic memory archives stored on content-addressed infrastructure" }
+      ]
+    },
+    {
+      "id": "portable-identity-credentials",
+      "title": "Portable Identity, Credentials & Trust",
+      "tagline": "User-held identity that escapes platforms and institutions",
+      "image": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&q=80",
+      "description": "Without portable identity, users remain trapped in platforms and institutions they do not control. Identity must become a user-held coordination layer—carrying credentials, reputation, and permissions across ecosystems without depending on any dominant intermediary. This includes human identity, agent identity, and everything in between.",
+      "inflectionPoint": "A 100M+ service identifies users without KYC, or autonomous agents begin transacting using self-sovereign identity primitives, signaling that identity is no longer exclusively issued by nation-states or platforms.",
+      "tippingSignals": [
+        "Portable credentials used widely across apps and services",
+        "Reputation portable across ecosystems without loss of value",
+        "Wallets or identity agents become normal infrastructure, not crypto-native edge tools",
+        "Users switch platforms without losing social graph, economic history, or access rights",
+        "Employers, schools, and communities issue interoperable digital credentials"
+      ],
+      "shift": "Platforms lose their primary lock-in mechanism as identity escapes platform dependency. Identity stops being primarily a product of platform dependency.",
+      "subfields": ["Self-Sovereign Identity", "Verifiable Credentials", "Sybil Resistance", "Agent Identity", "Key Recovery"],
+      "keyAssumptions": [
+        "Platform lock-in is primarily an identity problem. The reason users cannot leave Facebook, LinkedIn, or Twitter is not the product—it is that their identity, social graph, and reputation are held hostage by the platform. Portable identity breaks this dynamic.",
+        "AI agents will require non-nation-state identity. Autonomous agents cannot hold passports. They need self-sovereign identity primitives to transact, coordinate, and operate across the internet—and they will need to earn and carry portable reputation over time.",
+        "Sybil resistance is the unsolved core problem. Any portable identity system must grapple with the fact that identity without sybil resistance is trivially gameable. Solutions like World ID and Gitcoin Passport are early attempts at the problem.",
+        "Key management complexity is a fatal adoption blocker. If users must manage cryptographic keys to control their identity, mainstream adoption will fail. Recovery, delegation, and abstraction layers are not optional features—they are the product."
+      ],
+      "observations": [
+        "Credential fragmentation prevents adoption. DIDs, VCs, ENS, and wallet-based identity have proliferated without converging on interoperable standards that actually work across ecosystems at scale.",
+        "No clear winner for sybil resistance. World ID, Gitcoin Passport, Proof of Humanity, and others each solve parts of the problem without achieving the scale or credibility needed for mainstream adoption.",
+        "Regulatory pressure creates opposing incentives. KYC/AML requirements and national digital identity mandates push toward centralized infrastructure even as decentralized alternatives mature.",
+        "Users do not want to be their own key manager. The UX gap between current wallets and the seamless identity experience users expect remains a fundamental adoption barrier that the field has not yet solved."
+      ],
+      "theOpportunity": "Portable identity becomes the internet's coordination layer for humans and agents alike. Users carry credentials—education, reputation, permissions, access rights—across platforms without losing value when they switch. Agents operate autonomously with self-sovereign identity that earns reputation over time. PL provides the neutral coordination infrastructure that no single platform can credibly offer.",
+      "fieldSignals": [
+        { "kpi": "Portable Credential Deployments", "measurement": "# of services issuing or accepting interoperable verifiable credentials" },
+        { "kpi": "Agent Identity Primitives", "measurement": "# of autonomous agents operating with self-sovereign identity in production" },
+        { "kpi": "Platform Migrations", "measurement": "# of documented cases where users migrated social graph or reputation across platforms" },
+        { "kpi": "Sybil Resistance Adoptions", "measurement": "# of services using privacy-preserving sybil resistance beyond KYC" },
+        { "kpi": "Key Recovery Deployments", "measurement": "# of users with non-custodial identity backed by social recovery or delegation" }
+      ]
+    },
+    {
+      "id": "verifiable-public-knowledge",
+      "title": "Verifiable Public Knowledge & Provenance",
+      "tagline": "Cryptographic provenance as civilizational infrastructure against synthetic reality",
+      "image": "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1200&q=80",
+      "description": "As AI floods the information environment with synthetic content, provenance and authenticity become core civilizational infrastructure. The coming war is not just over speech—it is over reality verification. Content addressing, durable storage, and verifiable retrieval must underpin the next generation of knowledge infrastructure.",
+      "inflectionPoint": "Two generations of frontier AI models ship with attested provenance tooling, or major media and scientific institutions adopt cryptographic provenance as a baseline requirement—signaling that the information environment now requires proof, not just trust.",
+      "tippingSignals": [
+        "Major applications use verifiable storage, identity, or timestamping in production",
+        "End users rely on provenance guarantees they can independently verify",
+        "AI datasets include content-addressed provenance by default",
+        "Enterprises, NGOs, and public institutions adopt verifiable auditability as a requirement",
+        "A new class of products competes primarily on provable correctness or provable neutrality"
+      ],
+      "shift": "Users begin to expect cryptographic attestations as baseline digital rights. Trust-only systems look increasingly obsolete or suspicious.",
+      "subfields": ["Content Provenance", "Verifiable Data", "Durable Storage", "AI Data Integrity"],
+      "keyAssumptions": [
+        "Deepfakes and synthetic content are already a civilizational threat. The ability to fabricate any image, video, audio, or document at near-zero cost means trust in media is collapsing. Platform moderation cannot scale to verify everything—cryptographic provenance can.",
+        "Content-addressed storage is the right foundation. IPFS and Filecoin provide the primitives for permanent, verifiable, tamper-evident storage of knowledge artifacts. The gap is adoption, tooling, and integration with mainstream publishing workflows.",
+        "AI training data provenance will become regulated. As AI-generated content proliferates, the provenance and integrity of training datasets will become a legal, commercial, and ethical requirement. Data pipelines that can prove provenance will have structural advantages.",
+        "Scientific and journalistic records are at acute risk. The combination of link rot, platform shutdowns, and synthetic content generation creates unprecedented risk of knowledge erasure and fabrication at civilizational scale."
+      ],
+      "observations": [
+        "C2PA and provenance standards exist but lack infrastructure. The Coalition for Content Provenance and Authenticity has built standards, but the underlying storage and retrieval infrastructure for durable provenance remains weak and fragmented.",
+        "No interoperability between open data systems and AI pipelines. Training datasets, scientific publications, and media archives exist in separate silos with no shared provenance or retrieval infrastructure.",
+        "Durable storage is under-funded as public infrastructure. While Filecoin and IPFS provide the technical foundation, the institutional and funding infrastructure for durable public knowledge preservation remains fragmented.",
+        "Verification UX doesn't exist for mainstream users. Even where cryptographic provenance is available, users have no accessible way to verify content authenticity without deep technical knowledge."
+      ],
+      "theOpportunity": "Cryptographic provenance becomes the default layer for media, scientific outputs, datasets, and archives. AI training pipelines incorporate content-addressed provenance by default. Journalists, scientists, and institutions publish with verifiable timestamps and integrity guarantees. PL's content-addressing infrastructure becomes the foundation of the internet's trust layer—not an alternative to it.",
+      "fieldSignals": [
+        { "kpi": "Provenance Deployments", "measurement": "# of media, scientific, and archival systems using cryptographic provenance in production" },
+        { "kpi": "Content-Addressed Datasets", "measurement": "Volume of AI training data with content-addressed provenance" },
+        { "kpi": "AI Provenance Standards", "measurement": "# of frontier AI labs with attested provenance tooling for model inputs/outputs" },
+        { "kpi": "Durable Archives", "measurement": "# of journalism and scientific archives stored on verifiable, durable infrastructure" },
+        { "kpi": "Verification UX Adoptions", "measurement": "# of user-facing tools enabling non-technical verification of content authenticity" }
+      ]
+    },
+    {
+      "id": "sovereign-infrastructure-ai-agents",
+      "title": "Sovereign Infrastructure for AI & Agents",
+      "tagline": "Open, verifiable rails for the agent economy—before it gets locked up",
+      "image": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1200&q=80",
+      "description": "AI will either deepen digital human rights or destroy them. The difference will be set at the infrastructure layer. Agent economies need open data rails, verifiable compute, self-sovereign identity, and permissionless coordination—before centralized providers make these choices by default. This is a first-class DHR priority, not a separate AI strategy.",
+      "inflectionPoint": "Autonomous agents begin transacting across organizational boundaries using open coordination infrastructure, demonstrating that agent economies can emerge without depending on centralized APIs as the sole coordination mechanism.",
+      "tippingSignals": [
+        "Agents use wallets, credentials, and verifiable compute in production",
+        "Autonomous services transact across organizational boundaries on open rails",
+        "AI developers adopt decentralized infrastructure for provenance and market coordination",
+        "New economic activity occurs natively on open protocols",
+        "Agents require open infrastructure to prove their value and justify autonomous existence"
+      ],
+      "shift": "Open coordination infrastructure stops being 'alternative internet' and becomes part of the main economic operating system for humans and machines. Web3 and digital rights become economically necessary, not just ideologically appealing.",
+      "subfields": ["Agent Infrastructure", "Verifiable Compute", "Open Data Markets", "Machine Identity"],
+      "keyAssumptions": [
+        "The agent economy is arriving faster than infrastructure can be built. Autonomous AI agents will need wallets, credentials, verifiable compute, and permissionless coordination infrastructure within years, not decades. If that infrastructure is not open when agents arrive, it will default to centralized.",
+        "PL sits at the unique intersection required. Data (IPFS, Filecoin), compute, networking (libp2p), and open systems—very few actors can integrate these layers coherently. PL's combination of technical depth and ecosystem credibility is structurally rare.",
+        "Verifiable compute will determine whether AI can be trusted. As agents take consequential actions—financial, legal, physical—the ability to verify what they did and why becomes a core safety and rights requirement.",
+        "Open data markets for AI training are a strategic chokepoint. If training datasets become monopolized by a handful of corporations, AI development permanently centralizes. Open, content-addressed data markets are the structural alternative."
+      ],
+      "observations": [
+        "AI infrastructure is centralizing around a handful of providers. AWS, Azure, and Google dominate AI compute. If agent infrastructure follows the same path, digital human rights in agent economies will depend on corporate policy, not technical guarantees.",
+        "Agent identity is an unsolved bootstrapping problem. Autonomous agents need identity before they can earn reputation, but they have no nation-state backing and no existing credential ecosystem designed for machine participants.",
+        "No open coordination layer for agent economies. Current agent frameworks are proprietary or require centralized APIs for coordination. Open protocols for agent negotiation, task coordination, and skill exchange do not yet exist at scale.",
+        "Provenance and usage controls for model I/O are absent. When agents produce outputs or consume data, there is no standardized infrastructure for tracking, verifying, or controlling how that data flows through AI pipelines."
+      ],
+      "theOpportunity": "Open data, compute, and networking rails become the default substrate for agent economies. Agents carry self-sovereign credentials, operate on verifiable compute, and transact through open coordination protocols. PL's infrastructure stack—IPFS, Filecoin, libp2p—becomes foundational to the agent economy rather than peripheral to it. The architecture of the machine economy preserves, rather than erodes, digital human rights.",
+      "fieldSignals": [
+        { "kpi": "Agent Infrastructure Adoptions", "measurement": "# of autonomous agents using open identity, storage, or compute infrastructure in production" },
+        { "kpi": "Open Data Markets", "measurement": "# of AI training pipelines using open, content-addressed data marketplaces" },
+        { "kpi": "Verifiable Compute Deployments", "measurement": "# of agent workloads running on cryptographically auditable compute" },
+        { "kpi": "Cross-Org Agent Transactions", "measurement": "# of agent-to-agent transactions across organizational boundaries on open rails" },
+        { "kpi": "Provenance Controls", "measurement": "# of AI pipelines with standardized provenance and usage controls for model inputs/outputs" }
+      ]
+    }
+  ]
+}

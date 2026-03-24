@@ -1,0 +1,119 @@
+{
+  "meta": {
+    "title": "Opportunity Spaces",
+    "subtitle": "Three convergence zones where PL Neuro can accelerate the integration of minds and machines in ways that expand human potential while maintaining autonomy and dignity."
+  },
+  "opportunities": [
+    {
+      "id": "neural-augmentation",
+      "title": "Neural Augmentation (BCI)",
+      "tagline": "Low-cost, scalable, high-bandwidth bidirectional interfaces that expand human cognitive capabilities",
+      "image": "https://images.unsplash.com/photo-1559757175-5700dde675bc?w=1200&q=80",
+      "description": "Brain-computer interfaces represent the most direct path to expanding human cognitive capabilities beyond biological limits. The near-term target is approved medical devices with life-changing effects for paralyzed and aphasic patients—the foundation for a broader ecosystem of open BCI platforms, third-party applications, and eventually elective non-medical augmentation.",
+      "inflectionPoint": "An FDA-cleared BCI device opens a standardized third-party application layer, triggering exponential utility growth as a global developer community innovates on BCI use cases—normalizing elective implantation and demonstrating off-label value.",
+      "tippingSignals": [
+        "FDA clearance of a standardized API/software layer for a commercial BCI device",
+        "Successful launch and adoption of the first third-party app for a BCI device",
+        "Off-label BCI implants commencing for non-medical consumer use",
+        "Non-invasive or minimally invasive devices proven safe, effective, and scalable",
+        "Robotic surgery enabling 20-minute outpatient BCI implantation procedures"
+      ],
+      "shift": "BCI utility scales exponentially. The value of an implant increases continuously post-surgery as the developer ecosystem innovates. Elective augmentation becomes a normalized category.",
+      "subfields": ["Brain-Computer Interfaces", "Neural Data", "Surgical Infrastructure", "BCI Applications"],
+      "keyAssumptions": [
+        "Medical BCI is the necessary first step. Regulatory approval for medical use cases creates the safety track record, clinical infrastructure, and device manufacturing ecosystem that consumer and elective applications will depend on.",
+        "The 'app store' model is the key inflection. The moment a BCI device opens a standardized developer platform—with strict guardrails between medical functions and third-party applications—the value proposition transforms from a single device into a platform.",
+        "Surgical infrastructure is a bottleneck. Neurosurgeon capacity constraints, high procedure complexity, and long surgical times currently limit BCI adoption. Robotic surgery and new provider training pathways are prerequisites for scale.",
+        "Privacy frameworks are non-negotiable. Without legal and technical frameworks ensuring that neural data cannot be accessed by third parties without explicit consent, high-bandwidth bidirectional interfaces face irreversible regulatory and social backlash."
+      ],
+      "observations": [
+        "Capital and clinical infrastructure favor medical applications. Current BCI development is dominated by med-tech investors focused on specific medical indications. The transition to deep-tech venture and broader platforms has not yet begun.",
+        "Device invasiveness imposes fundamental friction. Surgical implantation requirements limit the patient population and clinical pathways for BCI adoption, making non-invasive alternatives a critical parallel investment.",
+        "Regulatory redundancy slows deployment. FDA and CMS requirements create duplicative approval pathways that slow the conversion of approved devices into deployed, reimbursed treatments.",
+        "Neural data privacy frameworks lag device development. The legal and technical infrastructure for protecting thought privacy does not yet exist at the level required for high-bandwidth bidirectional interfaces."
+      ],
+      "theOpportunity": "Multiple FDA-approved BCI devices for medical use create the manufacturing, clinical, and regulatory infrastructure for a broader platform ecosystem. A third-party application layer emerges, enabling developers worldwide to innovate on BCI use cases without rebuilding the entire technology stack. Non-invasive and minimally invasive alternatives mature in parallel, expanding the addressable population beyond surgical candidates.",
+      "fieldSignals": [
+        { "kpi": "Clinical Approvals", "measurement": "# of BCI devices with FDA/CMS approval and documented adoption rates in patient populations" },
+        { "kpi": "Third-Party Apps", "measurement": "# of approved third-party applications for BCI platforms" },
+        { "kpi": "Surgical Throughput", "measurement": "Average BCI implantation procedure time and surgeon capacity constraints" },
+        { "kpi": "Neurotech Capital", "measurement": "Share of BCI investment from deep-tech VCs (vs. med-tech only)" },
+        { "kpi": "Privacy Frameworks", "measurement": "# of jurisdictions with legal frameworks protecting neural data privacy and autonomy of thought" }
+      ]
+    },
+    {
+      "id": "biologically-inspired-intelligence",
+      "title": "Biologically-Inspired Intelligence (NeuroAI)",
+      "tagline": "Harnessing the brain's representational, architectural, and algorithmic insights to build cognitively advanced, energy-efficient AI",
+      "image": "https://images.unsplash.com/photo-1507146426996-ef05306b995a?w=1200&q=80",
+      "description": "The AI industry's current scaling paradigm is running into fundamental constraints—energy costs, architectural limitations, and the gap between mimicking human behavior and thinking like a human brain. Neurally-derived inductive biases, at the representational, architectural, algorithmic, and hardware levels, offer a path to 3+ orders of magnitude improvement in useful information per unit of energy.",
+      "inflectionPoint": "A major AI lab demonstrates that fine-tuning on vast neural recording datasets enables a smaller model to match frontier performance at a fraction of the energy cost—making high-fidelity human neural data as universally valuable to the tech industry as text and video training data are today.",
+      "tippingSignals": [
+        "A flagship NeuroAI model matches SOTA performance with orders-of-magnitude energy efficiency gains",
+        "Sudden explosion of venture funding toward cheap non-invasive hardware for neural data collection",
+        "Formation of large-scale neural data consortiums aiming for millions of hours of recording",
+        "Frontier AI labs acquiring NeuroAI or neuromorphic startups",
+        "Computational neuroscientists intensely recruited for AI engineering rather than displaced by it"
+      ],
+      "shift": "Neurally-derived inductive biases become foundational in AI at the hardware and algorithmic level. AI development becomes permanently tethered to neuroscience, creating sustained demand for human neural data.",
+      "subfields": ["Neural Data Infrastructure", "Neuromorphic Computing", "NeuroAI", "Computational Neuroscience"],
+      "keyAssumptions": [
+        "The 'neural distillation' hypothesis is underexplored. Aligning the latent spaces of AI models with actual human neural activity—teaching AI to think like a brain rather than merely mimic its outputs—may be the most viable path to massive efficiency gains. This is not yet the mainstream bet.",
+        "Neural data scarcity is the primary bottleneck. AI labs absorbing computational neuroscience talent suppresses the broader NeuroAI field of insights by starving it of the data and funding required to generate transferable architectural and algorithmic insights.",
+        "The energy crisis will force architectural innovation. The physical limits of silicon scaling and power grid capacity create economic incentives to adopt neuromorphic and bio-inspired alternatives that reduce energy per useful computation.",
+        "Large-scale, multimodal neural datasets don't yet exist. The datasets required to test the neural distillation hypothesis—millions of hours of high-quality human cognitive recordings—require coordinated infrastructure investment beyond what academic labs can currently provide."
+      ],
+      "observations": [
+        "AI labs are absorbing computational neuroscience talent without leveraging biological insights. The current dynamic is one of talent capture, not intellectual leverage—researchers are hired for general ML skills, not for their neuroscience knowledge.",
+        "Neural activity data is expensive, fragmented, and inaccessible. Current neural recording infrastructure produces small, siloed datasets. No shared data infrastructure exists for aggregating and normalizing recordings across device types and research groups.",
+        "Theory of neural algorithms is poorly developed. Even where data exists, the theoretical frameworks for extracting actionable architectural and algorithmic insights from neural data are immature.",
+        "Minimal awareness and capital in the field. NeuroAI as a commercial and engineering discipline—distinct from pure computational neuroscience—has attracted minimal venture investment relative to its potential impact."
+      ],
+      "theOpportunity": "PL catalyzes the infrastructure required for neural data at scale—aggregating recordings across devices, research groups, and cognitive tasks into a shared data commons. Funding bridges the gap between academic computational neuroscience and commercial AI engineering contexts. Architectural and algorithmic insights from neural data translate into foundational efficiency gains that permanently reorient AI development toward biologically-inspired approaches.",
+      "fieldSignals": [
+        { "kpi": "Neural Data Volume", "measurement": "Hours of high-quality human neural recording data available in shared infrastructure" },
+        { "kpi": "NeuroAI Efficiency Benchmarks", "measurement": "Useful information per unit energy for NeuroAI models vs. standard architectures" },
+        { "kpi": "Neural Data Investment", "measurement": "Venture capital directed toward neural data collection hardware and infrastructure" },
+        { "kpi": "Cross-Disciplinary Hiring", "measurement": "# of AI labs hiring computational neuroscientists for architectural/algorithmic insight (vs. general ML)" },
+        { "kpi": "Neuromorphic Adoptions", "measurement": "# of commercial AI deployments using neuromorphic or bio-inspired hardware" }
+      ]
+    },
+    {
+      "id": "whole-organism-emulation",
+      "title": "Whole Organism Emulation (WBE)",
+      "tagline": "Simulating minds and bodies to pave a path to digital humans",
+      "image": "https://images.unsplash.com/photo-1576086213369-97a306d36557?w=1200&q=80",
+      "description": "Whole brain emulation—simulating complete nervous systems in silico—offers the most direct path to understanding intelligence at the systems level and, eventually, to digital continuation of human minds. Progress requires connectomics at scale, precise biophysical neuron models, and in-silico simulations that can exhibit the behavioral and memory properties of the organisms they model.",
+      "inflectionPoint": "A reconstructed mouse connectome simulated in silico with neuromechanically realistic bodies exhibits idiosyncratic behaviors learned by the specific mouse prior to connectome harvesting—demonstrating memory retrieval in simulation and validating WBE as a viable engineering discipline.",
+      "tippingSignals": [
+        "Completion of a full reconstructed mouse connectome",
+        "In-silico mouse simulation exhibiting specific learned behaviors from in-vivo experience",
+        "Mainstream media and scientific coverage validating memory retrieval in simulation",
+        "Connectomics throughput scaling to complete mouse brains in days",
+        "Formation of connectomics-as-a-service companies supporting broad demand"
+      ],
+      "shift": "The scientific and commercial communities accept that behavioral repertoire and memory can be digitally simulated. Serious academic and policy engagement begins regarding the rights of digital entities and ethical frameworks for emulation.",
+      "subfields": ["Connectomics", "Biophysical Neuron Models", "Whole Brain Emulation", "Digital Ethics"],
+      "keyAssumptions": [
+        "Clear benchmarks are the missing coordination mechanism. The field lacks agreed milestones for what constitutes successful emulation at each level—fly, mouse, human. Without clear targets, capital cannot be directed efficiently and progress cannot be verified.",
+        "Memory retrieval is the key validation milestone. Demonstrating that in-silico simulation of a specific organism can exhibit memories and learned behaviors from its in-vivo experience would represent an irreversible paradigm shift in how the field is perceived.",
+        "Connectomics throughput must improve dramatically. Current methods for electron microscopy, sectioning, and 3D reconstruction cannot scale to complete mouse brains in reasonable time or cost. Throughput improvements are the primary technical bottleneck.",
+        "Social and ethical frameworks lag technical capability. The 'ick factor' surrounding human whole brain emulation is a real risk factor. Building ethical frameworks, legal recognition for digital entities, and public understanding in parallel with technical progress is not optional."
+      ],
+      "observations": [
+        "Connectomics data alone may be insufficient for WBE. Molecular labeling, functional data, and biophysical modeling may be necessary complements to connectomics for full behavioral emulation—expanding both the technical scope and the cost of the problem.",
+        "The field lacks clear proof that WBE accelerates neuroscience. Without a compelling demonstration that in-silico emulation generates discoveries inaccessible to conventional experimental methods, large-scale capital investment remains hard to justify.",
+        "Human WBE is deeply socially unsettling. While fly and mouse emulation attracts scientific interest, human emulation faces acute social, religious, and philosophical friction that must be addressed proactively rather than reactively.",
+        "The business model for WBE is unclear. Unlike BCI or NeuroAI, whole brain emulation lacks an obvious near-term commercial application that can fund the underlying research infrastructure."
+      ],
+      "theOpportunity": "PL defines levels-based milestones for whole organism emulation, creating clear engineering targets that direct capital and talent efficiently. Early demos—a nematode, then a fly, then a mouse—build credibility incrementally. The memory retrieval milestone in a mouse triggers a surge of interest from AI labs and pharmaceutical sectors. A connectomics-as-a-service industry emerges, supporting demand from basic research, medical applications, and WBE simultaneously.",
+      "fieldSignals": [
+        { "kpi": "Connectomics Throughput", "measurement": "Time and cost to complete a full mouse brain connectome reconstruction" },
+        { "kpi": "Emulation Milestones", "measurement": "Levels-based progress: C. elegans → fly → mouse behavioral emulation benchmarks" },
+        { "kpi": "Memory Retrieval Demonstrations", "measurement": "# of documented cases of learned behavior exhibited by in-silico simulations" },
+        { "kpi": "WBE Capital Investment", "measurement": "Venture and grant capital directed toward connectomics, biophysical modeling, and WBE" },
+        { "kpi": "Ethical Framework Adoption", "measurement": "# of institutions with policy frameworks addressing digital entity rights and emulation ethics" }
+      ]
+    }
+  ]
+}
