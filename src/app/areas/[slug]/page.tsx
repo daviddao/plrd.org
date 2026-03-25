@@ -46,6 +46,7 @@ export default async function AreaPage({ params }: Props) {
       <Breadcrumb items={[{ label: 'Focus Areas', href: '/areas/' }, { label: stripFaPrefix(area.title) }]} />
       {/* Hero */}
       <div className="relative pt-8 pb-12 mb-12 overflow-hidden">
+        <AreaHexImage slug={slug} />
         <AreaGeo slug={slug} />
         <div className="flex items-start gap-5 mb-6">
           <AreaIcon type={SLUG_TO_ICON[slug] || 'hexagon'} className="w-14 h-14 lg:w-16 lg:h-16 shrink-0 text-blue/70" />
@@ -140,6 +141,60 @@ export default async function AreaPage({ params }: Props) {
           </Link>
         </div>
       )}
+    </div>
+  )
+}
+
+const AREA_IMAGES: Record<string, string> = {
+  'neurotech':           '/images/fa2/neurotech.jpg',
+  'ai-robotics':         '/images/fa2/ai-robotics.jpg',
+  'digital-human-rights':'/images/fa2/digital-human-rights.jpg',
+}
+
+function AreaHexImage({ slug }: { slug: string }) {
+  const src = AREA_IMAGES[slug]
+  if (!src) return null
+  // Unique IDs per slug to avoid SVG conflicts when multiple areas render
+  const clipId = `hexClip-${slug}`
+  const gradId = `hexGrad-${slug}`
+  const maskId = `hexMask-${slug}`
+  return (
+    <div
+      className="absolute right-0 top-1/2 -translate-y-1/2 w-[260px] h-[260px] md:w-[360px] md:h-[360px] lg:w-[440px] lg:h-[440px] pointer-events-none select-none"
+      aria-hidden="true"
+    >
+      <svg viewBox="0 0 400 400" className="w-full h-full">
+        <defs>
+          <clipPath id={clipId}>
+            <polygon points="200,40 330,110 330,290 200,360 70,290 70,110">
+              <animateTransform
+                attributeName="transform"
+                type="rotate"
+                from="45 200 200"
+                to="405 200 200"
+                dur="60s"
+                repeatCount="indefinite"
+              />
+            </polygon>
+          </clipPath>
+          <radialGradient id={gradId} cx="50%" cy="50%" r="50%">
+            <stop offset="50%" stopColor="white" />
+            <stop offset="100%" stopColor="black" />
+          </radialGradient>
+          <mask id={maskId}>
+            <circle cx="200" cy="200" r="200" fill={`url(#${gradId})`} />
+          </mask>
+        </defs>
+        <image
+          href={src}
+          x="0" y="0"
+          width="400" height="400"
+          preserveAspectRatio="xMidYMid slice"
+          clipPath={`url(#${clipId})`}
+          mask={`url(#${maskId})`}
+          opacity="0.35"
+        />
+      </svg>
     </div>
   )
 }
