@@ -2,12 +2,27 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import AuthorCard from '@/components/AuthorCard'
 import Breadcrumb from '@/components/Breadcrumb'
+import { fetchPage, getSection } from "@/lib/indexer"
 
 export const metadata: Metadata = {
   title: 'About',
 }
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const page = await fetchPage("about")
+  const hero = getSection(page, "hero")
+  const history = getSection(page, "history")
+  const collabs = getSection(page, "collaborations")
+  const future = getSection(page, "future")
+  const quoteJuan = getSection(page, "quote-juan")
+  const quoteWill = getSection(page, "quote-will")
+
+  const historyFallback =
+    "Those efforts became IPFS, a free and open-source software project to allow users and applications to directly share information without needing a central server. Within IPFS, expertise in programming language theory led to Multiformats, an effort to make our technologies adaptable and upgradable in a future-proof way, and IPLD, our data model for content-addressed data.\n\nIn parallel with IPFS, where users voluntarily store data they find interesting, we designed and launched Filecoin, a protocol that allows users to pay others to store data they find interesting. Originally proposed in 2014, the Filecoin concept was further detailed in our 2017 whitepaper, with CryptoLab efforts supporting both the network launch and future improvements.\n\nProtocol Labs has evolved and expanded beyond internet infrastructure to address broader challenges in coordination, AI development, and human enhancement technologies. What was once the company behind IPFS and Filecoin is now an innovation network that supports field-building, grant-making, and investing across emerging technologies. PL's focus areas now span the full spectrum from securing digital rights to pioneering responsible advancement in AI, robotics, and neurotechnology. PL R&D is the corner of the network that supports the early engineering and research efforts that will drive these focus areas forward."
+
+  const futureFallback =
+    "This critical century demands both caution and ambition. With technologies capable of rewriting genetic codes and reshaping how billions coordinate, we're building robust foundations across our four focus areas. From securing digital human rights through Web3 infrastructure to advancing AI and neurotechnology responsibly, from pioneering public goods funding mechanisms to developing breakthrough coordination systems, our work aims to harness humanity's potential while navigating existential challenges.\n\nWe do these things in ways that make technology easy to upgrade and hard to turn against users. We work toward this ideal by building open-source software, with users and contributors as vital components in the development process, and a licensing stack that ensures these tools remain free to obtain and use. Through collaboration across our focus areas, we're accelerating the R&D pipeline to push humanity forward."
+
   return (
     <div>
       {/* Hero */}
@@ -56,10 +71,10 @@ export default function AboutPage() {
           </div>
 
           <h1 className="relative z-10 font-semibold text-[28px] md:text-[40px] lg:text-[48px] leading-[1.1] tracking-tight mb-6 max-w-xl">
-            Our research is driven by beliefs about how technology should serve humanity.
+            {hero?.title || "Our research is driven by beliefs about how technology should serve humanity."}
           </h1>
           <p className="relative z-10 text-gray-600 text-lg md:text-xl lg:text-[22px] leading-relaxed max-w-2xl mb-6">
-            Substantial engineering efforts are necessary to turn ideas into real and useful tools that people can use. Our longest-term vision-driven innovation takes place in PL R&amp;D.
+            {hero?.subtitle || "Substantial engineering efforts are necessary to turn ideas into real and useful tools that people can use. Our longest-term vision-driven innovation takes place in PL R&D."}
           </p>
           <div className="relative z-10 flex flex-wrap gap-4">
             <Link 
@@ -112,24 +127,18 @@ export default function AboutPage() {
       </div>
 
       {/* History */}
-      <Section label="OUR HISTORY" title="Protocol Labs began with the desire to make it easy to name, organize, and share data in a scalable way.">
+      <Section label="OUR HISTORY" title={history?.title || "Protocol Labs began with the desire to make it easy to name, organize, and share data in a scalable way."}>
         <div className="lg:columns-2 lg:gap-14 text-base text-gray-700 leading-relaxed">
-          <p className="pb-6 break-inside-avoid">
-            Those efforts became IPFS, a free and open-source software project to allow users and applications to directly share information without needing a central server. Within IPFS, expertise in programming language theory led to Multiformats, an effort to make our technologies adaptable and upgradable in a future-proof way, and IPLD, our data model for content-addressed data.
-          </p>
-          <p className="pb-6 break-inside-avoid">
-            In parallel with IPFS, where users voluntarily store data they find interesting, we designed and launched Filecoin, a protocol that allows users to pay others to store data they find interesting. Originally proposed in 2014, the Filecoin concept was further detailed in our 2017 whitepaper, with CryptoLab efforts supporting both the network launch and future improvements.
-          </p>
-          <p className="pb-6 break-inside-avoid">
-            Protocol Labs has evolved and expanded beyond internet infrastructure to address broader challenges in coordination, AI development, and human enhancement technologies. What was once the company behind IPFS and Filecoin is now an innovation network that supports field-building, grant-making, and investing across emerging technologies. PL&apos;s focus areas now span the full spectrum from securing digital rights to pioneering responsible advancement in AI, robotics, and neurotechnology. PL R&amp;D is the corner of the network that supports the early engineering and research efforts that will drive these focus areas forward.
-          </p>
+          {(history?.body || historyFallback).split("\n\n").map((p, i) => (
+            <p key={i} className="pb-6 break-inside-avoid">{p}</p>
+          ))}
         </div>
       </Section>
 
       {/* Collaborations */}
-      <Section label="COLLABORATIONS AND SUPPORT" title="In addition to driving internal projects directly, we also support external research.">
+      <Section label="COLLABORATIONS AND SUPPORT" title={collabs?.title || "In addition to driving internal projects directly, we also support external research."}>
         <p className="text-base text-gray-700 leading-relaxed lg:columns-2 lg:gap-14">
-          Some of this support takes the form of our grant program, which supports academic research efforts related to the central mission and goals of Protocol Labs. Other support includes conference and event sponsorships, which usually involves representation from Protocol Labs researchers. If you&apos;re attending a conference we are sponsoring, you have a great chance of catching one of us in person. Alternatively, our conference sponsorships often take the form of sponsoring free, high-quality recordings of the talks to educate (or entertain) those unable to attend.
+          {collabs?.body || "Some of this support takes the form of our grant program, which supports academic research efforts related to the central mission and goals of Protocol Labs. Other support includes conference and event sponsorships, which usually involves representation from Protocol Labs researchers. If you're attending a conference we are sponsoring, you have a great chance of catching one of us in person. Alternatively, our conference sponsorships often take the form of sponsoring free, high-quality recordings of the talks to educate (or entertain) those unable to attend."}
         </p>
       </Section>
 
@@ -137,20 +146,17 @@ export default function AboutPage() {
       <div className="max-w-6xl mx-auto px-6 py-20 flex flex-col items-center text-center">
         <img className="mb-8 opacity-30 w-10" src="/images/about-page/quote-icon.svg" alt="" />
         <h3 className="font-semibold text-xl lg:text-2xl leading-relaxed mb-8">
-          More innovation faster
+          {quoteJuan?.title || "More innovation faster"}
         </h3>
         <AuthorCard slug="juan-benet" />
       </div>
 
       {/* The Future */}
-      <Section label="THE FUTURE" title="In our pursuit of this mission, we question how technology could work better and what we wish it would do.">
+      <Section label="THE FUTURE" title={future?.title || "In our pursuit of this mission, we question how technology could work better and what we wish it would do."}>
         <div className="lg:columns-2 lg:gap-14 text-base text-gray-700 leading-relaxed">
-          <p className="pb-6 break-inside-avoid">
-            This critical century demands both caution and ambition. With technologies capable of rewriting genetic codes and reshaping how billions coordinate, we&apos;re building robust foundations across our four focus areas. From securing digital human rights through Web3 infrastructure to advancing AI and neurotechnology responsibly, from pioneering public goods funding mechanisms to developing breakthrough coordination systems, our work aims to harness humanity&apos;s potential while navigating existential challenges.
-          </p>
-          <p className="pb-6 break-inside-avoid">
-            We do these things in ways that make technology easy to upgrade and hard to turn against users. We work toward this ideal by building open-source software, with users and contributors as vital components in the development process, and a licensing stack that ensures these tools remain free to obtain and use. Through collaboration across our focus areas, we&apos;re accelerating the R&amp;D pipeline to push humanity forward.
-          </p>
+          {(future?.body || futureFallback).split("\n\n").map((p, i) => (
+            <p key={i} className="pb-6 break-inside-avoid">{p}</p>
+          ))}
         </div>
       </Section>
 
@@ -158,7 +164,7 @@ export default function AboutPage() {
       <div className="max-w-6xl mx-auto px-6 pb-28">
         <div className="border-l-2 border-pink pl-8 py-3">
           <p className="text-lg text-gray-700 leading-relaxed mb-5 italic">
-            &ldquo;We consistently bet, not only that the future could be a fantastic and wonderful place, but that it&apos;s worthwhile for us, as an organization, to work toward that future.&rdquo;
+            {quoteWill?.body || "\u201cWe consistently bet, not only that the future could be a fantastic and wonderful place, but that it\u2019s worthwhile for us, as an organization, to work toward that future.\u201d"}
           </p>
           <AuthorCard slug="will-scott" />
         </div>
@@ -185,5 +191,3 @@ function FocusCard({ slug, title, description }: { slug: string; title: string; 
     </Link>
   )
 }
-
-

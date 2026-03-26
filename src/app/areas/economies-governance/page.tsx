@@ -3,13 +3,37 @@ import type { Metadata } from 'next'
 import AuthorCard from '@/components/AuthorCard'
 import Breadcrumb from '@/components/Breadcrumb'
 import FundingPipeline from '@/components/FundingPipeline'
+import { fetchPage, getSection } from '@/lib/indexer'
 
 export const metadata: Metadata = {
   title: 'Economies & Governance',
   description: 'Creating more efficient and equitable structures for global progress through crypto-native infrastructure.',
 }
 
-export default function FA2MainPage() {
+export default async function FA2MainPage() {
+  const page = await fetchPage("area-economies-governance")
+
+  const heroSection = getSection(page, "hero")
+  const bodySection = getSection(page, "body")
+
+  const exploreSubareas = getSection(page, "explore-subareas")
+  const exploreOpportunities = getSection(page, "explore-opportunities")
+  const exploreImpact = getSection(page, "explore-impact")
+  const exploreProjects = getSection(page, "explore-projects")
+  const exploreDepgraph = getSection(page, "explore-depgraph")
+
+  const engFeedback = getSection(page, "engage-feedback")
+  const engCases = getSection(page, "engage-cases")
+  const engPartners = getSection(page, "engage-partners")
+  const engTechnical = getSection(page, "engage-technical")
+  const engStrategic = getSection(page, "engage-strategic")
+
+  const bodyParagraphs = bodySection?.body
+    ? bodySection.body.split("\n\n").filter(Boolean)
+    : [
+        "This focus area rectifies the inadequacies of current macro systems, which often struggle to coordinate and solve monumental challenges like climate change. By leveraging cryptoeconomics and improved governance tools, we are rethinking how capital is formed and deployed.",
+        "This movement harnesses mechanism design to align millions of people worldwide toward shared goals, creating structures that can allocate resources at the scale of nation-states for the benefit of all humanity.",
+      ]
   return (
     <div className="max-w-6xl mx-auto px-6 pt-8 pb-16">
       <Breadcrumb items={[{ label: 'Focus Areas', href: '/areas/' }, { label: 'Economies & Governance' }]} />
@@ -63,7 +87,7 @@ export default function FA2MainPage() {
           </h1>
         </div>
         <p className="relative z-10 text-lg text-gray-600 leading-relaxed max-w-2xl mb-8">
-          Building crypto-native economic and governance infrastructure to create more efficient, equitable structures that coordinate at the scale of nation-states.
+          {heroSection?.subtitle || "Building crypto-native economic and governance infrastructure to create more efficient, equitable structures that coordinate at the scale of nation-states."}
         </p>
         <div className="relative z-10 flex flex-wrap gap-4 mb-10">
           <Link 
@@ -95,12 +119,11 @@ export default function FA2MainPage() {
 
       {/* Content */}
       <div className="mb-12 pb-12 border-b border-gray-100">
-        <p className="text-base text-gray-700 leading-relaxed mb-5 max-w-3xl">
-          This focus area rectifies the inadequacies of current macro systems, which often struggle to coordinate and solve monumental challenges like climate change. By leveraging cryptoeconomics and improved governance tools, we are rethinking how capital is formed and deployed.
-        </p>
-        <p className="text-base text-gray-700 leading-relaxed max-w-3xl">
-          This movement harnesses mechanism design to align millions of people worldwide toward shared goals, creating structures that can allocate resources at the scale of nation-states for the benefit of all humanity.
-        </p>
+        {bodyParagraphs.map((para, i) => (
+          <p key={i} className="text-base text-gray-700 leading-relaxed mb-5 max-w-3xl">
+            {para}
+          </p>
+        ))}
       </div>
 
       {/* Explore */}
@@ -109,32 +132,32 @@ export default function FA2MainPage() {
         <ExploreCard
           href="/areas/economies-governance/subareas/"
           label="Domains"
-          title="Subareas"
-          description="9 interconnected subfields driving systemic change."
+          title={exploreSubareas?.title || "Subareas"}
+          description={exploreSubareas?.subtitle || "9 interconnected subfields driving systemic change."}
         />
         <ExploreCard
           href="/areas/economies-governance/opportunity-spaces/"
           label="Strategy"
-          title="Opportunity Spaces"
-          description="4 convergence zones for systemic change."
+          title={exploreOpportunities?.title || "Opportunity Spaces"}
+          description={exploreOpportunities?.subtitle || "4 convergence zones for systemic change."}
         />
         <ExploreCard
           href="/areas/economies-governance/impact/"
           label="Metrics"
-          title="Impact Dashboard"
-          description="Ecosystem impact across villages and funding."
+          title={exploreImpact?.title || "Impact Dashboard"}
+          description={exploreImpact?.subtitle || "Ecosystem impact across villages and funding."}
         />
         <ExploreCard
           href="/areas/economies-governance/projects/"
           label="Ecosystem"
-          title="Project Explorer"
-          description="242+ teams building public goods infrastructure."
+          title={exploreProjects?.title || "Project Explorer"}
+          description={exploreProjects?.subtitle || "242+ teams building public goods infrastructure."}
         />
         <ExploreCard
           href="/areas/economies-governance/dependency-graph/"
           label="Architecture"
-          title="Dependency Graph"
-          description="Strategic dependency trees across 4 inflection points."
+          title={exploreDepgraph?.title || "Dependency Graph"}
+          description={exploreDepgraph?.subtitle || "Strategic dependency trees across 4 inflection points."}
         />
       </div>
 
@@ -161,24 +184,24 @@ export default function FA2MainPage() {
         <p className="text-base text-gray-600 mb-6">We are actively seeking:</p>
         <div className="grid md:grid-cols-2 gap-6">
           <EngageItem
-            title="Feedback on this framing"
-            description="Does this opportunity space resonate? What's missing? What's wrong?"
+            title={engFeedback?.title || "Feedback on this framing"}
+            description={engFeedback?.body || "Does this opportunity space resonate? What's missing? What's wrong?"}
           />
           <EngageItem
-            title="Case studies and examples"
-            description="What sovereign DPI deployments, DeSci infrastructure, DePIN projects, or PGF mechanisms should we be learning from?"
+            title={engCases?.title || "Case studies and examples"}
+            description={engCases?.body || "What sovereign DPI deployments, DeSci infrastructure, DePIN projects, or PGF mechanisms should we be learning from?"}
           />
           <EngageItem
-            title="Partner identification"
-            description="Who else should be at the table? What institutions, teams, or individuals are essential to this work?"
+            title={engPartners?.title || "Partner identification"}
+            description={engPartners?.body || "Who else should be at the table? What institutions, teams, or individuals are essential to this work?"}
           />
           <EngageItem
-            title="Technical input"
-            description="What reference architectures, standards, or specifications would be most valuable?"
+            title={engTechnical?.title || "Technical input"}
+            description={engTechnical?.body || "What reference architectures, standards, or specifications would be most valuable?"}
           />
           <EngageItem
-            title="Strategic counsel"
-            description="What have we gotten wrong about the field, the opportunity, or the approach?"
+            title={engStrategic?.title || "Strategic counsel"}
+            description={engStrategic?.body || "What have we gotten wrong about the field, the opportunity, or the approach?"}
           />
         </div>
         <a

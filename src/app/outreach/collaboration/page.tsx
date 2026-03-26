@@ -1,12 +1,26 @@
 import type { Metadata } from 'next'
 import Breadcrumb from '@/components/Breadcrumb'
+import { fetchPage, getSection } from '@/lib/indexer'
 
 export const metadata: Metadata = {
   title: 'Collaborate',
   description: 'Partner with PL R&D to advance the frontiers of computing and build infrastructure for humanity.',
 }
 
-export default function CollaborationPage() {
+export default async function CollaborationPage() {
+  const page = await fetchPage("collaborate")
+  const heroSection = getSection(page, "hero")
+  const bodySection = getSection(page, "body")
+
+  const heroTitle = heroSection?.title || "Collaborate With Us"
+  const heroBody = heroSection?.subtitle || "We believe in open collaboration. Whether you're a researcher, developer, institution, or visionary builder, there are many ways to work together on problems that matter."
+  const bodyParagraphs = bodySection?.body
+    ? bodySection.body.split("\n\n").filter(Boolean)
+    : [
+        "PL R&D works at the intersection of fundamental research and real-world impact. We're building the infrastructure for a better internet and exploring how technology can help humanity flourish.",
+        "Our collaborative approach brings together researchers, engineers, and institutions worldwide. We're always looking for partners who share our vision of open, decentralized, and human-centric technology.",
+      ]
+
   return (
     <div className="max-w-6xl mx-auto px-6 pt-8 pb-16">
       <Breadcrumb items={[{ label: 'Collaborate' }]} />
@@ -15,21 +29,20 @@ export default function CollaborationPage() {
         <CollabGeo />
 
         <h1 className="relative z-10 text-xl lg:text-[40px] font-semibold leading-[1.15] tracking-tight mb-4 max-w-lg">
-          Collaborate With Us
+          {heroTitle}
         </h1>
         <p className="relative z-10 text-gray-600 leading-relaxed max-w-xl">
-          We believe in open collaboration. Whether you're a researcher, developer, institution, or visionary builder, there are many ways to work together on problems that matter.
+          {heroBody}
         </p>
       </div>
 
       {/* Content */}
       <div className="mb-10 pb-10 border-b border-gray-100">
-        <p className="text-sm text-gray-700 leading-relaxed mb-4">
-          PL R&D works at the intersection of fundamental research and real-world impact. We're building the infrastructure for a better internet and exploring how technology can help humanity flourish.
-        </p>
-        <p className="text-sm text-gray-700 leading-relaxed">
-          Our collaborative approach brings together researchers, engineers, and institutions worldwide. We're always looking for partners who share our vision of open, decentralized, and human-centric technology.
-        </p>
+        {bodyParagraphs.map((para, i) => (
+          <p key={i} className="text-sm text-gray-700 leading-relaxed mb-4">
+            {para}
+          </p>
+        ))}
       </div>
 
       {/* CTA */}
