@@ -5,6 +5,7 @@ import { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
 import Breadcrumb from '@/components/Breadcrumb'
 import type { CuratedListEntry } from '@/lib/lexicons'
+import PageEditor from '@/components/PageEditor'
 
 export default function AdminPage() {
   const { isAuthenticated, isAdmin, session, login, logout, isLoading } = useAuth()
@@ -331,6 +332,17 @@ export default function AdminPage() {
               ))}
             </div>
           )}
+        </div>
+      )}
+
+      {/* Page Content (admin only) */}
+      {isAdmin && (
+        <div className="mb-12">
+          <h2 className="text-sm text-gray-500 uppercase tracking-wide mb-4">Page Content</h2>
+          <p className="text-sm text-gray-600 mb-6">
+            Edit page content stored on ATProto.
+          </p>
+          <PageEditor />
         </div>
       )}
 
