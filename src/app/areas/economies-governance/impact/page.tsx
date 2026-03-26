@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import type { Metadata } from 'next'
+import EditPageButton from '@/components/EditPageButton'
 import Breadcrumb from '@/components/Breadcrumb'
 import { fetchPage, getSection } from '@/lib/indexer'
 
@@ -78,6 +79,7 @@ export default async function ImpactOverviewPage() {
           </svg>
         </Link>
       </div>
+      <EditPageButton rkey="area-eg-impact" />
     </div>
   )
 }

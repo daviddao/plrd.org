@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import EditPageButton from '@/components/EditPageButton'
 import { publications, talks, blogPosts } from '@/lib/content'
 import { formatDate } from '@/lib/format'
 import { AreaIcon } from '@/components/AreaIcons'
@@ -249,6 +250,7 @@ export default async function HomePage() {
           </svg>
         </Link>
       </div>
+      <EditPageButton rkey="landing" />
     </div>
   )
 }

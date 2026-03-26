@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import EditPageButton from '@/components/EditPageButton'
 import Breadcrumb from '@/components/Breadcrumb'
 import { fetchPage, getSection } from '@/lib/indexer'
 
@@ -114,6 +115,7 @@ export default async function SubareasPage() {
       <p className="text-sm text-gray-400 leading-relaxed italic mt-10 max-w-xl">
         More subareas may emerge as the field grows. These subfields overlap and create new opportunity spaces at their convergence points.
       </p>
+      <EditPageButton rkey="area-eg-subareas" />
     </div>
   )
 }

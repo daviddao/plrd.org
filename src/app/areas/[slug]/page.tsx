@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import EditPageButton from '@/components/EditPageButton'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { areas, publications, talks } from '@/lib/content'
@@ -159,6 +160,7 @@ export default async function AreaPage({ params }: Props) {
           </Link>
         </div>
       )}
+      <EditPageButton rkey={`area-${slug}`} />
     </div>
   )
 }

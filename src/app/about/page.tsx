@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import EditPageButton from '@/components/EditPageButton'
 import Link from 'next/link'
 import AuthorCard from '@/components/AuthorCard'
 import Breadcrumb from '@/components/Breadcrumb'
@@ -169,6 +170,7 @@ export default async function AboutPage() {
           <AuthorCard slug="will-scott" />
         </div>
       </div>
+      <EditPageButton rkey="about" />
     </div>
   )
 }
