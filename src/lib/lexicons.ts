@@ -43,6 +43,39 @@ export type CuratedListRecord = {
   updatedAt: string
 }
 
+// Page collections
+export const PAGE_COLLECTION = "org.plresearch.page"
+export const OPPORTUNITY_COLLECTION = "org.plresearch.opportunitySpace"
+
+// Page section
+export type PageSection = {
+  sectionId: string
+  label?: string
+  title?: string
+  subtitle?: string
+  body?: string
+}
+
+// Page record stored on ATProto
+export type PageRecord = {
+  $type: string
+  pageId: string
+  iconType?: string
+  leads?: string[]
+  advisors?: string[]
+  sections: PageSection[]
+  updatedAt: string
+}
+
+// All known page rkeys
+export const PAGE_RKEYS = [
+  "landing", "about", "areas", "collaborate",
+  "area-ai-robotics", "area-digital-human-rights", "area-neurotech",
+  "area-economies-governance", "area-eg-subareas", "area-eg-impact",
+] as const
+
+export type PageRkey = typeof PAGE_RKEYS[number]
+
 // Post with metadata for display
 export type PostEntry = {
   uri: string

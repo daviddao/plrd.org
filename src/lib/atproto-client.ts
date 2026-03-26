@@ -1,6 +1,6 @@
 import { AtpAgent } from '@atproto/api'
-import { CURATEDLIST_COLLECTION, ADMIN_DID, POST_COLLECTION } from './lexicons'
-import type { CuratedListRecord, CuratedListEntry, PostRecord, PostEntry } from './lexicons'
+import { CURATEDLIST_COLLECTION, ADMIN_DID, POST_COLLECTION, PAGE_COLLECTION } from './lexicons'
+import type { CuratedListRecord, CuratedListEntry, PostRecord, PostEntry, PageRecord } from './lexicons'
 
 /**
  * Public Bluesky API agent (for resolving handles and profiles)
@@ -185,3 +185,44 @@ export async function getFeedPosts(): Promise<PostEntry[]> {
 }
 
 export { CURATED_LIST_RKEY }
+
+/**
+ * Fetch a single page record from the admin PDS.
+ */
+export async function getPageRecord(rkey: string): Promise<PageRecord | null> {
+  try {
+    const pdsUrl = await resolvePds(ADMIN_DID)
+    if (!pdsUrl) return null
+    const pdsAgent = getPdsAgent(pdsUrl)
+    const response = await pdsAgent.com.atproto.repo.getRecord({
+      repo: ADMIN_DID,
+      collection: PAGE_COLLECTION,
+      rkey,
+    })
+    return response.data.value as PageRecord
+  } catch {
+    return null
+  }
+}
+
+/**
+ * Fetch all page records from the admin PDS.
+ */
+export async function getAllPageRecords(): Promise<{ rkey: string; record: PageRecord }[]> {
+  try {
+    const pdsUrl = await resolvePds(ADMIN_DID)
+    if (!pdsUrl) return []
+    const pdsAgent = getPdsAgent(pdsUrl)
+    const response = await pdsAgent.com.atproto.repo.listRecords({
+      repo: ADMIN_DID,
+      collection: PAGE_COLLECTION,
+      limit: 100,
+    })
+    return response.data.records.map((r) => ({
+      rkey: r.uri.split("/").pop()!,
+      record: r.value as PageRecord,
+    }))
+  } catch {
+    return []
+  }
+}
