@@ -1,0 +1,40 @@
+{
+  "$type": "org.plresearch.opportunitySpace",
+  "areaSlug": "digital-human-rights",
+  "id": "verifiable-public-knowledge",
+  "title": "Verifiable Public Knowledge & Provenance",
+  "tagline": "Cryptographic provenance as civilizational infrastructure against synthetic reality",
+  "image": "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1200&q=80",
+  "description": "As AI floods the information environment with synthetic content, provenance and authenticity become core civilizational infrastructure. The coming war is not just over speech—it is over reality verification. Content addressing, durable storage, and verifiable retrieval must underpin the next generation of knowledge infrastructure.",
+  "inflectionPoint": "Two generations of frontier AI models ship with attested provenance tooling, or major media and scientific institutions adopt cryptographic provenance as a baseline requirement—signaling that the information environment now requires proof, not just trust.",
+  "shift": "Users begin to expect cryptographic attestations as baseline digital rights. Trust-only systems look increasingly obsolete or suspicious.",
+  "theOpportunity": "Cryptographic provenance becomes the default layer for media, scientific outputs, datasets, and archives. AI training pipelines incorporate content-addressed provenance by default. Journalists, scientists, and institutions publish with verifiable timestamps and integrity guarantees. PL's content-addressing infrastructure becomes the foundation of the internet's trust layer—not an alternative to it.",
+  "subfields": ["Content Provenance", "Verifiable Data", "Durable Storage", "AI Data Integrity"],
+  "tippingSignals": [
+    "Major applications use verifiable storage, identity, or timestamping in production",
+    "End users rely on provenance guarantees they can independently verify",
+    "AI datasets include content-addressed provenance by default",
+    "Enterprises, NGOs, and public institutions adopt verifiable auditability as a requirement",
+    "A new class of products competes primarily on provable correctness or provable neutrality"
+  ],
+  "keyAssumptions": [
+    "Deepfakes and synthetic content are already a civilizational threat. The ability to fabricate any image, video, audio, or document at near-zero cost means trust in media is collapsing. Platform moderation cannot scale to verify everything—cryptographic provenance can.",
+    "Content-addressed storage is the right foundation. IPFS and Filecoin provide the primitives for permanent, verifiable, tamper-evident storage of knowledge artifacts. The gap is adoption, tooling, and integration with mainstream publishing workflows.",
+    "AI training data provenance will become regulated. As AI-generated content proliferates, the provenance and integrity of training datasets will become a legal, commercial, and ethical requirement. Data pipelines that can prove provenance will have structural advantages.",
+    "Scientific and journalistic records are at acute risk. The combination of link rot, platform shutdowns, and synthetic content generation creates unprecedented risk of knowledge erasure and fabrication at civilizational scale."
+  ],
+  "observations": [
+    "C2PA and provenance standards exist but lack infrastructure. The Coalition for Content Provenance and Authenticity has built standards, but the underlying storage and retrieval infrastructure for durable provenance remains weak and fragmented.",
+    "No interoperability between open data systems and AI pipelines. Training datasets, scientific publications, and media archives exist in separate silos with no shared provenance or retrieval infrastructure.",
+    "Durable storage is under-funded as public infrastructure. While Filecoin and IPFS provide the technical foundation, the institutional and funding infrastructure for durable public knowledge preservation remains fragmented.",
+    "Verification UX doesn't exist for mainstream users. Even where cryptographic provenance is available, users have no accessible way to verify content authenticity without deep technical knowledge."
+  ],
+  "fieldSignals": [
+    { "kpi": "Provenance Deployments", "measurement": "# of media, scientific, and archival systems using cryptographic provenance in production" },
+    { "kpi": "Content-Addressed Datasets", "measurement": "Volume of AI training data with content-addressed provenance" },
+    { "kpi": "AI Provenance Standards", "measurement": "# of frontier AI labs with attested provenance tooling for model inputs/outputs" },
+    { "kpi": "Durable Archives", "measurement": "# of journalism and scientific archives stored on verifiable, durable infrastructure" },
+    { "kpi": "Verification UX Adoptions", "measurement": "# of user-facing tools enabling non-technical verification of content authenticity" }
+  ],
+  "updatedAt": "2026-03-25T00:00:00.000Z"
+}

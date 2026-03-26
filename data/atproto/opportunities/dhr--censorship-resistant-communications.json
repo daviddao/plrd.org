@@ -1,0 +1,40 @@
+{
+  "$type": "org.plresearch.opportunitySpace",
+  "areaSlug": "digital-human-rights",
+  "id": "censorship-resistant-communications",
+  "title": "Censorship-Resistant Communications & Media",
+  "tagline": "Resilient protocols for speech, publishing, and information that cannot be deplatformed",
+  "image": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200&q=80",
+  "description": "Speech, association, and information distribution are the first rights constrained in adversarial environments. Resilient messaging, portable social graphs, and censorship-resistant publishing must become the default infrastructure—not the exception. The goal is not to build a better social app but to build protocols and data primitives that make deplatforming non-fatal.",
+  "inflectionPoint": "A major incident of takedown or suppression fails because content and coordination survive across decentralized networks, demonstrating that deplatforming is no longer a viable tool of control at low cost.",
+  "shift": "Free expression moves from platform tolerance to network-embedded resilience. Deplatforming becomes less final—speech infrastructure can no longer be centrally turned off at low cost.",
+  "theOpportunity": "Resilient messaging, publishing, and social graph primitives become standard infrastructure—used by activists, journalists, communities, and everyday users alike. Content survives takedowns. Audiences survive deplatforming. PL-aligned protocols underpin the next generation of speech infrastructure, making censorship prohibitively expensive rather than trivially easy.",
+  "subfields": ["Censorship Resistance", "Decentralized Social", "Resilient Infrastructure", "Durable Storage"],
+  "tippingSignals": [
+    "Activists and journalists rely on censorship-resistant networks in practice",
+    "Social and messaging protocols achieve meaningful cross-platform portability",
+    "Tooling works in low-connectivity and adversarial environments",
+    "Users preserve social graphs independent of any single platform",
+    "Diverse discovery and search platforms prevent capturable chokepoints"
+  ],
+  "keyAssumptions": [
+    "Current speech infrastructure is fragile by design. Centralized platforms remain the single point of failure for billions of users' access to information, organizing, and association. A single moderation decision, court order, or infrastructure outage can silence communities at scale.",
+    "IPFS, libp2p, and content-addressed data provide strong foundations for this area. PL's existing infrastructure is uniquely positioned to underpin censorship-resistant communication protocols without rebuilding from scratch.",
+    "Protocol-layer neutrality is compatible with application-layer moderation. A resilient protocol does not require abandoning content moderation—it requires separating protocol-level censorship resistance from app-level filtering choices.",
+    "Global demand is real and growing. From journalists under authoritarian regimes to activists coordinating across borders, the demand for communication infrastructure that cannot be centrally turned off is not niche—it is a precondition for political participation in much of the world."
+  ],
+  "observations": [
+    "Decentralized social protocols exist but haven't crossed the mainstream threshold. AT Protocol, Nostr, and ActivityPub have demonstrated technical viability but remain at the margins of adoption. Network effects still overwhelmingly favor centralized incumbents.",
+    "No clean separation between protocol and app. The field lacks modular abstractions between protocol-level censorship resistance and application-layer moderation, making it hard to build products that are both resilient and safe.",
+    "Low-connectivity environments remain underserved. Tooling for partitioned, adversarial, or low-bandwidth environments is fragmented and difficult to deploy at scale for the communities that need it most.",
+    "Durable storage for journalism and civic memory is unsolved. Investigative archives, scientific records, and civil society documentation regularly disappear when platforms change policies, shut down, or face legal pressure."
+  ],
+  "fieldSignals": [
+    { "kpi": "Protocol Adoptions", "measurement": "# of apps and services using censorship-resistant messaging or publishing protocols in production" },
+    { "kpi": "Deplatforming Survivals", "measurement": "# of documented incidents where censorship-resistant infrastructure preserved access" },
+    { "kpi": "Cross-Platform Portability", "measurement": "# of protocols enabling portable social graphs across services" },
+    { "kpi": "Adversarial Deployments", "measurement": "# of active users in low-connectivity or censored environments using resilient tooling" },
+    { "kpi": "Durable Archives", "measurement": "# of journalism, scientific, and civic memory archives stored on content-addressed infrastructure" }
+  ],
+  "updatedAt": "2026-03-25T00:00:00.000Z"
+}

@@ -1,0 +1,39 @@
+{
+  "$type": "org.plresearch.opportunitySpace",
+  "areaSlug": "ai-robotics",
+  "id": "open-compute-networks",
+  "title": "Open Compute Networks",
+  "tagline": "Distributed infrastructure for AI training and inference beyond the hyperscalers",
+  "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&q=80",
+  "description": "AI compute infrastructure is concentrated within a handful of hyperscalers and large labs, limiting experimentation and participation. Distributed compute markets can provide scalable access to training and inference capacity—enabling AI development to happen across decentralized infrastructure rather than a handful of centralized clouds.",
+  "inflectionPoint": "A decentralized compute network trains a competitive model—demonstrating that distributed infrastructure can match centralized systems for meaningful AI workloads, breaking the assumption that only hyperscalers can develop frontier AI.",
+  "shift": "AI infrastructure becomes globally distributed. Model training moves from centralized labs to open, coordinated compute markets.",
+  "theOpportunity": "Distributed compute networks become viable infrastructure for meaningful AI training workloads. Open compute markets attract independent researchers, startups, and eventually mid-tier labs seeking alternatives to hyperscaler pricing. PL's infrastructure experience—bootstrapping global decentralized networks—becomes directly applicable to compute coordination at scale.",
+  "subfields": ["Distributed Compute", "Decentralized AI Infrastructure", "Compute Coordination"],
+  "tippingSignals": [
+    "Decentralized compute networks training meaningful models at competitive cost",
+    "New markets for compute coordination and spot pricing emerge",
+    "Startups build training pipelines on distributed infrastructure",
+    "Open compute becomes a viable alternative for research labs and independent developers"
+  ],
+  "keyAssumptions": [
+    "Concentration of AI infrastructure is the primary competitive moat. Whoever controls compute controls who can build frontier AI. Distributed alternatives must reach performance and cost parity to meaningfully shift this dynamic.",
+    "Supply-side coordination is the hard problem. Building distributed compute networks that maintain reliability, consistent performance, and economic sustainability requires solving hard mechanism design problems that pure technology alone does not address.",
+    "Open infrastructure enables open innovation. When AI training infrastructure is permissionless, independent researchers, small labs, and new entrants can experiment and innovate without depending on large-scale capital or hyperscaler access.",
+    "The window is open but may close quickly. As AI infrastructure consolidation accelerates, the opportunity to establish open alternatives narrows. Distributed compute must demonstrate viability before centralized lock-in becomes irreversible."
+  ],
+  "observations": [
+    "Centralization accelerates as model scale grows. The compute requirements for frontier models grow faster than distributed alternatives can scale, creating a widening gap between centralized and decentralized capabilities.",
+    "Reliability and performance variance remains a major barrier. Distributed compute networks struggle to offer the consistent SLAs that production AI workloads require, limiting adoption to experimental and non-critical use cases.",
+    "Speculative token design undermines real utility. Many distributed compute projects have been designed around token incentives rather than genuine infrastructure utility, eroding trust and slowing adoption.",
+    "No shared standards for compute coordination. Fragmented protocols, APIs, and orchestration layers prevent interoperability between distributed compute networks."
+  ],
+  "fieldSignals": [
+    { "kpi": "Distributed Training Milestones", "measurement": "# of competitive AI models trained on distributed compute infrastructure" },
+    { "kpi": "Compute Network Utilization", "measurement": "Sustained, non-speculative usage across distributed compute networks" },
+    { "kpi": "Cost Competitiveness", "measurement": "Price per GPU-hour on distributed networks vs. hyperscaler equivalents" },
+    { "kpi": "Ecosystem Businesses", "measurement": "# of startups building AI products on distributed compute rather than hyperscalers" },
+    { "kpi": "Open Standards Adoption", "measurement": "# of distributed compute networks using shared coordination protocols" }
+  ],
+  "updatedAt": "2026-03-25T00:00:00.000Z"
+}

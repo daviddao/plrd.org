@@ -1,0 +1,40 @@
+{
+  "$type": "org.plresearch.page",
+  "pageId": "landing",
+  "sections": [
+    {
+      "sectionId": "hero",
+      "title": "Driving R&D breakthroughs to push humanity forward."
+    },
+    {
+      "sectionId": "approach",
+      "title": "Use-inspired research across four frontiers",
+      "body": "We work in Pasteur's Quadrant — pursuing fundamental understanding while staying anchored to real-world impact. Our four focus areas span the most consequential frontiers in computing, society, and human cognition."
+    },
+    {
+      "sectionId": "approach-dhr",
+      "title": "Digital Human Rights",
+      "subtitle": "Building decentralized infrastructure that enshrines freedom and safety in the digital age."
+    },
+    {
+      "sectionId": "approach-eg",
+      "title": "Economies & Governance",
+      "subtitle": "Crypto-native tools for more efficient, equitable coordination at global scale."
+    },
+    {
+      "sectionId": "approach-ai",
+      "title": "AI & Robotics",
+      "subtitle": "Responsible advancement in AGI, robotics, and immersive technologies that reshape how we interact with the world."
+    },
+    {
+      "sectionId": "approach-neuro",
+      "title": "Neurotechnology",
+      "subtitle": "Accelerating brain-computer interfaces and NeuroAI to expand human cognition and treat brain disorders."
+    },
+    {
+      "sectionId": "team",
+      "body": "A fully remote team distributed across the globe, working with talented and intellectually curious people who share a passion for improving technology for humanity."
+    }
+  ],
+  "updatedAt": "2026-03-25T00:00:00.000Z"
+}

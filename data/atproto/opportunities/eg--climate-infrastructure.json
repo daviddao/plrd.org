@@ -1,0 +1,40 @@
+{
+  "$type": "org.plresearch.opportunitySpace",
+  "areaSlug": "economies-governance",
+  "id": "climate-infrastructure",
+  "title": "Decentralized Climate Infrastructure & Finance",
+  "tagline": "DePIN networks and ReFi mechanisms for climate action at scale",
+  "image": "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=1200&q=80",
+  "description": "Decentralized Physical Infrastructure Networks (DePIN) are demonstrating that compute, energy, sensing, mapping, and telecommunications can be coordinated through crypto-native mechanisms. Combined with Regenerative Finance (ReFi), this creates new possibilities for funding and operating climate infrastructure at global scale.",
+  "inflectionPoint": "There exists a billion-dollar DePIN-enabled climate business (e.g. Glow scaling to control large parts of the solar market).",
+  "shift": "Crypto becomes planetary-scale coordination infrastructure.",
+  "theOpportunity": "DePIN becomes a mainstream infrastructure category for climate action. Glow-style solar coordination scales globally, with verifiable impact measurement connecting to institutional climate finance. Environmental sensing networks provide transparent, verifiable climate data. ReFi mechanisms evolve from carbon tokenization to funding real infrastructure deployment, with clear measurement frameworks that institutional investors can trust.",
+  "subfields": ["DePIN", "Climate / ReFi", "DeFi", "Public Goods Funding"],
+  "tippingSignals": [
+    "Institutional climate funds via crypto rails",
+    "DePIN coordinating real renewable capacity",
+    "Verified climate assets traded on-chain",
+    "Multilateral climate standards reference crypto-native MRV"
+  ],
+  "keyAssumptions": [
+    "Climate infrastructure requires unprecedented coordination. The scale of renewable energy, sensing networks, and adaptation infrastructure needed exceeds what traditional coordination mechanisms can deliver. Decentralized coordination offers a path to the required scale.",
+    "DePIN has demonstrated technical viability. Filecoin, Helium, Glow, and other networks prove that physical infrastructure can be coordinated through crypto-native mechanisms. The gap is sovereign-grade trust and institutional adoption.",
+    "Carbon markets and climate finance are broken but essential. Current carbon markets suffer from fraud, double-counting, and opacity. Verifiable, transparent, crypto-native alternatives could unlock institutional climate capital.",
+    "Community ownership aligns incentives for climate action. When communities own renewable energy infrastructure and benefit directly from its operation, adoption accelerates and outcomes improve."
+  ],
+  "observations": [
+    "DePIN hasn't achieved sovereign-grade trust: Despite technical success, DePIN networks remain in crypto-native usage. Institutional and sovereign adoption requires different trust frameworks, compliance, and operational standards.",
+    "ReFi remains disconnected from real climate action: Most ReFi projects focus on tokenizing existing carbon credits rather than funding new climate infrastructure or driving measurable environmental outcomes.",
+    "Measurement and verification gaps: Climate impact claims lack rigorous, verifiable measurement infrastructure. This prevents institutional capital deployment and undermines market integrity.",
+    "No coordination between DePIN and climate finance: Energy DePIN networks (Glow, etc.) operate separately from climate finance mechanisms. Integration could unlock significant capital and accelerate deployment."
+  ],
+  "fieldSignals": [
+    { "kpi": "DePIN Climate Deployments", "measurement": "# of DePIN networks (energy, sensing, mapping) deployed for climate infrastructure at scale" },
+    { "kpi": "Institutional Climate Capital", "measurement": "$XM+ of institutional climate finance connected to DePIN or ReFi mechanisms" },
+    { "kpi": "Verifiable Impact Measurement", "measurement": "# of climate projects with rigorous, verifiable measurement infrastructure for institutional trust" },
+    { "kpi": "Community-Owned Infrastructure", "measurement": "# of renewable energy or climate infrastructure projects with community ownership models" },
+    { "kpi": "ReFi Infrastructure Funding", "measurement": "# of real infrastructure projects funded through ReFi mechanisms (beyond carbon tokenization)" },
+    { "kpi": "Environmental Sensing Networks", "measurement": "# of transparent, verifiable climate data networks deployed for monitoring and verification" }
+  ],
+  "updatedAt": "2026-03-25T00:00:00.000Z"
+}

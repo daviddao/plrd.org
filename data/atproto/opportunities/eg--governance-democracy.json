@@ -1,0 +1,39 @@
+{
+  "$type": "org.plresearch.opportunitySpace",
+  "areaSlug": "economies-governance",
+  "id": "governance-democracy",
+  "title": "Crypto-Native Governance & Democracy",
+  "tagline": "New coordination mechanisms for collective decision-making",
+  "image": "https://images.unsplash.com/photo-1577962917302-cd874c4e31d2?w=1200&q=80",
+  "description": "Traditional governance systems struggle with scale, legitimacy, and responsiveness. Crypto-native governance mechanisms offer new primitives for collective decision-making: quadratic voting, conviction voting, futarchy, and novel delegation systems.",
+  "inflectionPoint": "Crypto-native governance is adopted because existing institutions can no longer credibly claim authority (e.g. Edge City-derived governance frameworks adopted by a city or jurisdiction).",
+  "shift": "Crypto governance moves from 'experiments' to institutional necessity.",
+  "theOpportunity": "Network state communities serve as living laboratories for governance innovations that then propagate to progressive jurisdictions. Sovereign-grade governance tooling emerges, enabling quadratic voting for participatory budgeting, conviction voting for resource allocation, and liquid democracy for representation. Decentralized identity infrastructure enables privacy-preserving civic participation at scale.",
+  "subfields": ["DeGov / Governance improvements", "Network States / new societies", "(Sovereign) DPI", "Improving Nations"],
+  "tippingSignals": [
+    "Cities allocating budgets via crypto",
+    "Crypto-enabled civic identity systems adopted",
+    "Governance tooling referenced in constitutional or legal reform"
+  ],
+  "keyAssumptions": [
+    "Democratic institutions are facing a legitimacy crisis. Declining trust in government, polarization, and slow responsiveness create demand for governance innovations that can restore citizen engagement and institutional effectiveness.",
+    "Network states provide safe experimentation zones. Voluntary communities can test governance innovations at meaningful scale without the constraints of legacy systems, creating proof points for broader adoption.",
+    "Decentralized identity unlocks new participation models. Privacy-preserving, verifiable credentials enable civic participation models impossible with current identity infrastructure, from quadratic voting to liquid democracy.",
+    "Progressive jurisdictions are actively seeking innovations. Cities, special economic zones, and small states are experimenting with participatory budgeting, digital democracy tools, and new forms of citizen engagement."
+  ],
+  "observations": [
+    "DAO governance has not crossed to mainstream adoption: Despite billions in DAO treasuries, governance innovations remain largely confined to crypto-native communities. Translation to civic institutions has been minimal.",
+    "No sovereign-grade governance tooling: Existing tools (Snapshot, Tally, Aragon) are built for DAOs, not governments. Sovereign adoption requires different security, compliance, and accessibility standards.",
+    "Fragmented experimentation: Cities and jurisdictions experimenting with digital democracy tools do so in isolation. No coordination layer shares learnings or develops common standards.",
+    "Identity remains the blocker: Most governance innovations require identity infrastructure that doesn't exist at sovereign grade. Sybil resistance, privacy, and verifiability remain unsolved at population scale."
+  ],
+  "fieldSignals": [
+    { "kpi": "Network State Laboratories", "measurement": "# of network state communities actively testing governance innovations with proof-of-concept outcomes" },
+    { "kpi": "Jurisdiction Adoptions", "measurement": "# of cities, SEZs, or progressive jurisdictions piloting crypto-native governance tools" },
+    { "kpi": "Governance Tooling Deployed", "measurement": "# of sovereign-grade governance tools (voting, delegation, budgeting) deployed in civic contexts" },
+    { "kpi": "Civic Participants", "measurement": "# of citizens actively participating through decentralized identity or governance mechanisms" },
+    { "kpi": "Coordination Standards", "measurement": "# of shared governance standards, playbooks, or frameworks adopted across jurisdictions" },
+    { "kpi": "Identity Infrastructure", "measurement": "# of privacy-preserving, sybil-resistant identity deployments at population scale" }
+  ],
+  "updatedAt": "2026-03-25T00:00:00.000Z"
+}

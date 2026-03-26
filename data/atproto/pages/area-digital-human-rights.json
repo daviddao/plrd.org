@@ -1,0 +1,16 @@
+{
+  "$type": "org.plresearch.page",
+  "pageId": "area-digital-human-rights",
+  "iconType": "shield",
+  "leads": ["will-scott"],
+  "advisors": [],
+  "sections": [
+    {
+      "sectionId": "hero",
+      "title": "Digital Human Rights",
+      "subtitle": "Securing Digital Human Rights: Building a foundation of freedom and safety in the digital age through Web3 networks and decentralized infrastructure.",
+      "body": "Digital Human Rights is centered on building a foundation of freedom and safety in the digital age. Our mission is to improve the internet by developing web3 networks, infrastructure, and new primitives that promote human agency.\n\nBy making the internet more decentralized, verifiable, and secure, we aim to protect against digital totalitarianism and create better infrastructure that enshrines human rights through mathematics, incentives, and robust global governance. This involves constructing an underlying infrastructure layer with public internet digital utilities that ensure universal access and consistent connectivity for all humans worldwide."
+    }
+  ],
+  "updatedAt": "2026-03-25T00:00:00.000Z"
+}

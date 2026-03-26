@@ -1,0 +1,68 @@
+{
+  "$type": "org.plresearch.page",
+  "pageId": "area-economies-governance",
+  "iconType": "hexagon",
+  "leads": ["david-dao", "james-tunningley"],
+  "sections": [
+    {
+      "sectionId": "hero",
+      "title": "Economies & Governance",
+      "subtitle": "Building crypto-native economic and governance infrastructure to create more efficient, equitable structures that coordinate at the scale of nation-states."
+    },
+    {
+      "sectionId": "body",
+      "body": "This focus area rectifies the inadequacies of current macro systems, which often struggle to coordinate and solve monumental challenges like climate change. By leveraging cryptoeconomics and improved governance tools, we are rethinking how capital is formed and deployed.\n\nThis movement harnesses mechanism design to align millions of people worldwide toward shared goals, creating structures that can allocate resources at the scale of nation-states for the benefit of all humanity."
+    },
+    {
+      "sectionId": "explore-subareas",
+      "title": "Subareas",
+      "subtitle": "9 interconnected subfields driving systemic change."
+    },
+    {
+      "sectionId": "explore-opportunities",
+      "title": "Opportunity Spaces",
+      "subtitle": "4 convergence zones for systemic change."
+    },
+    {
+      "sectionId": "explore-impact",
+      "title": "Impact Dashboard",
+      "subtitle": "Ecosystem impact across villages and funding."
+    },
+    {
+      "sectionId": "explore-projects",
+      "title": "Project Explorer",
+      "subtitle": "242+ teams building public goods infrastructure."
+    },
+    {
+      "sectionId": "explore-depgraph",
+      "title": "Dependency Graph",
+      "subtitle": "Strategic dependency trees across 4 inflection points."
+    },
+    {
+      "sectionId": "engage-feedback",
+      "title": "Feedback on this framing",
+      "body": "Does this opportunity space resonate? What's missing? What's wrong?"
+    },
+    {
+      "sectionId": "engage-cases",
+      "title": "Case studies and examples",
+      "body": "What sovereign DPI deployments, DeSci infrastructure, DePIN projects, or PGF mechanisms should we be learning from?"
+    },
+    {
+      "sectionId": "engage-partners",
+      "title": "Partner identification",
+      "body": "Who else should be at the table? What institutions, teams, or individuals are essential to this work?"
+    },
+    {
+      "sectionId": "engage-technical",
+      "title": "Technical input",
+      "body": "What reference architectures, standards, or specifications would be most valuable?"
+    },
+    {
+      "sectionId": "engage-strategic",
+      "title": "Strategic counsel",
+      "body": "What have we gotten wrong about the field, the opportunity, or the approach?"
+    }
+  ],
+  "updatedAt": "2026-03-25T00:00:00.000Z"
+}
