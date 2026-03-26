@@ -4,7 +4,8 @@ import Link from 'next/link'
 import { useAuth } from '@/lib/atproto'
 
 /**
- * Floating edit button — only visible to admin users.
+ * Edit button — only visible to admin users.
+ * Positioned top-right of the page content area.
  * Links to /admin where the PageEditor can edit the given page rkey.
  */
 export default function EditPageButton({ rkey }: { rkey: string }) {
@@ -15,13 +16,13 @@ export default function EditPageButton({ rkey }: { rkey: string }) {
   return (
     <Link
       href={`/admin?page=${encodeURIComponent(rkey)}`}
-      className="fixed bottom-6 right-6 z-50 flex items-center gap-2 px-4 py-2.5 bg-blue text-white rounded-full shadow-lg hover:bg-blue/90 transition-colors text-sm font-medium"
+      className="fixed top-20 right-6 z-50 flex items-center gap-2 px-4 py-2 bg-blue text-white rounded-full shadow-lg hover:bg-blue/90 transition-colors text-sm font-medium"
       title={`Edit "${rkey}" page content`}
     >
       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
       </svg>
-      Edit
+      Edit page
     </Link>
   )
 }
