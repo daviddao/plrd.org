@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import type { Metadata } from 'next'
+import EditPageButton from '@/components/EditPageButton'
 import AuthorCard from '@/components/AuthorCard'
 import Breadcrumb from '@/components/Breadcrumb'
 import FundingPipeline from '@/components/FundingPipeline'
@@ -216,6 +217,7 @@ export default async function FA2MainPage() {
           </svg>
         </a>
       </div>
+      <EditPageButton rkey="area-economies-governance" />
     </div>
   )
 }

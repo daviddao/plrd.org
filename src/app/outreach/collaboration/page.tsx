@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import EditPageButton from '@/components/EditPageButton'
 import Breadcrumb from '@/components/Breadcrumb'
 import { fetchPage, getSection } from '@/lib/indexer'
 
@@ -58,6 +59,7 @@ export default async function CollaborationPage() {
           </svg>
         </a>
       </div>
+      <EditPageButton rkey="collaborate" />
     </div>
   )
 }

@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { useSearchParams } from "next/navigation"
 import type { PageRecord, PageSection } from "@/lib/lexicons"
 
 type PageEntry = { rkey: string; record: PageRecord }
@@ -13,16 +14,28 @@ export default function PageEditor() {
   const [isSaving, setIsSaving] = useState(false)
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
 
-  // Fetch all pages on mount
+  const searchParams = useSearchParams()
+  const autoSelectRkey = searchParams.get("page")
+
+  // Fetch all pages on mount, auto-select if ?page= is set
   useEffect(() => {
     fetch("/api/pages")
       .then((r) => r.json())
       .then((data) => {
-        setPages(data.pages || [])
+        const loaded = data.pages || []
+        setPages(loaded)
         setIsLoading(false)
+        // Auto-select page from URL query param
+        if (autoSelectRkey && !selectedRkey) {
+          const entry = loaded.find((p: PageEntry) => p.rkey === autoSelectRkey)
+          if (entry) {
+            setSelectedRkey(entry.rkey)
+            setEditingRecord(structuredClone(entry.record))
+          }
+        }
       })
       .catch(() => setIsLoading(false))
-  }, [])
+  }, [autoSelectRkey])
 
   const selectPage = (entry: PageEntry) => {
     setSelectedRkey(entry.rkey)

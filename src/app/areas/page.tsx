@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import EditPageButton from '@/components/EditPageButton'
 import Link from 'next/link'
 import { areas } from '@/lib/content'
 import { stripFaPrefix } from '@/lib/format'
@@ -57,6 +58,7 @@ export default async function AreasPage() {
           </Link>
         ))}
       </div>
+      <EditPageButton rkey="areas" />
     </div>
   )
 }
