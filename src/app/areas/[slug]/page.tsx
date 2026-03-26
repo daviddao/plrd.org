@@ -6,6 +6,7 @@ import { stripFaPrefix } from '@/lib/format'
 import { AreaIcon, type AreaIconType } from '@/components/AreaIcons'
 import AuthorCard from '@/components/AuthorCard'
 import Breadcrumb from '@/components/Breadcrumb'
+import { fetchPage, getSection } from '@/lib/indexer'
 
 type Props = { params: Promise<{ slug: string }> }
 
@@ -38,6 +39,15 @@ export default async function AreaPage({ params }: Props) {
   const area = areas.find((a) => a.slug === slug)
   if (!area) notFound()
 
+  const pageRkey = `area-${slug}`
+  const page = await fetchPage(pageRkey)
+  const heroSection = getSection(page, "hero")
+
+  const summary = heroSection?.subtitle || area.summary
+  const bodyFromIndexer = heroSection?.body ?? null
+  const leads = page?.leads || area.leads
+  const advisors = page?.advisors || area.advisors
+
   const areaPubs = publications.filter((p) => p.areas.includes(slug)).slice(0, 8)
   const areaTalks = talks.filter((t) => t.areas.includes(slug)).slice(0, 6)
 
@@ -54,9 +64,9 @@ export default async function AreaPage({ params }: Props) {
             {stripFaPrefix(area.title)}
           </h1>
         </div>
-        {area.summary && (
+        {summary && (
           <p className="relative z-10 text-lg text-gray-600 leading-relaxed max-w-2xl mb-8">
-            {area.summary}
+            {summary}
           </p>
         )}
         <div className="relative z-10 flex flex-wrap gap-4 mb-10">
@@ -70,9 +80,9 @@ export default async function AreaPage({ params }: Props) {
             </svg>
           </Link>
         </div>
-        {area.leads.length > 0 && (
+        {leads.length > 0 && (
           <div className="relative z-10 flex flex-wrap gap-4">
-            {area.leads.map((authorSlug) => (
+            {leads.map((authorSlug) => (
               <AuthorCard key={authorSlug} slug={authorSlug} variant="lead" />
             ))}
           </div>
@@ -80,11 +90,11 @@ export default async function AreaPage({ params }: Props) {
       </div>
 
       {/* Advisors */}
-      {area.advisors && area.advisors.length > 0 && (
+      {advisors && advisors.length > 0 && (
         <div className="relative z-10 mt-10 mb-2">
           <h2 className="text-sm text-gray-500 uppercase tracking-wide mb-4">Advisors</h2>
           <div className="flex flex-wrap gap-3">
-            {area.advisors.map((authorSlug) => (
+            {advisors.map((authorSlug) => (
               <AuthorCard key={authorSlug} slug={authorSlug} variant="advisor" />
             ))}
           </div>
@@ -92,9 +102,17 @@ export default async function AreaPage({ params }: Props) {
       )}
 
       {/* Content */}
-      {area.html && (
+      {(bodyFromIndexer || area.html) && (
         <div className="mb-12 pb-12 border-b border-gray-100">
-          <div className="page-content text-base text-gray-700 leading-relaxed max-w-3xl" dangerouslySetInnerHTML={{ __html: area.html }} />
+          {bodyFromIndexer ? (
+            <div className="page-content text-base text-gray-700 leading-relaxed max-w-3xl">
+              {bodyFromIndexer.split('\n\n').map((para, i) => (
+                <p key={i}>{para}</p>
+              ))}
+            </div>
+          ) : (
+            <div className="page-content text-base text-gray-700 leading-relaxed max-w-3xl" dangerouslySetInnerHTML={{ __html: area.html! }} />
+          )}
         </div>
       )}
 

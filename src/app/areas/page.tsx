@@ -4,6 +4,7 @@ import { areas } from '@/lib/content'
 import { stripFaPrefix } from '@/lib/format'
 import { AreaIcon, type AreaIconType } from '@/components/AreaIcons'
 import Breadcrumb from '@/components/Breadcrumb'
+import { fetchPage, getSection } from '@/lib/indexer'
 
 export const metadata: Metadata = { title: 'Focus Areas' }
 
@@ -16,7 +17,9 @@ const AREA_ICONS: Record<string, AreaIconType> = {
   'neurotech': 'brain',
 }
 
-export default function AreasPage() {
+export default async function AreasPage() {
+  const page = await fetchPage("areas")
+  const heroSection = getSection(page, "hero")
   return (
     <div className="max-w-6xl mx-auto px-6 pt-8 pb-16">
       <Breadcrumb items={[{ label: 'Focus Areas' }]} />
@@ -27,7 +30,7 @@ export default function AreasPage() {
           Focus Areas
         </h1>
         <p className="relative z-10 text-lg text-gray-600 leading-relaxed max-w-2xl">
-          Four research directions driving breakthroughs in computing, coordination, and human capability.
+          {heroSection?.subtitle || "Four research directions driving breakthroughs in computing, coordination, and human capability."}
         </p>
       </div>
 

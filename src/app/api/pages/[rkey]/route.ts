@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server"
-import { getPageRecord } from "@/lib/atproto-client"
+import { fetchPage } from "@/lib/indexer"
 import { getAuthenticatedAgent } from "@/lib/agent"
 import { getSession } from "@/lib/session"
 import { ADMIN_DID, PAGE_COLLECTION } from "@/lib/lexicons"
@@ -12,7 +12,7 @@ type Props = { params: Promise<{ rkey: string }> }
 export async function GET(_req: NextRequest, { params }: Props) {
   const { rkey } = await params
   try {
-    const record = await getPageRecord(rkey)
+    const record = await fetchPage(rkey)
     if (!record) {
       return NextResponse.json({ error: "Page not found" }, { status: 404 })
     }

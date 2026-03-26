@@ -3,6 +3,7 @@ import { publications, talks, blogPosts } from '@/lib/content'
 import { formatDate } from '@/lib/format'
 import { AreaIcon } from '@/components/AreaIcons'
 import { GeoIllustration } from '@/components/GeoIllustration'
+import { fetchPage, getSection, getSectionsWithPrefix } from "@/lib/indexer"
 
 type UpdateItem = {
   title: string
@@ -51,8 +52,17 @@ function CardIllustration({ slug, areas }: { slug: string; areas: string[] }) {
 }
 
 
-export default function HomePage() {
+export default async function HomePage() {
   const updates = getLatestUpdates(8)
+
+  const page = await fetchPage("landing")
+  const hero = getSection(page, "hero")
+  const approach = getSection(page, "approach")
+  const dhr = getSection(page, "approach-dhr")
+  const eg = getSection(page, "approach-eg")
+  const ai = getSection(page, "approach-ai")
+  const neuro = getSection(page, "approach-neuro")
+  const team = getSection(page, "team")
 
   return (
     <div className="max-w-6xl mx-auto px-6">
@@ -74,7 +84,7 @@ export default function HomePage() {
         />
 
         <h1 className="relative z-10 font-serif text-[36px] md:text-[52px] lg:text-[64px] font-normal leading-[1.1] tracking-tight mb-8">
-          Driving R&D breakthroughs to push humanity forward.
+          {hero?.title || "Driving R&D breakthroughs to push humanity forward."}
         </h1>
         <div className="relative z-10 flex flex-wrap gap-4">
           <Link 
@@ -108,10 +118,10 @@ export default function HomePage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
           <div>
             <h2 className="text-[28px] md:text-[36px] font-normal leading-tight tracking-tight mb-6">
-              Use-inspired research across four frontiers
+              {approach?.title || "Use-inspired research across four frontiers"}
             </h2>
             <p className="text-base text-gray-600 leading-relaxed mb-10">
-              We work in <a href="https://en.wikipedia.org/wiki/Pasteur%27s_quadrant" target="_blank" rel="noopener noreferrer" className="text-gray-500 underline decoration-gray-300 underline-offset-2 hover:text-gray-700 transition-colors">Pasteur&apos;s Quadrant</a> — pursuing fundamental understanding while staying anchored to real-world impact. Our four focus areas span the most consequential frontiers in computing, society, and human cognition.
+              {approach?.body || "We work in Pasteur's Quadrant — pursuing fundamental understanding while staying anchored to real-world impact. Our four focus areas span the most consequential frontiers in computing, society, and human cognition."}
             </p>
 
           </div>
@@ -119,8 +129,8 @@ export default function HomePage() {
             <Link href="/areas/digital-human-rights" className="flex items-start gap-4 p-5 border border-gray-200 rounded-lg hover:border-blue hover:shadow-sm transition-all group">
               <AreaIcon type="shield" />
               <div className="flex-1 min-w-0">
-                <div className="text-sm font-medium text-black group-hover:text-blue transition-colors mb-1">Digital Human Rights</div>
-                <div className="text-sm text-gray-500 leading-relaxed">Building decentralized infrastructure that enshrines freedom and safety in the digital age.</div>
+                <div className="text-sm font-medium text-black group-hover:text-blue transition-colors mb-1">{dhr?.title || "Digital Human Rights"}</div>
+                <div className="text-sm text-gray-500 leading-relaxed">{dhr?.subtitle || "Building decentralized infrastructure that enshrines freedom and safety in the digital age."}</div>
               </div>
               <svg className="w-4 h-4 text-gray-300 group-hover:text-blue transition-colors shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -129,8 +139,8 @@ export default function HomePage() {
             <Link href="/areas/economies-governance" className="flex items-start gap-4 p-5 border border-gray-200 rounded-lg hover:border-blue hover:shadow-sm transition-all group">
               <AreaIcon type="hexagon" />
               <div className="flex-1 min-w-0">
-                <div className="text-sm font-medium text-black group-hover:text-blue transition-colors mb-1">Economies &amp; Governance</div>
-                <div className="text-sm text-gray-500 leading-relaxed">Crypto-native tools for more efficient, equitable coordination at global scale.</div>
+                <div className="text-sm font-medium text-black group-hover:text-blue transition-colors mb-1">{eg?.title || "Economies & Governance"}</div>
+                <div className="text-sm text-gray-500 leading-relaxed">{eg?.subtitle || "Crypto-native tools for more efficient, equitable coordination at global scale."}</div>
               </div>
               <svg className="w-4 h-4 text-gray-300 group-hover:text-blue transition-colors shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -139,8 +149,8 @@ export default function HomePage() {
             <Link href="/areas/ai-robotics" className="flex items-start gap-4 p-5 border border-gray-200 rounded-lg hover:border-blue hover:shadow-sm transition-all group">
               <AreaIcon type="neural" />
               <div className="flex-1 min-w-0">
-                <div className="text-sm font-medium text-black group-hover:text-blue transition-colors mb-1">AI &amp; Robotics</div>
-                <div className="text-sm text-gray-500 leading-relaxed">Responsible advancement in AGI, robotics, and immersive technologies that reshape how we interact with the world.</div>
+                <div className="text-sm font-medium text-black group-hover:text-blue transition-colors mb-1">{ai?.title || "AI & Robotics"}</div>
+                <div className="text-sm text-gray-500 leading-relaxed">{ai?.subtitle || "Responsible advancement in AGI, robotics, and immersive technologies that reshape how we interact with the world."}</div>
               </div>
               <svg className="w-4 h-4 text-gray-300 group-hover:text-blue transition-colors shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -149,8 +159,8 @@ export default function HomePage() {
             <Link href="/areas/neurotech" className="flex items-start gap-4 p-5 border border-gray-200 rounded-lg hover:border-blue hover:shadow-sm transition-all group">
               <AreaIcon type="brain" />
               <div className="flex-1 min-w-0">
-                <div className="text-sm font-medium text-black group-hover:text-blue transition-colors mb-1">Neurotechnology</div>
-                <div className="text-sm text-gray-500 leading-relaxed">Accelerating brain-computer interfaces and NeuroAI to expand human cognition and treat brain disorders.</div>
+                <div className="text-sm font-medium text-black group-hover:text-blue transition-colors mb-1">{neuro?.title || "Neurotechnology"}</div>
+                <div className="text-sm text-gray-500 leading-relaxed">{neuro?.subtitle || "Accelerating brain-computer interfaces and NeuroAI to expand human cognition and treat brain disorders."}</div>
               </div>
               <svg className="w-4 h-4 text-gray-300 group-hover:text-blue transition-colors shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -227,7 +237,7 @@ export default function HomePage() {
       <div className="pb-20 lg:pb-28">
         <h2 className="text-sm text-gray-500 uppercase tracking-wide mb-6">Team</h2>
         <p className="text-lg text-gray-700 leading-relaxed max-w-2xl mb-6">
-          A fully remote team distributed across the globe, working with talented and intellectually curious people who share a passion for improving technology for humanity.
+          {team?.body || "A fully remote team distributed across the globe, working with talented and intellectually curious people who share a passion for improving technology for humanity."}
         </p>
         <Link 
           href="/authors" 
@@ -242,5 +252,3 @@ export default function HomePage() {
     </div>
   )
 }
-
-

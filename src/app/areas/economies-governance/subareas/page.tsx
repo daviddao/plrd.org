@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Breadcrumb from '@/components/Breadcrumb'
+import { fetchPage, getSection } from '@/lib/indexer'
 
 export const metadata: Metadata = {
   title: 'Subareas',
@@ -8,7 +9,7 @@ export const metadata: Metadata = {
 
 type SubareaIconType = 'dpi' | 'desci' | 'depin' | 'pgf' | 'defi' | 'degov' | 'network-states' | 'nations' | 'refi'
 
-const subareas: { title: string; tagline: string; description: string; icon: SubareaIconType }[] = [
+const HARDCODED_SUBAREAS: { title: string; tagline: string; description: string; icon: SubareaIconType }[] = [
   {
     title: '(Sovereign) DPI',
     tagline: 'Digital Public Infrastructure',
@@ -65,7 +66,17 @@ const subareas: { title: string; tagline: string; description: string; icon: Sub
   },
 ]
 
-export default function SubareasPage() {
+export default async function SubareasPage() {
+  const page = await fetchPage("area-eg-subareas")
+  const subareas = HARDCODED_SUBAREAS.map(sub => {
+    const section = getSection(page, sub.icon)
+    return {
+      ...sub,
+      title: section?.title || sub.title,
+      tagline: section?.subtitle || sub.tagline,
+      description: section?.body || sub.description,
+    }
+  })
   return (
     <div className="max-w-6xl mx-auto px-6 pt-8 pb-16">
       <Breadcrumb
