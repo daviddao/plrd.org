@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useCallback, createContext, useContext } from 'react'
-import { ADMIN_DID } from './lexicons'
+import { ADMIN_DIDS } from './lexicons'
 
 // Session type
 export interface Session {
@@ -129,7 +129,7 @@ export function useAuth() {
 
   const { state, login, logout } = context
 
-  const isAdmin = state.session?.did === ADMIN_DID
+  const isAdmin = state.session ? ADMIN_DIDS.includes(state.session.did) : false
 
   return {
     status: state.status,
