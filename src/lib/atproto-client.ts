@@ -1,6 +1,6 @@
 import { AtpAgent } from '@atproto/api'
-import { CURATEDLIST_COLLECTION, ADMIN_DID, POST_COLLECTION, PAGE_COLLECTION } from './lexicons'
-import type { CuratedListRecord, CuratedListEntry, PostRecord, PostEntry, PageRecord } from './lexicons'
+import { ADMIN_DID, PAGE_COLLECTION } from './lexicons'
+import type { PageRecord } from './lexicons'
 
 /**
  * Public Bluesky API agent (for resolving handles and profiles)
@@ -70,121 +70,6 @@ export async function getPublicProfile(actor: string) {
     return null
   }
 }
-
-// Singleton rkey for the curated list record
-const CURATED_LIST_RKEY = 'self'
-
-/**
- * Get the full curated list with metadata
- */
-export async function getCuratedList(): Promise<CuratedListEntry[]> {
-  try {
-    const pdsUrl = await resolvePds(ADMIN_DID)
-    if (!pdsUrl) return []
-
-    const pdsAgent = getPdsAgent(pdsUrl)
-    const response = await pdsAgent.com.atproto.repo.getRecord({
-      repo: ADMIN_DID,
-      collection: CURATEDLIST_COLLECTION,
-      rkey: CURATED_LIST_RKEY,
-    })
-
-    const record = response.data.value as CuratedListRecord
-    if (!record?.users || !Array.isArray(record.users)) {
-      return []
-    }
-
-    return record.users
-  } catch {
-    return []
-  }
-}
-
-/**
- * Get the curated list record CID for swap updates
- */
-export async function getCuratedListRecordCid(): Promise<string | undefined> {
-  try {
-    const pdsUrl = await resolvePds(ADMIN_DID)
-    if (!pdsUrl) return undefined
-
-    const pdsAgent = getPdsAgent(pdsUrl)
-    const response = await pdsAgent.com.atproto.repo.getRecord({
-      repo: ADMIN_DID,
-      collection: CURATEDLIST_COLLECTION,
-      rkey: CURATED_LIST_RKEY,
-    })
-
-    return response.data.cid
-  } catch {
-    return undefined
-  }
-}
-
-/**
- * Fetch posts from a user's PDS
- */
-export async function getUserPosts(did: string): Promise<PostEntry[]> {
-  try {
-    const pdsUrl = await resolvePds(did)
-    if (!pdsUrl) return []
-
-    const pdsAgent = getPdsAgent(pdsUrl)
-    const response = await pdsAgent.com.atproto.repo.listRecords({
-      repo: did,
-      collection: POST_COLLECTION,
-      limit: 100,
-    })
-
-    const profile = await getPublicProfile(did)
-
-    return response.data.records.map((record) => ({
-      uri: record.uri,
-      cid: record.cid,
-      author: {
-        did,
-        handle: profile?.handle || did,
-        displayName: profile?.displayName,
-        avatar: profile?.avatar,
-      },
-      record: record.value as PostRecord,
-    }))
-  } catch {
-    return []
-  }
-}
-
-/**
- * Fetch all posts from curated accounts
- */
-export async function getFeedPosts(): Promise<PostEntry[]> {
-  const curatedList = await getCuratedList()
-  const allPosts: PostEntry[] = []
-
-  for (const entry of curatedList) {
-    const posts = await getUserPosts(entry.did)
-    allPosts.push(...posts)
-  }
-
-  // Also fetch admin's own posts
-  const adminPosts = await getUserPosts(ADMIN_DID)
-  // Avoid duplicates if admin is in curated list
-  const existingUris = new Set(allPosts.map(p => p.uri))
-  for (const post of adminPosts) {
-    if (!existingUris.has(post.uri)) {
-      allPosts.push(post)
-    }
-  }
-
-  // Sort by date descending
-  allPosts.sort((a, b) =>
-    new Date(b.record.createdAt).getTime() - new Date(a.record.createdAt).getTime()
-  )
-
-  return allPosts
-}
-
-export { CURATED_LIST_RKEY }
 
 /**
  * Fetch a single page record from the admin PDS.
