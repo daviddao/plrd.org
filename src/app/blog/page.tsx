@@ -2,8 +2,6 @@ import Link from 'next/link'
 import { blogPosts } from '@/lib/content'
 import { formatDate } from '@/lib/format'
 import Breadcrumb from '@/components/Breadcrumb'
-import AtprotoFeed from './AtprotoFeed'
-
 export default function BlogPage() {
   return (
     <div className="max-w-6xl mx-auto px-6 pt-8 pb-16">
@@ -53,8 +51,7 @@ export default function BlogPage() {
         </div>
       )}
 
-      {/* ATProto feed (loads client-side when available) */}
-      <AtprotoFeed />
+
     </div>
   )
 }
