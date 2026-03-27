@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server"
 import { fetchPage } from "@/lib/indexer"
 import { getAuthenticatedAgent } from "@/lib/agent"
 import { getSession } from "@/lib/session"
-import { ADMIN_DID, PAGE_COLLECTION } from "@/lib/lexicons"
+import { ADMIN_DID, ADMIN_DIDS, PAGE_COLLECTION } from "@/lib/lexicons"
 import type { PageRecord } from "@/lib/lexicons"
 
 export const dynamic = "force-dynamic"
@@ -32,7 +32,7 @@ export async function PUT(req: NextRequest, { params }: Props) {
   }
 
   // Admin check — only the admin DID can edit pages
-  if (session.did !== ADMIN_DID) {
+  if (!ADMIN_DIDS.includes(session.did)) {
     return NextResponse.json({ error: "Forbidden — admin only" }, { status: 403 })
   }
 
