@@ -2,14 +2,14 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getAuthenticatedAgent } from '@/lib/agent'
 import { getCuratedList, getCuratedListRecordCid, resolvePds, getPdsAgent, resolveHandle } from '@/lib/atproto-client'
 import { getSession } from '@/lib/session'
-import { CURATEDLIST_COLLECTION, ADMIN_DID } from '@/lib/lexicons'
+import { CURATEDLIST_COLLECTION, ADMIN_DIDS } from '@/lib/lexicons'
 import type { CuratedListRecord, CuratedListEntry } from '@/lib/lexicons'
 import { CURATED_LIST_RKEY } from '@/lib/atproto-client'
 
 export const dynamic = 'force-dynamic'
 
 function isAdmin(did: string | undefined): boolean {
-  return did === ADMIN_DID
+  return did != null && ADMIN_DIDS.includes(did)
 }
 
 /**
