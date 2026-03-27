@@ -3,10 +3,23 @@
 import Link from 'next/link'
 import { useAuth } from '@/lib/atproto'
 
+const EDIT_ROUTES: Record<string, string> = {
+  landing: '/edit',
+  about: '/about/edit',
+  areas: '/areas/edit',
+  collaborate: '/outreach/collaboration/edit',
+  'area-ai-robotics': '/areas/ai-robotics/edit',
+  'area-digital-human-rights': '/areas/digital-human-rights/edit',
+  'area-neurotech': '/areas/neurotech/edit',
+  'area-economies-governance': '/areas/economies-governance/edit',
+  'area-eg-subareas': '/areas/economies-governance/subareas/edit',
+  'area-eg-impact': '/areas/economies-governance/impact/edit',
+}
+
 /**
  * Edit button — only visible to admin users.
  * Positioned top-right of the page content area.
- * Links to /admin where the PageEditor can edit the given page rkey.
+ * Links to the inline edit route for the given page rkey.
  */
 export default function EditPageButton({ rkey }: { rkey: string }) {
   const { isAuthenticated, isAdmin } = useAuth()
@@ -15,7 +28,7 @@ export default function EditPageButton({ rkey }: { rkey: string }) {
 
   return (
     <Link
-      href={`/admin?page=${encodeURIComponent(rkey)}`}
+      href={EDIT_ROUTES[rkey] || `/admin?page=${encodeURIComponent(rkey)}`}
       className="fixed top-20 right-6 z-50 flex items-center gap-2 px-4 py-2 bg-blue text-white rounded-full shadow-lg hover:bg-blue/90 transition-colors text-sm font-medium"
       title={`Edit "${rkey}" page content`}
     >
