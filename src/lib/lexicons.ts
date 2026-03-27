@@ -10,7 +10,13 @@ export const CURATEDLIST_COLLECTION = 'org.plresearch.curatedlist'
 
 // Admin DID - the only user who can manage the curated list
 // Uses NEXT_PUBLIC_ prefix so it's available in both server and client code
-export const ADMIN_DID = process.env.NEXT_PUBLIC_ADMIN_DID || 'did:plc:qc42fmqqlsmdq7jiypiiigww'
+// Primary admin DID (plresearch.org) — used for reading/writing page records
+export const ADMIN_DID = process.env.NEXT_PUBLIC_ADMIN_DID || 'did:plc:pgwr6hkosgznfl5nz7egajei'
+
+// All DIDs allowed to see the edit button and use the admin panel
+// Comma-separated in NEXT_PUBLIC_ADMIN_DIDS env var, falls back to ADMIN_DID
+const _adminDidsRaw = process.env.NEXT_PUBLIC_ADMIN_DIDS || ADMIN_DID
+export const ADMIN_DIDS: string[] = _adminDidsRaw.split(',').map(d => d.trim()).filter(Boolean)
 
 // Post types
 export type PostType = 'blog' | 'publication' | 'talk' | 'tutorial'
