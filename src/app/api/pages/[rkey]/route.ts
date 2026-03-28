@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from "next/server"
+import { AtpAgent } from "@atproto/api"
 import { fetchPage } from "@/lib/indexer"
-import { getAuthenticatedAgent } from "@/lib/agent"
 import { getSession } from "@/lib/session"
 import { ADMIN_DID, ADMIN_DIDS, PAGE_COLLECTION } from "@/lib/lexicons"
+import { env } from "@/lib/env"
 import type { PageRecord } from "@/lib/lexicons"
 
 export const dynamic = "force-dynamic"
@@ -22,23 +23,34 @@ export async function GET(_req: NextRequest, { params }: Props) {
   }
 }
 
+/**
+ * Get an agent authenticated as plresearch.org via app password.
+ * This is needed because page records live on plresearch.org's repo,
+ * but the admin user may be logged in as a different DID (e.g. daviddao.org).
+ */
+async function getPlresearchAgent(): Promise<AtpAgent> {
+  const handle = env.ATPROTO_HANDLE
+  const password = env.ATPROTO_PASSWORD
+  if (!handle || !password) {
+    throw new Error("ATPROTO_HANDLE and ATPROTO_PASSWORD must be set")
+  }
+  const agent = new AtpAgent({ service: "https://bsky.social" })
+  await agent.login({ identifier: handle, password })
+  return agent
+}
+
 export async function PUT(req: NextRequest, { params }: Props) {
   const { rkey } = await params
   const session = await getSession()
 
-  // Auth check
+  // Auth check — user must be logged in
   if (!session.did) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
   }
 
-  // Admin check — only the admin DID can edit pages
+  // Admin check — only admin DIDs can edit pages
   if (!ADMIN_DIDS.includes(session.did)) {
     return NextResponse.json({ error: "Forbidden — admin only" }, { status: 403 })
-  }
-
-  const agent = await getAuthenticatedAgent()
-  if (!agent) {
-    return NextResponse.json({ error: "Failed to restore session" }, { status: 401 })
   }
 
   try {
@@ -49,9 +61,12 @@ export async function PUT(req: NextRequest, { params }: Props) {
       return NextResponse.json({ error: "Invalid page record" }, { status: 400 })
     }
 
-    // Write to the admin repo using putRecord (create or update)
+    // Authenticate as plresearch.org to write to its repo
+    const agent = await getPlresearchAgent()
+
+    // Write to plresearch.org's repo using putRecord
     const response = await agent.com.atproto.repo.putRecord({
-      repo: session.did,
+      repo: ADMIN_DID,
       collection: PAGE_COLLECTION,
       rkey,
       record: {
