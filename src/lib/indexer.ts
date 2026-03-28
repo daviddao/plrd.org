@@ -82,7 +82,7 @@ export async function fetchPage(rkey: string): Promise<IndexerPage | null> {
     orgPlresearchPage: { edges: { node: IndexerPage }[] }
   }>(`{
     orgPlresearchPage(
-      where: { did: { eq: "${PLRESEARCH_DID}" }, rkey: { eq: "${rkey}" } }
+      where: { did: { eq: "${PLRESEARCH_DID}" }, pageId: { eq: "${rkey}" } }
       first: 1
     ) {
       edges { node { ${PAGE_FIELDS} } }
