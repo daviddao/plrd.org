@@ -27,6 +27,40 @@ export type PostRecord = {
   createdAt: string
 }
 
+// standard.site lexicons for long-form publishing
+export const STANDARD_PUBLICATION_COLLECTION = "site.standard.publication"
+export const STANDARD_DOCUMENT_COLLECTION = "site.standard.document"
+
+// Content format for our markdown posts (custom type embedded in the open union)
+export const PLRESEARCH_CONTENT_TYPE = "org.plresearch.markdownContent"
+
+export type StandardDocumentRecord = {
+  $type: "site.standard.document"
+  site: string          // AT-URI of publication or URL
+  title: string
+  publishedAt: string   // ISO datetime
+  path: string          // e.g. /blog/my-post
+  description?: string
+  textContent?: string  // plaintext for indexing
+  tags?: string[]
+  updatedAt?: string
+  content?: {
+    $type: string       // org.plresearch.markdownContent
+    markdown: string    // the markdown body
+    postType?: string   // blog | publication | talk | tutorial
+    venue?: string
+    authors?: string[]
+    doi?: string
+  }
+}
+
+export type StandardPublicationRecord = {
+  $type: "site.standard.publication"
+  url: string
+  name: string
+  description?: string
+}
+
 // Page collections
 export const PAGE_COLLECTION = "org.plresearch.page"
 export const OPPORTUNITY_COLLECTION = "org.plresearch.opportunitySpace"

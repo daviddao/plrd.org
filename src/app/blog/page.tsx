@@ -2,7 +2,10 @@ import Link from 'next/link'
 import { blogPosts } from '@/lib/content'
 import { formatDate } from '@/lib/format'
 import Breadcrumb from '@/components/Breadcrumb'
-export default function BlogPage() {
+import { fetchAtproPosts } from '@/lib/indexer'
+
+export default async function BlogPage() {
+  const atprotoPosts = await fetchAtproPosts()
   return (
     <div className="max-w-6xl mx-auto px-6 pt-8 pb-16">
       <Breadcrumb items={[{ label: 'Blog' }]} />
@@ -51,6 +54,32 @@ export default function BlogPage() {
         </div>
       )}
 
+      {atprotoPosts.length > 0 && (
+        <div className="divide-y divide-gray-200 mt-8">
+          {atprotoPosts.map((post) => {
+            const href = post.path || `/blog/${post.rkey}`
+            const tag = post.tags?.find(t => t !== "blog") || "blog"
+            return (
+              <div key={post.rkey} className="py-4">
+                <div className="flex items-baseline gap-3 mb-1">
+                  <span className="text-xs text-gray-400">PL R&D</span>
+                  <span className="text-xs text-gray-400">{formatDate(post.publishedAt)}</span>
+                  {tag !== "blog" && <span className="text-xs text-gray-400 capitalize">{tag}</span>}
+                </div>
+                <a
+                  href={href}
+                  className="text-black font-medium leading-snug hover:text-blue transition-colors"
+                >
+                  {post.title}
+                </a>
+                {post.description && (
+                  <p className="text-sm text-gray-600 mt-1">{post.description}</p>
+                )}
+              </div>
+            )
+          })}
+        </div>
+      )}
 
     </div>
   )

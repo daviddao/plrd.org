@@ -143,6 +143,76 @@ export async function fetchOpportunitySpace(rkey: string): Promise<IndexerOpport
   return data?.orgPlresearchOpportunitySpace?.edges?.[0]?.node ?? null
 }
 
+// ---- ATProto post queries (site.standard.document via generic records) ----
+
+export type IndexerPost = {
+  rkey: string
+  uri: string
+  title: string
+  description?: string | null
+  publishedAt: string
+  path?: string | null
+  tags?: string[] | null
+  content?: {
+    $type: string
+    markdown?: string
+    postType?: string
+  } | null
+}
+
+export async function fetchAtproPosts(): Promise<IndexerPost[]> {
+  const data = await query<{
+    records: {
+      edges: {
+        node: {
+          rkey: string
+          uri: string
+          value: {
+            title?: string
+            description?: string
+            publishedAt?: string
+            path?: string
+            tags?: string[]
+            content?: {
+              $type: string
+              markdown?: string
+              postType?: string
+            }
+          }
+        }
+      }[]
+    }
+  }>(`{
+    records(
+      collection: "site.standard.document"
+      first: 50
+    ) {
+      edges {
+        node {
+          rkey
+          uri
+          value
+        }
+      }
+    }
+  }`)
+
+  return (
+    data?.records?.edges
+      ?.map((e) => ({
+        rkey: e.node.rkey,
+        uri: e.node.uri,
+        title: e.node.value?.title || "",
+        description: e.node.value?.description,
+        publishedAt: e.node.value?.publishedAt || "",
+        path: e.node.value?.path,
+        tags: e.node.value?.tags,
+        content: e.node.value?.content,
+      }))
+      .filter((p) => p.title && p.publishedAt) ?? []
+  )
+}
+
 // ---- Helpers ----
 
 /** Get a specific section from a page by sectionId */

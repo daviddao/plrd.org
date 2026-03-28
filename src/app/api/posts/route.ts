@@ -1,9 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getAuthenticatedAgent } from '@/lib/agent'
 import { getSession } from '@/lib/session'
-import { POST_COLLECTION } from '@/lib/lexicons'
+import { STANDARD_DOCUMENT_COLLECTION, PLRESEARCH_CONTENT_TYPE } from '@/lib/lexicons'
 import { generateTid } from '@/lib/tid'
-import type { PostRecord } from '@/lib/lexicons'
 
 export const dynamic = 'force-dynamic'
 
@@ -39,23 +38,31 @@ export async function POST(request: NextRequest) {
     }
 
     const rkey = generateTid()
-    const record: PostRecord = {
-      $type: POST_COLLECTION,
+    const record = {
+      $type: STANDARD_DOCUMENT_COLLECTION,
+      site: process.env.NEXT_PUBLIC_PUBLICATION_URI || 'https://www.plresearch.org',
       title: title.trim(),
-      content: content.trim(),
-      summary: summary?.trim() || undefined,
-      postType,
-      venue: venue?.trim() || undefined,
-      authors: Array.isArray(authors) ? authors.filter((a: string) => a.trim()) : undefined,
-      doi: doi?.trim() || undefined,
-      createdAt: new Date().toISOString(),
+      publishedAt: new Date().toISOString(),
+      path: '/blog/' + rkey,
+      description: summary?.trim() || undefined,
+      textContent: content.trim().replace(/[#*`\[\]]/g, ''),
+      tags: postType !== 'blog' ? [postType] : undefined,
+      content: {
+        $type: PLRESEARCH_CONTENT_TYPE,
+        markdown: content.trim(),
+        postType,
+        venue,
+        authors,
+        doi,
+      },
     }
 
     const result = await agent.com.atproto.repo.createRecord({
       repo: session.did,
-      collection: POST_COLLECTION,
+      collection: STANDARD_DOCUMENT_COLLECTION,
       rkey,
       record,
+      validate: false,
     })
 
     return NextResponse.json({
