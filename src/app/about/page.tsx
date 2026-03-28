@@ -75,7 +75,7 @@ export default async function AboutPage() {
             {hero?.title || "Our research is driven by beliefs about how technology should serve humanity."}
           </h1>
           <p className="relative z-10 text-gray-600 text-lg md:text-xl lg:text-[22px] leading-relaxed max-w-2xl mb-6">
-            {hero?.subtitle || "Substantial engineering efforts are necessary to turn ideas into real and useful tools that people can use. Our longest-term vision-driven innovation takes place in PL R&D."}
+            {hero?.body || hero?.subtitle || "Substantial engineering efforts are necessary to turn ideas into real and useful tools that people can use. Our longest-term vision-driven innovation takes place in PL R&D."}
           </p>
           <div className="relative z-10 flex flex-wrap gap-4">
             <Link 
@@ -147,7 +147,7 @@ export default async function AboutPage() {
       <div className="max-w-6xl mx-auto px-6 py-20 flex flex-col items-center text-center">
         <img className="mb-8 opacity-30 w-10" src="/images/about-page/quote-icon.svg" alt="" />
         <h3 className="font-semibold text-xl lg:text-2xl leading-relaxed mb-8">
-          {quoteJuan?.title || "More innovation faster"}
+          {quoteJuan?.body || quoteJuan?.title || "More innovation faster"}
         </h3>
         <AuthorCard slug="juan-benet" />
       </div>
