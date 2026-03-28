@@ -68,8 +68,9 @@ export default function AboutEditPage() {
             className="relative z-10 font-semibold text-[28px] md:text-[40px] lg:text-[48px] leading-[1.1] tracking-tight mb-6 max-w-xl"
           />
           <EditableField
-            value={get('hero', 'subtitle')}
-            onChange={(v) => set('hero', 'subtitle', v)}
+            value={get('hero', 'body') || get('hero', 'subtitle')}
+            onChange={(v) => set('hero', 'body', v)}
+            multiline
             className="relative z-10 text-gray-600 text-lg md:text-xl lg:text-[22px] leading-relaxed max-w-2xl mb-6"
           />
           <div className="relative z-10 flex flex-wrap gap-4">
@@ -156,8 +157,8 @@ export default function AboutEditPage() {
       <div className="max-w-6xl mx-auto px-6 py-20 flex flex-col items-center text-center">
         <img className="mb-8 opacity-30 w-10" src="/images/about-page/quote-icon.svg" alt="" />
         <EditableField
-          value={get('quote-juan', 'title')}
-          onChange={(v) => set('quote-juan', 'title', v)}
+          value={get('quote-juan', 'body') || get('quote-juan', 'title')}
+          onChange={(v) => set('quote-juan', 'body', v)}
           className="font-semibold text-xl lg:text-2xl leading-relaxed mb-8"
         />
         <AuthorCard slug="juan-benet" />
