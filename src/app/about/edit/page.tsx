@@ -7,9 +7,9 @@ import Link from 'next/link'
 
 export default function AboutEditPage() {
   const { ready } = useRequireAdmin()
-  const { get, set, isDirty, isSaving, saveStatus, save, discard } = usePageEdit('about')
+  const { get, set, isDirty, isLoading, isSaving, saveStatus, save, discard } = usePageEdit('about')
 
-  if (!ready) return (
+  if (!ready || isLoading) return (
     <div className="max-w-6xl mx-auto px-6 pt-8 pb-16">
       <p className="text-sm text-gray-400">Loading...</p>
     </div>

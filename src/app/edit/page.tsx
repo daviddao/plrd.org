@@ -113,9 +113,8 @@ export default function LandingEditPage() {
 
           <div className="flex flex-col lg:sticky lg:top-24 gap-4">
             {/* Digital Human Rights */}
-            <Link
-              href="/areas/digital-human-rights"
-              className="flex items-start gap-4 p-5 border border-gray-200 rounded-lg hover:border-blue hover:shadow-sm transition-all group"
+            <div
+              className="flex items-start gap-4 p-5 border border-gray-200 rounded-lg transition-all"
             >
               <AreaIcon type="shield" />
               <div className="flex-1 min-w-0">
@@ -135,15 +134,14 @@ export default function LandingEditPage() {
                   className="text-sm text-gray-500 leading-relaxed"
                 />
               </div>
-              <svg className="w-4 h-4 text-gray-300 group-hover:text-blue transition-colors shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-4 h-4 text-gray-300 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
-            </Link>
+            </div>
 
             {/* Economies & Governance */}
-            <Link
-              href="/areas/economies-governance"
-              className="flex items-start gap-4 p-5 border border-gray-200 rounded-lg hover:border-blue hover:shadow-sm transition-all group"
+            <div
+              className="flex items-start gap-4 p-5 border border-gray-200 rounded-lg transition-all"
             >
               <AreaIcon type="hexagon" />
               <div className="flex-1 min-w-0">
@@ -163,15 +161,14 @@ export default function LandingEditPage() {
                   className="text-sm text-gray-500 leading-relaxed"
                 />
               </div>
-              <svg className="w-4 h-4 text-gray-300 group-hover:text-blue transition-colors shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-4 h-4 text-gray-300 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
-            </Link>
+            </div>
 
             {/* AI & Robotics */}
-            <Link
-              href="/areas/ai-robotics"
-              className="flex items-start gap-4 p-5 border border-gray-200 rounded-lg hover:border-blue hover:shadow-sm transition-all group"
+            <div
+              className="flex items-start gap-4 p-5 border border-gray-200 rounded-lg transition-all"
             >
               <AreaIcon type="neural" />
               <div className="flex-1 min-w-0">
@@ -191,15 +188,14 @@ export default function LandingEditPage() {
                   className="text-sm text-gray-500 leading-relaxed"
                 />
               </div>
-              <svg className="w-4 h-4 text-gray-300 group-hover:text-blue transition-colors shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-4 h-4 text-gray-300 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
-            </Link>
+            </div>
 
             {/* Neurotechnology */}
-            <Link
-              href="/areas/neurotech"
-              className="flex items-start gap-4 p-5 border border-gray-200 rounded-lg hover:border-blue hover:shadow-sm transition-all group"
+            <div
+              className="flex items-start gap-4 p-5 border border-gray-200 rounded-lg transition-all"
             >
               <AreaIcon type="brain" />
               <div className="flex-1 min-w-0">
@@ -219,10 +215,10 @@ export default function LandingEditPage() {
                   className="text-sm text-gray-500 leading-relaxed"
                 />
               </div>
-              <svg className="w-4 h-4 text-gray-300 group-hover:text-blue transition-colors shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-4 h-4 text-gray-300 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
-            </Link>
+            </div>
           </div>
         </div>
       </div>

@@ -187,6 +187,8 @@ export function EditableField({
       ref={ref}
       value={value}
       onChange={(e) => onChange(e.target.value)}
+      onClick={(e) => e.stopPropagation()}
+      onMouseDown={(e) => e.stopPropagation()}
       placeholder={placeholder}
       rows={1}
       onKeyDown={
@@ -199,10 +201,12 @@ export function EditableField({
       className={[
         // Invisible base
         'bg-transparent resize-none outline-none overflow-hidden',
-        // Hover / focus ring
-        'rounded ring-1 ring-transparent hover:ring-blue/20 focus:ring-blue/30 focus:bg-blue/[0.03] transition-all px-1 -mx-1',
+        // Hover / focus ring — visible enough to show it is editable
+        'rounded-sm ring-1 ring-blue/10 hover:ring-blue/30 focus:ring-blue/50 focus:bg-blue/[0.03] transition-all px-1.5 -mx-1.5 py-0.5',
         // Block + full width so it fills the line
         'block w-full',
+        // Cursor
+        'cursor-text',
         // Caller text styling
         className,
       ]
@@ -233,11 +237,8 @@ export function EditBar({
   onSave: () => void
   onDiscard: () => void
 }) {
-  const visible = isDirty || saveStatus !== 'idle'
-  if (!visible) return null
-
   return (
-    <div className="fixed bottom-0 inset-x-0 z-50 bg-white/90 backdrop-blur-sm border-t border-gray-100">
+    <div className="fixed bottom-0 inset-x-0 z-50 bg-white/95 backdrop-blur-sm border-t border-gray-200 shadow-[0_-2px_8px_rgba(0,0,0,0.04)]">
       <div className="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between gap-4">
         {/* Status indicator */}
         <div className="flex items-center gap-2 text-sm text-gray-500">
@@ -265,18 +266,23 @@ export function EditBar({
               <span>Unsaved changes</span>
             </>
           )}
+          {saveStatus === 'idle' && !isDirty && (
+            <span className="text-gray-400">Editing mode — click any text to edit</span>
+          )}
         </div>
 
         {/* Actions */}
         <div className="flex items-center gap-4">
-          <button
-            type="button"
-            onClick={onDiscard}
-            disabled={isSaving}
-            className="text-sm text-gray-400 hover:text-gray-700 transition-colors disabled:opacity-40"
-          >
-            Discard
-          </button>
+          {isDirty && (
+            <button
+              type="button"
+              onClick={onDiscard}
+              disabled={isSaving}
+              className="text-sm text-gray-400 hover:text-gray-700 transition-colors disabled:opacity-40"
+            >
+              Discard
+            </button>
+          )}
           <button
             type="button"
             onClick={onSave}
