@@ -55,7 +55,7 @@ async function query<T>(gql: string, variables?: Record<string, unknown>): Promi
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ query: gql, variables }),
-      next: { revalidate: 60 }, // ISR: revalidate every 60 seconds
+      next: { revalidate: 60, tags: ["indexer"] },
     })
     if (!res.ok) return null
     const json = await res.json()

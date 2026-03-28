@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { AtpAgent } from "@atproto/api"
+import { revalidateTag } from "next/cache"
 import { fetchPage } from "@/lib/indexer"
 import { getSession } from "@/lib/session"
 import { ADMIN_DID, ADMIN_DIDS, PAGE_COLLECTION } from "@/lib/lexicons"
@@ -79,6 +80,9 @@ export async function PUT(req: NextRequest, { params }: Props) {
         updatedAt: new Date().toISOString(),
       },
     })
+
+    // Bust the ISR cache so pages reflect the update immediately
+    revalidateTag("indexer")
 
     return NextResponse.json({ uri: response.data.uri, cid: response.data.cid })
   } catch (error) {
