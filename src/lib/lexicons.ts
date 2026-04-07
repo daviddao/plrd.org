@@ -10,6 +10,7 @@ export const ADMIN_DID = process.env.NEXT_PUBLIC_ADMIN_DID || 'did:plc:pgwr6hkos
 const DEFAULT_ADMIN_DIDS = [
   ADMIN_DID,                              // plresearch.org
   'did:plc:cpoagodpqrgs4t7thi5z37uf',     // satyam2.climateai.org
+  'did:plc:ly6ens5mmnfo7mc3di7do5yb',     // momack.bsky.social
 ]
 const _adminDidsRaw = process.env.NEXT_PUBLIC_ADMIN_DIDS || DEFAULT_ADMIN_DIDS.join(',')
 export const ADMIN_DIDS: string[] = _adminDidsRaw.split(',').map(d => d.trim()).filter(Boolean)
