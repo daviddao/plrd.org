@@ -14,7 +14,8 @@ export type IndexerPageSection = {
 }
 
 export type IndexerPage = {
-  rkey: string
+  uri?: string
+  rkey?: string
   pageId: string
   iconType?: string | null
   leads?: string[] | null
@@ -29,7 +30,8 @@ export type IndexerFieldSignal = {
 }
 
 export type IndexerOpportunitySpace = {
-  rkey: string
+  uri?: string
+  rkey?: string
   areaSlug: string
   id: string
   title: string
@@ -73,7 +75,7 @@ async function query<T>(gql: string, variables?: Record<string, unknown>): Promi
 // ---- Page queries ----
 
 const PAGE_FIELDS = `
-  rkey pageId iconType leads advisors updatedAt
+  uri pageId iconType leads advisors updatedAt
   sections { sectionId label title subtitle body }
 `
 
@@ -88,7 +90,13 @@ export async function fetchPage(rkey: string): Promise<IndexerPage | null> {
       edges { node { ${PAGE_FIELDS} } }
     }
   }`)
-  return data?.orgPlresearchPage?.edges?.[0]?.node ?? null
+  const node = data?.orgPlresearchPage?.edges?.[0]?.node ?? null
+  if (node && node.uri && !node.rkey) {
+    // Extract rkey from AT URI: at://did/collection/rkey
+    const parts = node.uri.split('/')
+    node.rkey = parts[parts.length - 1]
+  }
+  return node
 }
 
 export async function fetchAllPages(): Promise<IndexerPage[]> {
@@ -102,13 +110,20 @@ export async function fetchAllPages(): Promise<IndexerPage[]> {
       edges { node { ${PAGE_FIELDS} } }
     }
   }`)
-  return data?.orgPlresearchPage?.edges?.map(e => e.node) ?? []
+  return data?.orgPlresearchPage?.edges?.map(e => {
+    const node = e.node
+    if (node.uri && !node.rkey) {
+      const parts = node.uri.split('/')
+      node.rkey = parts[parts.length - 1]
+    }
+    return node
+  }) ?? []
 }
 
 // ---- Opportunity Space queries ----
 
 const OS_FIELDS = `
-  rkey areaSlug id title tagline image description
+  uri areaSlug id title tagline image description
   inflectionPoint shift theOpportunity
   subfields tippingSignals keyAssumptions observations
   fieldSignals { kpi measurement }
@@ -126,21 +141,35 @@ export async function fetchOpportunitySpaces(areaSlug: string): Promise<IndexerO
       edges { node { ${OS_FIELDS} } }
     }
   }`)
-  return data?.orgPlresearchOpportunitySpace?.edges?.map(e => e.node) ?? []
+  return data?.orgPlresearchOpportunitySpace?.edges?.map(e => {
+    const node = e.node
+    if (node.uri && !node.rkey) {
+      const parts = node.uri.split('/')
+      node.rkey = parts[parts.length - 1]
+    }
+    return node
+  }) ?? []
 }
 
 export async function fetchOpportunitySpace(rkey: string): Promise<IndexerOpportunitySpace | null> {
+  // Query by URI since lex-gql uses uri not rkey
+  const uri = `at://${PLRESEARCH_DID}/org.plresearch.opportunitySpace/${rkey}`
   const data = await query<{
     orgPlresearchOpportunitySpace: { edges: { node: IndexerOpportunitySpace }[] }
   }>(`{
     orgPlresearchOpportunitySpace(
-      where: { did: { eq: "${PLRESEARCH_DID}" }, rkey: { eq: "${rkey}" } }
+      where: { uri: { eq: "${uri}" } }
       first: 1
     ) {
       edges { node { ${OS_FIELDS} } }
     }
   }`)
-  return data?.orgPlresearchOpportunitySpace?.edges?.[0]?.node ?? null
+  const node = data?.orgPlresearchOpportunitySpace?.edges?.[0]?.node ?? null
+  if (node && node.uri && !node.rkey) {
+    const parts = node.uri.split('/')
+    node.rkey = parts[parts.length - 1]
+  }
+  return node
 }
 
 // ---- ATProto post queries (site.standard.document via generic records) ----
