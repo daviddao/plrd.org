@@ -1,6 +1,6 @@
 import "server-only"
 
-const HYPERINDEX_URL = "https://api.hi.gainforest.app/graphql"
+const HYPERINDEX_URL = process.env.INDEXER_URL || process.env.NEXT_PUBLIC_INDEXER_URL || "https://api.hi.gainforest.app/graphql"
 const PLRESEARCH_DID = "did:plc:pgwr6hkosgznfl5nz7egajei"
 
 // ---- Types ----
