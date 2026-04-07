@@ -63,16 +63,41 @@ export function usePageEdit(rkey: string): UsePageEditResult {
     setIsLoading(true)
     fetch(`/api/pages/${rkey}`)
       .then((res) => {
+        if (res.status === 404) {
+          // Page doesn't exist yet — create a skeleton record so the editor works
+          const skeleton: PageRecord = {
+            $type: 'org.plresearch.page',
+            pageId: rkey,
+            sections: [],
+            updatedAt: new Date().toISOString(),
+          }
+          if (!cancelled) {
+            setOriginal(skeleton)
+            setRecord(structuredClone(skeleton))
+          }
+          return undefined
+        }
         if (!res.ok) throw new Error(`HTTP ${res.status}`)
         return res.json() as Promise<{ rkey: string; record: PageRecord }>
       })
-      .then(({ record }) => {
-        if (cancelled) return
-        setOriginal(record)
-        setRecord(structuredClone(record))
+      .then((data) => {
+        if (cancelled || !data) return
+        setOriginal(data.record)
+        setRecord(structuredClone(data.record))
       })
       .catch((err) => {
         console.error('[usePageEdit] fetch error', err)
+        // Even on error, create a skeleton so the page is usable
+        if (!cancelled) {
+          const skeleton: PageRecord = {
+            $type: 'org.plresearch.page',
+            pageId: rkey,
+            sections: [],
+            updatedAt: new Date().toISOString(),
+          }
+          setOriginal(skeleton)
+          setRecord(structuredClone(skeleton))
+        }
       })
       .finally(() => {
         if (!cancelled) setIsLoading(false)
@@ -95,10 +120,17 @@ export function usePageEdit(rkey: string): UsePageEditResult {
     (sectionId: string, field: SectionField, value: string) => {
       setRecord((prev) => {
         if (!prev) return prev
-        const sections = prev.sections.map((s) =>
-          s.sectionId === sectionId ? { ...s, [field]: value } : s,
-        )
-        return { ...prev, sections }
+        const exists = prev.sections.some((s) => s.sectionId === sectionId)
+        if (exists) {
+          const sections = prev.sections.map((s) =>
+            s.sectionId === sectionId ? { ...s, [field]: value } : s,
+          )
+          return { ...prev, sections }
+        } else {
+          // Create a new section when it doesn't exist yet
+          const newSection: PageSection = { sectionId, [field]: value }
+          return { ...prev, sections: [...prev.sections, newSection] }
+        }
       })
     },
     [],
