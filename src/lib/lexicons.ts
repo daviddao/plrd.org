@@ -6,8 +6,12 @@
 export const ADMIN_DID = process.env.NEXT_PUBLIC_ADMIN_DID || 'did:plc:pgwr6hkosgznfl5nz7egajei'
 
 // All DIDs allowed to use the admin panel
-// Comma-separated in NEXT_PUBLIC_ADMIN_DIDS env var, falls back to ADMIN_DID
-const _adminDidsRaw = process.env.NEXT_PUBLIC_ADMIN_DIDS || ADMIN_DID
+// Comma-separated in NEXT_PUBLIC_ADMIN_DIDS env var, falls back to defaults
+const DEFAULT_ADMIN_DIDS = [
+  ADMIN_DID,                              // plresearch.org
+  'did:plc:cpoagodpqrgs4t7thi5z37uf',     // satyam2.climateai.org
+]
+const _adminDidsRaw = process.env.NEXT_PUBLIC_ADMIN_DIDS || DEFAULT_ADMIN_DIDS.join(',')
 export const ADMIN_DIDS: string[] = _adminDidsRaw.split(',').map(d => d.trim()).filter(Boolean)
 
 // Post collection (write page / blog posts authored on this PDS)
