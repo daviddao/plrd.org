@@ -77,6 +77,47 @@ export default function ImpactReport2025Page() {
         </div>
       </div>
 
+      {/* Co-Funders */}
+      {impactData.cofunders && impactData.cofunders.length > 0 && (
+        <div className="mb-14 pb-14 border-b border-gray-100">
+          <h2 className="text-sm text-gray-500 uppercase tracking-wide mb-8">Co-Funders</h2>
+          <div className="divide-y divide-gray-100">
+            {impactData.cofunders.map((cf) => (
+              <div key={cf.id} className="py-8 first:pt-0 last:pb-0">
+                <div className="flex items-start gap-4 mb-3">
+                  <div>
+                    <div className="flex items-center gap-3 mb-1">
+                      <a href={cf.website} target="_blank" rel="noopener noreferrer"
+                        className="text-lg font-medium text-black hover:text-blue transition-colors">
+                        {cf.name}
+                      </a>
+                      <span className="text-sm text-gray-400">{cf.type}</span>
+                      <span className="text-xs px-2 py-0.5 rounded-full bg-yellow-50 text-yellow-700 border border-yellow-200">
+                        {cf.status}
+                      </span>
+                    </div>
+                    <p className="text-base text-gray-600 leading-relaxed max-w-3xl">{cf.description}</p>
+                  </div>
+                </div>
+                <div className="flex flex-wrap gap-x-8 gap-y-2 mb-3">
+                  {cf.arms.map((arm) => (
+                    <div key={arm.name}>
+                      <span className="text-lg font-semibold text-black">{arm.size}</span>
+                      <span className="text-sm text-gray-400 ml-2">{arm.name} — {arm.focus}</span>
+                    </div>
+                  ))}
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {cf.focus.map((f) => (
+                    <span key={f} className="text-xs px-2 py-1 bg-gray-100 text-gray-600 rounded">{f}</span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* Ecosystem */}
       <div className="mb-12">
         <h2 className="text-sm text-gray-500 uppercase tracking-wide mb-5">Ecosystem Overview</h2>
