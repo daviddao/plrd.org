@@ -10,6 +10,24 @@
     { "value": "230+", "label": "Startups Accelerated", "source": "Crecimiento" },
     { "value": "42", "label": "Projects Catalyzed", "source": "FTC Residency" }
   ],
+  "cofunders": [
+    {
+      "id": "alterra",
+      "name": "Altérra",
+      "status": "Warm Lead",
+      "type": "Private Climate Fund",
+      "website": "https://www.alterra.ae",
+      "logo": "https://www.alterra.ae/favicon.ico",
+      "description": "World's largest private investment vehicle for climate finance. UAE government-backed, $30B committed with a $250B mobilization target by 2030.",
+      "ticketSize": "Up to $1B+ co-invest",
+      "focus": ["Energy transition", "Emerging Markets", "Global South"],
+      "contact": "HE Majid Al Suwaidi, CEO",
+      "arms": [
+        { "name": "Acceleration", "size": "$25B", "focus": "Global co-investment in climate VC, PE, infrastructure" },
+        { "name": "Transformation", "size": "$5B", "focus": "Catalytic capital for emerging markets & Global South" }
+      ]
+    }
+  ],
   "initiatives": [
     {
       "id": "edge_city",
