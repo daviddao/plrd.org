@@ -259,6 +259,16 @@ export default function OpportunitySpaceEditor({
         </div>
       </div>
 
+      <EditSection label="Hero image">
+        <EditableField
+          value={record.image ?? ''}
+          onChange={(v) => setField('image', v)}
+          className="text-sm text-gray-600 font-mono"
+          placeholder="https://… (paste any public image URL)"
+        />
+        <ImagePreview url={record.image ?? ''} />
+      </EditSection>
+
       <EditSection label="Subfields">
         <StringArrayEditor
           items={record.subfields ?? []}
@@ -400,6 +410,43 @@ function EditSection({ label, children }: { label: string; children: React.React
     <div className="mb-12 pb-12 border-b border-gray-100">
       <h2 className="text-sm text-gray-500 uppercase tracking-wide mb-5">{label}</h2>
       <div className="max-w-3xl">{children}</div>
+    </div>
+  )
+}
+
+/**
+ * Live preview for the hero image URL. Renders a thumbnail when the URL
+ * resolves, fades to 30% opacity on an <img> load error so editors get
+ * obvious feedback that the URL is broken without nuking the whole UI.
+ */
+function ImagePreview({ url }: { url: string }) {
+  const trimmed = url.trim()
+  if (!trimmed) {
+    return (
+      <p className="mt-3 text-xs text-gray-400">
+        No image set. Any public HTTPS URL works (Unsplash, your CMS, an
+        ATProto blob, &hellip;).
+      </p>
+    )
+  }
+  return (
+    <div className="mt-3 w-60 h-32 bg-gray-100 rounded overflow-hidden border border-gray-200 relative">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={trimmed}
+        alt="hero preview"
+        className="w-full h-full object-cover transition-opacity duration-200"
+        onError={(e) => {
+          const el = e.currentTarget
+          el.style.opacity = '0.25'
+          el.setAttribute('data-broken', 'true')
+        }}
+        onLoad={(e) => {
+          const el = e.currentTarget
+          el.style.opacity = '1'
+          el.removeAttribute('data-broken')
+        }}
+      />
     </div>
   )
 }
