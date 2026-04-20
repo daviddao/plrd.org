@@ -2,13 +2,52 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 import Breadcrumb from '@/components/Breadcrumb'
 import opportunityData from '@/data/fa2/ai-opportunityspaces.json'
+import { fetchOpportunitySpaces } from '@/lib/indexer'
 
 export const metadata: Metadata = {
   title: 'Opportunity Spaces – AI & Robotics',
   description: 'Four foundational infrastructure layers where PL can catalyze the open substrate that autonomous AI and robotics systems require.',
 }
 
-export default function OpportunitySpacesPage() {
+type OpportunityCard = {
+  id: string
+  title: string
+  tagline?: string
+  image?: string
+  description: string
+  subfields: string[]
+}
+
+/**
+ * Prefer the live indexer (org.plresearch.opportunitySpace records) and
+ * fall back to the static JSON checked into git if the indexer is
+ * unreachable. The static JSON is also used to seed generateStaticParams
+ * on detail pages so build-time rendering stays deterministic.
+ */
+async function loadCards(): Promise<OpportunityCard[]> {
+  const remote = await fetchOpportunitySpaces('ai-robotics')
+  if (remote.length > 0) {
+    return remote.map((o) => ({
+      id: o.id,
+      title: o.title,
+      tagline: o.tagline ?? '',
+      image: o.image ?? opportunityData.opportunities.find((s) => s.id === o.id)?.image ?? '',
+      description: o.description,
+      subfields: o.subfields ?? [],
+    }))
+  }
+  return opportunityData.opportunities.map((o) => ({
+    id: o.id,
+    title: o.title,
+    tagline: o.tagline,
+    image: o.image,
+    description: o.description,
+    subfields: o.subfields,
+  }))
+}
+
+export default async function OpportunitySpacesPage() {
+  const opportunities = await loadCards()
   return (
     <div className="max-w-6xl mx-auto px-6 pt-8 pb-16">
       <Breadcrumb
@@ -29,7 +68,7 @@ export default function OpportunitySpacesPage() {
 
       {/* Grid */}
       <div className="grid md:grid-cols-2 gap-px bg-gray-200">
-        {opportunityData.opportunities.map((opp) => (
+        {opportunities.map((opp) => (
           <Link
             key={opp.id}
             href={`/areas/ai-robotics/opportunity-spaces/${opp.id}/`}
