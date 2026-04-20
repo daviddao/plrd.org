@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import EditPageButton from '@/components/EditPageButton'
+import { PageEditHistoryByline } from '@/components/EditHistoryByline'
 import Link from 'next/link'
 import AuthorCard from '@/components/AuthorCard'
 import Breadcrumb from '@/components/Breadcrumb'
@@ -171,6 +172,9 @@ export default async function AboutPage() {
         </div>
       </div>
       <EditPageButton rkey="about" />
+      <div className="mt-4">
+        <PageEditHistoryByline rkey="about" />
+      </div>
     </div>
   )
 }

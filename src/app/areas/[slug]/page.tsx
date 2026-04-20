@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import EditPageButton from '@/components/EditPageButton'
+import { PageEditHistoryByline } from '@/components/EditHistoryByline'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { areas, publications, talks } from '@/lib/content'
@@ -161,6 +162,9 @@ export default async function AreaPage({ params }: Props) {
         </div>
       )}
       <EditPageButton rkey={`area-${slug}`} />
+      <div className="mt-4">
+        <PageEditHistoryByline rkey={`area-${slug}`} />
+      </div>
     </div>
   )
 }
