@@ -11,6 +11,7 @@ const DEFAULT_ADMIN_DIDS = [
   ADMIN_DID,                              // plresearch.org
   'did:plc:cpoagodpqrgs4t7thi5z37uf',     // satyam2.climateai.org
   'did:plc:ly6ens5mmnfo7mc3di7do5yb',     // momack.bsky.social
+  'did:plc:akyopoapqza6xjzthjnandaz',     // wills.co.tt
 ]
 const _adminDidsRaw = process.env.NEXT_PUBLIC_ADMIN_DIDS || DEFAULT_ADMIN_DIDS.join(',')
 export const ADMIN_DIDS: string[] = _adminDidsRaw.split(',').map(d => d.trim()).filter(Boolean)
@@ -69,6 +70,46 @@ export type StandardPublicationRecord = {
 // Page collections
 export const PAGE_COLLECTION = "org.plresearch.page"
 export const OPPORTUNITY_COLLECTION = "org.plresearch.opportunitySpace"
+
+// Opportunity space record (stored on plresearch.org PDS, indexed by the indexer)
+export type OpportunitySpaceFieldSignal = {
+  kpi: string
+  measurement: string
+}
+
+export type OpportunitySpaceRecord = {
+  $type: string
+  areaSlug: string
+  id: string
+  title: string
+  tagline?: string
+  image?: string
+  description: string
+  inflectionPoint?: string
+  shift?: string
+  theOpportunity?: string
+  subfields?: string[]
+  tippingSignals?: string[]
+  keyAssumptions?: string[]
+  observations?: string[]
+  fieldSignals?: OpportunitySpaceFieldSignal[]
+  updatedAt: string
+}
+
+// Map a focus-area slug + opportunity-space id to the record's rkey.
+// Rkeys on the PDS use short per-area prefixes (see commit bb88ffa).
+const OPP_RKEY_PREFIX: Record<string, string> = {
+  'ai-robotics': 'ai',
+  'digital-human-rights': 'dhr',
+  'economies-governance': 'eg',
+  'neurotech': 'neuro',
+}
+
+export function opportunitySpaceRkey(areaSlug: string, id: string): string {
+  const prefix = OPP_RKEY_PREFIX[areaSlug]
+  if (!prefix) throw new Error(`Unknown areaSlug for opportunity space: ${areaSlug}`)
+  return `${prefix}--${id}`
+}
 
 // Page section
 export type PageSection = {

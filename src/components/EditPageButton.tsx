@@ -20,15 +20,19 @@ const EDIT_ROUTES: Record<string, string> = {
  * Edit button — only visible to admin users.
  * Positioned top-right of the page content area.
  * Links to the inline edit route for the given page rkey.
+ *
+ * If `href` is provided, it overrides the EDIT_ROUTES lookup — useful for
+ * record collections other than `org.plresearch.page` (e.g. opportunity
+ * spaces) that don't fit the rkey-based map.
  */
-export default function EditPageButton({ rkey }: { rkey: string }) {
+export default function EditPageButton({ rkey, href }: { rkey: string; href?: string }) {
   const { isAuthenticated, isAdmin } = useAuth()
 
   if (!isAuthenticated || !isAdmin) return null
 
   return (
     <Link
-      href={EDIT_ROUTES[rkey] || `/admin?page=${encodeURIComponent(rkey)}`}
+      href={href || EDIT_ROUTES[rkey] || `/admin?page=${encodeURIComponent(rkey)}`}
       className="fixed top-20 right-6 z-50 flex items-center gap-2 px-4 py-2 bg-blue text-white rounded-full shadow-lg hover:bg-blue/90 transition-colors text-sm font-medium"
       title={`Edit "${rkey}" page content`}
     >
