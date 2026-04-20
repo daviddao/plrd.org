@@ -2,8 +2,9 @@
 
 import { useCallback, useEffect, useState } from 'react'
 import Breadcrumb from '@/components/Breadcrumb'
+import EditHistoryByline from '@/components/EditHistoryByline'
 import { EditBar, EditBarSpacer, EditableField, useRequireAdmin } from '@/components/InlineEdit'
-import { opportunitySpaceRkey } from '@/lib/lexicons'
+import { ADMIN_DID, OPPORTUNITY_COLLECTION, opportunitySpaceRkey } from '@/lib/lexicons'
 import type { OpportunitySpaceRecord } from '@/lib/lexicons'
 
 type SaveStatus = 'idle' | 'saving' | 'saved' | 'error'
@@ -231,6 +232,11 @@ export default function OpportunitySpaceEditor({
   return (
     <div className="max-w-6xl mx-auto px-6 pt-8 pb-16">
       {breadcrumb}
+      <div className="mt-4">
+        <EditHistoryByline
+          targetUri={`at://${ADMIN_DID}/${OPPORTUNITY_COLLECTION}/${rkey}`}
+        />
+      </div>
 
       {/* Hero */}
       <div className="mt-12 mb-12 max-w-3xl">

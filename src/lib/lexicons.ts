@@ -70,6 +70,21 @@ export type StandardPublicationRecord = {
 // Page collections
 export const PAGE_COLLECTION = "org.plresearch.page"
 export const OPPORTUNITY_COLLECTION = "org.plresearch.opportunitySpace"
+export const EDIT_EVENT_COLLECTION = "org.plresearch.editEvent"
+
+// Edit audit log record, written to the editor's own PDS on every successful
+// admin edit of a content record.
+export type EditEventRecord = {
+  $type: string
+  target: string            // at-uri of the edited record
+  targetCid?: string        // CID after the edit
+  collection?: string       // NSID of the edited collection
+  editor: string            // DID that performed the edit
+  editorHandle?: string     // Handle snapshot at edit time
+  changedFields?: string[]  // Top-level field names that differed
+  note?: string             // Optional human note
+  editedAt: string          // ISO datetime
+}
 
 // Opportunity space record (stored on plresearch.org PDS, indexed by the indexer)
 export type OpportunitySpaceFieldSignal = {
