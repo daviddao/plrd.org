@@ -16,8 +16,13 @@ export function diffFields(
     ...Object.keys(after ?? {}),
   ])
   const changed: string[] = []
-  // Fields that change on every edit (auto-managed) — exclude from the user-facing diff.
-  const ignored = new Set(['updatedAt', '$type', 'id', 'areaSlug', 'pageId'])
+  // Fields that change on every edit (auto-managed), or that only exist on
+  // the indexer-shaped "prior" object (synthesized from the GraphQL response),
+  // never on the outgoing "after" record. Excluded from the user-facing diff.
+  const ignored = new Set([
+    'updatedAt', '$type', 'id', 'areaSlug', 'pageId',
+    'uri', 'rkey', 'did', 'cid',
+  ])
   for (const k of keys) {
     if (ignored.has(k)) continue
     const a = (before as Record<string, unknown> | null)?.[k]
