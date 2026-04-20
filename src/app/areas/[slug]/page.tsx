@@ -56,6 +56,9 @@ export default async function AreaPage({ params }: Props) {
   return (
     <div className="max-w-6xl mx-auto px-6 pt-8 pb-16">
       <Breadcrumb items={[{ label: 'Focus Areas', href: '/areas/' }, { label: stripFaPrefix(area.title) }]} />
+      <div className="mt-4">
+        <PageEditHistoryByline rkey={`area-${slug}`} />
+      </div>
       {/* Hero */}
       <div className="relative pt-8 pb-12 mb-12 overflow-hidden">
         <AreaHexImage slug={slug} />
@@ -162,9 +165,6 @@ export default async function AreaPage({ params }: Props) {
         </div>
       )}
       <EditPageButton rkey={`area-${slug}`} />
-      <div className="mt-4">
-        <PageEditHistoryByline rkey={`area-${slug}`} />
-      </div>
     </div>
   )
 }
