@@ -2,9 +2,10 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Breadcrumb from '@/components/Breadcrumb'
 import EditPageButton from '@/components/EditPageButton'
+import EditHistoryByline from '@/components/EditHistoryByline'
 import opportunityData from '@/data/fa2/ai-opportunityspaces.json'
 import { fetchOpportunitySpace } from '@/lib/indexer'
-import { opportunitySpaceRkey } from '@/lib/lexicons'
+import { ADMIN_DID, OPPORTUNITY_COLLECTION, opportunitySpaceRkey } from '@/lib/lexicons'
 
 type Props = {
   params: Promise<{ slug: string }>
@@ -77,6 +78,11 @@ export default async function OpportunityDetailPage({ params }: Props) {
         rkey={rkey}
         href={`/areas/ai-robotics/opportunity-spaces/${slug}/edit`}
       />
+      <div className="mt-4">
+        <EditHistoryByline
+          targetUri={`at://${ADMIN_DID}/${OPPORTUNITY_COLLECTION}/${rkey}`}
+        />
+      </div>
 
       {/* Hero */}
       <div className="relative pt-12 pb-12 mb-12 overflow-hidden">

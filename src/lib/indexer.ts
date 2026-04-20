@@ -49,6 +49,19 @@ export type IndexerOpportunitySpace = {
   updatedAt: string
 }
 
+export type IndexerEditEvent = {
+  uri?: string
+  did?: string           // the editor's DID (repo owner)
+  target: string         // AT-URI of the edited record
+  targetCid?: string | null
+  collection?: string | null
+  editor: string         // DID of the editor (usually same as did above)
+  editorHandle?: string | null
+  changedFields?: string[] | null
+  note?: string | null
+  editedAt: string
+}
+
 // ---- GraphQL helper ----
 
 async function query<T>(gql: string, variables?: Record<string, unknown>): Promise<T | null> {
@@ -170,6 +183,34 @@ export async function fetchOpportunitySpace(rkey: string): Promise<IndexerOpport
     node.rkey = parts[parts.length - 1]
   }
   return node
+}
+
+// ---- Edit event queries ----
+
+const EDIT_EVENT_FIELDS = `
+  uri did target targetCid collection
+  editor editorHandle changedFields note editedAt
+`
+
+/**
+ * Fetch all audit-log entries that target a given AT-URI, newest first.
+ * Queries ALL admin DIDs (not scoped to plresearch.org) because edit events
+ * are written to each editor's own repo.
+ */
+export async function fetchEditEvents(targetUri: string): Promise<IndexerEditEvent[]> {
+  const data = await query<{
+    orgPlresearchEditEvent: { edges: { node: IndexerEditEvent }[] }
+  }>(`{
+    orgPlresearchEditEvent(
+      where: { target: { eq: "${targetUri}" } }
+      first: 100
+    ) {
+      edges { node { ${EDIT_EVENT_FIELDS} } }
+    }
+  }`)
+  const events = data?.orgPlresearchEditEvent?.edges?.map(e => e.node) ?? []
+  // Sort by editedAt descending — the indexer doesn't guarantee order.
+  return events.sort((a, b) => (b.editedAt ?? '').localeCompare(a.editedAt ?? ''))
 }
 
 // ---- ATProto post queries (site.standard.document via generic records) ----
