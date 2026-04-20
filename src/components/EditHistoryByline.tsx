@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from 'react'
 import { formatDate } from '@/lib/format'
+import { ADMIN_DID, OPPORTUNITY_COLLECTION, PAGE_COLLECTION } from '@/lib/lexicons'
 
 type EditEvent = {
   uri?: string
@@ -133,6 +134,24 @@ export default function EditHistoryByline({ targetUri }: { targetUri: string }) 
         />
       )}
     </>
+  )
+}
+
+/** Convenience wrapper: byline for an org.plresearch.page record by rkey. */
+export function PageEditHistoryByline({ rkey }: { rkey: string }) {
+  return (
+    <EditHistoryByline
+      targetUri={`at://${ADMIN_DID}/${PAGE_COLLECTION}/${rkey}`}
+    />
+  )
+}
+
+/** Convenience wrapper: byline for an opportunity-space record by rkey. */
+export function OpportunitySpaceEditHistoryByline({ rkey }: { rkey: string }) {
+  return (
+    <EditHistoryByline
+      targetUri={`at://${ADMIN_DID}/${OPPORTUNITY_COLLECTION}/${rkey}`}
+    />
   )
 }
 

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import EditPageButton from '@/components/EditPageButton'
+import { PageEditHistoryByline } from '@/components/EditHistoryByline'
 import Breadcrumb from '@/components/Breadcrumb'
 import { fetchPage, getSection } from '@/lib/indexer'
 
@@ -116,6 +117,9 @@ export default async function SubareasPage() {
         More subareas may emerge as the field grows. These subfields overlap and create new opportunity spaces at their convergence points.
       </p>
       <EditPageButton rkey="area-eg-subareas" />
+      <div className="mt-4">
+        <PageEditHistoryByline rkey="area-eg-subareas" />
+      </div>
     </div>
   )
 }

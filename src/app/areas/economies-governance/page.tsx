@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import type { Metadata } from 'next'
 import EditPageButton from '@/components/EditPageButton'
+import { PageEditHistoryByline } from '@/components/EditHistoryByline'
 import AuthorCard from '@/components/AuthorCard'
 import Breadcrumb from '@/components/Breadcrumb'
 import FundingPipeline from '@/components/FundingPipeline'
@@ -218,6 +219,9 @@ export default async function FA2MainPage() {
         </a>
       </div>
       <EditPageButton rkey="area-economies-governance" />
+      <div className="mt-4">
+        <PageEditHistoryByline rkey="area-economies-governance" />
+      </div>
     </div>
   )
 }

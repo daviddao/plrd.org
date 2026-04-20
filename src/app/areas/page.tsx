@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import EditPageButton from '@/components/EditPageButton'
+import { PageEditHistoryByline } from '@/components/EditHistoryByline'
 import Link from 'next/link'
 import { areas } from '@/lib/content'
 import { stripFaPrefix } from '@/lib/format'
@@ -59,6 +60,9 @@ export default async function AreasPage() {
         ))}
       </div>
       <EditPageButton rkey="areas" />
+      <div className="mt-4">
+        <PageEditHistoryByline rkey="areas" />
+      </div>
     </div>
   )
 }

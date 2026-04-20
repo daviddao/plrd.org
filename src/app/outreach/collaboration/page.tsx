@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import EditPageButton from '@/components/EditPageButton'
+import { PageEditHistoryByline } from '@/components/EditHistoryByline'
 import Breadcrumb from '@/components/Breadcrumb'
 import { fetchPage, getSection } from '@/lib/indexer'
 
@@ -60,6 +61,9 @@ export default async function CollaborationPage() {
         </a>
       </div>
       <EditPageButton rkey="collaborate" />
+      <div className="mt-4">
+        <PageEditHistoryByline rkey="collaborate" />
+      </div>
     </div>
   )
 }
