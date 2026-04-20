@@ -2,11 +2,16 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Breadcrumb from '@/components/Breadcrumb'
+import EditPageButton from '@/components/EditPageButton'
 import opportunityData from '@/data/fa2/opportunityspaces.json'
+import { fetchOpportunitySpace } from '@/lib/indexer'
+import { opportunitySpaceRkey } from '@/lib/lexicons'
 
 type Props = {
   params: Promise<{ slug: string }>
 }
+
+type Opportunity = (typeof opportunityData)['opportunities'][number]
 
 export function generateStaticParams() {
   return opportunityData.opportunities.map((opp) => ({
@@ -14,9 +19,33 @@ export function generateStaticParams() {
   }))
 }
 
+async function loadOpp(slug: string): Promise<Opportunity | null> {
+  const staticOpp = opportunityData.opportunities.find((o) => o.id === slug)
+  const rkey = opportunitySpaceRkey('economies-governance', slug)
+  const remote = await fetchOpportunitySpace(rkey)
+  if (remote) {
+    return {
+      id: remote.id,
+      title: remote.title,
+      tagline: remote.tagline ?? '',
+      image: remote.image ?? staticOpp?.image ?? '',
+      description: remote.description,
+      inflectionPoint: remote.inflectionPoint ?? '',
+      shift: remote.shift ?? '',
+      theOpportunity: remote.theOpportunity ?? '',
+      subfields: remote.subfields ?? [],
+      tippingSignals: remote.tippingSignals ?? [],
+      keyAssumptions: remote.keyAssumptions ?? [],
+      observations: remote.observations ?? [],
+      fieldSignals: remote.fieldSignals ?? [],
+    } as Opportunity
+  }
+  return staticOpp ?? null
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
-  const opp = opportunityData.opportunities.find((o) => o.id === slug)
+  const opp = await loadOpp(slug)
   if (!opp) return { title: 'Not Found' }
   return {
     title: opp.title,
@@ -26,8 +55,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function OpportunityDetailPage({ params }: Props) {
   const { slug } = await params
-  const opp = opportunityData.opportunities.find((o) => o.id === slug)
+  const opp = await loadOpp(slug)
   if (!opp) notFound()
+  const rkey = opportunitySpaceRkey('economies-governance', slug)
 
   return (
     <div className="max-w-6xl mx-auto px-6 pt-8 pb-16">
@@ -38,6 +68,10 @@ export default async function OpportunityDetailPage({ params }: Props) {
           { label: 'Opportunity Spaces', href: '/areas/economies-governance/opportunity-spaces' },
           { label: opp.title },
         ]}
+      />
+      <EditPageButton
+        rkey={rkey}
+        href={`/areas/economies-governance/opportunity-spaces/${slug}/edit`}
       />
 
       {/* Hero */}

@@ -2,13 +2,46 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 import Breadcrumb from '@/components/Breadcrumb'
 import opportunityData from '@/data/fa2/neuro-opportunityspaces.json'
+import { fetchOpportunitySpaces } from '@/lib/indexer'
+
+type OpportunityCard = {
+  id: string
+  title: string
+  tagline?: string
+  image?: string
+  description: string
+  subfields: string[]
+}
+
+async function loadCards(): Promise<OpportunityCard[]> {
+  const remote = await fetchOpportunitySpaces('neurotech')
+  if (remote.length > 0) {
+    return remote.map((o) => ({
+      id: o.id,
+      title: o.title,
+      tagline: o.tagline ?? '',
+      image: o.image ?? opportunityData.opportunities.find((s) => s.id === o.id)?.image ?? '',
+      description: o.description,
+      subfields: o.subfields ?? [],
+    }))
+  }
+  return opportunityData.opportunities.map((o) => ({
+    id: o.id,
+    title: o.title,
+    tagline: o.tagline,
+    image: o.image,
+    description: o.description,
+    subfields: o.subfields,
+  }))
+}
 
 export const metadata: Metadata = {
   title: 'Opportunity Spaces – Neurotech',
   description: 'Three convergence zones where PL Neuro can accelerate the integration of minds and machines.',
 }
 
-export default function OpportunitySpacesPage() {
+export default async function OpportunitySpacesPage() {
+  const opportunities = await loadCards()
   return (
     <div className="max-w-6xl mx-auto px-6 pt-8 pb-16">
       <Breadcrumb
@@ -29,7 +62,7 @@ export default function OpportunitySpacesPage() {
 
       {/* Grid */}
       <div className="grid md:grid-cols-2 gap-px bg-gray-200">
-        {opportunityData.opportunities.map((opp) => (
+        {opportunities.map((opp) => (
           <Link
             key={opp.id}
             href={`/areas/neurotech/opportunity-spaces/${opp.id}/`}
