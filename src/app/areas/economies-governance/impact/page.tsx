@@ -23,6 +23,9 @@ export default async function ImpactOverviewPage() {
         { label: 'Economies & Governance', href: '/areas/economies-governance/' },
         { label: 'Impact' }
       ]} />
+      <div className="mt-4">
+        <PageEditHistoryByline rkey="area-eg-impact" />
+      </div>
 
       {/* Hero */}
       <div className="pt-8 pb-12 mb-12">
@@ -81,9 +84,6 @@ export default async function ImpactOverviewPage() {
         </Link>
       </div>
       <EditPageButton rkey="area-eg-impact" />
-      <div className="mt-4">
-        <PageEditHistoryByline rkey="area-eg-impact" />
-      </div>
     </div>
   )
 }

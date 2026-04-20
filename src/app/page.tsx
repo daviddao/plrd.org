@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import EditPageButton from '@/components/EditPageButton'
-import { PageEditHistoryByline } from '@/components/EditHistoryByline'
 import { publications, talks, blogPosts } from '@/lib/content'
 import { formatDate } from '@/lib/format'
 import { AreaIcon } from '@/components/AreaIcons'
@@ -252,9 +251,6 @@ export default async function HomePage() {
         </Link>
       </div>
       <EditPageButton rkey="landing" />
-      <div className="mt-4">
-        <PageEditHistoryByline rkey="landing" />
-      </div>
     </div>
   )
 }

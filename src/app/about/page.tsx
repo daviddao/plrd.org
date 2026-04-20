@@ -30,6 +30,9 @@ export default async function AboutPage() {
       {/* Hero */}
       <div className="max-w-6xl mx-auto px-6 pt-8">
         <Breadcrumb items={[{ label: 'About' }]} />
+        <div className="mt-4">
+          <PageEditHistoryByline rkey="about" />
+        </div>
         <div className="relative pt-4 pb-16 lg:pt-8 lg:pb-20 overflow-hidden">
           {/* Background image - rotated hexagon clip */}
           <div 
@@ -172,9 +175,6 @@ export default async function AboutPage() {
         </div>
       </div>
       <EditPageButton rkey="about" />
-      <div className="mt-4">
-        <PageEditHistoryByline rkey="about" />
-      </div>
     </div>
   )
 }

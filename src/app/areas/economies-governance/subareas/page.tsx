@@ -88,6 +88,9 @@ export default async function SubareasPage() {
           { label: 'Subareas' },
         ]}
       />
+      <div className="mt-4">
+        <PageEditHistoryByline rkey="area-eg-subareas" />
+      </div>
 
       {/* Header */}
       <div className="mb-12">
@@ -117,9 +120,6 @@ export default async function SubareasPage() {
         More subareas may emerge as the field grows. These subfields overlap and create new opportunity spaces at their convergence points.
       </p>
       <EditPageButton rkey="area-eg-subareas" />
-      <div className="mt-4">
-        <PageEditHistoryByline rkey="area-eg-subareas" />
-      </div>
     </div>
   )
 }

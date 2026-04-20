@@ -26,6 +26,9 @@ export default async function CollaborationPage() {
   return (
     <div className="max-w-6xl mx-auto px-6 pt-8 pb-16">
       <Breadcrumb items={[{ label: 'Collaborate' }]} />
+      <div className="mt-4">
+        <PageEditHistoryByline rkey="collaborate" />
+      </div>
       {/* Hero */}
       <div className="relative pt-6 pb-10 mb-10 overflow-hidden">
         <CollabGeo />
@@ -61,9 +64,6 @@ export default async function CollaborationPage() {
         </a>
       </div>
       <EditPageButton rkey="collaborate" />
-      <div className="mt-4">
-        <PageEditHistoryByline rkey="collaborate" />
-      </div>
     </div>
   )
 }
