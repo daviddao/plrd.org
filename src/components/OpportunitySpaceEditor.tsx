@@ -360,7 +360,7 @@ export default function OpportunitySpaceEditor({
               <button
                 type="button"
                 onClick={() => removeFieldSignal(i)}
-                className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity text-xs text-gray-400 hover:text-red-500"
+                className="absolute top-2 right-2 text-xs text-gray-300 hover:text-red-500 transition-colors"
                 title="Remove signal"
               >
                 remove
@@ -437,7 +437,7 @@ function StringArrayEditor({
           <button
             type="button"
             onClick={() => onRemove(i)}
-            className="mt-1 opacity-0 group-hover:opacity-100 transition-opacity text-xs text-gray-400 hover:text-red-500"
+            className="mt-1 text-xs text-gray-300 hover:text-red-500 transition-colors"
             title="Remove"
           >
             remove
