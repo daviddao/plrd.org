@@ -5,9 +5,16 @@
   &::-webkit-scrollbar { display: none; }
 }
 
+@font-face {
+  font-family: 'Aileron';
+  src: url('/fonts/Aileron-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
 /* ===== Theme (Tailwind v4 CSS-first config) ===== */
 @theme {
-  --font-family-body: 'Inter', sans-serif;
+  --font-family-body: 'Aileron', sans-serif;
   --font-family-serif: 'Newsreader', Georgia, "Times New Roman", serif;
 
   --breakpoint-sm: 640px;

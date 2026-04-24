@@ -1,13 +1,25 @@
 import type { Metadata } from 'next'
-import { Inter, Newsreader } from 'next/font/google'
+import localFont from 'next/font/local'
+import { Newsreader } from 'next/font/google'
 import { siteConfig } from '@/lib/site-config'
 import { AuthProvider } from '@/lib/atproto'
 import SiteShell from '@/components/SiteShell'
 import './globals.css'
 
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
+const aileron = localFont({
+  src: [
+    {
+      path: '../../public/fonts/Aileron-Regular.woff2',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/Aileron-Bold.woff2',
+      weight: '700',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-aileron',
 })
 
 const newsreader = Newsreader({
@@ -50,7 +62,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${newsreader.variable} font-[family-name:var(--font-inter)] min-w-[320px] text-base text-black leading-normal antialiased`}>        <AuthProvider>
+      <body className={`${aileron.variable} ${newsreader.variable} font-[family-name:var(--font-aileron)] min-w-[320px] text-base text-black leading-normal antialiased`}>
+        <AuthProvider>
           <SiteShell>{children}</SiteShell>
         </AuthProvider>
       </body>
