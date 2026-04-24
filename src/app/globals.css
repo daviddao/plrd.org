@@ -8,7 +8,7 @@
 /* ===== Theme (Tailwind v4 CSS-first config) ===== */
 @theme {
   --font-body: var(--font-inter), sans-serif;
-  --font-serif: var(--font-serif), Georgia, "Times New Roman", serif;
+  --font-serif: var(--font-newsreader), Georgia, "Times New Roman", serif;
 
   --breakpoint-sm: 640px;
   --breakpoint-md: 768px;
@@ -53,7 +53,7 @@ html {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-serif);
+  font-family: var(--font-newsreader);
 }
 
 p + ul, p + ol, p + blockquote {

@@ -84,7 +84,7 @@ export default async function HomePage() {
           aria-hidden="true"
         />
 
-        <h1 className="relative z-10 font-serif text-[36px] md:text-[52px] lg:text-[64px] font-normal leading-[1.1] tracking-tight mb-8">
+        <h1 className="relative z-10 font-newsreader text-[36px] md:text-[52px] lg:text-[64px] font-normal leading-[1.1] tracking-tight mb-8">
           {hero?.title || "Driving R&D breakthroughs to push humanity forward."}
         </h1>
         <div className="relative z-10 flex flex-wrap gap-4">

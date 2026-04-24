@@ -13,7 +13,7 @@ const inter = Inter({
 const newsreader = Newsreader({
   subsets: ['latin'],
   weight: '400',
-  variable: '--font-serif',
+  variable: '--font-newsreader',
 })
 
 export const metadata: Metadata = {
