@@ -7,8 +7,8 @@
 
 /* ===== Theme (Tailwind v4 CSS-first config) ===== */
 @theme {
-  --font-body: var(--font-inter), sans-serif;
-  --font-serif: var(--font-newsreader), Georgia, "Times New Roman", serif;
+  --font-family-body: 'Inter', sans-serif;
+  --font-family-serif: 'Newsreader', Georgia, "Times New Roman", serif;
 
   --breakpoint-sm: 640px;
   --breakpoint-md: 768px;

@@ -50,8 +50,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${newsreader.variable} font-body min-w-[320px] text-base text-black leading-normal antialiased`}>
-        <AuthProvider>
+      <body className={`${inter.variable} ${newsreader.variable} font-[family-name:var(--font-inter)] min-w-[320px] text-base text-black leading-normal antialiased`}>        <AuthProvider>
           <SiteShell>{children}</SiteShell>
         </AuthProvider>
       </body>
