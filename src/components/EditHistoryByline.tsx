@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from 'react'
 import { formatDate } from '@/lib/format'
+import { useAuth } from '@/lib/atproto'
 import { ADMIN_DID, OPPORTUNITY_COLLECTION, PAGE_COLLECTION } from '@/lib/lexicons'
 
 type EditEvent = {
@@ -28,13 +29,18 @@ type Profile = {
  * Mounted on public detail pages and on edit pages. Fetches from
  * /api/edit-history?target=<at-uri> on mount. Swallows errors — if the indexer
  * is down, the byline just doesn't render.
+ *
+ * Admin-only: the byline is hidden for non-admin visitors, both as a UI
+ * affordance and because the underlying API enforces the same gate.
  */
 export default function EditHistoryByline({ targetUri }: { targetUri: string }) {
+  const { isAdmin, isLoading: authLoading } = useAuth()
   const [events, setEvents] = useState<EditEvent[] | null>(null)
   const [profiles, setProfiles] = useState<Record<string, Profile>>({})
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
+    if (authLoading || !isAdmin) return
     let cancelled = false
     fetch(`/api/edit-history?target=${encodeURIComponent(targetUri)}`)
       .then((r) => (r.ok ? r.json() : Promise.reject(r.statusText)))
@@ -47,7 +53,7 @@ export default function EditHistoryByline({ targetUri }: { targetUri: string }) 
     return () => {
       cancelled = true
     }
-  }, [targetUri])
+  }, [targetUri, isAdmin, authLoading])
 
   // Hydrate profiles (avatar/displayName) from public Bluesky API as events arrive.
   useEffect(() => {
@@ -94,6 +100,7 @@ export default function EditHistoryByline({ targetUri }: { targetUri: string }) 
     return () => window.removeEventListener('keydown', onKey)
   }, [open])
 
+  if (!isAdmin) return null
   if (!events || events.length === 0) return null
 
   const latest = events[0]

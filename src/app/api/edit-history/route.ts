@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import { fetchEditEvents } from "@/lib/indexer"
+import { getSession } from "@/lib/session"
+import { ADMIN_DIDS } from "@/lib/lexicons"
 
 export const dynamic = "force-dynamic"
 
@@ -7,10 +9,20 @@ export const dynamic = "force-dynamic"
  * Returns audit-log entries for a given AT-URI, newest first.
  * Caller: `GET /api/edit-history?target=at://did/collection/rkey`
  *
- * No auth gate — edit history is public. The lexicon does not store diffs,
- * only field names, so revealing it does not leak pre-publish content.
+ * Admin-only: edit history reveals the editor DIDs/handles behind every change
+ * to a CMS-editable record, which is internal-facing data. Non-admin callers
+ * receive 401/403; the matching client component (`EditHistoryByline`)
+ * suppresses itself for non-admins so the byline never flashes.
  */
 export async function GET(req: NextRequest) {
+  const session = await getSession()
+  if (!session.did) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+  }
+  if (!ADMIN_DIDS.includes(session.did)) {
+    return NextResponse.json({ error: "Forbidden \u2014 admin only" }, { status: 403 })
+  }
+
   const target = req.nextUrl.searchParams.get("target")
   if (!target || !target.startsWith("at://")) {
     return NextResponse.json(
