@@ -120,7 +120,7 @@ export default async function HomePage() {
           edge slices into the cluster of hexes — the mosaic reads as a
           "signal" rising out of the card. */}
       <div className="pb-20 lg:pb-28 border-t border-gray-200 pt-16 lg:pt-24">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start mb-36 sm:mb-40 lg:mb-44">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start mb-44 sm:mb-48 lg:mb-52">
           <h2 className="text-[28px] md:text-[36px] font-normal leading-tight tracking-tight">
             {approach?.title || "Use-inspired research across four frontiers"}
           </h2>
@@ -129,7 +129,7 @@ export default async function HomePage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-32 md:gap-y-36 lg:gap-y-40">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-44 md:gap-y-48 lg:gap-y-52">
           <FocusAreaCard
             href="/areas/digital-human-rights"
             iconType="shield"
@@ -270,22 +270,24 @@ function FocusAreaCard({
     // its own card edges, never bleeds across siblings.
     <div className="relative isolate">
       {/*
-        Hex mosaic band: a fixed-height strip sitting directly on top of the
-        card. `overflow-hidden` clips the mosaic so it can never escape this
-        strip and invade the previous row, the section title, or other cards.
-        The image is anchored to the bottom of the strip and grows to ~110%
-        wide, so the cluster reads as if it's rising out from behind the
-        card and being cropped by the card's top edge.
+        Hex mosaic band: anchored to the left edge of the card, ~60% as wide
+        as the card so the mosaic reads as a cluster rising out from behind
+        the card's top-left corner (matches the design reference). The
+        band's height is taller than the mosaic itself so the entire
+        cluster silhouette is visible — the bottom of the cluster is
+        anchored flush with the card top and the rest of the cluster reads
+        as a soft cloud above the card. `overflow-hidden` keeps the mosaic
+        from bleeding into adjacent rows or the section header.
       */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute left-0 right-0 -top-28 sm:-top-32 lg:-top-36 h-32 sm:h-36 lg:h-40 overflow-hidden select-none"
+        className="pointer-events-none absolute left-0 -top-40 sm:-top-44 lg:-top-48 w-3/5 sm:w-[55%] lg:w-1/2 h-40 sm:h-44 lg:h-48 overflow-hidden select-none"
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={mosaicSrc}
           alt=""
-          className="absolute -left-[5%] -bottom-4 w-[110%] h-auto opacity-90"
+          className="absolute bottom-0 left-0 w-full h-auto"
           loading="lazy"
           decoding="async"
         />
