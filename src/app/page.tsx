@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import EditPageButton from '@/components/EditPageButton'
+import { PageEditHistoryByline } from '@/components/EditHistoryByline'
 import { publications, talks, blogPosts } from '@/lib/content'
 import { formatDate } from '@/lib/format'
 import { AreaIcon } from '@/components/AreaIcons'
@@ -68,6 +69,11 @@ export default async function HomePage() {
 
   return (
     <div className="max-w-6xl mx-auto px-6">
+      {/* Admin-only edit-history byline. Renders nothing for non-admins so this
+          wrapper takes no visual space on the public landing page. */}
+      <div className="pt-6">
+        <PageEditHistoryByline rkey="landing" />
+      </div>
       <div className="relative pt-20 pb-20 md:pt-32 md:pb-28 lg:pt-44 lg:pb-36" style={{ clipPath: 'inset(0 -100vw 0 0)' }}>
         {/* Hero banner image - extends to screen edge */}
         <div 
