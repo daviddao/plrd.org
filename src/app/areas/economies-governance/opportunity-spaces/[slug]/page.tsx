@@ -66,7 +66,7 @@ export default async function OpportunityDetailPage({ params }: Props) {
         items={[
           { label: 'Areas', href: '/areas' },
           { label: 'Economies & Governance', href: '/areas/economies-governance' },
-          { label: 'Opportunity Spaces', href: '/areas/economies-governance/opportunity-spaces' },
+          { label: 'Opportunity Spaces', href: '/areas/economies-governance/#opportunity-spaces' },
           { label: opp.title },
         ]}
       />

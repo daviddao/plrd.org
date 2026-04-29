@@ -19,6 +19,11 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: '/areas/economies-governance/opportunity-spaces/',
+        destination: '/areas/economies-governance/#opportunity-spaces',
+        permanent: true,
+      },
+      {
         source: '/research/:path*',
         destination: '/insights/:path*',
         permanent: true,

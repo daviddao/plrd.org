@@ -54,12 +54,12 @@ export default function EGEditPage() {
         </div>
 
         <div className="relative z-10 flex flex-wrap gap-4 mb-10">
-          <Link href="/areas/economies-governance/opportunity-spaces/" className="inline-flex items-center gap-2 px-5 py-2.5 bg-blue text-white rounded-full hover:bg-blue/90 transition-colors font-medium">
+          <a href="#opportunity-spaces" className="inline-flex items-center gap-2 px-5 py-2.5 bg-blue text-white rounded-full hover:bg-blue/90 transition-colors font-medium">
             Opportunity Spaces
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 5v14m0 0l-6-6m6 6l6-6" />
             </svg>
-          </Link>
+          </a>
           <a href="https://grants.plresearch.org" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2.5 border border-blue/30 text-blue rounded-full hover:bg-blue/5 transition-colors font-medium">
             Apply for Grants
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -86,13 +86,19 @@ export default function EGEditPage() {
         <p className="text-xs text-gray-400 mt-2">Paragraphs separated by blank lines</p>
       </div>
 
+      {/* Opportunity Spaces section header (inlined on the live page) */}
+      <section className="mb-12 pb-12 border-b border-gray-100">
+        <div className="text-xs text-gray-400 uppercase tracking-widest mb-2">Strategy · inlined Opportunity Spaces section header</div>
+        <ExploreCardEdit sectionId="explore-opportunities" label="Section heading + subtitle" get={get} set={set}
+          href="/areas/economies-governance/#opportunity-spaces" />
+        <p className="text-xs text-gray-400 mt-2">The opportunity space cards themselves are managed individually — edit each card on its own page.</p>
+      </section>
+
       {/* Explore */}
       <h2 className="text-sm text-gray-500 uppercase tracking-wide mb-6">Explore</h2>
       <div className="grid md:grid-cols-2 gap-6 mb-12">
         <ExploreCardEdit sectionId="explore-subareas" label="Domains" get={get} set={set}
           href="/areas/economies-governance/subareas/" />
-        <ExploreCardEdit sectionId="explore-opportunities" label="Strategy" get={get} set={set}
-          href="/areas/economies-governance/opportunity-spaces/" />
         <ExploreCardEdit sectionId="explore-impact" label="Metrics" get={get} set={set}
           href="/areas/economies-governance/impact/" />
         <ExploreCardEdit sectionId="explore-projects" label="Ecosystem" get={get} set={set}
