@@ -116,28 +116,27 @@ function clusterAlpha(col, row, cols, rows, slug) {
   const x = col / Math.max(1, cols - 1)
   const y = row / Math.max(1, rows - 1)
 
-  // Main blob: anchored left-of-centre, slightly above vertical centre.
-  // The bottom of the canvas is cropped by the card top edge in the
-  // page layout, so we bias the silhouette upward.
-  const cx = slug === "neurotech" ? 0.5 : 0.38
-  const cy = 0.42
-  // Wide and slightly tall ellipse so the cluster spans most of the
-  // canvas with soft falloff in every direction.
-  const dx = (x - cx) / 0.55
-  const dy = (y - cy) / 0.6
+  // Main blob: roughly square silhouette so the cluster reads as a
+  // "cloud" rather than a horizontal band, even though the SVG canvas
+  // is wider than it is tall. The cluster sits slightly upper-left so
+  // outlier tiles can scatter to the lower-right.
+  const cx = slug === "neurotech" ? 0.45 : 0.38
+  const cy = 0.45
+  const dx = (x - cx) / 0.4
+  const dy = (y - cy) / 0.55
   const main = 1 - Math.min(1, Math.sqrt(dx * dx + dy * dy))
 
-  // Asymmetric satellite to the right: pulls a few hexes out beyond the
-  // main blob, giving the silhouette a "cloud" rather than "ellipse" feel.
-  const sx = (x - 0.78) / 0.22
-  const sy = (y - 0.4) / 0.4
+  // Asymmetric satellite to the lower-right: pulls a few hexes out beyond
+  // the main blob so the silhouette breaks out of an ellipse shape.
+  const sx = (x - 0.7) / 0.22
+  const sy = (y - 0.65) / 0.3
   const sat = 1 - Math.min(1, Math.sqrt(sx * sx + sy * sy))
 
   // Pseudo-random jitter, deterministic per cell — breaks the outline into
   // a soft cloud and (crucially) lets a few isolated tiles "float" away
   // from the main blob.
   const seed = (col * 73856093) ^ (row * 19349663) ^ slug.length
-  const noise = ((Math.abs(Math.sin(seed)) * 43758.5453) % 1) * 0.32 - 0.09
+  const noise = ((Math.abs(Math.sin(seed)) * 43758.5453) % 1) * 0.34 - 0.1
 
   return Math.max(0, Math.min(1, Math.max(main, sat * 0.7) + noise))
 }
