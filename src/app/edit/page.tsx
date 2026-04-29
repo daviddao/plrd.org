@@ -88,138 +88,67 @@ export default function LandingEditPage() {
         </div>
       </div>
 
-      {/* R&D approach section */}
+      {/* R&D approach section — mirrors the live homepage layout:
+          two-column intro (title + body) above a 2x2 grid of large
+          FocusAreaCards with hex-mosaic backdrops. */}
       <div className="pb-20 lg:pb-28 border-t border-gray-200 pt-16 lg:pt-24">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
-          <div>
-            <h2 className="mb-6">
-              <EditableField
-                value={get('approach', 'title')}
-                onChange={(v) => set('approach', 'title', v)}
-                placeholder="Use-inspired research across four frontiers"
-                className="text-[28px] md:text-[36px] font-normal leading-tight tracking-tight"
-              />
-            </h2>
-            <div className="mb-10">
-              <EditableField
-                value={get('approach', 'body')}
-                onChange={(v) => set('approach', 'body', v)}
-                multiline
-                placeholder="We work in Pasteur's Quadrant — pursuing fundamental understanding while staying anchored to real-world impact."
-                className="text-base text-gray-600 leading-relaxed"
-              />
-            </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start mb-44 sm:mb-48 lg:mb-52">
+          <h2>
+            <EditableField
+              value={get('approach', 'title')}
+              onChange={(v) => set('approach', 'title', v)}
+              placeholder="Use-inspired research across four frontiers"
+              className="text-[28px] md:text-[36px] font-normal leading-tight tracking-tight"
+            />
+          </h2>
+          <div className="lg:pt-3">
+            <EditableField
+              value={get('approach', 'body')}
+              onChange={(v) => set('approach', 'body', v)}
+              multiline
+              placeholder="We work in Pasteur's Quadrant — pursuing fundamental understanding while staying anchored to real-world impact. Our four focus areas span the most consequential frontiers in computing, society, and human cognition."
+              className="text-base text-gray-600 leading-relaxed"
+            />
           </div>
+        </div>
 
-          <div className="flex flex-col lg:sticky lg:top-24 gap-4">
-            {/* Digital Human Rights */}
-            <div
-              className="flex items-start gap-4 p-5 border border-gray-200 rounded-lg transition-all"
-            >
-              <AreaIcon type="shield" />
-              <div className="flex-1 min-w-0">
-                <div className="mb-1">
-                  <EditableField
-                    value={get('approach-dhr', 'title')}
-                    onChange={(v) => set('approach-dhr', 'title', v)}
-                    placeholder="Digital Human Rights"
-                    className="text-sm font-medium text-black"
-                  />
-                </div>
-                <EditableField
-                  value={get('approach-dhr', 'subtitle')}
-                  onChange={(v) => set('approach-dhr', 'subtitle', v)}
-                  multiline
-                  placeholder="Building decentralized infrastructure that enshrines freedom and safety in the digital age."
-                  className="text-sm text-gray-500 leading-relaxed"
-                />
-              </div>
-              <svg className="w-4 h-4 text-gray-300 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </div>
-
-            {/* Economies & Governance */}
-            <div
-              className="flex items-start gap-4 p-5 border border-gray-200 rounded-lg transition-all"
-            >
-              <AreaIcon type="hexagon" />
-              <div className="flex-1 min-w-0">
-                <div className="mb-1">
-                  <EditableField
-                    value={get('approach-eg', 'title')}
-                    onChange={(v) => set('approach-eg', 'title', v)}
-                    placeholder="Economies & Governance"
-                    className="text-sm font-medium text-black"
-                  />
-                </div>
-                <EditableField
-                  value={get('approach-eg', 'subtitle')}
-                  onChange={(v) => set('approach-eg', 'subtitle', v)}
-                  multiline
-                  placeholder="Crypto-native tools for more efficient, equitable coordination at global scale."
-                  className="text-sm text-gray-500 leading-relaxed"
-                />
-              </div>
-              <svg className="w-4 h-4 text-gray-300 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </div>
-
-            {/* AI & Robotics */}
-            <div
-              className="flex items-start gap-4 p-5 border border-gray-200 rounded-lg transition-all"
-            >
-              <AreaIcon type="neural" />
-              <div className="flex-1 min-w-0">
-                <div className="mb-1">
-                  <EditableField
-                    value={get('approach-ai', 'title')}
-                    onChange={(v) => set('approach-ai', 'title', v)}
-                    placeholder="AI & Robotics"
-                    className="text-sm font-medium text-black"
-                  />
-                </div>
-                <EditableField
-                  value={get('approach-ai', 'subtitle')}
-                  onChange={(v) => set('approach-ai', 'subtitle', v)}
-                  multiline
-                  placeholder="Responsible advancement in AGI, robotics, and immersive technologies that reshape how we interact with the world."
-                  className="text-sm text-gray-500 leading-relaxed"
-                />
-              </div>
-              <svg className="w-4 h-4 text-gray-300 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </div>
-
-            {/* Neurotechnology */}
-            <div
-              className="flex items-start gap-4 p-5 border border-gray-200 rounded-lg transition-all"
-            >
-              <AreaIcon type="brain" />
-              <div className="flex-1 min-w-0">
-                <div className="mb-1">
-                  <EditableField
-                    value={get('approach-neuro', 'title')}
-                    onChange={(v) => set('approach-neuro', 'title', v)}
-                    placeholder="Neurotechnology"
-                    className="text-sm font-medium text-black"
-                  />
-                </div>
-                <EditableField
-                  value={get('approach-neuro', 'subtitle')}
-                  onChange={(v) => set('approach-neuro', 'subtitle', v)}
-                  multiline
-                  placeholder="Accelerating brain-computer interfaces and NeuroAI to expand human cognition and treat brain disorders."
-                  className="text-sm text-gray-500 leading-relaxed"
-                />
-              </div>
-              <svg className="w-4 h-4 text-gray-300 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </div>
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-44 md:gap-y-48 lg:gap-y-52">
+          <FocusAreaCardEdit
+            sectionId="approach-dhr"
+            iconType="shield"
+            mosaicSrc="/images/fa2/mosaics/digital-human-rights.svg"
+            placeholderTitle="Digital Human Rights"
+            placeholderBody="Building decentralized infrastructure that enshrines freedom and safety in the digital age."
+            get={get}
+            set={set}
+          />
+          <FocusAreaCardEdit
+            sectionId="approach-eg"
+            iconType="hexagon"
+            mosaicSrc="/images/fa2/mosaics/economies-governance.svg"
+            placeholderTitle="Economies & Governance"
+            placeholderBody="Crypto-native tools for more efficient, equitable coordination at global scale."
+            get={get}
+            set={set}
+          />
+          <FocusAreaCardEdit
+            sectionId="approach-ai"
+            iconType="neural"
+            mosaicSrc="/images/fa2/mosaics/ai-robotics.svg"
+            placeholderTitle="AI & Robotics"
+            placeholderBody="Responsible advancement in AGI, robotics, and immersive technologies that reshape how we interact with the world."
+            get={get}
+            set={set}
+          />
+          <FocusAreaCardEdit
+            sectionId="approach-neuro"
+            iconType="brain"
+            mosaicSrc="/images/fa2/mosaics/neurotech.svg"
+            placeholderTitle="Neurotechnology"
+            placeholderBody="Accelerating brain-computer interfaces and NeuroAI to expand human cognition and treat brain disorders."
+            get={get}
+            set={set}
+          />
         </div>
       </div>
 
@@ -254,6 +183,69 @@ export default function LandingEditPage() {
         onSave={save}
         onDiscard={discard}
       />
+    </div>
+  )
+}
+
+/**
+ * Edit-mode mirror of the live <FocusAreaCard /> in src/app/page.tsx.
+ * Same hex-mosaic backdrop, same 2-col card layout, but the title and
+ * body are EditableField hooks bound to the page record's section.
+ */
+function FocusAreaCardEdit({
+  sectionId,
+  iconType,
+  mosaicSrc,
+  placeholderTitle,
+  placeholderBody,
+  get,
+  set,
+}: {
+  sectionId: string
+  iconType: 'shield' | 'hexagon' | 'neural' | 'brain'
+  mosaicSrc: string
+  placeholderTitle: string
+  placeholderBody: string
+  get: (s: string, f: 'title' | 'subtitle' | 'body' | 'label') => string
+  set: (s: string, f: 'title' | 'subtitle' | 'body' | 'label', v: string) => void
+}) {
+  return (
+    <div className="relative isolate">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute left-0 -top-28 sm:-top-32 lg:-top-32 w-[65%] sm:w-[62%] lg:w-[60%] h-56 sm:h-64 lg:h-64 overflow-hidden select-none"
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={mosaicSrc}
+          alt=""
+          className="absolute bottom-0 left-0 w-full h-auto opacity-60"
+          style={{ filter: 'saturate(0.55)' }}
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+
+      <div className="relative z-10 flex items-start gap-5 p-6 lg:p-7 bg-white border border-gray-200 rounded-xl">
+        <AreaIcon type={iconType} />
+        <div className="flex-1 min-w-0">
+          <div className="mb-2">
+            <EditableField
+              value={get(sectionId, 'title')}
+              onChange={(v) => set(sectionId, 'title', v)}
+              placeholder={placeholderTitle}
+              className="text-lg lg:text-[22px] font-medium text-black leading-tight"
+            />
+          </div>
+          <EditableField
+            value={get(sectionId, 'subtitle')}
+            onChange={(v) => set(sectionId, 'subtitle', v)}
+            multiline
+            placeholder={placeholderBody}
+            className="text-sm lg:text-[15px] text-gray-500 leading-relaxed"
+          />
+        </div>
+      </div>
     </div>
   )
 }
