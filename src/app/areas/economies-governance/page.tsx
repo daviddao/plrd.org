@@ -54,7 +54,6 @@ export default async function FA2MainPage() {
   const bodySection = getSection(page, "body")
 
   const exploreSubareas = getSection(page, "explore-subareas")
-  const exploreOpportunities = getSection(page, "explore-opportunities")
   const exploreImpact = getSection(page, "explore-impact")
   const exploreProjects = getSection(page, "explore-projects")
   const exploreDepgraph = getSection(page, "explore-depgraph")
@@ -170,11 +169,9 @@ export default async function FA2MainPage() {
       <section id="opportunity-spaces" className="mb-16 scroll-mt-24">
         <div className="mb-8">
           <h2 className="text-xs text-gray-400 uppercase tracking-widest mb-2">Strategy</h2>
-          <h3 className="text-2xl lg:text-[32px] font-semibold mb-3">
-            {exploreOpportunities?.title || opportunityData.meta.title}
-          </h3>
+          <h3 className="text-2xl lg:text-[32px] font-semibold mb-3">{opportunityData.meta.title}</h3>
           <p className="text-base text-gray-600 leading-relaxed max-w-3xl">
-            {exploreOpportunities?.subtitle || opportunityData.meta.subtitle}
+            {opportunityData.meta.subtitle}
           </p>
         </div>
         <div className="grid md:grid-cols-2 gap-px bg-gray-200 border border-gray-200">
