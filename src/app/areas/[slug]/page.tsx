@@ -8,7 +8,64 @@ import { stripFaPrefix } from '@/lib/format'
 import { AreaIcon, type AreaIconType } from '@/components/AreaIcons'
 import AuthorCard from '@/components/AuthorCard'
 import Breadcrumb from '@/components/Breadcrumb'
-import { fetchPage, getSection } from '@/lib/indexer'
+import { fetchPage, getSection, fetchOpportunitySpaces } from '@/lib/indexer'
+import aiOpportunityData from '@/data/fa2/ai-opportunityspaces.json'
+import dhrOpportunityData from '@/data/fa2/dhr-opportunityspaces.json'
+import neuroOpportunityData from '@/data/fa2/neuro-opportunityspaces.json'
+
+type OpportunityCard = {
+  id: string
+  title: string
+  tagline?: string
+  image?: string
+  description: string
+  subfields: string[]
+}
+
+type OpportunityDataset = {
+  meta: { title: string; subtitle: string }
+  opportunities: OpportunityCard[]
+}
+
+const SLUG_TO_OPPORTUNITY_DATA: Record<string, OpportunityDataset> = {
+  'ai-robotics': aiOpportunityData as OpportunityDataset,
+  'digital-human-rights': dhrOpportunityData as OpportunityDataset,
+  'neurotech': neuroOpportunityData as OpportunityDataset,
+}
+
+async function loadOpportunityCards(slug: string): Promise<{
+  meta: OpportunityDataset['meta']
+  cards: OpportunityCard[]
+}> {
+  const dataset = SLUG_TO_OPPORTUNITY_DATA[slug]
+  if (!dataset) return { meta: { title: '', subtitle: '' }, cards: [] }
+
+  const remote = await fetchOpportunitySpaces(slug)
+  if (remote.length > 0) {
+    return {
+      meta: dataset.meta,
+      cards: remote.map((o) => ({
+        id: o.id,
+        title: o.title,
+        tagline: o.tagline ?? '',
+        image: o.image ?? dataset.opportunities.find((s) => s.id === o.id)?.image ?? '',
+        description: o.description,
+        subfields: o.subfields ?? [],
+      })),
+    }
+  }
+  return {
+    meta: dataset.meta,
+    cards: dataset.opportunities.map((o) => ({
+      id: o.id,
+      title: o.title,
+      tagline: o.tagline,
+      image: o.image,
+      description: o.description,
+      subfields: o.subfields,
+    })),
+  }
+}
 
 type Props = { params: Promise<{ slug: string }> }
 
@@ -53,6 +110,8 @@ export default async function AreaPage({ params }: Props) {
   const areaPubs = publications.filter((p) => p.areas.includes(slug)).slice(0, 8)
   const areaTalks = talks.filter((t) => t.areas.includes(slug)).slice(0, 6)
 
+  const { meta: oppMeta, cards: opportunities } = await loadOpportunityCards(slug)
+
   return (
     <div className="max-w-6xl mx-auto px-6 pt-8 pb-16">
       <Breadcrumb items={[{ label: 'Focus Areas', href: '/areas/' }, { label: stripFaPrefix(area.title) }]} />
@@ -74,17 +133,19 @@ export default async function AreaPage({ params }: Props) {
             {summary}
           </p>
         )}
-        <div className="relative z-10 flex flex-wrap gap-4 mb-10">
-          <Link
-            href={`/areas/${slug}/opportunity-spaces/`}
-            className="inline-flex items-center gap-2 px-5 py-2.5 bg-blue text-white rounded-full hover:bg-blue/90 transition-colors font-medium"
-          >
-            Opportunity Spaces
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </Link>
-        </div>
+        {opportunities.length > 0 && (
+          <div className="relative z-10 flex flex-wrap gap-4 mb-10">
+            <a
+              href="#opportunity-spaces"
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-blue text-white rounded-full hover:bg-blue/90 transition-colors font-medium"
+            >
+              Opportunity Spaces
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 5v14m0 0l-6-6m6 6l6-6" />
+              </svg>
+            </a>
+          </div>
+        )}
         {leads.length > 0 && (
           <div className="relative z-10 flex flex-wrap gap-4">
             {leads.map((authorSlug) => (
@@ -119,6 +180,55 @@ export default async function AreaPage({ params }: Props) {
             <div className="page-content text-base text-gray-700 leading-relaxed max-w-3xl" dangerouslySetInnerHTML={{ __html: area.html! }} />
           )}
         </div>
+      )}
+
+      {/* Opportunity Spaces (inlined) */}
+      {opportunities.length > 0 && (
+        <section id="opportunity-spaces" className="mb-12 pb-12 border-b border-gray-100 scroll-mt-24">
+          <div className="mb-8">
+            <h2 className="text-xs text-gray-400 uppercase tracking-widest mb-2">Strategy</h2>
+            <h3 className="text-2xl lg:text-[32px] font-semibold mb-3">{oppMeta.title}</h3>
+            <p className="text-base text-gray-600 leading-relaxed max-w-3xl">{oppMeta.subtitle}</p>
+          </div>
+          <div className="grid md:grid-cols-2 gap-px bg-gray-200 border border-gray-200">
+            {opportunities.map((opp) => (
+              <Link
+                key={opp.id}
+                href={`/areas/${slug}/opportunity-spaces/${opp.id}/`}
+                className="bg-white p-8 hover:bg-gray-50 transition-colors relative overflow-hidden group no-underline"
+              >
+                <OppCardGeo />
+                {opp.image && (
+                  <div className="h-28 mb-5 bg-gray-100 overflow-hidden rounded-sm">
+                    <img
+                      src={opp.image}
+                      alt={opp.title}
+                      className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-300"
+                    />
+                  </div>
+                )}
+                <h4 className="relative z-10 text-lg font-medium text-black group-hover:text-blue transition-colors mb-1">
+                  {opp.title}
+                </h4>
+                {opp.tagline && (
+                  <p className="relative z-10 text-sm text-gray-400 mb-3">{opp.tagline}</p>
+                )}
+                <p className="relative z-10 text-base text-gray-600 leading-relaxed mb-4">
+                  {opp.description.slice(0, 140)}...
+                </p>
+                {opp.subfields.length > 0 && (
+                  <div className="relative z-10 flex flex-wrap gap-1.5">
+                    {opp.subfields.map((sf) => (
+                      <span key={sf} className="text-xs text-gray-400 border border-gray-200 px-2 py-0.5 rounded-sm">
+                        {sf}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </Link>
+            ))}
+          </div>
+        </section>
       )}
 
       {/* Publications */}
@@ -166,6 +276,26 @@ export default async function AreaPage({ params }: Props) {
       )}
       <EditPageButton rkey={`area-${slug}`} />
     </div>
+  )
+}
+
+function OppCardGeo() {
+  return (
+    <svg
+      className="absolute right-2 top-2 w-14 h-14 opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-500 ease-out pointer-events-none select-none"
+      viewBox="0 0 60 60"
+      fill="none"
+      aria-hidden="true"
+    >
+      <circle cx="30" cy="30" r="24" stroke="#C3E1FF" strokeWidth="0.75" strokeDasharray="3 2" />
+      <circle cx="30" cy="30" r="16" stroke="#C3E1FF" strokeWidth="0.5" />
+      <circle cx="30" cy="6" r="2" fill="#C3E1FF" />
+      <circle cx="54" cy="30" r="2" fill="#C3E1FF" />
+      <circle cx="6" cy="30" r="2" fill="#C3E1FF" />
+      <line x1="30" y1="6" x2="30" y2="14" stroke="#C3E1FF" strokeWidth="0.5" />
+      <line x1="46" y1="30" x2="54" y2="30" stroke="#C3E1FF" strokeWidth="0.5" />
+      <line x1="6" y1="30" x2="14" y2="30" stroke="#C3E1FF" strokeWidth="0.5" />
+    </svg>
   )
 }
 
