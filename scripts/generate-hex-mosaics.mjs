@@ -12,16 +12,31 @@
  *   4. Renders each hex as a discrete polygon in an SVG, with a soft "cloud"
  *      alpha falloff toward the edges so the mosaic dissolves into the page
  *      instead of ending in a hard hex outline.
- *   5. Rasterises the SVG to a transparent PNG and writes it to
- *      public/images/fa2/<slug>-mosaic.png.
+ *   5. Writes the result to public/images/fa2/mosaics/<slug>.svg.
  *
- * Run this once whenever the source images change:
+ * sharp is intentionally NOT a project dependency — the build itself never
+ * needs it, and pinning a native binary in pnpm-lock.yaml would slow down
+ * every Vercel deploy. Install it ad-hoc the first time you regenerate:
+ *
+ *   npm install --no-save sharp
  *   node scripts/generate-hex-mosaics.mjs
  *
- * The output PNGs are committed to git — the build does NOT run sharp.
+ * The output SVGs are committed to git so the site can render without
+ * ever running sharp.
  */
 
-import sharp from "sharp"
+let sharp
+try {
+  sharp = (await import("sharp")).default
+} catch (err) {
+  console.error(
+    "\n[mosaic] sharp is not installed in this project.\n" +
+      "        Install it locally (it is intentionally NOT a project\n" +
+      "        dependency \u2014 the build doesn't need it):\n\n" +
+      "          npm install --no-save sharp\n",
+  )
+  process.exit(1)
+}
 import { writeFile, mkdir } from "node:fs/promises"
 import { dirname, join } from "node:path"
 import { fileURLToPath } from "node:url"
