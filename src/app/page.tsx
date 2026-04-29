@@ -114,60 +114,50 @@ export default async function HomePage() {
         </div>
       </div>
 
-      {/* R&D approach section */}
+      {/* R&D approach section — four focus-area cards with hexagonal mosaic
+          backdrops generated from each area's hero image. The mosaic floats
+          above the card from the top-left, peeking out by ~96px so the card
+          edge slices into the cluster of hexes — the mosaic reads as a
+          "signal" rising out of the card. */}
       <div className="pb-20 lg:pb-28 border-t border-gray-200 pt-16 lg:pt-24">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
-          <div>
-            <h2 className="text-[28px] md:text-[36px] font-normal leading-tight tracking-tight mb-6">
-              {approach?.title || "Use-inspired research across four frontiers"}
-            </h2>
-            <p className="text-base text-gray-600 leading-relaxed mb-10">
-              {approach?.body || "We work in Pasteur's Quadrant — pursuing fundamental understanding while staying anchored to real-world impact. Our four focus areas span the most consequential frontiers in computing, society, and human cognition."}
-            </p>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start mb-36 sm:mb-40 lg:mb-44">
+          <h2 className="text-[28px] md:text-[36px] font-normal leading-tight tracking-tight">
+            {approach?.title || "Use-inspired research across four frontiers"}
+          </h2>
+          <p className="text-base text-gray-600 leading-relaxed lg:pt-3">
+            {approach?.body || "We work in Pasteur's Quadrant — pursuing fundamental understanding while staying anchored to real-world impact. Our four focus areas span the most consequential frontiers in computing, society, and human cognition."}
+          </p>
+        </div>
 
-          </div>
-          <div className="flex flex-col lg:sticky lg:top-24 gap-4">
-            <Link href="/areas/digital-human-rights" className="flex items-start gap-4 p-5 border border-gray-200 rounded-lg hover:border-blue hover:shadow-sm transition-all group">
-              <AreaIcon type="shield" />
-              <div className="flex-1 min-w-0">
-                <div className="text-sm font-medium text-black group-hover:text-blue transition-colors mb-1">{dhr?.title || "Digital Human Rights"}</div>
-                <div className="text-sm text-gray-500 leading-relaxed">{dhr?.subtitle || "Building decentralized infrastructure that enshrines freedom and safety in the digital age."}</div>
-              </div>
-              <svg className="w-4 h-4 text-gray-300 group-hover:text-blue transition-colors shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </Link>
-            <Link href="/areas/economies-governance" className="flex items-start gap-4 p-5 border border-gray-200 rounded-lg hover:border-blue hover:shadow-sm transition-all group">
-              <AreaIcon type="hexagon" />
-              <div className="flex-1 min-w-0">
-                <div className="text-sm font-medium text-black group-hover:text-blue transition-colors mb-1">{eg?.title || "Economies & Governance"}</div>
-                <div className="text-sm text-gray-500 leading-relaxed">{eg?.subtitle || "Crypto-native tools for more efficient, equitable coordination at global scale."}</div>
-              </div>
-              <svg className="w-4 h-4 text-gray-300 group-hover:text-blue transition-colors shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </Link>
-            <Link href="/areas/ai-robotics" className="flex items-start gap-4 p-5 border border-gray-200 rounded-lg hover:border-blue hover:shadow-sm transition-all group">
-              <AreaIcon type="neural" />
-              <div className="flex-1 min-w-0">
-                <div className="text-sm font-medium text-black group-hover:text-blue transition-colors mb-1">{ai?.title || "AI & Robotics"}</div>
-                <div className="text-sm text-gray-500 leading-relaxed">{ai?.subtitle || "Responsible advancement in AGI, robotics, and immersive technologies that reshape how we interact with the world."}</div>
-              </div>
-              <svg className="w-4 h-4 text-gray-300 group-hover:text-blue transition-colors shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </Link>
-            <Link href="/areas/neurotech" className="flex items-start gap-4 p-5 border border-gray-200 rounded-lg hover:border-blue hover:shadow-sm transition-all group">
-              <AreaIcon type="brain" />
-              <div className="flex-1 min-w-0">
-                <div className="text-sm font-medium text-black group-hover:text-blue transition-colors mb-1">{neuro?.title || "Neurotechnology"}</div>
-                <div className="text-sm text-gray-500 leading-relaxed">{neuro?.subtitle || "Accelerating brain-computer interfaces and NeuroAI to expand human cognition and treat brain disorders."}</div>
-              </div>
-              <svg className="w-4 h-4 text-gray-300 group-hover:text-blue transition-colors shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </Link>
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-32 md:gap-y-36 lg:gap-y-40">
+          <FocusAreaCard
+            href="/areas/digital-human-rights"
+            iconType="shield"
+            mosaicSrc="/images/fa2/mosaics/digital-human-rights.svg"
+            title={dhr?.title || "Digital Human Rights"}
+            body={dhr?.subtitle || "Building decentralized infrastructure that enshrines freedom and safety in the digital age."}
+          />
+          <FocusAreaCard
+            href="/areas/economies-governance"
+            iconType="hexagon"
+            mosaicSrc="/images/fa2/mosaics/economies-governance.svg"
+            title={eg?.title || "Economies & Governance"}
+            body={eg?.subtitle || "Crypto-native tools for more efficient, equitable coordination at global scale."}
+          />
+          <FocusAreaCard
+            href="/areas/ai-robotics"
+            iconType="neural"
+            mosaicSrc="/images/fa2/mosaics/ai-robotics.svg"
+            title={ai?.title || "AI & Robotics"}
+            body={ai?.subtitle || "Responsible advancement in AGI, robotics, and immersive technologies that reshape how we interact with the world."}
+          />
+          <FocusAreaCard
+            href="/areas/neurotech"
+            iconType="brain"
+            mosaicSrc="/images/fa2/mosaics/neurotech.svg"
+            title={neuro?.title || "Neurotechnology"}
+            body={neuro?.subtitle || "Accelerating brain-computer interfaces and NeuroAI to expand human cognition and treat brain disorders."}
+          />
         </div>
       </div>
 
@@ -251,6 +241,85 @@ export default async function HomePage() {
         </Link>
       </div>
       <EditPageButton rkey="landing" />
+    </div>
+  )
+}
+
+/**
+ * One of the four focus-area cards on the landing page. The card itself
+ * is a clean white panel; the hexagonal-mosaic backdrop floats above and
+ * to the left, generated by `scripts/generate-hex-mosaics.mjs` from each
+ * area's hero image. The card crops the bottom half of the cluster, so
+ * the silhouette reads as a cloud of hexes rising out of the card edge.
+ */
+function FocusAreaCard({
+  href,
+  iconType,
+  mosaicSrc,
+  title,
+  body,
+}: {
+  href: string
+  iconType: 'shield' | 'hexagon' | 'neural' | 'brain'
+  mosaicSrc: string
+  title: string
+  body: string
+}) {
+  return (
+    // `isolate` scopes z-index to this card so the mosaic only stacks against
+    // its own card edges, never bleeds across siblings.
+    <div className="relative isolate">
+      {/*
+        Hex mosaic band: a fixed-height strip sitting directly on top of the
+        card. `overflow-hidden` clips the mosaic so it can never escape this
+        strip and invade the previous row, the section title, or other cards.
+        The image is anchored to the bottom of the strip and grows to ~110%
+        wide, so the cluster reads as if it's rising out from behind the
+        card and being cropped by the card's top edge.
+      */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute left-0 right-0 -top-28 sm:-top-32 lg:-top-36 h-32 sm:h-36 lg:h-40 overflow-hidden select-none"
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={mosaicSrc}
+          alt=""
+          className="absolute -left-[5%] -bottom-4 w-[110%] h-auto opacity-90"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+
+      <Link
+        href={href}
+        className="relative z-10 flex items-start gap-5 p-6 lg:p-7 bg-white border border-gray-200 rounded-xl hover:border-blue hover:shadow-md transition-all group"
+      >
+        <AreaIcon type={iconType} />
+        <div className="flex-1 min-w-0">
+          <div className="flex items-start justify-between gap-3">
+            <h3 className="text-lg lg:text-[22px] font-medium text-black group-hover:text-blue transition-colors leading-tight">
+              {title}
+            </h3>
+            <svg
+              className="w-4 h-4 text-gray-300 group-hover:text-blue group-hover:translate-x-0.5 transition-all shrink-0 mt-1.5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M17 8l4 4m0 0l-4 4m4-4H3"
+              />
+            </svg>
+          </div>
+          <p className="mt-2 text-sm lg:text-[15px] text-gray-500 leading-relaxed">
+            {body}
+          </p>
+        </div>
+      </Link>
     </div>
   )
 }
