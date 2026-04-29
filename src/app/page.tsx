@@ -5,6 +5,7 @@ import { formatDate } from '@/lib/format'
 import { AreaIcon } from '@/components/AreaIcons'
 import { GeoIllustration } from '@/components/GeoIllustration'
 import { fetchPage, getSection, getSectionsWithPrefix } from "@/lib/indexer"
+import { loadHexMosaic, type HexPattern } from "@/lib/hex-mosaic"
 
 type UpdateItem = {
   title: string
@@ -133,28 +134,28 @@ export default async function HomePage() {
           <FocusAreaCard
             href="/areas/digital-human-rights"
             iconType="shield"
-            mosaicSrc="/images/fa2/mosaics/digital-human-rights.svg"
+            mosaicSlug="digital-human-rights"
             title={dhr?.title || "Digital Human Rights"}
             body={dhr?.subtitle || "Building decentralized infrastructure that enshrines freedom and safety in the digital age."}
           />
           <FocusAreaCard
             href="/areas/economies-governance"
             iconType="hexagon"
-            mosaicSrc="/images/fa2/mosaics/economies-governance.svg"
+            mosaicSlug="economies-governance"
             title={eg?.title || "Economies & Governance"}
             body={eg?.subtitle || "Crypto-native tools for more efficient, equitable coordination at global scale."}
           />
           <FocusAreaCard
             href="/areas/ai-robotics"
             iconType="neural"
-            mosaicSrc="/images/fa2/mosaics/ai-robotics.svg"
+            mosaicSlug="ai-robotics"
             title={ai?.title || "AI & Robotics"}
             body={ai?.subtitle || "Responsible advancement in AGI, robotics, and immersive technologies that reshape how we interact with the world."}
           />
           <FocusAreaCard
             href="/areas/neurotech"
             iconType="brain"
-            mosaicSrc="/images/fa2/mosaics/neurotech.svg"
+            mosaicSlug="neurotech"
             title={neuro?.title || "Neurotechnology"}
             body={neuro?.subtitle || "Accelerating brain-computer interfaces and NeuroAI to expand human cognition and treat brain disorders."}
           />
@@ -255,42 +256,65 @@ export default async function HomePage() {
 function FocusAreaCard({
   href,
   iconType,
-  mosaicSrc,
+  mosaicSlug,
   title,
   body,
 }: {
   href: string
-  iconType: 'shield' | 'hexagon' | 'neural' | 'brain'
-  mosaicSrc: string
+  iconType: HexPattern
+  mosaicSlug: string
   title: string
   body: string
 }) {
+  // Parse the mosaic SVG once at module load and pre-compute per-hex animation
+  // delays. The pattern (shield/hexagon/neural/brain) drives which wave shape
+  // the hover ripple takes. See `src/lib/hex-mosaic.ts`.
+  const mosaic = loadHexMosaic(mosaicSlug, iconType)
+
   return (
     // `isolate` scopes z-index to this card so the mosaic only stacks against
-    // its own card edges, never bleeds across siblings.
-    <div className="relative isolate">
+    // its own card edges, never bleeds across siblings. `hex-cloud-card` is
+    // the hover hook — `:hover` here cascades into the inline mosaic SVG and
+    // each polygon (see `globals.css`).
+    <div className="hex-cloud-card relative isolate">
       {/*
-        Hex mosaic band: anchored to the left edge of the card, ~60% as wide
-        as the card so the mosaic reads as a cluster rising out from behind
-        the card's top-left corner (matches the design reference). The
-        band's height is taller than the mosaic itself so the entire
-        cluster silhouette is visible — the bottom of the cluster is
-        anchored flush with the card top and the rest of the cluster reads
-        as a soft cloud above the card. `overflow-hidden` keeps the mosaic
-        from bleeding into adjacent rows or the section header.
+        Hex mosaic band: anchored to the left edge of the card and ~65% as
+        wide as the card. The band extends a few rems BELOW the card's top
+        edge so the bottom of the cluster sits behind the card — the card's
+        white panel slices through the cluster, which reads as the cloud
+        "diving into" the card top (matches the design reference).
+        `overflow-hidden` keeps the cluster from bleeding into adjacent rows
+        or the section header. The SVG itself is inline (not an <img>) so we
+        can target individual <polygon>s on hover.
       */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute left-0 -top-40 sm:-top-44 lg:-top-48 w-3/5 sm:w-[55%] lg:w-1/2 h-40 sm:h-44 lg:h-48 overflow-hidden select-none"
+        className="pointer-events-none absolute left-0 -top-28 sm:-top-32 lg:-top-32 w-[65%] sm:w-[62%] lg:w-[60%] h-56 sm:h-64 lg:h-64 overflow-hidden select-none"
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={mosaicSrc}
-          alt=""
-          className="absolute bottom-0 left-0 w-full h-auto"
-          loading="lazy"
-          decoding="async"
-        />
+        <svg
+          viewBox={mosaic.viewBox}
+          width={mosaic.width}
+          height={mosaic.height}
+          xmlns="http://www.w3.org/2000/svg"
+          className="hex-cloud-svg absolute bottom-0 left-0 w-full h-auto"
+          preserveAspectRatio="xMidYMax meet"
+        >
+          {mosaic.polygons.map((p, i) => (
+            <polygon
+              key={i}
+              className="hex-cloud-hex"
+              points={p.points}
+              fill={p.fill}
+              style={{
+                // CSS custom prop carries the per-hex base opacity into the
+                // keyframe so the cloud's edge falloff is preserved while the
+                // hex pulses brighter on hover.
+                ['--hex-op' as string]: p.opacity.toFixed(3),
+                animationDelay: `${p.delayMs}ms`,
+              }}
+            />
+          ))}
+        </svg>
       </div>
 
       <Link

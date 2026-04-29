@@ -313,3 +313,77 @@ ul li li {
 .scroll-hand-slide {
   animation: handSlide 2s ease-in-out infinite;
 }
+
+/* =====================================================================
+   Focus-area hex-mosaic hover animation
+   ---------------------------------------------------------------------
+   Each landing-page focus-area card has an inline SVG "cloud" of ~100
+   hexagons sitting above it. On hover we want two things to happen:
+
+     1. The whole cloud comes alive — saturates from a desaturated wash
+        to full colour, lifts a few pixels, and gently scales up.
+     2. A wave ripples through the individual hexes, each pulsing brighter
+        and scaling up briefly. The wave shape (left→right, radial,
+        sparkle, or top→bottom sine) is encoded as per-hex `animationDelay`
+        in `src/lib/hex-mosaic.ts` based on each focus area's icon type.
+
+   The base opacity of every hex is preserved via the `--hex-op` custom
+   property so the cloud's soft edge falloff doesn't get nuked when the
+   keyframe brightens each tile.
+   ===================================================================== */
+.hex-cloud-svg {
+  filter: saturate(0.55);
+  transform: translateY(0) scale(1);
+  transform-origin: 50% 100%;
+  transition:
+    filter 600ms ease,
+    transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hex-cloud-card:hover .hex-cloud-svg {
+  filter: saturate(1.05);
+  transform: translateY(-6px) scale(1.015);
+}
+
+.hex-cloud-hex {
+  /* Scale around each hex's own centre, not the SVG origin. */
+  transform-box: fill-box;
+  transform-origin: center;
+  fill-opacity: var(--hex-op, 0.5);
+  transition: fill-opacity 400ms ease;
+  /* Will-change is intentionally omitted — ~100 hexes × 4 cards = 400
+     compositor layers, which is wasteful when most cards aren't hovered. */
+}
+
+.hex-cloud-card:hover .hex-cloud-hex {
+  animation: hex-cloud-pulse 1400ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  /* `animationDelay` is set per-polygon inline (see page.tsx) to drive the
+     wave shape — left→right for shield, radial for hexagon, etc. */
+}
+
+@keyframes hex-cloud-pulse {
+  0% {
+    transform: scale(1) translateY(0);
+    fill-opacity: var(--hex-op, 0.5);
+  }
+  35% {
+    transform: scale(1.12) translateY(-2px);
+    fill-opacity: calc(var(--hex-op, 0.5) + 0.4);
+  }
+  100% {
+    transform: scale(1.02) translateY(-1px);
+    fill-opacity: calc(var(--hex-op, 0.5) + 0.12);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hex-cloud-svg,
+  .hex-cloud-hex {
+    transition: none;
+    animation: none !important;
+  }
+  .hex-cloud-card:hover .hex-cloud-svg {
+    transform: none;
+    filter: saturate(0.85);
+  }
+}
