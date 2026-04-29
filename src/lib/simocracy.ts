@@ -139,7 +139,16 @@ export type SimocracyTotals = {
   totalChats: number
 }
 
-export type ActivityBucket = { date: string; count: number }
+export type ActivityBucket = {
+  /** ISO date (YYYY-MM-DD) at midnight local time. */
+  date: string
+  /** Total events on this day. */
+  count: number
+  /** Subset of `count` that are chat events. */
+  chats: number
+  /** Subset of `count` that are S-Process events. */
+  sprocess: number
+}
 
 export type SimLeaderboardEntry = { name: string; chats: number }
 export type UserLeaderboardEntry = { did: string; total: number; chats: number }
@@ -187,7 +196,12 @@ function bucket14d(events: SimocracyEvent[]): ActivityBucket[] {
   const buckets: ActivityBucket[] = Array.from({ length: days }, (_, i) => {
     const d = new Date(today)
     d.setDate(d.getDate() - (days - 1 - i))
-    return { date: d.toISOString().slice(0, 10), count: 0 }
+    return {
+      date: d.toISOString().slice(0, 10),
+      count: 0,
+      chats: 0,
+      sprocess: 0,
+    }
   })
   const start = new Date(buckets[0].date).getTime()
   const dayMs = 24 * 60 * 60 * 1000
@@ -196,7 +210,11 @@ function bucket14d(events: SimocracyEvent[]): ActivityBucket[] {
     const t = new Date(e.createdAt).getTime()
     if (Number.isNaN(t) || t < start || t >= end) continue
     const idx = Math.floor((t - start) / dayMs)
-    if (buckets[idx]) buckets[idx].count += 1
+    const b = buckets[idx]
+    if (!b) continue
+    b.count += 1
+    if (e.type === 'chat') b.chats += 1
+    else if (e.type === 'sprocess') b.sprocess += 1
   }
   return buckets
 }
