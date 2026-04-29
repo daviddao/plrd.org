@@ -89,15 +89,15 @@ export default function AreaEditPage() {
         </div>
 
         <div className="relative z-10 flex flex-wrap gap-4 mb-10">
-          <Link
-            href={`/areas/${slug}/opportunity-spaces/`}
+          <a
+            href={`/areas/${slug}/#opportunity-spaces`}
             className="inline-flex items-center gap-2 px-5 py-2.5 bg-blue text-white rounded-full hover:bg-blue/90 transition-colors font-medium"
           >
             Opportunity Spaces
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 5v14m0 0l-6-6m6 6l6-6" />
             </svg>
-          </Link>
+          </a>
         </div>
 
         {/* Leads */}

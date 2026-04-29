@@ -65,7 +65,7 @@ export default async function OpportunityDetailPage({ params }: Props) {
         items={[
           { label: 'Areas', href: '/areas' },
           { label: 'Digital Human Rights', href: '/areas/digital-human-rights' },
-          { label: 'Opportunity Spaces', href: '/areas/digital-human-rights/opportunity-spaces' },
+          { label: 'Opportunity Spaces', href: '/areas/digital-human-rights/#opportunity-spaces' },
           { label: opp.title },
         ]}
       />

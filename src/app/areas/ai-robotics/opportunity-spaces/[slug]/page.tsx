@@ -70,7 +70,7 @@ export default async function OpportunityDetailPage({ params }: Props) {
         items={[
           { label: 'Areas', href: '/areas' },
           { label: 'AI & Robotics', href: '/areas/ai-robotics' },
-          { label: 'Opportunity Spaces', href: '/areas/ai-robotics/opportunity-spaces' },
+          { label: 'Opportunity Spaces', href: '/areas/ai-robotics/#opportunity-spaces' },
           { label: opp.title },
         ]}
       />

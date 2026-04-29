@@ -65,7 +65,7 @@ export default async function OpportunityDetailPage({ params }: Props) {
         items={[
           { label: 'Areas', href: '/areas' },
           { label: 'Neurotech', href: '/areas/neurotech' },
-          { label: 'Opportunity Spaces', href: '/areas/neurotech/opportunity-spaces' },
+          { label: 'Opportunity Spaces', href: '/areas/neurotech/#opportunity-spaces' },
           { label: opp.title },
         ]}
       />

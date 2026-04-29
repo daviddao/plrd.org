@@ -24,6 +24,21 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: '/areas/ai-robotics/opportunity-spaces/',
+        destination: '/areas/ai-robotics/#opportunity-spaces',
+        permanent: true,
+      },
+      {
+        source: '/areas/digital-human-rights/opportunity-spaces/',
+        destination: '/areas/digital-human-rights/#opportunity-spaces',
+        permanent: true,
+      },
+      {
+        source: '/areas/neurotech/opportunity-spaces/',
+        destination: '/areas/neurotech/#opportunity-spaces',
+        permanent: true,
+      },
+      {
         source: '/research/:path*',
         destination: '/insights/:path*',
         permanent: true,
