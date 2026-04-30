@@ -76,20 +76,27 @@ export default async function HomePage() {
       <div className="pt-6 empty:hidden">
         <PageEditHistoryByline rkey="landing" />
       </div>
+      {/* clipPath: keep the top hard-clipped at the hero's top edge so the
+          painting starts cleanly below the navbar (no bleed-through behind
+          the sticky white/95 navbar). Right side opens by 100vw so the
+          image can extend to the screen edge past `max-w-6xl`. */}
       <div className="relative pt-20 pb-20 md:pt-32 md:pb-28 lg:pt-44 lg:pb-36" style={{ clipPath: 'inset(0 -100vw 0 0)' }}>
-        {/* Hero banner image - extends to screen edge */}
-        <div 
-          className="absolute top-1/2 -translate-y-[60%] h-[140%] pointer-events-none select-none"
+        {/* Hero banner image. `inset-y-0` (instead of the old
+            `top-1/2 -translate-y-[60%] h-[140%]`) makes the image's
+            display box exactly match the hero band's height — no extra
+            offset, no upward overflow that gets clipped. With
+            `backgroundSize: auto 100%` the painting fits this height
+            exactly (full brain → city composition visible) and overflows
+            horizontally; `right center` pins the right edge so the
+            overflow lands on the LEFT and is softened by the left-fading
+            mask. */}
+        <div
+          className="absolute inset-y-0 pointer-events-none select-none"
           style={{
             right: 'calc(-50vw + 50%)',
             width: '70vw',
             backgroundImage: 'url(/images/hero.webp)',
-            // `cover` zooms the painting to fill the band's full height
-            // (no whitespace gaps top/bottom). The image's aspect ratio
-            // means it overflows horizontally; anchoring to `right center`
-            // pins the right edge so any overflow is cropped on the LEFT,
-            // which is then softened by the left-fading mask below.
-            backgroundSize: 'cover',
+            backgroundSize: 'auto 100%',
             backgroundPosition: 'right center',
             backgroundRepeat: 'no-repeat',
             opacity: 0.35,
