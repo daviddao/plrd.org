@@ -88,7 +88,7 @@ export default async function SubareasPage() {
           { label: 'Subareas' },
         ]}
       />
-      <div className="mt-4">
+      <div className="mt-4 empty:hidden">
         <PageEditHistoryByline rkey="area-eg-subareas" />
       </div>
 

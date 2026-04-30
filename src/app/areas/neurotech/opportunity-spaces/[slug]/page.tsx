@@ -73,7 +73,7 @@ export default async function OpportunityDetailPage({ params }: Props) {
         rkey={rkey}
         href={`/areas/neurotech/opportunity-spaces/${slug}/edit`}
       />
-      <div className="mt-4">
+      <div className="mt-4 empty:hidden">
         <EditHistoryByline
           targetUri={`at://${ADMIN_DID}/${OPPORTUNITY_COLLECTION}/${rkey}`}
         />

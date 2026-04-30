@@ -23,7 +23,7 @@ export default async function ImpactOverviewPage() {
         { label: 'Economies & Governance', href: '/areas/economies-governance/' },
         { label: 'Impact' }
       ]} />
-      <div className="mt-4">
+      <div className="mt-4 empty:hidden">
         <PageEditHistoryByline rkey="area-eg-impact" />
       </div>
 

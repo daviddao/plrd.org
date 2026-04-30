@@ -30,7 +30,7 @@ export default async function AboutPage() {
       {/* Hero */}
       <div className="max-w-6xl mx-auto px-6 pt-8">
         <Breadcrumb items={[{ label: 'About' }]} />
-        <div className="mt-4">
+        <div className="mt-4 empty:hidden">
           <PageEditHistoryByline rkey="about" />
         </div>
         <div className="relative pt-4 pb-16 lg:pt-8 lg:pb-20 overflow-hidden">
@@ -64,13 +64,13 @@ export default async function AboutPage() {
                 </mask>
               </defs>
               <image 
-                href="/images/banners/about-banner.jpg" 
+                href="/images/banners/about-banner.webp" 
                 x="0" y="0" 
                 width="400" height="400" 
-                preserveAspectRatio="xMaxYMid slice"
+                preserveAspectRatio="xMidYMid slice"
                 clipPath="url(#aboutHexClip)"
                 mask="url(#aboutHexFade)"
-                opacity="0.35"
+                opacity="0.55"
               />
             </svg>
           </div>
