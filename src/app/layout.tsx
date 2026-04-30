@@ -49,7 +49,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
       <body className={`${inter.variable} ${newsreader.variable} font-body min-w-[320px] text-base text-black leading-normal antialiased`}>
         <AuthProvider>
           <SiteShell>{children}</SiteShell>
