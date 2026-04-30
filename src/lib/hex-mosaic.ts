@@ -50,17 +50,24 @@ const WAVE_SPAN_MS = 750
 
 /**
  * Soft edge-fade band: fraction of cluster width/height (measured from each
- * non-bottom edge) over which hex base-opacity ramps from 0 → 1 via a
- * smoothstep curve. Hexes inside this band dissolve into the page background
- * so the cluster reads as a soft cloud rather than a hard silhouette.
+ * non-bottom edge) over which hex base-opacity ramps from FADE_FLOOR → 1
+ * via a smoothstep curve. Hexes inside this band gradually dissolve toward
+ * the page background so the cluster reads as a soft cloud rather than a
+ * hard silhouette.
  *
  * The bottom edge is intentionally excluded — that's where the cluster meets
  * the white card panel and should stay crisp.
  *
- * Tuned by eye: 0.22 leaves a visibly bright "core" but the outer ~5 hex
- * rings progressively fade out.
+ * `FADE_FLOOR` is the minimum opacity multiplier applied at the very outer
+ * edge: even the outermost hexes stay visible as a faint "ghost layer"
+ * rather than vanishing entirely. Keeps the dissolve looking soft and
+ * organic instead of cropping the silhouette away.
+ *
+ * Tuned by eye: a wide band (0.40) plus a non-zero floor (0.12) gives a
+ * long, gentle gradient from bright core to barely-there outer halo.
  */
-const FADE_BAND = 0.22
+const FADE_BAND = 0.4
+const FADE_FLOOR = 0.12
 
 /** Cubic smoothstep — 0 at t≤0, 1 at t≥1, S-curve in between. */
 function smoothstep(t: number): number {
@@ -144,15 +151,18 @@ export function loadHexMosaic(slug: string, pattern: HexPattern): ParsedMosaic {
     const nx = (p.cx - minX) / w // 0..1, left → right
     const ny = (p.cy - minY) / h // 0..1, top → bottom
 
-    // Edge fade — multiply base opacity by the smoothstep distance to the
-    // nearest non-bottom edge so the cluster dissolves into transparency at
-    // the top, left, and right. The bottom is left full-strength because
-    // that's the design line where the cloud meets the card.
+    // Edge fade — multiply base opacity by a soft falloff toward the
+    // nearest non-bottom edge so the cluster dissolves into a faint halo
+    // at the top, left, and right. The bottom is left full-strength because
+    // that's the design line where the cloud meets the card. The fade
+    // never reaches zero (FADE_FLOOR floor), so the outermost hexes still
+    // ghost-render rather than vanishing.
     const distTop = ny
     const distLeft = nx
     const distRight = 1 - nx
     const minEdgeDist = Math.min(distTop, distLeft, distRight)
-    const fade = smoothstep(minEdgeDist / FADE_BAND)
+    const edgeT = Math.min(1, minEdgeDist / FADE_BAND)
+    const fade = FADE_FLOOR + (1 - FADE_FLOOR) * smoothstep(edgeT)
     const fadedOpacity = p.opacity * fade
     let t = 0 // 0..~1 wave-progress for this hex
 
