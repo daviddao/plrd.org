@@ -84,8 +84,13 @@ export default async function HomePage() {
             right: 'calc(-50vw + 50%)',
             width: '70vw',
             backgroundImage: 'url(/images/hero.webp)',
-            backgroundSize: 'cover',
+            // `contain` (vs `cover`) shows the whole 2:1 painting at the
+            // container's width instead of zooming in to fill its height —
+            // brain + drips + biophilic city all read at once, anchored to
+            // the right edge.
+            backgroundSize: 'contain',
             backgroundPosition: 'right center',
+            backgroundRepeat: 'no-repeat',
             opacity: 0.35,
             maskImage: 'linear-gradient(to left, black 40%, transparent 80%)',
             WebkitMaskImage: 'linear-gradient(to left, black 40%, transparent 80%)',
