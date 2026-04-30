@@ -76,6 +76,34 @@ function smoothstep(t: number): number {
   return t * t * (3 - 2 * t)
 }
 
+/**
+ * The mosaic generator (`scripts/generate-hex-mosaics.mjs`) draws each hex
+ * ~1.5 units larger than its grid cell so neighbours overlap, masking the
+ * sub-pixel white seams that would otherwise show between fully-opaque
+ * tiles. With per-hex `fill-opacity` < 1 (which the generator emits, and
+ * which our edge fade reduces further), those overlaps composite twice and
+ * read as visibly darker borders around every hex.
+ *
+ * We can't fix this at the SVG level without re-running sharp, so we shrink
+ * each polygon toward its own centroid at parse time. 0.93 removes the
+ * overlap (innerSize 23.5 × 0.93 ≈ 22 = original grid cell width) so
+ * neighbours just touch instead of overlapping.
+ */
+const HEX_SHRINK = 0.93
+
+function shrinkPoints(points: string, cx: number, cy: number): string {
+  return points
+    .trim()
+    .split(/\s+/)
+    .map((p) => {
+      const [x, y] = p.split(",").map(Number)
+      const sx = cx + (x - cx) * HEX_SHRINK
+      const sy = cy + (y - cy) * HEX_SHRINK
+      return `${sx.toFixed(2)},${sy.toFixed(2)}`
+    })
+    .join(" ")
+}
+
 export function loadHexMosaic(slug: string, pattern: HexPattern): ParsedMosaic {
   const key = `${slug}|${pattern}`
   const cached = cache.get(key)
@@ -197,7 +225,7 @@ export function loadHexMosaic(slug: string, pattern: HexPattern): ParsedMosaic {
     }
 
     return {
-      points: p.points,
+      points: shrinkPoints(p.points, p.cx, p.cy),
       fill: p.fill,
       opacity: fadedOpacity,
       delayMs: Math.round(t * WAVE_SPAN_MS),
