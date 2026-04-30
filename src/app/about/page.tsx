@@ -75,7 +75,7 @@ export default async function AboutPage() {
             </svg>
           </div>
 
-          <h1 className="relative z-10 font-semibold text-[28px] md:text-[40px] lg:text-[48px] leading-[1.1] tracking-tight mb-6 max-w-xl">
+          <h1 className="relative z-10 font-normal text-[28px] md:text-[40px] lg:text-[48px] leading-[1.1] tracking-tight mb-6 max-w-xl">
             {hero?.title || "Our research is driven by beliefs about how technology should serve humanity."}
           </h1>
           <p className="relative z-10 text-gray-600 text-lg md:text-xl lg:text-[22px] leading-relaxed max-w-2xl mb-6">
