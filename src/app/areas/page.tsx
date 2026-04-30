@@ -25,7 +25,7 @@ export default async function AreasPage() {
   return (
     <div className="max-w-6xl mx-auto px-6 pt-8 pb-16">
       <Breadcrumb items={[{ label: 'Focus Areas' }]} />
-      <div className="mt-4">
+      <div className="mt-4 empty:hidden">
         <PageEditHistoryByline rkey="areas" />
       </div>
       {/* Hero */}

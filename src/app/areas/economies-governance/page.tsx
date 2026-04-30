@@ -73,7 +73,7 @@ export default async function FA2MainPage() {
   return (
     <div className="max-w-6xl mx-auto px-6 pt-8 pb-16">
       <Breadcrumb items={[{ label: 'Focus Areas', href: '/areas/' }, { label: 'Economies & Governance' }]} />
-      <div className="mt-4">
+      <div className="mt-4 empty:hidden">
         <PageEditHistoryByline rkey="area-economies-governance" />
       </div>
       {/* Hero */}

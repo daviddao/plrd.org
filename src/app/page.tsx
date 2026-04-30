@@ -69,9 +69,11 @@ export default async function HomePage() {
 
   return (
     <div className="max-w-6xl mx-auto px-6">
-      {/* Admin-only edit-history byline. Renders nothing for non-admins so this
-          wrapper takes no visual space on the public landing page. */}
-      <div className="pt-6">
+      {/* Admin-only edit-history byline. Renders nothing for non-admins —
+          the `empty:hidden` variant collapses this wrapper entirely (incl.
+          its `pt-6`) when the byline returns null, so the public landing
+          page's hero sits flush against the navbar. */}
+      <div className="pt-6 empty:hidden">
         <PageEditHistoryByline rkey="landing" />
       </div>
       <div className="relative pt-20 pb-20 md:pt-32 md:pb-28 lg:pt-44 lg:pb-36" style={{ clipPath: 'inset(0 -100vw 0 0)' }}>
