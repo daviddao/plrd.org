@@ -106,15 +106,18 @@ export default async function HomePage() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </Link>
-          <Link 
-            href="/areas" 
+          {/* In-page anchor: scrolls to the focus-areas section below
+              instead of leaving the landing page. <a> (not next/link) so we
+              don't get a router push for a same-page hash. */}
+          <a
+            href="#focus-areas"
             className="inline-flex items-center gap-2 px-5 py-2.5 border border-gray-300 text-gray-700 rounded-full hover:border-blue hover:text-blue transition-colors font-medium"
           >
             Focus areas
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
-          </Link>
+          </a>
         </div>
         <div className="relative z-10 mt-16 lg:mt-24">
           <svg className="w-6 h-6 text-gray-400 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -128,7 +131,7 @@ export default async function HomePage() {
           above the card from the top-left, peeking out by ~96px so the card
           edge slices into the cluster of hexes — the mosaic reads as a
           "signal" rising out of the card. */}
-      <div className="pb-20 lg:pb-28 border-t border-gray-200 pt-16 lg:pt-24">
+      <div id="focus-areas" className="pb-20 lg:pb-28 border-t border-gray-200 pt-16 lg:pt-24 scroll-mt-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start mb-44 sm:mb-48 lg:mb-52">
           <h2 className="text-[28px] md:text-[36px] font-normal leading-tight tracking-tight">
             {approach?.title || "Use-inspired research across four frontiers"}
