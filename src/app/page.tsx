@@ -84,11 +84,12 @@ export default async function HomePage() {
             right: 'calc(-50vw + 50%)',
             width: '70vw',
             backgroundImage: 'url(/images/hero.webp)',
-            // `contain` (vs `cover`) shows the whole 2:1 painting at the
-            // container's width instead of zooming in to fill its height —
-            // brain + drips + biophilic city all read at once, anchored to
-            // the right edge.
-            backgroundSize: 'contain',
+            // `cover` zooms the painting to fill the band's full height
+            // (no whitespace gaps top/bottom). The image's aspect ratio
+            // means it overflows horizontally; anchoring to `right center`
+            // pins the right edge so any overflow is cropped on the LEFT,
+            // which is then softened by the left-fading mask below.
+            backgroundSize: 'cover',
             backgroundPosition: 'right center',
             backgroundRepeat: 'no-repeat',
             opacity: 0.35,
