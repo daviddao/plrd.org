@@ -295,7 +295,7 @@ function FocusAreaCard({
       */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute left-0 -top-28 sm:-top-32 lg:-top-32 w-[65%] sm:w-[62%] lg:w-[60%] h-56 sm:h-64 lg:h-64 overflow-hidden select-none"
+        className="pointer-events-none absolute left-0 -top-32 sm:-top-36 lg:-top-40 w-[65%] sm:w-[62%] lg:w-[60%] h-56 sm:h-64 lg:h-64 overflow-hidden select-none"
       >
         <svg
           viewBox={mosaic.viewBox}
