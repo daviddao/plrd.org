@@ -17,162 +17,108 @@ export function AreaIcon({ type, className }: { type: AreaIconType; className?: 
   }
 }
 
-// Digital Human Rights - Shield with grid pattern
+function PLMark() {
+  return (
+    <>
+      <path
+        d="M17.9162 16.6294L17.8813 25.3389C17.8813 25.5197 17.6873 25.6336 17.5322 25.5432L8.54886 20.3497C8.34328 20.2319 8.08341 20.3812 8.08341 20.6208V30.8821C8.08341 31.1217 7.82741 31.2749 7.61795 31.1531L0.314182 26.9221C0.120242 26.8121 0 26.6039 0 26.3761V6.42712C0 6.18748 0.255993 6.03427 0.465448 6.15605L17.5981 16.0834C17.7998 16.1934 17.9162 16.4016 17.9162 16.6294Z"
+        className="fill-current"
+      />
+      <path
+        d="M10.3582 23.2476L17.6115 27.4816C17.8031 27.591 17.9181 27.798 17.9181 28.0245V36.5434C17.9181 36.7817 17.6652 36.934 17.4583 36.813L10.205 32.5789C10.0134 32.4656 9.89844 32.2625 9.89844 32.036V23.521C9.89844 23.2788 10.1513 23.1265 10.3582 23.2476Z"
+        className="fill-current"
+      />
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M17.9797 5.05605C17.9797 4.99202 17.9453 4.93291 17.8897 4.90121L9.43749 0.0849289C9.24279 -0.0276545 9.00916 -0.0276539 8.81835 0.0810474L1.52489 4.24275C1.31462 4.3631 1.31462 4.66203 1.52489 4.78238L17.7131 14.0199C17.8319 14.0877 17.9797 14.0019 17.9797 13.8651V5.05605Z"
+        className="fill-current"
+      />
+    </>
+  )
+}
+
+// Digital Human Rights - PL mark + shield, privacy grid, and resilient network
 export function ShieldIcon({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 40 40" fill="none" className={className} aria-hidden="true">
+    <svg viewBox="0 0 40 38" fill="none" className={className} aria-hidden="true">
+      <PLMark />
       <path
-        d="M20 4L6 10V18C6 26.8 12 34.4 20 36C28 34.4 34 26.8 34 18V10L20 4Z"
+        d="M31 2.7L22.6 6.2V15.2C22.6 24.4 27.8 31.7 31 34.7C34.2 31.7 39.4 24.4 39.4 15.2V6.2L31 2.7Z"
         className="stroke-current"
-        strokeWidth="1.5"
-        fill="none"
+        strokeWidth="1.7"
         strokeLinejoin="round"
-      >
-        <animate
-          attributeName="stroke-dasharray"
-          values="0 100;100 0"
-          dur="2s"
-          fill="freeze"
-        />
-      </path>
-      <line x1="14" y1="14" x2="26" y2="14" className="stroke-current" strokeWidth="1" opacity="0.5">
-        <animate attributeName="opacity" values="0.3;0.6;0.3" dur="3s" repeatCount="indefinite" />
-      </line>
-      <line x1="14" y1="20" x2="26" y2="20" className="stroke-current" strokeWidth="1" opacity="0.5">
-        <animate attributeName="opacity" values="0.3;0.6;0.3" dur="3s" repeatCount="indefinite" begin="0.5s" />
-      </line>
-      <line x1="14" y1="26" x2="26" y2="26" className="stroke-current" strokeWidth="1" opacity="0.5">
-        <animate attributeName="opacity" values="0.3;0.6;0.3" dur="3s" repeatCount="indefinite" begin="1s" />
-      </line>
-      <line x1="20" y1="10" x2="20" y2="30" className="stroke-current" strokeWidth="1" opacity="0.4">
-        <animate attributeName="opacity" values="0.2;0.5;0.2" dur="3s" repeatCount="indefinite" begin="0.25s" />
-      </line>
+      />
+      <path d="M26.4 10.8H35.6M26.4 15.4H35.6M26.4 20H34.2" className="stroke-current" strokeWidth="1.25" strokeLinecap="round" />
+      <path d="M31 7.4V23.6" className="stroke-current" strokeWidth="1.25" strokeLinecap="round" />
+      <path d="M25.8 29.5L29.1 26.4L32.7 28.8L36.4 25.2" className="stroke-current" strokeWidth="1.45" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx="29.1" cy="26.4" r="1.6" className="fill-current" />
+      <circle cx="32.7" cy="28.8" r="1.6" className="fill-current" />
+      <circle cx="36.4" cy="25.2" r="1.6" className="fill-current" />
+      <rect x="36.8" y="5.1" width="2" height="2" rx="0.2" className="fill-current" />
+      <rect x="37.7" y="9.6" width="1.8" height="1.8" rx="0.2" className="fill-current" />
     </svg>
   )
 }
 
-// Economies & Governance - Hexagon network
+// Economies & Governance - PL mark + hex network, institutions, and capital coordination
 export function HexagonIcon({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 40 40" fill="none" className={className} aria-hidden="true">
-      <polygon
-        points="20,6 30,12 30,24 20,30 10,24 10,12"
+    <svg viewBox="0 0 40 38" fill="none" className={className} aria-hidden="true">
+      <PLMark />
+      <path
+        d="M31 2.8L38.3 7V15.4L31 19.6L23.7 15.4V7L31 2.8Z"
         className="stroke-current"
-        strokeWidth="1.5"
-        fill="none"
+        strokeWidth="1.7"
         strokeLinejoin="round"
-      >
-        <animateTransform
-          attributeName="transform"
-          type="rotate"
-          values="0 20 18;360 20 18"
-          dur="30s"
-          repeatCount="indefinite"
-        />
-      </polygon>
-      <circle cx="20" cy="6" r="2" className="fill-current" opacity="0.6">
-        <animate attributeName="r" values="1.5;2.5;1.5" dur="2s" repeatCount="indefinite" />
-      </circle>
-      <circle cx="30" cy="12" r="1.5" className="fill-current" opacity="0.4">
-        <animate attributeName="r" values="1;2;1" dur="2s" repeatCount="indefinite" begin="0.3s" />
-      </circle>
-      <circle cx="30" cy="24" r="1.5" className="fill-current" opacity="0.4">
-        <animate attributeName="r" values="1;2;1" dur="2s" repeatCount="indefinite" begin="0.6s" />
-      </circle>
-      <circle cx="20" cy="30" r="2" className="fill-current" opacity="0.6">
-        <animate attributeName="r" values="1.5;2.5;1.5" dur="2s" repeatCount="indefinite" begin="0.9s" />
-      </circle>
-      <circle cx="10" cy="24" r="1.5" className="fill-current" opacity="0.4">
-        <animate attributeName="r" values="1;2;1" dur="2s" repeatCount="indefinite" begin="1.2s" />
-      </circle>
-      <circle cx="10" cy="12" r="1.5" className="fill-current" opacity="0.4">
-        <animate attributeName="r" values="1;2;1" dur="2s" repeatCount="indefinite" begin="1.5s" />
-      </circle>
-      <circle cx="20" cy="18" r="3" className="stroke-current" strokeWidth="1" fill="none" opacity="0.5">
-        <animate attributeName="r" values="2;4;2" dur="3s" repeatCount="indefinite" />
-        <animate attributeName="opacity" values="0.5;0.2;0.5" dur="3s" repeatCount="indefinite" />
-      </circle>
+      />
+      <path
+        d="M23.7 22.5L31 18.3L38.3 22.5V30.9L31 35.1L23.7 30.9V22.5Z"
+        className="stroke-current"
+        strokeWidth="1.7"
+        strokeLinejoin="round"
+      />
+      <path d="M31 19.6V34.6" className="stroke-current" strokeWidth="1.35" strokeLinecap="round" />
+      <path d="M28.1 16.6H33.9M27.2 21.6H34.8" className="stroke-current" strokeWidth="1.25" strokeLinecap="round" />
+      <path d="M29.1 15.9V11.9H32.9V15.9" className="stroke-current" strokeWidth="1.25" strokeLinejoin="round" />
+      <path d="M28.2 11.9L31 9.9L33.8 11.9" className="fill-current" />
+      <circle cx="31" cy="2.8" r="1.9" className="fill-current" />
+      <circle cx="38.3" cy="15.4" r="1.9" className="fill-current" />
+      <circle cx="38.3" cy="30.9" r="1.9" className="fill-current" />
+      <circle cx="23.7" cy="30.9" r="1.9" className="fill-current" />
     </svg>
   )
 }
 
-// AI & Robotics - Neural network / branching tree
+// AI & Robotics - PL mark + neural circuitry and robotic end effector
 export function NeuralIcon({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 40 40" fill="none" className={className} aria-hidden="true">
-      <circle cx="20" cy="8" r="3" className="fill-current" opacity="0.7">
-        <animate attributeName="r" values="2.5;3.5;2.5" dur="2s" repeatCount="indefinite" />
-      </circle>
-      <line x1="20" y1="11" x2="12" y2="20" className="stroke-current" strokeWidth="1.5" opacity="0.6" />
-      <line x1="20" y1="11" x2="28" y2="20" className="stroke-current" strokeWidth="1.5" opacity="0.6" />
-      <circle cx="12" cy="20" r="2.5" className="fill-current" opacity="0.5">
-        <animate attributeName="opacity" values="0.4;0.7;0.4" dur="2s" repeatCount="indefinite" begin="0.3s" />
-      </circle>
-      <circle cx="28" cy="20" r="2.5" className="fill-current" opacity="0.5">
-        <animate attributeName="opacity" values="0.4;0.7;0.4" dur="2s" repeatCount="indefinite" begin="0.6s" />
-      </circle>
-      <line x1="12" y1="22.5" x2="8" y2="30" className="stroke-current" strokeWidth="1" opacity="0.5" />
-      <line x1="12" y1="22.5" x2="16" y2="30" className="stroke-current" strokeWidth="1" opacity="0.5" />
-      <line x1="28" y1="22.5" x2="24" y2="30" className="stroke-current" strokeWidth="1" opacity="0.5" />
-      <line x1="28" y1="22.5" x2="32" y2="30" className="stroke-current" strokeWidth="1" opacity="0.5" />
-      <circle cx="8" cy="30" r="2" className="fill-current" opacity="0.4">
-        <animate attributeName="opacity" values="0.3;0.6;0.3" dur="2s" repeatCount="indefinite" begin="0.9s" />
-      </circle>
-      <circle cx="16" cy="30" r="2" className="fill-current" opacity="0.4">
-        <animate attributeName="opacity" values="0.3;0.6;0.3" dur="2s" repeatCount="indefinite" begin="1.2s" />
-      </circle>
-      <circle cx="24" cy="30" r="2" className="fill-current" opacity="0.4">
-        <animate attributeName="opacity" values="0.3;0.6;0.3" dur="2s" repeatCount="indefinite" begin="1.5s" />
-      </circle>
-      <circle cx="32" cy="30" r="2" className="fill-current" opacity="0.4">
-        <animate attributeName="opacity" values="0.3;0.6;0.3" dur="2s" repeatCount="indefinite" begin="1.8s" />
-      </circle>
+    <svg viewBox="0 0 40 38" fill="none" className={className} aria-hidden="true">
+      <PLMark />
+      <path d="M23.4 31.7V16.3L27.5 12.2V6.8" className="stroke-current" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M26.6 33.6V21.4L31.8 16.2H35.4" className="stroke-current" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M29.7 29.7V24.8L34.2 20.3H38" className="stroke-current" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M23.4 18.4L31.5 18.4V10.2" className="stroke-current" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx="27.5" cy="6.8" r="2.3" className="stroke-current" strokeWidth="1.7" />
+      <circle cx="31.5" cy="10.2" r="2.3" className="stroke-current" strokeWidth="1.7" />
+      <circle cx="35.4" cy="16.2" r="2.3" className="stroke-current" strokeWidth="1.7" />
+      <circle cx="38" cy="20.3" r="2" className="stroke-current" strokeWidth="1.7" />
+      <circle cx="23.5" cy="31.7" r="3.3" className="stroke-current" strokeWidth="1.9" />
+      <path d="M30.7 33.1L34.8 30.7L38.8 32.6V35.4L34.8 33.5L30.7 35.9V33.1Z" className="fill-current" />
+      <path d="M36.9 27.2H39.4M36.9 37H39.4" className="stroke-current" strokeWidth="1.6" strokeLinecap="round" />
     </svg>
   )
 }
 
-// Neurotechnology - Brain waves / neural connections
+// Neurotechnology - existing PL Neuro logo mark from https://plneuro.xyz/
 export function BrainIcon({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 40 40" fill="none" className={className} aria-hidden="true">
-      <ellipse cx="20" cy="18" rx="14" ry="12" className="stroke-current" strokeWidth="1.5" fill="none" opacity="0.6">
-        <animate attributeName="ry" values="11;13;11" dur="4s" repeatCount="indefinite" />
-      </ellipse>
+    <svg viewBox="0 0 40 38" fill="none" className={className} aria-hidden="true">
+      <PLMark />
       <path
-        d="M10 18 Q 15 14, 20 18 T 30 18"
-        className="stroke-current"
-        strokeWidth="1"
-        fill="none"
-        opacity="0.5"
-      >
-        <animate attributeName="d" values="M10 18 Q 15 14, 20 18 T 30 18;M10 18 Q 15 22, 20 18 T 30 18;M10 18 Q 15 14, 20 18 T 30 18" dur="3s" repeatCount="indefinite" />
-      </path>
-      <path
-        d="M12 14 Q 17 10, 22 14 T 28 14"
-        className="stroke-current"
-        strokeWidth="1"
-        fill="none"
-        opacity="0.4"
-      >
-        <animate attributeName="d" values="M12 14 Q 17 10, 22 14 T 28 14;M12 14 Q 17 18, 22 14 T 28 14;M12 14 Q 17 10, 22 14 T 28 14" dur="3s" repeatCount="indefinite" begin="0.5s" />
-      </path>
-      <path
-        d="M12 22 Q 17 26, 22 22 T 28 22"
-        className="stroke-current"
-        strokeWidth="1"
-        fill="none"
-        opacity="0.4"
-      >
-        <animate attributeName="d" values="M12 22 Q 17 26, 22 22 T 28 22;M12 22 Q 17 18, 22 22 T 28 22;M12 22 Q 17 26, 22 22 T 28 22" dur="3s" repeatCount="indefinite" begin="1s" />
-      </path>
-      <circle cx="14" cy="18" r="1.5" className="fill-current" opacity="0.6">
-        <animate attributeName="cx" values="14;26;14" dur="2s" repeatCount="indefinite" />
-        <animate attributeName="opacity" values="0.8;0.3;0.8" dur="2s" repeatCount="indefinite" />
-      </circle>
-      <line x1="20" y1="30" x2="20" y2="36" className="stroke-current" strokeWidth="1.5" opacity="0.5" />
-      <circle cx="20" cy="36" r="2" className="fill-current" opacity="0.4">
-        <animate attributeName="r" values="1.5;2.5;1.5" dur="2s" repeatCount="indefinite" />
-      </circle>
+        d="M25.0508 0.291992C25.2378 0.205994 25.4514 0.197429 25.6445 0.268555L25.7393 0.310547L34.5625 4.97168C34.8174 5.1065 34.9766 5.37178 34.9766 5.66016V10.2188L39.3438 12.7148C39.5861 12.8533 39.7362 13.1106 39.7363 13.3896V23.2188C39.7363 23.4814 39.6035 23.7264 39.3838 23.8701L35.2949 26.5439L34.9814 31.084C34.9639 31.3368 34.8244 31.5653 34.6074 31.6963L25.7754 37.0293C25.5163 37.1857 25.1896 37.1777 24.9385 37.0088L20.9463 34.3203C20.7317 34.1757 20.6036 33.9336 20.6035 33.6748V3.52539C20.6037 3.25888 20.7397 3.01076 20.9648 2.86816L24.96 0.34082L25.0508 0.291992ZM21.8027 3.75684V16.9697L23.9688 15.4873C23.9743 14.9508 24.4114 14.5176 24.9492 14.5176C25.4904 14.5177 25.9287 14.9568 25.9287 15.498C25.9285 16.0392 25.4903 16.4774 24.9492 16.4775C24.8617 16.4775 24.777 16.4649 24.6963 16.4434L21.8027 18.4238V33.4492L25.3857 35.8623L28.7832 33.8096L26.5762 32.4736C26.4841 32.5023 26.3866 32.5185 26.2852 32.5186C25.7439 32.5186 25.3049 32.0803 25.3047 31.5391C25.3047 30.9977 25.7438 30.5586 26.2852 30.5586C26.8084 30.5587 27.2339 30.969 27.2617 31.4854L29.9434 33.1094L33.7988 30.7822L34.0928 26.5225L31.4551 24.8555C30.9146 24.8546 30.4767 24.4176 30.4766 23.877C30.4766 23.3356 30.9157 22.8965 31.457 22.8965C31.9983 22.8966 32.4365 23.3357 32.4365 23.877C32.4365 23.935 32.4306 23.9916 32.4209 24.0469L34.709 25.4922L38.5361 22.9912V18.6465L35.9355 17.1699C35.8693 17.1841 35.8009 17.1924 35.7305 17.1924C35.1892 17.1924 34.7502 16.7541 34.75 16.2129C34.75 15.6715 35.1891 15.2324 35.7305 15.2324C36.2717 15.2326 36.71 15.6716 36.71 16.2129C36.71 16.2188 36.7091 16.2246 36.709 16.2305L38.5361 17.2666V13.6338L34.3975 11.2695L30.6406 13.7012V17.626L34.1182 19.7998C34.2543 19.7281 34.4096 19.6875 34.5742 19.6875C35.1154 19.6876 35.5537 20.1267 35.5537 20.668C35.5535 21.2091 35.1153 21.6473 34.5742 21.6475C34.1148 21.6475 33.7293 21.3318 33.623 20.9053L30.1094 18.709L25.8809 21.2773V25.3574L29.1641 27.3135C29.3129 27.2223 29.4884 27.1699 29.6758 27.1699C30.217 27.1701 30.6553 27.6091 30.6553 28.1504C30.6551 28.6915 30.2169 29.1297 29.6758 29.1299C29.2431 29.1299 28.8761 28.8498 28.7461 28.4609L25.0615 26.2656C24.826 26.1253 24.6817 25.8718 24.6816 25.5977V21.0391C24.6818 20.7673 24.8234 20.5151 25.0557 20.374L29.4404 17.7119V13.7402L25.4551 11.748C25.1917 11.6162 25.0255 11.3473 25.0254 11.0527V7.06543C24.8144 6.8857 24.6798 6.61914 24.6797 6.32031C24.6797 5.77897 25.1188 5.33984 25.6602 5.33984C26.2014 5.33999 26.6396 5.77906 26.6396 6.32031C26.6395 6.65101 26.4756 6.94267 26.2246 7.12012V10.791L30.0059 12.6816L33.7764 10.2422V5.91309L30.5605 4.21387V7.28027C30.8296 7.45503 31.0068 7.75882 31.0068 8.10352C31.0067 8.64463 30.5685 9.08286 30.0273 9.08301C29.4861 9.08301 29.047 8.64472 29.0469 8.10352C29.0469 7.79428 29.1904 7.51852 29.4141 7.33887H29.3613V3.58008L25.3945 1.48535L21.8027 3.75684Z"
+        className="fill-current"
+      />
     </svg>
   )
 }
