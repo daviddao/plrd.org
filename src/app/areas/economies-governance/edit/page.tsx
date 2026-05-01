@@ -4,6 +4,7 @@ import Link from 'next/link'
 import AuthorCard from '@/components/AuthorCard'
 import Breadcrumb from '@/components/Breadcrumb'
 import FundingPipeline from '@/components/FundingPipeline'
+import { AreaIcon } from '@/components/AreaIcons'
 import opportunityData from '@/data/fa2/opportunityspaces.json'
 import {
   useRequireAdmin,
@@ -33,7 +34,7 @@ export default function EGEditPage() {
       {/* Hero */}
       <div className="relative pt-8 pb-12 mb-12 overflow-hidden">
         <div className="flex items-start gap-5 mb-6">
-          <HexagonIcon className="w-14 h-14 lg:w-16 lg:h-16 shrink-0 text-blue/70" />
+          <AreaIcon type="hexagon" className="w-14 h-14 lg:w-16 lg:h-16 shrink-0 text-blue/70" />
           <div className="relative z-10 flex-1">
             <EditableField
               value={get('hero', 'title')}
@@ -254,26 +255,5 @@ function EngageItemEdit({
         className="text-sm text-gray-500 leading-relaxed"
       />
     </div>
-  )
-}
-
-function HexagonIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 40 40" fill="none" className={className} aria-hidden="true">
-      <polygon points="20,6 30,12 30,24 20,30 10,24 10,12" className="stroke-current" strokeWidth="1.5" fill="none" strokeLinejoin="round">
-        <animateTransform attributeName="transform" type="rotate" values="0 20 18;360 20 18" dur="30s" repeatCount="indefinite" />
-      </polygon>
-      <circle cx="20" cy="6" r="2" className="fill-current" opacity="0.6">
-        <animate attributeName="r" values="1.5;2.5;1.5" dur="2s" repeatCount="indefinite" />
-      </circle>
-      <circle cx="30" cy="12" r="1.5" className="fill-current" opacity="0.4" />
-      <circle cx="30" cy="24" r="1.5" className="fill-current" opacity="0.4" />
-      <circle cx="20" cy="30" r="2" className="fill-current" opacity="0.6" />
-      <circle cx="10" cy="24" r="1.5" className="fill-current" opacity="0.4" />
-      <circle cx="10" cy="12" r="1.5" className="fill-current" opacity="0.4" />
-      <circle cx="20" cy="18" r="3" className="stroke-current" strokeWidth="1" fill="none" opacity="0.5">
-        <animate attributeName="r" values="2;4;2" dur="3s" repeatCount="indefinite" />
-      </circle>
-    </svg>
   )
 }

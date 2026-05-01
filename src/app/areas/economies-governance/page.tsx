@@ -5,6 +5,7 @@ import { PageEditHistoryByline } from '@/components/EditHistoryByline'
 import AuthorCard from '@/components/AuthorCard'
 import Breadcrumb from '@/components/Breadcrumb'
 import FundingPipeline from '@/components/FundingPipeline'
+import { AreaIcon } from '@/components/AreaIcons'
 import opportunityData from '@/data/fa2/opportunityspaces.json'
 import { fetchPage, getSection, fetchOpportunitySpaces } from '@/lib/indexer'
 
@@ -120,7 +121,7 @@ export default async function FA2MainPage() {
         </div>
 
         <div className="flex items-start gap-5 mb-6">
-          <HexagonIcon className="w-14 h-14 lg:w-16 lg:h-16 shrink-0 text-blue/70" />
+          <AreaIcon type="hexagon" className="w-14 h-14 lg:w-16 lg:h-16 shrink-0 text-blue/70" />
           <h1 className="relative z-10 text-2xl lg:text-[44px] font-semibold leading-[1.1] tracking-tight max-w-xl">
             Economies & Governance
           </h1>
@@ -364,45 +365,6 @@ function ExploreCard({ href, label, title, description }: { href: string; label:
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
       </svg>
     </Link>
-  )
-}
-
-// Economies & Governance - Hexagon network (animated)
-function HexagonIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 40 40" fill="none" className={className} aria-hidden="true">
-      <polygon
-        points="20,6 30,12 30,24 20,30 10,24 10,12"
-        className="stroke-current"
-        strokeWidth="1.5"
-        fill="none"
-        strokeLinejoin="round"
-      >
-        <animateTransform attributeName="transform" type="rotate" values="0 20 18;360 20 18" dur="30s" repeatCount="indefinite" />
-      </polygon>
-      <circle cx="20" cy="6" r="2" className="fill-current" opacity="0.6">
-        <animate attributeName="r" values="1.5;2.5;1.5" dur="2s" repeatCount="indefinite" />
-      </circle>
-      <circle cx="30" cy="12" r="1.5" className="fill-current" opacity="0.4">
-        <animate attributeName="r" values="1;2;1" dur="2s" repeatCount="indefinite" begin="0.3s" />
-      </circle>
-      <circle cx="30" cy="24" r="1.5" className="fill-current" opacity="0.4">
-        <animate attributeName="r" values="1;2;1" dur="2s" repeatCount="indefinite" begin="0.6s" />
-      </circle>
-      <circle cx="20" cy="30" r="2" className="fill-current" opacity="0.6">
-        <animate attributeName="r" values="1.5;2.5;1.5" dur="2s" repeatCount="indefinite" begin="0.9s" />
-      </circle>
-      <circle cx="10" cy="24" r="1.5" className="fill-current" opacity="0.4">
-        <animate attributeName="r" values="1;2;1" dur="2s" repeatCount="indefinite" begin="1.2s" />
-      </circle>
-      <circle cx="10" cy="12" r="1.5" className="fill-current" opacity="0.4">
-        <animate attributeName="r" values="1;2;1" dur="2s" repeatCount="indefinite" begin="1.5s" />
-      </circle>
-      <circle cx="20" cy="18" r="3" className="stroke-current" strokeWidth="1" fill="none" opacity="0.5">
-        <animate attributeName="r" values="2;4;2" dur="3s" repeatCount="indefinite" />
-        <animate attributeName="opacity" values="0.5;0.2;0.5" dur="3s" repeatCount="indefinite" />
-      </circle>
-    </svg>
   )
 }
 
