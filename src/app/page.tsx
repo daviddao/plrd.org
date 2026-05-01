@@ -106,11 +106,12 @@ export default async function HomePage() {
           aria-hidden="true"
         />
 
-        {/* `max-w-2xl` keeps the h1 in the left ~half of the viewport so
-            it naturally wraps into the four-line cadence ("Driving R&D /
-            breakthroughs to / push humanity / forward.") and leaves the
-            painting on the right uncovered by long text. */}
-        <h1 className="relative z-10 max-w-2xl font-serif text-[36px] md:text-[52px] lg:text-[64px] font-normal leading-[1.1] tracking-tight mb-8">
+        {/* `max-w-lg` (32rem) is tight enough that at lg's 64px the h1
+            wraps into the four-line cadence from the design ref:
+            "Driving R&D / breakthroughs to / push humanity / forward."
+            — "breakthroughs to" fits on a line, but "breakthroughs to push"
+            doesn't, forcing the desired break. */}
+        <h1 className="relative z-10 max-w-lg font-serif text-[36px] md:text-[52px] lg:text-[64px] font-normal leading-[1.1] tracking-tight mb-8">
           {hero?.title || "Driving R&D breakthroughs to push humanity forward."}
         </h1>
         <div className="relative z-10 flex flex-wrap gap-4">
