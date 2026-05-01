@@ -1,20 +1,29 @@
+import type { CSSProperties } from 'react'
+
 export type AreaIconType = 'shield' | 'hexagon' | 'neural' | 'brain'
 
 const DEFAULT_CLASS = 'w-12 h-12 shrink-0 text-blue/60 group-hover:text-blue transition-colors duration-300'
 
+const LOGO_IMAGE: Record<Exclude<AreaIconType, 'brain'>, string> = {
+  shield: '/images/focus-area-logos/digital-human-rights.png',
+  hexagon: '/images/focus-area-logos/economies-governance.png',
+  neural: '/images/focus-area-logos/ai-robotics.png',
+}
+
 export function AreaIcon({ type, className }: { type: AreaIconType; className?: string }) {
   const cls = className || DEFAULT_CLASS
 
-  switch (type) {
-    case 'shield':
-      return <ShieldIcon className={cls} />
-    case 'hexagon':
-      return <HexagonIcon className={cls} />
-    case 'neural':
-      return <NeuralIcon className={cls} />
-    case 'brain':
-      return <BrainIcon className={cls} />
+  if (type === 'brain') return <BrainIcon className={cls} />
+  return <ImageLogoIcon src={LOGO_IMAGE[type]} className={cls} />
+}
+
+function ImageLogoIcon({ src, className }: { src: string; className: string }) {
+  const style: CSSProperties = {
+    WebkitMask: `url(${src}) center / contain no-repeat`,
+    mask: `url(${src}) center / contain no-repeat`,
   }
+
+  return <span className={`${className} block bg-current`} style={style} aria-hidden="true" />
 }
 
 function PLMark() {
@@ -35,78 +44,6 @@ function PLMark() {
         className="fill-current"
       />
     </>
-  )
-}
-
-// Digital Human Rights - PL mark + shield, privacy grid, and resilient network
-export function ShieldIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 40 38" fill="none" className={className} aria-hidden="true">
-      <PLMark />
-      <path
-        d="M31 2.7L22.6 6.2V15.2C22.6 24.4 27.8 31.7 31 34.7C34.2 31.7 39.4 24.4 39.4 15.2V6.2L31 2.7Z"
-        className="stroke-current"
-        strokeWidth="1.7"
-        strokeLinejoin="round"
-      />
-      <path d="M26.4 10.8H35.6M26.4 15.4H35.6M26.4 20H34.2" className="stroke-current" strokeWidth="1.25" strokeLinecap="round" />
-      <path d="M31 7.4V23.6" className="stroke-current" strokeWidth="1.25" strokeLinecap="round" />
-      <path d="M25.8 29.5L29.1 26.4L32.7 28.8L36.4 25.2" className="stroke-current" strokeWidth="1.45" strokeLinecap="round" strokeLinejoin="round" />
-      <circle cx="29.1" cy="26.4" r="1.6" className="fill-current" />
-      <circle cx="32.7" cy="28.8" r="1.6" className="fill-current" />
-      <circle cx="36.4" cy="25.2" r="1.6" className="fill-current" />
-      <rect x="36.8" y="5.1" width="2" height="2" rx="0.2" className="fill-current" />
-      <rect x="37.7" y="9.6" width="1.8" height="1.8" rx="0.2" className="fill-current" />
-    </svg>
-  )
-}
-
-// Economies & Governance - PL mark + hex network, institutions, and capital coordination
-export function HexagonIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 40 38" fill="none" className={className} aria-hidden="true">
-      <PLMark />
-      <path
-        d="M31 2.8L38.3 7V15.4L31 19.6L23.7 15.4V7L31 2.8Z"
-        className="stroke-current"
-        strokeWidth="1.7"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M23.7 22.5L31 18.3L38.3 22.5V30.9L31 35.1L23.7 30.9V22.5Z"
-        className="stroke-current"
-        strokeWidth="1.7"
-        strokeLinejoin="round"
-      />
-      <path d="M31 19.6V34.6" className="stroke-current" strokeWidth="1.35" strokeLinecap="round" />
-      <path d="M28.1 16.6H33.9M27.2 21.6H34.8" className="stroke-current" strokeWidth="1.25" strokeLinecap="round" />
-      <path d="M29.1 15.9V11.9H32.9V15.9" className="stroke-current" strokeWidth="1.25" strokeLinejoin="round" />
-      <path d="M28.2 11.9L31 9.9L33.8 11.9" className="fill-current" />
-      <circle cx="31" cy="2.8" r="1.9" className="fill-current" />
-      <circle cx="38.3" cy="15.4" r="1.9" className="fill-current" />
-      <circle cx="38.3" cy="30.9" r="1.9" className="fill-current" />
-      <circle cx="23.7" cy="30.9" r="1.9" className="fill-current" />
-    </svg>
-  )
-}
-
-// AI & Robotics - PL mark + neural circuitry and robotic end effector
-export function NeuralIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 40 38" fill="none" className={className} aria-hidden="true">
-      <PLMark />
-      <path d="M23.4 31.7V16.3L27.5 12.2V6.8" className="stroke-current" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M26.6 33.6V21.4L31.8 16.2H35.4" className="stroke-current" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M29.7 29.7V24.8L34.2 20.3H38" className="stroke-current" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M23.4 18.4L31.5 18.4V10.2" className="stroke-current" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" />
-      <circle cx="27.5" cy="6.8" r="2.3" className="stroke-current" strokeWidth="1.7" />
-      <circle cx="31.5" cy="10.2" r="2.3" className="stroke-current" strokeWidth="1.7" />
-      <circle cx="35.4" cy="16.2" r="2.3" className="stroke-current" strokeWidth="1.7" />
-      <circle cx="38" cy="20.3" r="2" className="stroke-current" strokeWidth="1.7" />
-      <circle cx="23.5" cy="31.7" r="3.3" className="stroke-current" strokeWidth="1.9" />
-      <path d="M30.7 33.1L34.8 30.7L38.8 32.6V35.4L34.8 33.5L30.7 35.9V33.1Z" className="fill-current" />
-      <path d="M36.9 27.2H39.4M36.9 37H39.4" className="stroke-current" strokeWidth="1.6" strokeLinecap="round" />
-    </svg>
   )
 }
 
