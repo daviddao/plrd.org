@@ -106,7 +106,12 @@ export default async function HomePage() {
           aria-hidden="true"
         />
 
-        <h1 className="relative z-10 font-serif text-[36px] md:text-[52px] lg:text-[64px] font-normal leading-[1.1] tracking-tight mb-8">
+        {/* `max-w-2xl` keeps the h1 in the left ~half of the viewport so
+            it naturally wraps into the four-line cadence ("Driving R&D /
+            breakthroughs to / push humanity / forward.") and leaves the
+            painting on the right uncovered by long text. Sizes step up
+            aggressively on lg+ to match the design. */}
+        <h1 className="relative z-10 max-w-2xl font-serif text-[40px] md:text-[64px] lg:text-[80px] xl:text-[88px] font-normal leading-[1.05] tracking-tight mb-10">
           {hero?.title || "Driving R&D breakthroughs to push humanity forward."}
         </h1>
         <div className="relative z-10 flex flex-wrap gap-4">
