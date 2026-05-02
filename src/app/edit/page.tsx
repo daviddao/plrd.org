@@ -226,7 +226,7 @@ function FocusAreaCardEdit({
         />
       </div>
 
-      <div className="relative z-10 flex items-start gap-5 p-6 lg:p-7 bg-white border border-gray-200 rounded-xl">
+      <div className="relative z-10 flex flex-col items-center gap-4 p-6 text-center sm:flex-row sm:items-start sm:gap-5 sm:text-left lg:p-7 bg-white border border-gray-200 rounded-xl">
         <AreaIcon type={iconType} />
         <div className="flex-1 min-w-0">
           <div className="mb-2">
