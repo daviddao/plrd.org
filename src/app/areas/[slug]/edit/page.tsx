@@ -87,8 +87,8 @@ export default function AreaEditPage() {
 
       {/* Hero */}
       <div className="relative pt-8 pb-12 mb-12 overflow-hidden">
-        <div className="flex flex-col items-center gap-3 text-center sm:flex-row sm:items-start sm:gap-5 sm:text-left mb-6">
-          <AreaIcon type={iconType} className="w-16 h-16 sm:w-14 sm:h-14 lg:w-16 lg:h-16 shrink-0 text-blue/70" />
+        <div className="flex items-center gap-4 sm:items-start sm:gap-5 mb-6">
+          <AreaIcon type={iconType} className="w-14 h-14 lg:w-16 lg:h-16 shrink-0 text-blue/70" />
           <div className="relative z-10 flex-1">
             <EditableField
               value={get('hero', 'title') || fallbackTitle}
@@ -105,11 +105,11 @@ export default function AreaEditPage() {
             onChange={(v) => set('hero', 'subtitle', v)}
             multiline
             placeholder="Short summary of this focus area"
-            className="text-lg text-gray-600 leading-relaxed max-w-2xl text-center sm:text-left"
+            className="text-lg text-gray-600 leading-relaxed max-w-2xl"
           />
         </div>
 
-        <div className="relative z-10 flex flex-wrap justify-center sm:justify-start gap-4 mb-10">
+        <div className="relative z-10 flex flex-wrap gap-4 mb-10">
           <a
             href={`/areas/${slug}/#opportunity-spaces`}
             className="inline-flex items-center gap-2 px-5 py-2.5 bg-blue text-white rounded-full hover:bg-blue/90 transition-colors font-medium"

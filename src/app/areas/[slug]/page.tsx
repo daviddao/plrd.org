@@ -122,19 +122,19 @@ export default async function AreaPage({ params }: Props) {
       <div className="relative pt-8 pb-12 mb-12 overflow-hidden">
         <AreaHexImage slug={slug} />
         <AreaGeo slug={slug} />
-        <div className="flex flex-col items-center gap-3 text-center sm:flex-row sm:items-start sm:gap-5 sm:text-left mb-6">
-          <AreaIcon type={SLUG_TO_ICON[slug] || 'hexagon'} className="w-16 h-16 sm:w-14 sm:h-14 lg:w-16 lg:h-16 shrink-0 text-blue/70" />
+        <div className="flex items-center gap-4 sm:items-start sm:gap-5 mb-6">
+          <AreaIcon type={SLUG_TO_ICON[slug] || 'hexagon'} className="w-14 h-14 lg:w-16 lg:h-16 shrink-0 text-blue/70" />
           <h1 className="relative z-10 text-2xl lg:text-[44px] font-semibold leading-[1.1] tracking-tight max-w-xl">
             {stripFaPrefix(area.title)}
           </h1>
         </div>
         {summary && (
-          <p className="relative z-10 text-lg text-gray-600 leading-relaxed max-w-2xl mb-8 text-center sm:text-left">
+          <p className="relative z-10 text-lg text-gray-600 leading-relaxed max-w-2xl mb-8">
             {summary}
           </p>
         )}
         {opportunities.length > 0 && (
-          <div className="relative z-10 flex flex-wrap justify-center sm:justify-start gap-4 mb-10">
+          <div className="relative z-10 flex flex-wrap gap-4 mb-10">
             <a
               href="#opportunity-spaces"
               className="inline-flex items-center gap-2 px-5 py-2.5 bg-blue text-white rounded-full hover:bg-blue/90 transition-colors font-medium"
