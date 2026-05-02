@@ -348,16 +348,16 @@ function FocusAreaCard({
 
       <Link
         href={href}
-        className="relative z-10 flex flex-col items-center gap-4 p-6 text-center sm:flex-row sm:items-start sm:gap-5 sm:text-left lg:p-7 bg-white border border-gray-200 rounded-xl hover:border-blue hover:shadow-md transition-all group"
+        className="relative z-10 flex items-start gap-5 p-6 lg:p-7 bg-white border border-gray-200 rounded-xl hover:border-blue hover:shadow-md transition-all group"
       >
         <AreaIcon type={iconType} />
         <div className="flex-1 min-w-0">
-          <div className="flex items-start justify-center sm:justify-between gap-3">
+          <div className="flex items-start justify-between gap-3">
             <h3 className="text-lg lg:text-[22px] font-medium text-black group-hover:text-blue transition-colors leading-tight">
               {title}
             </h3>
             <svg
-              className="hidden sm:block w-4 h-4 text-gray-300 group-hover:text-blue group-hover:translate-x-0.5 transition-all shrink-0 mt-1.5"
+              className="w-4 h-4 text-gray-300 group-hover:text-blue group-hover:translate-x-0.5 transition-all shrink-0 mt-1.5"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
