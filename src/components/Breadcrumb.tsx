@@ -30,9 +30,25 @@ function CrumbLink({ href, children }: { href: string; children: ReactNode }) {
   )
 }
 
+function DesktopCrumb({ item, index }: { item: BreadcrumbItem; index: number }) {
+  return (
+    <li className="flex min-w-0 items-center gap-2">
+      <span className="shrink-0">/</span>
+      {item.href ? (
+        <CrumbLink href={item.href}>{item.label}</CrumbLink>
+      ) : (
+        <span className={index > 1 ? 'max-w-[36rem] truncate text-gray-600' : 'text-gray-600'} title={item.label}>
+          {item.label}
+        </span>
+      )}
+    </li>
+  )
+}
+
 export default function Breadcrumb({ items }: Props) {
   const current = items[items.length - 1]
   const previous = [...items].slice(0, -1).reverse().find((item) => item.href) ?? { label: 'Home', href: '/' }
+  const desktopItems = items.length > 2 ? items.slice(-2) : items
 
   return (
     <nav className="mb-6" aria-label="Breadcrumb">
@@ -40,15 +56,14 @@ export default function Breadcrumb({ items }: Props) {
         <li>
           <CrumbLink href="/">Home</CrumbLink>
         </li>
-        {items.map((item, index) => (
-          <li key={index} className="flex min-w-0 items-center gap-2">
-            <span className="shrink-0">/</span>
-            {item.href ? (
-              <CrumbLink href={item.href}>{item.label}</CrumbLink>
-            ) : (
-              <span className="text-gray-600">{item.label}</span>
-            )}
+        {items.length > 2 && (
+          <li className="flex items-center gap-2" aria-hidden="true">
+            <span>/</span>
+            <span>…</span>
           </li>
+        )}
+        {desktopItems.map((item, index) => (
+          <DesktopCrumb key={`${item.label}-${index}`} item={item} index={index} />
         ))}
       </ol>
 
