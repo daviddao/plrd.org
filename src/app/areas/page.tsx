@@ -47,10 +47,10 @@ export default async function AreasPage() {
             href={`/areas/${area.slug}`}
             className="bg-white p-8 hover:bg-blue/[0.02] border border-transparent hover:border-blue/20 hover:shadow-lg transition-all duration-200 relative overflow-hidden group"
           >
-            <div className="flex items-start gap-5">
+            <div className="flex flex-col items-center gap-4 text-center sm:flex-row sm:items-start sm:gap-5 sm:text-left">
               <AreaIcon type={AREA_ICONS[area.slug] || 'shield'} />
               <div className="flex-1">
-                <h2 className="text-lg font-medium mb-2 group-hover:text-blue transition-colors flex items-center gap-2">
+                <h2 className="text-lg font-medium mb-2 group-hover:text-blue transition-colors flex items-center justify-center sm:justify-start gap-2">
                   {stripFaPrefix(area.title)}
                   <svg className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200 text-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
