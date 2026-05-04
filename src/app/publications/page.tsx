@@ -3,6 +3,9 @@ import Link from 'next/link'
 import { publications, authors } from '@/lib/content'
 import { slugToName } from '@/lib/format'
 import Breadcrumb from '@/components/Breadcrumb'
+import EditPageButton from '@/components/EditPageButton'
+import { PageEditHistoryByline } from '@/components/EditHistoryByline'
+import { fetchPage, getSection } from '@/lib/indexer'
 
 function resolveAuthorName(slug: string): string {
   return authors.find((a) => a.slug === slug)?.name || slugToName(slug)
@@ -10,18 +13,30 @@ function resolveAuthorName(slug: string): string {
 
 export const metadata: Metadata = { title: 'Publications' }
 
-export default function PublicationsPage() {
+const FALLBACK_HERO_TITLE = 'Publications'
+const FALLBACK_HERO_SUBTITLE =
+  'Papers and articles advancing the frontiers of decentralized systems, cryptography, and distributed computing.'
+
+export default async function PublicationsPage() {
+  const page = await fetchPage('publications')
+  const hero = getSection(page, 'hero')
+  const heroTitle = hero?.title || FALLBACK_HERO_TITLE
+  const heroSubtitle = hero?.subtitle || FALLBACK_HERO_SUBTITLE
+
   return (
     <div className="max-w-6xl mx-auto px-6 pt-8 pb-16">
       <Breadcrumb items={[{ label: 'Research', href: '/research/' }, { label: 'Publications' }]} />
+      <div className="mt-4 empty:hidden">
+        <PageEditHistoryByline rkey="publications" />
+      </div>
       {/* Hero */}
       <div className="relative pt-6 pb-10 mb-10 overflow-hidden">
         <PageGeo />
         <h1 className="relative z-10 text-xl lg:text-[40px] font-semibold leading-[1.15] tracking-tight mb-4 max-w-lg">
-          Publications
+          {heroTitle}
         </h1>
         <p className="relative z-10 text-gray-600 leading-relaxed max-w-xl">
-          Papers and articles advancing the frontiers of decentralized systems, cryptography, and distributed computing.
+          {heroSubtitle}
         </p>
       </div>
 
@@ -29,7 +44,7 @@ export default function PublicationsPage() {
       <div className="divide-y divide-gray-200">
         {publications.map((pub) => (
           <div key={pub.slug} className="py-4">
-            <Link href={`/publications/${pub.slug}`} className="text-black hover:text-blue font-medium transition-colors">
+            <Link href={`/publications/${pub.slug}/`} className="text-black hover:text-blue font-medium transition-colors">
               {pub.title}
             </Link>
             <div className="text-sm text-gray-500 mt-1">
@@ -40,6 +55,7 @@ export default function PublicationsPage() {
           </div>
         ))}
       </div>
+      <EditPageButton rkey="publications" />
     </div>
   )
 }

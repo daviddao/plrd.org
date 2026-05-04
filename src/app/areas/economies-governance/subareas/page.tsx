@@ -70,6 +70,9 @@ const HARDCODED_SUBAREAS: { title: string; tagline: string; description: string;
 
 export default async function SubareasPage() {
   const page = await fetchPage("area-eg-subareas")
+  const heroSection = getSection(page, "hero")
+  const heroTitle = heroSection?.title || "Subareas"
+  const heroSubtitle = heroSection?.subtitle || "Nine interconnected subfields, each representing a critical domain for economies and governance."
   const subareas = HARDCODED_SUBAREAS.map(sub => {
     const section = getSection(page, sub.icon)
     return {
@@ -83,8 +86,8 @@ export default async function SubareasPage() {
     <div className="max-w-6xl mx-auto px-6 pt-8 pb-16">
       <Breadcrumb
         items={[
-          { label: 'Areas', href: '/areas' },
-          { label: 'Economies & Governance', href: '/areas/economies-governance' },
+          { label: 'Areas', href: '/areas/' },
+          { label: 'Economies & Governance', href: '/areas/economies-governance/' },
           { label: 'Subareas' },
         ]}
       />
@@ -94,9 +97,9 @@ export default async function SubareasPage() {
 
       {/* Header */}
       <div className="mb-12">
-        <h1 className="text-2xl lg:text-[36px] font-semibold mb-3">Subareas</h1>
+        <h1 className="text-2xl lg:text-[36px] font-semibold mb-3">{heroTitle}</h1>
         <p className="text-lg text-gray-600 leading-relaxed max-w-2xl">
-          Nine interconnected subfields, each representing a critical domain for economies and governance.
+          {heroSubtitle}
         </p>
       </div>
 

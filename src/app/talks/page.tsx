@@ -2,21 +2,36 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { talks } from '@/lib/content'
 import Breadcrumb from '@/components/Breadcrumb'
+import EditPageButton from '@/components/EditPageButton'
+import { PageEditHistoryByline } from '@/components/EditHistoryByline'
+import { fetchPage, getSection } from '@/lib/indexer'
 
 export const metadata: Metadata = { title: 'Talks' }
 
-export default function TalksPage() {
+const FALLBACK_HERO_TITLE = 'Talks'
+const FALLBACK_HERO_SUBTITLE =
+  'Presentations and lectures from conferences and events around the world.'
+
+export default async function TalksPage() {
+  const page = await fetchPage('talks')
+  const hero = getSection(page, 'hero')
+  const heroTitle = hero?.title || FALLBACK_HERO_TITLE
+  const heroSubtitle = hero?.subtitle || FALLBACK_HERO_SUBTITLE
+
   return (
     <div className="max-w-6xl mx-auto px-6 pt-8 pb-16">
       <Breadcrumb items={[{ label: 'Research', href: '/research/' }, { label: 'Talks' }]} />
+      <div className="mt-4 empty:hidden">
+        <PageEditHistoryByline rkey="talks" />
+      </div>
       {/* Hero */}
       <div className="relative pt-6 pb-10 mb-10 overflow-hidden">
         <PageGeo />
         <h1 className="relative z-10 text-xl lg:text-[40px] font-semibold leading-[1.15] tracking-tight mb-4 max-w-lg">
-          Talks
+          {heroTitle}
         </h1>
         <p className="relative z-10 text-gray-600 leading-relaxed max-w-xl">
-          Presentations and lectures from conferences and events around the world.
+          {heroSubtitle}
         </p>
       </div>
 
@@ -24,7 +39,7 @@ export default function TalksPage() {
       <div className="divide-y divide-gray-200">
         {talks.map((talk) => (
           <div key={talk.slug} className="py-4">
-            <Link href={`/talks/${talk.slug}`} className="text-black hover:text-blue font-medium transition-colors">
+            <Link href={`/talks/${talk.slug}/`} className="text-black hover:text-blue font-medium transition-colors">
               {talk.title}
             </Link>
             <div className="text-sm text-gray-500 mt-1">
@@ -35,6 +50,7 @@ export default function TalksPage() {
           </div>
         ))}
       </div>
+      <EditPageButton rkey="talks" />
     </div>
   )
 }

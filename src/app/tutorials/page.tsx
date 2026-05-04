@@ -2,21 +2,36 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { tutorials } from '@/lib/content'
 import Breadcrumb from '@/components/Breadcrumb'
+import EditPageButton from '@/components/EditPageButton'
+import { PageEditHistoryByline } from '@/components/EditHistoryByline'
+import { fetchPage, getSection } from '@/lib/indexer'
 
 export const metadata: Metadata = { title: 'Tutorials' }
 
-export default function TutorialsPage() {
+const FALLBACK_HERO_TITLE = 'Tutorials'
+const FALLBACK_HERO_SUBTITLE =
+  'In-depth guides and educational materials on core research topics.'
+
+export default async function TutorialsPage() {
+  const page = await fetchPage('tutorials')
+  const hero = getSection(page, 'hero')
+  const heroTitle = hero?.title || FALLBACK_HERO_TITLE
+  const heroSubtitle = hero?.subtitle || FALLBACK_HERO_SUBTITLE
+
   return (
     <div className="max-w-6xl mx-auto px-6 pt-8 pb-16">
       <Breadcrumb items={[{ label: 'Research', href: '/research/' }, { label: 'Tutorials' }]} />
+      <div className="mt-4 empty:hidden">
+        <PageEditHistoryByline rkey="tutorials" />
+      </div>
       {/* Hero */}
       <div className="relative pt-6 pb-10 mb-10 overflow-hidden">
         <PageGeo />
         <h1 className="relative z-10 text-xl lg:text-[40px] font-semibold leading-[1.15] tracking-tight mb-4 max-w-lg">
-          Tutorials
+          {heroTitle}
         </h1>
         <p className="relative z-10 text-gray-600 leading-relaxed max-w-xl">
-          In-depth guides and educational materials on core research topics.
+          {heroSubtitle}
         </p>
       </div>
 
@@ -24,13 +39,14 @@ export default function TutorialsPage() {
       <div className="divide-y divide-gray-200">
         {tutorials.map((t) => (
           <div key={t.slug} className="py-4">
-            <Link href={`/tutorials/${t.slug}`} className="text-black hover:text-blue font-medium transition-colors">
+            <Link href={`/tutorials/${t.slug}/`} className="text-black hover:text-blue font-medium transition-colors">
               {t.title || t.slug}
             </Link>
             {t.summary && <p className="text-sm text-gray-500 mt-1">{t.summary}</p>}
           </div>
         ))}
       </div>
+      <EditPageButton rkey="tutorials" />
     </div>
   )
 }

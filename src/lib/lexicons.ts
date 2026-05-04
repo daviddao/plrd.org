@@ -152,6 +152,7 @@ export const PAGE_RKEYS = [
   "landing", "about", "areas", "collaborate",
   "area-ai-robotics", "area-digital-human-rights", "area-neurotech",
   "area-economies-governance", "area-eg-subareas", "area-eg-impact",
+  "insights", "publications", "talks", "tutorials", "blog", "authors",
 ] as const
 
 export type PageRkey = typeof PAGE_RKEYS[number]

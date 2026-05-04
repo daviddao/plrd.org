@@ -18,6 +18,12 @@ const PAGE_LABELS: Record<string, string> = {
   "area-economies-governance": "Economies & Governance",
   "area-eg-subareas": "E&G — Subareas",
   "area-eg-impact": "E&G — Impact",
+  insights: "Insights",
+  publications: "Publications",
+  talks: "Talks",
+  tutorials: "Tutorials",
+  blog: "Blog",
+  authors: "Team / Authors",
 }
 
 // Which fields are meaningful per sectionId prefix
