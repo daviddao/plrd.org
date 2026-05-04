@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import EditPageButton from '@/components/EditPageButton'
-import { PageEditHistoryByline } from '@/components/EditHistoryByline'
 import { fetchPage, getSection } from '@/lib/indexer'
 import AuthorsTabs from './AuthorsTabs'
 
@@ -26,9 +25,6 @@ export default async function AuthorsPage() {
 
   return (
     <>
-      <div className="max-w-6xl mx-auto px-6 pt-8 empty:hidden">
-        <PageEditHistoryByline rkey="authors" />
-      </div>
       <AuthorsTabs
         heroTitle={heroTitle}
         heroSubtitle={heroSubtitle}
