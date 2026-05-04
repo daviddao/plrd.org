@@ -1,222 +1,41 @@
-'use client'
+import type { Metadata } from 'next'
+import EditPageButton from '@/components/EditPageButton'
+import { PageEditHistoryByline } from '@/components/EditHistoryByline'
+import { fetchPage, getSection } from '@/lib/indexer'
+import AuthorsTabs from './AuthorsTabs'
 
-import Link from 'next/link'
-import { useState } from 'react'
-import { authors } from '@/lib/content'
+export const metadata: Metadata = { title: 'Team' }
 
-const LEADS = ['juan-benet', 'molly-mackinlay', 'will-scott', 'sean-escola', 'david-dao', 'james-tunningley']
+const FALLBACK_HERO_TITLE = 'Our team'
+const FALLBACK_HERO_SUBTITLE =
+  "We've come together from academia, startups, and the public sector, united by a belief that the hardest problems in computing and human flourishing deserve serious, long-horizon research."
+const FALLBACK_LEADERSHIP_BLURB = 'R&D Lead · Operations · Focus Area Leads'
+const FALLBACK_ADVISORS_BLURB =
+  'Leading scientists, engineers, and entrepreneurs advising Protocol Labs on neurotechnology, NeuroAI, and brain-computer interfaces.'
 
-const leadership = LEADS.map(slug => authors.find(a => a.slug === slug)).filter(Boolean) as typeof authors
-const advisors = authors.filter(a => a.user_groups.includes('Neuro Advisors'))
-const alumni = authors.filter(a => !LEADS.includes(a.slug) && !a.user_groups.includes('Neuro Advisors'))
+export default async function AuthorsPage() {
+  const page = await fetchPage('authors')
+  const hero = getSection(page, 'hero')
+  const leadership = getSection(page, 'leadership-blurb')
+  const advisors = getSection(page, 'advisors-blurb')
 
-const TABS = [
-  { id: 'leadership', label: 'Leadership' },
-  { id: 'advisors',   label: 'Advisors' },
-  { id: 'alumni',     label: 'Alumni' },
-]
-
-export default function AuthorsPage() {
-  const [activeTab, setActiveTab] = useState('leadership')
-
-  return (
-    <div className="max-w-6xl mx-auto px-6 pt-8 pb-24">
-      {/* Header */}
-      <div className="pt-6 pb-12 border-b border-gray-200 mb-0">
-        <h1 className="text-[36px] md:text-[52px] font-normal leading-[1.1] tracking-tight mb-4">
-          Our team
-        </h1>
-        <p className="text-lg text-gray-600 leading-relaxed max-w-2xl">
-          We&apos;ve come together from academia, startups, and the public sector, united by a belief that the hardest problems in computing and human flourishing deserve serious, long-horizon research.
-        </p>
-      </div>
-
-      {/* Sticky tab bar */}
-      <div className="sticky top-0 z-20 bg-white border-b border-gray-200 mb-16">
-        <nav className="flex gap-8" aria-label="Team sections">
-          {TABS.map(tab => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`py-4 text-sm font-medium border-b-2 transition-colors -mb-px ${
-                activeTab === tab.id
-                  ? 'border-blue text-blue'
-                  : 'border-transparent text-gray-500 hover:text-black'
-              }`}
-            >
-              {tab.label}
-            </button>
-          ))}
-        </nav>
-      </div>
-
-      {/* Leadership */}
-      {activeTab === 'leadership' && (
-        <div>
-          <p className="text-sm text-gray-500 uppercase tracking-wide mb-12">
-            R&amp;D Lead · Operations · Focus Area Leads
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 mb-24">
-            {leadership.map(author => (
-              <LeaderCard key={author.slug} author={author} />
-            ))}
-          </div>
-
-        </div>
-      )}
-
-      {/* Advisors */}
-      {activeTab === 'advisors' && (
-        <div>
-          <p className="text-sm text-gray-500 uppercase tracking-wide mb-2">
-            PL Neuro · External Advisors
-          </p>
-          <p className="text-sm text-gray-400 mb-10 max-w-xl">
-            Leading scientists, engineers, and entrepreneurs advising Protocol Labs on neurotechnology, NeuroAI, and brain-computer interfaces.
-          </p>
-          <div
-            className="flex gap-6 overflow-x-auto pb-4 -mx-6 px-6 snap-x snap-mandatory scroll-smooth"
-            style={{ scrollbarWidth: 'none' }}
-          >
-            {advisors.map(author => (
-              <AdvisorCard key={author.slug} author={author} />
-            ))}
-          </div>
-          <div className="mt-8 pt-8 border-t border-gray-100">
-            <p className="text-xs text-gray-400 max-w-xl leading-relaxed">
-              Advisors contribute strategic guidance and field expertise to PL Neuro's research direction, investment thesis, and field-building efforts. They are not employees of Protocol Labs.
-            </p>
-          </div>
-        </div>
-      )}
-
-      {/* Alumni */}
-      {activeTab === 'alumni' && (
-        <div>
-          <p className="text-sm text-gray-500 uppercase tracking-wide mb-12">
-            Former members who shaped PL R&amp;D
-          </p>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-6 gap-y-10">
-            {alumni.map(author => (
-              <AlumniCard key={author.slug} author={author} />
-            ))}
-          </div>
-        </div>
-      )}
-    </div>
-  )
-}
-
-// ── Large card for Leadership ────────────────────────────────────────────────
-
-function LeaderCard({ author }: { author: typeof authors[number] }) {
-  const [expanded, setExpanded] = useState(false)
-  const bioText = (author.html ?? '')
-    .replace(/<[^>]+>/g, '')
-    .replace(/&amp;/g, '&')
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-    .replace(/&quot;/g, '"')
-    .replace(/&#x26;/g, '&')
-    .replace(/&#(\d+);/g, (_, n) => String.fromCharCode(Number(n)))
-    .replace(/&#x([0-9a-f]+);/gi, (_, h) => String.fromCharCode(parseInt(h, 16)))
-    .trim()
-  const shortBio = bioText.length > 220 ? bioText.slice(0, 220).trimEnd() + '…' : bioText
+  const heroTitle = hero?.title || FALLBACK_HERO_TITLE
+  const heroSubtitle = hero?.subtitle || FALLBACK_HERO_SUBTITLE
+  const leadershipBlurb = leadership?.body || FALLBACK_LEADERSHIP_BLURB
+  const advisorsBlurb = advisors?.body || FALLBACK_ADVISORS_BLURB
 
   return (
-    <div className="flex flex-col">
-      <Link href={`/authors/${author.slug}`} className="block mb-4 group">
-        <div className="aspect-square w-full overflow-hidden rounded-xl bg-gray-100">
-          {author.avatarPath ? (
-            <img
-              src={author.avatarPath}
-              alt={author.name}
-              className="w-full h-full object-cover object-top group-hover:scale-[1.03] transition-transform duration-500"
-            />
-          ) : (
-            <div className="w-full h-full bg-gray-200" />
-          )}
-        </div>
-      </Link>
-      <Link href={`/authors/${author.slug}`} className="group">
-        <h3 className="text-base font-medium text-black group-hover:text-blue transition-colors leading-snug">
-          {author.name}
-        </h3>
-      </Link>
-      <p className="text-sm text-gray-500 mt-0.5">{author.role}</p>
-      {bioText && (
-        <div className="mt-3">
-          <p className="text-sm text-gray-600 leading-relaxed">
-            {expanded ? bioText : shortBio}
-          </p>
-          {bioText.length > 220 && (
-            <button
-              onClick={() => setExpanded(e => !e)}
-              className="mt-1.5 text-xs text-gray-400 hover:text-blue transition-colors"
-            >
-              {expanded ? 'Show less' : 'Read more'}
-            </button>
-          )}
-        </div>
-      )}
-    </div>
-  )
-}
-
-// ── Carousel card for Advisors ──────────────────────────────────────────────
-
-function AdvisorCard({ author }: { author: typeof authors[number] }) {
-  const affiliation = author.groups?.[0] ?? ''
-  return (
-    <Link
-      href={`/authors/${author.slug}`}
-      className="group flex-shrink-0 snap-start w-48 flex flex-col"
-    >
-      <div className="w-full aspect-square overflow-hidden rounded-xl bg-gray-100 mb-3">
-        {author.avatarPath ? (
-          <img
-            src={author.avatarPath}
-            alt={author.name}
-            className="w-full h-full object-cover object-top group-hover:scale-[1.03] transition-transform duration-500"
-          />
-        ) : (
-          <div className="w-full h-full bg-gray-200 flex items-center justify-center text-2xl font-semibold text-gray-400">
-            {author.name.charAt(0)}
-          </div>
-        )}
+    <>
+      <div className="max-w-6xl mx-auto px-6 pt-8 empty:hidden">
+        <PageEditHistoryByline rkey="authors" />
       </div>
-      <div className="text-sm font-medium text-black group-hover:text-blue transition-colors leading-snug">
-        {author.name}
-      </div>
-      {affiliation && (
-        <div className="text-xs text-gray-400 mt-0.5 leading-tight">{affiliation}</div>
-      )}
-    </Link>
-  )
-}
-
-// ── Compact card for Alumni ──────────────────────────────────────────────────
-
-function AlumniCard({ author }: { author: typeof authors[number] }) {
-  return (
-    <Link href={`/authors/${author.slug}`} className="group flex flex-col items-center text-center">
-      <div className="w-full aspect-square overflow-hidden rounded-lg bg-gray-100 mb-3">
-        {author.avatarPath ? (
-          <img
-            src={author.avatarPath}
-            alt={author.name}
-            className="w-full h-full object-cover object-top group-hover:scale-[1.03] transition-transform duration-500"
-          />
-        ) : (
-          <div className="w-full h-full bg-gray-200" />
-        )}
-      </div>
-      <div className="text-sm font-medium text-black group-hover:text-blue transition-colors leading-tight">
-        {author.name}
-      </div>
-      {author.role && (
-        <div className="text-xs text-gray-400 mt-0.5 leading-tight">{author.role}</div>
-      )}
-    </Link>
+      <AuthorsTabs
+        heroTitle={heroTitle}
+        heroSubtitle={heroSubtitle}
+        leadershipBlurb={leadershipBlurb}
+        advisorsBlurb={advisorsBlurb}
+      />
+      <EditPageButton rkey="authors" />
+    </>
   )
 }

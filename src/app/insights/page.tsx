@@ -2,24 +2,57 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { sections, publications, talks, tutorials, blogPosts } from '@/lib/content'
 import Breadcrumb from '@/components/Breadcrumb'
+import EditPageButton from '@/components/EditPageButton'
+import { PageEditHistoryByline } from '@/components/EditHistoryByline'
+import { fetchPage, getSection } from '@/lib/indexer'
 
 export const metadata: Metadata = { title: 'Insights' }
 
-export default function InsightsPage() {
+const FALLBACK_HERO_TITLE = 'Insights'
+const FALLBACK_HERO_SUBTITLE =
+  'Exploring the frontiers of computing, networking, and knowledge systems to build infrastructure that empowers humanity.'
+const FALLBACK_CARDS = {
+  'card-publications': {
+    title: 'Publications',
+    body: 'Papers and articles advancing the frontiers of decentralized systems, cryptography, and more.',
+  },
+  'card-talks': {
+    title: 'Talks',
+    body: 'Presentations and lectures from conferences and events around the world.',
+  },
+  'card-tutorials': {
+    title: 'Tutorials',
+    body: 'In-depth guides and educational materials on core research topics.',
+  },
+}
+
+export default async function InsightsPage() {
+  const page = await fetchPage('insights')
+  const hero = getSection(page, 'hero')
+  const heroTitle = hero?.title || FALLBACK_HERO_TITLE
+  const heroSubtitle = hero?.subtitle || FALLBACK_HERO_SUBTITLE
+
+  const cardPublications = getSection(page, 'card-publications')
+  const cardTalks = getSection(page, 'card-talks')
+  const cardTutorials = getSection(page, 'card-tutorials')
+
   const recentPubs = publications.slice(0, 10)
   const recentPosts = blogPosts.slice(0, 5)
 
   return (
     <div className="max-w-6xl mx-auto px-6 pt-8 pb-16">
       <Breadcrumb items={[{ label: 'Insights' }]} />
+      <div className="mt-4 empty:hidden">
+        <PageEditHistoryByline rkey="insights" />
+      </div>
       {/* Hero */}
       <div className="relative pt-8 pb-12 mb-12 overflow-hidden">
         <PageGeo />
         <h1 className="relative z-10 text-2xl lg:text-[44px] font-semibold leading-[1.1] tracking-tight mb-5 max-w-xl">
-          Insights
+          {heroTitle}
         </h1>
         <p className="relative z-10 text-lg text-gray-600 leading-relaxed max-w-2xl">
-          Exploring the frontiers of computing, networking, and knowledge systems to build infrastructure that empowers humanity.
+          {heroSubtitle}
         </p>
       </div>
 
@@ -27,21 +60,21 @@ export default function InsightsPage() {
       <div className="mb-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <InsightCard
-            href="/publications"
-            title="Publications"
-            description="Papers and articles advancing the frontiers of decentralized systems, cryptography, and more."
+            href="/publications/"
+            title={cardPublications?.title || FALLBACK_CARDS['card-publications'].title}
+            description={cardPublications?.body || FALLBACK_CARDS['card-publications'].body}
             count={publications.length}
           />
           <InsightCard
-            href="/talks"
-            title="Talks"
-            description="Presentations and lectures from conferences and events around the world."
+            href="/talks/"
+            title={cardTalks?.title || FALLBACK_CARDS['card-talks'].title}
+            description={cardTalks?.body || FALLBACK_CARDS['card-talks'].body}
             count={talks.length}
           />
           <InsightCard
-            href="/tutorials"
-            title="Tutorials"
-            description="In-depth guides and educational materials on core research topics."
+            href="/tutorials/"
+            title={cardTutorials?.title || FALLBACK_CARDS['card-tutorials'].title}
+            description={cardTutorials?.body || FALLBACK_CARDS['card-tutorials'].body}
             count={tutorials.length}
           />
         </div>
@@ -84,7 +117,7 @@ export default function InsightsPage() {
               )
             })}
           </div>
-          <Link href="/blog" className="text-sm text-blue hover:underline mt-6 inline-block">
+          <Link href="/blog/" className="text-sm text-blue hover:underline mt-6 inline-block">
             All posts →
           </Link>
         </div>
@@ -97,7 +130,7 @@ export default function InsightsPage() {
           <div className="divide-y divide-gray-100">
             {recentPubs.map((p) => (
               <div key={p.slug} className="py-4">
-                <Link href={`/publications/${p.slug}`} className="text-base text-black hover:text-blue transition-colors">
+                <Link href={`/publications/${p.slug}/`} className="text-base text-black hover:text-blue transition-colors">
                   {p.title}
                 </Link>
                 <div className="text-sm text-gray-400 mt-1">
@@ -106,11 +139,12 @@ export default function InsightsPage() {
               </div>
             ))}
           </div>
-          <Link href="/publications" className="text-base text-blue hover:underline mt-6 inline-block">
+          <Link href="/publications/" className="text-base text-blue hover:underline mt-6 inline-block">
             All publications →
           </Link>
         </div>
       )}
+      <EditPageButton rkey="insights" />
     </div>
   )
 }

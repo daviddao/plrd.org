@@ -2,21 +2,37 @@ import Link from 'next/link'
 import { blogPosts } from '@/lib/content'
 import { formatDate } from '@/lib/format'
 import Breadcrumb from '@/components/Breadcrumb'
-import { fetchAtproPosts } from '@/lib/indexer'
+import EditPageButton from '@/components/EditPageButton'
+import { PageEditHistoryByline } from '@/components/EditHistoryByline'
+import { fetchAtproPosts, fetchPage, getSection } from '@/lib/indexer'
+
+const FALLBACK_HERO_TITLE = 'Blog'
+const FALLBACK_HERO_SUBTITLE =
+  'Updates, insights, and reflections from the PL R&D team.'
 
 export default async function BlogPage() {
-  const atprotoPosts = await fetchAtproPosts()
+  const [atprotoPosts, page] = await Promise.all([
+    fetchAtproPosts(),
+    fetchPage('blog'),
+  ])
+  const hero = getSection(page, 'hero')
+  const heroTitle = hero?.title || FALLBACK_HERO_TITLE
+  const heroSubtitle = hero?.subtitle || FALLBACK_HERO_SUBTITLE
+
   return (
     <div className="max-w-6xl mx-auto px-6 pt-8 pb-16">
       <Breadcrumb items={[{ label: 'Blog' }]} />
+      <div className="mt-4 empty:hidden">
+        <PageEditHistoryByline rkey="blog" />
+      </div>
       {/* Hero */}
       <div className="relative pt-6 pb-10 mb-10 overflow-hidden">
         <PageGeo />
         <h1 className="relative z-10 text-xl lg:text-[40px] font-semibold leading-[1.15] tracking-tight mb-4 max-w-lg">
-          Blog
+          {heroTitle}
         </h1>
         <p className="relative z-10 text-gray-600 leading-relaxed max-w-xl">
-          Updates, insights, and reflections from the PL R&D team.
+          {heroSubtitle}
         </p>
       </div>
 
@@ -80,7 +96,7 @@ export default async function BlogPage() {
           })}
         </div>
       )}
-
+      <EditPageButton rkey="blog" />
     </div>
   )
 }

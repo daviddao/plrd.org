@@ -14,6 +14,12 @@ const EDIT_ROUTES: Record<string, string> = {
   'area-economies-governance': '/areas/economies-governance/edit',
   'area-eg-subareas': '/areas/economies-governance/subareas/edit',
   'area-eg-impact': '/areas/economies-governance/impact/edit',
+  insights: '/insights/edit',
+  publications: '/publications/edit',
+  talks: '/talks/edit',
+  tutorials: '/tutorials/edit',
+  blog: '/blog/edit',
+  authors: '/authors/edit',
 }
 
 /**
