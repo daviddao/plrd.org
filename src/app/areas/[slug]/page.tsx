@@ -157,7 +157,7 @@ export default async function AreaPage({ params }: Props) {
 
       {/* Advisors */}
       {advisors && advisors.length > 0 && (
-        <div className="relative z-10 mt-10 mb-2">
+        <div className="relative z-10 mt-10 mb-2 max-w-3xl">
           <h2 className="text-sm text-gray-500 uppercase tracking-wide mb-4">Advisors</h2>
           <div className="flex flex-wrap gap-3">
             {advisors.map((authorSlug) => (
