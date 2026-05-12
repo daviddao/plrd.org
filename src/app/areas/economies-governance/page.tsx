@@ -6,6 +6,7 @@ import AuthorCard from '@/components/AuthorCard'
 import Breadcrumb from '@/components/Breadcrumb'
 import FundingPipeline from '@/components/FundingPipeline'
 import { AreaIcon } from '@/components/AreaIcons'
+import MarkdownContent from '@/components/MarkdownContent'
 import opportunityData from '@/data/fa2/opportunityspaces.json'
 import { fetchPage, getSection, fetchOpportunitySpaces } from '@/lib/indexer'
 
@@ -65,12 +66,7 @@ export default async function FA2MainPage() {
   const engTechnical = getSection(page, "engage-technical")
   const engStrategic = getSection(page, "engage-strategic")
 
-  const bodyParagraphs = bodySection?.body
-    ? bodySection.body.split("\n\n").filter(Boolean)
-    : [
-        "This focus area rectifies the inadequacies of current macro systems, which often struggle to coordinate and solve monumental challenges like climate change. By leveraging cryptoeconomics and improved governance tools, we are rethinking how capital is formed and deployed.",
-        "This movement harnesses mechanism design to align millions of people worldwide toward shared goals, creating structures that can allocate resources at the scale of nation-states for the benefit of all humanity.",
-      ]
+  const bodyContent = bodySection?.body || "This focus area rectifies the inadequacies of current macro systems, which often struggle to coordinate and solve monumental challenges like climate change. By leveraging cryptoeconomics and improved governance tools, we are rethinking how capital is formed and deployed.\n\nThis movement harnesses mechanism design to align millions of people worldwide toward shared goals, creating structures that can allocate resources at the scale of nation-states for the benefit of all humanity."
   return (
     <div className="max-w-6xl mx-auto px-6 pt-8 pb-16">
       <Breadcrumb items={[{ label: 'Focus Areas', href: '/areas/' }, { label: 'Economies & Governance' }]} />
@@ -126,9 +122,10 @@ export default async function FA2MainPage() {
             Economies & Governance
           </h1>
         </div>
-        <p className="relative z-10 text-lg text-gray-600 leading-relaxed max-w-2xl mb-8">
-          {heroSection?.subtitle || "Building crypto-native economic and governance infrastructure to create more efficient, equitable structures that coordinate at the scale of nation-states."}
-        </p>
+        <MarkdownContent
+          content={heroSection?.subtitle || "Building crypto-native economic and governance infrastructure to create more efficient, equitable structures that coordinate at the scale of nation-states."}
+          className="relative z-10 text-lg text-gray-600 leading-relaxed max-w-2xl mb-8"
+        />
         <div className="relative z-10 flex flex-wrap gap-4 mb-10">
           <a
             href="#opportunity-spaces"
@@ -159,11 +156,7 @@ export default async function FA2MainPage() {
 
       {/* Content */}
       <div className="mb-12 pb-12 border-b border-gray-100">
-        {bodyParagraphs.map((para, i) => (
-          <p key={i} className="text-base text-gray-700 leading-relaxed mb-5 max-w-3xl">
-            {para}
-          </p>
-        ))}
+        <MarkdownContent content={bodyContent} className="page-content text-base text-gray-700 leading-relaxed max-w-3xl" />
       </div>
 
       {/* Opportunity Spaces (inlined) */}
@@ -308,7 +301,7 @@ function EngageItem({ title, description }: { title: string; description: string
   return (
     <div className="border-l-2 border-gray-100 pl-5">
       <h3 className="text-base font-medium text-black mb-1">{title}</h3>
-      <p className="text-sm text-gray-500 leading-relaxed">{description}</p>
+      <MarkdownContent content={description} className="text-sm text-gray-500 leading-relaxed [&_p]:mb-0" />
     </div>
   )
 }
@@ -359,7 +352,7 @@ function ExploreCard({ href, label, title, description }: { href: string; label:
       <div>
         <div className="text-xs text-gray-400 uppercase tracking-widest mb-1">{label}</div>
         <h3 className="text-base font-medium text-black group-hover:text-blue transition-colors mb-1">{title}</h3>
-        <p className="text-sm text-gray-500 leading-relaxed">{description}</p>
+        <MarkdownContent content={description} className="text-sm text-gray-500 leading-relaxed [&_p]:mb-0" />
       </div>
       <svg className="w-5 h-5 text-gray-300 group-hover:text-blue group-hover:translate-x-1 transition-all shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />

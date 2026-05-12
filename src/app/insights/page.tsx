@@ -4,6 +4,7 @@ import { sections, publications, talks, tutorials, blogPosts } from '@/lib/conte
 import Breadcrumb from '@/components/Breadcrumb'
 import EditPageButton from '@/components/EditPageButton'
 import { PageEditHistoryByline } from '@/components/EditHistoryByline'
+import MarkdownContent from '@/components/MarkdownContent'
 import { fetchPage, getSection } from '@/lib/indexer'
 
 export const metadata: Metadata = { title: 'Insights' }
@@ -51,9 +52,7 @@ export default async function InsightsPage() {
         <h1 className="relative z-10 text-2xl lg:text-[44px] font-semibold leading-[1.1] tracking-tight mb-5 max-w-xl">
           {heroTitle}
         </h1>
-        <p className="relative z-10 text-lg text-gray-600 leading-relaxed max-w-2xl">
-          {heroSubtitle}
-        </p>
+        <MarkdownContent content={heroSubtitle} className="relative z-10 text-lg text-gray-600 leading-relaxed max-w-2xl" />
       </div>
 
       {/* Subpages */}
@@ -153,7 +152,7 @@ function InsightCard({ href, title, description, count }: { href: string; title:
   return (
     <Link href={href} className="border border-gray-300 p-8 hover:border-blue hover:shadow-sm transition-all block">
       <h3 className="font-semibold text-lg mb-2">{title}</h3>
-      <p className="text-base text-gray-700 mb-4">{description}</p>
+      <MarkdownContent content={description} className="text-base text-gray-700 mb-4 [&_p]:mb-0" />
       <span className="text-sm text-gray-400">{count} entries</span>
     </Link>
   )

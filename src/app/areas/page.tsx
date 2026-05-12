@@ -6,6 +6,7 @@ import { areas } from '@/lib/content'
 import { stripFaPrefix } from '@/lib/format'
 import { AreaIcon, type AreaIconType } from '@/components/AreaIcons'
 import Breadcrumb from '@/components/Breadcrumb'
+import MarkdownContent from '@/components/MarkdownContent'
 import { fetchPage, getSection } from '@/lib/indexer'
 
 export const metadata: Metadata = { title: 'Focus Areas' }
@@ -34,9 +35,10 @@ export default async function AreasPage() {
         <h1 className="relative z-10 text-2xl lg:text-[44px] font-semibold leading-[1.1] tracking-tight mb-5 max-w-xl">
           Focus Areas
         </h1>
-        <p className="relative z-10 text-lg text-gray-600 leading-relaxed max-w-2xl">
-          {heroSection?.subtitle || "Four research directions driving breakthroughs in computing, coordination, and human capability."}
-        </p>
+        <MarkdownContent
+          content={heroSection?.subtitle || "Four research directions driving breakthroughs in computing, coordination, and human capability."}
+          className="relative z-10 text-lg text-gray-600 leading-relaxed max-w-2xl"
+        />
       </div>
 
       {/* Grid */}

@@ -5,6 +5,7 @@ import { publications, talks, blogPosts } from '@/lib/content'
 import { formatDate } from '@/lib/format'
 import { AreaIcon } from '@/components/AreaIcons'
 import { GeoIllustration } from '@/components/GeoIllustration'
+import MarkdownContent from '@/components/MarkdownContent'
 import { fetchPage, getSection, getSectionsWithPrefix } from "@/lib/indexer"
 import { loadHexMosaic, type HexPattern } from "@/lib/hex-mosaic"
 
@@ -154,9 +155,10 @@ export default async function HomePage() {
           <h2 className="text-[28px] md:text-[36px] font-normal leading-tight tracking-tight">
             {approach?.title || "Use-inspired research across four frontiers"}
           </h2>
-          <p className="text-base text-gray-600 leading-relaxed lg:pt-3">
-            {approach?.body || "We work in Pasteur's Quadrant — pursuing fundamental understanding while staying anchored to real-world impact. Our four focus areas span the most consequential frontiers in computing, society, and human cognition."}
-          </p>
+          <MarkdownContent
+            content={approach?.body || "We work in Pasteur's Quadrant — pursuing fundamental understanding while staying anchored to real-world impact. Our four focus areas span the most consequential frontiers in computing, society, and human cognition."}
+            className="text-base text-gray-600 leading-relaxed lg:pt-3"
+          />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-44 md:gap-y-48 lg:gap-y-52">
@@ -257,9 +259,10 @@ export default async function HomePage() {
 
       <div className="pb-20 lg:pb-28">
         <h2 className="text-sm text-gray-500 uppercase tracking-wide mb-6">Team</h2>
-        <p className="text-lg text-gray-700 leading-relaxed max-w-2xl mb-6">
-          {team?.body || "A fully remote team distributed across the globe, working with talented and intellectually curious people who share a passion for improving technology for humanity."}
-        </p>
+        <MarkdownContent
+          content={team?.body || "A fully remote team distributed across the globe, working with talented and intellectually curious people who share a passion for improving technology for humanity."}
+          className="text-lg text-gray-700 leading-relaxed max-w-2xl mb-6"
+        />
         <Link 
           href="/authors" 
           className="inline-flex items-center gap-2 px-5 py-2.5 border border-blue/30 text-blue rounded-full hover:bg-blue hover:text-white hover:border-blue transition-all font-medium"
@@ -370,9 +373,10 @@ function FocusAreaCard({
               />
             </svg>
           </div>
-          <p className="mt-2 text-sm lg:text-[15px] text-gray-500 leading-relaxed">
-            {body}
-          </p>
+          <MarkdownContent
+            content={body}
+            className="mt-2 text-sm lg:text-[15px] text-gray-500 leading-relaxed [&_p]:mb-0"
+          />
         </div>
       </Link>
     </div>
