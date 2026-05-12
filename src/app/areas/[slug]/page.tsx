@@ -173,18 +173,6 @@ export default async function AreaPage({ params }: Props) {
         )}
       </div>
 
-      {/* Advisors */}
-      {advisors && advisors.length > 0 && (
-        <div className="relative z-10 mt-10 mb-2 max-w-3xl">
-          <h2 className="text-sm text-gray-500 uppercase tracking-wide mb-4">Advisors</h2>
-          <div className="flex flex-wrap gap-3">
-            {advisors.map((authorSlug) => (
-              <AuthorCard key={authorSlug} slug={authorSlug} variant="advisor" />
-            ))}
-          </div>
-        </div>
-      )}
-
       {/* Content */}
       {(bodyFromIndexer || area.html) && (
         <div className="mb-12 pb-12 border-b border-gray-100">
@@ -197,6 +185,20 @@ export default async function AreaPage({ params }: Props) {
           ) : (
             <div className="page-content text-base text-gray-700 leading-relaxed max-w-3xl" dangerouslySetInnerHTML={{ __html: area.html! }} />
           )}
+        </div>
+      )}
+
+      {/* Advisors */}
+      {advisors && advisors.length > 0 && (
+        <div className="mb-12 pb-12 border-b border-gray-100 max-w-3xl">
+          <h2 className="text-sm text-gray-500 uppercase tracking-wide mb-4">
+            {slug === 'neurotech' ? 'Science Advisory Board' : 'Advisors'}
+          </h2>
+          <div className="flex flex-wrap gap-3">
+            {advisors.map((authorSlug) => (
+              <AuthorCard key={authorSlug} slug={authorSlug} variant="advisor" />
+            ))}
+          </div>
         </div>
       )}
 

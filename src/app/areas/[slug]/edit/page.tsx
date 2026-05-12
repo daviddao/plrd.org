@@ -131,18 +131,6 @@ export default function AreaEditPage() {
         )}
       </div>
 
-      {/* Advisors */}
-      {advisors.length > 0 && (
-        <div className="relative z-10 mt-10 mb-12">
-          <h2 className="text-sm text-gray-500 uppercase tracking-wide mb-4">Advisors</h2>
-          <div className="flex flex-wrap gap-3">
-            {advisors.map((authorSlug) => (
-              <AuthorCard key={authorSlug} slug={authorSlug} variant="advisor" />
-            ))}
-          </div>
-        </div>
-      )}
-
       {/* Content body */}
       <div className="mb-12 pb-12 border-b border-gray-100">
         <p className="text-xs text-gray-400 mb-2 uppercase tracking-wide">Body content</p>
@@ -155,6 +143,20 @@ export default function AreaEditPage() {
         />
         <p className="text-xs text-gray-400 mt-2">Paragraphs separated by blank lines</p>
       </div>
+
+      {/* Advisors */}
+      {advisors.length > 0 && (
+        <div className="mb-12 pb-12 border-b border-gray-100 max-w-3xl">
+          <h2 className="text-sm text-gray-500 uppercase tracking-wide mb-4">
+            {slug === 'neurotech' ? 'Science Advisory Board' : 'Advisors'}
+          </h2>
+          <div className="flex flex-wrap gap-3">
+            {advisors.map((authorSlug) => (
+              <AuthorCard key={authorSlug} slug={authorSlug} variant="advisor" />
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Opportunity Spaces preview (read-only — each card has its own edit page) */}
       <OpportunitySpacesPreview areaSlug={slug} />
