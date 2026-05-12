@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import EditPageButton from '@/components/EditPageButton'
 import { PageEditHistoryByline } from '@/components/EditHistoryByline'
 import Breadcrumb from '@/components/Breadcrumb'
+import MarkdownContent from '@/components/MarkdownContent'
 import { fetchPage, getSection } from '@/lib/indexer'
 
 export const metadata: Metadata = {
@@ -16,12 +17,7 @@ export default async function CollaborationPage() {
 
   const heroTitle = heroSection?.title || "Collaborate With Us"
   const heroBody = heroSection?.subtitle || "We believe in open collaboration. Whether you're a researcher, developer, institution, or visionary builder, there are many ways to work together on problems that matter."
-  const bodyParagraphs = bodySection?.body
-    ? bodySection.body.split("\n\n").filter(Boolean)
-    : [
-        "PL R&D works at the intersection of fundamental research and real-world impact. We're building the infrastructure for a better internet and exploring how technology can help humanity flourish.",
-        "Our collaborative approach brings together researchers, engineers, and institutions worldwide. We're always looking for partners who share our vision of open, decentralized, and human-centric technology.",
-      ]
+  const bodyContent = bodySection?.body || "PL R&D works at the intersection of fundamental research and real-world impact. We're building the infrastructure for a better internet and exploring how technology can help humanity flourish.\n\nOur collaborative approach brings together researchers, engineers, and institutions worldwide. We're always looking for partners who share our vision of open, decentralized, and human-centric technology."
 
   return (
     <div className="max-w-6xl mx-auto px-6 pt-8 pb-16">
@@ -36,18 +32,12 @@ export default async function CollaborationPage() {
         <h1 className="relative z-10 text-xl lg:text-[40px] font-semibold leading-[1.15] tracking-tight mb-4 max-w-lg">
           {heroTitle}
         </h1>
-        <p className="relative z-10 text-gray-600 leading-relaxed max-w-xl">
-          {heroBody}
-        </p>
+        <MarkdownContent content={heroBody} className="relative z-10 text-gray-600 leading-relaxed max-w-xl" />
       </div>
 
       {/* Content */}
       <div className="mb-10 pb-10 border-b border-gray-100">
-        {bodyParagraphs.map((para, i) => (
-          <p key={i} className="text-sm text-gray-700 leading-relaxed mb-4">
-            {para}
-          </p>
-        ))}
+        <MarkdownContent content={bodyContent} className="page-content text-sm text-gray-700 leading-relaxed" />
       </div>
 
       {/* CTA */}
