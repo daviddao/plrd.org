@@ -1,7 +1,7 @@
 ---
 title: "Neurotech"
 date: 2024-03-15
-summary: "Accelerate neurotechnologies to benefit humanity, focusing on breakthroughs in brain-computer interfaces (BCI)."
+summary: "Accelerating brain-computer interfaces (BCI), whole-brain emulation (WBE), & NeuroAI to expand human cognition."
 leads:
   - sean-escola
 advisors:

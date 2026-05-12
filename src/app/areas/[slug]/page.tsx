@@ -4,6 +4,7 @@ import { PageEditHistoryByline } from '@/components/EditHistoryByline'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { areas, publications, talks } from '@/lib/content'
+import { FOCUS_AREA_DESCRIPTIONS, type FocusAreaSlug } from '@/lib/focus-area-descriptions'
 import { stripFaPrefix } from '@/lib/format'
 import { AreaIcon, type AreaIconType } from '@/components/AreaIcons'
 import AuthorCard from '@/components/AuthorCard'
@@ -106,7 +107,7 @@ export default async function AreaPage({ params }: Props) {
   const page = await fetchPage(pageRkey)
   const heroSection = getSection(page, "hero")
 
-  const summary = heroSection?.subtitle || area.summary
+  const summary = FOCUS_AREA_DESCRIPTIONS[slug as FocusAreaSlug] || heroSection?.subtitle || area.summary
   const bodyFromIndexer = heroSection?.body ?? null
   const leads = page?.leads || area.leads
   const advisors = page?.advisors || area.advisors
