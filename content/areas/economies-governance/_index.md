@@ -1,7 +1,7 @@
 ---
 title: "Economies & Governance"
 date: 2024-03-15
-summary: "Creating more efficient and equitable structures for global progress through crypto-native infrastructure."
+summary: "Building programmable infrastructure for more efficient, equitable coordination at global scale."
 leads: []
 ---
 This focus area is building the field of crypto-native economic and governance infrastructure, aiming to rectify the inadequacies of current macro systems which often struggle to coordinate and solve monumental challenges like climate change.

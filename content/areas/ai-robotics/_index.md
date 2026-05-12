@@ -1,7 +1,7 @@
 ---
 title: "AI & Robotics"
 date: 2024-03-15
-summary: "Developing Advanced Technologies: Ensuring responsible advancement in AI, Robotics, AR, VR, and other nascent tech breakthroughs."
+summary: "Building open compute, coordination, data, and economic rails for autonomous agents and embodied AI."
 leads:
   - molly-mackinlay
 ---

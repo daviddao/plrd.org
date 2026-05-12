@@ -3,7 +3,7 @@
     "slug": "ai-robotics",
     "title": "AI & Robotics",
     "date": "2024-03-15T00:00:00.000Z",
-    "summary": "Developing Advanced Technologies: Ensuring responsible advancement in AI, Robotics, AR, VR, and other nascent tech breakthroughs.",
+    "summary": "Building open compute, coordination, data, and economic rails for autonomous agents and embodied AI.",
     "leads": [
       "molly-mackinlay"
     ],
@@ -14,7 +14,7 @@
     "slug": "digital-human-rights",
     "title": "Digital Human Rights",
     "date": "2024-03-15T00:00:00.000Z",
-    "summary": "Securing Digital Human Rights: Building a foundation of freedom and safety in the digital age through Web3 networks and decentralized infrastructure.",
+    "summary": "Building open, verifiable, censorship-resistant infrastructure human freedom & agency in the digital age.",
     "leads": [
       "will-scott"
     ],
@@ -25,7 +25,7 @@
     "slug": "economies-governance",
     "title": "Economies & Governance",
     "date": "2024-03-15T00:00:00.000Z",
-    "summary": "Creating more efficient and equitable structures for global progress through crypto-native infrastructure.",
+    "summary": "Building programmable infrastructure for more efficient, equitable coordination at global scale.",
     "leads": [],
     "advisors": [],
     "html": "<p>This focus area is building the field of crypto-native economic and governance infrastructure, aiming to rectify the inadequacies of current macro systems which often struggle to coordinate and solve monumental challenges like climate change.</p>\n<p>By leveraging cryptoeconomics and improved governance tools, we are rethinking how capital is formed and deployed (e.g., Public Goods Funding). This movement harnesses mechanism design to align millions of people worldwide toward shared goals, creating more efficient and equitable structures that can allocate resources at the scale of nation-states for the benefit of all humanity.</p>\n"
@@ -34,7 +34,7 @@
     "slug": "neurotech",
     "title": "Neurotech",
     "date": "2024-03-15T00:00:00.000Z",
-    "summary": "Accelerate neurotechnologies to benefit humanity, focusing on breakthroughs in brain-computer interfaces (BCI).",
+    "summary": "Accelerating brain-computer interfaces (BCI), whole-brain emulation (WBE), & NeuroAI to expand human cognition.",
     "leads": [
       "sean-escola"
     ],
