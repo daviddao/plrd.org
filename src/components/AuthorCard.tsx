@@ -11,6 +11,7 @@ export default function AuthorCard({ slug, variant = 'default' }: AuthorCardProp
   const author = authors.find((a) => a.slug === slug)
   const name = author?.name || slugToName(slug)
   const role = author?.role || ''
+  const institution = author?.groups.filter(Boolean).join(', ') || ''
   const avatar = author?.avatarPath || null
 
   if (variant === 'lead') {
@@ -50,7 +51,7 @@ export default function AuthorCard({ slug, variant = 'default' }: AuthorCardProp
         )}
         <span className="flex flex-col leading-tight">
           <span className="text-sm font-medium text-black group-hover:text-blue transition-colors">{name}</span>
-          {role && <span className="text-xs text-gray-500 mt-0.5">{role}</span>}
+          {institution && <span className="text-xs text-gray-500 mt-0.5">{institution}</span>}
         </span>
       </Link>
     )
