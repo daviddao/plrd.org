@@ -7,6 +7,7 @@ import Breadcrumb from '@/components/Breadcrumb'
 import FundingPipeline from '@/components/FundingPipeline'
 import { AreaIcon } from '@/components/AreaIcons'
 import opportunityData from '@/data/fa2/opportunityspaces.json'
+import { FOCUS_AREA_DESCRIPTIONS } from '@/lib/focus-area-descriptions'
 import { fetchPage, getSection, fetchOpportunitySpaces } from '@/lib/indexer'
 
 type OpportunityCard = {
@@ -42,7 +43,7 @@ async function loadOpportunityCards(): Promise<OpportunityCard[]> {
 
 export const metadata: Metadata = {
   title: 'Economies & Governance',
-  description: 'Creating more efficient and equitable structures for global progress through crypto-native infrastructure.',
+  description: FOCUS_AREA_DESCRIPTIONS['economies-governance'],
 }
 
 export default async function FA2MainPage() {
@@ -51,7 +52,6 @@ export default async function FA2MainPage() {
     loadOpportunityCards(),
   ])
 
-  const heroSection = getSection(page, "hero")
   const bodySection = getSection(page, "body")
 
   const exploreSubareas = getSection(page, "explore-subareas")
@@ -127,7 +127,7 @@ export default async function FA2MainPage() {
           </h1>
         </div>
         <p className="relative z-10 text-lg text-gray-600 leading-relaxed max-w-2xl mb-8">
-          {heroSection?.subtitle || "Building crypto-native economic and governance infrastructure to create more efficient, equitable structures that coordinate at the scale of nation-states."}
+          {FOCUS_AREA_DESCRIPTIONS['economies-governance']}
         </p>
         <div className="relative z-10 flex flex-wrap gap-4 mb-10">
           <a
