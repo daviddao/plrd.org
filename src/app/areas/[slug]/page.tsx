@@ -105,7 +105,11 @@ export default async function AreaPage({ params }: Props) {
   const page = await fetchPage(pageRkey)
   const heroSection = getSection(page, "hero")
 
-  const summary = FOCUS_AREA_DESCRIPTIONS[slug as FocusAreaSlug] || heroSection?.subtitle || area.summary
+  // Fallback chain: indexer-edited subtitle wins (so /areas/<slug>/edit/ shows
+  // up), then the canonical FOCUS_AREA_DESCRIPTIONS constant (matches the
+  // landing page + About when the indexer record is empty), then the markdown
+  // frontmatter summary as a final safety net.
+  const summary = heroSection?.subtitle || FOCUS_AREA_DESCRIPTIONS[slug as FocusAreaSlug] || area.summary
   const bodyFromIndexer = heroSection?.body ?? null
   const leads = page?.leads || area.leads
   const advisors = page?.advisors || area.advisors
