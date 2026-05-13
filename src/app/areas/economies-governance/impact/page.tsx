@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import EditPageButton from '@/components/EditPageButton'
 import { PageEditHistoryByline } from '@/components/EditHistoryByline'
 import Breadcrumb from '@/components/Breadcrumb'
+import MarkdownContent from '@/components/MarkdownContent'
 import { fetchPage, getSection } from '@/lib/indexer'
 
 export const metadata: Metadata = {
@@ -32,9 +33,10 @@ export default async function ImpactOverviewPage() {
         <h1 className="text-2xl lg:text-[44px] font-semibold leading-[1.1] tracking-tight mb-5 max-w-xl">
           {heroSection?.title || "Impact"}
         </h1>
-        <p className="text-lg text-gray-600 leading-relaxed max-w-2xl">
-          {heroSection?.subtitle || "Track ecosystem growth, measure outcomes, and explore the real-world impact of decentralized economies and governance."}
-        </p>
+        <MarkdownContent
+          content={heroSection?.subtitle || "Track ecosystem growth, measure outcomes, and explore the real-world impact of decentralized economies and governance."}
+          className="text-lg text-gray-600 leading-relaxed max-w-2xl"
+        />
       </div>
 
       {/* Cards */}
@@ -52,9 +54,10 @@ export default async function ImpactOverviewPage() {
                 {cardReport?.title || "Impact Report 2025"}
               </h2>
             </div>
-            <p className="text-base text-gray-500 leading-relaxed">
-              {cardReport?.body || "Annual report on ecosystem growth, key initiatives, and measurable outcomes."}
-            </p>
+            <MarkdownContent
+              content={cardReport?.body || "Annual report on ecosystem growth, key initiatives, and measurable outcomes."}
+              className="text-base text-gray-500 leading-relaxed [&_p]:mb-0"
+            />
           </div>
           <svg className="w-5 h-5 text-gray-300 group-hover:text-blue group-hover:translate-x-1 transition-all shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -74,9 +77,10 @@ export default async function ImpactOverviewPage() {
                 {cardDashboard?.title || "Live Dashboard"}
               </h2>
             </div>
-            <p className="text-base text-gray-500 leading-relaxed">
-              {cardDashboard?.body || "Real-time metrics and data visualizations tracking ecosystem activity."}
-            </p>
+            <MarkdownContent
+              content={cardDashboard?.body || "Real-time metrics and data visualizations tracking ecosystem activity."}
+              className="text-base text-gray-500 leading-relaxed [&_p]:mb-0"
+            />
           </div>
           <svg className="w-5 h-5 text-gray-300 group-hover:text-blue group-hover:translate-x-1 transition-all shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />

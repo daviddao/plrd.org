@@ -4,6 +4,7 @@ import { PageEditHistoryByline } from '@/components/EditHistoryByline'
 import Link from 'next/link'
 import AuthorCard from '@/components/AuthorCard'
 import Breadcrumb from '@/components/Breadcrumb'
+import MarkdownContent from '@/components/MarkdownContent'
 import { FOCUS_AREA_DESCRIPTIONS } from '@/lib/focus-area-descriptions'
 import { fetchPage, getSection } from "@/lib/indexer"
 
@@ -79,9 +80,10 @@ export default async function AboutPage() {
           <h1 className="relative z-10 font-normal text-[28px] md:text-[40px] lg:text-[48px] leading-[1.1] tracking-tight mb-6 max-w-xl">
             {hero?.title || "Our research is driven by beliefs about how technology should serve humanity."}
           </h1>
-          <p className="relative z-10 text-gray-600 text-lg md:text-xl lg:text-[22px] leading-relaxed max-w-2xl mb-6">
-            {hero?.body || hero?.subtitle || "Substantial engineering efforts are necessary to turn ideas into real and useful tools that people can use. Our longest-term vision-driven innovation takes place in PL R&D."}
-          </p>
+          <MarkdownContent
+            content={hero?.body || hero?.subtitle || "Substantial engineering efforts are necessary to turn ideas into real and useful tools that people can use. Our longest-term vision-driven innovation takes place in PL R&D."}
+            className="relative z-10 text-gray-600 text-lg md:text-xl lg:text-[22px] leading-relaxed max-w-2xl mb-6"
+          />
           <div className="relative z-10 flex flex-wrap gap-4">
             <Link 
               href="/areas" 
@@ -134,44 +136,45 @@ export default async function AboutPage() {
 
       {/* History */}
       <Section label="OUR HISTORY" title={history?.title || "Protocol Labs began with the desire to make it easy to name, organize, and share data in a scalable way."}>
-        <div className="lg:columns-2 lg:gap-14 text-base text-gray-700 leading-relaxed">
-          {(history?.body || historyFallback).split("\n\n").map((p, i) => (
-            <p key={i} className="pb-6 break-inside-avoid">{p}</p>
-          ))}
-        </div>
+        <MarkdownContent
+          content={history?.body || historyFallback}
+          className="page-content lg:columns-2 lg:gap-14 text-base text-gray-700 leading-relaxed"
+        />
       </Section>
 
       {/* Collaborations */}
       <Section label="COLLABORATIONS AND SUPPORT" title={collabs?.title || "In addition to driving internal projects directly, we also support external research."}>
-        <p className="text-base text-gray-700 leading-relaxed lg:columns-2 lg:gap-14">
-          {collabs?.body || "Some of this support takes the form of our grant program, which supports academic research efforts related to the central mission and goals of Protocol Labs. Other support includes conference and event sponsorships, which usually involves representation from Protocol Labs researchers. If you're attending a conference we are sponsoring, you have a great chance of catching one of us in person. Alternatively, our conference sponsorships often take the form of sponsoring free, high-quality recordings of the talks to educate (or entertain) those unable to attend."}
-        </p>
+        <MarkdownContent
+          content={collabs?.body || "Some of this support takes the form of our grant program, which supports academic research efforts related to the central mission and goals of Protocol Labs. Other support includes conference and event sponsorships, which usually involves representation from Protocol Labs researchers. If you're attending a conference we are sponsoring, you have a great chance of catching one of us in person. Alternatively, our conference sponsorships often take the form of sponsoring free, high-quality recordings of the talks to educate (or entertain) those unable to attend."}
+          className="page-content text-base text-gray-700 leading-relaxed lg:columns-2 lg:gap-14"
+        />
       </Section>
 
       {/* Quote */}
       <div className="max-w-6xl mx-auto px-6 py-20 flex flex-col items-center text-center">
         <img className="mb-8 opacity-30 w-10" src="/images/about-page/quote-icon.svg" alt="" />
-        <h3 className="font-semibold text-xl lg:text-2xl leading-relaxed mb-8">
-          {quoteJuan?.body || quoteJuan?.title || "More innovation faster"}
-        </h3>
+        <MarkdownContent
+          content={quoteJuan?.body || quoteJuan?.title || "More innovation faster"}
+          className="font-semibold text-xl lg:text-2xl leading-relaxed mb-8 [&_p]:mb-0"
+        />
         <AuthorCard slug="juan-benet" />
       </div>
 
       {/* The Future */}
       <Section label="THE FUTURE" title={future?.title || "In our pursuit of this mission, we question how technology could work better and what we wish it would do."}>
-        <div className="lg:columns-2 lg:gap-14 text-base text-gray-700 leading-relaxed">
-          {(future?.body || futureFallback).split("\n\n").map((p, i) => (
-            <p key={i} className="pb-6 break-inside-avoid">{p}</p>
-          ))}
-        </div>
+        <MarkdownContent
+          content={future?.body || futureFallback}
+          className="page-content lg:columns-2 lg:gap-14 text-base text-gray-700 leading-relaxed"
+        />
       </Section>
 
       {/* Will Scott quote */}
       <div className="max-w-6xl mx-auto px-6 pb-28">
         <div className="border-l-2 border-pink pl-8 py-3">
-          <p className="text-lg text-gray-700 leading-relaxed mb-5 italic">
-            {quoteWill?.body || "\u201cWe consistently bet, not only that the future could be a fantastic and wonderful place, but that it\u2019s worthwhile for us, as an organization, to work toward that future.\u201d"}
-          </p>
+          <MarkdownContent
+            content={quoteWill?.body || "\u201cWe consistently bet, not only that the future could be a fantastic and wonderful place, but that it\u2019s worthwhile for us, as an organization, to work toward that future.\u201d"}
+            className="page-content text-lg text-gray-700 leading-relaxed mb-5 italic"
+          />
           <AuthorCard slug="will-scott" />
         </div>
       </div>

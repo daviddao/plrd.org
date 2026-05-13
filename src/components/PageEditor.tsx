@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react"
 import { useSearchParams } from "next/navigation"
 import type { PageRecord, PageSection } from "@/lib/lexicons"
+import { markdownToHtml } from "@/lib/markdown"
 
 type PageEntry = { rkey: string; record: PageRecord }
 
@@ -255,8 +256,8 @@ function BodyField({ value, onChange }: { value: string; onChange: (v: string) =
         <div className="min-h-[80px] py-2 border-b border-gray-200">
           {value.trim() ? (
             <div
-              className="text-sm text-gray-700 leading-relaxed prose-sm"
-              dangerouslySetInnerHTML={{ __html: renderMarkdown(value) }}
+              className="markdown-content page-content text-sm text-gray-700 leading-relaxed prose-sm"
+              dangerouslySetInnerHTML={{ __html: markdownToHtml(value) }}
             />
           ) : (
             <p className="text-sm text-gray-300 italic">Nothing to preview</p>
@@ -267,43 +268,13 @@ function BodyField({ value, onChange }: { value: string; onChange: (v: string) =
           ref={textareaRef}
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          placeholder="Supports markdown — **bold**, *italic*, [link](url)"
+          placeholder="Supports markdown — **bold**, _italic_, ## heading"
           rows={3}
           className="w-full bg-transparent outline-none text-sm text-gray-800 placeholder:text-gray-300 border-b border-gray-200 focus:border-blue py-2 resize-none overflow-hidden leading-relaxed font-mono text-[13px] transition-colors"
         />
       )}
     </div>
   )
-}
-
-// Minimal markdown renderer
-function renderMarkdown(md: string): string {
-  const escape = (s: string) =>
-    s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
-
-  const inline = (s: string) =>
-    s
-      .replace(/`([^`]+)`/g, "<code>$1</code>")
-      .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
-      .replace(/\*([^*]+)\*/g, "<em>$1</em>")
-      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-blue underline">$1</a>')
-      .replace(/\n/g, "<br/>")
-
-  return md
-    .split(/\n\n+/)
-    .map((block) => {
-      block = block.trim()
-      if (!block) return ""
-      if (block.startsWith("### ")) return `<h3 class="font-semibold text-sm mt-3 mb-1">${inline(block.slice(4))}</h3>`
-      if (block.startsWith("## ")) return `<h2 class="font-semibold text-base mt-4 mb-1">${inline(block.slice(3))}</h2>`
-      if (block.startsWith("# ")) return `<h1 class="font-semibold text-lg mt-4 mb-2">${inline(block.slice(2))}</h1>`
-      if (block.startsWith("```")) {
-        const code = block.replace(/^```\w*\n?/, "").replace(/\n?```$/, "")
-        return `<pre class="bg-gray-50 rounded p-2 text-xs overflow-x-auto"><code>${escape(code)}</code></pre>`
-      }
-      return `<p class="mb-2">${inline(block)}</p>`
-    })
-    .join("")
 }
 
 // ── Page list ─────────────────────────────────────────────────────────────────

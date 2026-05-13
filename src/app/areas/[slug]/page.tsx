@@ -10,6 +10,7 @@ import { AreaIcon, type AreaIconType } from '@/components/AreaIcons'
 import AreaHeroActions from '@/components/AreaHeroActions'
 import AuthorCard from '@/components/AuthorCard'
 import Breadcrumb from '@/components/Breadcrumb'
+import MarkdownContent from '@/components/MarkdownContent'
 import { fetchPage, getSection, fetchOpportunitySpaces } from '@/lib/indexer'
 import aiOpportunityData from '@/data/fa2/ai-opportunityspaces.json'
 import dhrOpportunityData from '@/data/fa2/dhr-opportunityspaces.json'
@@ -131,9 +132,7 @@ export default async function AreaPage({ params }: Props) {
           </h1>
         </div>
         {summary && (
-          <p className="relative z-10 text-lg text-gray-600 leading-relaxed max-w-2xl mb-8">
-            {summary}
-          </p>
+          <MarkdownContent content={summary} className="relative z-10 text-lg text-gray-600 leading-relaxed max-w-2xl mb-8" />
         )}
         <AreaHeroActions
           areaSlug={slug}
@@ -153,11 +152,7 @@ export default async function AreaPage({ params }: Props) {
       {(bodyFromIndexer || area.html) && (
         <div className="mb-12 pb-12 border-b border-gray-100">
           {bodyFromIndexer ? (
-            <div className="page-content text-base text-gray-700 leading-relaxed max-w-3xl">
-              {bodyFromIndexer.split('\n\n').map((para, i) => (
-                <p key={i}>{para}</p>
-              ))}
-            </div>
+            <MarkdownContent content={bodyFromIndexer} className="page-content text-base text-gray-700 leading-relaxed max-w-3xl" />
           ) : (
             <div className="page-content text-base text-gray-700 leading-relaxed max-w-3xl" dangerouslySetInnerHTML={{ __html: area.html! }} />
           )}

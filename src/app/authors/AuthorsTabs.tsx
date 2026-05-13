@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { authors } from '@/lib/content'
 import { PageEditHistoryByline } from '@/components/EditHistoryByline'
+import MarkdownContent from '@/components/MarkdownContent'
 
 const LEADS = ['juan-benet', 'molly-mackinlay', 'will-scott', 'sean-escola', 'david-dao', 'james-tunningley']
 
@@ -37,9 +38,7 @@ export default function AuthorsTabs({ heroTitle, heroSubtitle, leadershipBlurb, 
         <h1 className="text-[36px] md:text-[52px] font-normal leading-[1.1] tracking-tight mb-4">
           {heroTitle}
         </h1>
-        <p className="text-lg text-gray-600 leading-relaxed max-w-2xl">
-          {heroSubtitle}
-        </p>
+        <MarkdownContent content={heroSubtitle} className="text-lg text-gray-600 leading-relaxed max-w-2xl" />
       </div>
 
       {/* Sticky tab bar */}
@@ -64,9 +63,7 @@ export default function AuthorsTabs({ heroTitle, heroSubtitle, leadershipBlurb, 
       {/* Leadership */}
       {activeTab === 'leadership' && (
         <div>
-          <p className="text-sm text-gray-500 uppercase tracking-wide mb-12">
-            {leadershipBlurb}
-          </p>
+          <MarkdownContent content={leadershipBlurb} className="text-sm text-gray-500 uppercase tracking-wide mb-12 [&_p]:mb-0" />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 mb-24">
             {leadership.map(author => (
               <LeaderCard key={author.slug} author={author} />
@@ -82,9 +79,7 @@ export default function AuthorsTabs({ heroTitle, heroSubtitle, leadershipBlurb, 
           <p className="text-sm text-gray-500 uppercase tracking-wide mb-2">
             PL Neuro · External Advisors
           </p>
-          <p className="text-sm text-gray-400 mb-10 max-w-xl">
-            {advisorsBlurb}
-          </p>
+          <MarkdownContent content={advisorsBlurb} className="text-sm text-gray-400 mb-10 max-w-xl [&_p]:mb-0" />
           <div
             className="flex gap-6 overflow-x-auto pb-4 -mx-6 px-6 snap-x snap-mandatory scroll-smooth"
             style={{ scrollbarWidth: 'none' }}
