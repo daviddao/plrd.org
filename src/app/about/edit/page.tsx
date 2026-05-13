@@ -3,6 +3,7 @@
 import { usePageEdit, EditableField, EditBar, useRequireAdmin } from '@/components/InlineEdit'
 import AuthorCard from '@/components/AuthorCard'
 import Breadcrumb from '@/components/Breadcrumb'
+import { FOCUS_AREA_DESCRIPTIONS } from '@/lib/focus-area-descriptions'
 import Link from 'next/link'
 
 export default function AboutEditPage() {
@@ -103,22 +104,22 @@ export default function AboutEditPage() {
           <FocusCard
             slug="digital-human-rights"
             title="Digital Human Rights"
-            description="Securing freedom and safety in the digital age through improved internet infrastructure and Web3 technologies."
+            description={FOCUS_AREA_DESCRIPTIONS['digital-human-rights']}
           />
           <FocusCard
             slug="economies-governance"
             title="Economies & Governance"
-            description="Upgrading coordination systems through cryptoeconomics, mechanism design, and public goods funding."
+            description={FOCUS_AREA_DESCRIPTIONS['economies-governance']}
           />
           <FocusCard
             slug="ai-robotics"
             title="AI & Robotics"
-            description="Advancing artificial intelligence and robotics with focus on beneficial outcomes and responsible development."
+            description={FOCUS_AREA_DESCRIPTIONS['ai-robotics']}
           />
           <FocusCard
             slug="neurotech"
             title="Neurotechnology"
-            description="Pioneering brain-computer interfaces and related technologies to expand human capabilities safely."
+            description={FOCUS_AREA_DESCRIPTIONS.neurotech}
           />
         </div>
       </div>

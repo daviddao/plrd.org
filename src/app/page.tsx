@@ -7,6 +7,7 @@ import { AreaIcon } from '@/components/AreaIcons'
 import { GeoIllustration } from '@/components/GeoIllustration'
 import MarkdownContent from '@/components/MarkdownContent'
 import { fetchPage, getSection, getSectionsWithPrefix } from "@/lib/indexer"
+import { FOCUS_AREA_DESCRIPTIONS } from '@/lib/focus-area-descriptions'
 import { loadHexMosaic, type HexPattern } from "@/lib/hex-mosaic"
 
 type UpdateItem = {
@@ -167,28 +168,28 @@ export default async function HomePage() {
             iconType="shield"
             mosaicSlug="digital-human-rights"
             title={dhr?.title || "Digital Human Rights"}
-            body={dhr?.subtitle || "Building decentralized infrastructure that enshrines freedom and safety in the digital age."}
+            body={dhr?.subtitle || FOCUS_AREA_DESCRIPTIONS['digital-human-rights']}
           />
           <FocusAreaCard
             href="/areas/economies-governance"
             iconType="hexagon"
             mosaicSlug="economies-governance"
             title={eg?.title || "Economies & Governance"}
-            body={eg?.subtitle || "Crypto-native tools for more efficient, equitable coordination at global scale."}
+            body={eg?.subtitle || FOCUS_AREA_DESCRIPTIONS['economies-governance']}
           />
           <FocusAreaCard
             href="/areas/ai-robotics"
             iconType="neural"
             mosaicSlug="ai-robotics"
             title={ai?.title || "AI & Robotics"}
-            body={ai?.subtitle || "Responsible advancement in AGI, robotics, and immersive technologies that reshape how we interact with the world."}
+            body={ai?.subtitle || FOCUS_AREA_DESCRIPTIONS['ai-robotics']}
           />
           <FocusAreaCard
             href="/areas/neurotech"
             iconType="brain"
             mosaicSlug="neurotech"
             title={neuro?.title || "Neurotechnology"}
-            body={neuro?.subtitle || "Accelerating brain-computer interfaces and NeuroAI to expand human cognition and treat brain disorders."}
+            body={neuro?.subtitle || FOCUS_AREA_DESCRIPTIONS.neurotech}
           />
         </div>
       </div>

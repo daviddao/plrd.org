@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { AreaIcon } from '@/components/AreaIcons'
+import { FOCUS_AREA_DESCRIPTIONS } from '@/lib/focus-area-descriptions'
 import {
   useRequireAdmin,
   usePageEdit,
@@ -118,7 +119,7 @@ export default function LandingEditPage() {
             iconType="shield"
             mosaicSrc="/images/fa2/mosaics/digital-human-rights.svg"
             placeholderTitle="Digital Human Rights"
-            placeholderBody="Building decentralized infrastructure that enshrines freedom and safety in the digital age."
+            placeholderBody={FOCUS_AREA_DESCRIPTIONS['digital-human-rights']}
             get={get}
             set={set}
           />
@@ -127,7 +128,7 @@ export default function LandingEditPage() {
             iconType="hexagon"
             mosaicSrc="/images/fa2/mosaics/economies-governance.svg"
             placeholderTitle="Economies & Governance"
-            placeholderBody="Crypto-native tools for more efficient, equitable coordination at global scale."
+            placeholderBody={FOCUS_AREA_DESCRIPTIONS['economies-governance']}
             get={get}
             set={set}
           />
@@ -136,7 +137,7 @@ export default function LandingEditPage() {
             iconType="neural"
             mosaicSrc="/images/fa2/mosaics/ai-robotics.svg"
             placeholderTitle="AI & Robotics"
-            placeholderBody="Responsible advancement in AGI, robotics, and immersive technologies that reshape how we interact with the world."
+            placeholderBody={FOCUS_AREA_DESCRIPTIONS['ai-robotics']}
             get={get}
             set={set}
           />
@@ -145,7 +146,7 @@ export default function LandingEditPage() {
             iconType="brain"
             mosaicSrc="/images/fa2/mosaics/neurotech.svg"
             placeholderTitle="Neurotechnology"
-            placeholderBody="Accelerating brain-computer interfaces and NeuroAI to expand human cognition and treat brain disorders."
+            placeholderBody={FOCUS_AREA_DESCRIPTIONS.neurotech}
             get={get}
             set={set}
           />

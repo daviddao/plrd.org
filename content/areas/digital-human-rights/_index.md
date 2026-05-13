@@ -1,7 +1,7 @@
 ---
 title: "Digital Human Rights"
 date: 2024-03-15
-summary: "Securing Digital Human Rights: Building a foundation of freedom and safety in the digital age through Web3 networks and decentralized infrastructure."
+summary: "Building open, verifiable, censorship-resistant infrastructure human freedom & agency in the digital age."
 leads:
   - will-scott
 ---
