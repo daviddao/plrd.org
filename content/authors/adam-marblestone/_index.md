@@ -3,11 +3,11 @@
 name: Adam Marblestone
 
 # Role/position (e.g. Research Scientist)
-role: Research Advisor 
+role: Research Advisor
 
 # Zero or one of the groups in content/groups (or free text)
-groups: 
-  
+groups:
+  - Convergent Research
 
 # Avatar (no need to edit)
 resources:
@@ -21,7 +21,7 @@ interests:
   - Biology
 
 # Degrees
-education: 
+education:
   courses:
   - course: PhD
     institution: Harvard
@@ -42,7 +42,7 @@ social:
   - icon: linkedin
     link: https://www.linkedin.com/in/adam-marblestone-87202813
   - icon: link
-    link: https://www.adammarblestone.org/    
+    link: https://www.adammarblestone.org/
 
 # Organizational groups that you belong to (for author list route)
 # Delete what doesn't apply
@@ -55,8 +55,8 @@ user_groups:
 
 ---
 
-Adam is working to roadmap and launch science and technology moonshot projects that call for novel organizational and funding models. 
+Adam is working to roadmap and launch science and technology moonshot projects that call for novel organizational and funding models.
 
-Adam is a Schmidt Futures Innovation Fellow and affiliated with the Federation of American Scientists (FAS). Previously, he was a research scientist at Google DeepMind studying connections between AI and neuroscience, Chief Strategy Officer of the brain-computer interface company Kernel, a research scientist in Ed Boyden's Synthetic Neurobiology Group at MIT working to develop new technologies for brain circuit mapping, a PhD student in biophysics with George Church and colleagues at Harvard, and a theoretical physics student with Michel Devoret at Yale working on quantum information theory. 
+Adam is a Schmidt Futures Innovation Fellow and affiliated with the Federation of American Scientists (FAS). Previously, he was a research scientist at Google DeepMind studying connections between AI and neuroscience, Chief Strategy Officer of the brain-computer interface company Kernel, a research scientist in Ed Boyden's Synthetic Neurobiology Group at MIT working to develop new technologies for brain circuit mapping, a PhD student in biophysics with George Church and colleagues at Harvard, and a theoretical physics student with Michel Devoret at Yale working on quantum information theory.
 
 His work has been recognized with a Technology Review 35 Innovators Under 35 Award (2018), a Fannie and John Hertz Foundation Fellowship (2010) and a Goldwater Scholarship (2008). He also helped to start companies like BioBright and advised foundations such as the Open Philanthropy Project.

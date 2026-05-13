@@ -7,7 +7,7 @@ authors:
 role: Neuro Advisor
 
 groups:
-  - IARPA
+  - STR
 
 user_groups:
   - Neuro Advisors
