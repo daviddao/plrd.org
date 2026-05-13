@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import EditPageButton from '@/components/EditPageButton'
 import { PageEditHistoryByline } from '@/components/EditHistoryByline'
 import Breadcrumb from '@/components/Breadcrumb'
+import MarkdownContent from '@/components/MarkdownContent'
 import { fetchPage, getSection } from '@/lib/indexer'
 
 export const metadata: Metadata = {
@@ -98,9 +99,7 @@ export default async function SubareasPage() {
       {/* Header */}
       <div className="mb-12">
         <h1 className="text-2xl lg:text-[36px] font-semibold mb-3">{heroTitle}</h1>
-        <p className="text-lg text-gray-600 leading-relaxed max-w-2xl">
-          {heroSubtitle}
-        </p>
+        <MarkdownContent content={heroSubtitle} className="text-lg text-gray-600 leading-relaxed max-w-2xl" />
       </div>
 
       {/* Subareas grid */}
@@ -112,7 +111,7 @@ export default async function SubareasPage() {
               <div className="flex-1 min-w-0">
                 <h3 className="text-base font-medium text-black mb-1">{sub.title}</h3>
                 <span className="text-sm text-gray-400">{sub.tagline}</span>
-                <p className="text-sm text-gray-500 leading-relaxed mt-3">{sub.description}</p>
+                <MarkdownContent content={sub.description} className="mt-3 text-sm text-gray-500 leading-relaxed [&_p]:mb-0" />
               </div>
             </div>
           </div>

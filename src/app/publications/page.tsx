@@ -5,6 +5,7 @@ import { slugToName } from '@/lib/format'
 import Breadcrumb from '@/components/Breadcrumb'
 import EditPageButton from '@/components/EditPageButton'
 import { PageEditHistoryByline } from '@/components/EditHistoryByline'
+import MarkdownContent from '@/components/MarkdownContent'
 import { fetchPage, getSection } from '@/lib/indexer'
 
 function resolveAuthorName(slug: string): string {
@@ -35,9 +36,7 @@ export default async function PublicationsPage() {
         <h1 className="relative z-10 text-xl lg:text-[40px] font-semibold leading-[1.15] tracking-tight mb-4 max-w-lg">
           {heroTitle}
         </h1>
-        <p className="relative z-10 text-gray-600 leading-relaxed max-w-xl">
-          {heroSubtitle}
-        </p>
+        <MarkdownContent content={heroSubtitle} className="relative z-10 text-gray-600 leading-relaxed max-w-xl" />
       </div>
 
       {/* List */}

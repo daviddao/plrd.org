@@ -175,6 +175,55 @@ ul li li {
   padding-bottom: 1rem;
 }
 
+/* Minimal markdown rendered from editable page text. */
+.markdown-content > :last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.markdown-content:not(.page-content) p:not(:last-child) {
+  margin-bottom: 1rem;
+}
+
+.markdown-content:not(.page-content) h1,
+.markdown-content:not(.page-content) h2,
+.markdown-content:not(.page-content) h3 {
+  font-weight: 600;
+  line-height: 1.25;
+  margin: 0.75rem 0 0.5rem;
+}
+
+.markdown-content:not(.page-content) h1 {
+  font-size: 1.5em;
+}
+
+.markdown-content:not(.page-content) h2 {
+  font-size: 1.25em;
+}
+
+.markdown-content:not(.page-content) h3 {
+  font-size: 1.1em;
+}
+
+.markdown-content code {
+  background: rgb(0 0 0 / 0.04);
+  border-radius: 0.25rem;
+  padding: 0.1rem 0.25rem;
+}
+
+.markdown-content pre {
+  background: rgb(0 0 0 / 0.04);
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.markdown-content pre code {
+  background: transparent;
+  padding: 0;
+}
+
 /* ===== Custom utilities ===== */
 .fade-in {
   transition: opacity .4s cubic-bezier(0.785, 0.135, 0.15, 0.86);
