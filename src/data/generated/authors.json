@@ -30,7 +30,9 @@
     "slug": "adam-marblestone",
     "name": "Adam Marblestone",
     "role": "Research Advisor",
-    "groups": [],
+    "groups": [
+      "Convergent Research"
+    ],
     "user_groups": [
       "Neuro Advisors"
     ],
@@ -809,7 +811,7 @@
     "name": "David A. Markowitz",
     "role": "Neuro Advisor",
     "groups": [
-      "IARPA"
+      "STR"
     ],
     "user_groups": [
       "Neuro Advisors"
