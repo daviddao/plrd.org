@@ -1,7 +1,7 @@
 ---
 title: "Digital Human Rights"
 date: 2024-03-15
-summary: "Building open, verifiable, censorship-resistant infrastructure human freedom & agency in the digital age."
+summary: "Building open, verifiable, censorship-resistant infrastructure for human freedom & agency in the digital age."
 leads:
   - will-scott
 ---
