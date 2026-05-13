@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { AreaIcon, type AreaIconType } from '@/components/AreaIcons'
+import AreaHeroActions from '@/components/AreaHeroActions'
 import AuthorCard from '@/components/AuthorCard'
 import Breadcrumb from '@/components/Breadcrumb'
 import aiOpportunityData from '@/data/fa2/ai-opportunityspaces.json'
@@ -109,17 +110,11 @@ export default function AreaEditPage() {
           />
         </div>
 
-        <div className="relative z-10 flex flex-wrap gap-4 mb-10">
-          <a
-            href={`/areas/${slug}/#opportunity-spaces`}
-            className="inline-flex items-center gap-2 px-5 py-2.5 bg-blue text-white rounded-full hover:bg-blue/90 transition-colors font-medium"
-          >
-            Opportunity Spaces
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 5v14m0 0l-6-6m6 6l6-6" />
-            </svg>
-          </a>
-        </div>
+        <AreaHeroActions
+          areaSlug={slug}
+          showOpportunitySpaces={Boolean(SLUG_TO_OPPORTUNITY_DATA[slug])}
+          opportunityHref={`/areas/${slug}/#opportunity-spaces`}
+        />
 
         {/* Leads */}
         {leads.length > 0 && (
