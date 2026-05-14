@@ -9,6 +9,7 @@ import MarkdownContent from '@/components/MarkdownContent'
 import { fetchPage, getSection, getSectionsWithPrefix } from "@/lib/indexer"
 import { FOCUS_AREA_DESCRIPTIONS } from '@/lib/focus-area-descriptions'
 import { loadHexMosaic, type HexPattern } from "@/lib/hex-mosaic"
+import RDPipeline from "@/components/RDPipeline"
 
 type UpdateItem = {
   title: string
@@ -143,6 +144,31 @@ export default async function HomePage() {
           <svg className="w-6 h-6 text-gray-400 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 14l-7 7m0 0l-7-7" />
           </svg>
+        </div>
+      </div>
+
+      {/* R&D pipeline — the canonical PL R&D 5-stage funnel shown as a
+          hexagonal mosaic from blue (Research) → green (Scaling). Mirrors
+          the focus-areas section directly below it: same 2-column heading +
+          description grid, same vertical rhythm, same top border. The
+          diagram is constrained to a sub-`max-w-6xl` column so it reads as
+          a refined diagram rather than a hero banner. */}
+      <div className="pb-16 lg:pb-20 border-t border-gray-200 pt-16 lg:pt-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start mb-12 lg:mb-14">
+          <h2 className="text-[28px] md:text-[36px] font-normal leading-tight tracking-tight">
+            From research to scale.
+          </h2>
+          <p className="text-base text-gray-600 leading-relaxed lg:pt-3">
+            Our R&amp;D pipeline moves frontier ideas from open research
+            through productionizing and into deployed systems that scale
+            globally — each stage compounding on the last.
+          </p>
+        </div>
+        {/* `max-w-5xl` (64rem ≈ 1024px) tames the diagram so it no longer
+            dominates the page. `mx-auto` keeps it centered within the
+            page's `max-w-6xl` content column. */}
+        <div className="max-w-5xl mx-auto">
+          <RDPipeline />
         </div>
       </div>
 
