@@ -14,7 +14,7 @@ const alumni = authors.filter(a => !LEADS.includes(a.slug) && !a.user_groups.inc
 
 const TABS = [
   { id: 'leadership', label: 'Leadership' },
-  { id: 'advisors',   label: 'PL Neuro Science Advisory Board' },
+  { id: 'advisors',   label: 'Advisors' },
   { id: 'alumni',     label: 'Alumni' },
 ]
 
@@ -77,7 +77,7 @@ export default function AuthorsTabs({ heroTitle, heroSubtitle, leadershipBlurb, 
       {activeTab === 'advisors' && (
         <div className="max-w-5xl mx-auto">
           <p className="text-sm text-gray-500 uppercase tracking-wide mb-2">
-            Advisors
+            PL Neuro Science Advisory Board
           </p>
           <MarkdownContent content={advisorsBlurb} className="text-sm text-gray-400 mb-10 max-w-xl [&_p]:mb-0" />
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-6 gap-y-10">
