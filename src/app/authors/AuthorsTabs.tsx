@@ -75,12 +75,12 @@ export default function AuthorsTabs({ heroTitle, heroSubtitle, leadershipBlurb, 
 
       {/* Advisors */}
       {activeTab === 'advisors' && (
-        <div>
+        <div className="max-w-5xl mx-auto">
           <p className="text-sm text-gray-500 uppercase tracking-wide mb-2">
-            PL Neuro Science Advisory Board
+            Advisors
           </p>
           <MarkdownContent content={advisorsBlurb} className="text-sm text-gray-400 mb-10 max-w-xl [&_p]:mb-0" />
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-6 gap-y-10">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-6 gap-y-10">
             {advisors.map(author => (
               <AdvisorCard key={author.slug} author={author} />
             ))}
