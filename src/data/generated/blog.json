@@ -6,6 +6,7 @@
     "summary": "Builders redefining privacy and sovereignty — where control of data, identity, and computation is real, not just promised. Highlights from the teams working at the frontier of digital human rights.",
     "authors": [],
     "external_url": "https://protocol.ai/blog/data-sovereignty-in-a-privacy-first-future/",
+    "coverImage": "https://protocol.ai/images/blog/og/data-sovereignty-in-a-privacy-first-future.jpg",
     "html": ""
   },
   {
@@ -15,6 +16,7 @@
     "summary": "Attestation could follow TLS's path: standardize trust signals, clarify roles, and mature tooling. A look at what it would take for remote attestation to become infrastructure-grade.",
     "authors": [],
     "external_url": "https://protocol.ai/blog/attestation-follow-in-the-footsteps-of-tls/",
+    "coverImage": "https://protocol.ai/images/blog/og/attestation-follow-in-the-footsteps-of-TLS.png",
     "html": ""
   },
   {
@@ -24,6 +26,7 @@
     "summary": "Key takeaways from the Cypherpunk Retreat, where 100 leading builders advanced privacy-tech coordination. Themes included TEEs, MPC, and the next generation of private computation.",
     "authors": [],
     "external_url": "https://protocol.ai/blog/threads-from-the-2025-cypherpunk-retreat/",
+    "coverImage": "https://protocol.ai/images/blog/og/cyber-punk-retreat.jpg",
     "html": ""
   },
   {
@@ -33,6 +36,7 @@
     "summary": "Exploring how crypto incentives and decentralized infrastructure can accelerate embodied AI and robotics — and why open coordination matters for the next wave of physical AI.",
     "authors": [],
     "external_url": "https://protocol.ai/blog/bit-robot-and-the-future-of-embodied-ai/",
+    "coverImage": "https://protocol.ai/images/blog/og/bit-robot.jpg",
     "html": ""
   },
   {
@@ -42,6 +46,7 @@
     "summary": "Reflecting on Protocol Labs' 2024 impact across neurotech, digital human rights, AI, and economies — and the vision for 2025 and beyond.",
     "authors": [],
     "external_url": "https://protocol.ai/blog/the-impact-of-our-innovation-network/",
+    "coverImage": "https://protocol.ai/images/blog/og/pl-summit-2024.jpg",
     "html": ""
   },
   {
@@ -51,6 +56,7 @@
     "summary": "A deep dive into neurotechnology's potential to reshape treatment of brain disorders, augment human cognition, and accelerate our understanding of the brain. Why Protocol Labs is investing in this frontier.",
     "authors": [],
     "external_url": "https://protocol.ai/blog/the-transformative-power-of-neurotechnology/",
+    "coverImage": "https://protocol.ai/images/blog/og/pl-blog-future-neurotech.jpg",
     "html": ""
   },
   {
@@ -60,6 +66,7 @@
     "summary": "At a crossroads of technological capability and institutional inadequacy, Protocol Labs articulates its mission: building the infrastructure for a more open, equitable, and resilient internet.",
     "authors": [],
     "external_url": "https://protocol.ai/blog/transcription-pl-vision-driving-a-breakthroughs-in-computing-to-push-humanity-forward/",
+    "coverImage": "https://protocol.ai/images/blog/og/pl-vision.png",
     "html": ""
   }
 ]

@@ -18,6 +18,13 @@ type UpdateItem = {
   permalink: string
   slug: string
   areas: string[]
+  /**
+   * For blog posts, the cover image scraped from the external_url's
+   * og:image at build time (see `scripts/build-content.mjs > buildBlog`).
+   * Publications and talks leave this empty and fall back to the
+   * procedural hex GeoIllustration.
+   */
+  coverImage?: string
 }
 
 function getLatestUpdates(count: number): UpdateItem[] {
@@ -46,6 +53,7 @@ function getLatestUpdates(count: number): UpdateItem[] {
     permalink: b.external_url || `/blog/${b.slug}`,
     slug: b.slug,
     areas: [],
+    coverImage: b.coverImage || '',
   }))
 
   return [...pubs, ...talkItems, ...blogItems]
@@ -53,7 +61,32 @@ function getLatestUpdates(count: number): UpdateItem[] {
     .slice(0, count)
 }
 
-function CardIllustration({ slug, areas }: { slug: string; areas: string[] }) {
+function CardIllustration({
+  slug,
+  areas,
+  coverImage,
+  title,
+}: {
+  slug: string
+  areas: string[]
+  coverImage?: string
+  title?: string
+}) {
+  // When the source provides a real cover image (currently: blog posts whose
+  // og:image was scraped at build time), use it. Otherwise fall back to the
+  // procedural hex illustration so publications/talks still get a visual.
+  if (coverImage) {
+    return (
+      <img
+        src={coverImage}
+        alt={title || ''}
+        width={320}
+        height={120}
+        loading="lazy"
+        className="w-full h-[120px] object-cover bg-gray-50 group-hover:scale-[1.02] transition-transform duration-300"
+      />
+    )
+  }
   return <GeoIllustration seed={slug} areas={areas} w={320} h={120} />
 }
 
@@ -255,7 +288,12 @@ export default async function HomePage() {
             >
               {/* Illustration */}
               <div className="overflow-hidden">
-                <CardIllustration slug={item.slug} areas={item.areas} />
+                <CardIllustration
+                  slug={item.slug}
+                  areas={item.areas}
+                  coverImage={item.coverImage}
+                  title={item.title}
+                />
               </div>
               {/* Content */}
               <div className="flex flex-col flex-1 justify-between p-5">

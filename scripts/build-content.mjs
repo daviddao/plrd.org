@@ -144,17 +144,120 @@ function buildOutreach() {
 }
 
 // Blog posts
-function buildBlog() {
-  const items = readDir('blog').map((b) => ({
-    slug: b.slug,
-    title: b.title || '',
-    date: b.date || '',
-    summary: b.summary || '',
-    authors: b.authors || [],
-    external_url: b.external_url || '',
-    html: renderMd(b.content),
-  })).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-  return items
+// Pull the first plausible image URL out of an HTML or markdown blob.
+// Priority: og:image → twitter:image → first <img src="..."> (or data-src)
+// → first markdown ![](url). Returns '' if nothing found. The optional
+// baseUrl resolves relative paths (e.g. /images/foo.png on protocol.ai).
+function extractFirstImage(html, baseUrl) {
+  if (!html) return ''
+
+  const resolve = (src) => {
+    if (!src) return ''
+    if (!baseUrl) return src
+    try {
+      return new URL(src, baseUrl).toString()
+    } catch {
+      return src
+    }
+  }
+
+  // og:image (both attribute orders)
+  const og =
+    html.match(/<meta[^>]*property=["']og:image["'][^>]*content=["']([^"']+)["']/i) ||
+    html.match(/<meta[^>]*content=["']([^"']+)["'][^>]*property=["']og:image["']/i)
+  if (og) return resolve(og[1])
+
+  // twitter:image
+  const tw =
+    html.match(/<meta[^>]*name=["']twitter:image["'][^>]*content=["']([^"']+)["']/i) ||
+    html.match(/<meta[^>]*content=["']([^"']+)["'][^>]*name=["']twitter:image["']/i)
+  if (tw) return resolve(tw[1])
+
+  // <img src="..."> / <img data-src="..."> — skip empty + obvious placeholders
+  const imgs = [...html.matchAll(/<img[^>]+(?:src|data-src)=["']([^"']+)["']/gi)]
+  for (const m of imgs) {
+    const src = m[1]
+    if (!src) continue
+    // Protocol.ai lazy-loaded <img> placeholders we should ignore.
+    if (/\/default\.png(?:$|\?)/i.test(src)) continue
+    return resolve(src)
+  }
+
+  // markdown ![alt](url) — only consider URLs that look like images
+  const md = html.match(/!\[[^\]]*\]\(([^)\s]+)/)
+  if (md) return resolve(md[1])
+
+  return ''
+}
+
+async function fetchCoverImage(url) {
+  try {
+    const res = await fetch(url, { redirect: 'follow' })
+    if (!res.ok) {
+      console.warn(`  ⚠ Cover fetch ${res.status} for ${url}`)
+      return ''
+    }
+    const html = await res.text()
+    return extractFirstImage(html, url)
+  } catch (err) {
+    console.warn(`  ⚠ Cover fetch failed for ${url}: ${err.message}`)
+    return ''
+  }
+}
+
+// Load previous blog.json as a cheap cache so we don't re-hit the network
+// for every external_url on every build. Vercel runs the build script
+// fresh each deploy, but the committed blog.json still primes the cache.
+function loadBlogCoverCache() {
+  const prev = path.join(OUT_DIR, 'blog.json')
+  if (!fs.existsSync(prev)) return {}
+  try {
+    const arr = JSON.parse(fs.readFileSync(prev, 'utf-8'))
+    const map = {}
+    for (const p of arr) {
+      if (p && p.external_url && p.coverImage) {
+        map[p.external_url] = p.coverImage
+      }
+    }
+    return map
+  } catch {
+    return {}
+  }
+}
+
+async function buildBlog() {
+  const raw = readDir('blog')
+  const cache = loadBlogCoverCache()
+  // Set BLOG_REFRESH_COVERS=1 to force re-fetching every external page.
+  const refresh = process.env.BLOG_REFRESH_COVERS === '1'
+
+  const out = []
+  for (const b of raw) {
+    // 1. Author-supplied override wins (frontmatter `cover_image: ...`).
+    // 2. First image embedded in the markdown body.
+    // 3. og:image of the external_url (cached across builds).
+    let coverImage = b.cover_image || extractFirstImage(b.content)
+    if (!coverImage && b.external_url) {
+      if (!refresh && cache[b.external_url]) {
+        coverImage = cache[b.external_url]
+      } else {
+        coverImage = await fetchCoverImage(b.external_url)
+      }
+    }
+
+    out.push({
+      slug: b.slug,
+      title: b.title || '',
+      date: b.date || '',
+      summary: b.summary || '',
+      authors: b.authors || [],
+      external_url: b.external_url || '',
+      coverImage,
+      html: renderMd(b.content),
+    })
+  }
+
+  return out.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 }
 
 // Dependency Graph
@@ -351,7 +454,7 @@ const authors = buildAuthors()
 const talks = buildTalks()
 const tutorials = buildTutorials()
 const outreach = buildOutreach()
-const blog = buildBlog()
+const blog = await buildBlog()
 const areas = buildAreas()
 const sections = buildSections()
 const depGraph = buildDependencyGraph()

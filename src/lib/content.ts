@@ -64,6 +64,14 @@ export type BlogPost = {
   summary: string
   authors: string[]
   external_url: string
+  /**
+   * URL of the post's cover image. For external blog posts (the common case
+   * — `external_url` set, body empty), `scripts/build-content.mjs` fetches
+   * the remote page at build time and extracts og:image / twitter:image /
+   * first <img>. Empty string when nothing was found, in which case the
+   * landing-page card falls back to the procedural GeoIllustration.
+   */
+  coverImage: string
   html: string
 }
 
