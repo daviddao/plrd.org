@@ -138,22 +138,12 @@ const HEXAGONS: { d: string; fill: string; x: number }[] = [
   ...GREEN_HEXES.map((d) => ({ d, fill: "#75DA9E", x: pathX(d) })),
 ]
 
-// Wave timing. The wave loops continuously while the user is hovering;
-// each hex's animation has the same duration but a different
-// `animation-delay` based on its horizontal centroid.
-//
-// To make the loop COHERENT (not a chaotic chase), we tune the values
-// so the rightmost hex finishes its pulse exactly when the leftmost
-// hex starts its next cycle:
-//   pulseEndsAt   = STAGGER_MS + DURATION_MS * PULSE_FRACTION
-//   nextCycleAt   = DURATION_MS
-//   => DURATION_MS = STAGGER_MS / (1 - PULSE_FRACTION)
-// With PULSE_FRACTION = 0.22 and STAGGER_MS = 1400ms, DURATION_MS works
-// out to ~1800ms — the wave then traverses left-to-right cleanly and
-// restarts without a visible seam.
+// Subtle wave timing. The hexes and the group-label rules use the same
+// left-to-right stagger so the annotation layer feels connected to the
+// diagram instead of sitting on top of an unrelated animation.
 const X_MAX = 1146
-const STAGGER_MS = 1400
-const DURATION_MS = 1800
+const STAGGER_MS = 1800
+const DURATION_MS = 3600
 
 export default function RDPipeline() {
   // Stage labels — `leftPct` is the left-edge of the label as a percentage
@@ -165,6 +155,37 @@ export default function RDPipeline() {
     { name: "Productionizing", color: "#59ABC3", leftPct: 43 },
     { name: "Production", color: "#63BCB6", leftPct: 63 },
     { name: "Scaling", color: "#75DA9E", leftPct: 82 },
+  ]
+
+  const groupLabels = [
+    {
+      name: "Basic research groups",
+      color: "#3D78EC",
+      leftPct: 0.2,
+      topPct: 44,
+      widthPct: 21,
+    },
+    {
+      name: "FROs, R&D teams, side projects",
+      color: "#4E8AD3",
+      leftPct: 22,
+      topPct: 59,
+      widthPct: 25.5,
+    },
+    {
+      name: "Tech startups",
+      color: "#59ABC3",
+      leftPct: 49,
+      topPct: 35,
+      widthPct: 28,
+    },
+    {
+      name: "Tech companies",
+      color: "#75DA9E",
+      leftPct: 78.5,
+      topPct: 11,
+      widthPct: 21,
+    },
   ]
 
   return (
@@ -184,65 +205,113 @@ export default function RDPipeline() {
         .rdpipeline-figure .rdpipeline-hex {
           transform-box: fill-box;
           transform-origin: center;
-          will-change: transform, filter;
+          will-change: transform, filter, opacity;
         }
-        /* While hovered, every hex runs the same looping animation but
-           with its own delay — the staggered delays form the wave. */
+        .rdpipeline-figure .rdpipeline-group-rule {
+          transform-origin: left center;
+          will-change: transform, opacity, filter;
+        }
+        .rdpipeline-figure .rdpipeline-group-label {
+          will-change: transform, opacity;
+        }
+        /* While hovered, the diagram breathes left-to-right. The scale and
+           brightness changes are intentionally small so the labels remain
+           the calm, readable anchor of the figure. */
         @media (prefers-reduced-motion: no-preference) {
           .rdpipeline-figure:hover .rdpipeline-hex {
-            animation: rdpipeline-wave ${DURATION_MS}ms ease-in-out infinite;
+            animation: rdpipeline-wave ${DURATION_MS}ms cubic-bezier(.22, .61, .36, 1) infinite;
+          }
+          .rdpipeline-figure:hover .rdpipeline-group-label {
+            animation: rdpipeline-label ${DURATION_MS}ms cubic-bezier(.22, .61, .36, 1) infinite;
+            animation-delay: var(--label-delay);
+          }
+          .rdpipeline-figure:hover .rdpipeline-group-rule {
+            animation: rdpipeline-rule ${DURATION_MS}ms cubic-bezier(.22, .61, .36, 1) infinite;
+            animation-delay: var(--label-delay);
           }
         }
-        /* The pulse occupies the first ~22% of each cycle; the remaining
-           78% the hex sits at rest. With our chosen DURATION_MS /
-           STAGGER_MS pairing, by the time the rightmost hex finishes its
-           pulse, the leftmost is just starting its next cycle — giving a
-           continuous left-to-right flow. */
         @keyframes rdpipeline-wave {
-          0%   { transform: scale(1);    filter: brightness(1); }
-          11%  { transform: scale(1.18); filter: brightness(1.18) saturate(1.08); }
-          22%  { transform: scale(1);    filter: brightness(1); }
-          100% { transform: scale(1);    filter: brightness(1); }
+          0%   { transform: scale(1);     filter: brightness(1) saturate(1); opacity: 1; }
+          10%  { transform: scale(1.035); filter: brightness(1.055) saturate(1.025); opacity: .96; }
+          22%  { transform: scale(1);     filter: brightness(1) saturate(1); opacity: 1; }
+          100% { transform: scale(1);     filter: brightness(1) saturate(1); opacity: 1; }
+        }
+        @keyframes rdpipeline-label {
+          0%   { transform: translateY(0); opacity: 1; }
+          10%  { transform: translateY(-1px); opacity: .92; }
+          22%  { transform: translateY(0); opacity: 1; }
+          100% { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes rdpipeline-rule {
+          0%   { transform: scaleX(1);    opacity: .62; filter: brightness(1); }
+          10%  { transform: scaleX(1.025); opacity: .9;  filter: brightness(1.08); }
+          22%  { transform: scaleX(1);    opacity: .62; filter: brightness(1); }
+          100% { transform: scaleX(1);    opacity: .62; filter: brightness(1); }
         }
       `}</style>
 
-      <svg
-        viewBox="0 0 1146 366"
-        xmlns="http://www.w3.org/2000/svg"
-        className="w-full h-auto block"
-        aria-label="PL R&D pipeline: Research → Development → Productionizing → Production → Scaling"
-        role="img"
-      >
-        <g clipPath="url(#rdpipeline_clip)">
-          {HEXAGONS.map((hex, i) => (
-            <path
-              key={i}
-              d={hex.d}
-              fill={hex.fill}
-              className="rdpipeline-hex"
+      <div className="relative aspect-[1146/366] md:aspect-[1146/450]">
+        <div className="absolute inset-0 z-10 hidden md:block pointer-events-none" aria-hidden="true">
+          {groupLabels.map((label) => (
+            <div
+              key={label.name}
+              className="rdpipeline-group-label absolute"
               style={{
-                animationDelay: `${(hex.x / X_MAX) * STAGGER_MS}ms`,
+                left: `${label.leftPct}%`,
+                top: `${label.topPct}%`,
+                width: `${label.widthPct}%`,
+                ['--label-delay' as string]: `${(label.leftPct / 100) * STAGGER_MS}ms`,
               }}
-            />
+            >
+              <span className="block text-[13px] lg:text-sm font-medium tracking-tight text-gray-800 whitespace-nowrap">
+                {label.name}
+              </span>
+              <span
+                className="rdpipeline-group-rule mt-2 block h-px w-full opacity-70"
+                style={{ backgroundColor: label.color }}
+              />
+            </div>
           ))}
-        </g>
-        <defs>
-          <linearGradient
-            id="rdpipeline_gradient"
-            x1="212.514"
-            y1="276.247"
-            x2="728.334"
-            y2="276.247"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop stopColor="#4E8AD3" />
-            <stop offset="1" stopColor="#59ABC3" />
-          </linearGradient>
-          <clipPath id="rdpipeline_clip">
-            <rect width="1145.63" height="365.235" fill="white" />
-          </clipPath>
-        </defs>
-      </svg>
+        </div>
+
+        <svg
+          viewBox="0 0 1146 366"
+          xmlns="http://www.w3.org/2000/svg"
+          className="absolute inset-x-0 bottom-0 z-0 w-full h-auto block"
+          aria-label="PL R&D pipeline: Research → Development → Productionizing → Production → Scaling"
+          role="img"
+        >
+          <g clipPath="url(#rdpipeline_clip)">
+            {HEXAGONS.map((hex, i) => (
+              <path
+                key={i}
+                d={hex.d}
+                fill={hex.fill}
+                className="rdpipeline-hex"
+                style={{
+                  animationDelay: `${(hex.x / X_MAX) * STAGGER_MS}ms`,
+                }}
+              />
+            ))}
+          </g>
+          <defs>
+            <linearGradient
+              id="rdpipeline_gradient"
+              x1="212.514"
+              y1="276.247"
+              x2="728.334"
+              y2="276.247"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stopColor="#4E8AD3" />
+              <stop offset="1" stopColor="#59ABC3" />
+            </linearGradient>
+            <clipPath id="rdpipeline_clip">
+              <rect width="1145.63" height="365.235" fill="white" />
+            </clipPath>
+          </defs>
+        </svg>
+      </div>
 
       {/*
         Desktop labels (≥ sm): absolutely-positioned in a relative wrapper
