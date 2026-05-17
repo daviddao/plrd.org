@@ -6,22 +6,20 @@
  * matched to each cluster's visual centroid in the source artwork so they
  * track the clusters precisely at any width.
  *
- * Hover animation: when the user hovers anywhere on the figure, every
- * hexagon pulses (slight scale-up + brightness bump) with an
- * `animation-delay` proportional to the hex's x-position in the SVG. The
- * net effect is a wave that propagates left → right across the whole
- * mosaic, reinforcing the "research → scaling" flow the diagram already
- * implies visually. Respects `prefers-reduced-motion`.
+ * Interaction: there is no ambient animation. Hovering a pipeline region
+ * keeps that group in color, softens the rest of the mosaic, and expands
+ * the matching group label with a short description. The transitions are
+ * deliberately small so the diagram stays readable.
  *
  * Implementation: the source SVG ships two COMPOUND <path> elements (the
  * gradient cluster covering Development + Productionizing, and the teal
  * cluster covering Production) with multiple `M…Z` hex segments
- * concatenated into a single `d` string. To animate each hex
- * independently we split those compounds into individual hex paths at
- * module load via `splitCompound`. Each hex's first `M x y` is exactly
- * the top-center of the hexagon (verified by reading the source paths),
- * so `pathX(d)` gives us each hex's true horizontal centroid — perfect
- * for the wave's delay calculation.
+ * concatenated into a single `d` string. We split those compounds into
+ * individual hex paths at module load via `splitCompound` so each hex can
+ * be assigned to one of the four hover groups. Each hex's first `M x y`
+ * is exactly the top-center of the hexagon (verified by reading the source
+ * paths), so `pathX(d)` gives us a reliable horizontal centroid for the
+ * group boundary split.
  */
 
 // All blue "Research" cluster hexes from the source SVG, individual paths.
@@ -113,74 +111,108 @@ function splitCompound(d: string): string[] {
 /**
  * Extract the x-coordinate of the first `M` point in a hex path. By
  * convention the source SVG starts each hex path at its top-center
- * vertex, so this returns the hexagon's horizontal centroid — exactly
- * what we want for the wave's stagger calculation.
+ * vertex, so this returns the hexagon's horizontal centroid for grouping.
  */
 function pathX(d: string): number {
   const m = d.match(/M\s*([\d.]+)/)
   return m ? parseFloat(m[1]) : 0
 }
 
-// Flat list of every hexagon in the diagram, each annotated with its fill
-// and horizontal centroid. Built once at module load.
-const HEXAGONS: { d: string; fill: string; x: number }[] = [
-  ...BLUE_HEXES.map((d) => ({ d, fill: "#3D78EC", x: pathX(d) })),
-  ...splitCompound(COMPOUND_GRADIENT).map((d) => ({
-    d,
-    fill: "url(#rdpipeline_gradient)",
-    x: pathX(d),
-  })),
+type PipelineGroup = "basic" | "fros" | "startups" | "companies"
+
+type PipelineHex = {
+  d: string
+  fill: string
+  x: number
+  group: PipelineGroup
+}
+
+const gradientGroup = (x: number): PipelineGroup => (x < 560 ? "fros" : "startups")
+
+// Flat list of every hexagon in the diagram, each annotated with its fill,
+// horizontal centroid, and interaction group. Built once at module load.
+const HEXAGONS: PipelineHex[] = [
+  ...BLUE_HEXES.map((d) => ({ d, fill: "#3D78EC", x: pathX(d), group: "basic" as const })),
+  ...splitCompound(COMPOUND_GRADIENT).map((d) => {
+    const x = pathX(d)
+    return {
+      d,
+      fill: "url(#rdpipeline_gradient)",
+      x,
+      group: gradientGroup(x),
+    }
+  }),
   ...splitCompound(COMPOUND_TEAL).map((d) => ({
     d,
     fill: "#63BCB6",
     x: pathX(d),
+    group: "startups" as const,
   })),
-  ...GREEN_HEXES.map((d) => ({ d, fill: "#75DA9E", x: pathX(d) })),
+  ...GREEN_HEXES.map((d) => ({ d, fill: "#75DA9E", x: pathX(d), group: "companies" as const })),
 ]
 
-// Subtle wave timing. The hexes and the group-label rules use the same
-// left-to-right stagger so the annotation layer feels connected to the
-// diagram instead of sitting on top of an unrelated animation.
-const X_MAX = 1146
-const STAGGER_MS = 1800
-const DURATION_MS = 3600
+// Invisible SVG hit areas make each pipeline region easier to hover without
+// changing the artwork. Bounds are non-overlapping so adjacent labels / bars
+// never fight for hover state.
+const HIT_AREAS: { group: PipelineGroup; x: number; y: number; width: number; height: number }[] = [
+  { group: "basic", x: 0, y: 145, width: 210, height: 221 },
+  { group: "fros", x: 210, y: 215, width: 350, height: 151 },
+  { group: "startups", x: 560, y: 120, width: 340, height: 246 },
+  { group: "companies", x: 900, y: 0, width: 246, height: 366 },
+]
 
 export default function RDPipeline() {
   // Stage labels — `leftPct` is the left-edge of the label as a percentage
   // of the SVG width, derived from each cluster's leftmost dense hex in
   // the source artwork.
-  const stages = [
-    { name: "Research", color: "#3D78EC", leftPct: 4 },
-    { name: "Development", color: "#4E8AD3", leftPct: 24 },
-    { name: "Productionizing", color: "#59ABC3", leftPct: 43 },
-    { name: "Production", color: "#63BCB6", leftPct: 63 },
-    { name: "Scaling", color: "#75DA9E", leftPct: 82 },
+  const stages: { name: string; color: string; leftPct: number; group: PipelineGroup }[] = [
+    { name: "Research", color: "#3D78EC", leftPct: 4, group: "basic" },
+    { name: "Development", color: "#4E8AD3", leftPct: 24, group: "fros" },
+    { name: "Productionizing", color: "#59ABC3", leftPct: 43, group: "startups" },
+    { name: "Production", color: "#63BCB6", leftPct: 63, group: "startups" },
+    { name: "Scaling", color: "#75DA9E", leftPct: 82, group: "companies" },
   ]
 
-  const groupLabels = [
+  const groupLabels: {
+    group: PipelineGroup
+    name: string
+    description: string
+    color: string
+    leftPct: number
+    topPct: number
+    widthPct: number
+  }[] = [
     {
+      group: "basic",
       name: "Basic research groups",
+      description: "Open scientific work that creates new principles, primitives, and proof points.",
       color: "#3D78EC",
       leftPct: 0.2,
       topPct: 44,
       widthPct: 21,
     },
     {
+      group: "fros",
       name: "FROs, R&D teams, side projects",
+      description: "Focused teams turn promising ideas into prototypes, tools, and early ecosystems.",
       color: "#4E8AD3",
       leftPct: 22,
       topPct: 59,
       widthPct: 25.5,
     },
     {
+      group: "startups",
       name: "Tech startups",
+      description: "New ventures productize validated breakthroughs for real users and markets.",
       color: "#59ABC3",
       leftPct: 49,
       topPct: 35,
       widthPct: 28,
     },
     {
+      group: "companies",
       name: "Tech companies",
+      description: "Mature companies deploy, operate, and scale systems globally.",
       color: "#75DA9E",
       leftPct: 78.5,
       topPct: 11,
@@ -191,62 +223,87 @@ export default function RDPipeline() {
   return (
     <figure className="rdpipeline-figure w-full group">
       {/*
-        Scoped styles for the hover wave. Kept inline (rather than in
-        globals.css) so the component is self-contained and the keyframe
-        name can't clash with anything else. `transform-box: fill-box` +
+        Scoped hover styles. Kept inline (rather than in globals.css) so
+        the component is self-contained. `transform-box: fill-box` +
         `transform-origin: center` make each hex scale around its own
         center rather than the SVG origin (otherwise large hexes would
         translate visibly when scaled).
-        prefers-reduced-motion: respect the user's OS-level preference;
-        if they've asked for reduced motion, the hover animation simply
-        doesn't apply.
       */}
       <style>{`
         .rdpipeline-figure .rdpipeline-hex {
           transform-box: fill-box;
           transform-origin: center;
-          will-change: transform, filter, opacity;
+          transition: opacity 360ms ease, filter 360ms ease, transform 360ms ease;
+        }
+        .rdpipeline-figure .rdpipeline-hitarea {
+          cursor: default;
+          pointer-events: all;
+        }
+        .rdpipeline-figure .rdpipeline-group-label,
+        .rdpipeline-figure .rdpipeline-stage-label {
+          transition: opacity 320ms ease, filter 320ms ease, transform 320ms ease;
+        }
+        .rdpipeline-figure .rdpipeline-group-label {
+          border-radius: 14px;
+          padding: 8px 10px 10px;
+          margin: -8px -10px -10px;
+          pointer-events: auto;
         }
         .rdpipeline-figure .rdpipeline-group-rule {
           transform-origin: left center;
-          will-change: transform, opacity, filter;
+          transition: opacity 320ms ease, filter 320ms ease, transform 320ms ease;
         }
-        .rdpipeline-figure .rdpipeline-group-label {
-          will-change: transform, opacity;
+        .rdpipeline-figure .rdpipeline-description {
+          max-height: 0;
+          opacity: 0;
+          overflow: hidden;
+          transform: translateY(-4px);
+          transition: max-height 360ms ease, opacity 260ms ease, transform 360ms ease, margin-top 360ms ease;
         }
-        /* While hovered, the diagram breathes left-to-right. The scale and
-           brightness changes are intentionally small so the labels remain
-           the calm, readable anchor of the figure. */
-        @media (prefers-reduced-motion: no-preference) {
-          .rdpipeline-figure:hover .rdpipeline-hex {
-            animation: rdpipeline-wave ${DURATION_MS}ms cubic-bezier(.22, .61, .36, 1) infinite;
-          }
-          .rdpipeline-figure:hover .rdpipeline-group-label {
-            animation: rdpipeline-label ${DURATION_MS}ms cubic-bezier(.22, .61, .36, 1) infinite;
-            animation-delay: var(--label-delay);
-          }
-          .rdpipeline-figure:hover .rdpipeline-group-rule {
-            animation: rdpipeline-rule ${DURATION_MS}ms cubic-bezier(.22, .61, .36, 1) infinite;
-            animation-delay: var(--label-delay);
-          }
+        .rdpipeline-figure:has(.rdpipeline-interactive:hover) .rdpipeline-hex,
+        .rdpipeline-figure:has(.rdpipeline-interactive:hover) .rdpipeline-group-label,
+        .rdpipeline-figure:has(.rdpipeline-interactive:hover) .rdpipeline-stage-label {
+          opacity: .22;
+          filter: grayscale(1) saturate(.25);
         }
-        @keyframes rdpipeline-wave {
-          0%   { transform: scale(1);     filter: brightness(1) saturate(1); opacity: 1; }
-          10%  { transform: scale(1.035); filter: brightness(1.055) saturate(1.025); opacity: .96; }
-          22%  { transform: scale(1);     filter: brightness(1) saturate(1); opacity: 1; }
-          100% { transform: scale(1);     filter: brightness(1) saturate(1); opacity: 1; }
+        .rdpipeline-figure:has(.rdpipeline-basic:hover) .rdpipeline-basic,
+        .rdpipeline-figure:has(.rdpipeline-fros:hover) .rdpipeline-fros,
+        .rdpipeline-figure:has(.rdpipeline-startups:hover) .rdpipeline-startups,
+        .rdpipeline-figure:has(.rdpipeline-companies:hover) .rdpipeline-companies {
+          opacity: 1;
+          filter: none;
         }
-        @keyframes rdpipeline-label {
-          0%   { transform: translateY(0); opacity: 1; }
-          10%  { transform: translateY(-1px); opacity: .92; }
-          22%  { transform: translateY(0); opacity: 1; }
-          100% { transform: translateY(0); opacity: 1; }
+        .rdpipeline-figure:has(.rdpipeline-basic:hover) .rdpipeline-basic.rdpipeline-hex,
+        .rdpipeline-figure:has(.rdpipeline-fros:hover) .rdpipeline-fros.rdpipeline-hex,
+        .rdpipeline-figure:has(.rdpipeline-startups:hover) .rdpipeline-startups.rdpipeline-hex,
+        .rdpipeline-figure:has(.rdpipeline-companies:hover) .rdpipeline-companies.rdpipeline-hex {
+          transform: translateY(-1px) scale(1.015);
+          filter: brightness(1.04) saturate(1.04);
         }
-        @keyframes rdpipeline-rule {
-          0%   { transform: scaleX(1);    opacity: .62; filter: brightness(1); }
-          10%  { transform: scaleX(1.025); opacity: .9;  filter: brightness(1.08); }
-          22%  { transform: scaleX(1);    opacity: .62; filter: brightness(1); }
-          100% { transform: scaleX(1);    opacity: .62; filter: brightness(1); }
+        .rdpipeline-figure:has(.rdpipeline-basic:hover) .rdpipeline-group-label.rdpipeline-basic,
+        .rdpipeline-figure:has(.rdpipeline-fros:hover) .rdpipeline-group-label.rdpipeline-fros,
+        .rdpipeline-figure:has(.rdpipeline-startups:hover) .rdpipeline-group-label.rdpipeline-startups,
+        .rdpipeline-figure:has(.rdpipeline-companies:hover) .rdpipeline-group-label.rdpipeline-companies {
+          transform: translateY(-2px);
+          background: rgba(255, 255, 255, .88);
+          box-shadow: 0 14px 35px rgba(19, 19, 22, .06);
+        }
+        .rdpipeline-figure:has(.rdpipeline-basic:hover) .rdpipeline-group-label.rdpipeline-basic .rdpipeline-description,
+        .rdpipeline-figure:has(.rdpipeline-fros:hover) .rdpipeline-group-label.rdpipeline-fros .rdpipeline-description,
+        .rdpipeline-figure:has(.rdpipeline-startups:hover) .rdpipeline-group-label.rdpipeline-startups .rdpipeline-description,
+        .rdpipeline-figure:has(.rdpipeline-companies:hover) .rdpipeline-group-label.rdpipeline-companies .rdpipeline-description {
+          max-height: 90px;
+          opacity: 1;
+          transform: translateY(0);
+          margin-top: 8px;
+        }
+        .rdpipeline-figure:has(.rdpipeline-basic:hover) .rdpipeline-group-label.rdpipeline-basic .rdpipeline-group-rule,
+        .rdpipeline-figure:has(.rdpipeline-fros:hover) .rdpipeline-group-label.rdpipeline-fros .rdpipeline-group-rule,
+        .rdpipeline-figure:has(.rdpipeline-startups:hover) .rdpipeline-group-label.rdpipeline-startups .rdpipeline-group-rule,
+        .rdpipeline-figure:has(.rdpipeline-companies:hover) .rdpipeline-group-label.rdpipeline-companies .rdpipeline-group-rule {
+          opacity: 1;
+          transform: scaleX(1.03);
+          filter: brightness(1.08);
         }
       `}</style>
 
@@ -255,12 +312,11 @@ export default function RDPipeline() {
           {groupLabels.map((label) => (
             <div
               key={label.name}
-              className="rdpipeline-group-label absolute"
+              className={`rdpipeline-group-label rdpipeline-interactive rdpipeline-${label.group} absolute`}
               style={{
                 left: `${label.leftPct}%`,
                 top: `${label.topPct}%`,
                 width: `${label.widthPct}%`,
-                ['--label-delay' as string]: `${(label.leftPct / 100) * STAGGER_MS}ms`,
               }}
             >
               <span className="block text-[13px] lg:text-sm font-medium tracking-tight text-gray-800 whitespace-nowrap">
@@ -270,6 +326,9 @@ export default function RDPipeline() {
                 className="rdpipeline-group-rule mt-2 block h-px w-full opacity-70"
                 style={{ backgroundColor: label.color }}
               />
+              <span className="rdpipeline-description block text-xs leading-snug text-gray-500">
+                {label.description}
+              </span>
             </div>
           ))}
         </div>
@@ -287,13 +346,22 @@ export default function RDPipeline() {
                 key={i}
                 d={hex.d}
                 fill={hex.fill}
-                className="rdpipeline-hex"
-                style={{
-                  animationDelay: `${(hex.x / X_MAX) * STAGGER_MS}ms`,
-                }}
+                className={`rdpipeline-hex rdpipeline-interactive rdpipeline-${hex.group}`}
               />
             ))}
           </g>
+          {HIT_AREAS.map((area) => (
+            <rect
+              key={area.group}
+              x={area.x}
+              y={area.y}
+              width={area.width}
+              height={area.height}
+              fill="transparent"
+              className={`rdpipeline-hitarea rdpipeline-interactive rdpipeline-${area.group}`}
+              aria-hidden="true"
+            />
+          ))}
           <defs>
             <linearGradient
               id="rdpipeline_gradient"
@@ -322,7 +390,7 @@ export default function RDPipeline() {
         {stages.map((stage) => (
           <span
             key={stage.name}
-            className="absolute top-0 text-sm font-medium tracking-tight whitespace-nowrap"
+            className={`rdpipeline-stage-label rdpipeline-interactive rdpipeline-${stage.group} absolute top-0 text-sm font-medium tracking-tight whitespace-nowrap pointer-events-auto`}
             style={{ left: `${stage.leftPct}%`, color: stage.color }}
           >
             {stage.name}
