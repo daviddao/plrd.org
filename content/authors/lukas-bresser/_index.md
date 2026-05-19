@@ -17,7 +17,7 @@ user_groups:
 
 resources:
   - name: avatar
-    src: avatar.png
+    src: avatar.jpg
 ---
 
 Lukas is the **Operations Lead** at PL R&D, owning the operating model, cross-focus-area coordination, and the public-output pipeline that surfaces PL R&D's work.
