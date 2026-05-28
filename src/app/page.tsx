@@ -2,7 +2,7 @@ import Link from 'next/link'
 import EditPageButton from '@/components/EditPageButton'
 import { PageEditHistoryByline } from '@/components/EditHistoryByline'
 import { publications, talks, blogPosts } from '@/lib/content'
-import { formatDate } from '@/lib/format'
+import InsightCarousel from "@/components/InsightCarousel"
 import { AreaIcon, type AreaIconType } from '@/components/AreaIcons'
 import MarkdownContent from '@/components/MarkdownContent'
 import { fetchPage, getSection } from "@/lib/indexer"
@@ -91,12 +91,6 @@ type UpdateItem = {
   permalink: string
   slug: string
   areas: string[]
-  /**
-   * For blog posts, the cover image scraped from the external_url's
-   * og:image at build time (see `scripts/build-content.mjs > buildBlog`).
-   * Publications and talks leave this empty and fall back to the
-   * procedural hex GeoIllustration.
-   */
   coverImage?: string
 }
 
@@ -132,35 +126,6 @@ function getLatestUpdates(count: number): UpdateItem[] {
   return [...pubs, ...talkItems, ...blogItems]
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .slice(0, count)
-}
-
-function CardIllustration({
-  slug,
-  areas,
-  coverImage,
-  title,
-}: {
-  slug: string
-  areas: string[]
-  coverImage?: string
-  title?: string
-}) {
-  // When the source provides a real cover image (currently: blog posts whose
-  // og:image was scraped at build time), use it. Otherwise fall back to the
-  // procedural hex illustration so publications/talks still get a visual.
-  if (coverImage) {
-    return (
-      <img
-        src={coverImage}
-        alt={title || ''}
-        width={320}
-        height={120}
-        loading="lazy"
-        className="w-full h-[120px] object-cover bg-gray-50 group-hover:scale-[1.02] transition-transform duration-300"
-      />
-    )
-  }
-  return <GeoIllustration seed={slug} areas={areas} w={320} h={120} />
 }
 
 
@@ -288,71 +253,23 @@ export default async function HomePage() {
 
 
 
-      {/* Latest from PL R&D — horizontal scroll cards */}
-      <div className="pb-20 lg:pb-28">
-        <div className="flex items-baseline justify-between mb-8">
-          <h2 className="text-sm text-gray-500 uppercase tracking-wide">Latest insights from PL R&amp;D</h2>
-          <div className="flex gap-4">
-            <Link
-              href="/publications"
-              className="text-sm text-gray-400 hover:text-blue transition-colors"
-            >
-              Publications
-            </Link>
-            <Link
-              href="/talks"
-              className="text-sm text-gray-400 hover:text-blue transition-colors"
-            >
-              Talks
-            </Link>
+      {/* ── Latest Insights ── */}
+      <div className="pb-20 lg:pb-28 pt-16 lg:pt-20">
+        <div className="flex items-baseline justify-between mb-7">
+          <div>
+            <p className="text-sm text-blue font-medium mb-1">News &amp; Insights</p>
+            <h2 className="text-[28px] md:text-[36px] font-normal leading-tight tracking-tight">
+              Latest from PL R&amp;D
+            </h2>
           </div>
+          <Link
+            href="/insights/"
+            className="text-sm text-blue font-semibold hover:underline transition-colors hidden sm:inline-flex items-center gap-1"
+          >
+            View all News &amp; Insights →
+          </Link>
         </div>
-        {/* Scroll track — bleeds to the right edge of the viewport */}
-        <div
-          className="flex gap-5 overflow-x-auto pb-6 -mr-6"
-          style={{ scrollSnapType: 'x mandatory', WebkitOverflowScrolling: 'touch' }}
-        >
-          {updates.map((item) => (
-            <Link
-              key={item.permalink}
-              href={item.permalink}
-              className="group flex-none w-[280px] md:w-[300px] flex flex-col border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md hover:border-blue transition-all duration-200"
-              style={{ scrollSnapAlign: 'start' }}
-            >
-              {/* Illustration */}
-              <div className="overflow-hidden">
-                <CardIllustration
-                  slug={item.slug}
-                  areas={item.areas}
-                  coverImage={item.coverImage}
-                  title={item.title}
-                />
-              </div>
-              {/* Content */}
-              <div className="flex flex-col flex-1 justify-between p-5">
-                <div>
-                  <div className="flex items-center gap-3 mb-3">
-                    <span className="text-xs font-medium px-2.5 py-1 rounded-full bg-gray-100 text-gray-500 group-hover:bg-blue/10 group-hover:text-blue transition-colors">
-                      {item.type}
-                    </span>
-                    <span className="text-xs text-gray-400">{formatDate(item.date)}</span>
-                  </div>
-                  <h3 className="text-sm font-medium text-black leading-snug group-hover:text-blue transition-colors line-clamp-3">
-                    {item.title}
-                  </h3>
-                </div>
-                <div className="mt-5 flex items-center gap-1.5 text-xs text-gray-400 group-hover:text-blue transition-colors">
-                  Read more
-                  <svg className="w-3.5 h-3.5 -translate-x-0.5 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </div>
-              </div>
-            </Link>
-          ))}
-          {/* Trailing spacer so last card doesn't sit flush against viewport edge */}
-          <div className="flex-none w-2" aria-hidden="true" />
-        </div>
+        <InsightCarousel items={updates} />
       </div>
 
       <div className="pb-20 lg:pb-28">
