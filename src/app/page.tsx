@@ -3,13 +3,86 @@ import EditPageButton from '@/components/EditPageButton'
 import { PageEditHistoryByline } from '@/components/EditHistoryByline'
 import { publications, talks, blogPosts } from '@/lib/content'
 import { formatDate } from '@/lib/format'
-import { AreaIcon } from '@/components/AreaIcons'
-import { GeoIllustration } from '@/components/GeoIllustration'
+import { AreaIcon, type AreaIconType } from '@/components/AreaIcons'
 import MarkdownContent from '@/components/MarkdownContent'
-import { fetchPage, getSection, getSectionsWithPrefix } from "@/lib/indexer"
+import { fetchPage, getSection } from "@/lib/indexer"
 import { FOCUS_AREA_DESCRIPTIONS } from '@/lib/focus-area-descriptions'
-import { loadHexMosaic, type HexPattern } from "@/lib/hex-mosaic"
 import RDPipeline from "@/components/RDPipeline"
+
+const AREA_COLORS: Record<string, string> = {
+  'digital-human-rights': '#1982F4',
+  'economies-governance': '#12bfdf',
+  'ai-robotics': '#3966FE',
+  'neurotech': '#E51A66',
+}
+
+const AREA_IMAGES: Record<string, string> = {
+  'digital-human-rights': 'https://images.unsplash.com/photo-1758876201450-cf77ab8b95bc?w=600&q=80',
+  'economies-governance': 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&q=80',
+  'ai-robotics': 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&q=80',
+  'neurotech': 'https://images.unsplash.com/photo-1559757175-5700dde675bc?w=600&q=80',
+}
+
+const FOCUS_AREA_META: {
+  slug: string
+  href: string
+  iconType: AreaIconType
+  sectionKey: string
+  descKey: keyof typeof FOCUS_AREA_DESCRIPTIONS
+  opportunitySpaces: { id: string; label: string }[]
+}[] = [
+  {
+    slug: 'digital-human-rights',
+    href: '/areas/digital-human-rights',
+    iconType: 'shield',
+    sectionKey: 'approach-dhr',
+    descKey: 'digital-human-rights',
+    opportunitySpaces: [
+      { id: 'censorship-resistant-communications', label: 'Censorship-Resistant Comms' },
+      { id: 'portable-identity-credentials', label: 'Portable Identity' },
+      { id: 'verifiable-public-knowledge', label: 'Verifiable Knowledge' },
+      { id: 'sovereign-infrastructure-ai-agents', label: 'Sovereign AI Infra' },
+    ],
+  },
+  {
+    slug: 'economies-governance',
+    href: '/areas/economies-governance',
+    iconType: 'hexagon',
+    sectionKey: 'approach-eg',
+    descKey: 'economies-governance',
+    opportunitySpaces: [
+      { id: 'sovereign-dpi', label: 'Sovereign DPI' },
+      { id: 'public-goods-funding', label: 'Public Goods Funding' },
+      { id: 'governance-democracy', label: 'Governance & Democracy' },
+      { id: 'climate-infrastructure', label: 'Climate Infrastructure' },
+    ],
+  },
+  {
+    slug: 'ai-robotics',
+    href: '/areas/ai-robotics',
+    iconType: 'neural',
+    sectionKey: 'approach-ai',
+    descKey: 'ai-robotics',
+    opportunitySpaces: [
+      { id: 'open-compute-networks', label: 'Open Compute' },
+      { id: 'agent-coordination-infrastructure', label: 'Agent Coordination' },
+      { id: 'embodied-ai-robotics-data', label: 'Embodied AI & Robotics' },
+      { id: 'agent-native-economic-infrastructure', label: 'Agent Economics' },
+    ],
+  },
+  {
+    slug: 'neurotech',
+    href: '/areas/neurotech',
+    iconType: 'brain',
+    sectionKey: 'approach-neuro',
+    descKey: 'neurotech',
+    opportunitySpaces: [
+      { id: 'neural-augmentation', label: 'Neural Augmentation (BCI)' },
+      { id: 'biologically-inspired-intelligence', label: 'NeuroAI' },
+      { id: 'whole-organism-emulation', label: 'Whole Brain Emulation' },
+    ],
+  },
+]
 
 type UpdateItem = {
   title: string
@@ -97,13 +170,14 @@ export default async function HomePage() {
   const page = await fetchPage("landing")
   const hero = getSection(page, "hero")
   const approach = getSection(page, "approach")
-  const dhr = getSection(page, "approach-dhr")
-  const eg = getSection(page, "approach-eg")
-  const ai = getSection(page, "approach-ai")
-  const neuro = getSection(page, "approach-neuro")
   const team = getSection(page, "team")
 
+  const focusAreaSections = Object.fromEntries(
+    FOCUS_AREA_META.map((fa) => [fa.slug, getSection(page, fa.sectionKey)])
+  )
+
   return (
+    <>
     <div className="max-w-6xl mx-auto px-6">
       {/* Admin-only edit-history byline. Renders nothing for non-admins —
           the `empty:hidden` variant collapses this wrapper entirely (incl.
@@ -174,53 +248,43 @@ export default async function HomePage() {
         </div>
       </div>
 
-      {/* R&D approach section — four focus-area cards with hexagonal mosaic
-          backdrops generated from each area's hero image. The mosaic floats
-          above the card from the top-left, peeking out by ~96px so the card
-          edge slices into the cluster of hexes — the mosaic reads as a
-          "signal" rising out of the card. */}
-      <div id="focus-areas" className="pb-20 lg:pb-28 border-t border-gray-200 pt-16 lg:pt-24 scroll-mt-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start mb-44 sm:mb-48 lg:mb-52">
+    </div>
+
+    {/* ── Focus Areas (full-bleed gray) ── */}
+    <div id="focus-areas" className="bg-gray-100 scroll-mt-20">
+      <div className="max-w-6xl mx-auto px-6 py-16 lg:py-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start mb-14 lg:mb-12">
           <h2 className="text-[28px] md:text-[36px] font-normal leading-tight tracking-tight">
             {approach?.title || "Use-inspired research across four frontiers"}
           </h2>
           <MarkdownContent
-            content={approach?.body || "We work in Pasteur's Quadrant — pursuing fundamental understanding while staying anchored to real-world impact. Our four focus areas span the most consequential frontiers in computing, society, and human cognition."}
+            content="PL R&D drives breakthroughs in computing to expand human freedom, coordination, intelligence, and cognition. We help researchers, builders, funders, and institutions coordinate around the technical primitives, open infrastructure, and deployment pathways that make new fields real."
             className="text-base text-gray-600 leading-relaxed lg:pt-3"
           />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-44 md:gap-y-48 lg:gap-y-52">
-          <FocusAreaCard
-            href="/areas/digital-human-rights"
-            iconType="shield"
-            mosaicSlug="digital-human-rights"
-            title={dhr?.title || "Digital Human Rights"}
-            body={dhr?.subtitle || FOCUS_AREA_DESCRIPTIONS['digital-human-rights']}
-          />
-          <FocusAreaCard
-            href="/areas/economies-governance"
-            iconType="hexagon"
-            mosaicSlug="economies-governance"
-            title={eg?.title || "Economies & Governance"}
-            body={eg?.subtitle || FOCUS_AREA_DESCRIPTIONS['economies-governance']}
-          />
-          <FocusAreaCard
-            href="/areas/ai-robotics"
-            iconType="neural"
-            mosaicSlug="ai-robotics"
-            title={ai?.title || "AI & Robotics"}
-            body={ai?.subtitle || FOCUS_AREA_DESCRIPTIONS['ai-robotics']}
-          />
-          <FocusAreaCard
-            href="/areas/neurotech"
-            iconType="brain"
-            mosaicSlug="neurotech"
-            title={neuro?.title || "Neurotechnology"}
-            body={neuro?.subtitle || FOCUS_AREA_DESCRIPTIONS.neurotech}
-          />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          {FOCUS_AREA_META.map((fa) => {
+            const section = focusAreaSections[fa.slug]
+            return (
+              <FocusAreaCard
+                key={fa.slug}
+                href={fa.href}
+                iconType={fa.iconType}
+                title={section?.title || fa.slug.split('-').map(w => w[0].toUpperCase() + w.slice(1)).join(' ')}
+                body={section?.subtitle || FOCUS_AREA_DESCRIPTIONS[fa.descKey]}
+                opportunitySpaces={fa.opportunitySpaces}
+                areaSlug={fa.slug}
+                color={AREA_COLORS[fa.slug]}
+                image={AREA_IMAGES[fa.slug]}
+              />
+            )
+          })}
         </div>
       </div>
+    </div>
+
+    <div className="max-w-6xl mx-auto px-6">
 
 
 
@@ -309,110 +373,78 @@ export default async function HomePage() {
       </div>
       <EditPageButton rkey="landing" />
     </div>
+    </>
   )
 }
 
-/**
- * One of the four focus-area cards on the landing page. The card itself
- * is a clean white panel; the hexagonal-mosaic backdrop floats above and
- * to the left, generated by `scripts/generate-hex-mosaics.mjs` from each
- * area's hero image. The card crops the bottom half of the cluster, so
- * the silhouette reads as a cloud of hexes rising out of the card edge.
- */
 function FocusAreaCard({
   href,
   iconType,
-  mosaicSlug,
   title,
   body,
+  opportunitySpaces,
+  areaSlug,
+  color,
+  image,
 }: {
   href: string
-  iconType: HexPattern
-  mosaicSlug: string
+  iconType: AreaIconType
   title: string
   body: string
+  opportunitySpaces: { id: string; label: string }[]
+  areaSlug: string
+  color: string
+  image: string
 }) {
-  // Parse the mosaic SVG once at module load and pre-compute per-hex animation
-  // delays. The pattern (shield/hexagon/neural/brain) drives which wave shape
-  // the hover ripple takes. See `src/lib/hex-mosaic.ts`.
-  const mosaic = loadHexMosaic(mosaicSlug, iconType)
-
   return (
-    // `isolate` scopes z-index to this card so the mosaic only stacks against
-    // its own card edges, never bleeds across siblings. `hex-cloud-card` is
-    // the hover hook — `:hover` here cascades into the inline mosaic SVG and
-    // each polygon (see `globals.css`).
-    <div className="hex-cloud-card relative isolate">
-      {/*
-        Hex mosaic band: anchored to the left edge of the card and ~65% as
-        wide as the card. The band extends a few rems BELOW the card's top
-        edge so the bottom of the cluster sits behind the card — the card's
-        white panel slices through the cluster, which reads as the cloud
-        "diving into" the card top (matches the design reference).
-        `overflow-hidden` keeps the cluster from bleeding into adjacent rows
-        or the section header. The SVG itself is inline (not an <img>) so we
-        can target individual <polygon>s on hover.
-      */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute left-0 -top-32 sm:-top-36 lg:-top-40 w-[65%] sm:w-[62%] lg:w-[60%] h-56 sm:h-64 lg:h-64 overflow-hidden select-none"
-      >
-        <svg
-          viewBox={mosaic.viewBox}
-          width={mosaic.width}
-          height={mosaic.height}
-          xmlns="http://www.w3.org/2000/svg"
-          className="hex-cloud-svg absolute bottom-0 left-0 w-full h-auto"
-          preserveAspectRatio="xMidYMax meet"
-        >
-          {mosaic.polygons.map((p, i) => (
-            <polygon
-              key={i}
-              className="hex-cloud-hex"
-              points={p.points}
-              fill={p.fill}
-              style={{
-                // CSS custom prop carries the per-hex base opacity into the
-                // keyframe so the cloud's edge falloff is preserved while the
-                // hex pulses brighter on hover.
-                ['--hex-op' as string]: p.opacity.toFixed(3),
-                animationDelay: `${p.delayMs}ms`,
-              }}
+    <div className="group border border-gray-200 rounded-2xl bg-white overflow-hidden hover:shadow-lg hover:border-gray-300 transition-all duration-200 hover:-translate-y-0.5">
+      <div className="grid grid-cols-[150px_1fr] max-[520px]:grid-cols-1 max-[860px]:grid-cols-[96px_1fr]">
+        <div
+          className="bg-gray-100 bg-cover bg-center max-[520px]:h-[120px]"
+          style={{ backgroundImage: `url('${image}')` }}
+        />
+        <div className="p-4 lg:p-5">
+          <Link href={href} className="block">
+            <div className="flex items-center gap-2.5 mb-1.5">
+              <span
+                className="w-[30px] h-[30px] rounded-lg flex items-center justify-center text-white shrink-0"
+                style={{ backgroundColor: color }}
+              >
+                <AreaIcon type={iconType} className="w-[17px] h-[17px]" />
+              </span>
+              <h3 className="text-[22px] font-serif font-normal leading-tight tracking-tight">
+                {title}
+              </h3>
+            </div>
+            <MarkdownContent
+              content={body}
+              className="text-[14.5px] text-gray-600 leading-relaxed mb-2.5 [&_p]:mb-0"
             />
-          ))}
-        </svg>
-      </div>
+          </Link>
 
-      <Link
-        href={href}
-        className="relative z-10 flex items-start gap-5 p-6 lg:p-7 bg-white border border-gray-200 rounded-xl hover:border-blue hover:shadow-md transition-all group"
-      >
-        <AreaIcon type={iconType} />
-        <div className="flex-1 min-w-0">
-          <div className="flex items-start justify-between gap-3">
-            <h3 className="text-lg lg:text-[22px] font-medium text-black group-hover:text-blue transition-colors leading-tight">
-              {title}
-            </h3>
-            <svg
-              className="w-4 h-4 text-gray-300 group-hover:text-blue group-hover:translate-x-0.5 transition-all shrink-0 mt-1.5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M17 8l4 4m0 0l-4 4m4-4H3"
-              />
-            </svg>
-          </div>
-          <MarkdownContent
-            content={body}
-            className="mt-2 text-sm lg:text-[15px] text-gray-500 leading-relaxed [&_p]:mb-0"
-          />
+          {opportunitySpaces.length > 0 && (
+            <div>
+              <p className="text-[11px] text-gray-500 uppercase tracking-[0.1em] font-bold mb-1.5">Opportunity spaces</p>
+              <div>
+                {opportunitySpaces.map((os) => (
+                  <Link
+                    key={os.id}
+                    href={`/areas/${areaSlug}/opportunity-spaces/${os.id}/`}
+                    className="flex items-center gap-2 text-[13.5px] text-almost-black py-1 border-t border-gray-100 first:border-t-0 hover:text-blue transition-colors"
+                  >
+                    <span
+                      className="w-1.5 h-1.5 rounded-full shrink-0"
+                      style={{ backgroundColor: color }}
+                    />
+                    {os.label}
+                    <span className="ml-auto text-[13px] text-gray-300 group-hover:text-blue transition-colors">→</span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
-      </Link>
+      </div>
     </div>
   )
 }
