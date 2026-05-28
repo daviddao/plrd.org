@@ -112,71 +112,40 @@ export default async function HomePage() {
       <div className="pt-6 empty:hidden">
         <PageEditHistoryByline rkey="landing" />
       </div>
-      {/* clipPath: keep the top hard-clipped at the hero's top edge so the
-          painting starts cleanly below the navbar (no bleed-through behind
-          the sticky white/95 navbar). Right side opens by 100vw so the
-          image can extend to the screen edge past `max-w-6xl`. */}
-      <div className="relative pt-20 pb-20 md:pt-32 md:pb-28 lg:pt-44 lg:pb-36" style={{ clipPath: 'inset(0 -100vw 0 0)' }}>
-        {/* Hero banner image. `inset-y-0` (instead of the old
-            `top-1/2 -translate-y-[60%] h-[140%]`) makes the image's
-            display box exactly match the hero band's height — no extra
-            offset, no upward overflow that gets clipped. With
-            `backgroundSize: auto 100%` the painting fits this height
-            exactly (full brain → city composition visible) and overflows
-            horizontally; `right center` pins the right edge so the
-            overflow lands on the LEFT and is softened by the left-fading
-            mask. */}
-        <div
-          className="absolute inset-y-0 pointer-events-none select-none"
-          style={{
-            right: 'calc(-50vw + 50%)',
-            width: '70vw',
-            backgroundImage: 'url(/images/hero.webp)',
-            backgroundSize: 'auto 100%',
-            backgroundPosition: 'right center',
-            backgroundRepeat: 'no-repeat',
-            opacity: 0.35,
-            maskImage: 'linear-gradient(to left, black 40%, transparent 80%)',
-            WebkitMaskImage: 'linear-gradient(to left, black 40%, transparent 80%)',
-          }}
-          aria-hidden="true"
+      {/* ── Hero ── */}
+      <div className="relative pt-16 pb-16 md:pt-20 md:pb-20 lg:pt-24 lg:pb-24">
+        <img
+          src="/images/hero-prism.png"
+          alt=""
+          className="absolute right-0 top-1/2 -translate-y-1/2 w-full h-auto pointer-events-none select-none"
         />
-
-        {/* `max-w-lg` (32rem) is tight enough that at lg's 64px the h1
-            wraps into the four-line cadence from the design ref:
-            "Driving R&D / breakthroughs to / push humanity / forward."
-            — "breakthroughs to" fits on a line, but "breakthroughs to push"
-            doesn't, forcing the desired break. */}
-        <h1 className="relative z-10 max-w-lg font-serif text-[36px] md:text-[52px] lg:text-[64px] font-normal leading-[1.1] tracking-tight mb-8">
-          {hero?.title || "Driving R&D breakthroughs to push humanity forward."}
-        </h1>
-        <div className="relative z-10 flex flex-wrap gap-4">
-          <Link 
-            href="/about" 
-            className="inline-flex items-center gap-2 px-5 py-2.5 bg-blue text-white rounded-full hover:bg-blue/90 transition-colors font-medium"
-          >
-            About us
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </Link>
-          {/* In-page anchor: scrolls to the focus-areas section below
-              instead of leaving the landing page. <a> (not next/link) so we
-              don't get a router push for a same-page hash. */}
-          <a
-            href="#focus-areas"
-            className="inline-flex items-center gap-2 px-5 py-2.5 border border-gray-300 text-gray-700 rounded-full hover:border-blue hover:text-blue transition-colors font-medium"
-          >
-            Focus areas
-            <svg className="w-4 h-4 rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </a>
-        </div>
-        <div className="relative z-10 mt-16 lg:mt-24">
-          <svg className="w-6 h-6 text-gray-400 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 14l-7 7m0 0l-7-7" />
-          </svg>
+        <div className="relative z-10">
+          <p className="text-sm text-gray-500 uppercase tracking-widest mb-6 font-medium">
+            Protocol Labs Research &amp; Development
+          </p>
+          <h1 className="max-w-[13ch] font-serif text-[36px] md:text-[48px] lg:text-[62px] font-normal leading-[1.06] tracking-tight mb-6">
+            {hero?.title || "Driving R&D breakthroughs to push humanity forward."}
+          </h1>
+          <p className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-xl mb-8">
+            We drive breakthroughs in computing to expand human freedom,
+            coordination, intelligence, and cognition — moving frontier ideas
+            from open research to deployed systems that scale globally.
+          </p>
+          <div className="flex flex-wrap gap-3.5">
+            <Link
+              href="/about"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-blue text-white rounded-full hover:opacity-90 transition-opacity font-semibold text-[15px]"
+            >
+              Explore focus areas
+              <span className="text-[15px]">→</span>
+            </Link>
+            <Link
+              href="/outreach/collaboration/"
+              className="inline-flex items-center gap-2 px-6 py-3 border border-gray-300 text-gray-700 rounded-full hover:border-blue hover:text-blue transition-colors font-semibold text-[15px]"
+            >
+              Partner with us
+            </Link>
+          </div>
         </div>
       </div>
 
