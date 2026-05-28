@@ -2,12 +2,12 @@ import Link from 'next/link'
 import EditPageButton from '@/components/EditPageButton'
 import { PageEditHistoryByline } from '@/components/EditHistoryByline'
 import { publications, talks, blogPosts } from '@/lib/content'
-import InsightCarousel from "@/components/InsightCarousel"
 import { AreaIcon, type AreaIconType } from '@/components/AreaIcons'
 import MarkdownContent from '@/components/MarkdownContent'
 import { fetchPage, getSection } from "@/lib/indexer"
 import { FOCUS_AREA_DESCRIPTIONS } from '@/lib/focus-area-descriptions'
 import RDPipeline from "@/components/RDPipeline"
+import InsightCarousel from "@/components/InsightCarousel"
 
 const AREA_COLORS: Record<string, string> = {
   'digital-human-rights': '#1982F4',
@@ -129,6 +129,7 @@ function getLatestUpdates(count: number): UpdateItem[] {
 }
 
 
+
 export default async function HomePage() {
   const updates = getLatestUpdates(8)
 
@@ -144,13 +145,10 @@ export default async function HomePage() {
   return (
     <>
     <div className="max-w-6xl mx-auto px-6">
-      {/* Admin-only edit-history byline. Renders nothing for non-admins —
-          the `empty:hidden` variant collapses this wrapper entirely (incl.
-          its `pt-6`) when the byline returns null, so the public landing
-          page's hero sits flush against the navbar. */}
       <div className="pt-6 empty:hidden">
         <PageEditHistoryByline rkey="landing" />
       </div>
+
       {/* ── Hero ── */}
       <div className="relative pt-16 pb-16 md:pt-20 md:pb-20 lg:pt-24 lg:pb-24">
         <img
@@ -188,26 +186,18 @@ export default async function HomePage() {
         </div>
       </div>
 
-      {/* R&D pipeline — the canonical PL R&D 5-stage funnel shown as a
-          hexagonal mosaic from blue (Research) → green (Scaling). Mirrors
-          the focus-areas section directly below it: same 2-column heading +
-          description grid, same vertical rhythm, same top border. The
-          diagram is constrained to a sub-`max-w-6xl` column so it reads as
-          a refined diagram rather than a hero banner. */}
+      {/* ── R&D Pipeline ── */}
       <div className="pb-16 lg:pb-20 border-t border-gray-200 pt-16 lg:pt-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start mb-12 lg:mb-14">
-          <h2 className="text-[28px] md:text-[36px] font-normal leading-tight tracking-tight">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start mb-6 lg:mb-8">
+          <h2 className="text-[28px] md:text-[36px] font-normal leading-[1.1] tracking-tight">
             From research to scale.
           </h2>
-          <p className="text-base text-gray-600 leading-relaxed lg:pt-3">
+          <p className="text-base text-gray-600 leading-relaxed lg:-mt-[3px]">
             Our R&amp;D pipeline moves frontier ideas from open research
             through productionizing and into deployed systems that scale
             globally — each stage compounding on the last.
           </p>
         </div>
-        {/* `max-w-5xl` (64rem ≈ 1024px) tames the diagram so it no longer
-            dominates the page. `mx-auto` keeps it centered within the
-            page's `max-w-6xl` content column. */}
         <div className="max-w-5xl mx-auto">
           <RDPipeline />
         </div>
@@ -219,12 +209,12 @@ export default async function HomePage() {
     <div id="focus-areas" className="bg-gray-100 scroll-mt-20">
       <div className="max-w-6xl mx-auto px-6 py-16 lg:py-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start mb-14 lg:mb-12">
-          <h2 className="text-[28px] md:text-[36px] font-normal leading-tight tracking-tight">
+          <h2 className="text-[28px] md:text-[36px] font-normal leading-[1.1] tracking-tight">
             {approach?.title || "Use-inspired research across four frontiers"}
           </h2>
           <MarkdownContent
             content="PL R&D drives breakthroughs in computing to expand human freedom, coordination, intelligence, and cognition. We help researchers, builders, funders, and institutions coordinate around the technical primitives, open infrastructure, and deployment pathways that make new fields real."
-            className="text-base text-gray-600 leading-relaxed lg:pt-3"
+            className="text-base text-gray-600 leading-relaxed lg:-mt-[3px]"
           />
         </div>
 
@@ -250,15 +240,12 @@ export default async function HomePage() {
     </div>
 
     <div className="max-w-6xl mx-auto px-6">
-
-
-
       {/* ── Latest Insights ── */}
-      <div className="pb-20 lg:pb-28 pt-16 lg:pt-20">
+      <div className="pb-12 lg:pb-14 pt-14 lg:pt-16">
         <div className="flex items-baseline justify-between mb-7">
           <div>
             <p className="text-sm text-blue font-medium mb-1">News &amp; Insights</p>
-            <h2 className="text-[28px] md:text-[36px] font-normal leading-tight tracking-tight">
+            <h2 className="text-[28px] md:text-[36px] font-normal leading-[1.1] tracking-tight">
               Latest from PL R&amp;D
             </h2>
           </div>
@@ -272,20 +259,19 @@ export default async function HomePage() {
         <InsightCarousel items={updates} />
       </div>
 
-      <div className="pb-20 lg:pb-28">
-        <h2 className="text-sm text-gray-500 uppercase tracking-wide mb-6">Team</h2>
+      {/* ── Team ── */}
+      <div className="pb-12 lg:pb-14 border-t border-gray-200 pt-10 lg:pt-12">
+        <h2 className="text-[13px] text-gray-500 uppercase tracking-[0.12em] font-bold mb-4">Team</h2>
         <MarkdownContent
           content={team?.body || "A fully remote team distributed across the globe, working with talented and intellectually curious people who share a passion for improving technology for humanity."}
           className="text-lg text-gray-700 leading-relaxed max-w-2xl mb-6"
         />
-        <Link 
-          href="/authors" 
-          className="inline-flex items-center gap-2 px-5 py-2.5 border border-blue/30 text-blue rounded-full hover:bg-blue hover:text-white hover:border-blue transition-all font-medium"
+        <Link
+          href="/authors"
+          className="inline-flex items-center gap-2 px-6 py-3 border border-gray-300 text-gray-700 rounded-full hover:border-blue hover:text-blue transition-all font-semibold text-sm"
         >
           Meet the team
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-          </svg>
+          <span>→</span>
         </Link>
       </div>
       <EditPageButton rkey="landing" />
@@ -365,3 +351,4 @@ function FocusAreaCard({
     </div>
   )
 }
+
