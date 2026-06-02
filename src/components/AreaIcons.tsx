@@ -4,9 +4,8 @@ export type AreaIconType = 'shield' | 'hexagon' | 'neural' | 'brain'
 
 const DEFAULT_CLASS = 'w-12 h-12 shrink-0 text-blue/60 group-hover:text-blue transition-colors duration-300'
 
-const LOGO_IMAGE: Record<Exclude<AreaIconType, 'brain'>, string> = {
+const LOGO_IMAGE: Record<Exclude<AreaIconType, 'brain' | 'hexagon'>, string> = {
   shield: '/images/focus-area-logos/digital-human-rights.png',
-  hexagon: '/images/focus-area-logos/economies-governance.png',
   neural: '/images/focus-area-logos/ai-robotics.png',
 }
 
@@ -14,6 +13,7 @@ export function AreaIcon({ type, className }: { type: AreaIconType; className?: 
   const cls = className || DEFAULT_CLASS
 
   if (type === 'brain') return <BrainIcon className={cls} />
+  if (type === 'hexagon') return <EconGovIcon className={cls} />
   return <ImageLogoIcon src={LOGO_IMAGE[type]} className={cls} />
 }
 
@@ -24,6 +24,23 @@ function ImageLogoIcon({ src, className }: { src: string; className: string }) {
   }
 
   return <span className={`${className} block bg-current`} style={style} aria-hidden="true" />
+}
+
+// Economies & Governance — isometric blocks mark (inherits currentColor)
+export function EconGovIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 115 117" fill="none" className={className} aria-hidden="true">
+      <path d="M112.52 21.5703L65 35.5703V42.7303L112.52 28.7303V21.5703Z" stroke="currentColor" strokeWidth="3" strokeMiterlimit="10" strokeLinejoin="round" />
+      <path d="M113.5 81.9102L65 100.569V107.729L113.5 89.0702V81.9102Z" stroke="currentColor" strokeWidth="3" strokeMiterlimit="10" strokeLinejoin="round" />
+      <path d="M64.76 107.72L113.5 89.2501V96.4101L64.76 114.88V107.72Z" stroke="currentColor" strokeWidth="3" strokeMiterlimit="10" strokeLinejoin="round" />
+      <path d="M83.24 92.4601L71.03 97.4601L72.09 40.8101L82.18 37.8101L83.24 92.4601Z" stroke="currentColor" strokeWidth="3" strokeMiterlimit="10" strokeLinejoin="round" />
+      <path d="M108.31 83.4601L96.1001 88.4601L97.1601 33.8101L107.25 30.8101L108.31 83.4601Z" stroke="currentColor" strokeWidth="3" strokeMiterlimit="10" strokeLinejoin="round" />
+      <path d="M98.5 5.41016L112.5 21.3403L65 35.3403V15.2357L98.5 5.41016Z" stroke="currentColor" strokeWidth="3" strokeMiterlimit="10" strokeLinejoin="round" />
+      <path d="M0.97 19.6304C0.46 19.6304 0 20.0404 0 20.6004V82.3704C0 83.0704 0.37 83.7104 0.98 84.0604L23.88 97.1604C24.04 97.2504 24.2 97.2904 24.36 97.2904C24.87 97.2904 25.33 96.8804 25.33 96.3204V64.5504C25.33 63.9804 25.8 63.5804 26.3 63.5804C26.46 63.5804 26.63 63.6204 26.78 63.7104L54.95 79.7904C55.07 79.8604 55.19 79.8904 55.31 79.8904C55.69 79.8904 56.04 79.5904 56.04 79.1604L56.15 52.1904C56.15 51.4904 55.78 50.8404 55.17 50.4904L1.46 19.7604C1.3 19.6704 1.14 19.6304 0.98 19.6304H0.97Z" fill="currentColor" />
+      <path d="M31.5999 72.3804C31.0899 72.3804 30.6299 72.7904 30.6299 73.3504V99.8704C30.6299 100.57 30.9999 101.21 31.6099 101.56L54.6299 114.75C54.7899 114.84 54.9499 114.88 55.1099 114.88C55.6199 114.88 56.0799 114.47 56.0799 113.91V87.3904C56.0799 86.6904 55.7099 86.0504 55.0999 85.7004L32.0799 72.5204C31.9199 72.4304 31.7599 72.3904 31.5999 72.3904V72.3804Z" fill="currentColor" />
+      <path d="M28.13 0C27.61 0 27.08 0.129994 26.61 0.399994L6.05 12.17C4.65 12.97 4.65 14.98 6.05 15.78L54.72 43.63C54.9 43.73 55.09 43.78 55.27 43.78C55.85 43.78 56.38 43.32 56.38 42.67V16.33C56.38 15.93 56.17 15.57 55.82 15.37L29.64 0.399994C29.17 0.129994 28.65 0 28.12 0H28.13Z" fill="currentColor" />
+    </svg>
+  )
 }
 
 function PLMark() {
