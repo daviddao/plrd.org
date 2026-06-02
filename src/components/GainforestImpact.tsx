@@ -152,8 +152,8 @@ export default function GainforestImpact({ stats }: { stats: GainforestStats }) 
       },
       {
         key: 'bumicerts' as const,
-        label: 'Bumicerts',
-        caption: 'Impact claims (hypercerts) created',
+        label: 'Hypercerts',
+        caption: 'Impact claims created',
         color: BLUE,
         value: stats.bumicerts,
       },

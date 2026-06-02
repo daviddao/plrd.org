@@ -74,7 +74,6 @@ export default async function LiveDashboardPage() {
       <SimocracyDashboard
         totals={stats.totals}
         trends={stats.trends}
-        pulse14d={stats.pulse14d}
         fetchedAt={stats.fetchedAt}
         degraded={stats.degraded}
       />
