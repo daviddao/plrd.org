@@ -17,10 +17,10 @@ const AREA_COLORS: Record<string, string> = {
 }
 
 const AREA_IMAGES: Record<string, string> = {
-  'digital-human-rights': 'https://images.unsplash.com/photo-1758876201450-cf77ab8b95bc?w=600&q=80',
-  'economies-governance': 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&q=80',
-  'ai-robotics': 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&q=80',
-  'neurotech': 'https://images.unsplash.com/photo-1559757175-5700dde675bc?w=600&q=80',
+  'digital-human-rights': 'https://images.unsplash.com/photo-1756573346001-6c3ab30e837b?w=600&q=80',
+  'economies-governance': 'https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=600&q=80',
+  'ai-robotics': 'https://images.unsplash.com/photo-1647427060118-4911c9821b82?w=600&q=80',
+  'neurotech': 'https://images.unsplash.com/photo-1581090465357-c8a1f71f0407?w=600&q=80',
 }
 
 const FOCUS_AREA_META: {
@@ -151,55 +151,34 @@ export default async function HomePage() {
 
       {/* ── Hero ── */}
       <div className="relative pt-16 pb-16 md:pt-20 md:pb-20 lg:pt-24 lg:pb-24">
-        <img
-          src="/images/hero-prism.png"
-          alt=""
-          className="absolute right-0 top-1/2 -translate-y-1/2 w-full h-auto pointer-events-none select-none"
-        />
         <div className="relative z-10">
           <p className="text-sm text-gray-500 uppercase tracking-widest mb-6 font-medium">
             Protocol Labs Research &amp; Development
           </p>
-          <h1 className="max-w-[13ch] font-serif text-[36px] md:text-[48px] lg:text-[62px] font-normal leading-[1.06] tracking-tight mb-6">
-            {hero?.title || "Driving R&D breakthroughs to push humanity forward."}
+          <h1 className="max-w-3xl font-serif text-[36px] md:text-[48px] lg:text-[62px] font-normal leading-[1.06] tracking-tight mb-6">
+            Accelerating breakthroughs in computing to push humanity forward
           </h1>
           <p className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-xl mb-8">
-            We drive breakthroughs in computing to expand human freedom,
-            coordination, intelligence, and cognition — moving frontier ideas
-            from open research to deployed systems that scale globally.
+            We move frontier ideas in computing from open research to deployed systems to expand human freedom, coordination, intelligence, and cognition
           </p>
-          <div className="flex flex-wrap gap-3.5">
+          <div className="flex flex-wrap items-center gap-4">
             <Link
               href="/about"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-blue text-white rounded-full hover:opacity-90 transition-opacity font-semibold text-[15px]"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-black text-white rounded-full hover:bg-gray-800 transition-colors font-semibold text-[15px]"
             >
-              Explore focus areas
-              <span className="text-[15px]">→</span>
-            </Link>
-            <Link
-              href="/outreach/collaboration/"
-              className="inline-flex items-center gap-2 px-6 py-3 border border-gray-300 text-gray-700 rounded-full hover:border-blue hover:text-blue transition-colors font-semibold text-[15px]"
-            >
-              Partner with us
+              About us
             </Link>
           </div>
-        </div>
-      </div>
 
-      {/* ── R&D Pipeline ── */}
-      <div className="pb-16 lg:pb-20 border-t border-gray-200 pt-16 lg:pt-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start mb-6 lg:mb-8">
-          <h2 className="text-[28px] md:text-[36px] font-normal leading-[1.1] tracking-tight">
-            From research to scale.
-          </h2>
-          <p className="text-base text-gray-600 leading-relaxed lg:-mt-[3px]">
-            Our R&amp;D pipeline moves frontier ideas from open research
-            through productionizing and into deployed systems that scale
-            globally — each stage compounding on the last.
-          </p>
-        </div>
-        <div className="max-w-5xl mx-auto">
-          <RDPipeline />
+          <a
+            href="#focus-areas"
+            className="inline-flex flex-col items-center gap-1.5 mt-12 text-gray-400 hover:text-gray-600 transition-colors group"
+          >
+            <span className="text-sm font-medium tracking-wide">Explore focus areas</span>
+            <svg className="w-5 h-5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
+            </svg>
+          </a>
         </div>
       </div>
 
@@ -240,6 +219,23 @@ export default async function HomePage() {
     </div>
 
     <div className="max-w-6xl mx-auto px-6">
+      {/* ── R&D Pipeline ── */}
+      <div className="pb-16 lg:pb-20 border-t border-gray-200 pt-16 lg:pt-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start mb-6 lg:mb-8">
+          <h2 className="text-[28px] md:text-[36px] font-normal leading-[1.1] tracking-tight">
+            From research to scale.
+          </h2>
+          <p className="text-base text-gray-600 leading-relaxed lg:-mt-[3px]">
+            Our R&amp;D pipeline moves frontier ideas from open research
+            through productionizing and into deployed systems that scale
+            globally — each stage compounding on the last.
+          </p>
+        </div>
+        <div className="max-w-5xl mx-auto">
+          <RDPipeline />
+        </div>
+      </div>
+
       {/* ── Latest Insights ── */}
       <div className="pb-12 lg:pb-14 pt-14 lg:pt-16">
         <div className="flex items-baseline justify-between mb-7">
@@ -301,9 +297,9 @@ function FocusAreaCard({
 }) {
   return (
     <div className="group border border-gray-200 rounded-2xl bg-white overflow-hidden hover:shadow-lg hover:border-gray-300 transition-all duration-200 hover:-translate-y-0.5">
-      <div className="grid grid-cols-[150px_1fr] max-[520px]:grid-cols-1 max-[860px]:grid-cols-[96px_1fr]">
+      <div className="grid grid-cols-[150px_1fr] max-[520px]:grid-cols-1 max-[860px]:grid-cols-[96px_1fr] h-full">
         <div
-          className="bg-gray-100 bg-cover bg-center max-[520px]:h-[120px]"
+          className="bg-gray-100 bg-cover bg-center self-stretch max-[520px]:h-[120px]"
           style={{ backgroundImage: `url('${image}')` }}
         />
         <div className="p-4 lg:p-5">
