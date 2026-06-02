@@ -189,9 +189,8 @@ export default function GainforestImpact({ stats }: { stats: GainforestStats }) 
         Live data from{' '}
         <a href="https://gainforest.earth" target="_blank" rel="noopener noreferrer" className="text-blue hover:underline">
           GainForest
-        </a>{' '}
-        · counts via the Hyperindex AT Protocol indexer; the map shows certified
-        organization locations
+        </a>
+        ’s ATProto indexer; the map shows certified organization locations
         {stats.degraded && ' · counts temporarily unavailable'}.
       </p>
 

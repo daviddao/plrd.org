@@ -103,6 +103,10 @@ async function pdsHost(did) {
       }
     }
   } catch {}
+  // certified.one's TLS cert only covers *.certified.one, so the bare apex
+  // fails the handshake in browsers (blob images never load). Use the www
+  // subdomain, which serves the same blobs and matches the wildcard cert.
+  if (host === 'certified.one') host = 'www.certified.one'
   hostCache.set(did, host)
   return host
 }
