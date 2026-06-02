@@ -4,6 +4,7 @@ import EditPageButton from '@/components/EditPageButton'
 import { PageEditHistoryByline } from '@/components/EditHistoryByline'
 import AuthorCard from '@/components/AuthorCard'
 import Breadcrumb from '@/components/Breadcrumb'
+import FundingPipeline from '@/components/FundingPipeline'
 import AreaHeroGraphic from '@/components/AreaHeroGraphic'
 import { AreaIcon } from '@/components/AreaIcons'
 import MarkdownContent from '@/components/MarkdownContent'
@@ -198,6 +199,23 @@ export default async function FA2MainPage() {
           title={exploreDepgraph?.title || "Dependency Graph"}
           description={exploreDepgraph?.subtitle || "Strategic dependency trees across 4 inflection points."}
         />
+      </div>
+
+      {/* Grants */}
+      <div className="mt-16 mb-12 pb-12 border-b border-gray-100">
+        <h2 className="text-sm text-gray-500 uppercase tracking-wide mb-6">Grants</h2>
+        <FundingPipeline />
+        <a
+          href="https://grants.plresearch.org"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 mt-8 text-base text-blue hover:text-black border border-blue/30 hover:border-black/30 px-5 py-2.5 rounded-full transition-colors font-medium"
+        >
+          Apply for Grants
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
+          </svg>
+        </a>
       </div>
 
       {/* How to Engage */}
