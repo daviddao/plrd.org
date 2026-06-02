@@ -1,4 +1,7 @@
 import "server-only"
+import { type MetricSeries, cumulativeOnAxis, dayAxis, ms } from "./trends"
+
+export type { MetricSeries }
 
 /**
  * Read-only client for the Simocracy indexer at
@@ -155,14 +158,6 @@ export type ActivityBucket = {
 export type SimLeaderboardEntry = { name: string; chats: number }
 export type UserLeaderboardEntry = { did: string; total: number; chats: number }
 
-/** A cumulative daily time series for one metric. */
-export type MetricSeries = {
-  /** Shared ISO date axis (YYYY-MM-DD), oldest → newest. */
-  days: string[]
-  /** Cumulative value at the end of each day. Same length as `days`. */
-  values: number[]
-}
-
 /** Cumulative daily series for every headline metric (keys mirror SimocracyTotals). */
 export type SimocracyTrends = {
   treasuryUsd: MetricSeries
@@ -241,39 +236,6 @@ function bucket14d(events: SimocracyEvent[]): ActivityBucket[] {
   return buckets
 }
 
-const DAY_MS = 24 * 60 * 60 * 1000
-
-/** Parse an ISO date to epoch ms, or NaN. */
-function ms(iso: string | undefined): number {
-  if (!iso) return NaN
-  return new Date(iso).getTime()
-}
-
-/**
- * Accumulate timestamped increments onto a shared day axis. `events` are
- * {t, inc} pairs; the returned array is the running total at the end of each
- * day in `days` (day-start epoch ms), seeded with `baseline`.
- */
-function cumulativeOnAxis(
-  days: number[],
-  events: { t: number; inc: number }[],
-  baseline = 0,
-): number[] {
-  const sorted = [...events].filter((e) => !Number.isNaN(e.t)).sort((a, b) => a.t - b.t)
-  const out: number[] = []
-  let i = 0
-  let acc = baseline
-  for (const day of days) {
-    const cutoff = day + DAY_MS
-    while (i < sorted.length && sorted[i].t < cutoff) {
-      acc += sorted[i].inc
-      i++
-    }
-    out.push(acc)
-  }
-  return out
-}
-
 /**
  * Build cumulative daily series for every headline metric on one shared date
  * axis spanning the earliest recorded event through today.
@@ -289,12 +251,11 @@ function buildTrends(args: {
 
   const gatheringTimes = gatherings.map((g) => ms(g.createdAt)).filter((t) => !Number.isNaN(t))
   const eventTimes = events.map((e) => ms(e.createdAt)).filter((t) => !Number.isNaN(t))
-  const allTimes = [...simTimes, ...userFirstSeen, ...gatheringTimes, ...eventTimes].filter(
-    (t) => !Number.isNaN(t),
-  )
+  const allTimes = [...simTimes, ...userFirstSeen, ...gatheringTimes, ...eventTimes]
 
   const empty: MetricSeries = { days: [], values: [] }
-  if (allTimes.length === 0) {
+  const { days, isoDays } = dayAxis(allTimes)
+  if (days.length === 0) {
     return {
       treasuryUsd: empty,
       uniqueHumans: empty,
@@ -304,14 +265,6 @@ function buildTrends(args: {
       totalChats: empty,
     }
   }
-
-  const startDay = Math.floor(Math.min(...allTimes) / DAY_MS) * DAY_MS
-  const today = new Date()
-  today.setHours(0, 0, 0, 0)
-  const endDay = today.getTime()
-  const days: number[] = []
-  for (let d = startDay; d <= endDay; d += DAY_MS) days.push(d)
-  const isoDays = days.map((d) => new Date(d).toISOString().slice(0, 10))
 
   // S-Process increments: first time each hearingId appears among sprocess events.
   const seenHearings = new Set<string>()

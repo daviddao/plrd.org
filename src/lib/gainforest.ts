@@ -1,4 +1,5 @@
 import "server-only"
+import { type MetricSeries, cumulativeOnAxis, dayAxis, ms } from "./trends"
 
 /**
  * Read-only counts for the GainForest commons, surfaced on the FA2 Live
@@ -20,17 +21,45 @@ const GAINFOREST_INDEXER_URL =
 // 15-minute ISR — matches gainforest-app / Bumiscan's own cadence.
 const REVALIDATE = 60 * 15
 
+/** Cumulative daily series for the GainForest headline metrics. */
+export type GainforestTrends = {
+  certifiedOrgs: MetricSeries
+  bumicerts: MetricSeries
+}
+
 export type GainforestStats = {
   certifiedOrgs: number
   bumicerts: number
+  trends: GainforestTrends
   fetchedAt: string
   degraded: boolean
 }
 
+const EMPTY_TRENDS: GainforestTrends = {
+  certifiedOrgs: { days: [], values: [] },
+  bumicerts: { days: [], values: [] },
+}
+
+// `first: 1000` returns every record today (410 orgs, 815 claims) in one round
+// trip; `totalCount` stays authoritative for the headline number regardless.
 const TOTALS_QUERY = `query PlrdGainforestTotals {
-  actorOrg: appCertifiedActorOrganization(first: 0) { totalCount }
-  act: orgHypercertsClaimActivity(first: 0) { totalCount }
+  actorOrg: appCertifiedActorOrganization(first: 1000) {
+    totalCount
+    edges { node { createdAt } }
+  }
+  act: orgHypercertsClaimActivity(first: 1000) {
+    totalCount
+    edges { node { createdAt } }
+  }
 }`
+
+type EdgeList = { edges?: { node?: { createdAt?: string | null } | null }[] | null }
+
+function times(conn: EdgeList | undefined): number[] {
+  return (conn?.edges ?? [])
+    .map((e) => ms(e?.node?.createdAt))
+    .filter((t) => !Number.isNaN(t))
+}
 
 export async function fetchGainforestStats(): Promise<GainforestStats> {
   try {
@@ -43,20 +72,42 @@ export async function fetchGainforestStats(): Promise<GainforestStats> {
     if (!res.ok) throw new Error(`status ${res.status}`)
     const json = (await res.json()) as {
       data?: {
-        actorOrg?: { totalCount?: number | null }
-        act?: { totalCount?: number | null }
+        actorOrg?: ({ totalCount?: number | null } & EdgeList) | null
+        act?: ({ totalCount?: number | null } & EdgeList) | null
       }
     }
     const d = json.data
     if (!d) throw new Error("no data")
+
+    const orgTimes = times(d.actorOrg ?? undefined)
+    const actTimes = times(d.act ?? undefined)
+    const { days, isoDays } = dayAxis([...orgTimes, ...actTimes])
+    const trends: GainforestTrends = {
+      certifiedOrgs: {
+        days: isoDays,
+        values: cumulativeOnAxis(days, orgTimes.map((t) => ({ t, inc: 1 }))),
+      },
+      bumicerts: {
+        days: isoDays,
+        values: cumulativeOnAxis(days, actTimes.map((t) => ({ t, inc: 1 }))),
+      },
+    }
+
     return {
       certifiedOrgs: d.actorOrg?.totalCount ?? 0,
       bumicerts: d.act?.totalCount ?? 0,
+      trends,
       fetchedAt: new Date().toISOString(),
       degraded: false,
     }
   } catch (err) {
     console.warn("[gainforest] totals fetch failed:", err)
-    return { certifiedOrgs: 0, bumicerts: 0, fetchedAt: new Date().toISOString(), degraded: true }
+    return {
+      certifiedOrgs: 0,
+      bumicerts: 0,
+      trends: EMPTY_TRENDS,
+      fetchedAt: new Date().toISOString(),
+      degraded: true,
+    }
   }
 }

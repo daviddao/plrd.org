@@ -1,9 +1,10 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import worldMap from '@/data/world-map.json'
 import gainforestSites from '@/data/gainforest-sites.json'
-import type { GainforestStats } from '@/lib/gainforest'
+import type { GainforestStats, GainforestTrends } from '@/lib/gainforest'
+import { MetricModal, TrendStat, formatCount } from '@/components/MetricTrend'
 
 const { width: MW, height: MH, path: WORLD } = worldMap as { width: number; height: number; path: string }
 
@@ -21,44 +22,6 @@ const SITES = (gainforestSites as { points: MapPoint[] }).points
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
-
-function formatCount(n: number): string {
-  return n.toLocaleString('en-US')
-}
-
-/** Animate a number from 0 → target with ease-out cubic. */
-function useCountUp(target: number, duration = 900): number {
-  const [v, setV] = useState(0)
-  useEffect(() => {
-    if (target <= 0) {
-      setV(0)
-      return
-    }
-    let raf = 0
-    const start = performance.now()
-    const tick = (now: number) => {
-      const t = Math.min(1, (now - start) / duration)
-      setV(Math.round((1 - Math.pow(1 - t, 3)) * target))
-      if (t < 1) raf = requestAnimationFrame(tick)
-    }
-    raf = requestAnimationFrame(tick)
-    return () => cancelAnimationFrame(raf)
-  }, [target, duration])
-  return v
-}
-
-function Stat({ label, value, caption }: { label: string; value: number; caption?: string }) {
-  const animated = useCountUp(value)
-  return (
-    <div>
-      <div className="text-2xl lg:text-3xl font-semibold text-black mb-2 tabular-nums">
-        {formatCount(animated)}
-      </div>
-      <div className="text-sm text-gray-500">{label}</div>
-      {caption && <div className="text-xs text-gray-400 mt-1">{caption}</div>}
-    </div>
-  )
-}
 
 // ---------------------------------------------------------------------------
 // Map — dependency-free equirectangular SVG (basemap from world-map.json)
@@ -170,7 +133,35 @@ function SitesMap({ points }: { points: MapPoint[] }) {
 // Main
 // ---------------------------------------------------------------------------
 
+const BLUE = 'var(--color-blue, #1982F4)'
+const PINK = 'var(--color-pink, #E51A66)'
+
+type HcKey = keyof GainforestTrends
+
 export default function GainforestImpact({ stats }: { stats: GainforestStats }) {
+  const [active, setActive] = useState<HcKey | null>(null)
+
+  const metrics = useMemo(
+    () => [
+      {
+        key: 'certifiedOrgs' as const,
+        label: 'Certified organizations',
+        caption: 'On-chain actor orgs',
+        color: PINK,
+        value: stats.certifiedOrgs,
+      },
+      {
+        key: 'bumicerts' as const,
+        label: 'Bumicerts',
+        caption: 'Impact claims (hypercerts) created',
+        color: BLUE,
+        value: stats.bumicerts,
+      },
+    ],
+    [stats],
+  )
+  const activeMeta = active ? metrics.find((m) => m.key === active) ?? null : null
+
   return (
     <div className="mb-16 pb-14 border-b border-gray-100">
       <h2 className="text-sm text-gray-500 uppercase tracking-wide mb-6">
@@ -178,8 +169,18 @@ export default function GainforestImpact({ stats }: { stats: GainforestStats }) 
       </h2>
 
       <div className="grid grid-cols-2 gap-y-8 gap-x-8 mb-10 max-w-lg">
-        <Stat label="Certified organizations" value={stats.certifiedOrgs} caption="On-chain actor orgs" />
-        <Stat label="Bumicerts" value={stats.bumicerts} caption="Impact claims (hypercerts) created" />
+        {metrics.map((m) => (
+          <TrendStat
+            key={m.key}
+            label={m.label}
+            value={m.value}
+            caption={m.caption}
+            format={formatCount}
+            series={stats.trends[m.key]}
+            color={m.color}
+            onExpand={() => setActive(m.key)}
+          />
+        ))}
       </div>
 
       {SITES.length > 0 && <SitesMap points={SITES} />}
@@ -193,6 +194,17 @@ export default function GainforestImpact({ stats }: { stats: GainforestStats }) 
         organization locations
         {stats.degraded && ' · counts temporarily unavailable'}.
       </p>
+
+      {activeMeta && (
+        <MetricModal
+          title={activeMeta.label}
+          caption={activeMeta.caption}
+          series={stats.trends[activeMeta.key]}
+          color={activeMeta.color}
+          format={formatCount}
+          onClose={() => setActive(null)}
+        />
+      )}
     </div>
   )
 }
