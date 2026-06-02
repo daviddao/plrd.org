@@ -43,6 +43,7 @@ export default function AreaHeroGraphic({ slug, className }: { slug: string; cla
   const svgRef = useRef<SVGSVGElement>(null)
   const gradRef = useRef<SVGRadialGradientElement>(null)
   const lensRef = useRef<SVGGElement>(null)
+  const seedRef = useRef<SVGGElement>(null)
   if (!mosaic) return null
 
   const { viewBox, frame, image, href, seed, hexes } = mosaic
@@ -56,11 +57,15 @@ export default function AreaHeroGraphic({ slug, className }: { slug: string; cla
     const y = frame.y + ((clientY - rect.top) / rect.height) * frame.h
     grad.setAttribute('cx', String(x))
     grad.setAttribute('cy', String(y))
+    // While hovering, the cursor lens replaces the static seed cluster.
     if (lensRef.current) lensRef.current.style.opacity = '1'
+    if (seedRef.current) seedRef.current.style.opacity = '0'
   }
 
   function hideLens() {
+    // On leave, the lens fades out and the seed cluster returns.
     if (lensRef.current) lensRef.current.style.opacity = '0'
+    if (seedRef.current) seedRef.current.style.opacity = '1'
   }
 
   return (
@@ -113,8 +118,10 @@ export default function AreaHeroGraphic({ slug, className }: { slug: string; cla
           preserveAspectRatio="xMidYMid meet"
         />
 
-        {/* Static top-left pixelation — always visible. */}
-        <use href={`#tiles-${slug}`} mask={`url(#areaSeedMask-${slug})`} />
+        {/* Static top-left “seed” pixelation — shown until the cursor takes over. */}
+        <g ref={seedRef} style={{ opacity: 1, transition: 'opacity 250ms ease' }}>
+          <use href={`#tiles-${slug}`} mask={`url(#areaSeedMask-${slug})`} />
+        </g>
 
         {/* Interactive pixelation, revealed under the cursor lens. */}
         <g ref={lensRef} mask={`url(#areaLensMask-${slug})`} style={{ opacity: 0, transition: 'opacity 250ms ease' }}>
