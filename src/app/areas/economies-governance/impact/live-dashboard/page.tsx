@@ -2,8 +2,10 @@ import type { Metadata } from 'next'
 import Breadcrumb from '@/components/Breadcrumb'
 import SimocracyDashboard from '@/components/SimocracyDashboard'
 import GainforestImpact from '@/components/GainforestImpact'
+import GlowImpact from '@/components/GlowImpact'
 import { fetchSimocracyStats } from '@/lib/simocracy'
 import { fetchGainforestStats } from '@/lib/gainforest'
+import { fetchGlowStats } from '@/lib/glow'
 
 export const metadata: Metadata = {
   title: 'Live Dashboard',
@@ -15,9 +17,10 @@ export const metadata: Metadata = {
 export const revalidate = 60
 
 export default async function LiveDashboardPage() {
-  const [stats, gainforest] = await Promise.all([
+  const [stats, gainforest, glow] = await Promise.all([
     fetchSimocracyStats(),
     fetchGainforestStats(),
+    fetchGlowStats(),
   ])
 
   return (
@@ -66,10 +69,21 @@ export default async function LiveDashboardPage() {
         >
           Ma Earth
         </a>
+        , and{' '}
+        <a
+          href="https://glow.org"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-blue hover:underline"
+        >
+          Glow
+        </a>
         .
       </p>
 
       <GainforestImpact stats={gainforest} />
+
+      <GlowImpact stats={glow} />
 
       <SimocracyDashboard
         totals={stats.totals}
