@@ -9,7 +9,20 @@ export const metadata: Metadata = {
   description: 'Explore the impact of Protocol Labs ecosystem initiatives in 2025.',
 }
 
+type Cofunder = {
+  id: string
+  name: string
+  type: string
+  status: string
+  website: string
+  description: string
+  focus: string[]
+  arms: { name: string; size: string; focus: string }[]
+}
+
 export default function ImpactReport2025Page() {
+  // Typed because the JSON array may be empty (TS would otherwise infer never[]).
+  const cofunders = impactData.cofunders as Cofunder[]
   return (
     <div className="max-w-6xl mx-auto px-6 pt-8 pb-16">
       <Breadcrumb items={[
@@ -78,11 +91,11 @@ export default function ImpactReport2025Page() {
       </div>
 
       {/* Co-Funders */}
-      {impactData.cofunders && impactData.cofunders.length > 0 && (
+      {cofunders.length > 0 && (
         <div className="mb-14 pb-14 border-b border-gray-100">
           <h2 className="text-sm text-gray-500 uppercase tracking-wide mb-8">Co-Funders</h2>
           <div className="divide-y divide-gray-100">
-            {impactData.cofunders.map((cf) => (
+            {cofunders.map((cf) => (
               <div key={cf.id} className="py-8 first:pt-0 last:pb-0">
                 <div className="flex items-start gap-4 mb-3">
                   <div>
