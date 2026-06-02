@@ -5,6 +5,7 @@ import { PageEditHistoryByline } from '@/components/EditHistoryByline'
 import AuthorCard from '@/components/AuthorCard'
 import Breadcrumb from '@/components/Breadcrumb'
 import FundingPipeline from '@/components/FundingPipeline'
+import FA2HeroGraphic from '@/components/FA2HeroGraphic'
 import { AreaIcon } from '@/components/AreaIcons'
 import MarkdownContent from '@/components/MarkdownContent'
 import opportunityData from '@/data/fa2/opportunityspaces.json'
@@ -76,46 +77,8 @@ export default async function FA2MainPage() {
       </div>
       {/* Hero */}
       <div className="relative pt-8 pb-12 mb-12 overflow-hidden">
-        {/* Background image - rotated hexagon clip */}
-        <div 
-          className="absolute right-[0%] top-1/2 -translate-y-1/2 w-[280px] h-[280px] md:w-[380px] md:h-[380px] lg:w-[460px] lg:h-[460px] pointer-events-none select-none"
-          aria-hidden="true"
-        >
-          <svg viewBox="0 0 400 400" className="w-full h-full">
-            <defs>
-              <clipPath id="hexClip">
-                <polygon 
-                  points="200,40 330,110 330,290 200,360 70,290 70,110" 
-                >
-                  <animateTransform 
-                    attributeName="transform" 
-                    type="rotate" 
-                    from="45 200 200" 
-                    to="405 200 200" 
-                    dur="60s" 
-                    repeatCount="indefinite"
-                  />
-                </polygon>
-              </clipPath>
-              <mask id="hexFade">
-                <radialGradient id="fadeGrad" cx="50%" cy="50%" r="50%">
-                  <stop offset="50%" stopColor="white" />
-                  <stop offset="100%" stopColor="black" />
-                </radialGradient>
-                <circle cx="200" cy="200" r="200" fill="url(#fadeGrad)" />
-              </mask>
-            </defs>
-            <image 
-              href="/images/fa2/fa2.webp" 
-              x="0" y="0" 
-              width="400" height="400" 
-              preserveAspectRatio="xMidYMid slice"
-              clipPath="url(#hexClip)"
-              mask="url(#hexFade)"
-              opacity="0.35"
-            />
-          </svg>
-        </div>
+        {/* Background graphic — temple render dissolving into a hexagon cloud */}
+        <FA2HeroGraphic className="absolute right-0 top-1/2 -translate-y-1/2 hidden sm:block w-[320px] md:w-[400px] lg:w-[480px] aspect-[820/384] select-none" />
 
         <div className="flex items-center gap-4 sm:items-start sm:gap-5 mb-6">
           <AreaIcon type="hexagon" className="w-14 h-14 lg:w-16 lg:h-16 shrink-0 text-blue/70" />
