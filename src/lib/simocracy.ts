@@ -11,7 +11,7 @@ export type { MetricSeries }
  *
  * Powers the FA2 Live Dashboard. We pull three collections
  * (history, sim, gathering) and aggregate them into a small set of
- * headline metrics + a 14-day activity series + leaderboards.
+ * headline metrics + cumulative trend series + leaderboards.
  *
  * Schema mirrors simocracy-v2's `lib/indexer.ts` and `lib/lexicon-types.ts`,
  * but we deliberately keep this self-contained so plresearch.org doesn't
@@ -144,17 +144,6 @@ export type SimocracyTotals = {
   totalChats: number
 }
 
-export type ActivityBucket = {
-  /** ISO date (YYYY-MM-DD) at midnight local time. */
-  date: string
-  /** Total events on this day. */
-  count: number
-  /** Subset of `count` that are chat events. */
-  chats: number
-  /** Subset of `count` that are S-Process events. */
-  sprocess: number
-}
-
 export type SimLeaderboardEntry = { name: string; chats: number }
 export type UserLeaderboardEntry = { did: string; total: number; chats: number }
 
@@ -172,7 +161,6 @@ export type SimocracyStats = {
   totals: SimocracyTotals
   /** Per-metric cumulative daily series, oldest → newest, on a shared date axis. */
   trends: SimocracyTrends
-  pulse14d: ActivityBucket[]
   topSims: SimLeaderboardEntry[]
   topUsers: UserLeaderboardEntry[]
   recentEvents: SimocracyEvent[]
@@ -204,36 +192,6 @@ function sanitize(raw: RawHistoryRecord): SimocracyEvent {
     hearingId: raw.hearingId,
     round: raw.round,
   }
-}
-
-function bucket14d(events: SimocracyEvent[]): ActivityBucket[] {
-  const days = 14
-  const today = new Date()
-  today.setHours(0, 0, 0, 0)
-  const buckets: ActivityBucket[] = Array.from({ length: days }, (_, i) => {
-    const d = new Date(today)
-    d.setDate(d.getDate() - (days - 1 - i))
-    return {
-      date: d.toISOString().slice(0, 10),
-      count: 0,
-      chats: 0,
-      sprocess: 0,
-    }
-  })
-  const start = new Date(buckets[0].date).getTime()
-  const dayMs = 24 * 60 * 60 * 1000
-  const end = start + days * dayMs
-  for (const e of events) {
-    const t = new Date(e.createdAt).getTime()
-    if (Number.isNaN(t) || t < start || t >= end) continue
-    const idx = Math.floor((t - start) / dayMs)
-    const b = buckets[idx]
-    if (!b) continue
-    b.count += 1
-    if (e.type === 'chat') b.chats += 1
-    else if (e.type === 'sprocess') b.sprocess += 1
-  }
-  return buckets
 }
 
 /**
@@ -429,7 +387,6 @@ export async function fetchSimocracyStats(): Promise<SimocracyStats> {
       totalChats,
     },
     trends,
-    pulse14d: bucket14d(events),
     topSims,
     topUsers,
     recentEvents,
