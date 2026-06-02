@@ -9,16 +9,18 @@ import neuro from '@/data/area-heroes/neurotech.json'
 /**
  * Decorative, interactive focus-area hero graphic.
  *
- * The area's hero render shows crisp. On hover, a cursor-following lens reveals
- * a hexagon "pixelation" of exactly the area under the mouse — each tile colours
- * itself from the underlying image pixels (the transparent background is cut
- * out, so the effect only ever lands on the subject). Tiles are drawn slightly
- * overlapping, so there are no white seams.
+ * The area's hero render shows crisp, with one cluster "pixelated" into a
+ * hexagon honeycomb (each tile coloured from the underlying image pixels; the
+ * transparent background is cut out so the effect only lands on the subject).
  *
- * Per-tile colours + geometry + the tight crop frame are pre-computed by
+ * The pixelated cluster starts at a pre-computed `seed` (the top-left of the
+ * subject) and follows the cursor while hovering. When the mouse leaves it
+ * simply stays where it last was — the seed becomes the last hovered location.
+ *
+ * Per-tile colours + geometry + the crop frame + seed are pre-computed by
  * `scripts/generate-area-hero-mosaics.mjs` into `src/data/area-heroes/<slug>.json`.
- * The lens is an SVG radial-gradient mask whose centre we move imperatively on
- * mousemove, so the polygons never re-render.
+ * The lens is an SVG radial-gradient mask whose centre we move imperatively, so
+ * the polygons never re-render.
  */
 type Mosaic = {
   viewBox: string
@@ -42,8 +44,6 @@ export default function AreaHeroGraphic({ slug, className }: { slug: string; cla
   const mosaic = MOSAICS[slug]
   const svgRef = useRef<SVGSVGElement>(null)
   const gradRef = useRef<SVGRadialGradientElement>(null)
-  const lensRef = useRef<SVGGElement>(null)
-  const seedRef = useRef<SVGGElement>(null)
   if (!mosaic) return null
 
   const { viewBox, frame, image, href, seed, hexes } = mosaic
@@ -57,15 +57,6 @@ export default function AreaHeroGraphic({ slug, className }: { slug: string; cla
     const y = frame.y + ((clientY - rect.top) / rect.height) * frame.h
     grad.setAttribute('cx', String(x))
     grad.setAttribute('cy', String(y))
-    // While hovering, the cursor lens replaces the static seed cluster.
-    if (lensRef.current) lensRef.current.style.opacity = '1'
-    if (seedRef.current) seedRef.current.style.opacity = '0'
-  }
-
-  function hideLens() {
-    // On leave, the lens fades out and the seed cluster returns.
-    if (lensRef.current) lensRef.current.style.opacity = '0'
-    if (seedRef.current) seedRef.current.style.opacity = '1'
   }
 
   return (
@@ -76,30 +67,21 @@ export default function AreaHeroGraphic({ slug, className }: { slug: string; cla
         className="w-full h-full"
         preserveAspectRatio="xMidYMid meet"
         onMouseMove={(e) => moveLens(e.clientX, e.clientY)}
-        onMouseLeave={hideLens}
         onTouchMove={(e) => {
           const t = e.touches[0]
           if (t) moveLens(t.clientX, t.clientY)
         }}
-        onTouchEnd={hideLens}
       >
         <defs>
-          <radialGradient id={`areaLens-${slug}`} ref={gradRef} gradientUnits="userSpaceOnUse" cx={-9999} cy={-9999} r={LENS_R}>
-            <stop offset="0" stopColor="#fff" />
-            <stop offset="0.55" stopColor="#fff" />
-            <stop offset="1" stopColor="#000" />
-          </radialGradient>
-          {/* Static “already hovered” cluster anchored to the top-left of the subject. */}
-          <radialGradient id={`areaSeed-${slug}`} gradientUnits="userSpaceOnUse" cx={seed.x} cy={seed.y} r={LENS_R}>
+          {/* Lens starts at the seed (top-left of the subject) and follows the
+              cursor; it stays put when the mouse leaves. */}
+          <radialGradient id={`areaLens-${slug}`} ref={gradRef} gradientUnits="userSpaceOnUse" cx={seed.x} cy={seed.y} r={LENS_R}>
             <stop offset="0" stopColor="#fff" />
             <stop offset="0.55" stopColor="#fff" />
             <stop offset="1" stopColor="#000" />
           </radialGradient>
           <mask id={`areaLensMask-${slug}`}>
             <rect x={frame.x} y={frame.y} width={frame.w} height={frame.h} fill={`url(#areaLens-${slug})`} />
-          </mask>
-          <mask id={`areaSeedMask-${slug}`}>
-            <rect x={frame.x} y={frame.y} width={frame.w} height={frame.h} fill={`url(#areaSeed-${slug})`} />
           </mask>
           <g id={`tiles-${slug}`}>
             {hexes.map((hx, i) => (
@@ -118,13 +100,8 @@ export default function AreaHeroGraphic({ slug, className }: { slug: string; cla
           preserveAspectRatio="xMidYMid meet"
         />
 
-        {/* Static top-left “seed” pixelation — shown until the cursor takes over. */}
-        <g ref={seedRef} style={{ opacity: 1, transition: 'opacity 250ms ease' }}>
-          <use href={`#tiles-${slug}`} mask={`url(#areaSeedMask-${slug})`} />
-        </g>
-
-        {/* Interactive pixelation, revealed under the cursor lens. */}
-        <g ref={lensRef} mask={`url(#areaLensMask-${slug})`} style={{ opacity: 0, transition: 'opacity 250ms ease' }}>
+        {/* Hexagon pixelation, revealed under the lens. */}
+        <g mask={`url(#areaLensMask-${slug})`}>
           <use href={`#tiles-${slug}`} />
         </g>
       </svg>
