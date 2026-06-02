@@ -25,6 +25,7 @@ type Mosaic = {
   frame: { x: number; y: number; w: number; h: number }
   image: { x: number; y: number; w: number; h: number }
   href: string
+  seed: { x: number; y: number }
   hexes: { p: string; f: string }[]
 }
 
@@ -44,7 +45,7 @@ export default function AreaHeroGraphic({ slug, className }: { slug: string; cla
   const lensRef = useRef<SVGGElement>(null)
   if (!mosaic) return null
 
-  const { viewBox, frame, image, href, hexes } = mosaic
+  const { viewBox, frame, image, href, seed, hexes } = mosaic
 
   function moveLens(clientX: number, clientY: number) {
     const svg = svgRef.current
@@ -83,9 +84,23 @@ export default function AreaHeroGraphic({ slug, className }: { slug: string; cla
             <stop offset="0.55" stopColor="#fff" />
             <stop offset="1" stopColor="#000" />
           </radialGradient>
+          {/* Static “already hovered” cluster anchored to the top-left of the subject. */}
+          <radialGradient id={`areaSeed-${slug}`} gradientUnits="userSpaceOnUse" cx={seed.x} cy={seed.y} r={LENS_R}>
+            <stop offset="0" stopColor="#fff" />
+            <stop offset="0.55" stopColor="#fff" />
+            <stop offset="1" stopColor="#000" />
+          </radialGradient>
           <mask id={`areaLensMask-${slug}`}>
             <rect x={frame.x} y={frame.y} width={frame.w} height={frame.h} fill={`url(#areaLens-${slug})`} />
           </mask>
+          <mask id={`areaSeedMask-${slug}`}>
+            <rect x={frame.x} y={frame.y} width={frame.w} height={frame.h} fill={`url(#areaSeed-${slug})`} />
+          </mask>
+          <g id={`tiles-${slug}`}>
+            {hexes.map((hx, i) => (
+              <polygon key={i} points={hx.p} fill={hx.f} />
+            ))}
+          </g>
         </defs>
 
         {/* Crisp render. */}
@@ -98,11 +113,12 @@ export default function AreaHeroGraphic({ slug, className }: { slug: string; cla
           preserveAspectRatio="xMidYMid meet"
         />
 
-        {/* Hexagon pixelation, revealed only under the cursor lens. */}
+        {/* Static top-left pixelation — always visible. */}
+        <use href={`#tiles-${slug}`} mask={`url(#areaSeedMask-${slug})`} />
+
+        {/* Interactive pixelation, revealed under the cursor lens. */}
         <g ref={lensRef} mask={`url(#areaLensMask-${slug})`} style={{ opacity: 0, transition: 'opacity 250ms ease' }}>
-          {hexes.map((hx, i) => (
-            <polygon key={i} points={hx.p} fill={hx.f} />
-          ))}
+          <use href={`#tiles-${slug}`} />
         </g>
       </svg>
     </div>

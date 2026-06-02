@@ -116,6 +116,9 @@ for (const { slug, file } of SOURCES) {
   const rows = Math.ceil(h / STEP_Y) + 2
 
   const hexes = []
+  // Top-left-most foreground tile — the static "already hovered" anchor.
+  let seed = { x: fx + fw * 0.18, y: fy + fh * 0.18 }
+  let seedScore = Infinity
   for (let col = 0; col < cols; col++) {
     for (let row = 0; row < rows; row++) {
       const cx = col * STEP_X
@@ -124,6 +127,8 @@ for (const { slug, file } of SOURCES) {
       const s = sample(data, w, h, cx, cy, SIZE * 0.62)
       if (!s || s.coverage < 0.12) continue // mostly transparent → skip (cut out the subject)
       hexes.push({ p: hexPoints(cx, cy, DRAW), f: `rgb(${s.r},${s.g},${s.b})` })
+      const score = cx + cy
+      if (score < seedScore) { seedScore = score; seed = { x: Math.round(cx), y: Math.round(cy) } }
     }
   }
 
@@ -132,6 +137,7 @@ for (const { slug, file } of SOURCES) {
     frame: { x: fx, y: fy, w: fw, h: fh },
     image: { x: 0, y: 0, w, h },
     href: `/images/fa2/${file}`,
+    seed,
     hexes,
   }
   await writeFile(join(OUT_DIR, `${slug}.json`), JSON.stringify(out))
