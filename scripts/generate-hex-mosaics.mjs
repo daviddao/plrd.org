@@ -50,19 +50,19 @@ const ROOT = join(__dirname, "..")
 const SOURCES = [
   {
     slug: "digital-human-rights",
-    src: "public/images/fa2/digital-human-rights.jpg",
+    src: "public/images/fa2/digital-human-rights-hero.png",
   },
   {
     slug: "economies-governance",
-    src: "public/images/fa2/fa2.webp",
+    src: "public/images/fa2/fa2-hero.png",
   },
   {
     slug: "ai-robotics",
-    src: "public/images/fa2/ai-robotics.jpg",
+    src: "public/images/fa2/ai-robotics-hero.png",
   },
   {
     slug: "neurotech",
-    src: "public/images/fa2/neurotech.jpg",
+    src: "public/images/fa2/neurotech-hero.png",
   },
 ]
 
@@ -145,8 +145,14 @@ function clusterAlpha(col, row, cols, rows, slug) {
 // Colour sampling
 // ---------------------------------------------------------------------------
 
-/** Sample the average colour of an N×N pixel patch around (px, py). */
-function samplePatch(pixels, w, h, channels, px, py, patch = 5) {
+/**
+ * Sample the average colour of an N×N pixel patch around (px, py), counting
+ * only opaque pixels (alpha ≥ 128) so the transparent background never bleeds
+ * black/garbage into the cloud. If the patch is entirely transparent, fall
+ * back to the subject's global mean colour so every hex carries the FA's
+ * palette rather than vanishing to white.
+ */
+function samplePatch(pixels, w, h, channels, px, py, patch, fallback) {
   const r = Math.max(1, Math.floor(patch / 2))
   let R = 0,
     G = 0,
@@ -159,14 +165,38 @@ function samplePatch(pixels, w, h, channels, px, py, patch = 5) {
   for (let y = y0; y <= y1; y++) {
     for (let x = x0; x <= x1; x++) {
       const i = (y * w + x) * channels
+      if (channels === 4 && pixels[i + 3] < 128) continue
       R += pixels[i]
       G += pixels[i + 1]
       B += pixels[i + 2]
       n++
     }
   }
-  if (n === 0) return [127, 127, 127]
+  if (n === 0) return fallback || [127, 127, 127]
   return [Math.round(R / n), Math.round(G / n), Math.round(B / n)]
+}
+
+/** Alpha bounding box + mean colour of the opaque subject. */
+function subjectStats(pixels, w, h, channels) {
+  let minX = w, maxX = 0, minY = h, maxY = 0
+  let R = 0, G = 0, B = 0, n = 0
+  for (let y = 0; y < h; y++) {
+    for (let x = 0; x < w; x++) {
+      const i = (y * w + x) * channels
+      const a = channels === 4 ? pixels[i + 3] : 255
+      if (a < 128) continue
+      if (x < minX) minX = x
+      if (x > maxX) maxX = x
+      if (y < minY) minY = y
+      if (y > maxY) maxY = y
+      R += pixels[i]; G += pixels[i + 1]; B += pixels[i + 2]; n++
+    }
+  }
+  if (n === 0) return { bbox: { x: 0, y: 0, w, h }, mean: [127, 127, 127] }
+  return {
+    bbox: { x: minX, y: minY, w: Math.max(1, maxX - minX), h: Math.max(1, maxY - minY) },
+    mean: [Math.round(R / n), Math.round(G / n), Math.round(B / n)],
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -174,6 +204,7 @@ function samplePatch(pixels, w, h, channels, px, py, patch = 5) {
 // ---------------------------------------------------------------------------
 
 function buildSvg(slug, pixels, w, h, channels) {
+  const { bbox, mean } = subjectStats(pixels, w, h, channels)
   const stepX = HEX_SIZE * 1.5
   const stepY = HEX_SIZE * Math.sqrt(3)
   const cols = Math.ceil(w / stepX) + 1
@@ -200,10 +231,11 @@ function buildSvg(slug, pixels, w, h, channels) {
       // beyond the main blob — those become the floating outliers.
       if (alpha < 0.22) continue
 
-      // Sample colour from the source at this hex's centre
-      const px = (cx / (cols * stepX)) * w
-      const py = (cy / (rows * stepY)) * h
-      const [r, g, b] = samplePatch(pixels, w, h, channels, px, py, 6)
+      // Sample colour from the subject (mapped into its alpha bbox so the
+      // cloud reads the FA's palette, not the transparent margins).
+      const px = bbox.x + (cx / (cols * stepX)) * bbox.w
+      const py = bbox.y + (cy / (rows * stepY)) * bbox.h
+      const [r, g, b] = samplePatch(pixels, w, h, channels, px, py, 6, mean)
 
       const pts = hexPoints(cx, cy, innerSize)
         .map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`)
