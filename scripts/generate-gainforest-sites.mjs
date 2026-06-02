@@ -79,6 +79,15 @@ function parseLocation(str) {
   }
 }
 
+/** Normalise an indexer blob ref (Hyperindex sometimes serialises it as a Go
+ *  map string "map[$link:bafkrei…]" instead of a bare CID). */
+function normaliseRef(ref) {
+  if (!ref) return null
+  if (ref.startsWith('b') || ref.startsWith('Q')) return ref
+  const m = ref.match(/\$link:([a-zA-Z0-9]+)/)
+  return m ? m[1] : ref
+}
+
 const hostCache = new Map()
 async function pdsHost(did) {
   if (hostCache.has(did)) return hostCache.get(did)
@@ -172,14 +181,38 @@ await runLimited(blobTasks)
 // ── 4. join display names from certified profiles ───────────────────────────
 const dids = [...new Set(points.map((p) => p.did))]
 const names = new Map()
+const avatarRefs = new Map()
 for (let i = 0; i < dids.length; i += 80) {
   const slice = dids.slice(i, i + 80)
-  const parts = slice.map((did, k) => `p${k}: appCertifiedActorProfileByUri(uri:"at://${did}/app.certified.actor.profile/self"){ displayName }`)
+  const parts = slice.map(
+    (did, k) =>
+      `p${k}: appCertifiedActorProfileByUri(uri:"at://${did}/app.certified.actor.profile/self"){ displayName avatar{ __typename ... on OrgHypercertsDefsSmallImage{ image{ ref } } } }`,
+  )
   try {
     const j = await gql(`query{${parts.join('\n')}}`)
-    slice.forEach((did, k) => { const n = j.data?.[`p${k}`]?.displayName; if (n) names.set(did, n) })
+    slice.forEach((did, k) => {
+      const n = j.data?.[`p${k}`]
+      if (n?.displayName) names.set(did, n.displayName)
+      const ref = normaliseRef(n?.avatar?.image?.ref)
+      if (ref) avatarRefs.set(did, ref)
+    })
   } catch {}
 }
+
+// ── resolve org logo blob URLs (PDS-hosted, CORS-open) ─────────────────
+const imageByDid = new Map()
+await runLimited(
+  dids.map((did) => async () => {
+    const ref = avatarRefs.get(did)
+    if (!ref) return
+    const host = await pdsHost(did)
+    if (!host) return
+    imageByDid.set(
+      did,
+      `https://${host}/xrpc/com.atproto.sync.getBlob?did=${encodeURIComponent(did)}&cid=${encodeURIComponent(ref)}`,
+    )
+  }),
+)
 
 const trunc = (s, n) => (s && s.length > n ? s.slice(0, n - 1).trimEnd() + '\u2026' : s)
 const out = {
@@ -191,6 +224,7 @@ const out = {
       name: names.get(p.did) || null,
       type: m.type || null,
       description: trunc(m.description, 180) || null,
+      image: imageByDid.get(p.did) || null,
       url: m.website || `https://certs.gainforest.app/account/${p.did}`,
     }
   }),

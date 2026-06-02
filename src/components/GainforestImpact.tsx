@@ -13,6 +13,7 @@ type MapPoint = {
   name: string | null
   type: string | null
   description: string | null
+  image: string | null
   url: string
 }
 const SITES = (gainforestSites as { points: MapPoint[] }).points
@@ -126,12 +127,25 @@ function SitesMap({ points }: { points: MapPoint[] }) {
           onMouseEnter={() => open(active as number)}
           onMouseLeave={scheduleClose}
         >
-          <div className="text-sm font-semibold text-black leading-snug">
-            {focused.name || 'Certified organization'}
+          <div className="flex items-start gap-3">
+            {focused.image && (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={focused.image}
+                alt=""
+                loading="lazy"
+                className="h-10 w-10 shrink-0 rounded-lg border border-gray-100 bg-gray-100 object-cover"
+              />
+            )}
+            <div className="min-w-0">
+              <div className="text-sm font-semibold text-black leading-snug">
+                {focused.name || 'Certified organization'}
+              </div>
+              {focused.type && (
+                <div className="mt-0.5 text-[11px] uppercase tracking-wide text-gray-400">{focused.type}</div>
+              )}
+            </div>
           </div>
-          {focused.type && (
-            <div className="mt-1 text-[11px] uppercase tracking-wide text-gray-400">{focused.type}</div>
-          )}
           {focused.description && (
             <p className="mt-2 text-xs leading-relaxed text-gray-600 line-clamp-4">{focused.description}</p>
           )}
@@ -160,7 +174,7 @@ export default function GainforestImpact({ stats }: { stats: GainforestStats }) 
   return (
     <div className="mb-16 pb-14 border-b border-gray-100">
       <h2 className="text-sm text-gray-500 uppercase tracking-wide mb-6">
-        GainForest commons
+        Environmental Hypercerts
       </h2>
 
       <div className="grid grid-cols-2 gap-y-8 gap-x-8 mb-10 max-w-lg">
