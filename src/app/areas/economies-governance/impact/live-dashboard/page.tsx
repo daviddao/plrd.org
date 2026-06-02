@@ -34,17 +34,8 @@ export default async function LiveDashboardPage() {
       <h1 className="mt-8 text-2xl lg:text-[36px] font-semibold mb-3">
         Live Dashboard
       </h1>
-      <p className="text-lg text-gray-600 mb-12 max-w-2xl">
-        Real-time metrics across the focus area: on-the-ground impact from the{' '}
-        <a
-          href="https://gainforest.earth"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-blue hover:underline"
-        >
-          GainForest
-        </a>{' '}
-        commons, and ecosystem activity from{' '}
+      <p className="text-lg text-gray-600 mb-3 max-w-2xl">
+        Real-time metrics across the focus area: environmental hypercerts, the{' '}
         <a
           href="https://simocracy.org"
           target="_blank"
@@ -52,9 +43,30 @@ export default async function LiveDashboardPage() {
           className="text-blue hover:underline"
         >
           Simocracy
+        </a>{' '}
+        governance simulation, and broad listening for large-scale collective
+        deliberation.
+      </p>
+      <p className="text-sm text-gray-400 mb-12 max-w-2xl">
+        In collaboration with associated network partners{' '}
+        <a
+          href="https://gainforest.earth"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-blue hover:underline"
+        >
+          GainForest
+        </a>{' '}
+        and{' '}
+        <a
+          href="https://maearth.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-blue hover:underline"
+        >
+          Ma Earth
         </a>
-        , a governance simulation tracking treasuries governed, sims minted, and
-        deliberations completed.
+        .
       </p>
 
       <GainforestImpact stats={gainforest} />
