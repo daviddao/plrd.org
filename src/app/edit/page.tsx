@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { AreaIcon } from '@/components/AreaIcons'
+import RDPipeline from '@/components/RDPipeline'
 import { FOCUS_AREA_DESCRIPTIONS } from '@/lib/focus-area-descriptions'
 import {
   useRequireAdmin,
@@ -33,13 +34,14 @@ export default function LandingEditPage() {
       >
         {/* Hero banner image - extends to screen edge */}
         <div
-          className="absolute top-1/2 -translate-y-[60%] h-[140%] pointer-events-none select-none"
+          className="absolute inset-y-0 pointer-events-none select-none"
           style={{
             right: 'calc(-50vw + 50%)',
             width: '70vw',
             backgroundImage: 'url(/images/hero.webp)',
-            backgroundSize: 'cover',
+            backgroundSize: 'auto 100%',
             backgroundPosition: 'right center',
+            backgroundRepeat: 'no-repeat',
             opacity: 0.35,
             maskImage: 'linear-gradient(to left, black 40%, transparent 80%)',
             WebkitMaskImage: 'linear-gradient(to left, black 40%, transparent 80%)',
@@ -47,7 +49,7 @@ export default function LandingEditPage() {
           aria-hidden="true"
         />
 
-        <h1 className="relative z-10 mb-8">
+        <h1 className="relative z-10 max-w-lg mb-8">
           <EditableField
             value={get('hero', 'title')}
             onChange={(v) => set('hero', 'title', v)}
@@ -58,7 +60,7 @@ export default function LandingEditPage() {
 
         <div className="relative z-10 flex flex-wrap gap-4">
           <Link
-            href="/about"
+            href="/about/"
             className="inline-flex items-center gap-2 px-5 py-2.5 bg-blue text-white rounded-full hover:bg-blue/90 transition-colors font-medium"
           >
             About us
@@ -66,15 +68,15 @@ export default function LandingEditPage() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </Link>
-          <Link
-            href="/areas"
+          <a
+            href="#focus-areas"
             className="inline-flex items-center gap-2 px-5 py-2.5 border border-gray-300 text-gray-700 rounded-full hover:border-blue hover:text-blue transition-colors font-medium"
           >
             Focus areas
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
-          </Link>
+          </a>
         </div>
 
         <div className="relative z-10 mt-16 lg:mt-24">
@@ -89,10 +91,27 @@ export default function LandingEditPage() {
         </div>
       </div>
 
+      {/* R&D pipeline — static preview matching the public landing page. */}
+      <div className="pb-16 lg:pb-20 border-t border-gray-200 pt-16 lg:pt-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start mb-12 lg:mb-14">
+          <h2 className="text-[28px] md:text-[36px] font-normal leading-tight tracking-tight">
+            From research to scale.
+          </h2>
+          <p className="text-base text-gray-600 leading-relaxed lg:pt-3">
+            Our R&amp;D pipeline moves frontier ideas from open research
+            through productionizing and into deployed systems that scale
+            globally — each stage compounding on the last.
+          </p>
+        </div>
+        <div className="max-w-5xl mx-auto">
+          <RDPipeline />
+        </div>
+      </div>
+
       {/* R&D approach section — mirrors the live homepage layout:
           two-column intro (title + body) above a 2x2 grid of large
           FocusAreaCards with hex-mosaic backdrops. */}
-      <div className="pb-20 lg:pb-28 border-t border-gray-200 pt-16 lg:pt-24">
+      <div id="focus-areas" className="pb-20 lg:pb-28 border-t border-gray-200 pt-16 lg:pt-24 scroll-mt-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start mb-44 sm:mb-48 lg:mb-52">
           <h2>
             <EditableField
@@ -166,7 +185,7 @@ export default function LandingEditPage() {
           />
         </div>
         <Link
-          href="/authors"
+          href="/authors/"
           className="inline-flex items-center gap-2 px-5 py-2.5 border border-blue/30 text-blue rounded-full hover:bg-blue hover:text-white hover:border-blue transition-all font-medium"
         >
           Meet the team
