@@ -143,6 +143,45 @@ ul li li {
   .gf-track { animation: none; }
 }
 
+/* ===== Simocracy sim parade (most recent sims walking right) =====
+   The sprite sheet is a 128×128 pipoya walk-cycle: 4 cols × 4 rows of 32×32
+   frames, row order front/left/right/back. We animate the "right" row (y=-64)
+   through its 4 walk frames with steps(4), and march the whole row rightward
+   as a seamless marquee (cards rendered twice, translateX -50% → 0). */
+.sim-parade-wall {
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 4%, #000 96%, transparent 100%);
+          mask-image: linear-gradient(90deg, transparent 0, #000 4%, #000 96%, transparent 100%);
+}
+.sim-parade {
+  animation: sim-parade-scroll 55s linear infinite;
+  will-change: transform;
+}
+.sim-parade-wall:hover .sim-parade { animation-play-state: paused; }
+@keyframes sim-parade-scroll {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+.sim-sprite {
+  display: block;
+  width: 32px;
+  height: 32px;
+  background-repeat: no-repeat;
+  background-position: 0 -64px; /* row 2 = "right" (front, left, right, back) */
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  transform: scale(2.25);
+  transform-origin: bottom center;
+  animation: sim-walk-right 0.62s steps(4) infinite;
+}
+@keyframes sim-walk-right {
+  from { background-position-x: 0; }
+  to   { background-position-x: -128px; } /* 4 frames × 32px */
+}
+@media (prefers-reduced-motion: reduce) {
+  .sim-parade { animation: none; }
+  .sim-sprite { animation: none; }
+}
+
 /* ===== Sticky nav ===== */
 [data-selector="nav"] [data-selector="nav-contents"] {
   transition: padding-top .4s ease-in-out, padding-bottom .4s ease-in-out;

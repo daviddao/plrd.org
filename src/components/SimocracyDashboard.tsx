@@ -1,12 +1,14 @@
 'use client'
 
 import { useMemo, useState } from 'react'
-import type { SimocracyTotals, SimocracyTrends } from '@/lib/simocracy'
+import type { SimocracyTotals, SimocracyTrends, RecentSim } from '@/lib/simocracy'
 import { MetricModal, TrendStat, formatCount } from '@/components/MetricTrend'
+import SimWalk from '@/components/SimWalk'
 
 type Props = {
   totals: SimocracyTotals
   trends: SimocracyTrends
+  recentSims: RecentSim[]
   fetchedAt: string
   degraded: boolean
 }
@@ -41,6 +43,7 @@ type MetricMeta = {
 export default function SimocracyDashboard({
   totals,
   trends,
+  recentSims,
   fetchedAt,
   degraded,
 }: Props) {
@@ -99,6 +102,9 @@ export default function SimocracyDashboard({
           />
         ))}
       </div>
+
+      {/* Most recent sims walking from left to right. */}
+      <SimWalk sims={recentSims} />
 
       {activeMeta && (
         <MetricModal
