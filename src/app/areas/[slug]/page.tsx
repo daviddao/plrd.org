@@ -7,6 +7,7 @@ import { areas, publications, talks } from '@/lib/content'
 import { FOCUS_AREA_DESCRIPTIONS, type FocusAreaSlug } from '@/lib/focus-area-descriptions'
 import { stripFaPrefix } from '@/lib/format'
 import { AreaIcon, type AreaIconType } from '@/components/AreaIcons'
+import AreaHeroGraphic from '@/components/AreaHeroGraphic'
 import AreaHeroActions from '@/components/AreaHeroActions'
 import AuthorCard from '@/components/AuthorCard'
 import Breadcrumb from '@/components/Breadcrumb'
@@ -83,6 +84,14 @@ const SLUG_TO_ICON: Record<string, AreaIconType> = {
   'neurotech': 'brain',
 }
 
+// Per-area hero-graphic widths (tuned to each render's aspect so the square
+// globe isn't too tall and the wide hand/brain aren't overpowering).
+const HERO_WIDTH: Record<string, string> = {
+  'digital-human-rights': 'w-[240px] md:w-[300px] lg:w-[360px]',
+  'ai-robotics': 'w-[320px] md:w-[420px] lg:w-[500px]',
+  'neurotech': 'w-[300px] md:w-[380px] lg:w-[440px]',
+}
+
 export function generateStaticParams() {
   return areas
     .filter((a) => !HARDCODED_AREA_SLUGS.includes(a.slug))
@@ -127,8 +136,17 @@ export default async function AreaPage({ params }: Props) {
       </div>
       {/* Hero */}
       <div className="relative pt-8 pb-12 mb-12 overflow-hidden">
-        <AreaHexImage slug={slug} />
-        <AreaGeo slug={slug} />
+        {slug in HERO_WIDTH ? (
+          <AreaHeroGraphic
+            slug={slug}
+            className={`absolute right-0 top-1/2 -translate-y-1/2 hidden sm:block select-none ${HERO_WIDTH[slug] || 'w-[300px] md:w-[400px] lg:w-[460px]'}`}
+          />
+        ) : (
+          <>
+            <AreaHexImage slug={slug} />
+            <AreaGeo slug={slug} />
+          </>
+        )}
         <div className="flex items-center gap-4 sm:items-start sm:gap-5 mb-6">
           <AreaIcon type={SLUG_TO_ICON[slug] || 'hexagon'} className="w-14 h-14 lg:w-16 lg:h-16 shrink-0 text-blue/70" />
           <h1 className="relative z-10 text-2xl lg:text-[44px] font-semibold leading-[1.1] tracking-tight max-w-xl">
