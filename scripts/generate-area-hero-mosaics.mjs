@@ -31,20 +31,19 @@ import { fileURLToPath } from 'node:url'
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
 const OUT_DIR = join(ROOT, 'src/data/area-heroes')
 
+// `size` overrides the tile size (centre→vertex in the 820px working canvas).
+// economies-governance has a much wider crop frame than the others, so it gets
+// scaled down more on screen; a larger tile size keeps the *displayed* hexagons
+// the same size across all focus-area heroes.
 const SOURCES = [
-  { slug: 'economies-governance', file: 'fa2-hero.png' },
+  { slug: 'economies-governance', file: 'fa2-hero.png', size: 27 },
   { slug: 'digital-human-rights', file: 'digital-human-rights-hero.png' },
   { slug: 'ai-robotics', file: 'ai-robotics-hero.png' },
   { slug: 'neurotech', file: 'neurotech-hero.png' },
 ]
 
 const W = 820 // working/display canvas width
-
-// Flat-top hexagon grid.
-const SIZE = 20 // centre → vertex (= side length)
-const DRAW = SIZE + 0.8 // draw slightly larger so tiles overlap — no white seams
-const STEP_X = SIZE * 1.5
-const STEP_Y = SIZE * Math.sqrt(3)
+const DEFAULT_SIZE = 20 // tile radius (centre → vertex) in working-canvas units
 
 const A_BG = 30 // alpha below this = transparent background
 const A_SOLID = 110 // alpha at/above this = solid foreground (sampled for colour)
@@ -85,7 +84,12 @@ function sample(data, w, h, px, py, rad) {
 
 await mkdir(OUT_DIR, { recursive: true })
 
-for (const { slug, file } of SOURCES) {
+for (const { slug, file, size } of SOURCES) {
+  const SIZE = size ?? DEFAULT_SIZE
+  const DRAW = SIZE + 0.8 // draw slightly larger so tiles overlap — no white seams
+  const STEP_X = SIZE * 1.5
+  const STEP_Y = SIZE * Math.sqrt(3)
+
   const { data, info } = await sharp(join(ROOT, 'public/images/fa2', file))
     .resize({ width: W })
     .ensureAlpha()
