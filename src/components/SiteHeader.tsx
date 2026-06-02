@@ -50,7 +50,7 @@ export default function SiteHeader({ onMenuClick }: Props) {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
-            <img src="/images/pl_logo_mark.svg" className="h-8 transition-transform group-hover:scale-105" alt="Protocol Labs" />
+            <img src="/images/pl_logo_mark.svg" className="h-11 transition-transform group-hover:scale-105" alt="Protocol Labs" />
             <span className="font-semibold text-black">
               PL <span className="font-normal text-gray-500">R&D</span>
             </span>

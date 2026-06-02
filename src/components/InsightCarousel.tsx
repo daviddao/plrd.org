@@ -107,7 +107,7 @@ export default function InsightCarousel({ items }: { items: InsightItem[] }) {
         <div className="flex gap-2.5">
           <button
             onClick={() => scroll('left')}
-            className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center text-gray-500 hover:border-blue hover:text-blue transition-colors disabled:opacity-30"
+            className="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center hover:bg-gray-800 transition-colors disabled:opacity-30"
             aria-label="Previous"
             disabled={progress <= 0}
           >
@@ -115,7 +115,7 @@ export default function InsightCarousel({ items }: { items: InsightItem[] }) {
           </button>
           <button
             onClick={() => scroll('right')}
-            className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center text-gray-500 hover:border-blue hover:text-blue transition-colors disabled:opacity-30"
+            className="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center hover:bg-gray-800 transition-colors disabled:opacity-30"
             aria-label="Next"
             disabled={progress >= 0.99}
           >

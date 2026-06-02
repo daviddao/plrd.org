@@ -150,7 +150,7 @@ export default async function HomePage() {
       </div>
 
       {/* ── Hero ── */}
-      <div className="relative pt-16 pb-16 md:pt-20 md:pb-20 lg:pt-24 lg:pb-24">
+      <div className="relative pt-16 pb-8 md:pt-20 md:pb-10 lg:pt-24 lg:pb-12">
         <div className="relative z-10">
           <p className="text-sm text-gray-500 uppercase tracking-widest mb-6 font-medium">
             Protocol Labs Research &amp; Development
@@ -159,7 +159,7 @@ export default async function HomePage() {
             Accelerating breakthroughs in computing to push humanity forward
           </h1>
           <p className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-xl mb-8">
-            We move frontier ideas in computing from open research to deployed systems to expand human freedom, coordination, intelligence, and cognition
+            We de-risk frontier ideas in computing and help them cross from open research to deployment, expanding human freedom, coordination, intelligence, and cognition
           </p>
           <div className="flex flex-wrap items-center gap-4">
             <Link
@@ -172,7 +172,7 @@ export default async function HomePage() {
 
           <a
             href="#focus-areas"
-            className="inline-flex flex-col items-center gap-1.5 mt-12 text-gray-400 hover:text-gray-600 transition-colors group"
+            className="inline-flex flex-col items-center gap-1.5 mt-8 text-gray-400 hover:text-gray-600 transition-colors group"
           >
             <span className="text-sm font-medium tracking-wide">Explore focus areas</span>
             <svg className="w-5 h-5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -192,7 +192,7 @@ export default async function HomePage() {
             {approach?.title || "Use-inspired research across four frontiers"}
           </h2>
           <MarkdownContent
-            content="PL R&D drives breakthroughs in computing to expand human freedom, coordination, intelligence, and cognition. We help researchers, builders, funders, and institutions coordinate around the technical primitives, open infrastructure, and deployment pathways that make new fields real."
+            content="Our work is concentrated in areas where computing systems will shape human freedom, institutional capacity, machine intelligence, and the future of cognition itself."
             className="text-base text-gray-600 leading-relaxed lg:-mt-[3px]"
           />
         </div>
@@ -206,7 +206,7 @@ export default async function HomePage() {
                 href={fa.href}
                 iconType={fa.iconType}
                 title={section?.title || fa.slug.split('-').map(w => w[0].toUpperCase() + w.slice(1)).join(' ')}
-                body={section?.subtitle || FOCUS_AREA_DESCRIPTIONS[fa.descKey]}
+                body={FOCUS_AREA_DESCRIPTIONS[fa.descKey]}
                 opportunitySpaces={fa.opportunitySpaces}
                 areaSlug={fa.slug}
                 color={AREA_COLORS[fa.slug]}
@@ -223,12 +223,10 @@ export default async function HomePage() {
       <div className="pb-16 lg:pb-20 border-t border-gray-200 pt-16 lg:pt-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start mb-6 lg:mb-8">
           <h2 className="text-[28px] md:text-[36px] font-normal leading-[1.1] tracking-tight">
-            From research to scale.
+            From research to scale
           </h2>
           <p className="text-base text-gray-600 leading-relaxed lg:-mt-[3px]">
-            Our R&amp;D pipeline moves frontier ideas from open research
-            through productionizing and into deployed systems that scale
-            globally — each stage compounding on the last.
+            We help researchers, builders, funders, and institutions coordinate around the technical primitives, open infrastructure, and deployment pathways that make new fields real.
           </p>
         </div>
         <div className="max-w-5xl mx-auto">
@@ -264,7 +262,7 @@ export default async function HomePage() {
         />
         <Link
           href="/authors"
-          className="inline-flex items-center gap-2 px-6 py-3 border border-gray-300 text-gray-700 rounded-full hover:border-blue hover:text-blue transition-all font-semibold text-sm"
+          className="inline-flex items-center gap-2 px-6 py-3 bg-black text-white rounded-full hover:bg-gray-800 transition-colors font-semibold text-sm"
         >
           Meet the team
           <span>→</span>
