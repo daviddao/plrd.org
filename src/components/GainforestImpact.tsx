@@ -138,6 +138,10 @@ const BLUE = 'var(--color-blue, #1982F4)'
 const PINK = 'var(--color-pink, #E51A66)'
 const TEAL = 'var(--color-teal, #12bfdf)'
 
+function formatUsd(n: number): string {
+  return `$${n.toLocaleString('en-US')}`
+}
+
 type HcKey = 'certifiedOrgs' | 'bumicerts'
 
 export default function GainforestImpact({ stats }: { stats: GainforestStats }) {
@@ -173,7 +177,7 @@ export default function GainforestImpact({ stats }: { stats: GainforestStats }) 
         Environmental Hypercerts
       </h2>
 
-      <div className="grid grid-cols-2 gap-y-8 gap-x-8 mb-10 max-w-lg">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-y-8 gap-x-8 mb-10 max-w-2xl">
         {metrics.map((m) => (
           <TrendStat
             key={m.key}
@@ -186,6 +190,22 @@ export default function GainforestImpact({ stats }: { stats: GainforestStats }) 
             onExpand={() => setActive(m.key)}
           />
         ))}
+        {/* Static QF matching pool — links out to Ma Earth. */}
+        <a
+          href="https://maearth.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group block"
+          title="Ma Earth Round 3 quadratic-funding matching pool"
+        >
+          <TrendStat
+            label="QF matching pool"
+            value={500000}
+            caption="Ma Earth Round 3 ↗"
+            format={formatUsd}
+            color={TEAL}
+          />
+        </a>
       </div>
 
       {SITES.length > 0 && <SitesMap points={SITES} />}

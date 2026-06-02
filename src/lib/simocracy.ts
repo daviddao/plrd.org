@@ -147,18 +147,6 @@ export type SimocracyTotals = {
 export type SimLeaderboardEntry = { name: string; chats: number }
 export type UserLeaderboardEntry = { did: string; total: number; chats: number }
 
-/** One of the most-recently-minted sims, for the walking parade. */
-export type RecentSim = {
-  did: string
-  name: string
-  /** 'pipoya' (default) or 'codexPet'. Drives client-side rendering. */
-  spriteKind: string | null
-  /** Resolved URL of the 128×128 pipoya walk-cycle sheet (null for codexPet/legacy). */
-  spriteUrl: string | null
-  /** Resolved URL of the static avatar thumbnail (fallback when no sprite sheet). */
-  imageUrl: string | null
-}
-
 /** Cumulative daily series for every headline metric (keys mirror SimocracyTotals). */
 export type SimocracyTrends = {
   treasuryUsd: MetricSeries
@@ -176,8 +164,6 @@ export type SimocracyStats = {
   topSims: SimLeaderboardEntry[]
   topUsers: UserLeaderboardEntry[]
   recentEvents: SimocracyEvent[]
-  /** The 10 most recently minted sims (newest first), with resolved sprite URLs. */
-  recentSims: RecentSim[]
   /** Best-effort wall-clock time the underlying GraphQL fetches completed. */
   fetchedAt: string
   /** True when the indexer was unreachable or returned no data. */
@@ -279,13 +265,7 @@ function buildTrends(args: {
  */
 export async function fetchSimocracyStats(): Promise<SimocracyStats> {
   type HistoryNode = RawHistoryRecord
-  type SimNode = RawSimRecord & {
-    did?: string
-    uri?: string
-    spriteKind?: string | null
-    sprite?: { ref?: unknown } | null
-    image?: { ref?: unknown } | null
-  }
+  type SimNode = RawSimRecord & { did?: string; uri?: string }
   type GatheringNode = RawGatheringRecord & { did?: string }
 
   let historyNodes: HistoryNode[] = []
@@ -299,11 +279,7 @@ export async function fetchSimocracyStats(): Promise<SimocracyStats> {
         "type actorDid simNames simUris proposalTitle round hearingId createdAt content userMessage",
         5_000,
       ),
-      fetchRoot<SimNode>(
-        "orgSimocracySim",
-        "did uri name createdAt spriteKind image { ref } sprite { ref }",
-        1_000,
-      ),
+      fetchRoot<SimNode>("orgSimocracySim", "did uri name createdAt", 1_000),
       fetchRoot<GatheringNode>(
         "orgSimocracyGathering",
         "did name treasuryUsd status createdAt",
@@ -396,14 +372,6 @@ export async function fetchSimocracyStats(): Promise<SimocracyStats> {
     )
     .slice(0, 25)
 
-  // Newest 10 sims for the walking parade, with sprite/image blob URLs resolved.
-  let recentSims: RecentSim[] = []
-  try {
-    recentSims = await buildRecentSims(simNodes)
-  } catch (err) {
-    console.warn("[simocracy] recent-sims sprite resolution failed:", err)
-  }
-
   const degraded =
     historyNodes.length === 0 &&
     simNodes.length === 0 &&
@@ -422,95 +390,9 @@ export async function fetchSimocracyStats(): Promise<SimocracyStats> {
     topSims,
     topUsers,
     recentEvents,
-    recentSims,
     fetchedAt: new Date().toISOString(),
     degraded,
   }
-}
-
-// ---------------------------------------------------------------------------
-// Recent-sim sprite resolution (server-side PDS → getBlob)
-// ---------------------------------------------------------------------------
-
-type RawSimNode = {
-  did?: string
-  name?: string
-  createdAt?: string
-  spriteKind?: string | null
-  sprite?: { ref?: unknown } | null
-  image?: { ref?: unknown } | null
-}
-
-const pdsHostCache = new Map<string, string | null>()
-
-/** Resolve a DID's PDS host via plc.directory (cached per process). */
-async function resolvePdsHost(did: string): Promise<string | null> {
-  if (pdsHostCache.has(did)) return pdsHostCache.get(did) ?? null
-  try {
-    if (did.startsWith("did:web:")) {
-      const host = did.slice("did:web:".length).replace(/:/g, "/")
-      pdsHostCache.set(did, host)
-      return host
-    }
-    const res = await fetch(`https://plc.directory/${did}`, {
-      next: { revalidate: 3600, tags: ["simocracy"] },
-    })
-    if (!res.ok) {
-      pdsHostCache.set(did, null)
-      return null
-    }
-    const doc = (await res.json()) as {
-      service?: { type?: string; serviceEndpoint?: string }[]
-    }
-    const ep = doc.service?.find((s) => s.type === "AtprotoPersonalDataServer")?.serviceEndpoint
-    const host = ep ? new URL(ep).host : null
-    pdsHostCache.set(did, host)
-    return host
-  } catch {
-    pdsHostCache.set(did, null)
-    return null
-  }
-}
-
-/** Pull a blob CID out of an indexer blob ref (bare CID string or `{ $link }`). */
-function extractCid(ref: unknown): string | null {
-  if (typeof ref === "string") return ref
-  if (ref && typeof ref === "object") {
-    const link = (ref as { $link?: unknown })["$link"]
-    if (typeof link === "string") return link
-  }
-  return null
-}
-
-function blobUrl(host: string, did: string, cid: string): string {
-  return `https://${host}/xrpc/com.atproto.sync.getBlob?did=${encodeURIComponent(did)}&cid=${encodeURIComponent(cid)}`
-}
-
-/** Take the 10 newest sims and resolve their sprite + image blob URLs. */
-async function buildRecentSims(nodes: RawSimNode[]): Promise<RecentSim[]> {
-  const newest = [...nodes]
-    .filter((n) => n.did && n.name)
-    .sort(
-      (a, b) =>
-        new Date(b.createdAt ?? "").getTime() - new Date(a.createdAt ?? "").getTime(),
-    )
-    .slice(0, 10)
-
-  return Promise.all(
-    newest.map(async (n): Promise<RecentSim> => {
-      const did = n.did as string
-      const host = await resolvePdsHost(did)
-      const spriteCid = extractCid(n.sprite?.ref)
-      const imageCid = extractCid(n.image?.ref)
-      return {
-        did,
-        name: n.name as string,
-        spriteKind: n.spriteKind ?? null,
-        spriteUrl: host && spriteCid ? blobUrl(host, did, spriteCid) : null,
-        imageUrl: host && imageCid ? blobUrl(host, did, imageCid) : null,
-      }
-    }),
-  )
 }
 
 // ---------------------------------------------------------------------------

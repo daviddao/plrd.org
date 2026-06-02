@@ -143,32 +143,6 @@ ul li li {
   .gf-track { animation: none; }
 }
 
-/* ===== Simocracy "most recent sims" — standing idle sims =====
-   The sprite sheet is a 128×128 pipoya walk-cycle: 4 cols × 4 rows of 32×32
-   frames, row order front/left/right/back. We show the FRONT row (y=0) and
-   loop its 4 frames as a gentle in-place idle — matching simocracy-v2's council
-   MiniPixelSim, which loops the front-facing frames at ~8fps. The sims just
-   stand (no horizontal movement). */
-.sim-sprite {
-  display: block;
-  width: 32px;
-  height: 32px;
-  background-repeat: no-repeat;
-  background-position: 0 0; /* row 0 = "front" (front, left, right, back) */
-  image-rendering: pixelated;
-  image-rendering: crisp-edges;
-  transform: scale(1.6);
-  transform-origin: bottom center;
-  animation: sim-idle 0.5s steps(4) infinite; /* ~8fps, matches council feel */
-}
-@keyframes sim-idle {
-  from { background-position-x: 0; }
-  to   { background-position-x: -128px; } /* 4 frames × 32px */
-}
-@media (prefers-reduced-motion: reduce) {
-  .sim-sprite { animation: none; }
-}
-
 /* ===== Sticky nav ===== */
 [data-selector="nav"] [data-selector="nav-contents"] {
   transition: padding-top .4s ease-in-out, padding-bottom .4s ease-in-out;
