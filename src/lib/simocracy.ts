@@ -155,8 +155,28 @@ export type ActivityBucket = {
 export type SimLeaderboardEntry = { name: string; chats: number }
 export type UserLeaderboardEntry = { did: string; total: number; chats: number }
 
+/** A cumulative daily time series for one metric. */
+export type MetricSeries = {
+  /** Shared ISO date axis (YYYY-MM-DD), oldest → newest. */
+  days: string[]
+  /** Cumulative value at the end of each day. Same length as `days`. */
+  values: number[]
+}
+
+/** Cumulative daily series for every headline metric (keys mirror SimocracyTotals). */
+export type SimocracyTrends = {
+  treasuryUsd: MetricSeries
+  uniqueHumans: MetricSeries
+  totalSims: MetricSeries
+  totalGatherings: MetricSeries
+  totalSProcesses: MetricSeries
+  totalChats: MetricSeries
+}
+
 export type SimocracyStats = {
   totals: SimocracyTotals
+  /** Per-metric cumulative daily series, oldest → newest, on a shared date axis. */
+  trends: SimocracyTrends
   pulse14d: ActivityBucket[]
   topSims: SimLeaderboardEntry[]
   topUsers: UserLeaderboardEntry[]
@@ -221,6 +241,113 @@ function bucket14d(events: SimocracyEvent[]): ActivityBucket[] {
   return buckets
 }
 
+const DAY_MS = 24 * 60 * 60 * 1000
+
+/** Parse an ISO date to epoch ms, or NaN. */
+function ms(iso: string | undefined): number {
+  if (!iso) return NaN
+  return new Date(iso).getTime()
+}
+
+/**
+ * Accumulate timestamped increments onto a shared day axis. `events` are
+ * {t, inc} pairs; the returned array is the running total at the end of each
+ * day in `days` (day-start epoch ms), seeded with `baseline`.
+ */
+function cumulativeOnAxis(
+  days: number[],
+  events: { t: number; inc: number }[],
+  baseline = 0,
+): number[] {
+  const sorted = [...events].filter((e) => !Number.isNaN(e.t)).sort((a, b) => a.t - b.t)
+  const out: number[] = []
+  let i = 0
+  let acc = baseline
+  for (const day of days) {
+    const cutoff = day + DAY_MS
+    while (i < sorted.length && sorted[i].t < cutoff) {
+      acc += sorted[i].inc
+      i++
+    }
+    out.push(acc)
+  }
+  return out
+}
+
+/**
+ * Build cumulative daily series for every headline metric on one shared date
+ * axis spanning the earliest recorded event through today.
+ */
+function buildTrends(args: {
+  simTimes: number[]
+  userFirstSeen: number[]
+  gatherings: { createdAt?: string; treasuryUsd?: number }[]
+  events: SimocracyEvent[]
+  treasuryBaseline: number
+}): SimocracyTrends {
+  const { simTimes, userFirstSeen, gatherings, events, treasuryBaseline } = args
+
+  const gatheringTimes = gatherings.map((g) => ms(g.createdAt)).filter((t) => !Number.isNaN(t))
+  const eventTimes = events.map((e) => ms(e.createdAt)).filter((t) => !Number.isNaN(t))
+  const allTimes = [...simTimes, ...userFirstSeen, ...gatheringTimes, ...eventTimes].filter(
+    (t) => !Number.isNaN(t),
+  )
+
+  const empty: MetricSeries = { days: [], values: [] }
+  if (allTimes.length === 0) {
+    return {
+      treasuryUsd: empty,
+      uniqueHumans: empty,
+      totalSims: empty,
+      totalGatherings: empty,
+      totalSProcesses: empty,
+      totalChats: empty,
+    }
+  }
+
+  const startDay = Math.floor(Math.min(...allTimes) / DAY_MS) * DAY_MS
+  const today = new Date()
+  today.setHours(0, 0, 0, 0)
+  const endDay = today.getTime()
+  const days: number[] = []
+  for (let d = startDay; d <= endDay; d += DAY_MS) days.push(d)
+  const isoDays = days.map((d) => new Date(d).toISOString().slice(0, 10))
+
+  // S-Process increments: first time each hearingId appears among sprocess events.
+  const seenHearings = new Set<string>()
+  const sprocessEvents: { t: number; inc: number }[] = []
+  for (const e of [...events].sort((a, b) => ms(a.createdAt) - ms(b.createdAt))) {
+    if (e.type === "sprocess" && e.hearingId && !seenHearings.has(e.hearingId)) {
+      seenHearings.add(e.hearingId)
+      sprocessEvents.push({ t: ms(e.createdAt), inc: 1 })
+    }
+  }
+
+  const series = (values: number[]): MetricSeries => ({ days: isoDays, values })
+
+  return {
+    treasuryUsd: series(
+      cumulativeOnAxis(
+        days,
+        gatherings.map((g) => ({ t: ms(g.createdAt), inc: g.treasuryUsd ?? 0 })),
+        treasuryBaseline,
+      ),
+    ),
+    uniqueHumans: series(cumulativeOnAxis(days, userFirstSeen.map((t) => ({ t, inc: 1 })))),
+    totalSims: series(cumulativeOnAxis(days, simTimes.map((t) => ({ t, inc: 1 })))),
+    totalGatherings: series(
+      cumulativeOnAxis(days, gatheringTimes.map((t) => ({ t, inc: 1 }))),
+    ),
+    totalSProcesses: series(cumulativeOnAxis(days, sprocessEvents)),
+    totalChats: series(
+      cumulativeOnAxis(
+        days,
+        events.filter((e) => e.type === "chat").map((e) => ({ t: ms(e.createdAt), inc: 1 })),
+      ),
+    ),
+  }
+}
+
 /**
  * Fetch + aggregate Simocracy data for the live dashboard. Falls back to a
  * `degraded: true` empty result if the indexer is unreachable.
@@ -265,12 +392,31 @@ export async function fetchSimocracyStats(): Promise<SimocracyStats> {
   )
   const treasuryUsd = treasuryFromGatherings + FTC_SF_TOWER_TREASURY_USD
 
-  // Unique humans = DIDs that own a sim ∪ DIDs that triggered any event
-  const humanDids = new Set<string>()
-  for (const node of simNodes) {
-    if (node.did) humanDids.add(node.did)
+  // Unique humans = DIDs that own a sim ∪ DIDs that triggered any event.
+  // Track first-seen timestamp per DID for the cumulative growth series.
+  const firstSeen = new Map<string, number>()
+  const noteFirst = (did: string | undefined, createdAt: string | undefined) => {
+    if (!did || !createdAt) return
+    const t = new Date(createdAt).getTime()
+    if (Number.isNaN(t)) return
+    const prev = firstSeen.get(did)
+    if (prev == null || t < prev) firstSeen.set(did, t)
   }
-  for (const e of events) humanDids.add(e.actorDid)
+  for (const node of simNodes) noteFirst(node.did, node.createdAt)
+  for (const e of events) noteFirst(e.actorDid, e.createdAt)
+  const humanDids = firstSeen
+
+  const simTimes = simNodes
+    .map((s) => new Date(s.createdAt ?? "").getTime())
+    .filter((t) => !Number.isNaN(t))
+
+  const trends = buildTrends({
+    simTimes,
+    userFirstSeen: [...firstSeen.values()],
+    gatherings,
+    events,
+    treasuryBaseline: FTC_SF_TOWER_TREASURY_USD,
+  })
 
   // S-processes = unique hearingId among sprocess events
   const sProcessRunIds = new Set<string>()
@@ -329,6 +475,7 @@ export async function fetchSimocracyStats(): Promise<SimocracyStats> {
       totalSProcesses: sProcessRunIds.size,
       totalChats,
     },
+    trends,
     pulse14d: bucket14d(events),
     topSims,
     topUsers,

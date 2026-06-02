@@ -1,10 +1,16 @@
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'
-import type { ActivityBucket, SimocracyTotals } from '@/lib/simocracy'
+import type {
+  ActivityBucket,
+  MetricSeries,
+  SimocracyTotals,
+  SimocracyTrends,
+} from '@/lib/simocracy'
 
 type Props = {
   totals: SimocracyTotals
+  trends: SimocracyTrends
   pulse14d: ActivityBucket[]
   fetchedAt: string
   degraded: boolean
@@ -53,19 +59,301 @@ type StatProps = {
   value: number
   caption?: string
   format?: (n: number) => string
+  series?: MetricSeries
+  color?: string
+  onExpand?: () => void
 }
 
-function Stat({ label, value, caption, format = formatCount }: StatProps) {
+function Stat({
+  label,
+  value,
+  caption,
+  format = formatCount,
+  series,
+  color = 'var(--color-blue, #1982F4)',
+  onExpand,
+}: StatProps) {
   const animated = useCountUp(value)
-  return (
-    <div>
-      <div className="text-2xl lg:text-3xl font-semibold text-black mb-2 tabular-nums">
-        {format(animated)}
+  const hasSeries = !!series && series.values.length > 1 && !!onExpand
+
+  const inner = (
+    <>
+      <div className="flex items-end justify-between gap-3">
+        <div
+          className={`text-2xl lg:text-3xl font-semibold text-black tabular-nums transition-colors ${
+            hasSeries ? 'group-hover:text-blue' : ''
+          }`}
+        >
+          {format(animated)}
+        </div>
+        {hasSeries && (
+          <Sparkline values={series!.values} color={color} className="w-16 h-7 shrink-0" />
+        )}
       </div>
-      <div className="text-sm text-gray-500">{label}</div>
+      <div className="text-sm text-gray-500 mt-2 flex items-center gap-1.5">
+        {label}
+        {hasSeries && (
+          <svg
+            aria-hidden
+            viewBox="0 0 24 24"
+            className="w-3 h-3 text-gray-300 group-hover:text-blue transition-colors"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={2}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M15 3h6v6M14 10l7-7M9 21H3v-6M10 14l-7 7" />
+          </svg>
+        )}
+      </div>
       {caption && <div className="text-xs text-gray-400 mt-1">{caption}</div>}
+    </>
+  )
+
+  if (hasSeries) {
+    return (
+      <button
+        type="button"
+        onClick={onExpand}
+        aria-label={`Expand ${label} trend`}
+        className="group block w-full text-left cursor-pointer outline-none"
+      >
+        {inner}
+      </button>
+    )
+  }
+  return <div>{inner}</div>
+}
+
+// ---------------------------------------------------------------------------
+// Sparkline — tiny inline cumulative curve (no axes, no interactivity)
+// ---------------------------------------------------------------------------
+
+function sparkPaths(values: number[], vw: number, vh: number) {
+  const n = values.length
+  const maxY = Math.max(1, ...values)
+  const x = (i: number) => (i / (n - 1)) * vw
+  const y = (v: number) => vh - (v / maxY) * vh
+  const line = values
+    .map((v, i) => `${i === 0 ? 'M' : 'L'}${x(i).toFixed(1)},${y(v).toFixed(1)}`)
+    .join(' ')
+  const area = `${line} L${vw},${vh} L0,${vh} Z`
+  return { line, area }
+}
+
+function Sparkline({
+  values,
+  color,
+  className = '',
+}: {
+  values: number[]
+  color: string
+  className?: string
+}) {
+  const VW = 100
+  const VH = 32
+  const { line, area } = sparkPaths(values, VW, VH)
+  return (
+    <svg
+      viewBox={`0 0 ${VW} ${VH}`}
+      preserveAspectRatio="none"
+      className={className}
+      aria-hidden
+    >
+      <path d={area} fill={color} opacity={0.1} />
+      <path
+        d={line}
+        fill="none"
+        stroke={color}
+        strokeWidth={2}
+        vectorEffect="non-scaling-stroke"
+        strokeLinejoin="round"
+        strokeLinecap="round"
+      />
+    </svg>
+  )
+}
+
+// ---------------------------------------------------------------------------
+// Metric modal — full interactive line graph for one metric
+// ---------------------------------------------------------------------------
+
+type MetricModalProps = {
+  title: string
+  caption?: string
+  series: MetricSeries
+  color: string
+  format: (n: number) => string
+  onClose: () => void
+}
+
+function MetricModal({ title, caption, series, color, format, onClose }: MetricModalProps) {
+  const [hover, setHover] = useState<number | null>(null)
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose()
+    }
+    window.addEventListener('keydown', onKey)
+    document.body.style.overflow = 'hidden'
+    return () => {
+      window.removeEventListener('keydown', onKey)
+      document.body.style.overflow = ''
+    }
+  }, [onClose])
+
+  const { days, values } = series
+  const n = values.length
+  const VW = 720
+  const VH = 320
+  const pad = { top: 16, right: 16, bottom: 28, left: 56 }
+  const iw = VW - pad.left - pad.right
+  const ih = VH - pad.top - pad.bottom
+  const maxRaw = Math.max(1, ...values)
+  const maxY = niceMax(maxRaw)
+  const x = (i: number) => pad.left + (n <= 1 ? 0 : (i / (n - 1)) * iw)
+  const y = (v: number) => pad.top + ih - (v / maxY) * ih
+  const line = values
+    .map((v, i) => `${i === 0 ? 'M' : 'L'}${x(i).toFixed(1)},${y(v).toFixed(1)}`)
+    .join(' ')
+  const area = `${line} L${x(n - 1).toFixed(1)},${(pad.top + ih).toFixed(1)} L${x(0).toFixed(
+    1,
+  )},${(pad.top + ih).toFixed(1)} Z`
+
+  // y gridlines
+  const yTicks: number[] = []
+  const tickStep = maxY / 4
+  for (let v = 0; v <= maxY + 0.5; v += tickStep) yTicks.push(Math.round(v))
+
+  // x labels: first, middle, last
+  const idxs = n > 1 ? [0, Math.floor((n - 1) / 2), n - 1] : [0]
+  const fmtDate = (iso: string) => {
+    const d = new Date(iso)
+    if (Number.isNaN(d.getTime())) return iso
+    return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+  }
+
+  const focus = hover != null ? { i: hover, v: values[hover], d: days[hover] } : null
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4"
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-label={`${title} trend`}
+    >
+      <div
+        className="bg-white rounded-2xl shadow-xl w-full max-w-3xl p-6"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-start justify-between gap-4 mb-5">
+          <div>
+            <h3 className="text-lg font-semibold text-black">{title}</h3>
+            <div className="text-sm text-gray-500 mt-0.5">
+              <span className="font-medium text-black tabular-nums">
+                {format(values[n - 1] ?? 0)}
+              </span>
+              {days.length > 0 && (
+                <span>
+                  {' '}
+                  · {fmtDate(days[0])} → {fmtDate(days[n - 1])}
+                </span>
+              )}
+            </div>
+            {caption && <div className="text-xs text-gray-400 mt-1">{caption}</div>}
+          </div>
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close"
+            className="shrink-0 rounded-full p-1.5 text-gray-400 hover:text-black hover:bg-gray-100 transition-colors"
+          >
+            <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round">
+              <path d="M6 6l12 12M18 6L6 18" />
+            </svg>
+          </button>
+        </div>
+
+        <svg
+          viewBox={`0 0 ${VW} ${VH}`}
+          className="w-full"
+          style={{ aspectRatio: `${VW} / ${VH}` }}
+          onMouseLeave={() => setHover(null)}
+        >
+          {yTicks.map((v) => (
+            <g key={v}>
+              <line x1={pad.left} x2={pad.left + iw} y1={y(v)} y2={y(v)} stroke="#EEEEF0" strokeWidth={1} />
+              <text x={pad.left - 10} y={y(v) + 4} textAnchor="end" fontSize={11} fill="#A0A0A6">
+                {formatCount(v)}
+              </text>
+            </g>
+          ))}
+
+          <path d={area} fill={color} opacity={0.1} />
+          <path
+            d={line}
+            fill="none"
+            stroke={color}
+            strokeWidth={2.5}
+            strokeLinejoin="round"
+            strokeLinecap="round"
+          />
+
+          {idxs.map((i) => (
+            <text
+              key={i}
+              x={x(i)}
+              y={VH - 6}
+              textAnchor={i === 0 ? 'start' : i === n - 1 ? 'end' : 'middle'}
+              fontSize={11}
+              fill="#A0A0A6"
+            >
+              {fmtDate(days[i])}
+            </text>
+          ))}
+
+          {focus && (
+            <g>
+              <line x1={x(focus.i)} x2={x(focus.i)} y1={pad.top} y2={pad.top + ih} stroke={color} strokeWidth={1} strokeDasharray="3 3" opacity={0.5} />
+              <circle cx={x(focus.i)} cy={y(focus.v)} r={4} fill={color} />
+            </g>
+          )}
+
+          {/* hover hit areas */}
+          {n > 1 &&
+            values.map((_, i) => (
+              <rect
+                key={i}
+                x={x(i) - iw / (n - 1) / 2}
+                y={pad.top}
+                width={iw / (n - 1)}
+                height={ih}
+                fill="transparent"
+                onMouseEnter={() => setHover(i)}
+              />
+            ))}
+        </svg>
+
+        {focus && (
+          <div className="mt-3 text-sm text-gray-600 tabular-nums">
+            <span className="font-medium text-black">{format(focus.v)}</span>{' '}
+            <span className="text-gray-400">on {fmtDate(focus.d)}</span>
+          </div>
+        )}
+      </div>
     </div>
   )
+}
+
+/** Round a max value up to a clean axis bound. */
+function niceMax(v: number): number {
+  if (v <= 0) return 1
+  const pow = Math.pow(10, Math.floor(Math.log10(v)))
+  const n = v / pow
+  const step = n <= 1 ? 1 : n <= 2 ? 2 : n <= 5 ? 5 : 10
+  return step * pow
 }
 
 // ---------------------------------------------------------------------------
@@ -252,12 +540,44 @@ function LegendDot({ color }: { color: string }) {
 // Main
 // ---------------------------------------------------------------------------
 
+const BLUE = 'var(--color-blue, #1982F4)'
+const PINK = 'var(--color-pink, #E51A66)'
+const TEAL = 'var(--color-teal, #18A999)'
+
+type MetricKey = keyof SimocracyTrends
+
+type MetricMeta = {
+  key: MetricKey
+  label: string
+  caption: string
+  color: string
+  value: number
+  format: (n: number) => string
+}
+
 export default function SimocracyDashboard({
   totals,
+  trends,
   pulse14d,
   fetchedAt,
   degraded,
 }: Props) {
+  const [active, setActive] = useState<MetricKey | null>(null)
+
+  const metrics: MetricMeta[] = useMemo(
+    () => [
+      { key: 'treasuryUsd', label: 'Treasury governed', caption: 'Gathering treasuries + FtC SF tower', color: TEAL, value: totals.treasuryUsd, format: formatUsd },
+      { key: 'uniqueHumans', label: 'Voices', caption: 'Unique humans active', color: PINK, value: totals.uniqueHumans, format: formatCount },
+      { key: 'totalSims', label: 'Sims', caption: 'AI agents minted', color: BLUE, value: totals.totalSims, format: formatCount },
+      { key: 'totalGatherings', label: 'Gatherings', caption: 'Events & councils convened', color: BLUE, value: totals.totalGatherings, format: formatCount },
+      { key: 'totalSProcesses', label: 'S-Processes', caption: 'Multi-agent deliberations', color: PINK, value: totals.totalSProcesses, format: formatCount },
+      { key: 'totalChats', label: 'Chats', caption: 'Messages exchanged with sims', color: TEAL, value: totals.totalChats, format: formatCount },
+    ],
+    [totals],
+  )
+
+  const activeMeta = active ? metrics.find((m) => m.key === active) ?? null : null
+
   const fetchedLabel = useMemo(() => {
     try {
       return new Date(fetchedAt).toLocaleString()
@@ -280,42 +600,37 @@ export default function SimocracyDashboard({
       <h2 className="text-sm text-gray-500 uppercase tracking-wide mb-6">
         Ecosystem snapshot
       </h2>
+      <p className="text-xs text-gray-400 -mt-4 mb-6">
+        Tap any metric to see its full trend.
+      </p>
       <div className="grid grid-cols-2 md:grid-cols-3 gap-y-8 gap-x-8 pb-14 border-b border-gray-100">
-        <Stat
-          label="Treasury governed"
-          value={totals.treasuryUsd}
-          caption="Gathering treasuries + FtC SF tower"
-          format={formatUsd}
-        />
-        <Stat
-          label="Voices"
-          value={totals.uniqueHumans}
-          caption="Unique humans active"
-        />
-        <Stat
-          label="Sims"
-          value={totals.totalSims}
-          caption="AI agents minted"
-        />
-        <Stat
-          label="Gatherings"
-          value={totals.totalGatherings}
-          caption="Events & councils convened"
-        />
-        <Stat
-          label="S-Processes"
-          value={totals.totalSProcesses}
-          caption="Multi-agent deliberations"
-        />
-        <Stat
-          label="Chats"
-          value={totals.totalChats}
-          caption="Messages exchanged with sims"
-        />
+        {metrics.map((m) => (
+          <Stat
+            key={m.key}
+            label={m.label}
+            value={m.value}
+            caption={m.caption}
+            format={m.format}
+            series={trends[m.key]}
+            color={m.color}
+            onExpand={() => setActive(m.key)}
+          />
+        ))}
       </div>
 
       {/* 14-day pulse */}
       <Pulse14d buckets={pulse14d} />
+
+      {activeMeta && (
+        <MetricModal
+          title={activeMeta.label}
+          caption={activeMeta.caption}
+          series={trends[activeMeta.key]}
+          color={activeMeta.color}
+          format={activeMeta.format}
+          onClose={() => setActive(null)}
+        />
+      )}
 
       {/* Footer */}
       <p className="mt-12 text-xs text-gray-400">
