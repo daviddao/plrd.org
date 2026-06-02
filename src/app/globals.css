@@ -114,6 +114,35 @@ ul li li {
   transform: translate3d(0, 0, 0);
 }
 
+/* ===== GainForest specimen marquee (live dashboard carousel) =====
+   Two rows of small square cards auto-scrolling in opposite directions,
+   seamless because each track renders its cards twice and shifts by -50%.
+   Ported from gainforest-app/decks/swissnex-2026's specimen wall. */
+.gf-wall {
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 3%, #000 97%, transparent 100%);
+          mask-image: linear-gradient(90deg, transparent 0, #000 3%, #000 97%, transparent 100%);
+}
+.gf-track {
+  animation-duration: 90s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+.gf-track-left  { animation-name: gf-marquee-left; }
+.gf-track-right { animation-name: gf-marquee-right; animation-duration: 105s; }
+.gf-wall:hover .gf-track { animation-play-state: paused; }
+@keyframes gf-marquee-left {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes gf-marquee-right {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gf-track { animation: none; }
+}
+
 /* ===== Sticky nav ===== */
 [data-selector="nav"] [data-selector="nav-contents"] {
   transition: padding-top .4s ease-in-out, padding-bottom .4s ease-in-out;

@@ -38,11 +38,16 @@ export function useCountUp(target: number, duration = 800): number {
 // Sparkline — tiny inline cumulative curve (no axes, no interactivity)
 // ---------------------------------------------------------------------------
 
-function sparkPaths(values: number[], vw: number, vh: number) {
+function sparkPaths(values: number[], vw: number, vh: number, minBaseline = false) {
   const n = values.length
-  const maxY = Math.max(1, ...values)
+  // When `minBaseline`, scale from min→max instead of 0→max so a near-the-top
+  // tail (e.g. the newest 1,000 of 400k+ observations) shows its slope rather
+  // than flatlining against a giant 0-based axis.
+  const lo = minBaseline ? Math.min(...values) : 0
+  const hi = Math.max(lo + 1, ...values)
+  const span = hi - lo || 1
   const x = (i: number) => (i / (n - 1)) * vw
-  const y = (v: number) => vh - (v / maxY) * vh
+  const y = (v: number) => vh - ((v - lo) / span) * vh
   const line = values
     .map((v, i) => `${i === 0 ? 'M' : 'L'}${x(i).toFixed(1)},${y(v).toFixed(1)}`)
     .join(' ')
@@ -54,14 +59,16 @@ export function Sparkline({
   values,
   color,
   className = '',
+  minBaseline = false,
 }: {
   values: number[]
   color: string
   className?: string
+  minBaseline?: boolean
 }) {
   const VW = 100
   const VH = 32
-  const { line, area } = sparkPaths(values, VW, VH)
+  const { line, area } = sparkPaths(values, VW, VH, minBaseline)
   return (
     <svg viewBox={`0 0 ${VW} ${VH}`} preserveAspectRatio="none" className={className} aria-hidden>
       <path d={area} fill={color} opacity={0.1} />
@@ -90,6 +97,8 @@ type TrendStatProps = {
   series?: MetricSeries
   color?: string
   onExpand?: () => void
+  /** Scale the sparkline from min→max instead of 0→max (for near-the-top tails). */
+  minBaseline?: boolean
 }
 
 export function TrendStat({
@@ -100,6 +109,7 @@ export function TrendStat({
   series,
   color = 'var(--color-blue, #1982F4)',
   onExpand,
+  minBaseline = false,
 }: TrendStatProps) {
   const animated = useCountUp(value)
   const hasSeries = !!series && series.values.length > 1 && !!onExpand
@@ -115,7 +125,12 @@ export function TrendStat({
           {format(animated)}
         </div>
         {hasSeries && (
-          <Sparkline values={series!.values} color={color} className="w-16 h-7 shrink-0" />
+          <Sparkline
+            values={series!.values}
+            color={color}
+            minBaseline={minBaseline}
+            className="w-16 h-7 shrink-0"
+          />
         )}
       </div>
       <div className="text-sm text-gray-500 mt-2 flex items-center gap-1.5">
@@ -165,6 +180,8 @@ type MetricModalProps = {
   color: string
   format?: (n: number) => string
   onClose: () => void
+  /** Scale the y-axis from min→max instead of 0→max (for near-the-top tails). */
+  minBaseline?: boolean
 }
 
 export function MetricModal({
@@ -174,6 +191,7 @@ export function MetricModal({
   color,
   format = formatCount,
   onClose,
+  minBaseline = false,
 }: MetricModalProps) {
   const [hover, setHover] = useState<number | null>(null)
 
@@ -197,9 +215,14 @@ export function MetricModal({
   const iw = VW - pad.left - pad.right
   const ih = VH - pad.top - pad.bottom
   const maxRaw = Math.max(1, ...values)
-  const maxY = niceMax(maxRaw)
+  // With `minBaseline`, frame the chart between the series' own min and max so
+  // a tail riding near a huge total still reads as a slope (matches the
+  // gainforest-explorer band). Otherwise keep the classic 0-based axis.
+  const minY = minBaseline ? Math.min(...values) : 0
+  const maxY = minBaseline ? Math.max(minY + 1, maxRaw) : niceMax(maxRaw)
+  const span = maxY - minY || 1
   const x = (i: number) => pad.left + (n <= 1 ? 0 : (i / (n - 1)) * iw)
-  const y = (v: number) => pad.top + ih - (v / maxY) * ih
+  const y = (v: number) => pad.top + ih - ((v - minY) / span) * ih
   const line = values
     .map((v, i) => `${i === 0 ? 'M' : 'L'}${x(i).toFixed(1)},${y(v).toFixed(1)}`)
     .join(' ')
@@ -207,10 +230,10 @@ export function MetricModal({
     1,
   )},${(pad.top + ih).toFixed(1)} Z`
 
-  // y gridlines
+  // y gridlines — 5 evenly spaced ticks across the [minY, maxY] domain.
   const yTicks: number[] = []
-  const tickStep = maxY / 4
-  for (let v = 0; v <= maxY + 0.5; v += tickStep) yTicks.push(Math.round(v))
+  const tickStep = span / 4
+  for (let k = 0; k <= 4; k++) yTicks.push(Math.round(minY + tickStep * k))
 
   // x labels: first, middle, last
   const idxs = n > 1 ? [0, Math.floor((n - 1) / 2), n - 1] : [0]

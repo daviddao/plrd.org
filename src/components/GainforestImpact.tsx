@@ -3,8 +3,9 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import worldMap from '@/data/world-map.json'
 import gainforestSites from '@/data/gainforest-sites.json'
-import type { GainforestStats, GainforestTrends } from '@/lib/gainforest'
+import type { GainforestStats } from '@/lib/gainforest'
 import { MetricModal, TrendStat, formatCount } from '@/components/MetricTrend'
+import GainforestCarousel from '@/components/GainforestCarousel'
 
 const { width: MW, height: MH, path: WORLD } = worldMap as { width: number; height: number; path: string }
 
@@ -135,11 +136,15 @@ function SitesMap({ points }: { points: MapPoint[] }) {
 
 const BLUE = 'var(--color-blue, #1982F4)'
 const PINK = 'var(--color-pink, #E51A66)'
+const TEAL = 'var(--color-teal, #12bfdf)'
 
-type HcKey = keyof GainforestTrends
+type HcKey = 'certifiedOrgs' | 'bumicerts'
 
 export default function GainforestImpact({ stats }: { stats: GainforestStats }) {
   const [active, setActive] = useState<HcKey | null>(null)
+  const [obsOpen, setObsOpen] = useState(false)
+  const obsSeries = stats.trends.observations
+  const obsHasTrend = obsSeries.values.length > 1
 
   const metrics = useMemo(
     () => [
@@ -194,6 +199,30 @@ export default function GainforestImpact({ stats }: { stats: GainforestStats }) 
         {stats.degraded && ' · counts temporarily unavailable'}.
       </p>
 
+      {/* Live carousel of the most recent biodiversity data collections
+          (Darwin Core occurrence records with field photos), fetched
+          dynamically from the GainForest indexer in the browser. The total
+          species-observation count + recent-activity tail (newest 1,000
+          records) sits on top, mirroring the gainforest-explorer landing band. */}
+      <div className="mt-12">
+        <h3 className="text-sm text-gray-500 uppercase tracking-wide mb-6">
+          Latest field data collections
+        </h3>
+        <div className="mb-8 max-w-xs">
+          <TrendStat
+            label="Species observations"
+            value={stats.observations}
+            caption="Darwin Core occurrence records · recent activity"
+            format={formatCount}
+            series={obsSeries}
+            color={TEAL}
+            minBaseline
+            onExpand={obsHasTrend ? () => setObsOpen(true) : undefined}
+          />
+        </div>
+        <GainforestCarousel limit={100} />
+      </div>
+
       {activeMeta && (
         <MetricModal
           title={activeMeta.label}
@@ -202,6 +231,18 @@ export default function GainforestImpact({ stats }: { stats: GainforestStats }) 
           color={activeMeta.color}
           format={formatCount}
           onClose={() => setActive(null)}
+        />
+      )}
+
+      {obsOpen && obsHasTrend && (
+        <MetricModal
+          title="Species observations"
+          caption="Cumulative occurrence records — recent activity (newest 1,000) anchored to the live total"
+          series={obsSeries}
+          color={TEAL}
+          format={formatCount}
+          minBaseline
+          onClose={() => setObsOpen(false)}
         />
       )}
     </div>
