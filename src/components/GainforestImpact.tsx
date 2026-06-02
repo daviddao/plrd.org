@@ -206,7 +206,7 @@ export default function GainforestImpact({ stats }: { stats: GainforestStats }) 
           records) sits on top, mirroring the gainforest-explorer landing band. */}
       <div className="mt-12">
         <h3 className="text-sm text-gray-500 uppercase tracking-wide mb-6">
-          Latest field data collections
+          GainForest Stats
         </h3>
         <div className="mb-8 max-w-xs">
           <TrendStat
