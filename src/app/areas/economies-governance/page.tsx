@@ -78,7 +78,7 @@ export default async function FA2MainPage() {
       {/* Hero */}
       <div className="relative pt-8 pb-12 mb-12 overflow-hidden">
         {/* Background graphic — temple render dissolving into a hexagon cloud */}
-        <FA2HeroGraphic className="absolute right-0 top-1/2 -translate-y-1/2 hidden sm:block w-[320px] md:w-[400px] lg:w-[480px] aspect-[820/384] select-none" />
+        <FA2HeroGraphic className="absolute right-0 top-1/2 -translate-y-1/2 hidden sm:block w-[300px] md:w-[380px] lg:w-[460px] aspect-[609/360] select-none" />
 
         <div className="flex items-center gap-4 sm:items-start sm:gap-5 mb-6">
           <AreaIcon type="hexagon" className="w-14 h-14 lg:w-16 lg:h-16 shrink-0 text-blue/70" />

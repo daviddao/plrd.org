@@ -40,7 +40,10 @@ const DRAW = SIZE + 0.8 // draw slightly larger so tiles overlap — no white se
 const STEP_X = SIZE * 1.5
 const STEP_Y = SIZE * Math.sqrt(3)
 
-const isBg = (r, g, b) => r > 246 && g > 244 && b > 240
+// A pixel the exterior-white flood can pass through (true background + the
+// anti-aliased halo around the silhouette). Building cream (~201,186,156) is
+// far below this, so the flood stops at the building.
+const passable = (r, g, b) => r >= 240 && g >= 238 && b >= 232
 
 function smoothstep(t) {
   if (t <= 0) return 0
@@ -62,19 +65,20 @@ function hexPoints(cx, cy, size) {
   return pts.join(' ')
 }
 
-function sample(data, w, h, c, px, py, rad) {
-  let R = 0, G = 0, B = 0, n = 0, bg = 0, tot = 0
+// Sample the average colour of foreground pixels (bg = exterior white).
+function sample(data, bg, w, c, px, py, rad) {
+  let R = 0, G = 0, B = 0, n = 0, tot = 0
   const x0 = Math.max(0, Math.floor(px - rad))
   const x1 = Math.min(w - 1, Math.floor(px + rad))
   const y0 = Math.max(0, Math.floor(py - rad))
   const y1 = Math.min(h - 1, Math.floor(py + rad))
   for (let y = y0; y <= y1; y++) {
     for (let x = x0; x <= x1; x++) {
-      const i = (y * w + x) * c
-      const r = data[i], g = data[i + 1], b = data[i + 2]
+      const idx = y * w + x
       tot++
-      if (isBg(r, g, b)) { bg++; continue }
-      R += r; G += g; B += b; n++
+      if (bg[idx]) continue
+      const i = idx * c
+      R += data[i]; G += data[i + 1]; B += data[i + 2]; n++
     }
   }
   if (n === 0) return null
@@ -84,17 +88,51 @@ function sample(data, w, h, c, px, py, rad) {
 const { data, info } = await sharp(SRC).resize(W).flatten({ background: '#ffffff' }).removeAlpha().raw().toBuffer({ resolveWithObject: true })
 const { width: w, height: h, channels: c } = info
 
-// Building bounds (non-white).
-let minX = w, maxX = 0
+// Exterior-white mask: flood-fill from every border pixel through passable
+// (near-white) pixels. Anything not reached — including the building's own
+// bright highlights enclosed inside the silhouette — stays foreground, so the
+// mosaic has no holes over the building.
+const bg = new Uint8Array(w * h)
+const stack = []
+const tryPush = (idx) => {
+  if (bg[idx]) return
+  const i = idx * c
+  if (!passable(data[i], data[i + 1], data[i + 2])) return
+  bg[idx] = 1
+  stack.push(idx)
+}
+for (let x = 0; x < w; x++) { tryPush(x); tryPush((h - 1) * w + x) }
+for (let y = 0; y < h; y++) { tryPush(y * w); tryPush(y * w + w - 1) }
+while (stack.length) {
+  const idx = stack.pop()
+  const x = idx % w
+  const y = (idx - x) / w
+  if (x > 0) tryPush(idx - 1)
+  if (x < w - 1) tryPush(idx + 1)
+  if (y > 0) tryPush(idx - w)
+  if (y < h - 1) tryPush(idx + w)
+}
+
+// Building bounds (foreground).
+let minX = w, maxX = 0, minY = h, maxY = 0
 for (let y = 0; y < h; y++) {
   for (let x = 0; x < w; x++) {
-    const i = (y * w + x) * c
-    if (!isBg(data[i], data[i + 1], data[i + 2])) {
+    if (!bg[y * w + x]) {
       if (x < minX) minX = x
       if (x > maxX) maxX = x
+      if (y < minY) minY = y
+      if (y > maxY) maxY = y
     }
   }
 }
+
+// Tight display frame around the building (so the graphic has little dead
+// white margin and the hover lens lands on the building almost everywhere).
+const PAD = 14
+const fx = Math.max(0, minX - PAD)
+const fy = Math.max(0, minY - PAD)
+const fw = Math.min(w, maxX + PAD) - fx
+const fh = Math.min(h, maxY + PAD) - fy
 
 const cols = Math.ceil(maxX / STEP_X) + 2
 const rows = Math.ceil(h / STEP_Y) + 2
@@ -106,21 +144,20 @@ for (let col = 0; col < cols; col++) {
     const cy = row * STEP_Y + (col % 2 ? STEP_Y / 2 : 0)
     if (cx < minX - SIZE || cx > maxX + SIZE) continue
 
-    const s = sample(data, w, h, c, cx, cy, SIZE * 0.72)
-    if (!s || s.coverage < 0.18) continue // mostly background → skip (cut out the building)
+    const s = sample(data, bg, w, c, cx, cy, SIZE * 0.62)
+    if (!s || s.coverage < 0.12) continue // mostly background → skip (cut out the building)
 
     hexes.push({ p: hexPoints(cx, cy, DRAW), f: `rgb(${s.r},${s.g},${s.b})` })
   }
 }
 
 const out = {
-  viewBox: `0 0 ${w} ${h}`,
-  width: w,
-  height: h,
+  viewBox: `${fx} ${fy} ${fw} ${fh}`,
+  frame: { x: fx, y: fy, w: fw, h: fh },
   image: { x: 0, y: 0, w, h },
   hexes,
 }
 
 await mkdir(dirname(OUT), { recursive: true })
 await writeFile(OUT, JSON.stringify(out))
-console.log(`[fa2-mosaic] ${hexes.length} hexes · building x${minX}-${maxX} · ${OUT}`)
+console.log(`[fa2-mosaic] ${hexes.length} hexes · building x${minX}-${maxX} y${minY}-${maxY} · frame ${fw}×${fh} (${(fw / fh).toFixed(3)}) · ${OUT}`)

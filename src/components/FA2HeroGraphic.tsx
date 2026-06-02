@@ -17,10 +17,10 @@ import mosaic from '@/data/fa2/hero-mosaic.json'
  * an SVG radial-gradient mask whose centre we move imperatively on mousemove,
  * so the 150-odd polygons never re-render.
  */
-const LENS_R = 130 // lens radius in viewBox units
+const LENS_R = 150 // lens radius in viewBox units
 
 export default function FA2HeroGraphic({ className }: { className?: string }) {
-  const { viewBox, width, height, image, hexes } = mosaic
+  const { viewBox, frame, image, hexes } = mosaic
   const svgRef = useRef<SVGSVGElement>(null)
   const gradRef = useRef<SVGRadialGradientElement>(null)
   const lensRef = useRef<SVGGElement>(null)
@@ -30,8 +30,8 @@ export default function FA2HeroGraphic({ className }: { className?: string }) {
     const grad = gradRef.current
     if (!svg || !grad) return
     const rect = svg.getBoundingClientRect()
-    const x = ((clientX - rect.left) / rect.width) * width
-    const y = ((clientY - rect.top) / rect.height) * height
+    const x = frame.x + ((clientX - rect.left) / rect.width) * frame.w
+    const y = frame.y + ((clientY - rect.top) / rect.height) * frame.h
     grad.setAttribute('cx', String(x))
     grad.setAttribute('cy', String(y))
     if (lensRef.current) lensRef.current.style.opacity = '1'
@@ -63,7 +63,7 @@ export default function FA2HeroGraphic({ className }: { className?: string }) {
             <stop offset="1" stopColor="#000" />
           </radialGradient>
           <mask id="fa2LensMask">
-            <rect x="0" y="0" width={width} height={height} fill="url(#fa2Lens)" />
+            <rect x={frame.x} y={frame.y} width={frame.w} height={frame.h} fill="url(#fa2Lens)" />
           </mask>
         </defs>
 
