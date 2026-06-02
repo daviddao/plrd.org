@@ -59,7 +59,9 @@ export default function GlowImpact({ stats }: { stats: GlowStats }) {
 
   return (
     <div className="mb-16 pb-14 border-b border-gray-100">
-      <h2 className="text-sm text-gray-500 uppercase tracking-wide mb-6">
+      <h2 className="flex items-center gap-2.5 text-sm text-gray-500 uppercase tracking-wide mb-6">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/images/partner-logos/glow.png" alt="Glow" className="h-5 w-5 object-contain" />
         Solar Energy — Glow Protocol
       </h2>
 

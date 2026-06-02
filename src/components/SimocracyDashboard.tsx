@@ -79,7 +79,9 @@ export default function SimocracyDashboard({
   return (
     <div>
       {/* Headline numbers — clean, no card chrome, matches /impact/report-2025/ */}
-      <h2 className="text-sm text-gray-500 uppercase tracking-wide mb-6">
+      <h2 className="flex items-center gap-2.5 text-sm text-gray-500 uppercase tracking-wide mb-6">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/images/partner-logos/simocracy.png" alt="Simocracy" className="h-5 w-5 object-contain" />
         Simocracy stats
       </h2>
       <p className="text-xs text-gray-400 -mt-4 mb-6">

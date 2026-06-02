@@ -38,7 +38,9 @@ export default async function LiveDashboardPage() {
         Live Dashboard
       </h1>
       <p className="text-lg text-gray-600 mb-3 max-w-2xl">
-        Real-time metrics across the focus area: environmental hypercerts, the{' '}
+        Real-time metrics across the focus area: environmental hypercerts and
+        biodiversity observations, solar energy generation and carbon offsets,
+        and the{' '}
         <a
           href="https://simocracy.org"
           target="_blank"
@@ -47,8 +49,7 @@ export default async function LiveDashboardPage() {
         >
           Simocracy
         </a>{' '}
-        governance simulation, and broad listening for large-scale collective
-        deliberation.
+        governance simulation.
       </p>
       <p className="text-sm text-gray-400 mb-12 max-w-2xl">
         In collaboration with associated network partners{' '}

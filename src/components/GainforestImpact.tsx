@@ -173,7 +173,15 @@ export default function GainforestImpact({ stats }: { stats: GainforestStats }) 
 
   return (
     <div className="mb-16 pb-14 border-b border-gray-100">
-      <h2 className="text-sm text-gray-500 uppercase tracking-wide mb-6">
+      <h2 className="flex items-center gap-2.5 text-sm text-gray-500 uppercase tracking-wide mb-6">
+        <span className="flex items-center gap-1.5">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/images/partner-logos/hypercerts.png" alt="Hypercerts" className="h-5 w-5 object-contain" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/images/partner-logos/maearth.png" alt="Ma Earth" className="h-5 w-5 object-contain" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/images/partner-logos/gainforest.png" alt="GainForest" className="h-5 w-5 object-contain" />
+        </span>
         Environmental Hypercerts
       </h2>
 
@@ -215,7 +223,7 @@ export default function GainforestImpact({ stats }: { stats: GainforestStats }) 
         <a href="https://gainforest.earth" target="_blank" rel="noopener noreferrer" className="text-blue hover:underline">
           GainForest
         </a>
-        ’s ATProto indexer; the map shows certified organization locations
+        ’s Hypercerts Indexer; the map shows certified organization locations
         {stats.degraded && ' · counts temporarily unavailable'}.
       </p>
 
@@ -225,8 +233,10 @@ export default function GainforestImpact({ stats }: { stats: GainforestStats }) 
           species-observation count + recent-activity tail (newest 1,000
           records) sits on top, mirroring the gainforest-explorer landing band. */}
       <div className="mt-12">
-        <h3 className="text-sm text-gray-500 uppercase tracking-wide mb-6">
-          GainForest Stats
+        <h3 className="flex items-center gap-2.5 text-sm text-gray-500 uppercase tracking-wide mb-6">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/images/partner-logos/gainforest.png" alt="GainForest" className="h-5 w-5 object-contain" />
+          Biodiversity Data — GainForest
         </h3>
         <div className="mb-8 max-w-xs">
           <TrendStat
@@ -241,6 +251,13 @@ export default function GainforestImpact({ stats }: { stats: GainforestStats }) 
           />
         </div>
         <GainforestCarousel limit={100} />
+        <p className="mt-6 text-xs text-gray-400">
+          Live data from{' '}
+          <a href="https://gainforest.earth" target="_blank" rel="noopener noreferrer" className="text-blue hover:underline">
+            GainForest.Earth
+          </a>
+          .
+        </p>
       </div>
 
       {activeMeta && (
