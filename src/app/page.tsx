@@ -2,14 +2,13 @@ import Link from 'next/link'
 import EditPageButton from '@/components/EditPageButton'
 import { PageEditHistoryByline } from '@/components/EditHistoryByline'
 import { publications, talks, blogPosts } from '@/lib/content'
-import { formatDate } from '@/lib/format'
 import { AreaIcon } from '@/components/AreaIcons'
-import { GeoIllustration } from '@/components/GeoIllustration'
 import MarkdownContent from '@/components/MarkdownContent'
 import { fetchPage, getSection, getSectionsWithPrefix } from "@/lib/indexer"
 import { FOCUS_AREA_DESCRIPTIONS } from '@/lib/focus-area-descriptions'
 import { loadHexMosaic, type HexPattern } from "@/lib/hex-mosaic"
 import RDPipeline from "@/components/RDPipeline"
+import InsightCarousel from "@/components/InsightCarousel"
 
 type UpdateItem = {
   title: string
@@ -61,35 +60,6 @@ function getLatestUpdates(count: number): UpdateItem[] {
     .slice(0, count)
 }
 
-function CardIllustration({
-  slug,
-  areas,
-  coverImage,
-  title,
-}: {
-  slug: string
-  areas: string[]
-  coverImage?: string
-  title?: string
-}) {
-  // When the source provides a real cover image (currently: blog posts whose
-  // og:image was scraped at build time), use it. Otherwise fall back to the
-  // procedural hex illustration so publications/talks still get a visual.
-  if (coverImage) {
-    return (
-      <img
-        src={coverImage}
-        alt={title || ''}
-        width={320}
-        height={120}
-        loading="lazy"
-        className="w-full h-[120px] object-cover bg-gray-50 group-hover:scale-[1.02] transition-transform duration-300"
-      />
-    )
-  }
-  return <GeoIllustration seed={slug} areas={areas} w={320} h={120} />
-}
-
 
 export default async function HomePage() {
   const updates = getLatestUpdates(8)
@@ -104,6 +74,7 @@ export default async function HomePage() {
   const team = getSection(page, "team")
 
   return (
+    <>
     <div className="max-w-6xl mx-auto px-6">
       {/* Admin-only edit-history byline. Renders nothing for non-admins —
           the `empty:hidden` variant collapses this wrapper entirely (incl.
@@ -147,36 +118,22 @@ export default async function HomePage() {
             "Driving R&D / breakthroughs to / push humanity / forward."
             — "breakthroughs to" fits on a line, but "breakthroughs to push"
             doesn't, forcing the desired break. */}
-        <h1 className="relative z-10 max-w-lg font-serif text-[36px] md:text-[52px] lg:text-[64px] font-normal leading-[1.1] tracking-tight mb-8">
-          {hero?.title || "Driving R&D breakthroughs to push humanity forward."}
+        <p className="relative z-10 text-sm text-gray-500 uppercase tracking-widest mb-6 font-medium">
+          Protocol Labs Research &amp; Development
+        </p>
+        <h1 className="relative z-10 max-w-3xl font-serif text-[36px] md:text-[48px] lg:text-[62px] font-normal leading-[1.06] tracking-tight mb-6">
+          {hero?.title || "Accelerating breakthroughs in computing to push humanity forward"}
         </h1>
-        <div className="relative z-10 flex flex-wrap gap-4">
-          <Link 
-            href="/about" 
-            className="inline-flex items-center gap-2 px-5 py-2.5 bg-blue text-white rounded-full hover:bg-blue/90 transition-colors font-medium"
+        <p className="relative z-10 text-lg md:text-xl text-gray-600 leading-relaxed max-w-xl mb-8">
+          We de-risk frontier ideas in computing and help them cross from open research to deployment, expanding human freedom, coordination, intelligence, and cognition
+        </p>
+        <div className="relative z-10 flex flex-wrap gap-3.5">
+          <Link
+            href="/about"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-black text-white rounded-full hover:bg-gray-800 transition-colors font-semibold text-[15px]"
           >
             About us
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
           </Link>
-          {/* In-page anchor: scrolls to the focus-areas section below
-              instead of leaving the landing page. <a> (not next/link) so we
-              don't get a router push for a same-page hash. */}
-          <a
-            href="#focus-areas"
-            className="inline-flex items-center gap-2 px-5 py-2.5 border border-gray-300 text-gray-700 rounded-full hover:border-blue hover:text-blue transition-colors font-medium"
-          >
-            Focus areas
-            <svg className="w-4 h-4 rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </a>
-        </div>
-        <div className="relative z-10 mt-16 lg:mt-24">
-          <svg className="w-6 h-6 text-gray-400 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 14l-7 7m0 0l-7-7" />
-          </svg>
         </div>
       </div>
 
@@ -210,7 +167,11 @@ export default async function HomePage() {
           above the card from the top-left, peeking out by ~96px so the card
           edge slices into the cluster of hexes — the mosaic reads as a
           "signal" rising out of the card. */}
-      <div id="focus-areas" className="pb-20 lg:pb-28 border-t border-gray-200 pt-16 lg:pt-24 scroll-mt-20">
+    </div>
+
+    {/* ── Focus Areas (full-bleed gray) ── */}
+    <div id="focus-areas" className="bg-gray-100 scroll-mt-20">
+      <div className="max-w-6xl mx-auto px-6 pb-20 lg:pb-28 pt-16 lg:pt-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start mb-44 sm:mb-48 lg:mb-52">
           <h2 className="text-[28px] md:text-[36px] font-normal leading-tight tracking-tight">
             {approach?.title || "Use-inspired research across four frontiers"}
@@ -252,94 +213,46 @@ export default async function HomePage() {
           />
         </div>
       </div>
+    </div>
 
-
-
-      {/* Latest from PL R&D — horizontal scroll cards */}
-      <div className="pb-20 lg:pb-28">
-        <div className="flex items-baseline justify-between mb-8">
-          <h2 className="text-sm text-gray-500 uppercase tracking-wide">Latest insights from PL R&amp;D</h2>
-          <div className="flex gap-4">
-            <Link
-              href="/publications"
-              className="text-sm text-gray-400 hover:text-blue transition-colors"
-            >
-              Publications
-            </Link>
-            <Link
-              href="/talks"
-              className="text-sm text-gray-400 hover:text-blue transition-colors"
-            >
-              Talks
-            </Link>
+    <div className="max-w-6xl mx-auto px-6">
+      {/* ── Latest Insights ── */}
+      <div className="pb-12 lg:pb-14 pt-14 lg:pt-16">
+        <div className="flex items-baseline justify-between mb-7">
+          <div>
+            <p className="text-sm text-blue font-medium mb-1">News &amp; Insights</p>
+            <h2 className="text-[28px] md:text-[36px] font-normal leading-[1.1] tracking-tight">
+              Latest from PL R&amp;D
+            </h2>
           </div>
+          <Link
+            href="/insights/"
+            className="text-sm text-blue font-semibold hover:underline transition-colors hidden sm:inline-flex items-center gap-1"
+          >
+            View all News &amp; Insights →
+          </Link>
         </div>
-        {/* Scroll track — bleeds to the right edge of the viewport */}
-        <div
-          className="flex gap-5 overflow-x-auto pb-6 -mr-6"
-          style={{ scrollSnapType: 'x mandatory', WebkitOverflowScrolling: 'touch' }}
-        >
-          {updates.map((item) => (
-            <Link
-              key={item.permalink}
-              href={item.permalink}
-              className="group flex-none w-[280px] md:w-[300px] flex flex-col border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md hover:border-blue transition-all duration-200"
-              style={{ scrollSnapAlign: 'start' }}
-            >
-              {/* Illustration */}
-              <div className="overflow-hidden">
-                <CardIllustration
-                  slug={item.slug}
-                  areas={item.areas}
-                  coverImage={item.coverImage}
-                  title={item.title}
-                />
-              </div>
-              {/* Content */}
-              <div className="flex flex-col flex-1 justify-between p-5">
-                <div>
-                  <div className="flex items-center gap-3 mb-3">
-                    <span className="text-xs font-medium px-2.5 py-1 rounded-full bg-gray-100 text-gray-500 group-hover:bg-blue/10 group-hover:text-blue transition-colors">
-                      {item.type}
-                    </span>
-                    <span className="text-xs text-gray-400">{formatDate(item.date)}</span>
-                  </div>
-                  <h3 className="text-sm font-medium text-black leading-snug group-hover:text-blue transition-colors line-clamp-3">
-                    {item.title}
-                  </h3>
-                </div>
-                <div className="mt-5 flex items-center gap-1.5 text-xs text-gray-400 group-hover:text-blue transition-colors">
-                  Read more
-                  <svg className="w-3.5 h-3.5 -translate-x-0.5 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </div>
-              </div>
-            </Link>
-          ))}
-          {/* Trailing spacer so last card doesn't sit flush against viewport edge */}
-          <div className="flex-none w-2" aria-hidden="true" />
-        </div>
+        <InsightCarousel items={updates} />
       </div>
 
-      <div className="pb-20 lg:pb-28">
-        <h2 className="text-sm text-gray-500 uppercase tracking-wide mb-6">Team</h2>
+      {/* ── Team ── */}
+      <div className="pb-12 lg:pb-14 border-t border-gray-200 pt-10 lg:pt-12">
+        <h2 className="text-[13px] text-gray-500 uppercase tracking-[0.12em] font-bold mb-4">Team</h2>
         <MarkdownContent
           content={team?.body || "A fully remote team distributed across the globe, working with talented and intellectually curious people who share a passion for improving technology for humanity."}
           className="text-lg text-gray-700 leading-relaxed max-w-2xl mb-6"
         />
-        <Link 
-          href="/authors" 
-          className="inline-flex items-center gap-2 px-5 py-2.5 border border-blue/30 text-blue rounded-full hover:bg-blue hover:text-white hover:border-blue transition-all font-medium"
+        <Link
+          href="/authors"
+          className="inline-flex items-center gap-2 px-6 py-3 bg-black text-white rounded-full hover:bg-gray-800 transition-colors font-semibold text-sm"
         >
           Meet the team
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-          </svg>
+          <span>→</span>
         </Link>
       </div>
       <EditPageButton rkey="landing" />
     </div>
+    </>
   )
 }
 
