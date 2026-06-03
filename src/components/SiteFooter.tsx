@@ -9,20 +9,12 @@ export default function SiteFooter() {
           <h2 className="text-[30px] md:text-[38px] font-serif font-normal leading-[1.1] max-w-[16ch]">
             Let&apos;s build the future of computing.
           </h2>
-          <div className="flex flex-wrap gap-3">
-            <Link
-              href="/outreach/collaboration/"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-white text-black text-[14.5px] font-semibold rounded-full hover:bg-gray-200 transition-colors"
-            >
-              Partner with us
-            </Link>
-            <a
-              href="mailto:research@protocol.ai"
-              className="inline-flex items-center gap-2 px-6 py-3 border border-white/20 text-white text-[14.5px] font-semibold rounded-full hover:border-white transition-colors"
-            >
-              Contact us
-            </a>
-          </div>
+          <Link
+            href="/outreach/collaboration/"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-white text-black text-[14.5px] font-semibold rounded-full hover:bg-gray-200 transition-colors"
+          >
+            Collaborate
+          </Link>
         </div>
 
         {/* Link columns */}
