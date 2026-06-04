@@ -3,6 +3,7 @@ import { Inter, Newsreader } from 'next/font/google'
 import { siteConfig } from '@/lib/site-config'
 import { AuthProvider } from '@/lib/atproto'
 import SiteShell from '@/components/SiteShell'
+import GoatCounter from '@/components/GoatCounter'
 import './globals.css'
 
 const inter = Inter({
@@ -54,6 +55,7 @@ export default function RootLayout({
         <AuthProvider>
           <SiteShell>{children}</SiteShell>
         </AuthProvider>
+        <GoatCounter />
       </body>
     </html>
   )
