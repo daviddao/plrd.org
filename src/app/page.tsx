@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react'
 import Link from 'next/link'
 import EditPageButton from '@/components/EditPageButton'
 import { PageEditHistoryByline } from '@/components/EditHistoryByline'
@@ -260,9 +261,8 @@ function FocusAreaCard({
               key={i}
               points={p.points}
               fill={p.fill}
-              opacity={p.opacity}
-              className="hex-cell"
-              style={{ transitionDelay: `${p.delayMs}ms` }}
+              className="hex-cloud-hex"
+              style={{ '--hex-op': p.opacity, animationDelay: `${p.delayMs}ms` } as CSSProperties}
             />
           ))}
         </svg>
