@@ -77,13 +77,10 @@ export default function AuthorsTabs({ heroTitle, heroSubtitle, leadershipBlurb, 
       {activeTab === 'advisors' && (
         <div>
           <p className="text-sm text-gray-500 uppercase tracking-wide mb-2">
-            PL Neuro · External Advisors
+            PL Neuro · Science Advisory Board
           </p>
           <MarkdownContent content={advisorsBlurb} className="text-sm text-gray-400 mb-10 max-w-xl [&_p]:mb-0" />
-          <div
-            className="flex gap-6 overflow-x-auto pb-4 -mx-6 px-6 snap-x snap-mandatory scroll-smooth"
-            style={{ scrollbarWidth: 'none' }}
-          >
+          <div className="grid grid-cols-2 gap-x-6 gap-y-10 md:grid-cols-4">
             {advisors.map(author => (
               <AdvisorCard key={author.slug} author={author} />
             ))}
@@ -169,16 +166,16 @@ function LeaderCard({ author }: { author: typeof authors[number] }) {
   )
 }
 
-// ── Carousel card for Advisors ──────────────────────────────────────────────
+// ── Compact grid card for Advisors ─────────────────────────────────────────
 
 function AdvisorCard({ author }: { author: typeof authors[number] }) {
   const affiliation = author.groups?.[0] ?? ''
   return (
     <Link
       href={`/authors/${author.slug}/`}
-      className="group flex-shrink-0 snap-start w-48 flex flex-col"
+      className="group flex flex-col items-center text-center"
     >
-      <div className="w-full aspect-square overflow-hidden rounded-xl bg-gray-100 mb-3">
+      <div className="w-full aspect-square overflow-hidden rounded-lg bg-gray-100 mb-3">
         {author.avatarPath ? (
           <img
             src={author.avatarPath}
@@ -191,7 +188,7 @@ function AdvisorCard({ author }: { author: typeof authors[number] }) {
           </div>
         )}
       </div>
-      <div className="text-sm font-medium text-black group-hover:text-blue transition-colors leading-snug">
+      <div className="text-sm font-medium text-black group-hover:text-blue transition-colors leading-tight">
         {author.name}
       </div>
       {affiliation && (
