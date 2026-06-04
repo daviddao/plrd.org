@@ -50,56 +50,56 @@ export default function SiteHeader({ onMenuClick }: Props) {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
-            <img src="/images/pl_logo_mark.svg" className="h-8 transition-transform group-hover:scale-105" alt="Protocol Labs" />
+            <img src="/images/pl_logo_mark.svg" className="h-11 transition-transform group-hover:scale-105" alt="Protocol Labs" />
             <span className="font-semibold text-black">
               PL <span className="font-normal text-gray-500">R&D</span>
             </span>
           </Link>
 
-          {/* Desktop Navigation */}
+          {/* Desktop: nav + search + CTA, right-aligned */}
           <div className="hidden lg:flex items-center gap-1">
-            {mainNav.map((item) => (
-              <NavItem
-                key={item.name}
-                item={item}
-                pathname={pathname}
-                isActive={activeDropdown === item.name}
-                onMouseEnter={() => item.children ? handleDropdownEnter(item.name) : setActiveDropdown(null)}
-                onMouseLeave={handleDropdownLeave}
-              />
-            ))}
-          </div>
+            <div className="flex items-center gap-1">
+              {mainNav.map((item) => (
+                <NavItem
+                  key={item.name}
+                  item={item}
+                  pathname={pathname}
+                  isActive={activeDropdown === item.name}
+                  onMouseEnter={() => item.children ? handleDropdownEnter(item.name) : setActiveDropdown(null)}
+                  onMouseLeave={handleDropdownLeave}
+                />
+              ))}
+            </div>
 
-          {/* Right side: Search + CTA */}
-          <div className="hidden lg:flex items-center gap-4">
-            <SearchBar variant="desktop" />
+            <div className="flex items-center gap-4 ml-4">
+              <SearchBar variant="desktop" />
 
-            {/* Auth Profile or CTA */}
-            {isAuthenticated && session ? (
-              <Link
-                href="/admin"
-                className="flex items-center gap-2 text-sm text-gray-600 hover:text-black transition-colors"
-              >
-                {session.avatar ? (
-                  <img
-                    src={session.avatar}
-                    alt={session.handle}
-                    className="w-8 h-8 rounded-full"
-                  />
-                ) : (
-                  <div className="w-8 h-8 rounded-full bg-violet text-white flex items-center justify-center text-xs font-medium">
-                    {(session.displayName || session.handle).charAt(0).toUpperCase()}
-                  </div>
-                )}
-              </Link>
-            ) : (
-              <Link
-                href="/outreach/collaboration/"
-                className="bg-black text-white text-sm font-medium px-4 py-2 rounded-full hover:bg-gray-800 transition-colors"
-              >
-                Collaborate
-              </Link>
-            )}
+              {isAuthenticated && session ? (
+                <Link
+                  href="/admin"
+                  className="flex items-center gap-2 text-sm text-gray-600 hover:text-black transition-colors"
+                >
+                  {session.avatar ? (
+                    <img
+                      src={session.avatar}
+                      alt={session.handle}
+                      className="w-8 h-8 rounded-full"
+                    />
+                  ) : (
+                    <div className="w-8 h-8 rounded-full bg-violet text-white flex items-center justify-center text-xs font-medium">
+                      {(session.displayName || session.handle).charAt(0).toUpperCase()}
+                    </div>
+                  )}
+                </Link>
+              ) : (
+                <Link
+                  href="/outreach/collaboration/"
+                  className="bg-black text-white text-sm font-semibold px-5 py-2 rounded-full hover:bg-gray-800 transition-colors"
+                >
+                  Collaborate
+                </Link>
+              )}
+            </div>
           </div>
 
           {/* Mobile */}

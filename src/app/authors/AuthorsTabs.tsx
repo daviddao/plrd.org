@@ -43,12 +43,12 @@ export default function AuthorsTabs({ heroTitle, heroSubtitle, leadershipBlurb, 
 
       {/* Sticky tab bar */}
       <div className="sticky top-0 z-20 bg-white border-b border-gray-200 mb-16">
-        <nav className="flex gap-8 overflow-x-auto" aria-label="Team sections">
+        <nav className="flex gap-8" aria-label="Team sections">
           {TABS.map(tab => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`py-4 text-sm font-medium whitespace-nowrap border-b-2 transition-colors -mb-px ${
+              className={`py-4 text-sm font-medium border-b-2 transition-colors -mb-px ${
                 activeTab === tab.id
                   ? 'border-blue text-blue'
                   : 'border-transparent text-gray-500 hover:text-black'
@@ -75,12 +75,15 @@ export default function AuthorsTabs({ heroTitle, heroSubtitle, leadershipBlurb, 
 
       {/* Advisors */}
       {activeTab === 'advisors' && (
-        <div className="max-w-5xl mx-auto">
+        <div>
           <p className="text-sm text-gray-500 uppercase tracking-wide mb-2">
-            PL Neuro Science Advisory Board
+            PL Neuro · External Advisors
           </p>
           <MarkdownContent content={advisorsBlurb} className="text-sm text-gray-400 mb-10 max-w-xl [&_p]:mb-0" />
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-6 gap-y-10">
+          <div
+            className="flex gap-6 overflow-x-auto pb-4 -mx-6 px-6 snap-x snap-mandatory scroll-smooth"
+            style={{ scrollbarWidth: 'none' }}
+          >
             {advisors.map(author => (
               <AdvisorCard key={author.slug} author={author} />
             ))}
@@ -166,16 +169,16 @@ function LeaderCard({ author }: { author: typeof authors[number] }) {
   )
 }
 
-// ── Compact grid card for PL Neuro Science Advisory Board ───────────────────
+// ── Carousel card for Advisors ──────────────────────────────────────────────
 
 function AdvisorCard({ author }: { author: typeof authors[number] }) {
   const affiliation = author.groups?.[0] ?? ''
   return (
     <Link
       href={`/authors/${author.slug}/`}
-      className="group flex flex-col items-center text-center"
+      className="group flex-shrink-0 snap-start w-48 flex flex-col"
     >
-      <div className="w-full aspect-square overflow-hidden rounded-lg bg-gray-100 mb-3">
+      <div className="w-full aspect-square overflow-hidden rounded-xl bg-gray-100 mb-3">
         {author.avatarPath ? (
           <img
             src={author.avatarPath}
@@ -188,7 +191,7 @@ function AdvisorCard({ author }: { author: typeof authors[number] }) {
           </div>
         )}
       </div>
-      <div className="text-sm font-medium text-black group-hover:text-blue transition-colors leading-tight">
+      <div className="text-sm font-medium text-black group-hover:text-blue transition-colors leading-snug">
         {author.name}
       </div>
       {affiliation && (

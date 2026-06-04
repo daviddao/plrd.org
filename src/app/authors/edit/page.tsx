@@ -72,7 +72,7 @@ export default function AuthorsEditPage() {
           advisors-blurb
         </p>
         <p className="text-xs text-gray-500 mb-3">
-          Shown above the PL Neuro Science Advisory Board grid.
+          Shown above the advisors carousel.
         </p>
         <EditableField
           value={get('advisors-blurb', 'body')}
@@ -84,9 +84,9 @@ export default function AuthorsEditPage() {
       </div>
 
       <p className="text-sm text-gray-400 max-w-2xl">
-        Author cards (leadership, PL Neuro Science Advisory Board, alumni) are
-        sourced from the author records under <code>content/authors/</code> and
-        are not editable from this screen.
+        Author cards (leadership, advisors, alumni) are sourced from the author
+        records under <code>content/authors/</code> and are not editable from
+        this screen.
       </p>
 
       <EditBarSpacer />

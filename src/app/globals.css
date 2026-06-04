@@ -25,11 +25,11 @@
   --color-gray-100: #F8F7F3;
   --color-gray-200: #F6F9FD;
   --color-gray-300: #F6F6F6;
-  --color-gray-500: #7F818B;
-  --color-gray-600: #737680;
+  --color-gray-500: #5f6270;
+  --color-gray-600: #4b4e5a;
   --color-gray-700: #4A5568;
   --color-gray-dark: #34373F;
-  --color-gray: #8B8C97;
+  --color-gray: #6b6d79;
   --color-pink: #E51A66;
   --color-white: #ffffff;
   --color-teal: #12bfdf;
@@ -83,7 +83,7 @@ figcaption {
   font-style: italic;
 }
 
-ul {
+ul:not([class]) {
   padding-left: 1rem;
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
@@ -91,7 +91,7 @@ ul {
   list-style-type: disc;
 }
 
-ul li li {
+ul:not([class]) li li {
   list-style: circle;
 }
 
