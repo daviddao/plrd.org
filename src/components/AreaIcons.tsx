@@ -4,8 +4,9 @@ export type AreaIconType = 'shield' | 'hexagon' | 'neural' | 'brain'
 
 const DEFAULT_CLASS = 'w-12 h-12 shrink-0 text-blue/60 group-hover:text-blue transition-colors duration-300'
 
-const LOGO_IMAGE: Record<Exclude<AreaIconType, 'brain' | 'hexagon'>, string> = {
+const LOGO_IMAGE: Record<Exclude<AreaIconType, 'brain'>, string> = {
   shield: '/images/focus-area-logos/digital-human-rights.png',
+  hexagon: '/images/focus-area-logos/economies-governance.png',
   neural: '/images/focus-area-logos/ai-robotics.png',
 }
 
@@ -13,7 +14,6 @@ export function AreaIcon({ type, className }: { type: AreaIconType; className?: 
   const cls = className || DEFAULT_CLASS
 
   if (type === 'brain') return <BrainIcon className={cls} />
-  if (type === 'hexagon') return <EconGovIcon className={cls} />
   return <ImageLogoIcon src={LOGO_IMAGE[type]} className={cls} />
 }
 

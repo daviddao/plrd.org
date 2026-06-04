@@ -3,8 +3,16 @@
 import { usePageEdit, EditableField, EditBar, useRequireAdmin } from '@/components/InlineEdit'
 import AuthorCard from '@/components/AuthorCard'
 import Breadcrumb from '@/components/Breadcrumb'
+import { AreaIcon, type AreaIconType } from '@/components/AreaIcons'
 import { FOCUS_AREA_DESCRIPTIONS } from '@/lib/focus-area-descriptions'
 import Link from 'next/link'
+
+const FOCUS_CARD_ICONS: Record<string, AreaIconType> = {
+  'digital-human-rights': 'shield',
+  'economies-governance': 'hexagon',
+  'ai-robotics': 'neural',
+  neurotech: 'brain',
+}
 
 export default function AboutEditPage() {
   const { ready } = useRequireAdmin()
@@ -229,10 +237,17 @@ function Section({
 }
 
 function FocusCard({ slug, title, description }: { slug: string; title: string; description: string }) {
+  const iconType = FOCUS_CARD_ICONS[slug] || 'shield'
+
   return (
-    <Link href={`/areas/${slug}`} className="border border-gray-300 p-8 hover:border-blue hover:shadow-sm transition-all block">
-      <h3 className="font-semibold text-lg mb-3">{title}</h3>
-      <p className="text-base text-gray-700">{description}</p>
+    <Link href={`/areas/${slug}`} className="group block border border-gray-300 p-8 hover:border-blue hover:shadow-sm transition-all">
+      <div className="flex items-start gap-5">
+        <AreaIcon type={iconType} />
+        <div className="min-w-0 flex-1">
+          <h3 className="font-semibold text-lg mb-3 group-hover:text-blue transition-colors">{title}</h3>
+          <p className="text-base text-gray-700">{description}</p>
+        </div>
+      </div>
     </Link>
   )
 }
