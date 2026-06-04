@@ -189,7 +189,7 @@ export default async function HomePage() {
       <div className="pb-16 lg:pb-20 border-t border-gray-200 pt-16 lg:pt-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start mb-12 lg:mb-14">
           <h2 className="text-[28px] md:text-[36px] font-normal leading-tight tracking-tight">
-            From research to scale.
+            PL R&amp;D helps promising research cross the innovation chasm
           </h2>
           <p className="text-base text-gray-600 leading-relaxed lg:pt-3">
             Our R&amp;D pipeline moves frontier ideas from open research
