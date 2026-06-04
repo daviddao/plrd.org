@@ -12,7 +12,9 @@
 .DS_Store
 *.pem
 *.pdf
+.env
 .env*.local
+!.env.example
 
 # typescript
 *.tsbuildinfo
