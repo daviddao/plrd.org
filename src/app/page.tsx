@@ -192,13 +192,11 @@ export default async function HomePage() {
             PL R&amp;D helps promising research cross the innovation chasm
           </h2>
           <p className="text-base text-gray-600 leading-relaxed lg:pt-3">
-            Our R&amp;D pipeline moves frontier ideas from open research
-            through productionizing and into deployed systems that scale
-Our R&amp;D pipeline accelerates frontier ideas from early research 
-into production systems that scale globally. We help researchers, 
-builders, funders, and institutions coordinate around the technical 
-primitives, open infrastructure, and deployment pathways that make 
-new fields real.
+            Our R&amp;D pipeline accelerates frontier ideas from early research
+            into production systems that scale globally. We help researchers,
+            builders, funders, and institutions coordinate around the technical
+            primitives, open infrastructure, and deployment pathways that make
+            new fields real.
           </p>
         </div>
         {/* `max-w-5xl` (64rem ≈ 1024px) tames the diagram so it no longer
