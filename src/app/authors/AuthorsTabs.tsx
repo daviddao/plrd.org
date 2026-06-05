@@ -6,7 +6,7 @@ import { authors } from '@/lib/content'
 import { PageEditHistoryByline } from '@/components/EditHistoryByline'
 import MarkdownContent from '@/components/MarkdownContent'
 
-const LEADS = ['juan-benet', 'molly-mackinlay', 'will-scott', 'sean-escola', 'david-dao', 'james-tunningley']
+const LEADS = ['juan-benet', 'molly-mackinlay', 'will-scott', 'sean-escola', 'david-dao', 'james-tunningley', 'lukas-bresser']
 
 const leadership = LEADS.map(slug => authors.find(a => a.slug === slug)).filter(Boolean) as typeof authors
 const advisors = authors.filter(a => a.user_groups.includes('Neuro Advisors'))
