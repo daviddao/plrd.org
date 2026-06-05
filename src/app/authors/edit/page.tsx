@@ -72,7 +72,7 @@ export default function AuthorsEditPage() {
           advisors-blurb
         </p>
         <p className="text-xs text-gray-500 mb-3">
-          Shown above the advisors carousel.
+          Shown above the PL Neuro Science Advisory Board grid.
         </p>
         <EditableField
           value={get('advisors-blurb', 'body')}
