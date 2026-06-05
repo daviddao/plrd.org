@@ -12,9 +12,14 @@
  *      it as "lat,lon" or GeoJSON (centroid).
  *   4. join each org's display name from its certified profile.
  *
- * Writes src/data/gainforest-sites.json (committed). Resolving ~200 blobs
+ * Writes src/data/gainforest-sites.json (committed). Resolving ~750 blobs
  * across many PDS hosts is too slow/fragile for a serverless render, so we do
  * it here at build time; the live dashboard's *counts* stay live via GraphQL.
+ *
+ * NOTE: the Hyperindex API returns HTTP 400 *with* a valid partial `data`
+ * payload when an aliased batch hits a dangling location strongRef — `gql()`
+ * deliberately honours that partial data instead of throwing, otherwise a
+ * single bad record sinks an 80-wide batch and freezes the snapshot.
  *
  * Refresh ad-hoc:  node scripts/generate-gainforest-sites.mjs
  */
@@ -32,8 +37,16 @@ async function gql(query, variables = {}) {
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify({ query, variables }),
   })
-  if (!res.ok) throw new Error(`gql ${res.status}`)
-  return res.json()
+  // Hyperindex returns HTTP 400 with a *valid partial* `data` payload whenever
+  // an aliased batch references a dangling strongRef — a location record whose
+  // non-nullable `location` field is missing. Honour GraphQL partial-data
+  // semantics: surface `data` whenever it's present (the offending aliases come
+  // back null and are skipped downstream) and only throw when data is truly
+  // absent. Throwing on every 400 is what froze the committed snapshot: one bad
+  // record sank an entire 80-wide location batch and aborted the whole script.
+  const json = await res.json().catch(() => null)
+  if (json && json.data) return json
+  throw new Error(`gql ${res.status}${json?.errors?.[0]?.message ? `: ${json.errors[0].message}` : ''}`)
 }
 
 // ── GeoJSON / inline string → {lat, lon} ───────────────────────────────────
@@ -155,27 +168,34 @@ for (let i = 0; i < withLoc.length; i += 80) {
 }
 
 // ── 3. resolve coordinates (inline now, blobs concurrency-limited) ──────────
+// Two distinct DIDs per location: the *org* DID (`o.did`) is the entity we map
+// — it keys the name/profile/meta/url joins below — while the location record's
+// own repo DID (`node.did`) is where the blob actually lives and must be used
+// for getBlob. They usually coincide, but some orgs reference location records
+// hosted in a shared seed repo; attributing the point to that host repo (the
+// old `node.did || o.did`) collapsed ~67 distinct orgs into one bogus name.
 const points = []
 const blobTasks = []
 for (const o of withLoc) {
   const node = locByUri.get(o.location.uri)
   const loc = node?.location
-  const did = node?.did || o.did
+  const orgDid = o.did // identity: name, profile, meta, url
+  const hostDid = node?.did || o.did // blob host repo
   if (loc?.__typename === 'AppCertifiedLocationString' && loc.string) {
     const c = parseLocation(loc.string)
-    if (c) points.push({ did, ...c })
+    if (c) points.push({ did: orgDid, ...c })
   } else if (loc?.__typename === 'OrgHypercertsDefsSmallBlob' && loc.blob?.ref) {
     blobTasks.push(async () => {
-      const host = await pdsHost(did)
+      const host = await pdsHost(hostDid)
       if (!host) return
       try {
         const r = await fetch(
-          `https://${host}/xrpc/com.atproto.sync.getBlob?did=${encodeURIComponent(did)}&cid=${encodeURIComponent(loc.blob.ref)}`,
+          `https://${host}/xrpc/com.atproto.sync.getBlob?did=${encodeURIComponent(hostDid)}&cid=${encodeURIComponent(loc.blob.ref)}`,
           { signal: AbortSignal.timeout(10000) },
         )
         if (!r.ok) return
         const c = parseLocation(await r.text())
-        if (c) points.push({ did, ...c })
+        if (c) points.push({ did: orgDid, ...c })
       } catch {}
     })
   }
