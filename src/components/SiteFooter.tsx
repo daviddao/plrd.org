@@ -68,8 +68,7 @@ export default function SiteFooter() {
           <div>
             <h5 className="text-[11px] uppercase tracking-[0.12em] text-[#8b8d99] font-bold mb-3.5">Legal</h5>
             <ul className="space-y-1.5 list-none m-0 p-0">
-              <li><Link href="/privacy-policy/" className="text-sm text-[#cfd1da] hover:text-white transition-colors block py-1">Privacy Policy</Link></li>
-              <li><Link href="/terms-of-service/" className="text-sm text-[#cfd1da] hover:text-white transition-colors block py-1">Terms of Service</Link></li>
+              <li><a href="https://www.protocol.ai/legal/#privacy-policy" target="_blank" rel="noopener noreferrer" className="text-sm text-[#cfd1da] hover:text-white transition-colors block py-1">Privacy Policy</a></li>
               <li><a href="https://creativecommons.org/licenses/by/4.0/" className="text-sm text-[#cfd1da] hover:text-white transition-colors block py-1">CC-BY 4.0 License</a></li>
               <li><a href="mailto:research@protocol.ai" className="text-sm text-[#cfd1da] hover:text-white transition-colors block py-1">Contact</a></li>
             </ul>
