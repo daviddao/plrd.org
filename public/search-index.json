@@ -1,5 +1,47 @@
 [
   {
+    "title": "How to Obtain a Complete Human Connectome at Synaptic Resolution Within the Next Decade",
+    "summary": "A PL Neuro whitepaper outlining what it would take to obtain a complete human connectome at synaptic resolution within the next decade, including the technical and organizational bottlenecks facing large-scale human brain mapping.",
+    "date": "2026-04-24T00:00:00.000Z",
+    "type": "publication",
+    "relpermalink": "/publications/how-to-obtain-complete-human-connectome/"
+  },
+  {
+    "title": "Models to Markets: BCI, Neural Data, and Business Innovation in the AI Era",
+    "summary": "The first issue in Representations, a limited series produced in partnership with PL Neuro, exploring how BCI companies are becoming neural-data and AI companies. It surveys emerging neuroAI business models, data strategy, clinical-commercial pathways, and the market dynamics that may expand neurotechnology beyond traditional medtech.",
+    "date": "2026-03-28T00:00:00.000Z",
+    "type": "publication",
+    "relpermalink": "/publications/models-to-markets-bci-neural-data/"
+  },
+  {
+    "title": "Compiling Molecular Ultrastructure Into Neural Dynamics",
+    "summary": "A proposal for an ultrastructure-to-dynamics compiler: a learned mapping from molecularly annotated neural ultrastructure to simulator-ready, uncertainty-aware physiological parameters. The paper outlines the paired structure and perturbation-response data needed to make high-resolution brain maps predictive of local neural dynamics.",
+    "date": "2026-03-26T00:00:00.000Z",
+    "type": "publication",
+    "relpermalink": "/publications/molecular-ultrastructure-neural-dynamics/"
+  },
+  {
+    "title": "Smoothing the Path to Clinical Revenue",
+    "summary": "Roadmap 1 in the Protocol Labs Brain–Computer Interface Roadmap Series, focused on the translational, regulatory, reimbursement, and business-model work needed to help BCI companies reach sustainable clinical revenue.",
+    "date": "2026-03-26T00:00:00.000Z",
+    "type": "publication",
+    "relpermalink": "/publications/pl-bci-roadmap-clinical-revenue/"
+  },
+  {
+    "title": "Overview: A Strategic Vision for the Future of Brain–Computer Interfaces",
+    "summary": "Roadmap 0 in the Protocol Labs Brain–Computer Interface Roadmap Series, setting out a strategic vision for the future of BCIs and the field-level milestones needed to move promising neural-interface research toward broad deployment.",
+    "date": "2026-03-26T00:00:00.000Z",
+    "type": "publication",
+    "relpermalink": "/publications/pl-bci-roadmap-overview/"
+  },
+  {
+    "title": "Cognitive Dark Matter: Measuring What AI Misses",
+    "summary": "This paper argues that modern AI systems miss important training signals — cognitive dark matter — for domains such as metacognition, cognitive flexibility, episodic memory, lifelong learning, abductive reasoning, social reasoning, common-sense reasoning, and emotional intelligence. It proposes paired cognitive, process-tracing, and neural-behavioral datasets to train models on cognitive process rather than behavioral outcome alone.",
+    "date": "2026-03-03T00:00:00.000Z",
+    "type": "publication",
+    "relpermalink": "/publications/cognitive-dark-matter/"
+  },
+  {
     "title": "A finality calculator for Filecoin’s Expected Consensus",
     "summary": "",
     "date": "2024-02-01T00:00:00.000Z",
@@ -509,6 +551,27 @@
     "date": "2014-07-14T00:00:00.000Z",
     "type": "publication",
     "relpermalink": "/publications/benet2014/"
+  },
+  {
+    "title": "Jacques Carolan — The Mission to Get Breakthrough Brain Treatments to Everyone",
+    "summary": "Juan Benet speaks with Jacques Carolan, a founding Programme Director at ARIA, about getting breakthrough brain treatments to everyone, how ambitious science programs can accelerate neurotechnology, and what it takes to move hard neurotech ideas toward patient impact.",
+    "date": "2026-05-29T00:00:00.000Z",
+    "type": "talk",
+    "relpermalink": "/talks/jbp-jacques-carolan/"
+  },
+  {
+    "title": "Ben Rapoport — Treating Paralysis and Digitizing Brain Data",
+    "summary": "Juan Benet speaks with Ben Rapoport of Precision Neuroscience about treating paralysis, building scalable brain-computer-interface platforms, and how high-quality neural data can transform both clinical care and computational neuroscience.",
+    "date": "2026-05-11T00:00:00.000Z",
+    "type": "talk",
+    "relpermalink": "/talks/jbp-ben-rapoport/"
+  },
+  {
+    "title": "Max Hodak — Restoring Sight, Growing Neurons on Silicon, and Expanding Human Intelligence",
+    "summary": "Juan Benet speaks with Max Hodak of Science Corporation about restoring sight with retinal implants, biohybrid neural interfaces that grow neurons on silicon, the Science BCI ecosystem, and paths toward expanding human intelligence.",
+    "date": "2026-04-08T00:00:00.000Z",
+    "type": "talk",
+    "relpermalink": "/talks/jbp-max-hodak/"
   },
   {
     "title": "Universal Data Income: Paying Contributors on-Chain",

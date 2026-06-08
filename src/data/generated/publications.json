@@ -1,5 +1,171 @@
 [
   {
+    "slug": "how-to-obtain-complete-human-connectome",
+    "title": "How to Obtain a Complete Human Connectome at Synaptic Resolution Within the Next Decade",
+    "date": "2026-04-24T00:00:00.000Z",
+    "authors": [
+      "Moritz Helmstaedter"
+    ],
+    "venue": "PL Neuro Whitepaper",
+    "doi": "10.5281/zenodo.19697470",
+    "publication_types": [
+      "report"
+    ],
+    "areas": [
+      "neurotech"
+    ],
+    "abstract": "A PL Neuro whitepaper outlining what it would take to obtain a complete human connectome at synaptic resolution within the next decade, including the technical and organizational bottlenecks facing large-scale human brain mapping.",
+    "url_pdf": "",
+    "url_source": "",
+    "html": ""
+  },
+  {
+    "slug": "models-to-markets-bci-neural-data",
+    "title": "Models to Markets: BCI, Neural Data, and Business Innovation in the AI Era",
+    "date": "2026-03-28T00:00:00.000Z",
+    "authors": [
+      "Naveen Rao"
+    ],
+    "venue": "Neurotech Futures Newsletter",
+    "doi": "",
+    "publication_types": [
+      "report"
+    ],
+    "areas": [
+      "neurotech"
+    ],
+    "abstract": "The first issue in Representations, a limited series produced in partnership with PL Neuro, exploring how BCI companies are becoming neural-data and AI companies. It surveys emerging neuroAI business models, data strategy, clinical-commercial pathways, and the market dynamics that may expand neurotechnology beyond traditional medtech.",
+    "url_pdf": "",
+    "url_source": "https://neurotechnology.substack.com/p/representations1",
+    "html": ""
+  },
+  {
+    "slug": "molecular-ultrastructure-neural-dynamics",
+    "title": "Compiling Molecular Ultrastructure Into Neural Dynamics",
+    "date": "2026-03-26T00:00:00.000Z",
+    "authors": [
+      "Konrad P. Kording",
+      "Anton Arkhipov",
+      "Davy Deng",
+      "sean-escola",
+      "Seth G.N. Grant",
+      "Gal Haspel",
+      "Michał Januszewski",
+      "Narayanan Kasthuri",
+      "Nina Khera",
+      "Richie E. Kohman",
+      "Grace Lindsay",
+      "Jeantine Lunshof",
+      "adam-marblestone",
+      "david-markowitz",
+      "Jordan Matelsky",
+      "Brett Mensh",
+      "Patrick Mineault",
+      "Andrew Payne",
+      "Joanne Peng",
+      "Xaq Pitkow",
+      "Philip Shiu",
+      "Gregor Schuhknecht",
+      "Sven Truckenbrodt",
+      "Joshua T. Vogelstein",
+      "Edward S. Boyden"
+    ],
+    "venue": "arXiv",
+    "doi": "",
+    "publication_types": [
+      "report"
+    ],
+    "areas": [
+      "neurotech"
+    ],
+    "abstract": "A proposal for an ultrastructure-to-dynamics compiler: a learned mapping from molecularly annotated neural ultrastructure to simulator-ready, uncertainty-aware physiological parameters. The paper outlines the paired structure and perturbation-response data needed to make high-resolution brain maps predictive of local neural dynamics.",
+    "url_pdf": "",
+    "url_source": "https://arxiv.org/abs/2603.25713",
+    "html": ""
+  },
+  {
+    "slug": "pl-bci-roadmap-clinical-revenue",
+    "title": "Smoothing the Path to Clinical Revenue",
+    "date": "2026-03-26T00:00:00.000Z",
+    "authors": [
+      "david-markowitz",
+      "juan-benet",
+      "Jacques Carolan",
+      "Eli Dourado",
+      "Thomas Kalil",
+      "Amy Kruse",
+      "adam-marblestone",
+      "Patrick Mineault",
+      "Joanne Peng",
+      "Joshua Rosenow",
+      "sean-escola"
+    ],
+    "venue": "PL Neuro BCI Roadmap Series",
+    "doi": "10.5281/zenodo.19240095",
+    "publication_types": [
+      "report"
+    ],
+    "areas": [
+      "neurotech"
+    ],
+    "abstract": "Roadmap 1 in the Protocol Labs Brain–Computer Interface Roadmap Series, focused on the translational, regulatory, reimbursement, and business-model work needed to help BCI companies reach sustainable clinical revenue.",
+    "url_pdf": "",
+    "url_source": "",
+    "html": ""
+  },
+  {
+    "slug": "pl-bci-roadmap-overview",
+    "title": "Overview: A Strategic Vision for the Future of Brain–Computer Interfaces",
+    "date": "2026-03-26T00:00:00.000Z",
+    "authors": [
+      "david-markowitz",
+      "juan-benet",
+      "Jacques Carolan",
+      "Eli Dourado",
+      "Thomas Kalil",
+      "Amy Kruse",
+      "adam-marblestone",
+      "Patrick Mineault",
+      "Joanne Peng",
+      "Joshua Rosenow",
+      "sean-escola"
+    ],
+    "venue": "PL Neuro BCI Roadmap Series",
+    "doi": "10.5281/zenodo.19240357",
+    "publication_types": [
+      "report"
+    ],
+    "areas": [
+      "neurotech"
+    ],
+    "abstract": "Roadmap 0 in the Protocol Labs Brain–Computer Interface Roadmap Series, setting out a strategic vision for the future of BCIs and the field-level milestones needed to move promising neural-interface research toward broad deployment.",
+    "url_pdf": "",
+    "url_source": "",
+    "html": ""
+  },
+  {
+    "slug": "cognitive-dark-matter",
+    "title": "Cognitive Dark Matter: Measuring What AI Misses",
+    "date": "2026-03-03T00:00:00.000Z",
+    "authors": [
+      "Patrick J. Mineault",
+      "Thomas L. Griffiths",
+      "sean-escola"
+    ],
+    "venue": "arXiv",
+    "doi": "",
+    "publication_types": [
+      "report"
+    ],
+    "areas": [
+      "neurotech"
+    ],
+    "abstract": "This paper argues that modern AI systems miss important training signals — cognitive dark matter — for domains such as metacognition, cognitive flexibility, episodic memory, lifelong learning, abductive reasoning, social reasoning, common-sense reasoning, and emotional intelligence. It proposes paired cognitive, process-tracing, and neural-behavioral datasets to train models on cognitive process rather than behavioral outcome alone.",
+    "url_pdf": "",
+    "url_source": "https://arxiv.org/abs/2603.03414",
+    "html": ""
+  },
+  {
     "slug": "goren2024",
     "title": "A finality calculator for Filecoin’s Expected Consensus",
     "date": "2024-02-01T00:00:00.000Z",

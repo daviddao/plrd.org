@@ -38,6 +38,7 @@ export default async function InsightsPage() {
   const cardTutorials = getSection(page, 'card-tutorials')
 
   const recentPubs = publications.slice(0, 10)
+  const recentTalks = talks.slice(0, 6)
   const recentPosts = blogPosts.slice(0, 5)
 
   return (
@@ -118,6 +119,29 @@ export default async function InsightsPage() {
           </div>
           <Link href="/blog/" className="text-sm text-blue hover:underline mt-6 inline-block">
             All posts →
+          </Link>
+        </div>
+      )}
+
+      {/* Recent Talks */}
+      {recentTalks.length > 0 && (
+        <div className="mb-12 pb-12 border-b border-gray-100">
+          <h2 className="text-sm text-gray-500 uppercase tracking-wide mb-8">Recent Talks &amp; Podcasts</h2>
+          <div className="divide-y divide-gray-100">
+            {recentTalks.map((t) => (
+              <div key={t.slug} className="py-4">
+                <Link href={`/talks/${t.slug}/`} className="text-base text-black hover:text-blue transition-colors">
+                  {t.title}
+                </Link>
+                <div className="text-sm text-gray-400 mt-1">
+                  {t.venue}{t.venue_location && ` · ${t.venue_location}`}{t.date && ` · ${new Date(t.date).getFullYear()}`}
+                </div>
+                {t.abstract && <p className="text-sm text-gray-500 mt-1 max-w-2xl">{t.abstract}</p>}
+              </div>
+            ))}
+          </div>
+          <Link href="/talks/" className="text-base text-blue hover:underline mt-6 inline-block">
+            All talks →
           </Link>
         </div>
       )}
