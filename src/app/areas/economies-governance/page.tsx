@@ -7,9 +7,13 @@ import Breadcrumb from '@/components/Breadcrumb'
 import AreaHeroGraphic from '@/components/AreaHeroGraphic'
 import { AreaIcon } from '@/components/AreaIcons'
 import MarkdownContent from '@/components/MarkdownContent'
+import FA2LiveStatsBand from '@/components/FA2LiveStatsBand'
 import opportunityData from '@/data/fa2/opportunityspaces.json'
 import { FOCUS_AREA_DESCRIPTIONS } from '@/lib/focus-area-descriptions'
 import { fetchPage, getSection, fetchOpportunitySpaces } from '@/lib/indexer'
+import { fetchSimocracyStats } from '@/lib/simocracy'
+import { fetchGainforestStats } from '@/lib/gainforest'
+import { fetchGlowStats } from '@/lib/glow'
 
 type OpportunityCard = {
   id: string
@@ -47,10 +51,16 @@ export const metadata: Metadata = {
   description: FOCUS_AREA_DESCRIPTIONS['economies-governance'],
 }
 
+// Refresh the live ecosystem stats on the same 60s window the dashboard uses.
+export const revalidate = 60
+
 export default async function FA2MainPage() {
-  const [page, opportunities] = await Promise.all([
+  const [page, opportunities, simStats, gainforest, glow] = await Promise.all([
     fetchPage("area-economies-governance"),
     loadOpportunityCards(),
+    fetchSimocracyStats(),
+    fetchGainforestStats(),
+    fetchGlowStats(),
   ])
 
   const heroSection = getSection(page, "hero")
@@ -105,6 +115,19 @@ export default async function FA2MainPage() {
           <AuthorCard slug="james-tunningley" variant="lead" />
         </div>
       </div>
+
+      {/* Live ecosystem stats preview */}
+      <FA2LiveStatsBand
+        href="/areas/economies-governance/impact/live-dashboard/"
+        sim={{
+          totalSims: simStats.totals.totalSims,
+          treasuryUsd: simStats.totals.treasuryUsd,
+          totalGatherings: simStats.totals.totalGatherings,
+          totalSProcesses: simStats.totals.totalSProcesses,
+        }}
+        gainforest={{ observations: gainforest.observations, certifiedOrgs: gainforest.certifiedOrgs }}
+        glow={{ powerOutput: glow.powerOutput, activeFarms: glow.activeFarms }}
+      />
 
       {/* Content */}
       <div className="mb-12 pb-12 border-b border-gray-100">
