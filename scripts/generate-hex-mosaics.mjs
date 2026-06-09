@@ -50,19 +50,19 @@ const ROOT = join(__dirname, "..")
 const SOURCES = [
   {
     slug: "digital-human-rights",
-    src: "public/images/fa2/digital-human-rights.jpg",
+    src: "public/images/fa2/digital-human-rights-hero.png",
   },
   {
     slug: "economies-governance",
-    src: "public/images/fa2/fa2.webp",
+    src: "public/images/fa2/fa2-hero.png",
   },
   {
     slug: "ai-robotics",
-    src: "public/images/fa2/ai-robotics.jpg",
+    src: "public/images/fa2/ai-robotics-hero.png",
   },
   {
     slug: "neurotech",
-    src: "public/images/fa2/neurotech.jpg",
+    src: "public/images/fa2/neurotech-hero.png",
   },
 ]
 
