@@ -120,13 +120,18 @@ export default async function FA2MainPage() {
       <FA2LiveStatsBand
         href="/areas/economies-governance/impact/live-dashboard/"
         sim={{
-          totalSims: simStats.totals.totalSims,
-          treasuryUsd: simStats.totals.treasuryUsd,
-          totalGatherings: simStats.totals.totalGatherings,
-          totalSProcesses: simStats.totals.totalSProcesses,
+          totalSims: { value: simStats.totals.totalSims, series: simStats.trends.totalSims.values },
+          treasuryUsd: { value: simStats.totals.treasuryUsd, series: simStats.trends.treasuryUsd.values },
+          totalGatherings: { value: simStats.totals.totalGatherings, series: simStats.trends.totalGatherings.values },
         }}
-        gainforest={{ observations: gainforest.observations, certifiedOrgs: gainforest.certifiedOrgs }}
-        glow={{ powerOutput: glow.powerOutput, activeFarms: glow.activeFarms }}
+        gainforest={{
+          bumicerts: { value: gainforest.bumicerts, series: gainforest.trends.bumicerts.values },
+          certifiedOrgs: { value: gainforest.certifiedOrgs, series: gainforest.trends.certifiedOrgs.values },
+        }}
+        glow={{
+          powerOutput: { value: glow.powerOutput, series: glow.trends.powerOutput.values },
+          activeFarms: { value: glow.activeFarms, series: glow.trends.activeFarms.values },
+        }}
       />
 
       {/* Content */}
