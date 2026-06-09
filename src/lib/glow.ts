@@ -2,35 +2,44 @@ import "server-only"
 import { type MetricSeries } from "./trends"
 
 /**
- * Read-only weekly solar metrics for the FA2 Live Dashboard, sourced from the
- * Glow protocol the same way glow.org/weekly-reports does:
+ * Read-only weekly solar metrics for the FA2 Live Dashboard, sourced the same
+ * way glow.org/archives reads them today: per-week static snapshots published
+ * to Glow's public R2 bucket.
  *
- *   POST {GLOW_API_URL}/headline_farm_stats
- *     body { urls: [GCA server url], week_number, with_full_data: false }
- *   → { numActiveFarms, filteredFarms[], rawData, multiplier }
+ *   GET {GLOW_R2_BASE}/week-{n}/filtered-data.json
+ *     → [{ powerOutput, carbonCreditsProduced, hexlifiedPublicKey, ... }, ...]
  *
- * Each farm carries `powerOutput` (kWh for the week) and
- * `carbonCreditsProduced` (metric tons CO₂). We sum those across farms to get
+ * Each element is one audited farm; `powerOutput` is its kWh for the week and
+ * `carbonCreditsProduced` its metric tons CO₂. We sum those across farms to get
  * the per-week totals glow.org renders, then build a rolling weekly activity
  * series (last `TREND_WEEKS` audited weeks) for the trend charts.
  *
- * The endpoint is CORS-open and deterministic. Genesis timestamp + week math
- * mirror glow.org's own client bundle. A flaky upstream yields 0 +
- * `degraded: true` rather than failing the page (same contract as
- * `fetchGainforestStats`).
+ * History: this module used to POST to the `headline_farm_stats` aggregator
+ * against a hardcoded GCA server (http://95.217.194.59:35015). That GCA server
+ * was retired — the aggregator still answers but returns zero farms — so the
+ * dashboard silently degraded to 0. glow.org itself moved to the R2 snapshots
+ * below, which is now the canonical public source.
+ *
+ * The snapshot files are large (~5 MB/week) because each farm carries 2016
+ * per-slot sample arrays we don't need, so we sum the two scalar fields with a
+ * targeted regex instead of JSON.parse-ing the whole graph. A flaky/empty
+ * upstream yields 0 + `degraded: true` rather than failing the page (same
+ * contract as `fetchGainforestStats`).
  */
 
-const GLOW_API_URL =
-  process.env.GLOW_API_URL ?? "https://fun-rust-production.up.railway.app"
-// Canonical GCA aggregation server queried by glow.org's weekly-reports page.
-const GLOW_GCA_SERVER_URL =
-  process.env.GLOW_GCA_SERVER_URL ?? "http://95.217.194.59:35015"
+const GLOW_R2_BASE =
+  process.env.GLOW_R2_BASE ??
+  "https://pub-7e0365747f054c9e85051df5f20fa815.r2.dev"
 
 // Protocol week-0 start (unix seconds) + week length, from glow.org's bundle.
 const GLOW_GENESIS = 1_700_352_000
 const WEEK_SECONDS = 604_800
-// Rolling window of recent protocol weeks to chart (~4 months of activity).
-const TREND_WEEKS = 16
+// Rolling window of recent protocol weeks to chart.
+const TREND_WEEKS = 8
+// Extra weeks to probe above the window: the freshest protocol weeks are not
+// audited/published yet (404) and there can be the odd gap, so we over-fetch
+// and keep the most recent `TREND_WEEKS` that actually resolved.
+const WEEK_LOOKBACK = TREND_WEEKS + 4
 // 15-minute ISR — weekly data only changes once per protocol week.
 const REVALIDATE = 60 * 15
 
@@ -58,14 +67,6 @@ export type GlowStats = {
   degraded: boolean
 }
 
-type FarmNode = {
-  powerOutput?: number | null
-  carbonCreditsProduced?: number | null
-}
-type WeekResponse = {
-  numActiveFarms?: number | null
-  filteredFarms?: FarmNode[] | null
-}
 type WeekTotals = {
   week: number
   powerOutput: number
@@ -91,31 +92,38 @@ function currentWeek(): number {
   return Math.floor((Date.now() / 1000 - GLOW_GENESIS) / WEEK_SECONDS)
 }
 
-/** Fetch + aggregate one protocol week, or null when empty/unreachable. */
+/**
+ * Sum every occurrence of a scalar `"key":<number>` field in the raw snapshot
+ * text. Glow's per-farm sample arrays use a sibling key that differs only by a
+ * trailing "s" (e.g. `powerOutputs`), and an exact `"key":` match — with the
+ * closing quote — never collides with `"keys":`, so this stays accurate
+ * without materialising the multi-megabyte object graph.
+ */
+function sumScalarField(text: string, key: string): number {
+  const re = new RegExp(`"${key}":\\s*(-?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)`, "g")
+  let total = 0
+  let m: RegExpExecArray | null
+  while ((m = re.exec(text)) !== null) total += Number(m[1])
+  return total
+}
+
+/** Fetch + aggregate one protocol week from its R2 snapshot, or null when
+ *  the week isn't published yet (404) or carries no farms. */
 async function fetchWeek(week: number): Promise<WeekTotals | null> {
   if (week < 0) return null
   try {
-    const res = await fetch(`${GLOW_API_URL}/headline_farm_stats`, {
-      method: "POST",
-      headers: { "content-type": "application/json" },
+    const res = await fetch(`${GLOW_R2_BASE}/week-${week}/filtered-data.json`, {
       next: { revalidate: REVALIDATE, tags: ["glow"] },
-      body: JSON.stringify({
-        urls: [GLOW_GCA_SERVER_URL],
-        week_number: week,
-        with_full_data: false,
-      }),
     })
     if (!res.ok) return null
-    const json = (await res.json()) as WeekResponse
-    const farms = json.filteredFarms ?? []
-    if (farms.length === 0) return null
-    const powerOutput = farms.reduce((s, f) => s + (f.powerOutput ?? 0), 0)
-    const carbon = farms.reduce((s, f) => s + (f.carbonCreditsProduced ?? 0), 0)
+    const text = await res.text()
+    const activeFarms = (text.match(/"hexlifiedPublicKey"/g) ?? []).length
+    if (activeFarms === 0) return null
     return {
       week,
-      powerOutput,
-      carbon,
-      activeFarms: json.numActiveFarms ?? farms.length,
+      powerOutput: sumScalarField(text, "powerOutput"),
+      carbon: sumScalarField(text, "carbonCreditsProduced"),
+      activeFarms,
     }
   } catch {
     return null
@@ -124,9 +132,7 @@ async function fetchWeek(week: number): Promise<WeekTotals | null> {
 
 export async function fetchGlowStats(): Promise<GlowStats> {
   const nominal = currentWeek()
-  // Request one extra week beyond the window: the freshest protocol week can
-  // still be unaudited (empty), so we over-fetch and drop blanks.
-  const weeks = Array.from({ length: TREND_WEEKS + 1 }, (_, i) => nominal - i)
+  const weeks = Array.from({ length: WEEK_LOOKBACK + 1 }, (_, i) => nominal - i)
 
   let results: WeekTotals[] = []
   try {
@@ -134,7 +140,7 @@ export async function fetchGlowStats(): Promise<GlowStats> {
       .filter((w): w is WeekTotals => w !== null)
       .sort((a, b) => a.week - b.week)
   } catch (err) {
-    console.warn("[glow] weekly stats fetch failed:", err)
+    console.warn("[glow] R2 weekly stats fetch failed:", err)
   }
 
   if (results.length === 0) {
