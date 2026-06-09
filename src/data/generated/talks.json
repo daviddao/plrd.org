@@ -1,5 +1,56 @@
 [
   {
+    "slug": "jbp-jacques-carolan",
+    "title": "Jacques Carolan — The Mission to Get Breakthrough Brain Treatments to Everyone",
+    "date": "2026-05-29T00:00:00.000Z",
+    "venue": "Juan Benet Podcast",
+    "venue_url": "https://www.youtube.com/@JuanBenetPodcast",
+    "venue_location": "Podcast",
+    "authors": [
+      "juan-benet",
+      "Jacques Carolan"
+    ],
+    "areas": [
+      "neurotech"
+    ],
+    "abstract": "Juan Benet speaks with Jacques Carolan, a founding Programme Director at ARIA, about getting breakthrough brain treatments to everyone, how ambitious science programs can accelerate neurotechnology, and what it takes to move hard neurotech ideas toward patient impact.",
+    "html": "<p>{{&#x3C; youtube YpqVcD6tc5U >}}</p>\n"
+  },
+  {
+    "slug": "jbp-ben-rapoport",
+    "title": "Ben Rapoport — Treating Paralysis and Digitizing Brain Data",
+    "date": "2026-05-11T00:00:00.000Z",
+    "venue": "Juan Benet Podcast",
+    "venue_url": "https://www.youtube.com/@JuanBenetPodcast",
+    "venue_location": "Podcast",
+    "authors": [
+      "juan-benet",
+      "Ben Rapoport"
+    ],
+    "areas": [
+      "neurotech"
+    ],
+    "abstract": "Juan Benet speaks with Ben Rapoport of Precision Neuroscience about treating paralysis, building scalable brain-computer-interface platforms, and how high-quality neural data can transform both clinical care and computational neuroscience.",
+    "html": "<p>{{&#x3C; youtube a8-9X2pj80A >}}</p>\n"
+  },
+  {
+    "slug": "jbp-max-hodak",
+    "title": "Max Hodak — Restoring Sight, Growing Neurons on Silicon, and Expanding Human Intelligence",
+    "date": "2026-04-08T00:00:00.000Z",
+    "venue": "Juan Benet Podcast",
+    "venue_url": "https://www.youtube.com/@JuanBenetPodcast",
+    "venue_location": "Podcast",
+    "authors": [
+      "juan-benet",
+      "max-hodak"
+    ],
+    "areas": [
+      "neurotech"
+    ],
+    "abstract": "Juan Benet speaks with Max Hodak of Science Corporation about restoring sight with retinal implants, biohybrid neural interfaces that grow neurons on silicon, the Science BCI ecosystem, and paths toward expanding human intelligence.",
+    "html": "<p>{{&#x3C; youtube 24CMpLSrRWQ >}}</p>\n"
+  },
+  {
     "slug": "voc-david-dao",
     "title": "Universal Data Income: Paying Contributors on-Chain",
     "date": "2025-10-08T00:00:00.000Z",

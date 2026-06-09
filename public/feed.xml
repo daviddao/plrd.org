@@ -7,6 +7,60 @@
     <atom:link href="https://plresearch.org/feed.xml" rel="self" type="application/rss+xml"/>
     
     <item>
+      <title><![CDATA[Jacques Carolan — The Mission to Get Breakthrough Brain Treatments to Everyone]]></title>
+      <link>https://plresearch.org/talks/jbp-jacques-carolan/</link>
+      <pubDate>Fri, 29 May 2026 00:00:00 GMT</pubDate>
+      <description><![CDATA[Juan Benet speaks with Jacques Carolan, a founding Programme Director at ARIA, about getting breakthrough brain treatments to everyone, how ambitious science programs can accelerate neurotechnology, and what it takes to move hard neurotech ideas toward patient impact.]]></description>
+    </item>
+    <item>
+      <title><![CDATA[Ben Rapoport — Treating Paralysis and Digitizing Brain Data]]></title>
+      <link>https://plresearch.org/talks/jbp-ben-rapoport/</link>
+      <pubDate>Mon, 11 May 2026 00:00:00 GMT</pubDate>
+      <description><![CDATA[Juan Benet speaks with Ben Rapoport of Precision Neuroscience about treating paralysis, building scalable brain-computer-interface platforms, and how high-quality neural data can transform both clinical care and computational neuroscience.]]></description>
+    </item>
+    <item>
+      <title><![CDATA[How to Obtain a Complete Human Connectome at Synaptic Resolution Within the Next Decade]]></title>
+      <link>https://plresearch.org/publications/how-to-obtain-complete-human-connectome/</link>
+      <pubDate>Fri, 24 Apr 2026 00:00:00 GMT</pubDate>
+      <description><![CDATA[A PL Neuro whitepaper outlining what it would take to obtain a complete human connectome at synaptic resolution within the next decade, including the technical and organizational bottlenecks facing large-scale human brain mapping.]]></description>
+    </item>
+    <item>
+      <title><![CDATA[Max Hodak — Restoring Sight, Growing Neurons on Silicon, and Expanding Human Intelligence]]></title>
+      <link>https://plresearch.org/talks/jbp-max-hodak/</link>
+      <pubDate>Wed, 08 Apr 2026 00:00:00 GMT</pubDate>
+      <description><![CDATA[Juan Benet speaks with Max Hodak of Science Corporation about restoring sight with retinal implants, biohybrid neural interfaces that grow neurons on silicon, the Science BCI ecosystem, and paths toward expanding human intelligence.]]></description>
+    </item>
+    <item>
+      <title><![CDATA[Models to Markets: BCI, Neural Data, and Business Innovation in the AI Era]]></title>
+      <link>https://plresearch.org/publications/models-to-markets-bci-neural-data/</link>
+      <pubDate>Sat, 28 Mar 2026 00:00:00 GMT</pubDate>
+      <description><![CDATA[The first issue in Representations, a limited series produced in partnership with PL Neuro, exploring how BCI companies are becoming neural-data and AI companies. It surveys emerging neuroAI business models, data strategy, clinical-commercial pathways, and the market dynamics that may expand neurote]]></description>
+    </item>
+    <item>
+      <title><![CDATA[Compiling Molecular Ultrastructure Into Neural Dynamics]]></title>
+      <link>https://plresearch.org/publications/molecular-ultrastructure-neural-dynamics/</link>
+      <pubDate>Thu, 26 Mar 2026 00:00:00 GMT</pubDate>
+      <description><![CDATA[A proposal for an ultrastructure-to-dynamics compiler: a learned mapping from molecularly annotated neural ultrastructure to simulator-ready, uncertainty-aware physiological parameters. The paper outlines the paired structure and perturbation-response data needed to make high-resolution brain maps p]]></description>
+    </item>
+    <item>
+      <title><![CDATA[Smoothing the Path to Clinical Revenue]]></title>
+      <link>https://plresearch.org/publications/pl-bci-roadmap-clinical-revenue/</link>
+      <pubDate>Thu, 26 Mar 2026 00:00:00 GMT</pubDate>
+      <description><![CDATA[Roadmap 1 in the Protocol Labs Brain–Computer Interface Roadmap Series, focused on the translational, regulatory, reimbursement, and business-model work needed to help BCI companies reach sustainable clinical revenue.]]></description>
+    </item>
+    <item>
+      <title><![CDATA[Overview: A Strategic Vision for the Future of Brain–Computer Interfaces]]></title>
+      <link>https://plresearch.org/publications/pl-bci-roadmap-overview/</link>
+      <pubDate>Thu, 26 Mar 2026 00:00:00 GMT</pubDate>
+      <description><![CDATA[Roadmap 0 in the Protocol Labs Brain–Computer Interface Roadmap Series, setting out a strategic vision for the future of BCIs and the field-level milestones needed to move promising neural-interface research toward broad deployment.]]></description>
+    </item>
+    <item>
+      <title><![CDATA[Cognitive Dark Matter: Measuring What AI Misses]]></title>
+      <link>https://plresearch.org/publications/cognitive-dark-matter/</link>
+      <pubDate>Tue, 03 Mar 2026 00:00:00 GMT</pubDate>
+      <description><![CDATA[This paper argues that modern AI systems miss important training signals — cognitive dark matter — for domains such as metacognition, cognitive flexibility, episodic memory, lifelong learning, abductive reasoning, social reasoning, common-sense reasoning, and emotional intelligence. It proposes pair]]></description>
+    </item>
+    <item>
       <title><![CDATA[Universal Data Income: Paying Contributors on-Chain]]></title>
       <link>https://plresearch.org/talks/voc-david-dao/</link>
       <pubDate>Wed, 08 Oct 2025 00:00:00 GMT</pubDate>
@@ -47,24 +101,6 @@
       <link>https://plresearch.org/talks/labweek24-yuri-deigin/</link>
       <pubDate>Fri, 08 Nov 2024 00:00:00 GMT</pubDate>
       <description><![CDATA[Yuri Deigin (CEO of YouthBio Therapeutics) presents the case for partial cellular reprogramming as a path to reversing biological ageing. He explains how Yamanaka factors can reset the epigenetic clock in cells without causing dedifferentiation, the evidence from mouse studies showing lifespan exten]]></description>
-    </item>
-    <item>
-      <title><![CDATA[Machine Consciousness]]></title>
-      <link>https://plresearch.org/talks/labweek24-joscha-bach/</link>
-      <pubDate>Thu, 13 Jun 2024 00:00:00 GMT</pubDate>
-      <description><![CDATA[Joscha Bach (LiquidAI, formerly MIT Media Lab and Harvard) lays out a computational theory of consciousness — arguing that mind is best understood as a self-organising model that a system builds of itself and its environment. He examines what it would take for a machine to be conscious, the distinct]]></description>
-    </item>
-    <item>
-      <title><![CDATA[Technologies for Stimulating and Simulating the Brain]]></title>
-      <link>https://plresearch.org/talks/labweek24-ed-boyden/</link>
-      <pubDate>Wed, 12 Jun 2024 00:00:00 GMT</pubDate>
-      <description><![CDATA[Ed Boyden, inventor of optogenetics and expansion microscopy at MIT and HHMI, presents cutting-edge techniques for mapping and manipulating brain circuits at nanoscale resolution. He covers how expansion microscopy — swelling brain tissue with superabsorbent polymers to physically magnify it — enabl]]></description>
-    </item>
-    <item>
-      <title><![CDATA[Neurotechnology: Past, Present, and Future]]></title>
-      <link>https://plresearch.org/talks/labweek24-sumner-norman/</link>
-      <pubDate>Tue, 11 Jun 2024 00:00:00 GMT</pubDate>
-      <description><![CDATA[Sumner Norman (Buck Institute for Research on Aging, formerly Caltech) delivers a comprehensive survey of neurotechnology from early EEG and deep brain stimulation through today's high-density electrode arrays and closed-loop BCI systems. He covers the engineering limits that have shaped the field —]]></description>
     </item>
     <item>
       <title><![CDATA[A finality calculator for Filecoin’s Expected Consensus]]></title>
@@ -148,42 +184,6 @@
       <title><![CDATA[Decentralized hole punching]]></title>
       <link>https://plresearch.org/publications/seemann2022/</link>
       <pubDate>Wed, 28 Sep 2022 00:00:00 GMT</pubDate>
-      <description><![CDATA[]]></description>
-    </item>
-    <item>
-      <title><![CDATA[Impossibilities in succinct arguments: Black-box extraction and more]]></title>
-      <link>https://plresearch.org/publications/campanelli2022e/</link>
-      <pubDate>Fri, 09 Sep 2022 00:00:00 GMT</pubDate>
-      <description><![CDATA[]]></description>
-    </item>
-    <item>
-      <title><![CDATA[Curve trees: Practical and transparent zero-knowledge accumulators]]></title>
-      <link>https://plresearch.org/publications/campanelli2022d/</link>
-      <pubDate>Thu, 08 Sep 2022 00:00:00 GMT</pubDate>
-      <description><![CDATA[]]></description>
-    </item>
-    <item>
-      <title><![CDATA[Encryption to the future: A paradigm for sending secret messages to future (anonymous) committees]]></title>
-      <link>https://plresearch.org/publications/campanelli2022c/</link>
-      <pubDate>Tue, 30 Aug 2022 00:00:00 GMT</pubDate>
-      <description><![CDATA[]]></description>
-    </item>
-    <item>
-      <title><![CDATA[Design and evaluation of IPFS: A storage layer for the decentralized web]]></title>
-      <link>https://plresearch.org/publications/trautwein2022/</link>
-      <pubDate>Tue, 26 Jul 2022 00:00:00 GMT</pubDate>
-      <description><![CDATA[]]></description>
-    </item>
-    <item>
-      <title><![CDATA[Linear-map vector commitments and their practical applications]]></title>
-      <link>https://plresearch.org/publications/campanelli2022b/</link>
-      <pubDate>Wed, 06 Jul 2022 00:00:00 GMT</pubDate>
-      <description><![CDATA[]]></description>
-    </item>
-    <item>
-      <title><![CDATA[What makes Fiat–Shamir zkSNARKs (updatable SRS) simulation extractable?]]></title>
-      <link>https://plresearch.org/publications/ganesh2022/</link>
-      <pubDate>Wed, 06 Jul 2022 00:00:00 GMT</pubDate>
       <description><![CDATA[]]></description>
     </item>
   </channel>
