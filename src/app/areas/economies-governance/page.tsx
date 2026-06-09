@@ -117,8 +117,8 @@ export default async function FA2MainPage() {
           <h2 className="text-xs text-gray-400 uppercase tracking-widest mb-2">In Practice</h2>
           <h3 className="text-2xl lg:text-[32px] font-semibold mb-3">Featured Work</h3>
           <p className="text-base text-gray-600 leading-relaxed max-w-3xl">
-            Two initiatives where we put these ideas to work &mdash; turning collective input into
-            legitimate decisions, and building the research field that stands behind them.
+            Two initiatives where we put these ideas to work, turning collective input into
+            legitimate decisions and building the research field that stands behind them.
           </p>
         </div>
         <div className="grid md:grid-cols-2 gap-px bg-gray-200 border border-gray-200">
@@ -127,11 +127,11 @@ export default async function FA2MainPage() {
             <h4 className="text-lg font-medium text-black mb-3">Broad Listening &amp; Simocracy</h4>
             <p className="text-base text-gray-600 leading-relaxed mb-6">
               AI-assisted sensemaking at the scale of a community or a nation. Broad Listening turns
-              thousands of voices on contested questions &mdash; climate, AI, public-goods funding &mdash;
+              thousands of voices on contested questions, such as climate, AI, and public-goods funding,
               into a clear, shared picture, building on a lineage of civic technology like Pol.is and
               Talk to the City. Simocracy takes the next step: at our Funding the Commons experiment in
               San Francisco, structured deliberation surfaced weighted preferences and drove real budget
-              allocation &mdash; sims at the table, humans on the wheel.
+              allocation, with sims at the table and humans on the wheel.
             </p>
             <div className="mt-auto flex flex-wrap gap-3">
               <FeaturedLink href="https://www.youtube.com/watch?v=kdwHnRJUtTg">Watch the documentary</FeaturedLink>
@@ -144,7 +144,7 @@ export default async function FA2MainPage() {
             <h4 className="text-lg font-medium text-black mb-3">AI for Public Goods (AI4PG)</h4>
             <p className="text-base text-gray-600 leading-relaxed mb-6">
               The academic engine behind the work. AI4PG grows the field of mechanism design for public
-              goods in the age of AI &mdash; co-funded with Gitcoin and co-led by PL Research. It funds
+              goods in the age of AI, co-funded with Gitcoin and co-led by PL Research. It funds
               grants, convenes workshops with leading universities, and produces open research that gives
               policymakers and communities trustworthy ground to stand on.
             </p>
@@ -223,7 +223,7 @@ export default async function FA2MainPage() {
           href="/areas/economies-governance/projects/"
           label="Ecosystem"
           title={exploreProjects?.title || "Project Explorer"}
-          description={exploreProjects?.subtitle || "242+ teams building public goods infrastructure."}
+          description={exploreProjects?.subtitle || "399 teams building public goods infrastructure."}
         />
         <ExploreCard
           href="/areas/economies-governance/dependency-graph/"
