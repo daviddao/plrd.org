@@ -111,6 +111,50 @@ export default async function FA2MainPage() {
         <MarkdownContent content={bodyContent} className="page-content text-base text-gray-700 leading-relaxed max-w-3xl" />
       </div>
 
+      {/* Featured Work */}
+      <section className="mb-16">
+        <div className="mb-8">
+          <h2 className="text-xs text-gray-400 uppercase tracking-widest mb-2">In Practice</h2>
+          <h3 className="text-2xl lg:text-[32px] font-semibold mb-3">Featured Work</h3>
+          <p className="text-base text-gray-600 leading-relaxed max-w-3xl">
+            Two initiatives where we put these ideas to work &mdash; turning collective input into
+            legitimate decisions, and building the research field that stands behind them.
+          </p>
+        </div>
+        <div className="grid md:grid-cols-2 gap-px bg-gray-200 border border-gray-200">
+          {/* Broad Listening & Simocracy */}
+          <div className="bg-white p-8 flex flex-col">
+            <h4 className="text-lg font-medium text-black mb-3">Broad Listening &amp; Simocracy</h4>
+            <p className="text-base text-gray-600 leading-relaxed mb-6">
+              AI-assisted sensemaking at the scale of a community or a nation. Broad Listening turns
+              thousands of voices on contested questions &mdash; climate, AI, public-goods funding &mdash;
+              into a clear, shared picture, building on a lineage of civic technology like Pol.is and
+              Talk to the City. Simocracy takes the next step: at our Funding the Commons experiment in
+              San Francisco, structured deliberation surfaced weighted preferences and drove real budget
+              allocation &mdash; sims at the table, humans on the wheel.
+            </p>
+            <div className="mt-auto flex flex-wrap gap-3">
+              <FeaturedLink href="https://www.youtube.com/watch?v=kdwHnRJUtTg">Watch the documentary</FeaturedLink>
+              <FeaturedLink href="https://www.fundingthecommons.io/post/comparative-floor-governance-at-funding-the-commons-sf">Read the FtC research</FeaturedLink>
+              <FeaturedLink href="https://simocracy.org">Explore Simocracy</FeaturedLink>
+            </div>
+          </div>
+          {/* AI4PG */}
+          <div className="bg-white p-8 flex flex-col">
+            <h4 className="text-lg font-medium text-black mb-3">AI for Public Goods (AI4PG)</h4>
+            <p className="text-base text-gray-600 leading-relaxed mb-6">
+              The academic engine behind the work. AI4PG grows the field of mechanism design for public
+              goods in the age of AI &mdash; co-funded with Gitcoin and co-led by PL Research. It funds
+              grants, convenes workshops with leading universities, and produces open research that gives
+              policymakers and communities trustworthy ground to stand on.
+            </p>
+            <div className="mt-auto flex flex-wrap gap-3">
+              <FeaturedLink href="https://ai4pg.com">Visit AI4PG</FeaturedLink>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Opportunity Spaces (inlined) */}
       <section id="opportunity-spaces" className="mb-16 scroll-mt-24">
         <div className="mb-8">
@@ -229,6 +273,22 @@ export default async function FA2MainPage() {
       </div>
       <EditPageButton rkey="area-economies-governance" />
     </div>
+  )
+}
+
+function FeaturedLink({ href, children }: { href: string; children: React.ReactNode }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-flex items-center gap-2 text-sm text-blue hover:text-black border border-blue/30 hover:border-black/30 px-4 py-2 rounded-full transition-colors no-underline"
+    >
+      {children}
+      <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
+      </svg>
+    </a>
   )
 }
 
