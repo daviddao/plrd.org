@@ -121,35 +121,57 @@ export default async function FA2MainPage() {
             legitimate decisions and building the research field that stands behind them.
           </p>
         </div>
-        <div className="grid md:grid-cols-2 gap-px bg-gray-200 border border-gray-200">
+        <div className="grid md:grid-cols-2 gap-6">
           {/* Broad Listening & Simocracy */}
-          <div className="bg-white p-8 flex flex-col">
-            <h4 className="text-lg font-medium text-black mb-3">Broad Listening &amp; Simocracy</h4>
-            <p className="text-base text-gray-600 leading-relaxed mb-6">
-              AI-assisted sensemaking at the scale of a community or a nation. Broad Listening turns
-              thousands of voices on contested questions, such as climate, AI, and public-goods funding,
-              into a clear, shared picture, building on a lineage of civic technology like Pol.is and
-              Talk to the City. Simocracy takes the next step: at our Funding the Commons experiment in
-              San Francisco, structured deliberation surfaced weighted preferences and drove real budget
-              allocation, with sims at the table and humans on the wheel.
-            </p>
-            <div className="mt-auto flex flex-wrap gap-3">
-              <FeaturedLink href="https://www.youtube.com/watch?v=kdwHnRJUtTg">Watch the documentary</FeaturedLink>
-              <FeaturedLink href="https://www.fundingthecommons.io/post/comparative-floor-governance-at-funding-the-commons-sf">Read the FtC research</FeaturedLink>
-              <FeaturedLink href="https://simocracy.org">Explore Simocracy</FeaturedLink>
+          <div className="group flex flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white transition-all duration-300 hover:border-gray-300 hover:shadow-[0_12px_40px_-12px_rgba(0,0,0,0.18)]">
+            <div className="aspect-[4/3] overflow-hidden bg-[#F9F2E2]">
+              <img
+                src="/images/featured/simocracy.webp"
+                alt="A classical Greek temple whose columns shelter rows of server racks — Simocracy"
+                loading="lazy"
+                className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+              />
+            </div>
+            <div className="flex flex-1 flex-col p-8">
+              <span className="text-xs uppercase tracking-widest text-pink mb-2">Deliberation</span>
+              <h4 className="text-lg font-medium text-black mb-3">Broad Listening &amp; Simocracy</h4>
+              <p className="text-base text-gray-600 leading-relaxed mb-6">
+                AI-assisted sensemaking at the scale of a community or a nation. Broad Listening turns
+                thousands of voices on contested questions, such as climate, AI, and public-goods funding,
+                into a clear, shared picture, building on a lineage of civic technology like Pol.is and
+                Talk to the City. Simocracy takes the next step: at our Funding the Commons experiment in
+                San Francisco, structured deliberation surfaced weighted preferences and drove real budget
+                allocation, with sims at the table and humans on the wheel.
+              </p>
+              <div className="mt-auto flex flex-wrap gap-3">
+                <FeaturedLink href="https://www.youtube.com/watch?v=kdwHnRJUtTg">Watch the documentary</FeaturedLink>
+                <FeaturedLink href="https://www.fundingthecommons.io/post/comparative-floor-governance-at-funding-the-commons-sf">Read the FtC research</FeaturedLink>
+                <FeaturedLink href="https://simocracy.org">Explore Simocracy</FeaturedLink>
+              </div>
             </div>
           </div>
           {/* AI4PG */}
-          <div className="bg-white p-8 flex flex-col">
-            <h4 className="text-lg font-medium text-black mb-3">AI for Public Goods (AI4PG)</h4>
-            <p className="text-base text-gray-600 leading-relaxed mb-6">
-              The academic engine behind the work. AI4PG grows the field of mechanism design for public
-              goods in the age of AI, co-funded with Gitcoin and co-led by PL Research. It funds
-              grants, convenes workshops with leading universities, and produces open research that gives
-              policymakers and communities trustworthy ground to stand on.
-            </p>
-            <div className="mt-auto flex flex-wrap gap-3">
-              <FeaturedLink href="https://ai4pg.com">Visit AI4PG</FeaturedLink>
+          <div className="group flex flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white transition-all duration-300 hover:border-gray-300 hover:shadow-[0_12px_40px_-12px_rgba(0,0,0,0.18)]">
+            <div className="aspect-[4/3] overflow-hidden bg-[#F9F2E2]">
+              <img
+                src="/images/featured/ai4pg.webp"
+                alt="A classical domed rotunda rendered in pencil — AI for Public Goods"
+                loading="lazy"
+                className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+              />
+            </div>
+            <div className="flex flex-1 flex-col p-8">
+              <span className="text-xs uppercase tracking-widest text-blue mb-2">Research</span>
+              <h4 className="text-lg font-medium text-black mb-3">AI for Public Goods (AI4PG)</h4>
+              <p className="text-base text-gray-600 leading-relaxed mb-6">
+                The academic engine behind the work. AI4PG grows the field of mechanism design for public
+                goods in the age of AI, co-funded with Gitcoin and co-led by PL Research. It funds
+                grants, convenes workshops with leading universities, and produces open research that gives
+                policymakers and communities trustworthy ground to stand on.
+              </p>
+              <div className="mt-auto flex flex-wrap gap-3">
+                <FeaturedLink href="https://ai4pg.com">Visit AI4PG</FeaturedLink>
+              </div>
             </div>
           </div>
         </div>
