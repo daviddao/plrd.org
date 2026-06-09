@@ -58,7 +58,7 @@ export default function SiteFooter() {
             <h5 className="text-[11px] uppercase tracking-[0.12em] text-[#8b8d99] font-bold mb-3.5">Connect</h5>
             <ul className="space-y-1.5 list-none m-0 p-0">
               <li><a href="https://github.com/protocol/research" className="text-sm text-[#cfd1da] hover:text-white transition-colors block py-1">GitHub</a></li>
-              <li><a href="https://bsky.app/profile/plresearch.org" className="text-sm text-[#cfd1da] hover:text-white transition-colors block py-1">Bluesky</a></li>
+              <li><a href="https://bsky.app/profile/plrd.org" className="text-sm text-[#cfd1da] hover:text-white transition-colors block py-1">Bluesky</a></li>
               <li><a href="https://twitter.com/ProtoResearch" className="text-sm text-[#cfd1da] hover:text-white transition-colors block py-1">X / Twitter</a></li>
               <li><a href="/feed.xml" className="text-sm text-[#cfd1da] hover:text-white transition-colors block py-1">RSS</a></li>
             </ul>
@@ -82,7 +82,7 @@ export default function SiteFooter() {
           </p>
           <div className="flex gap-5 text-[13px]">
             <a href="https://github.com/protocol/research" className="text-[#cfd1da] hover:text-white transition-colors">GitHub</a>
-            <a href="https://bsky.app/profile/plresearch.org" className="text-[#cfd1da] hover:text-white transition-colors">Bluesky</a>
+            <a href="https://bsky.app/profile/plrd.org" className="text-[#cfd1da] hover:text-white transition-colors">Bluesky</a>
             <a href="https://twitter.com/ProtoResearch" className="text-[#cfd1da] hover:text-white transition-colors">X</a>
             <a href="/feed.xml" className="text-[#cfd1da] hover:text-white transition-colors">RSS</a>
           </div>
