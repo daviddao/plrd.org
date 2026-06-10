@@ -45,7 +45,7 @@
       "id": "biologically-inspired-intelligence",
       "title": "Biologically-Inspired Intelligence (NeuroAI)",
       "tagline": "Harnessing the brain's representational, architectural, and algorithmic insights to build cognitively advanced, energy-efficient AI",
-      "image": "https://images.unsplash.com/photo-1507146426996-ef05306b995a?w=1200&q=80",
+      "image": "/images/fa2/neuroai.jpg",
       "description": "The AI industry's current scaling paradigm is running into fundamental constraints—energy costs, architectural limitations, and the gap between mimicking human behavior and thinking like a human brain. Neurally-derived inductive biases, at the representational, architectural, algorithmic, and hardware levels, offer a path to 3+ orders of magnitude improvement in useful information per unit of energy.",
       "inflectionPoint": "A major AI lab demonstrates that fine-tuning on vast neural recording datasets enables a smaller model to match frontier performance at a fraction of the energy cost—making high-fidelity human neural data as universally valuable to the tech industry as text and video training data are today.",
       "tippingSignals": [
