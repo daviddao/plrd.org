@@ -338,7 +338,7 @@ function escapeXml(str) {
   return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
 }
 
-function buildFeed(publications, talks) {
+function buildFeed(publications, talks, blog) {
   const baseUrl = 'https://plresearch.org'
   const items = [
     ...publications.slice(0, 20).map((p) => ({
@@ -352,6 +352,14 @@ function buildFeed(publications, talks) {
       link: `${baseUrl}/talks/${t.slug}/`,
       date: t.date,
       description: (t.abstract || '').slice(0, 300),
+    })),
+    // Blog posts: external stubs (e.g. protocol.ai imports) link to their
+    // original URL; native posts link to /blog/<slug>/ on plresearch.org.
+    ...blog.slice(0, 20).map((b) => ({
+      title: b.title,
+      link: b.external_url || `${baseUrl}/blog/${b.slug}/`,
+      date: b.date,
+      description: (b.summary || '').slice(0, 300),
     })),
   ].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 50)
 
@@ -472,7 +480,7 @@ fs.writeFileSync(path.join(OUT_DIR, 'sections.json'), JSON.stringify(sections, n
 fs.writeFileSync(path.join(OUT_DIR, 'dependency-graph.json'), JSON.stringify(depGraph, null, 2))
 
 // Static files
-fs.writeFileSync(path.join(PUBLIC_DIR, 'feed.xml'), buildFeed(publications, talks))
+fs.writeFileSync(path.join(PUBLIC_DIR, 'feed.xml'), buildFeed(publications, talks, blog))
 fs.writeFileSync(path.join(PUBLIC_DIR, 'search-index.json'), JSON.stringify(buildSearchIndex(publications, talks, authors, blog, tutorials, areas), null, 2))
 
 console.log(`  ${publications.length} publications`)
