@@ -3,9 +3,11 @@ import Breadcrumb from '@/components/Breadcrumb'
 import SimocracyDashboard from '@/components/SimocracyDashboard'
 import GainforestImpact from '@/components/GainforestImpact'
 import GlowImpact from '@/components/GlowImpact'
+import FtcImpact from '@/components/FtcImpact'
 import { fetchSimocracyStats } from '@/lib/simocracy'
 import { fetchGainforestStats } from '@/lib/gainforest'
 import { fetchGlowStats } from '@/lib/glow'
+import { fetchFtcStats } from '@/lib/ftc'
 
 export const metadata: Metadata = {
   title: 'Live Dashboard',
@@ -17,10 +19,11 @@ export const metadata: Metadata = {
 export const revalidate = 60
 
 export default async function LiveDashboardPage() {
-  const [stats, gainforest, glow] = await Promise.all([
+  const [stats, gainforest, glow, ftc] = await Promise.all([
     fetchSimocracyStats(),
     fetchGainforestStats(),
     fetchGlowStats(),
+    fetchFtcStats(),
   ])
 
   return (
@@ -60,8 +63,8 @@ export default async function LiveDashboardPage() {
           className="hover:text-blue hover:underline"
         >
           GainForest
-        </a>{' '}
-        and{' '}
+        </a>
+        ,{' '}
         <a
           href="https://maearth.com"
           target="_blank"
@@ -70,7 +73,7 @@ export default async function LiveDashboardPage() {
         >
           Ma Earth
         </a>
-        , and{' '}
+        ,{' '}
         <a
           href="https://glow.org"
           target="_blank"
@@ -79,12 +82,23 @@ export default async function LiveDashboardPage() {
         >
           Glow
         </a>
+        , and{' '}
+        <a
+          href="https://www.fundingthecommons.io"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-blue hover:underline"
+        >
+          Funding the Commons
+        </a>
         .
       </p>
 
       <GainforestImpact stats={gainforest} />
 
       <GlowImpact stats={glow} />
+
+      <FtcImpact stats={ftc} />
 
       <SimocracyDashboard
         totals={stats.totals}
