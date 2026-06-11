@@ -1,0 +1,19 @@
+{
+  "jobs": [
+    {
+      "id": "rC9e4zRnYz",
+      "name": "verify-ftc-indexer-live",
+      "schedule": "2026-06-11T16:07:44.184Z",
+      "prompt": "Check whether the plresearch-indexer Railway redeploy has picked up the FtC lexicons. Run:\n\ncurl -s --max-time 15 -X POST https://plresearch-indexer-production.up.railway.app/graphql -H 'Content-Type: application/json' -d '{\"query\":\"{ ioFundingthecommonsImpactMetricPoint(first: 2) { edges { node { metric value date } } } }\"}'; echo; curl -s --max-time 10 https://plresearch-indexer-production.up.railway.app/stats\n\nIf the response contains \"metric\" (field is live): report success with the recordCount from /stats, and note the FA2 Live Dashboard FtC band (https://www.plresearch.org/areas/economies-governance/impact/live-dashboard/) should now populate within ~60s (ISR). If it still returns 'Cannot query field \"ioFundingthecommonsImpactMetricPoint\"', tell the user the Railway service likely needs a manual redeploy nudge in the Railway dashboard (consistent with the prior 'chore: trigger redeploy' commit), and offer to push an empty trigger commit to force it.",
+      "enabled": false,
+      "type": "once",
+      "createdAt": "2026-06-11T15:55:44.184Z",
+      "runCount": 1,
+      "notify": true,
+      "session": "019e9cb6-bfc5-70cd-9816-fcdf64ef882d",
+      "lastStatus": "success",
+      "lastRun": "2026-06-11T16:22:42.972Z"
+    }
+  ],
+  "version": 1
+}

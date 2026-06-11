@@ -1,10 +1,14 @@
 import { NextResponse } from "next/server"
+import { revalidateTag, revalidatePath } from "next/cache"
 
 export const dynamic = "force-dynamic"
 
+const DASHBOARD_PATH =
+  "/areas/economies-governance/impact/live-dashboard"
+
 // TEMP diagnostic: surfaces exactly what the Vercel runtime sees when it queries
 // the PL Research indexer for FtC metricPoints. Delete after debugging.
-export async function GET() {
+export async function GET(req: Request) {
   const url =
     process.env.INDEXER_URL ??
     process.env.NEXT_PUBLIC_INDEXER_URL ??
@@ -14,6 +18,13 @@ export async function GET() {
     resolvedUrl: url,
     hasIndexerEnv: !!process.env.INDEXER_URL,
     hasPublicIndexerEnv: !!process.env.NEXT_PUBLIC_INDEXER_URL,
+  }
+
+  // ?purge=1 clears the stuck FtC fetch cache + the dashboard ISR page.
+  if (new URL(req.url).searchParams.get("purge")) {
+    revalidateTag("ftc")
+    revalidatePath(DASHBOARD_PATH)
+    out.purged = true
   }
 
   try {

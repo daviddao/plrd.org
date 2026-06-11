@@ -26,8 +26,9 @@ const PLRESEARCH_INDEXER_URL =
   process.env.NEXT_PUBLIC_INDEXER_URL ??
   "https://plresearch-indexer-production.up.railway.app/graphql"
 
-// 15-minute ISR — FtC mirrors its metrics nightly.
-const REVALIDATE = 60 * 15
+// Align with the page's 60s ISR so a transient indexer error (which Next caches
+// as the fetch Response) self-heals within a minute instead of sticking for 15.
+const REVALIDATE = 60
 
 export type FtcMetricKey =
   | "pgfDistributed"
