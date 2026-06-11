@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import worldMap from '@/data/world-map.json'
 import gainforestSites from '@/data/gainforest-sites.json'
 import type { GainforestStats } from '@/lib/gainforest'
-import { MetricModal, TrendStat, formatCount } from '@/components/MetricTrend'
+import { MetricModal, TrendStat, formatCount, InfoTooltip } from '@/components/MetricTrend'
 import GainforestCarousel from '@/components/GainforestCarousel'
 
 const { width: MW, height: MH, path: WORLD } = worldMap as { width: number; height: number; path: string }
@@ -183,6 +183,10 @@ export default function GainforestImpact({ stats }: { stats: GainforestStats }) 
           <img src="/images/partner-logos/gainforest.png" alt="GainForest" className="h-5 w-5 object-contain" />
         </span>
         Environmental Hypercerts
+        <InfoTooltip
+          label="About Environmental Hypercerts"
+          text="On-chain impact certificates (hypercerts) and certified conservation organizations in the GainForest commons, plus the Ma Earth quadratic-funding matching pool. Read live from GainForest's Hypercerts Indexer."
+        />
       </h2>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-y-8 gap-x-10 mb-10">
@@ -237,6 +241,10 @@ export default function GainforestImpact({ stats }: { stats: GainforestStats }) 
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/images/partner-logos/gainforest.png" alt="GainForest" className="h-5 w-5 object-contain" />
           Biodiversity Data — GainForest
+          <InfoTooltip
+            label="About Biodiversity Data"
+            text="Darwin Core species-occurrence records contributed by certified field organizations — the living biodiversity dataset underpinning GainForest's nature-finance work."
+          />
         </h3>
         <div className="mb-8 max-w-xs">
           <TrendStat

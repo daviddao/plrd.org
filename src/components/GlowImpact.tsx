@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react'
 import type { GlowStats } from '@/lib/glow'
-import { MetricModal, TrendStat, formatCount } from '@/components/MetricTrend'
+import { MetricModal, TrendStat, formatCount, InfoTooltip } from '@/components/MetricTrend'
 
 // ---------------------------------------------------------------------------
 // Glow protocol — weekly solar-farm activity. Mirrors GainforestImpact: three
@@ -63,6 +63,10 @@ export default function GlowImpact({ stats }: { stats: GlowStats }) {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/images/partner-logos/glow.png" alt="Glow" className="h-5 w-5 object-contain" />
         Solar Energy — Glow Protocol
+        <InfoTooltip
+          label="About Solar Energy"
+          text="Audited weekly performance from Glow's global network of solar farms — electricity generated (kWh) and the carbon offsets (tonnes CO₂) it produces. Sourced from Glow's public weekly reports."
+        />
       </h2>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-y-8 gap-x-10 mb-8">

@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react'
 import type { SimocracyTotals, SimocracyTrends } from '@/lib/simocracy'
-import { MetricModal, TrendStat, formatCount, formatUsd } from '@/components/MetricTrend'
+import { MetricModal, TrendStat, formatCount, formatUsd, InfoTooltip } from '@/components/MetricTrend'
 
 type Props = {
   totals: SimocracyTotals
@@ -73,6 +73,10 @@ export default function SimocracyDashboard({
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/images/partner-logos/simocracy.png" alt="Simocracy" className="h-5 w-5 object-contain" />
         Governance — Simocracy
+        <InfoTooltip
+          label="About Governance"
+          text="Activity in the Simocracy governance simulation: AI sims, the humans steering them, gatherings convened, multi-agent S-Process deliberations, and the treasury under governance. Read live from the Simocracy indexer."
+        />
       </h2>
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-y-8 gap-x-10 mb-8">
         {metrics.map((m) => (

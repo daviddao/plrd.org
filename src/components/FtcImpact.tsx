@@ -2,7 +2,10 @@
 
 import { useMemo, useState } from 'react'
 import type { FtcMetricKey, FtcStats } from '@/lib/ftc'
-import { MetricModal, TrendStat, formatCount, formatUsd } from '@/components/MetricTrend'
+import { MetricModal, TrendStat, formatCount, formatUsd, InfoTooltip } from '@/components/MetricTrend'
+
+const FTC_INFO =
+  "Public-goods funding facilitated by Funding the Commons — match pools, hackathon prize funds, and grants — alongside its residency and hackathon reach. Read live from FtC's signed impact records on AT Protocol."
 
 // ---------------------------------------------------------------------------
 // Funding the Commons — public-goods funding + program reach. Mirrors the
@@ -47,6 +50,7 @@ export default function FtcImpact({ stats }: { stats: FtcStats }) {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/images/partner-logos/ftc.png" alt="Funding the Commons" className="h-5 w-5 object-contain rounded" />
           Public Goods Funding — Funding the Commons
+          <InfoTooltip label="About Public Goods Funding" text={FTC_INFO} />
         </h2>
         <p className="text-sm text-gray-500">
           FtC impact metrics are temporarily unavailable. Try refreshing in a minute.
@@ -61,6 +65,7 @@ export default function FtcImpact({ stats }: { stats: FtcStats }) {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/images/partner-logos/ftc.png" alt="Funding the Commons" className="h-5 w-5 object-contain rounded" />
         Public Goods Funding — Funding the Commons
+        <InfoTooltip label="About Public Goods Funding" text={FTC_INFO} />
       </h2>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-y-8 gap-x-10 mb-8">

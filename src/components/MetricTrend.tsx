@@ -45,6 +45,43 @@ export function useCountUp(target: number, duration = 800): number {
 }
 
 // ---------------------------------------------------------------------------
+// InfoTooltip — small ⓘ icon that reveals a description on hover/focus.
+// Used on each live-dashboard section header to explain the category.
+// ---------------------------------------------------------------------------
+
+export function InfoTooltip({ text, label }: { text: string; label?: string }) {
+  return (
+    <span className="group/info relative inline-flex items-center align-middle">
+      <button
+        type="button"
+        aria-label={label ?? 'More information'}
+        className="inline-flex items-center justify-center rounded-full text-gray-300 hover:text-gray-500 focus-visible:text-gray-500 focus:outline-none transition-colors cursor-help"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          className="w-4 h-4"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={2}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden
+        >
+          <circle cx="12" cy="12" r="10" />
+          <path d="M12 16v-4M12 8h.01" />
+        </svg>
+      </button>
+      <span
+        role="tooltip"
+        className="pointer-events-none absolute left-1/2 top-full z-30 mt-2 w-64 max-w-[min(18rem,80vw)] -translate-x-1/2 rounded-lg bg-black/90 px-3 py-2 text-xs font-normal normal-case tracking-normal leading-relaxed text-white opacity-0 invisible shadow-lg transition-opacity duration-150 group-hover/info:opacity-100 group-hover/info:visible group-focus-within/info:opacity-100 group-focus-within/info:visible"
+      >
+        {text}
+      </span>
+    </span>
+  )
+}
+
+// ---------------------------------------------------------------------------
 // Sparkline — tiny inline cumulative curve (no axes, no interactivity)
 // ---------------------------------------------------------------------------
 
