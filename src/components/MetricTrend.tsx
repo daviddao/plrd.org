@@ -12,6 +12,16 @@ export function formatCount(n: number): string {
   return n.toLocaleString('en-US')
 }
 
+/** Compact USD for headline stats so magnitudes line up across sections:
+ *  $15K · $580K · $16.7M. */
+export function formatUsd(n: number): string {
+  if (n >= 1_000_000) {
+    return `$${(n / 1_000_000).toLocaleString('en-US', { maximumFractionDigits: 1 })}M`
+  }
+  if (n >= 1_000) return `$${Math.round(n / 1_000)}K`
+  return `$${n.toLocaleString('en-US')}`
+}
+
 /** Animate a number from 0 → target with ease-out cubic. */
 export function useCountUp(target: number, duration = 800): number {
   const [v, setV] = useState(0)

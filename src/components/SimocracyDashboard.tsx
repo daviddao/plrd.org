@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react'
 import type { SimocracyTotals, SimocracyTrends } from '@/lib/simocracy'
-import { MetricModal, TrendStat, formatCount } from '@/components/MetricTrend'
+import { MetricModal, TrendStat, formatCount, formatUsd } from '@/components/MetricTrend'
 
 type Props = {
   totals: SimocracyTotals
@@ -11,17 +11,6 @@ type Props = {
   degraded: boolean
 }
 
-// ---------------------------------------------------------------------------
-// Helpers
-// ---------------------------------------------------------------------------
-
-function formatUsd(n: number): string {
-  return `$${n.toLocaleString('en-US')}`
-}
-
-// ---------------------------------------------------------------------------
-// Main
-// ---------------------------------------------------------------------------
 
 const BLUE = 'var(--color-blue, #1982F4)'
 const PINK = 'var(--color-pink, #E51A66)'
@@ -78,16 +67,14 @@ export default function SimocracyDashboard({
 
   return (
     <div>
-      {/* Headline numbers — clean, no card chrome, matches /impact/report-2025/ */}
+      {/* Headline numbers — same constrained TrendStat grid as the partner
+          sections above (max-w-2xl, sm:grid-cols-3) so the figures line up. */}
       <h2 className="flex items-center gap-2.5 text-sm text-gray-500 uppercase tracking-wide mb-6">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/images/partner-logos/simocracy.png" alt="Simocracy" className="h-5 w-5 object-contain" />
-        Simocracy stats
+        Governance — Simocracy
       </h2>
-      <p className="text-xs text-gray-400 -mt-4 mb-6">
-        Tap any metric to see its full trend.
-      </p>
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-y-8 gap-x-8 pb-14 border-b border-gray-100">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-y-8 gap-x-8 mb-8 max-w-2xl">
         {metrics.map((m) => (
           <TrendStat
             key={m.key}
@@ -114,8 +101,8 @@ export default function SimocracyDashboard({
       )}
 
       {/* Footer */}
-      <p className="mt-12 text-xs text-gray-400">
-        Live data from{' '}
+      <p className="text-xs text-gray-400">
+        Tap any metric to expand its trend · live from{' '}
         <a
           href="https://simocracy.org/stats"
           target="_blank"
@@ -124,7 +111,7 @@ export default function SimocracyDashboard({
         >
           simocracy.org
         </a>{' '}
-        · last refreshed {fetchedLabel} · cached for 60s.
+        · refreshed {fetchedLabel} · cached 60s.
       </p>
     </div>
   )

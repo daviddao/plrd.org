@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react'
 import type { FtcMetricKey, FtcStats } from '@/lib/ftc'
-import { MetricModal, TrendStat, formatCount } from '@/components/MetricTrend'
+import { MetricModal, TrendStat, formatCount, formatUsd } from '@/components/MetricTrend'
 
 // ---------------------------------------------------------------------------
 // Funding the Commons — public-goods funding + program reach. Mirrors the
@@ -14,15 +14,6 @@ import { MetricModal, TrendStat, formatCount } from '@/components/MetricTrend'
 const BLUE = 'var(--color-blue, #1982F4)'
 const PINK = 'var(--color-pink, #E51A66)'
 const TEAL = 'var(--color-teal, #18A999)'
-
-// Compact USD ($580K, $16.7M) to match FtC's own dashboard register.
-function formatUsd(n: number): string {
-  if (n >= 1_000_000) {
-    return `$${(n / 1_000_000).toLocaleString('en-US', { maximumFractionDigits: 1 })}M`
-  }
-  if (n >= 1_000) return `$${Math.round(n / 1_000)}K`
-  return `$${n.toLocaleString('en-US')}`
-}
 
 type Meta = {
   key: FtcMetricKey
