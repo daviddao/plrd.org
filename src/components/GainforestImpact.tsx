@@ -155,7 +155,7 @@ export default function GainforestImpact({ stats }: { stats: GainforestStats }) 
       {
         key: 'certifiedOrgs' as const,
         label: 'Certified organizations',
-        caption: 'On-chain actor orgs',
+        caption: 'GainForest actor orgs',
         color: PINK,
         value: stats.certifiedOrgs,
       },
@@ -185,7 +185,7 @@ export default function GainforestImpact({ stats }: { stats: GainforestStats }) 
         Environmental Hypercerts
         <InfoTooltip
           label="About Environmental Hypercerts"
-          text="On-chain impact certificates (hypercerts) and certified conservation organizations in the GainForest commons, plus the Ma Earth quadratic-funding matching pool. Read live from GainForest's Hypercerts Indexer."
+          text="Impact certificates (hypercerts) and certified conservation organizations in the GainForest commons, plus the Ma Earth quadratic-funding matching pool. Read live from GainForest's Hypercerts Indexer."
         />
       </h2>
 
