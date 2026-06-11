@@ -126,9 +126,9 @@ export function TrendStat({
 
   const inner = (
     <>
-      <div className="flex items-end justify-between gap-3">
+      <div className="flex items-end gap-4">
         <div
-          className={`text-2xl lg:text-3xl font-semibold text-black tabular-nums transition-colors ${
+          className={`shrink-0 text-2xl lg:text-3xl font-semibold text-black tabular-nums transition-colors ${
             hasSeries ? 'group-hover:text-blue' : ''
           }`}
         >
@@ -139,7 +139,7 @@ export function TrendStat({
             values={series!.values}
             color={color}
             minBaseline={minBaseline}
-            className="w-16 h-7 shrink-0"
+            className="flex-1 min-w-0 h-9"
           />
         )}
       </div>

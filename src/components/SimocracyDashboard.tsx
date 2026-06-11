@@ -74,7 +74,7 @@ export default function SimocracyDashboard({
         <img src="/images/partner-logos/simocracy.png" alt="Simocracy" className="h-5 w-5 object-contain" />
         Governance — Simocracy
       </h2>
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-y-8 gap-x-8 mb-8 max-w-2xl">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-y-8 gap-x-10 mb-8">
         {metrics.map((m) => (
           <TrendStat
             key={m.key}

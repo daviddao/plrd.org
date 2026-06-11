@@ -185,7 +185,7 @@ export default function GainforestImpact({ stats }: { stats: GainforestStats }) 
         Environmental Hypercerts
       </h2>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-y-8 gap-x-8 mb-10 max-w-2xl">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-y-8 gap-x-10 mb-10">
         {metrics.map((m) => (
           <TrendStat
             key={m.key}
