@@ -61,10 +61,28 @@
       <description><![CDATA[This paper argues that modern AI systems miss important training signals — cognitive dark matter — for domains such as metacognition, cognitive flexibility, episodic memory, lifelong learning, abductive reasoning, social reasoning, common-sense reasoning, and emotional intelligence. It proposes pair]]></description>
     </item>
     <item>
+      <title><![CDATA[Data Sovereignty in a Privacy-First Future]]></title>
+      <link>https://protocol.ai/blog/data-sovereignty-in-a-privacy-first-future/</link>
+      <pubDate>Fri, 07 Nov 2025 00:00:00 GMT</pubDate>
+      <description><![CDATA[Builders redefining privacy and sovereignty — where control of data, identity, and computation is real, not just promised. Highlights from the teams working at the frontier of digital human rights.]]></description>
+    </item>
+    <item>
+      <title><![CDATA[Can Attestation Follow in the Footsteps of TLS?]]></title>
+      <link>https://protocol.ai/blog/attestation-follow-in-the-footsteps-of-tls/</link>
+      <pubDate>Wed, 29 Oct 2025 00:00:00 GMT</pubDate>
+      <description><![CDATA[Attestation could follow TLS's path: standardize trust signals, clarify roles, and mature tooling. A look at what it would take for remote attestation to become infrastructure-grade.]]></description>
+    </item>
+    <item>
       <title><![CDATA[Universal Data Income: Paying Contributors on-Chain]]></title>
       <link>https://plresearch.org/talks/voc-david-dao/</link>
       <pubDate>Wed, 08 Oct 2025 00:00:00 GMT</pubDate>
       <description><![CDATA[AI was trained on us. How do we value data and pay the people who create it? David Dao, co-founder and Chief Scientist of GainForest, unpacks data valuation, Shapley values as a mechanism for attributing data contributions, and how a green data marketplace could fund conservation while improving AI ]]></description>
+    </item>
+    <item>
+      <title><![CDATA[Threads From the 2025 Cypherpunk Retreat]]></title>
+      <link>https://protocol.ai/blog/threads-from-the-2025-cypherpunk-retreat/</link>
+      <pubDate>Fri, 03 Oct 2025 00:00:00 GMT</pubDate>
+      <description><![CDATA[Key takeaways from the Cypherpunk Retreat, where 100 leading builders advanced privacy-tech coordination. Themes included TEEs, MPC, and the next generation of private computation.]]></description>
     </item>
     <item>
       <title><![CDATA[AI Safety and Governance: Hard Rules, Real Evaluations, and Risk]]></title>
@@ -85,6 +103,18 @@
       <description><![CDATA[Timour Kosters, co-founder of Edge City, discusses why current institutions are too rigid to adapt to accelerating technological change and why humanity needs new frontiers to flourish. He explores designing governance systems from first principles, the role of experimental pop-up cities as living l]]></description>
     </item>
     <item>
+      <title><![CDATA[BitRobot and the Future of Embodied AI]]></title>
+      <link>https://protocol.ai/blog/bit-robot-and-the-future-of-embodied-ai/</link>
+      <pubDate>Tue, 29 Apr 2025 00:00:00 GMT</pubDate>
+      <description><![CDATA[Exploring how crypto incentives and decentralized infrastructure can accelerate embodied AI and robotics — and why open coordination matters for the next wave of physical AI.]]></description>
+    </item>
+    <item>
+      <title><![CDATA[Driving Breakthroughs: The Impact of Our Innovation Network]]></title>
+      <link>https://protocol.ai/blog/the-impact-of-our-innovation-network/</link>
+      <pubDate>Wed, 29 Jan 2025 00:00:00 GMT</pubDate>
+      <description><![CDATA[Reflecting on Protocol Labs' 2024 impact across neurotech, digital human rights, AI, and economies — and the vision for 2025 and beyond.]]></description>
+    </item>
+    <item>
       <title><![CDATA[Applying Indigenous Wisdom to Create Sustainable Tech]]></title>
       <link>https://plresearch.org/talks/voc-keolu-fox/</link>
       <pubDate>Thu, 09 Jan 2025 00:00:00 GMT</pubDate>
@@ -101,6 +131,18 @@
       <link>https://plresearch.org/talks/labweek24-yuri-deigin/</link>
       <pubDate>Fri, 08 Nov 2024 00:00:00 GMT</pubDate>
       <description><![CDATA[Yuri Deigin (CEO of YouthBio Therapeutics) presents the case for partial cellular reprogramming as a path to reversing biological ageing. He explains how Yamanaka factors can reset the epigenetic clock in cells without causing dedifferentiation, the evidence from mouse studies showing lifespan exten]]></description>
+    </item>
+    <item>
+      <title><![CDATA[The Transformative Power of Neurotechnology]]></title>
+      <link>https://protocol.ai/blog/the-transformative-power-of-neurotechnology/</link>
+      <pubDate>Wed, 05 Jun 2024 00:00:00 GMT</pubDate>
+      <description><![CDATA[A deep dive into neurotechnology's potential to reshape treatment of brain disorders, augment human cognition, and accelerate our understanding of the brain. Why Protocol Labs is investing in this frontier.]]></description>
+    </item>
+    <item>
+      <title><![CDATA[PL Vision: Driving Breakthroughs in Computing to Push Humanity Forward]]></title>
+      <link>https://protocol.ai/blog/transcription-pl-vision-driving-a-breakthroughs-in-computing-to-push-humanity-forward/</link>
+      <pubDate>Fri, 15 Mar 2024 00:00:00 GMT</pubDate>
+      <description><![CDATA[At a crossroads of technological capability and institutional inadequacy, Protocol Labs articulates its mission: building the infrastructure for a more open, equitable, and resilient internet.]]></description>
     </item>
     <item>
       <title><![CDATA[A finality calculator for Filecoin’s Expected Consensus]]></title>
