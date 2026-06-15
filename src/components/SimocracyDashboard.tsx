@@ -41,6 +41,8 @@ export default function SimocracyDashboard({
       { key: 'uniqueHumans', label: 'Voices', caption: 'Unique humans active', color: PINK, value: totals.uniqueHumans, format: formatCount },
       { key: 'totalSims', label: 'Sims', caption: 'AI agents minted', color: BLUE, value: totals.totalSims, format: formatCount },
       { key: 'totalGatherings', label: 'Gatherings', caption: 'Events & councils convened', color: BLUE, value: totals.totalGatherings, format: formatCount },
+      { key: 'totalProposals', label: 'Proposals', caption: 'Funding proposals submitted', color: TEAL, value: totals.totalProposals, format: formatCount },
+      { key: 'totalComments', label: 'Comments', caption: 'On proposals', color: BLUE, value: totals.totalComments, format: formatCount },
       { key: 'totalSProcesses', label: 'S-Processes', caption: 'Multi-agent deliberations', color: PINK, value: totals.totalSProcesses, format: formatCount },
       { key: 'totalChats', label: 'Chats', caption: 'Messages exchanged with sims', color: TEAL, value: totals.totalChats, format: formatCount },
     ],

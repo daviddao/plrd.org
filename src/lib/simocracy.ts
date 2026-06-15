@@ -140,6 +140,8 @@ export type SimocracyTotals = {
   uniqueHumans: number
   totalSims: number
   totalGatherings: number
+  totalProposals: number
+  totalComments: number
   totalSProcesses: number
   totalChats: number
 }
@@ -153,6 +155,8 @@ export type SimocracyTrends = {
   uniqueHumans: MetricSeries
   totalSims: MetricSeries
   totalGatherings: MetricSeries
+  totalProposals: MetricSeries
+  totalComments: MetricSeries
   totalSProcesses: MetricSeries
   totalChats: MetricSeries
 }
@@ -202,14 +206,23 @@ function buildTrends(args: {
   simTimes: number[]
   userFirstSeen: number[]
   gatherings: { createdAt?: string; treasuryUsd?: number }[]
+  proposalTimes: number[]
+  commentTimes: number[]
   events: SimocracyEvent[]
   treasuryBaseline: number
 }): SimocracyTrends {
-  const { simTimes, userFirstSeen, gatherings, events, treasuryBaseline } = args
+  const { simTimes, userFirstSeen, gatherings, proposalTimes, commentTimes, events, treasuryBaseline } = args
 
   const gatheringTimes = gatherings.map((g) => ms(g.createdAt)).filter((t) => !Number.isNaN(t))
   const eventTimes = events.map((e) => ms(e.createdAt)).filter((t) => !Number.isNaN(t))
-  const allTimes = [...simTimes, ...userFirstSeen, ...gatheringTimes, ...eventTimes]
+  const allTimes = [
+    ...simTimes,
+    ...userFirstSeen,
+    ...gatheringTimes,
+    ...proposalTimes,
+    ...commentTimes,
+    ...eventTimes,
+  ]
 
   const empty: MetricSeries = { days: [], values: [] }
   const { days, isoDays } = dayAxis(allTimes)
@@ -219,6 +232,8 @@ function buildTrends(args: {
       uniqueHumans: empty,
       totalSims: empty,
       totalGatherings: empty,
+      totalProposals: empty,
+      totalComments: empty,
       totalSProcesses: empty,
       totalChats: empty,
     }
@@ -249,6 +264,8 @@ function buildTrends(args: {
     totalGatherings: series(
       cumulativeOnAxis(days, gatheringTimes.map((t) => ({ t, inc: 1 }))),
     ),
+    totalProposals: series(cumulativeOnAxis(days, proposalTimes.map((t) => ({ t, inc: 1 })))),
+    totalComments: series(cumulativeOnAxis(days, commentTimes.map((t) => ({ t, inc: 1 })))),
     totalSProcesses: series(cumulativeOnAxis(days, sprocessEvents)),
     totalChats: series(
       cumulativeOnAxis(
@@ -267,13 +284,18 @@ export async function fetchSimocracyStats(): Promise<SimocracyStats> {
   type HistoryNode = RawHistoryRecord
   type SimNode = RawSimRecord & { did?: string; uri?: string }
   type GatheringNode = RawGatheringRecord & { did?: string }
+  type TimedNode = { createdAt?: string }
 
   let historyNodes: HistoryNode[] = []
   let simNodes: SimNode[] = []
   let gatheringNodes: GatheringNode[] = []
+  // Proposals are org.hypercerts.claim.activity records; comments on proposals
+  // are org.impactindexer.review.comment records (see ../simocracy-v2).
+  let proposalNodes: TimedNode[] = []
+  let commentNodes: TimedNode[] = []
 
   try {
-    ;[historyNodes, simNodes, gatheringNodes] = await Promise.all([
+    ;[historyNodes, simNodes, gatheringNodes, proposalNodes, commentNodes] = await Promise.all([
       fetchRoot<HistoryNode>(
         "orgSimocracyHistory",
         "type actorDid simNames simUris proposalTitle round hearingId createdAt content userMessage",
@@ -285,6 +307,8 @@ export async function fetchSimocracyStats(): Promise<SimocracyStats> {
         "did name treasuryUsd status createdAt",
         500,
       ),
+      fetchRoot<TimedNode>("orgHypercertsClaimActivity", "createdAt", 2_000),
+      fetchRoot<TimedNode>("orgImpactindexerReviewComment", "createdAt", 2_000),
     ])
   } catch (err) {
     console.warn("[simocracy] fetch failed:", err)
@@ -321,10 +345,15 @@ export async function fetchSimocracyStats(): Promise<SimocracyStats> {
     .map((s) => new Date(s.createdAt ?? "").getTime())
     .filter((t) => !Number.isNaN(t))
 
+  const proposalTimes = proposalNodes.map((p) => ms(p.createdAt)).filter((t) => !Number.isNaN(t))
+  const commentTimes = commentNodes.map((c) => ms(c.createdAt)).filter((t) => !Number.isNaN(t))
+
   const trends = buildTrends({
     simTimes,
     userFirstSeen: [...firstSeen.values()],
     gatherings,
+    proposalTimes,
+    commentTimes,
     events,
     treasuryBaseline: FTC_SF_TOWER_TREASURY_USD,
   })
@@ -383,6 +412,8 @@ export async function fetchSimocracyStats(): Promise<SimocracyStats> {
       uniqueHumans: humanDids.size,
       totalSims: simNodes.length,
       totalGatherings: gatheringNodes.length,
+      totalProposals: proposalNodes.length,
+      totalComments: commentNodes.length,
       totalSProcesses: sProcessRunIds.size,
       totalChats,
     },
