@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { sections, publications, talks, tutorials, blogPosts } from '@/lib/content'
+import { sections, publications, talks, blogPosts } from '@/lib/content'
 import Breadcrumb from '@/components/Breadcrumb'
 import EditPageButton from '@/components/EditPageButton'
 import { PageEditHistoryByline } from '@/components/EditHistoryByline'
@@ -21,9 +21,9 @@ const FALLBACK_CARDS = {
     title: 'Talks',
     body: 'Presentations and lectures from conferences and events around the world.',
   },
-  'card-tutorials': {
-    title: 'Tutorials',
-    body: 'In-depth guides and educational materials on core research topics.',
+  'card-blog': {
+    title: 'Blog',
+    body: 'Updates, insights, and reflections from the PL R&D team.',
   },
 }
 
@@ -35,7 +35,7 @@ export default async function InsightsPage() {
 
   const cardPublications = getSection(page, 'card-publications')
   const cardTalks = getSection(page, 'card-talks')
-  const cardTutorials = getSection(page, 'card-tutorials')
+  const cardBlog = getSection(page, 'card-blog')
 
   const recentPubs = publications.slice(0, 10)
   const recentTalks = talks.slice(0, 6)
@@ -72,10 +72,10 @@ export default async function InsightsPage() {
             count={talks.length}
           />
           <InsightCard
-            href="/tutorials/"
-            title={cardTutorials?.title || FALLBACK_CARDS['card-tutorials'].title}
-            description={cardTutorials?.body || FALLBACK_CARDS['card-tutorials'].body}
-            count={tutorials.length}
+            href="/blog/"
+            title={cardBlog?.title || FALLBACK_CARDS['card-blog'].title}
+            description={cardBlog?.body || FALLBACK_CARDS['card-blog'].body}
+            count={blogPosts.length}
           />
         </div>
       </div>
@@ -87,9 +87,54 @@ export default async function InsightsPage() {
         </div>
       )}
 
+      {/* Recent Talks */}
+      {recentTalks.length > 0 && (
+        <div className="mb-12 pb-12 border-b border-gray-100">
+          <h2 className="text-sm text-gray-500 uppercase tracking-wide mb-8">Recent Talks &amp; Podcasts</h2>
+          <div className="divide-y divide-gray-100">
+            {recentTalks.map((t) => (
+              <div key={t.slug} className="py-4">
+                <Link href={`/talks/${t.slug}/`} className="text-base text-black hover:text-blue transition-colors">
+                  {t.title}
+                </Link>
+                <div className="text-sm text-gray-400 mt-1">
+                  {t.venue}{t.venue_location && ` · ${t.venue_location}`}{t.date && ` · ${new Date(t.date).getFullYear()}`}
+                </div>
+                {t.abstract && <p className="text-sm text-gray-500 mt-1 max-w-2xl">{t.abstract}</p>}
+              </div>
+            ))}
+          </div>
+          <Link href="/talks/" className="text-base text-blue hover:underline mt-6 inline-block">
+            All talks →
+          </Link>
+        </div>
+      )}
+
+      {/* Recent Publications */}
+      {recentPubs.length > 0 && (
+        <div className="mb-12 pb-12 border-b border-gray-100">
+          <h2 className="text-sm text-gray-500 uppercase tracking-wide mb-8">Recent Publications</h2>
+          <div className="divide-y divide-gray-100">
+            {recentPubs.map((p) => (
+              <div key={p.slug} className="py-4">
+                <Link href={`/publications/${p.slug}/`} className="text-base text-black hover:text-blue transition-colors">
+                  {p.title}
+                </Link>
+                <div className="text-sm text-gray-400 mt-1">
+                  {p.venue}{p.date && ` · ${new Date(p.date).getFullYear()}`}
+                </div>
+              </div>
+            ))}
+          </div>
+          <Link href="/publications/" className="text-base text-blue hover:underline mt-6 inline-block">
+            All publications →
+          </Link>
+        </div>
+      )}
+
       {/* Recent Posts */}
       {recentPosts.length > 0 && (
-        <div className="mb-12 pb-12 border-b border-gray-100">
+        <div className="mb-12">
           <h2 className="text-sm text-gray-500 uppercase tracking-wide mb-6">From the Blog</h2>
           <div className="divide-y divide-gray-100">
             {recentPosts.map((post) => {
@@ -119,51 +164,6 @@ export default async function InsightsPage() {
           </div>
           <Link href="/blog/" className="text-sm text-blue hover:underline mt-6 inline-block">
             All posts →
-          </Link>
-        </div>
-      )}
-
-      {/* Recent Talks */}
-      {recentTalks.length > 0 && (
-        <div className="mb-12 pb-12 border-b border-gray-100">
-          <h2 className="text-sm text-gray-500 uppercase tracking-wide mb-8">Recent Talks &amp; Podcasts</h2>
-          <div className="divide-y divide-gray-100">
-            {recentTalks.map((t) => (
-              <div key={t.slug} className="py-4">
-                <Link href={`/talks/${t.slug}/`} className="text-base text-black hover:text-blue transition-colors">
-                  {t.title}
-                </Link>
-                <div className="text-sm text-gray-400 mt-1">
-                  {t.venue}{t.venue_location && ` · ${t.venue_location}`}{t.date && ` · ${new Date(t.date).getFullYear()}`}
-                </div>
-                {t.abstract && <p className="text-sm text-gray-500 mt-1 max-w-2xl">{t.abstract}</p>}
-              </div>
-            ))}
-          </div>
-          <Link href="/talks/" className="text-base text-blue hover:underline mt-6 inline-block">
-            All talks →
-          </Link>
-        </div>
-      )}
-
-      {/* Recent Publications */}
-      {recentPubs.length > 0 && (
-        <div className="mb-12">
-          <h2 className="text-sm text-gray-500 uppercase tracking-wide mb-8">Recent Publications</h2>
-          <div className="divide-y divide-gray-100">
-            {recentPubs.map((p) => (
-              <div key={p.slug} className="py-4">
-                <Link href={`/publications/${p.slug}/`} className="text-base text-black hover:text-blue transition-colors">
-                  {p.title}
-                </Link>
-                <div className="text-sm text-gray-400 mt-1">
-                  {p.venue}{p.date && ` · ${new Date(p.date).getFullYear()}`}
-                </div>
-              </div>
-            ))}
-          </div>
-          <Link href="/publications/" className="text-base text-blue hover:underline mt-6 inline-block">
-            All publications →
           </Link>
         </div>
       )}

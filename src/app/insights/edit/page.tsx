@@ -68,9 +68,9 @@ export default function InsightsEditPage() {
           set={set}
         />
         <CardEdit
-          sectionId="card-tutorials"
-          defaultTitle="Tutorials"
-          defaultBody="In-depth guides and educational materials on core research topics."
+          sectionId="card-blog"
+          defaultTitle="Blog"
+          defaultBody="Updates, insights, and reflections from the PL R&D team."
           get={get}
           set={set}
         />
