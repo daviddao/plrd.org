@@ -159,7 +159,7 @@ export default async function AboutPage() {
       </Section>
 
       {/* Quote */}
-      <div className="bg-gray-100 py-8 lg:py-10">
+      <div className="bg-gray-100 py-8 lg:py-10 mb-16 lg:mb-20">
         <div className="max-w-4xl mx-auto px-6">
           <div className="bg-white rounded-2xl p-6 lg:p-8 shadow-sm flex flex-col md:flex-row md:items-center gap-6">
             <div className="flex-1">
