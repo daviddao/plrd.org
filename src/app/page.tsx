@@ -21,6 +21,31 @@ type UpdateItem = {
   coverImage?: string
 }
 
+/**
+ * Extract YouTube video ID from Hugo shortcode in HTML.
+ * Handles both raw `{{< youtube ID >}}` and HTML-encoded `{{&#x3C; youtube ID >}}`
+ */
+function extractYouTubeId(html: string): string | null {
+  // Match patterns like {{< youtube VIDEO_ID >}} or {{&#x3C; youtube VIDEO_ID >}}
+  const patterns = [
+    /\{\{<\s*youtube\s+([a-zA-Z0-9_-]+)\s*>\}\}/,
+    /\{\{&#x3C;\s*youtube\s+([a-zA-Z0-9_-]+)\s*>\}\}/,
+  ]
+  for (const pattern of patterns) {
+    const match = html.match(pattern)
+    if (match) return match[1]
+  }
+  return null
+}
+
+/**
+ * Generate YouTube thumbnail URL from video ID.
+ * Uses maxresdefault for best quality, falls back to hqdefault.
+ */
+function getYouTubeThumbnail(videoId: string): string {
+  return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`
+}
+
 function getLatestUpdates(count: number): UpdateItem[] {
   const pubs = publications.map((p) => ({
     title: p.title || p.slug,
@@ -31,14 +56,18 @@ function getLatestUpdates(count: number): UpdateItem[] {
     areas: p.areas || [],
   }))
 
-  const talkItems = talks.map((t) => ({
-    title: t.title || t.slug,
-    date: t.date || '',
-    type: 'Talk',
-    permalink: `/talks/${t.slug}`,
-    slug: t.slug,
-    areas: (t.areas || []).filter(Boolean) as string[],
-  }))
+  const talkItems = talks.map((t) => {
+    const youtubeId = extractYouTubeId(t.html || '')
+    return {
+      title: t.title || t.slug,
+      date: t.date || '',
+      type: 'Talk',
+      permalink: `/talks/${t.slug}`,
+      slug: t.slug,
+      areas: (t.areas || []).filter(Boolean) as string[],
+      coverImage: youtubeId ? getYouTubeThumbnail(youtubeId) : undefined,
+    }
+  })
 
   const blogItems = blogPosts.map((b) => ({
     title: b.title || b.slug,
