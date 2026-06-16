@@ -54,6 +54,7 @@ function getLatestUpdates(count: number): UpdateItem[] {
     permalink: `/publications/${p.slug}`,
     slug: p.slug,
     areas: p.areas || [],
+    coverImage: '/images/publication-cover.png',
   }))
 
   const talkItems = talks.map((t) => {
