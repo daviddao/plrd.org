@@ -159,23 +159,25 @@ export default async function AboutPage() {
       </Section>
 
       {/* Quote */}
-      <div className="bg-gray-100 py-16 lg:py-20">
+      <div className="bg-gray-100 py-8 lg:py-10">
         <div className="max-w-4xl mx-auto px-6">
-          <div className="bg-white rounded-2xl p-8 lg:p-12 shadow-sm">
-            {/* Large quotation mark */}
-            <svg 
-              className="w-12 h-12 lg:w-16 lg:h-16 text-gray-300 mb-6" 
-              viewBox="0 0 24 24" 
-              fill="currentColor"
-              aria-hidden="true"
-            >
-              <path d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179zm10 0C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179z" />
-            </svg>
-            <MarkdownContent
-              content={quoteJuan?.body || quoteJuan?.title || "More innovation faster"}
-              className="text-xl lg:text-2xl text-gray-800 leading-relaxed mb-8 [&_p]:mb-0"
-            />
-            <div className="flex items-center gap-4">
+          <div className="bg-white rounded-2xl p-6 lg:p-8 shadow-sm flex flex-col md:flex-row md:items-center gap-6">
+            <div className="flex-1">
+              {/* Large quotation mark */}
+              <svg 
+                className="w-10 h-10 lg:w-12 lg:h-12 text-gray-300 mb-4" 
+                viewBox="0 0 24 24" 
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179zm10 0C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179z" />
+              </svg>
+              <MarkdownContent
+                content={quoteJuan?.body || quoteJuan?.title || "More innovation faster"}
+                className="text-lg lg:text-xl text-gray-800 leading-relaxed [&_p]:mb-0"
+              />
+            </div>
+            <div className="md:pl-6 md:border-l md:border-gray-100">
               <AuthorCard slug="juan-benet" variant="quote" />
             </div>
           </div>
@@ -191,23 +193,25 @@ export default async function AboutPage() {
       </Section>
 
       {/* Will Scott quote */}
-      <div className="bg-gray-100 py-16 lg:py-20 mb-12">
+      <div className="bg-gray-100 py-8 lg:py-10 mb-12">
         <div className="max-w-4xl mx-auto px-6">
-          <div className="bg-white rounded-2xl p-8 lg:p-12 shadow-sm">
-            {/* Large quotation mark */}
-            <svg 
-              className="w-12 h-12 lg:w-16 lg:h-16 text-gray-300 mb-6" 
-              viewBox="0 0 24 24" 
-              fill="currentColor"
-              aria-hidden="true"
-            >
-              <path d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179zm10 0C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179z" />
-            </svg>
-            <MarkdownContent
-              content={quoteWill?.body || "\u201cWe consistently bet, not only that the future could be a fantastic and wonderful place, but that it\u2019s worthwhile for us, as an organization, to work toward that future.\u201d"}
-              className="text-xl lg:text-2xl text-gray-800 leading-relaxed mb-8 [&_p]:mb-0"
-            />
-            <div className="flex items-center gap-4">
+          <div className="bg-white rounded-2xl p-6 lg:p-8 shadow-sm flex flex-col md:flex-row md:items-center gap-6">
+            <div className="flex-1">
+              {/* Large quotation mark */}
+              <svg 
+                className="w-10 h-10 lg:w-12 lg:h-12 text-gray-300 mb-4" 
+                viewBox="0 0 24 24" 
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179zm10 0C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179z" />
+              </svg>
+              <MarkdownContent
+                content={quoteWill?.body || "\u201cWe consistently bet, not only that the future could be a fantastic and wonderful place, but that it\u2019s worthwhile for us, as an organization, to work toward that future.\u201d"}
+                className="text-lg lg:text-xl text-gray-800 leading-relaxed [&_p]:mb-0"
+              />
+            </div>
+            <div className="md:pl-6 md:border-l md:border-gray-100">
               <AuthorCard slug="will-scott" variant="quote" />
             </div>
           </div>
