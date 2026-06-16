@@ -76,45 +76,49 @@ export default async function HomePage() {
       </div>
 
       {/* ── Hero ── */}
-      <div className="relative pt-16 pb-8 md:pt-20 md:pb-10 lg:pt-24 lg:pb-12">
-        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8 lg:gap-12">
-          <div className="relative z-10 flex-1 max-w-xl">
-            <p className="text-sm text-gray-500 uppercase tracking-widest mb-6 font-medium">
-              Protocol Labs Research &amp; Development
-            </p>
-            <h1 className="font-serif text-[36px] md:text-[48px] lg:text-[52px] font-normal leading-[1.06] tracking-tight mb-6">
-              Driving R&amp;D breakthroughs to push humanity forward.
-            </h1>
-            <div className="flex flex-wrap items-center gap-4">
-              <Link
-                href="/about"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-blue text-white rounded-full hover:bg-blue/90 transition-colors font-semibold text-[15px]"
-              >
-                About us
-                <span>→</span>
-              </Link>
-              <a
-                href="#focus-areas"
-                className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors font-medium text-[15px]"
-              >
-                Focus areas
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </a>
-            </div>
-          </div>
-          <div className="flex-shrink-0 lg:w-[340px] xl:w-[400px]">
-            <img
-              src="/images/hero.webp"
-              alt="Glass cube containing colorful neural structures"
-              className="w-full h-auto"
-            />
+      <div className="relative pt-16 pb-8 md:pt-20 md:pb-10 lg:pt-24 lg:pb-12 overflow-visible">
+        {/* Hero image - positioned absolutely to sit "under" the headline */}
+        <div
+          className="absolute right-0 top-1/2 -translate-y-1/2 w-[280px] sm:w-[360px] md:w-[450px] lg:w-[520px] xl:w-[560px] pointer-events-none select-none"
+          style={{ zIndex: 0 }}
+        >
+          <img
+            src="/images/hero.webp"
+            alt="Glass cube containing colorful neural structures"
+            className="w-full h-auto"
+          />
+        </div>
+
+        <div className="relative z-10">
+          <p className="text-sm text-gray-500 uppercase tracking-widest mb-6 font-medium">
+            Protocol Labs Research &amp; Development
+          </p>
+          <h1 className="font-serif text-[36px] md:text-[48px] lg:text-[52px] font-normal leading-[1.06] tracking-tight mb-6 max-w-md md:max-w-lg lg:max-w-xl">
+            Driving R&amp;D breakthroughs to push humanity forward.
+          </h1>
+          <div className="flex flex-wrap items-center gap-4">
+            <Link
+              href="/about"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-blue text-white rounded-full hover:bg-blue/90 transition-colors font-semibold text-[15px]"
+            >
+              About us
+              <span>→</span>
+            </Link>
+            <a
+              href="#focus-areas"
+              className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors font-medium text-[15px]"
+            >
+              Focus areas
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </a>
           </div>
         </div>
+
         <a
           href="#focus-areas"
-          className="inline-flex flex-col items-center gap-1.5 mt-12 text-gray-400 hover:text-gray-600 transition-colors group"
+          className="relative z-10 inline-flex flex-col items-center gap-1.5 mt-12 text-gray-400 hover:text-gray-600 transition-colors group"
         >
           <svg className="w-5 h-5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
