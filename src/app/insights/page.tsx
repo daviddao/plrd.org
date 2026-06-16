@@ -18,7 +18,7 @@ const FALLBACK_CARDS = {
     body: 'Papers and articles advancing the frontiers of decentralized systems, cryptography, and more.',
   },
   'card-talks': {
-    title: 'Talks',
+    title: 'Talks & Podcasts',
     body: 'Presentations and lectures from conferences and events around the world.',
   },
   'card-blog': {
@@ -60,16 +60,16 @@ export default async function InsightsPage() {
       <div className="mb-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <InsightCard
-            href="/publications/"
-            title={cardPublications?.title || FALLBACK_CARDS['card-publications'].title}
-            description={cardPublications?.body || FALLBACK_CARDS['card-publications'].body}
-            count={publications.length}
-          />
-          <InsightCard
             href="/talks/"
             title={cardTalks?.title || FALLBACK_CARDS['card-talks'].title}
             description={cardTalks?.body || FALLBACK_CARDS['card-talks'].body}
             count={talks.length}
+          />
+          <InsightCard
+            href="/publications/"
+            title={cardPublications?.title || FALLBACK_CARDS['card-publications'].title}
+            description={cardPublications?.body || FALLBACK_CARDS['card-publications'].body}
+            count={publications.length}
           />
           <InsightCard
             href="/blog/"
