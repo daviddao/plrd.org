@@ -5,9 +5,7 @@ export type { MetricSeries }
 
 /**
  * Read-only client for the Simocracy indexer at
- *   https://simocracy-indexer.gainforest.id/graphql
- * (canonical bumi-0 deployment; the legacy Railway endpoint at
- *  simocracy-indexer-production.up.railway.app has been retired)
+ *   https://simocracy-indexer-production.up.railway.app/graphql
  *
  * Powers the FA2 Live Dashboard. We pull three collections
  * (history, sim, gathering) and aggregate them into a small set of
@@ -21,9 +19,15 @@ export type { MetricSeries }
  * leave this module — the public dashboard only sees aggregate metadata.
  */
 
-const SIMOCRACY_INDEXER_URL =
+function graphqlEndpoint(url: string) {
+  const trimmed = url.replace(/\/+$/, "")
+  return trimmed.endsWith("/graphql") ? trimmed : `${trimmed}/graphql`
+}
+
+const SIMOCRACY_INDEXER_URL = graphqlEndpoint(
   process.env.SIMOCRACY_INDEXER_URL ??
-  "https://simocracy-indexer.gainforest.id/graphql"
+    "https://simocracy-indexer-production.up.railway.app",
+)
 
 // -- FtC SF tower treasury (canonical example tower not yet represented as
 // a gathering record). Mirrors TOWER_TREASURY in simocracy-v2/lib/ftc-sf-data.ts.
