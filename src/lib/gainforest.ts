@@ -21,14 +21,13 @@ const GAINFOREST_INDEXER_URL =
 // 15-minute ISR — matches gainforest-app / Bumiscan's own cadence.
 const REVALIDATE = 60 * 15
 
-/** Cumulative daily series for the GainForest headline metrics. */
+/** Recent-activity cumulative tails for the GainForest headline metrics: each
+ *  is the newest ~1000 records anchored to the true total, so the line ends on
+ *  the headline number without scanning a collection that has grown past the
+ *  1000-record page limit (orgs, hypercerts, and ~330k observations all have). */
 export type GainforestTrends = {
   certifiedOrgs: MetricSeries
   bumicerts: MetricSeries
-  /** Recent cumulative tail (newest ~1000 occurrence records) anchored to the
-   *  true total. Species observations (~330k) can't be charted in full at
-   *  request time, so we surface the recent growth slope from one cheap page,
-   *  mirroring the gainforest-explorer landing band. */
   observations: MetricSeries
 }
 
@@ -69,17 +68,18 @@ function tailSeries(times: number[], total: number): MetricSeries {
   return { days: isoDays, values }
 }
 
-// `first: 1000` returns every record today (410 orgs, 815 claims) in one round
-// trip; `totalCount` stays authoritative for the headline number regardless.
-// `occ` pulls only the newest 1000 occurrence timestamps (sorted DESC) + the
-// true `totalCount` — enough for the headline number plus a recent-activity
-// tail sparkline, without scanning all ~330k records.
+// Every connection is capped at `first: 1000` and sorted newest-first, so the
+// headline number always comes from `totalCount` (authoritative regardless of
+// the page) and the trends are recent-activity tails of the newest 1000 records
+// anchored to that total. Once a collection passes 1000 (orgs and hypercerts
+// both have) an un-sorted page would return an arbitrary slice and a from-zero
+// cumulative would plateau at 1000, undershooting the headline — see tailSeries.
 const TOTALS_QUERY = `query PlrdGainforestTotals {
-  actorOrg: appCertifiedActorOrganization(first: 1000) {
+  actorOrg: appCertifiedActorOrganization(first: 1000, sortBy: createdAt, sortDirection: DESC) {
     totalCount
     edges { node { createdAt } }
   }
-  act: orgHypercertsClaimActivity(first: 1000) {
+  act: orgHypercertsClaimActivity(first: 1000, sortBy: createdAt, sortDirection: DESC) {
     totalCount
     edges { node { createdAt } }
   }
@@ -119,24 +119,22 @@ export async function fetchGainforestStats(): Promise<GainforestStats> {
     const orgTimes = times(d.actorOrg ?? undefined)
     const actTimes = times(d.act ?? undefined)
     const occTimes = times(d.occ ?? undefined)
+    const certifiedOrgs = d.actorOrg?.totalCount ?? 0
+    const bumicerts = d.act?.totalCount ?? 0
     const observations = d.occ?.totalCount ?? 0
-    const { days, isoDays } = dayAxis([...orgTimes, ...actTimes])
+    // Recent-activity tails: the newest ~1000 records of each collection,
+    // anchored to the true `totalCount`. This keeps the trend line ending
+    // exactly on the headline number even after a collection grows past the
+    // 1000-record page limit (a from-zero cumulative would stop at 1000).
     const trends: GainforestTrends = {
-      certifiedOrgs: {
-        days: isoDays,
-        values: cumulativeOnAxis(days, orgTimes.map((t) => ({ t, inc: 1 }))),
-      },
-      bumicerts: {
-        days: isoDays,
-        values: cumulativeOnAxis(days, actTimes.map((t) => ({ t, inc: 1 }))),
-      },
-      // Recent-activity tail: newest ~1000 occurrences anchored to the true total.
+      certifiedOrgs: tailSeries(orgTimes, certifiedOrgs),
+      bumicerts: tailSeries(actTimes, bumicerts),
       observations: tailSeries(occTimes, observations),
     }
 
     return {
-      certifiedOrgs: d.actorOrg?.totalCount ?? 0,
-      bumicerts: d.act?.totalCount ?? 0,
+      certifiedOrgs,
+      bumicerts,
       observations,
       trends,
       fetchedAt: new Date().toISOString(),
