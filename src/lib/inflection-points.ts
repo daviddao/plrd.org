@@ -85,6 +85,19 @@ export const FOCUS_AREAS: FocusAreaMeta[] = [
   { key: 'neurotech', label: 'Neurotech', code: 'FA4', href: '/areas/neurotech/', accent: '#E51A66' },
 ]
 
+// The logic-model chain: planned work (inputs/activities/outputs) → intended
+// results (outcomes/impact). Shared by the Measuring-impact section, the three-
+// questions explainer, and the per-point detail modal so the vocabulary lives
+// in one place.
+export const LOGIC_MODEL = [
+  { key: 'inputs', label: 'Inputs', body: 'The resources we commit — funding, teams, convenings, standards.' },
+  { key: 'activities', label: 'Activities', body: 'What we do with them — seeding teams, building primitives, setting standards.' },
+  { key: 'outputs', label: 'Outputs', body: 'The volume of work produced — teams funded, deployments, papers, ventures.' },
+  { key: 'outcomes', label: 'Outcomes', body: 'The changes that follow — adoption, capital inflows, new entrants.' },
+  { key: 'impact', label: 'Impact', body: 'The lasting shift in the system — an inflection point that holds.' },
+] as const
+export type LogicStageKey = (typeof LOGIC_MODEL)[number]['key']
+
 // ── Field-progress lifecycle (Q1 -> Q2). Deliberately separate from PL contribution. ──
 export const FIELD_STAGES = ['Defined', 'Emerging', 'Reached', 'Scaling'] as const
 export type FieldStage = (typeof FIELD_STAGES)[number]

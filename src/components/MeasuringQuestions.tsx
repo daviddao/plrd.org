@@ -1,25 +1,30 @@
 'use client'
 
 import { useState } from 'react'
-import { CONTRIBUTION_META } from '@/lib/inflection-points'
+import { CONTRIBUTION_META, LOGIC_MODEL, type LogicStageKey } from '@/lib/inflection-points'
 
-const QUESTIONS = [
+const QUESTIONS: {
+  q: string
+  title: string
+  stages: LogicStageKey[]
+  body: string
+}[] = [
   {
     q: 'Q1',
     title: 'Did it happen?',
-    maps: 'Impact',
+    stages: ['impact'],
     body: 'We pre-register one observable threshold and report a simple yes/no plus a date when it is reached. It is externally observable — measured the same way whether or not PL is involved.',
   },
   {
     q: 'Q2',
     title: 'Did it matter?',
-    maps: 'Outcomes',
+    stages: ['outcomes'],
     body: 'A signal is only worth naming if it unlocks something. We name the second-order effects in advance and watch whether they follow. A threshold that is reached but unlocks nothing is itself a finding.',
   },
   {
     q: 'Q3',
     title: 'Did our work make it happen?',
-    maps: 'Inputs · Activities · Outputs',
+    stages: ['inputs', 'activities', 'outputs'],
     body: 'We trace contribution rather than claim credit: which PL-funded teams, convenings, standards, or ventures were on the critical path — and reason honestly about the counterfactual: would this have happened as fast, or at all, without us?',
   },
 ]
@@ -27,6 +32,7 @@ const QUESTIONS = [
 export default function MeasuringQuestions() {
   const [active, setActive] = useState(0)
   const item = QUESTIONS[active]
+  const stages = item.stages.map((k) => LOGIC_MODEL.find((s) => s.key === k)!)
 
   return (
     <div className="lg:grid lg:grid-cols-[248px_1fr] lg:gap-10">
@@ -73,13 +79,25 @@ export default function MeasuringQuestions() {
       {/* Detail panel */}
       <div className="rounded-xl border border-gray-200 bg-gray-50 p-6 lg:p-8">
         <div className="mb-1 text-xs font-medium uppercase tracking-wide text-gray-400">
-          Maps to logic model: {item.maps}
+          Maps to logic model: {stages.map((s) => s.label).join(' · ')}
         </div>
         <h3 className="mb-3 text-xl font-semibold tracking-tight text-black">{item.title}</h3>
         <p className="max-w-2xl text-base leading-relaxed text-gray-600">{item.body}</p>
 
+        {/* Logic-model stage(s) this question covers — same row style as the cards */}
+        <div className="mt-5 space-y-2.5 border-t border-gray-200 pt-5">
+          {stages.map((s) => (
+            <div key={s.key} className="flex gap-3">
+              <span className="w-24 shrink-0 pt-0.5 text-[11px] font-semibold uppercase tracking-wide text-gray-400">
+                {s.label}
+              </span>
+              <span className="flex-1 text-sm leading-relaxed text-gray-600">{s.body}</span>
+            </div>
+          ))}
+        </div>
+
         {active === 2 && (
-          <div className="mt-7 border-t border-gray-200 pt-6">
+          <div className="mt-6 border-t border-gray-200 pt-6">
             <div className="mb-2 text-sm font-semibold text-black">
               PL&rsquo;s role on the critical path
             </div>

@@ -180,7 +180,6 @@ function InflectionCard({
   onOpen: () => void
 }) {
   const fa = FOCUS_AREAS.find((f) => f.key === point.area)!
-  const status = STATUS_META[point.status]
 
   return (
     <button
@@ -190,21 +189,12 @@ function InflectionCard({
       className="group flex flex-col rounded-xl border border-gray-200 border-l-[3px] bg-white p-6 text-left transition-all hover:border-blue/40 hover:shadow-md"
       style={{ borderLeftColor: fa.accent }}
     >
-      {/* Header: area badge + status */}
-      <div className="mb-3 flex items-center justify-between gap-3">
-        <span className="inline-flex items-center gap-1.5 text-xs font-medium text-gray-500">
-          <span className="flex h-4 w-4 items-center justify-center" style={{ color: fa.accent }}>
-            <AreaIcon type={FA_ICON[fa.key]} className="block h-3.5 w-3.5" />
-          </span>
-          {fa.label}
+      {/* Header: area badge */}
+      <div className="mb-3 flex items-center gap-1.5 text-xs font-medium text-gray-500">
+        <span className="flex h-4 w-4 items-center justify-center" style={{ color: fa.accent }}>
+          <AreaIcon type={FA_ICON[fa.key]} className="block h-3.5 w-3.5" />
         </span>
-        <span
-          className="inline-flex items-center gap-1.5 rounded-full bg-gray-50 px-2.5 py-1 text-xs font-medium text-gray-600 ring-1 ring-gray-200"
-          title={status.description}
-        >
-          <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: status.color }} />
-          {status.label}
-        </span>
+        {fa.label}
       </div>
 
       <div className="mb-1 text-xs uppercase tracking-wide text-gray-400">
@@ -215,10 +205,10 @@ function InflectionCard({
       {/* Field-progress axis */}
       <FieldMeter status={point.status} accent={fa.accent} />
 
-      {/* Q1 signal teaser */}
+      {/* Inflection point teaser */}
       <div className="mt-4">
         <div className="mb-0.5 text-xs font-semibold uppercase tracking-wide text-gray-500">
-          Signal it happened
+          Inflection point
         </div>
         <p className="line-clamp-3 text-sm leading-relaxed text-gray-600">{point.signal}</p>
       </div>
@@ -324,16 +314,12 @@ function InflectionModal({
             </p>
           </div>
 
-          {/* Three questions */}
-          <Section
-            q="Q1"
-            label="Did it happen? — the signal"
-            accent={fa.accent}
-          >
-            {point.signal}
+          {/* Three questions — each tagged with the logic-model stage it maps to */}
+          <Section q="Q1" label="Did it happen? — the signal" accent={fa.accent}>
+            <LogicRow label="Impact">{point.signal}</LogicRow>
           </Section>
           <Section q="Q2" label="Did it matter? — the cascade" accent={fa.accent}>
-            {point.cascade}
+            <LogicRow label="Outcome">{point.cascade}</LogicRow>
           </Section>
           <Section q="Q3" label="Did our work make it happen? — PL contribution" accent={fa.accent}>
             <div className="mb-3 flex flex-wrap items-center gap-2">
