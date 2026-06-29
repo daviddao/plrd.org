@@ -34,6 +34,27 @@ export default async function InsightsPage() {
 
   const insightSections: InsightSection[] = [
     {
+      key: 'blog',
+      label: cardBlog?.title || FALLBACK_CARDS['card-blog'].title,
+      heading: 'From the Blog',
+      allHref: '/blog/',
+      allLabel: 'All posts →',
+      count: blogPosts.length,
+      items: recentPosts.map((post) => {
+        const isExternal = !!post.external_url
+        const dateLabel =
+          post.date && new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+        return {
+          key: post.slug,
+          href: post.external_url || `/blog/${post.slug}/`,
+          external: isExternal,
+          eyebrow: [dateLabel, isExternal && 'protocol.ai'].filter(Boolean).join(' · '),
+          title: post.title,
+          description: post.summary,
+        }
+      }),
+    },
+    {
       key: 'publications',
       label: cardPublications?.title || FALLBACK_CARDS['card-publications'].title,
       heading: 'Recent Publications',
@@ -61,27 +82,6 @@ export default async function InsightsPage() {
         title: t.title,
         description: t.abstract,
       })),
-    },
-    {
-      key: 'blog',
-      label: cardBlog?.title || FALLBACK_CARDS['card-blog'].title,
-      heading: 'From the Blog',
-      allHref: '/blog/',
-      allLabel: 'All posts →',
-      count: blogPosts.length,
-      items: recentPosts.map((post) => {
-        const isExternal = !!post.external_url
-        const dateLabel =
-          post.date && new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
-        return {
-          key: post.slug,
-          href: post.external_url || `/blog/${post.slug}/`,
-          external: isExternal,
-          eyebrow: [dateLabel, isExternal && 'protocol.ai'].filter(Boolean).join(' · '),
-          title: post.title,
-          description: post.summary,
-        }
-      }),
     },
   ].filter((s) => s.items.length > 0)
 
