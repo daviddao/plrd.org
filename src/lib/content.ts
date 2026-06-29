@@ -63,6 +63,8 @@ export type BlogPost = {
   date: string
   summary: string
   authors: string[]
+  /** Focus-area slugs (e.g. 'neurotech') — drives the Insights focus-area filter. */
+  areas: string[]
   external_url: string
   /**
    * URL of the post's cover image. For external blog posts (the common case
