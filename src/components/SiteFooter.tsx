@@ -37,7 +37,6 @@ export default function SiteFooter() {
             <ul className="space-y-1.5 list-none m-0 p-0">
               <li><Link href="/about/" className="text-sm text-[#cfd1da] hover:text-white transition-colors block py-1">About us</Link></li>
               <li><Link href="/insights/" className="text-sm text-[#cfd1da] hover:text-white transition-colors block py-1">Insights</Link></li>
-              <li><Link href="/blog/" className="text-sm text-[#cfd1da] hover:text-white transition-colors block py-1">Blog</Link></li>
               <li><Link href="/authors/" className="text-sm text-[#cfd1da] hover:text-white transition-colors block py-1">Team</Link></li>
             </ul>
           </div>

@@ -37,12 +37,10 @@ export const mainNav: NavItem[] = [
   },
   { name: 'Insights', url: '/insights/' },
   { name: 'Team', url: '/authors/' },
-  { name: 'Blog', url: '/blog/' },
 ]
 
 export const footerNav: NavItem[] = [
   { name: 'About', url: '/about/' },
   { name: 'Team', url: '/authors/' },
   { name: 'Insights', url: '/insights/' },
-  { name: 'Blog', url: '/blog/' },
 ]
