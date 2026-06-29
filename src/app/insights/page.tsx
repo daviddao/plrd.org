@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
 import { sections, publications, talks, blogPosts } from '@/lib/content'
 import Breadcrumb from '@/components/Breadcrumb'
 import EditPageButton from '@/components/EditPageButton'
 import { PageEditHistoryByline } from '@/components/EditHistoryByline'
 import MarkdownContent from '@/components/MarkdownContent'
+import InsightsExplorer, { type InsightSection } from '@/components/InsightsExplorer'
 import { fetchPage, getSection } from '@/lib/indexer'
 
 export const metadata: Metadata = { title: 'Insights' }
@@ -13,18 +13,9 @@ const FALLBACK_HERO_TITLE = 'Insights'
 const FALLBACK_HERO_SUBTITLE =
   'Exploring the frontiers of computing, networking, and knowledge systems to build infrastructure that empowers humanity.'
 const FALLBACK_CARDS = {
-  'card-publications': {
-    title: 'Publications',
-    body: 'Papers and articles advancing the frontiers of decentralized systems, cryptography, and more.',
-  },
-  'card-talks': {
-    title: 'Talks',
-    body: 'Presentations and lectures from conferences and events around the world.',
-  },
-  'card-blog': {
-    title: 'Blog',
-    body: 'Updates, insights, and reflections from the PL R&D team.',
-  },
+  'card-publications': { title: 'Publications' },
+  'card-talks': { title: 'Talks' },
+  'card-blog': { title: 'Blog' },
 }
 
 export default async function InsightsPage() {
@@ -37,9 +28,62 @@ export default async function InsightsPage() {
   const cardTalks = getSection(page, 'card-talks')
   const cardBlog = getSection(page, 'card-blog')
 
-  const recentPubs = publications.slice(0, 10)
+  const recentPubs = publications.slice(0, 9)
   const recentTalks = talks.slice(0, 6)
-  const recentPosts = blogPosts.slice(0, 5)
+  const recentPosts = blogPosts.slice(0, 6)
+
+  const insightSections: InsightSection[] = [
+    {
+      key: 'publications',
+      label: cardPublications?.title || FALLBACK_CARDS['card-publications'].title,
+      heading: 'Recent Publications',
+      allHref: '/publications/',
+      allLabel: 'All publications →',
+      count: publications.length,
+      items: recentPubs.map((p) => ({
+        key: p.slug,
+        href: `/publications/${p.slug}/`,
+        eyebrow: [p.venue, p.date && new Date(p.date).getFullYear()].filter(Boolean).join(' · '),
+        title: p.title,
+      })),
+    },
+    {
+      key: 'talks',
+      label: cardTalks?.title || FALLBACK_CARDS['card-talks'].title,
+      heading: 'Recent Talks & Podcasts',
+      allHref: '/talks/',
+      allLabel: 'All talks →',
+      count: talks.length,
+      items: recentTalks.map((t) => ({
+        key: t.slug,
+        href: `/talks/${t.slug}/`,
+        eyebrow: [t.venue, t.venue_location, t.date && new Date(t.date).getFullYear()].filter(Boolean).join(' · '),
+        title: t.title,
+        description: t.abstract,
+      })),
+    },
+    {
+      key: 'blog',
+      label: cardBlog?.title || FALLBACK_CARDS['card-blog'].title,
+      heading: 'From the Blog',
+      allHref: '/blog/',
+      allLabel: 'All posts →',
+      count: blogPosts.length,
+      items: recentPosts.map((post) => {
+        const isExternal = !!post.external_url
+        const dateLabel =
+          post.date && new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+        return {
+          key: post.slug,
+          href: post.external_url || `/blog/${post.slug}/`,
+          external: isExternal,
+          eyebrow: [dateLabel, isExternal && 'protocol.ai'].filter(Boolean).join(' · '),
+          title: post.title,
+          description: post.summary,
+        }
+      }),
+    },
+  ].filter((s) => s.items.length > 0)
 
   return (
     <div className="max-w-6xl mx-auto px-6 pt-8 pb-16">
@@ -56,30 +100,6 @@ export default async function InsightsPage() {
         <MarkdownContent content={heroSubtitle} className="relative z-10 text-lg text-gray-600 leading-relaxed max-w-2xl" />
       </div>
 
-      {/* Subpages */}
-      <div className="mb-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <InsightCard
-            href="/publications/"
-            title={cardPublications?.title || FALLBACK_CARDS['card-publications'].title}
-            description={cardPublications?.body || FALLBACK_CARDS['card-publications'].body}
-            count={publications.length}
-          />
-          <InsightCard
-            href="/talks/"
-            title={cardTalks?.title || FALLBACK_CARDS['card-talks'].title}
-            description={cardTalks?.body || FALLBACK_CARDS['card-talks'].body}
-            count={talks.length}
-          />
-          <InsightCard
-            href="/blog/"
-            title={cardBlog?.title || FALLBACK_CARDS['card-blog'].title}
-            description={cardBlog?.body || FALLBACK_CARDS['card-blog'].body}
-            count={blogPosts.length}
-          />
-        </div>
-      </div>
-
       {/* Section content if any */}
       {sections.research?.html && (
         <div className="mb-12 pb-12 border-b border-gray-100">
@@ -87,115 +107,10 @@ export default async function InsightsPage() {
         </div>
       )}
 
-      {/* Recent Talks */}
-      {recentTalks.length > 0 && (
-        <div className="mb-12 pb-12 border-b border-gray-100">
-          <h2 className="text-sm text-gray-500 uppercase tracking-wide mb-8">Recent Talks &amp; Podcasts</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {recentTalks.map((t) => (
-              <RecentTile
-                key={t.slug}
-                href={`/talks/${t.slug}/`}
-                eyebrow={[t.venue, t.venue_location, t.date && new Date(t.date).getFullYear()].filter(Boolean).join(' · ')}
-                title={t.title}
-                description={t.abstract}
-              />
-            ))}
-          </div>
-          <Link href="/talks/" className="text-base text-blue hover:underline mt-8 inline-block">
-            All talks →
-          </Link>
-        </div>
-      )}
+      <InsightsExplorer sections={insightSections} />
 
-      {/* Recent Publications */}
-      {recentPubs.length > 0 && (
-        <div className="mb-12 pb-12 border-b border-gray-100">
-          <h2 className="text-sm text-gray-500 uppercase tracking-wide mb-8">Recent Publications</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {recentPubs.map((p) => (
-              <RecentTile
-                key={p.slug}
-                href={`/publications/${p.slug}/`}
-                eyebrow={[p.venue, p.date && new Date(p.date).getFullYear()].filter(Boolean).join(' · ')}
-                title={p.title}
-              />
-            ))}
-          </div>
-          <Link href="/publications/" className="text-base text-blue hover:underline mt-8 inline-block">
-            All publications →
-          </Link>
-        </div>
-      )}
-
-      {/* Recent Posts */}
-      {recentPosts.length > 0 && (
-        <div className="mb-12">
-          <h2 className="text-sm text-gray-500 uppercase tracking-wide mb-8">From the Blog</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {recentPosts.map((post) => {
-              const href = post.external_url || `/blog/${post.slug}/`
-              const isExternal = !!post.external_url
-              const dateLabel = post.date && new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
-              return (
-                <RecentTile
-                  key={post.slug}
-                  href={href}
-                  external={isExternal}
-                  eyebrow={[dateLabel, isExternal && 'protocol.ai'].filter(Boolean).join(' · ')}
-                  title={post.title}
-                  description={post.summary}
-                />
-              )
-            })}
-          </div>
-          <Link href="/blog/" className="text-base text-blue hover:underline mt-8 inline-block">
-            All posts →
-          </Link>
-        </div>
-      )}
       <EditPageButton rkey="insights" />
     </div>
-  )
-}
-
-function InsightCard({ href, title, description, count }: { href: string; title: string; description: string; count: number }) {
-  return (
-    <Link href={href} className="border border-gray-300 p-8 hover:border-blue hover:shadow-sm transition-all block">
-      <h3 className="font-semibold text-lg mb-2">{title}</h3>
-      <MarkdownContent content={description} className="text-base text-gray-700 mb-4 [&_p]:mb-0" />
-      <span className="text-sm text-gray-400">{count} entries</span>
-    </Link>
-  )
-}
-
-function RecentTile({
-  href,
-  eyebrow,
-  title,
-  description,
-  external,
-}: {
-  href: string
-  eyebrow?: string
-  title: string
-  description?: string
-  external?: boolean
-}) {
-  return (
-    <Link
-      href={href}
-      target={external ? '_blank' : undefined}
-      rel={external ? 'noopener noreferrer' : undefined}
-      className="group flex flex-col h-full border border-gray-200 rounded-lg p-5 hover:border-blue hover:shadow-sm transition-all"
-    >
-      {eyebrow && <div className="text-xs text-gray-400 mb-2">{eyebrow}</div>}
-      <h3 className="text-base font-medium text-black leading-snug group-hover:text-blue transition-colors">
-        {title}
-        {external && <span className="text-gray-400 text-xs ml-1.5">↗</span>}
-      </h3>
-      {description && <p className="text-sm text-gray-500 mt-2 line-clamp-3">{description}</p>}
-    </Link>
   )
 }
 
