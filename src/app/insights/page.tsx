@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
-import { sections, publications, talks, blogPosts } from '@/lib/content'
+import { sections, publications, talks, blogPosts, areas } from '@/lib/content'
 import Breadcrumb from '@/components/Breadcrumb'
 import EditPageButton from '@/components/EditPageButton'
 import { PageEditHistoryByline } from '@/components/EditHistoryByline'
 import MarkdownContent from '@/components/MarkdownContent'
-import InsightsExplorer, { type InsightSection } from '@/components/InsightsExplorer'
+import InsightsExplorer, { type InsightSection, type AreaDef } from '@/components/InsightsExplorer'
 import { fetchPage, getSection } from '@/lib/indexer'
 
 export const metadata: Metadata = { title: 'Insights' }
@@ -28,9 +28,11 @@ export default async function InsightsPage() {
   const cardTalks = getSection(page, 'card-talks')
   const cardBlog = getSection(page, 'card-blog')
 
-  const recentPubs = publications.slice(0, 9)
-  const recentTalks = talks.slice(0, 6)
-  const recentPosts = blogPosts.slice(0, 6)
+  // Focus-area chips, ordered to match the site nav.
+  const AREA_ORDER = ['digital-human-rights', 'economies-governance', 'ai-robotics', 'neurotech']
+  const areaDefs: AreaDef[] = AREA_ORDER.map((slug) => areas.find((a) => a.slug === slug))
+    .filter((a): a is (typeof areas)[number] => Boolean(a))
+    .map((a) => ({ slug: a.slug, title: a.title }))
 
   const insightSections: InsightSection[] = [
     {
@@ -39,8 +41,7 @@ export default async function InsightsPage() {
       heading: 'From the Blog',
       allHref: '/blog/',
       allLabel: 'All posts →',
-      count: blogPosts.length,
-      items: recentPosts.map((post) => {
+      items: blogPosts.map((post) => {
         const isExternal = !!post.external_url
         const dateLabel =
           post.date && new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
@@ -51,6 +52,7 @@ export default async function InsightsPage() {
           eyebrow: [dateLabel, isExternal && 'protocol.ai'].filter(Boolean).join(' · '),
           title: post.title,
           description: post.summary,
+          areas: [],
         }
       }),
     },
@@ -60,12 +62,12 @@ export default async function InsightsPage() {
       heading: 'Recent Publications',
       allHref: '/publications/',
       allLabel: 'All publications →',
-      count: publications.length,
-      items: recentPubs.map((p) => ({
+      items: publications.map((p) => ({
         key: p.slug,
         href: `/publications/${p.slug}/`,
         eyebrow: [p.venue, p.date && new Date(p.date).getFullYear()].filter(Boolean).join(' · '),
         title: p.title,
+        areas: p.areas ?? [],
       })),
     },
     {
@@ -74,13 +76,13 @@ export default async function InsightsPage() {
       heading: 'Recent Talks & Podcasts',
       allHref: '/talks/',
       allLabel: 'All talks →',
-      count: talks.length,
-      items: recentTalks.map((t) => ({
+      items: talks.map((t) => ({
         key: t.slug,
         href: `/talks/${t.slug}/`,
         eyebrow: [t.venue, t.venue_location, t.date && new Date(t.date).getFullYear()].filter(Boolean).join(' · '),
         title: t.title,
         description: t.abstract,
+        areas: t.areas ?? [],
       })),
     },
   ].filter((s) => s.items.length > 0)
@@ -107,7 +109,7 @@ export default async function InsightsPage() {
         </div>
       )}
 
-      <InsightsExplorer sections={insightSections} />
+      <InsightsExplorer sections={insightSections} areas={areaDefs} />
 
       <EditPageButton rkey="insights" />
     </div>
