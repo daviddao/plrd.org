@@ -91,20 +91,18 @@ export default async function InsightsPage() {
       {recentTalks.length > 0 && (
         <div className="mb-12 pb-12 border-b border-gray-100">
           <h2 className="text-sm text-gray-500 uppercase tracking-wide mb-8">Recent Talks &amp; Podcasts</h2>
-          <div className="divide-y divide-gray-100">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {recentTalks.map((t) => (
-              <div key={t.slug} className="py-4">
-                <Link href={`/talks/${t.slug}/`} className="text-base text-black hover:text-blue transition-colors">
-                  {t.title}
-                </Link>
-                <div className="text-sm text-gray-400 mt-1">
-                  {t.venue}{t.venue_location && ` · ${t.venue_location}`}{t.date && ` · ${new Date(t.date).getFullYear()}`}
-                </div>
-                {t.abstract && <p className="text-sm text-gray-500 mt-1 max-w-2xl">{t.abstract}</p>}
-              </div>
+              <RecentTile
+                key={t.slug}
+                href={`/talks/${t.slug}/`}
+                eyebrow={[t.venue, t.venue_location, t.date && new Date(t.date).getFullYear()].filter(Boolean).join(' · ')}
+                title={t.title}
+                description={t.abstract}
+              />
             ))}
           </div>
-          <Link href="/talks/" className="text-base text-blue hover:underline mt-6 inline-block">
+          <Link href="/talks/" className="text-base text-blue hover:underline mt-8 inline-block">
             All talks →
           </Link>
         </div>
@@ -114,19 +112,17 @@ export default async function InsightsPage() {
       {recentPubs.length > 0 && (
         <div className="mb-12 pb-12 border-b border-gray-100">
           <h2 className="text-sm text-gray-500 uppercase tracking-wide mb-8">Recent Publications</h2>
-          <div className="divide-y divide-gray-100">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {recentPubs.map((p) => (
-              <div key={p.slug} className="py-4">
-                <Link href={`/publications/${p.slug}/`} className="text-base text-black hover:text-blue transition-colors">
-                  {p.title}
-                </Link>
-                <div className="text-sm text-gray-400 mt-1">
-                  {p.venue}{p.date && ` · ${new Date(p.date).getFullYear()}`}
-                </div>
-              </div>
+              <RecentTile
+                key={p.slug}
+                href={`/publications/${p.slug}/`}
+                eyebrow={[p.venue, p.date && new Date(p.date).getFullYear()].filter(Boolean).join(' · ')}
+                title={p.title}
+              />
             ))}
           </div>
-          <Link href="/publications/" className="text-base text-blue hover:underline mt-6 inline-block">
+          <Link href="/publications/" className="text-base text-blue hover:underline mt-8 inline-block">
             All publications →
           </Link>
         </div>
@@ -135,34 +131,25 @@ export default async function InsightsPage() {
       {/* Recent Posts */}
       {recentPosts.length > 0 && (
         <div className="mb-12">
-          <h2 className="text-sm text-gray-500 uppercase tracking-wide mb-6">From the Blog</h2>
-          <div className="divide-y divide-gray-100">
+          <h2 className="text-sm text-gray-500 uppercase tracking-wide mb-8">From the Blog</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {recentPosts.map((post) => {
               const href = post.external_url || `/blog/${post.slug}/`
               const isExternal = !!post.external_url
+              const dateLabel = post.date && new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
               return (
-                <div key={post.slug} className="py-4">
-                  <Link
-                    href={href}
-                    target={isExternal ? '_blank' : undefined}
-                    rel={isExternal ? 'noopener noreferrer' : undefined}
-                    className="text-base text-black hover:text-blue transition-colors"
-                  >
-                    {post.title}
-                    {isExternal && <span className="text-gray-400 text-xs ml-1.5">↗</span>}
-                  </Link>
-                  {post.summary && (
-                    <p className="text-sm text-gray-500 mt-1 max-w-2xl">{post.summary}</p>
-                  )}
-                  <div className="text-xs text-gray-400 mt-1">
-                    {post.date && new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-                    {isExternal && <span className="ml-2">· protocol.ai</span>}
-                  </div>
-                </div>
+                <RecentTile
+                  key={post.slug}
+                  href={href}
+                  external={isExternal}
+                  eyebrow={[dateLabel, isExternal && 'protocol.ai'].filter(Boolean).join(' · ')}
+                  title={post.title}
+                  description={post.summary}
+                />
               )
             })}
           </div>
-          <Link href="/blog/" className="text-sm text-blue hover:underline mt-6 inline-block">
+          <Link href="/blog/" className="text-base text-blue hover:underline mt-8 inline-block">
             All posts →
           </Link>
         </div>
@@ -178,6 +165,36 @@ function InsightCard({ href, title, description, count }: { href: string; title:
       <h3 className="font-semibold text-lg mb-2">{title}</h3>
       <MarkdownContent content={description} className="text-base text-gray-700 mb-4 [&_p]:mb-0" />
       <span className="text-sm text-gray-400">{count} entries</span>
+    </Link>
+  )
+}
+
+function RecentTile({
+  href,
+  eyebrow,
+  title,
+  description,
+  external,
+}: {
+  href: string
+  eyebrow?: string
+  title: string
+  description?: string
+  external?: boolean
+}) {
+  return (
+    <Link
+      href={href}
+      target={external ? '_blank' : undefined}
+      rel={external ? 'noopener noreferrer' : undefined}
+      className="group flex flex-col h-full border border-gray-200 rounded-lg p-5 hover:border-blue hover:shadow-sm transition-all"
+    >
+      {eyebrow && <div className="text-xs text-gray-400 mb-2">{eyebrow}</div>}
+      <h3 className="text-base font-medium text-black leading-snug group-hover:text-blue transition-colors">
+        {title}
+        {external && <span className="text-gray-400 text-xs ml-1.5">↗</span>}
+      </h3>
+      {description && <p className="text-sm text-gray-500 mt-2 line-clamp-3">{description}</p>}
     </Link>
   )
 }
