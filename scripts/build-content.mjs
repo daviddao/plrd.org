@@ -251,6 +251,7 @@ async function buildBlog() {
       date: b.date || '',
       summary: b.summary || '',
       authors: b.authors || [],
+      areas: b.areas || [],
       external_url: b.external_url || '',
       coverImage,
       html: renderMd(b.content),

@@ -52,7 +52,7 @@ export default async function InsightsPage() {
           eyebrow: [dateLabel, isExternal && 'protocol.ai'].filter(Boolean).join(' · '),
           title: post.title,
           description: post.summary,
-          areas: [],
+          areas: post.areas ?? [],
         }
       }),
     },

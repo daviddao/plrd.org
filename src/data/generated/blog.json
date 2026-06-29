@@ -5,6 +5,7 @@
     "date": "2026-04-08T00:00:00.000Z",
     "summary": "Juan Benet Podcast launches with Max Hodak on neurotech, brain interfaces, Fast R&D, and more.",
     "authors": [],
+    "areas": [],
     "external_url": "https://www.protocol.ai/blog/announcing-juan-benet-podcast-max-hodak/",
     "coverImage": "https://protocol.ai/images/blog/og/juan-benet-podcast-launch.jpg",
     "html": ""
@@ -15,6 +16,9 @@
     "date": "2025-11-07T00:00:00.000Z",
     "summary": "Builders redefining privacy and sovereignty — where control of data, identity, and computation is real, not just promised. Highlights from the teams working at the frontier of digital human rights.",
     "authors": [],
+    "areas": [
+      "digital-human-rights"
+    ],
     "external_url": "https://protocol.ai/blog/data-sovereignty-in-a-privacy-first-future/",
     "coverImage": "https://protocol.ai/images/blog/og/data-sovereignty-in-a-privacy-first-future.jpg",
     "html": ""
@@ -25,6 +29,7 @@
     "date": "2025-10-29T00:00:00.000Z",
     "summary": "Attestation could follow TLS's path: standardize trust signals, clarify roles, and mature tooling. A look at what it would take for remote attestation to become infrastructure-grade.",
     "authors": [],
+    "areas": [],
     "external_url": "https://protocol.ai/blog/attestation-follow-in-the-footsteps-of-tls/",
     "coverImage": "https://protocol.ai/images/blog/og/attestation-follow-in-the-footsteps-of-TLS.png",
     "html": ""
@@ -35,6 +40,7 @@
     "date": "2025-10-03T00:00:00.000Z",
     "summary": "Key takeaways from the Cypherpunk Retreat, where 100 leading builders advanced privacy-tech coordination. Themes included TEEs, MPC, and the next generation of private computation.",
     "authors": [],
+    "areas": [],
     "external_url": "https://protocol.ai/blog/threads-from-the-2025-cypherpunk-retreat/",
     "coverImage": "https://protocol.ai/images/blog/og/cyber-punk-retreat.jpg",
     "html": ""
@@ -45,6 +51,9 @@
     "date": "2025-04-29T00:00:00.000Z",
     "summary": "Exploring how crypto incentives and decentralized infrastructure can accelerate embodied AI and robotics — and why open coordination matters for the next wave of physical AI.",
     "authors": [],
+    "areas": [
+      "ai-robotics"
+    ],
     "external_url": "https://protocol.ai/blog/bit-robot-and-the-future-of-embodied-ai/",
     "coverImage": "https://protocol.ai/images/blog/og/bit-robot.jpg",
     "html": ""
@@ -55,6 +64,7 @@
     "date": "2025-01-29T00:00:00.000Z",
     "summary": "Reflecting on Protocol Labs' 2024 impact across neurotech, digital human rights, AI, and economies — and the vision for 2025 and beyond.",
     "authors": [],
+    "areas": [],
     "external_url": "https://protocol.ai/blog/the-impact-of-our-innovation-network/",
     "coverImage": "https://protocol.ai/images/blog/og/pl-summit-2024.jpg",
     "html": ""
@@ -65,6 +75,9 @@
     "date": "2024-06-05T00:00:00.000Z",
     "summary": "A deep dive into neurotechnology's potential to reshape treatment of brain disorders, augment human cognition, and accelerate our understanding of the brain. Why Protocol Labs is investing in this frontier.",
     "authors": [],
+    "areas": [
+      "neurotech"
+    ],
     "external_url": "https://protocol.ai/blog/the-transformative-power-of-neurotechnology/",
     "coverImage": "https://protocol.ai/images/blog/og/pl-blog-future-neurotech.jpg",
     "html": ""
@@ -75,6 +88,7 @@
     "date": "2024-03-15T00:00:00.000Z",
     "summary": "At a crossroads of technological capability and institutional inadequacy, Protocol Labs articulates its mission: building the infrastructure for a more open, equitable, and resilient internet.",
     "authors": [],
+    "areas": [],
     "external_url": "https://protocol.ai/blog/transcription-pl-vision-driving-a-breakthroughs-in-computing-to-push-humanity-forward/",
     "coverImage": "https://protocol.ai/images/blog/og/pl-vision.png",
     "html": ""
