@@ -160,7 +160,7 @@ function Pill({
       aria-pressed={active}
       className={`rounded-full px-3 py-1 text-[13px] transition-colors ${
         active
-          ? 'bg-blue text-white'
+          ? 'bg-black text-white hover:bg-gray-800 cursor-pointer'
           : disabled
             ? 'bg-gray-50 text-gray-300 cursor-not-allowed'
             : 'bg-gray-100 text-gray-600 hover:bg-gray-200 cursor-pointer'
