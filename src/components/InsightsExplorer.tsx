@@ -55,67 +55,48 @@ export default function InsightsExplorer({
     .map((s) => ({ section: s, shown: s.items.filter((t) => matchArea(t, area)) }))
     .filter((x) => x.shown.length > 0)
 
-  const typeTabs = [{ key: ALL, label: 'All' }, ...sections.map((s) => ({ key: s.key, label: s.label }))]
+  const typeTabs = [{ key: ALL, label: 'All types' }, ...sections.map((s) => ({ key: s.key, label: s.label }))]
   const areaChips = [{ slug: ALL, title: 'All areas' }, ...areas]
   const activeAreaTitle = areas.find((a) => a.slug === area)?.title
 
   return (
     <div>
-      {/* Filter toolbar: focus-area chips (left) + content-type tabs (right) */}
-      <div className="flex flex-col gap-4 border-b border-gray-200 mb-12 sm:flex-row sm:items-end sm:justify-between">
-        <div className="flex flex-wrap gap-2 pb-3">
+      {/* Filter toolbar: focus-area pills | content-type pills */}
+      <div className="flex flex-col gap-4 border-b border-gray-200 mb-12 pb-5 sm:flex-row sm:items-center sm:gap-0">
+        {/* Focus area */}
+        <div className="flex flex-wrap gap-2">
           {areaChips.map((a) => {
-            const isActive = area === a.slug
             const count = areaCount(a.slug)
-            const disabled = a.slug !== ALL && count === 0
             return (
-              <button
+              <Pill
                 key={a.slug}
-                type="button"
-                disabled={disabled}
+                label={a.title}
+                count={a.slug === ALL ? undefined : count}
+                active={area === a.slug}
+                disabled={a.slug !== ALL && count === 0}
                 onClick={() => setArea(a.slug)}
-                aria-pressed={isActive}
-                className={`rounded-full px-3 py-1 text-[13px] transition-colors ${
-                  isActive
-                    ? 'bg-blue text-white'
-                    : disabled
-                      ? 'bg-gray-50 text-gray-300 cursor-not-allowed'
-                      : 'bg-gray-100 text-gray-600 hover:bg-gray-200 cursor-pointer'
-                }`}
-              >
-                {a.title}
-                {a.slug !== ALL && (
-                  <span className={`ml-1.5 ${isActive ? 'text-white/70' : 'text-gray-400'}`}>{count}</span>
-                )}
-              </button>
+              />
             )
           })}
         </div>
 
-        <div className="flex flex-wrap items-end justify-end gap-x-7 gap-y-1">
+        {/* Divider between the two filter dimensions */}
+        <div className="hidden sm:block self-stretch w-px bg-gray-300 mx-5" aria-hidden="true" />
+        <div className="h-px w-full bg-gray-200 sm:hidden" aria-hidden="true" />
+
+        {/* Content type */}
+        <div className="flex flex-wrap gap-2">
           {typeTabs.map((f) => {
-            const isActive = type === f.key
             const count = typeCount(f.key)
-            const disabled = f.key !== ALL && count === 0
             return (
-              <button
+              <Pill
                 key={f.key}
-                type="button"
-                disabled={disabled}
+                label={f.label}
+                count={f.key === ALL ? undefined : count}
+                active={type === f.key}
+                disabled={f.key !== ALL && count === 0}
                 onClick={() => setType(f.key)}
-                aria-pressed={isActive}
-                className={`relative -mb-px pb-3 text-[15px] transition-colors ${
-                  isActive
-                    ? 'text-black font-medium'
-                    : disabled
-                      ? 'text-gray-300 cursor-not-allowed'
-                      : 'text-gray-400 hover:text-gray-700 cursor-pointer'
-                }`}
-              >
-                {f.label}
-                {f.key !== ALL && <span className="ml-1.5 text-xs text-gray-400">{count}</span>}
-                {isActive && <span className="absolute inset-x-0 -bottom-px h-0.5 bg-blue" />}
-              </button>
+              />
             )
           })}
         </div>
@@ -155,6 +136,41 @@ export default function InsightsExplorer({
         ))
       )}
     </div>
+  )
+}
+
+function Pill({
+  label,
+  count,
+  active,
+  disabled,
+  onClick,
+}: {
+  label: string
+  count?: number
+  active: boolean
+  disabled?: boolean
+  onClick: () => void
+}) {
+  return (
+    <button
+      type="button"
+      disabled={disabled}
+      onClick={onClick}
+      aria-pressed={active}
+      className={`rounded-full px-3 py-1 text-[13px] transition-colors ${
+        active
+          ? 'bg-blue text-white'
+          : disabled
+            ? 'bg-gray-50 text-gray-300 cursor-not-allowed'
+            : 'bg-gray-100 text-gray-600 hover:bg-gray-200 cursor-pointer'
+      }`}
+    >
+      {label}
+      {typeof count === 'number' && (
+        <span className={`ml-1.5 ${active ? 'text-white/70' : 'text-gray-400'}`}>{count}</span>
+      )}
+    </button>
   )
 }
 
