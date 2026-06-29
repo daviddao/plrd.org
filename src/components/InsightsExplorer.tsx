@@ -36,7 +36,7 @@ export default function InsightsExplorer({ sections }: { sections: InsightSectio
   return (
     <div>
       {/* Filter tabs */}
-      <div className="flex flex-wrap items-end gap-x-7 gap-y-1 border-b border-gray-200 mb-12">
+      <div className="flex flex-wrap items-end justify-end gap-x-7 gap-y-1 border-b border-gray-200 mb-12">
         {filters.map((f) => {
           const isActive = active === f.key
           return (
