@@ -5,6 +5,7 @@ import MeasuringQuestions from '@/components/MeasuringQuestions'
 import { fetchSimocracyStats } from '@/lib/simocracy'
 import { fetchGainforestStats } from '@/lib/gainforest'
 import { fetchGlowStats } from '@/lib/glow'
+import { LOGIC_MODEL } from '@/lib/inflection-points'
 
 // Pull live output metrics for the Economies & Governance inflection points from
 // the same sources as the FA2 live dashboard. These are Q3 OUTPUTS (the work
@@ -58,15 +59,6 @@ export const metadata: Metadata = {
     'How we measure whether PL R&D’s work matters: the inflection points we have pre-registered across every focus area, and how we will know if they happen.',
 }
 
-// The logic-model chain: planned work on the left, intended results on the right.
-const LOGIC_MODEL = [
-  { label: 'Inputs', body: 'The resources we commit — funding, teams, convenings, standards.' },
-  { label: 'Activities', body: 'What we do with them — seeding teams, building primitives, setting standards.' },
-  { label: 'Outputs', body: 'The volume of work produced — teams funded, deployments, papers, ventures.' },
-  { label: 'Outcomes', body: 'The changes that follow — adoption, capital inflows, new entrants.' },
-  { label: 'Impact', body: 'The lasting shift in the system — an inflection point that holds.' },
-]
-
 export default async function ImpactPage() {
   const liveOutputs = await fetchLiveOutputs()
   return (
@@ -94,10 +86,8 @@ export default async function ImpactPage() {
             Inflection points we are tracking
           </h2>
           <p className="text-base text-gray-600 leading-relaxed max-w-3xl mb-8">
-            Select a focus area. Each card shows the pre-registered threshold (did it happen), the
-            cascade we expect if it matters, and the PL contribution we would trace. Pre-registering
-            the threshold now is what keeps us honest later — the answer in two years should be a
-            reading, not an argument.
+            Select a focus area. Each card shows the defined threshold (did it happen), the cascade we
+            expect if it matters, and the PL contribution we would trace.
           </p>
           <ImpactDashboard liveOutputs={liveOutputs} />
         </div>
@@ -113,15 +103,23 @@ export default async function ImpactPage() {
           system — not just activity or output.
         </p>
 
-        {/* Logic-model chain */}
+        <p className="text-sm text-gray-500 leading-relaxed max-w-3xl mb-6">
+          Each inflection point instantiates this chain. On its card, the Q3 detail tracks our
+          inputs, activities, and outputs; the field meter tracks the outcomes and impact they aim
+          at.
+        </p>
+
+        {/* Logic-model chain — labels styled like the detail cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-px bg-gray-200 rounded-xl overflow-hidden border border-gray-200">
           {LOGIC_MODEL.map((stage, i) => (
-            <div key={stage.label} className="bg-white px-5 py-5">
+            <div key={stage.key} className="bg-white px-5 py-5">
               <div className="flex items-center gap-2 mb-2">
-                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-100 text-xs font-semibold text-gray-500">
+                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-100 text-xs font-semibold text-gray-400">
                   {i + 1}
                 </span>
-                <span className="text-sm font-semibold text-black">{stage.label}</span>
+                <span className="text-[11px] font-semibold uppercase tracking-wide text-gray-400">
+                  {stage.label}
+                </span>
               </div>
               <p className="text-sm text-gray-500 leading-snug">{stage.body}</p>
             </div>
@@ -131,11 +129,6 @@ export default async function ImpactPage() {
           <span>← Our planned work</span>
           <span>Our intended results →</span>
         </div>
-        <p className="text-sm text-gray-500 leading-relaxed max-w-3xl mt-4">
-          Each inflection point instantiates this chain. On its card, the Q3 detail tracks our
-          inputs, activities, and outputs; the field meter tracks the outcomes and impact they aim
-          at.
-        </p>
 
         {/* The three questions — pick one to read its detail */}
         <p className="text-base text-gray-600 leading-relaxed max-w-3xl mt-10 mb-6">
