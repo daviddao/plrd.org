@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
 import { talks } from '@/lib/content'
 import Breadcrumb from '@/components/Breadcrumb'
 import EditPageButton from '@/components/EditPageButton'
 import { PageEditHistoryByline } from '@/components/EditHistoryByline'
 import MarkdownContent from '@/components/MarkdownContent'
+import { ContentTile, ContentTileGrid } from '@/components/ContentTile'
 import { fetchPage, getSection } from '@/lib/indexer'
 
 export const metadata: Metadata = { title: 'Talks' }
@@ -34,21 +34,20 @@ export default async function TalksPage() {
         <MarkdownContent content={heroSubtitle} className="relative z-10 text-gray-600 leading-relaxed max-w-xl" />
       </div>
 
-      {/* List */}
-      <div className="divide-y divide-gray-200">
+      {/* Tiles */}
+      <ContentTileGrid>
         {talks.map((talk) => (
-          <div key={talk.slug} className="py-4">
-            <Link href={`/talks/${talk.slug}/`} className="text-black hover:text-blue font-medium transition-colors">
-              {talk.title}
-            </Link>
-            <div className="text-sm text-gray-500 mt-1">
-              {talk.venue}
-              {talk.venue_location && <> &middot; {talk.venue_location}</>}
-              {talk.date && <> &middot; {new Date(talk.date).getFullYear()}</>}
-            </div>
-          </div>
+          <ContentTile
+            key={talk.slug}
+            href={`/talks/${talk.slug}/`}
+            eyebrow={[talk.venue, talk.venue_location, talk.date && new Date(talk.date).getFullYear()]
+              .filter(Boolean)
+              .join(' · ')}
+            title={talk.title}
+            description={talk.abstract}
+          />
         ))}
-      </div>
+      </ContentTileGrid>
       <EditPageButton rkey="talks" />
     </div>
   )

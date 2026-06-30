@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
 import { tutorials } from '@/lib/content'
 import Breadcrumb from '@/components/Breadcrumb'
 import EditPageButton from '@/components/EditPageButton'
 import { PageEditHistoryByline } from '@/components/EditHistoryByline'
 import MarkdownContent from '@/components/MarkdownContent'
+import { ContentTile, ContentTileGrid } from '@/components/ContentTile'
 import { fetchPage, getSection } from '@/lib/indexer'
 
 export const metadata: Metadata = { title: 'Tutorials' }
@@ -34,17 +34,18 @@ export default async function TutorialsPage() {
         <MarkdownContent content={heroSubtitle} className="relative z-10 text-gray-600 leading-relaxed max-w-xl" />
       </div>
 
-      {/* List */}
-      <div className="divide-y divide-gray-200">
+      {/* Tiles */}
+      <ContentTileGrid>
         {tutorials.map((t) => (
-          <div key={t.slug} className="py-4">
-            <Link href={`/tutorials/${t.slug}/`} className="text-black hover:text-blue font-medium transition-colors">
-              {t.title || t.slug}
-            </Link>
-            {t.summary && <p className="text-sm text-gray-500 mt-1">{t.summary}</p>}
-          </div>
+          <ContentTile
+            key={t.slug}
+            href={`/tutorials/${t.slug}/`}
+            eyebrow={t.date ? String(new Date(t.date).getFullYear()) : undefined}
+            title={t.title || t.slug}
+            description={t.summary}
+          />
         ))}
-      </div>
+      </ContentTileGrid>
       <EditPageButton rkey="tutorials" />
     </div>
   )

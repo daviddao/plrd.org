@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import { ContentTile } from '@/components/ContentTile'
 
 export type InsightTile = {
   key: string
@@ -125,8 +126,8 @@ export default function InsightsExplorer({
           >
             <h2 className="text-sm text-gray-500 uppercase tracking-wide mb-8">{section.heading}</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-              {shown.slice(0, DISPLAY_LIMIT).map(({ key, ...tile }) => (
-                <RecentTile key={key} {...tile} />
+              {shown.slice(0, DISPLAY_LIMIT).map(({ key, areas: _areas, ...tile }) => (
+                <ContentTile key={key} {...tile} />
               ))}
             </div>
             <Link href={section.allHref} className="text-base text-blue hover:underline mt-8 inline-block">
@@ -174,26 +175,3 @@ function Pill({
   )
 }
 
-function RecentTile({
-  href,
-  eyebrow,
-  title,
-  description,
-  external,
-}: Omit<InsightTile, 'key' | 'areas'>) {
-  return (
-    <Link
-      href={href}
-      target={external ? '_blank' : undefined}
-      rel={external ? 'noopener noreferrer' : undefined}
-      className="group flex flex-col h-full border border-gray-200 rounded-lg p-5 hover:border-blue hover:shadow-sm transition-all"
-    >
-      {eyebrow && <div className="text-xs text-gray-400 mb-2">{eyebrow}</div>}
-      <h3 className="text-base font-medium text-black leading-snug group-hover:text-blue transition-colors">
-        {title}
-        {external && <span className="text-gray-400 text-xs ml-1.5">↗</span>}
-      </h3>
-      {description && <p className="text-sm text-gray-500 mt-2 line-clamp-3">{description}</p>}
-    </Link>
-  )
-}

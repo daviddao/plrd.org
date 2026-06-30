@@ -1,10 +1,10 @@
-import Link from 'next/link'
 import { blogPosts } from '@/lib/content'
 import { formatDate } from '@/lib/format'
 import Breadcrumb from '@/components/Breadcrumb'
 import EditPageButton from '@/components/EditPageButton'
 import { PageEditHistoryByline } from '@/components/EditHistoryByline'
 import MarkdownContent from '@/components/MarkdownContent'
+import { ContentTile, ContentTileGrid } from '@/components/ContentTile'
 import { fetchAtproPosts, fetchPage, getSection } from '@/lib/indexer'
 
 const FALLBACK_HERO_TITLE = 'Blog'
@@ -37,62 +37,43 @@ export default async function BlogPage() {
 
       {/* Blog posts */}
       {blogPosts.length > 0 && (
-        <div className="divide-y divide-gray-200">
+        <ContentTileGrid>
           {blogPosts.map((post) => {
             const href = post.external_url || `/blog/${post.slug}/`
             const isExternal = !!post.external_url
             return (
-              <div key={post.slug} className="py-4">
-                <div className="flex items-baseline gap-3 mb-1">
-                  {isExternal ? (
-                    <span className="text-xs text-gray-400">protocol.ai</span>
-                  ) : (
-                    <span className="text-xs text-gray-400">PL R&D</span>
-                  )}
-                  <span className="text-xs text-gray-400">{formatDate(post.date)}</span>
-                </div>
-                <Link
-                  href={href}
-                  target={isExternal ? '_blank' : undefined}
-                  rel={isExternal ? 'noopener noreferrer' : undefined}
-                  className="text-black font-medium leading-snug hover:text-blue transition-colors"
-                >
-                  {post.title}
-                  {isExternal && <span className="text-gray-400 text-xs ml-1.5">↗</span>}
-                </Link>
-                {post.summary && (
-                  <p className="text-sm text-gray-600 mt-1">{post.summary}</p>
-                )}
-              </div>
+              <ContentTile
+                key={post.slug}
+                href={href}
+                external={isExternal}
+                eyebrow={[isExternal ? 'protocol.ai' : 'PL R&D', formatDate(post.date)].filter(Boolean).join(' · ')}
+                title={post.title}
+                description={post.summary}
+              />
             )
           })}
-        </div>
+        </ContentTileGrid>
       )}
 
       {atprotoPosts.length > 0 && (
-        <div className="divide-y divide-gray-200 mt-8">
-          {atprotoPosts.map((post) => {
-            const href = post.path || `/blog/${post.rkey}`
-            const tag = post.tags?.find(t => t !== "blog") || "blog"
-            return (
-              <div key={post.rkey} className="py-4">
-                <div className="flex items-baseline gap-3 mb-1">
-                  <span className="text-xs text-gray-400">PL R&D</span>
-                  <span className="text-xs text-gray-400">{formatDate(post.publishedAt)}</span>
-                  {tag !== "blog" && <span className="text-xs text-gray-400 capitalize">{tag}</span>}
-                </div>
-                <a
+        <div className="mt-5">
+          <ContentTileGrid>
+            {atprotoPosts.map((post) => {
+              const href = post.path || `/blog/${post.rkey}`
+              const tag = post.tags?.find(t => t !== "blog") || "blog"
+              return (
+                <ContentTile
+                  key={post.rkey}
                   href={href}
-                  className="text-black font-medium leading-snug hover:text-blue transition-colors"
-                >
-                  {post.title}
-                </a>
-                {post.description && (
-                  <p className="text-sm text-gray-600 mt-1">{post.description}</p>
-                )}
-              </div>
-            )
-          })}
+                  eyebrow={['PL R&D', formatDate(post.publishedAt), tag !== "blog" ? tag : '']
+                    .filter(Boolean)
+                    .join(' · ')}
+                  title={post.title}
+                  description={post.description ?? undefined}
+                />
+              )
+            })}
+          </ContentTileGrid>
         </div>
       )}
       <EditPageButton rkey="blog" />
