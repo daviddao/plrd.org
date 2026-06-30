@@ -338,13 +338,6 @@ function InflectionModal({
           <Section q="Q3" label="Did our work make it happen? — PL contribution" accent={fa.accent}>
             <div className="mb-3">
               <RoleChips roles={point.roles} />
-              <ul className="mt-2 space-y-1">
-                {PL_ROLE_ORDER.filter((r) => point.roles.includes(r)).map((r) => (
-                  <li key={r} className="text-xs leading-relaxed text-gray-500">
-                    <span className="font-medium text-gray-700">{ROLE_META[r].label}:</span> {ROLE_META[r].description}
-                  </li>
-                ))}
-              </ul>
             </div>
             <div className="space-y-2.5">
               <LogicRow label="Inputs">{point.contribution.inputs}</LogicRow>
