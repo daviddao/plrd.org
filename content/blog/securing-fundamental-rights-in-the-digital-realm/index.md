@@ -98,7 +98,7 @@ The step-change comes when serious AI capability no longer requires a single pro
 
 ## Building the field
 
-The next few years will decide whether these freedoms are quietly curtailed or deliberately extended. Human freedom can be hollowed out when infrastructure is centralized, surveilled, or switched off, and PL R&D focuses on the root system a free digital society stands on. We do not build every piece; we connect them, and aim our toolkit, field-building communications, convenings, grants, venture support, and policy and standards work, at the blockers specific to this field. (That toolkit is described in the [PL R&D Overview](https://docs.google.com/document/d/1APrgJhsCZ3ALpc4V0sgwKMc1298g7lLP6HKUsrIuGEM/edit?tab=t.0#heading=h.4cnrfuw6zun1).) PL's foundational primitives here, IPFS, libp2p, and content-addressed data, are among the strongest in the portfolio.
+The next few years will decide whether these freedoms are quietly curtailed or deliberately extended. Human freedom can be hollowed out when infrastructure is centralized, surveilled, or switched off, and PL R&D focuses on the root system a free digital society stands on. We do not build every piece; we connect them, and aim our toolkit, field-building communications, convenings, grants, venture support, and policy and standards work, at the blockers specific to this field. (That toolkit is described in the PL R&D Overview.) PL's foundational primitives here, IPFS, libp2p, and content-addressed data, are among the strongest in the portfolio.
 
 ## Get involved
 
