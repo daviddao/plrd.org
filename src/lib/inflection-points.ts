@@ -20,8 +20,11 @@
 
 export type InflectionStatus = 'watching' | 'early-signal' | 'tripped'
 
-/** PL's pre-registered role on the critical path — a claim to be evidenced, not a credit score. */
-export type ContributionLevel = 'substrate' | 'originator' | 'funder-convener'
+/** PL's pre-registered role(s) on the critical path — claims to be evidenced, not a credit score. */
+export type PLRole = 'infrastructure' | 'legibility' | 'connection' | 'capital' | 'translation' | 'permission'
+
+/** Canonical display order for role pills, so cards read consistently. */
+export const PL_ROLE_ORDER: PLRole[] = ['infrastructure', 'legibility', 'connection', 'capital', 'translation', 'permission']
 
 /**
  * Q3 contribution, structured along the planned-work side of the logic model.
@@ -54,8 +57,8 @@ export type InflectionPoint = {
   cascade: string
   /** Q3 — PL contribution to trace, as inputs -> activities -> outputs. */
   contribution: Contribution
-  /** Q3, summarized as PL's role on the critical path. */
-  contributionLevel: ContributionLevel
+  /** Q3, summarized as the PL role(s) on the critical path — the instruments we bring. */
+  roles: PLRole[]
   /** Field-progress lifecycle state. All start 'watching' — none reached as of 2026. */
   status: InflectionStatus
   /** Optional live activity from PL-backed teams — strictly Q3 evidence, never Q1 progress. */
@@ -132,18 +135,30 @@ export const STATUS_META: Record<InflectionStatus, { label: string; description:
   },
 }
 
-export const CONTRIBUTION_META: Record<ContributionLevel, { label: string; description: string }> = {
-  substrate: {
-    label: 'Substrate',
-    description: 'PL-built technology is the underlying rail this would run on.',
+export const ROLE_META: Record<PLRole, { label: string; description: string }> = {
+  infrastructure: {
+    label: 'Infrastructure',
+    description: 'The open, neutral rail this runs on did not exist — PL builds and maintains it (e.g. libp2p / IPFS / Filecoin).',
   },
-  originator: {
-    label: 'Originator',
-    description: 'PL originated the mechanism, standard, or benchmark in play.',
+  legibility: {
+    label: 'Legibility',
+    description: 'The field lacked a shared map — PL increases visibility and navigability through roadmaps, taxonomies, benchmarks, and written artifacts.',
   },
-  'funder-convener': {
-    label: 'Funder & convener',
-    description: 'PL funds the teams on the critical path and convenes the field.',
+  connection: {
+    label: 'Connection',
+    description: 'Progress was blocked by too few connections — PL convenes the right people (dinners, retreats, residencies, hackathons).',
+  },
+  capital: {
+    label: 'Capital',
+    description: 'Pre-commercial work needed patient funding — PL runs grants and prizes and helps peer funders deploy theirs.',
+  },
+  translation: {
+    label: 'Translation',
+    description: 'The work was ready to leave the lab — PL helps convert it into ventures, pilots, and deployments.',
+  },
+  permission: {
+    label: 'Permission',
+    description: 'The rules did not yet permit or recognize the technology — PL engages standards, policy, and regulatory pathways.',
   },
 }
 
@@ -162,7 +177,7 @@ export const INFLECTION_POINTS: InflectionPoint[] = [
       activities: 'Maintaining the substrate, funding teams, and contributing to interoperability standards.',
       outputs: 'libp2p / IPFS deployments and the funded comms and messaging teams building on them.',
     },
-    contributionLevel: 'substrate',
+    roles: ['infrastructure', 'capital'],
     status: 'watching',
   },
   {
@@ -178,7 +193,7 @@ export const INFLECTION_POINTS: InflectionPoint[] = [
       activities: 'Convening identity-protocol teams and seeding / funding portable-credential work.',
       outputs: 'The identity and credential initiatives PL has seeded or funded.',
     },
-    contributionLevel: 'funder-convener',
+    roles: ['connection', 'capital'],
     status: 'watching',
   },
   {
@@ -194,7 +209,7 @@ export const INFLECTION_POINTS: InflectionPoint[] = [
       activities: 'Providing the content-addressing substrate and backing provenance / verifiable-compute teams.',
       outputs: 'Content-addressed provenance tooling and the PL-backed teams building it.',
     },
-    contributionLevel: 'substrate',
+    roles: ['infrastructure', 'capital'],
     status: 'watching',
   },
   {
@@ -210,7 +225,7 @@ export const INFLECTION_POINTS: InflectionPoint[] = [
       activities: 'Building open compute and storage rails and bridging them with identity for agents.',
       outputs: 'Filecoin and the open-compute portfolio; integrations across storage, compute, and identity.',
     },
-    contributionLevel: 'substrate',
+    roles: ['infrastructure', 'connection', 'capital'],
     status: 'watching',
   },
 
@@ -228,7 +243,7 @@ export const INFLECTION_POINTS: InflectionPoint[] = [
       activities: 'Writing standards and playbooks, convening sovereigns with builders, and funding DPI primitives.',
       outputs: 'Published playbooks, convened sovereign–builder cohorts, and funded DPI primitives.',
     },
-    contributionLevel: 'funder-convener',
+    roles: ['connection', 'capital', 'permission'],
     status: 'watching',
   },
   {
@@ -244,7 +259,7 @@ export const INFLECTION_POINTS: InflectionPoint[] = [
       activities: 'Supporting mechanism teams and convening government teams with tool teams.',
       outputs: 'Simocracy and broad-listening tools, and the government–tool convenings around them.',
     },
-    contributionLevel: 'funder-convener',
+    roles: ['connection', 'capital'],
     status: 'watching',
     liveEvidence: {
       label: 'Simocracy governance simulation — live participation',
@@ -265,7 +280,7 @@ export const INFLECTION_POINTS: InflectionPoint[] = [
       activities: 'Originating allocation mechanisms, building evidence and standards, and converting work into ventures.',
       outputs: 'Hypercerts, Funding the Commons, and the ventures spun out of this lineage.',
     },
-    contributionLevel: 'originator',
+    roles: ['infrastructure', 'capital', 'translation'],
     status: 'watching',
   },
   {
@@ -281,7 +296,7 @@ export const INFLECTION_POINTS: InflectionPoint[] = [
       activities: 'Backing MRV teams and convening benchmark and standards work for outcome verification.',
       outputs: 'GainForest, Glow, and the verification benchmarks and standards they inform.',
     },
-    contributionLevel: 'funder-convener',
+    roles: ['legibility', 'connection', 'capital'],
     status: 'watching',
     liveEvidence: {
       label: 'GainForest & Glow — live verification activity',
@@ -304,7 +319,7 @@ export const INFLECTION_POINTS: InflectionPoint[] = [
       activities: 'Defining the BCI component-ecosystem standard and convening regulators, makers, and developers.',
       outputs: 'A draft BCI component / API standard and the regulator–maker–developer convenings around it.',
     },
-    contributionLevel: 'originator',
+    roles: ['connection', 'permission'],
     status: 'watching',
   },
   {
@@ -320,7 +335,7 @@ export const INFLECTION_POINTS: InflectionPoint[] = [
       activities: 'Bridging AI-lab and comp-neuro talent and building neural-data infrastructure and norms.',
       outputs: 'The PL Neuro talent network and the neural-data infrastructure and norms it seeds.',
     },
-    contributionLevel: 'funder-convener',
+    roles: ['infrastructure', 'connection', 'capital'],
     status: 'watching',
   },
   {
@@ -336,7 +351,7 @@ export const INFLECTION_POINTS: InflectionPoint[] = [
       activities: 'Funding neuromorphic research and demos and defining the efficiency benchmark.',
       outputs: 'PL-funded NeuroAI demos and the energy-efficiency benchmarks that frame the target.',
     },
-    contributionLevel: 'funder-convener',
+    roles: ['legibility', 'capital'],
     status: 'watching',
   },
   {
@@ -352,7 +367,7 @@ export const INFLECTION_POINTS: InflectionPoint[] = [
       activities: 'Defining the WBE benchmark, running connectomics workshops, and engineering a reference demo.',
       outputs: 'The WBE benchmark, connectomics throughput targets, and a PL-engineered demo.',
     },
-    contributionLevel: 'originator',
+    roles: ['legibility', 'connection'],
     status: 'watching',
   },
 ]
