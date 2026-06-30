@@ -126,7 +126,7 @@ function Tab({
   )
 }
 
-/** Field-progress lifecycle meter (Q1 -> Q2). Colored in the focus-area accent. */
+/** Field-progress lifecycle meter (Q1 & Q2). Colored in the focus-area accent. */
 function FieldMeter({
   status,
   accent,
@@ -173,7 +173,7 @@ function RoleChips({ roles, eyebrow = true }: { roles: PLRole[]; eyebrow?: boole
         <span
           key={r}
           className="inline-flex items-center rounded-full border border-dark-blue/20 bg-dark-blue/[0.06] px-2.5 py-1 text-xs font-medium text-dark-blue"
-          title={ROLE_META[r].description}
+          title={`${ROLE_META[r].label} — ${ROLE_META[r].description}`}
         >
           {ROLE_META[r].label}
         </span>
@@ -323,17 +323,17 @@ function InflectionModal({
             </div>
             <FieldMeter status={point.status} accent={fa.accent} />
             <p className="mt-3 text-xs leading-relaxed text-gray-500">
-              The field axis (Q1 → Q2) is tracked independently of PL&rsquo;s contribution. It can
+              The field axis (Q1 & Q2) is tracked independently of PL&rsquo;s contribution. It can
               advance with little or no PL involvement.
             </p>
           </div>
 
           {/* Three questions — each tagged with the logic-model stage it maps to */}
-          <Section q="Q1" label="Did it happen? — the signal" accent={fa.accent}>
-            <LogicRow label="Impact">{point.signal}</LogicRow>
+          <Section q="Q1" label="Did it matter? — the cascade" accent={fa.accent}>
+            <LogicRow label="Impact">{point.cascade}</LogicRow>
           </Section>
-          <Section q="Q2" label="Did it matter? — the cascade" accent={fa.accent}>
-            <LogicRow label="Outcome">{point.cascade}</LogicRow>
+          <Section q="Q2" label="Did it happen? — the signal" accent={fa.accent}>
+            <LogicRow label="Outcome">{point.signal}</LogicRow>
           </Section>
           <Section q="Q3" label="Did our work make it happen? — PL contribution" accent={fa.accent}>
             <div className="mb-3">
@@ -350,7 +350,7 @@ function InflectionModal({
             </p>
           </Section>
 
-          {/* Live evidence (Q3 only — never a Q1 reading) */}
+          {/* Live evidence (Q3 only — never a Q2 reading) */}
           {point.liveEvidence && (
             <a
               href={point.liveEvidence.href}
