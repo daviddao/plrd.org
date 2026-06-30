@@ -170,12 +170,16 @@ function RoleChips({ roles, eyebrow = true }: { roles: PLRole[]; eyebrow?: boole
         <span className="text-[10px] uppercase tracking-wide text-dark-blue/60">PL role</span>
       )}
       {ordered.map((r) => (
-        <span
-          key={r}
-          className="inline-flex items-center rounded-full border border-dark-blue/20 bg-dark-blue/[0.06] px-2.5 py-1 text-xs font-medium text-dark-blue"
-          title={`${ROLE_META[r].label} — ${ROLE_META[r].description}`}
-        >
-          {ROLE_META[r].label}
+        <span key={r} className="group/role relative inline-flex">
+          <span className="inline-flex cursor-help items-center rounded-full border border-dark-blue/20 bg-dark-blue/[0.06] px-2.5 py-1 text-xs font-medium text-dark-blue">
+            {ROLE_META[r].label}
+          </span>
+          <span
+            role="tooltip"
+            className="pointer-events-none absolute bottom-full left-0 z-50 mb-2 w-60 rounded-lg bg-gray-900 px-3 py-2 text-left text-xs font-normal normal-case leading-relaxed text-white opacity-0 shadow-lg transition-opacity duration-150 group-hover/role:opacity-100"
+          >
+            <span className="font-semibold">{ROLE_META[r].label}</span> — {ROLE_META[r].description}
+          </span>
         </span>
       ))}
     </span>
