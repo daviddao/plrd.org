@@ -1,11 +1,11 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
 import { publications, authors } from '@/lib/content'
 import { slugToName } from '@/lib/format'
 import Breadcrumb from '@/components/Breadcrumb'
 import EditPageButton from '@/components/EditPageButton'
 import { PageEditHistoryByline } from '@/components/EditHistoryByline'
 import MarkdownContent from '@/components/MarkdownContent'
+import { ContentTile, ContentTileGrid } from '@/components/ContentTile'
 import { fetchPage, getSection } from '@/lib/indexer'
 
 function resolveAuthorName(slug: string): string {
@@ -39,21 +39,18 @@ export default async function PublicationsPage() {
         <MarkdownContent content={heroSubtitle} className="relative z-10 text-gray-600 leading-relaxed max-w-xl" />
       </div>
 
-      {/* List */}
-      <div className="divide-y divide-gray-200">
+      {/* Tiles */}
+      <ContentTileGrid>
         {publications.map((pub) => (
-          <div key={pub.slug} className="py-4">
-            <Link href={`/publications/${pub.slug}/`} className="text-black hover:text-blue font-medium transition-colors">
-              {pub.title}
-            </Link>
-            <div className="text-sm text-gray-500 mt-1">
-              {pub.authors?.map(resolveAuthorName).join(', ')}
-              {pub.venue && <> &middot; {pub.venue}</>}
-              {pub.date && <> &middot; {new Date(pub.date).getFullYear()}</>}
-            </div>
-          </div>
+          <ContentTile
+            key={pub.slug}
+            href={`/publications/${pub.slug}/`}
+            eyebrow={[pub.venue, pub.date && new Date(pub.date).getFullYear()].filter(Boolean).join(' · ')}
+            title={pub.title}
+            description={pub.authors?.map(resolveAuthorName).join(', ')}
+          />
         ))}
-      </div>
+      </ContentTileGrid>
       <EditPageButton rkey="publications" />
     </div>
   )
