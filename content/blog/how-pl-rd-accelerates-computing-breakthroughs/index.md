@@ -5,8 +5,6 @@ summary: "The first in a series: how PL R&D moves frontier ideas from open resea
 authors:
   - lukas-bresser
 ---
-*For discussion*
-
 ## Why we exist and what we do
 
 Computing is reshaping various dimensions of human agency. PL R&D exists to expand and safeguard human freedom, coordination, intelligence, and cognition by accelerating computing breakthroughs.
@@ -15,10 +13,12 @@ Our R&D pipeline aims to move frontier ideas from open research through producti
 
 Our work spans four *focus areas*:
 
-* **Digital Human Rights (freedom)**: the digital foundations that fundamental rights now depend on
-* **Programmable Economies & Governance (coordination)**: the open infrastructure that enables coordination among states, institutions, and individuals
-* **Safe AI & Robotics (intelligence)**: the frontier capabilities that keep machine intelligence under human direction
-* **Neurotechnology (cognition)**: the interface that lets human cognition expand by connecting brains with the rest of computing
+<div class="fa-grid">
+<div class="fa-tile" style="--fa-accent:#1982F4"><div class="fa-eyebrow">Freedom</div><div class="fa-title">Digital Human Rights</div><p>The digital foundations that fundamental rights now depend on.</p></div>
+<div class="fa-tile" style="--fa-accent:#12bfdf"><div class="fa-eyebrow">Coordination</div><div class="fa-title">Programmable Economies &amp; Governance</div><p>The open infrastructure that enables coordination among states, institutions, and individuals.</p></div>
+<div class="fa-tile" style="--fa-accent:#3966FE"><div class="fa-eyebrow">Intelligence</div><div class="fa-title">Safe AI &amp; Robotics</div><p>The frontier capabilities that keep machine intelligence under human direction.</p></div>
+<div class="fa-tile" style="--fa-accent:#E51A66"><div class="fa-eyebrow">Cognition</div><div class="fa-title">Neurotechnology</div><p>The interface that lets human cognition expand by connecting brains with the rest of computing.</p></div>
+</div>
 
 We break down each frontier field into no more than four *opportunity spaces*: tight clusters of technology and practice that often share expert networks, infrastructure, and bottlenecks.
 
@@ -37,15 +37,16 @@ Once the bottlenecks are named, the toolkit that releases them is plural by desi
 * **Grants and prizes** (e.g., open RFPs, retroactive funding, breakthrough prizes), when the bottleneck is funding and other resources (incl. ideas): pre-commercial work that no for-profit will reach in time needs capital that does not demand a near-term return; we run our own programs and help peer funders deploy theirs, pairing our field-mapping with their capital scale.
 * **Venture conversion** (e.g., spinouts, founder matching, introductions to PL Capital, pilot projects), when the bottleneck is no longer research but translation into (commercial) existence: when the work is ready to leave the lab, we help teams find the capital, talent, and discipline that only a company can provide and/or deploy pilot projects.
 * **Policy, standards & regulatory engagement** (e.g., participation in standards bodies, regulatory sandboxes, procurement-pathway and model-framework design, agency and multilateral partnerships), when the bottleneck is that the rules do not yet permit, recognize, or know how to engage with new technology: we work inside the rule-making processes themselves to turn "not allowed yet" into a pathway others can follow.
-* **Other:** tbd
 
 ## How we measure our success
 
 Three questions will measure the success of our work over the coming years:
 
-1. Did the inflection points happen?
-2. Did they matter?
-3. Did our work meaningfully make them/other progress happen?
+<div class="q-grid">
+<div class="q-card"><span class="q-num">1</span><div class="q-q">Did the inflection points happen?</div><p>A pre-registered, externally observable threshold &mdash; a simple yes/no and a date.</p></div>
+<div class="q-card"><span class="q-num">2</span><div class="q-q">Did they matter?</div><p>The second-order effects we expected them to unlock &mdash; named in advance, then watched for.</p></div>
+<div class="q-card"><span class="q-num">3</span><div class="q-q">Did our work make it happen?</div><p>Tracing PL&rsquo;s contribution on the critical path, and reasoning honestly about the counterfactual.</p></div>
+</div>
 
 We are committed to [publishing our progress](https://www.plrd.org/areas/economies-governance/impact/report-2025/).
 
