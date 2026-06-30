@@ -89,7 +89,7 @@ export default async function FA2MainPage() {
         {/* Hero render with hover hexagon-pixelation lens */}
         <AreaHeroGraphic slug="economies-governance" className="absolute right-0 top-1/2 -translate-y-1/2 hidden sm:block w-[300px] md:w-[380px] lg:w-[460px] select-none" />
 
-        <div className="flex items-center gap-4 sm:items-start sm:gap-5 mb-6">
+        <div className="flex items-center gap-4 sm:gap-5 mb-6">
           <AreaIcon type="hexagon" className="w-14 h-14 lg:w-16 lg:h-16 shrink-0 text-blue/70" />
           <h1 className="relative z-10 text-2xl lg:text-[44px] font-semibold leading-[1.1] tracking-tight max-w-xl">
             Economies & Governance

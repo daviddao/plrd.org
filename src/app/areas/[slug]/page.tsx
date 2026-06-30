@@ -147,7 +147,7 @@ export default async function AreaPage({ params }: Props) {
             <AreaGeo slug={slug} />
           </>
         )}
-        <div className="flex items-center gap-4 sm:items-start sm:gap-5 mb-6">
+        <div className="flex items-center gap-4 sm:gap-5 mb-6">
           <AreaIcon type={SLUG_TO_ICON[slug] || 'hexagon'} className="w-14 h-14 lg:w-16 lg:h-16 shrink-0 text-blue/70" />
           <h1 className="relative z-10 text-2xl lg:text-[44px] font-semibold leading-[1.1] tracking-tight max-w-xl">
             {stripFaPrefix(area.title)}
