@@ -3,7 +3,7 @@ title: "Securing Fundamental Rights in the Digital Realm: The Infrastructure Fre
 date: 2026-06-30
 summary: "The digital foundations our fundamental rights now depend on."
 authors:
-  - lukas-bresser
+  - will-scott
 ---
 *Part of a series introducing the focus areas of PL R&D.*
 
