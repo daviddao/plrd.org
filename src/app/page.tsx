@@ -21,6 +21,31 @@ type UpdateItem = {
   coverImage?: string
 }
 
+/**
+ * Extract YouTube video ID from Hugo shortcode in HTML.
+ * Handles both raw `{{< youtube ID >}}` and HTML-encoded `{{&#x3C; youtube ID >}}`
+ */
+function extractYouTubeId(html: string): string | null {
+  // Match patterns like {{< youtube VIDEO_ID >}} or {{&#x3C; youtube VIDEO_ID >}}
+  const patterns = [
+    /\{\{<\s*youtube\s+([a-zA-Z0-9_-]+)\s*>\}\}/,
+    /\{\{&#x3C;\s*youtube\s+([a-zA-Z0-9_-]+)\s*>\}\}/,
+  ]
+  for (const pattern of patterns) {
+    const match = html.match(pattern)
+    if (match) return match[1]
+  }
+  return null
+}
+
+/**
+ * Generate YouTube thumbnail URL from video ID.
+ * Uses maxresdefault for best quality, falls back to hqdefault.
+ */
+function getYouTubeThumbnail(videoId: string): string {
+  return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`
+}
+
 function getLatestUpdates(count: number): UpdateItem[] {
   const pubs = publications.map((p) => ({
     title: p.title || p.slug,
@@ -29,16 +54,21 @@ function getLatestUpdates(count: number): UpdateItem[] {
     permalink: `/publications/${p.slug}`,
     slug: p.slug,
     areas: p.areas || [],
+    coverImage: '/images/publication-cover.png',
   }))
 
-  const talkItems = talks.map((t) => ({
-    title: t.title || t.slug,
-    date: t.date || '',
-    type: 'Talk',
-    permalink: `/talks/${t.slug}`,
-    slug: t.slug,
-    areas: (t.areas || []).filter(Boolean) as string[],
-  }))
+  const talkItems = talks.map((t) => {
+    const youtubeId = extractYouTubeId(t.html || '')
+    return {
+      title: t.title || t.slug,
+      date: t.date || '',
+      type: 'Talk',
+      permalink: `/talks/${t.slug}`,
+      slug: t.slug,
+      areas: (t.areas || []).filter(Boolean) as string[],
+      coverImage: youtubeId ? getYouTubeThumbnail(youtubeId) : undefined,
+    }
+  })
 
   const blogItems = blogPosts.map((b) => ({
     title: b.title || b.slug,
@@ -76,51 +106,54 @@ export default async function HomePage() {
       </div>
 
       {/* ── Hero ── */}
-      <div className="relative pt-16 pb-8 md:pt-20 md:pb-10 lg:pt-24 lg:pb-12" style={{ clipPath: 'inset(0 -100vw 0 0)' }}>
+      <div className="relative pt-16 pb-8 md:pt-20 md:pb-10 lg:pt-24 lg:pb-12 overflow-visible">
+        {/* Hero image - positioned absolutely to sit "under" the headline */}
         <div
-          className="absolute inset-y-0 pointer-events-none select-none"
-          style={{
-            right: 'calc(-50vw + 50%)',
-            width: '70vw',
-            backgroundImage: 'url(/images/hero.webp)',
-            backgroundSize: 'auto 100%',
-            backgroundPosition: 'right center',
-            backgroundRepeat: 'no-repeat',
-            opacity: 0.35,
-            maskImage: 'linear-gradient(to left, black 40%, transparent 80%)',
-            WebkitMaskImage: 'linear-gradient(to left, black 40%, transparent 80%)',
-          }}
-          aria-hidden="true"
-        />
+          className="absolute right-0 top-1/2 -translate-y-1/2 w-[280px] sm:w-[360px] md:w-[450px] lg:w-[520px] xl:w-[560px] pointer-events-none select-none"
+          style={{ zIndex: 0 }}
+        >
+          <img
+            src="/images/hero.webp"
+            alt="Glass cube containing colorful neural structures"
+            className="w-full h-auto"
+          />
+        </div>
+
         <div className="relative z-10">
           <p className="text-sm text-gray-500 uppercase tracking-widest mb-6 font-medium">
             Protocol Labs Research &amp; Development
           </p>
-          <h1 className="max-w-3xl font-serif text-[36px] md:text-[48px] lg:text-[62px] font-normal leading-[1.06] tracking-tight mb-6">
-            Accelerating breakthroughs in computing to push humanity forward
+          <h1 className="font-serif text-[36px] md:text-[48px] lg:text-[52px] font-normal leading-[1.06] tracking-tight mb-6 max-w-md md:max-w-lg lg:max-w-xl">
+            Driving R&amp;D breakthroughs to push humanity forward.
           </h1>
-          <p className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-xl mb-8">
-            We de-risk frontier ideas in computing and help them cross from open research to deployment, expanding human freedom, coordination, intelligence, and cognition
-          </p>
           <div className="flex flex-wrap items-center gap-4">
             <Link
               href="/about"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-black text-white rounded-full hover:bg-gray-800 transition-colors font-semibold text-[15px]"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-blue text-white rounded-full hover:bg-blue/90 transition-colors font-semibold text-[15px]"
             >
               About us
+              <span>→</span>
             </Link>
+            <a
+              href="#focus-areas"
+              className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors font-medium text-[15px]"
+            >
+              Focus areas
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </a>
           </div>
-
-          <a
-            href="#focus-areas"
-            className="inline-flex flex-col items-center gap-1.5 mt-8 text-gray-400 hover:text-gray-600 transition-colors group"
-          >
-            <span className="text-sm font-medium tracking-wide">Explore focus areas</span>
-            <svg className="w-5 h-5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
-            </svg>
-          </a>
         </div>
+
+        <a
+          href="#focus-areas"
+          className="relative z-10 inline-flex flex-col items-center gap-1.5 mt-12 text-gray-400 hover:text-gray-600 transition-colors group"
+        >
+          <svg className="w-5 h-5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
+          </svg>
+        </a>
       </div>
 
     </div>
