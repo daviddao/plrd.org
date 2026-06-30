@@ -3,7 +3,8 @@ title: "Better Economies & Governance Systems: Upgrading Society's Operating Sys
 date: 2026-06-29
 summary: "An overview of PL R&D's Better Economies & Governance focus area — the programmable infrastructure societies use to make decisions, allocate capital, and verify outcomes — and the four opportunity spaces and inflection points we believe are within reach."
 authors:
-  - lukas-bresser
+  - david-dao
+  - james-tunningley
 areas:
   - economies-governance
 ---
