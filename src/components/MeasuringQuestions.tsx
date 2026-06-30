@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { CONTRIBUTION_META, LOGIC_MODEL, type LogicStageKey } from '@/lib/inflection-points'
+import { ROLE_META, PL_ROLE_ORDER, LOGIC_MODEL, type LogicStageKey } from '@/lib/inflection-points'
 
 const QUESTIONS: {
   q: string
@@ -25,7 +25,7 @@ const QUESTIONS: {
     q: 'Q3',
     title: 'Did our work make it happen?',
     stages: ['inputs', 'activities', 'outputs'],
-    body: 'We trace contribution rather than claim credit: which PL-funded teams, convenings, standards, or ventures were on the critical path — and reason honestly about the counterfactual: would this have happened as fast, or at all, without us?',
+    body: 'We trace contribution rather than claim credit: which PL instruments — open infrastructure, field-mapping, convenings, grants, ventures, or policy work — were on the critical path, and reason honestly about the counterfactual: would this have happened as fast, or at all, without us?',
   },
 ]
 
@@ -104,11 +104,12 @@ export default function MeasuringQuestions() {
             <p className="mb-5 max-w-2xl text-sm leading-relaxed text-gray-600">
               Contribution sits on its own axis, separate from how far the field has moved — we never
               collapse the two into a single score. A point can be reached with little or no PL
-              involvement; that is still a win for the field, and we record our role honestly. Each
-              card tags PL&rsquo;s role as one of three:
+              involvement; that is still a win for the field, and we record our role honestly. The
+              toolkit is plural by design, so each card tags one or more of these roles — the
+              instrument matched to the bottleneck it releases:
             </p>
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-              {Object.values(CONTRIBUTION_META).map((c) => (
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {PL_ROLE_ORDER.map((r) => ROLE_META[r]).map((c) => (
                 <div key={c.label} className="rounded-lg border border-gray-200 bg-white p-4">
                   <span className="mb-2 inline-flex items-center rounded-full border border-dark-blue/20 bg-dark-blue/[0.06] px-2.5 py-1 text-xs font-medium text-dark-blue">
                     {c.label}

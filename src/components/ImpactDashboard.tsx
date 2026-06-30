@@ -2,7 +2,8 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import {
-  CONTRIBUTION_META,
+  ROLE_META,
+  PL_ROLE_ORDER,
   FIELD_STAGES,
   FOCUS_AREAS,
   INFLECTION_POINTS,
@@ -10,6 +11,7 @@ import {
   stageIndexForStatus,
   type FocusAreaKey,
   type InflectionPoint,
+  type PLRole,
 } from '@/lib/inflection-points'
 import { AreaIcon, type AreaIconType } from '@/components/AreaIcons'
 
@@ -159,15 +161,23 @@ function FieldMeter({
   )
 }
 
-function ContributionChip({ level }: { level: InflectionPoint['contributionLevel'] }) {
-  const meta = CONTRIBUTION_META[level]
+/** One pill per PL role, in canonical order. */
+function RoleChips({ roles, eyebrow = true }: { roles: PLRole[]; eyebrow?: boolean }) {
+  const ordered = PL_ROLE_ORDER.filter((r) => roles.includes(r))
   return (
-    <span
-      className="inline-flex items-center gap-1.5 rounded-full border border-dark-blue/20 bg-dark-blue/[0.06] px-2.5 py-1 text-xs font-medium text-dark-blue"
-      title={meta.description}
-    >
-      <span className="text-[10px] uppercase tracking-wide text-dark-blue/60">PL role</span>
-      {meta.label}
+    <span className="inline-flex flex-wrap items-center gap-1.5">
+      {eyebrow && (
+        <span className="text-[10px] uppercase tracking-wide text-dark-blue/60">PL role</span>
+      )}
+      {ordered.map((r) => (
+        <span
+          key={r}
+          className="inline-flex items-center rounded-full border border-dark-blue/20 bg-dark-blue/[0.06] px-2.5 py-1 text-xs font-medium text-dark-blue"
+          title={ROLE_META[r].description}
+        >
+          {ROLE_META[r].label}
+        </span>
+      ))}
     </span>
   )
 }
@@ -214,14 +224,19 @@ function InflectionCard({
       </div>
 
       {/* Footer: contribution axis + open hint */}
-      <div className="mt-4 flex items-center justify-between gap-3 border-t border-gray-100 pt-4">
-        <ContributionChip level={point.contributionLevel} />
-        <span className="inline-flex items-center gap-1 text-sm font-medium text-gray-400 transition-colors group-hover:text-blue">
-          Detail
-          <svg className="h-4 w-4 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-          </svg>
-        </span>
+      <div className="mt-4 border-t border-gray-100 pt-4">
+        <div className="flex items-center justify-between gap-3">
+          <span className="text-[10px] uppercase tracking-wide text-dark-blue/60">PL role</span>
+          <span className="inline-flex items-center gap-1 text-sm font-medium text-gray-400 transition-colors group-hover:text-blue">
+            Detail
+            <svg className="h-4 w-4 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </span>
+        </div>
+        <div className="mt-2">
+          <RoleChips roles={point.roles} eyebrow={false} />
+        </div>
       </div>
     </button>
   )
@@ -238,7 +253,6 @@ function InflectionModal({
 }) {
   const fa = FOCUS_AREAS.find((f) => f.key === point.area)!
   const status = STATUS_META[point.status]
-  const role = CONTRIBUTION_META[point.contributionLevel]
 
   // Close on Escape, and lock body scroll while open.
   useEffect(() => {
@@ -322,9 +336,15 @@ function InflectionModal({
             <LogicRow label="Outcome">{point.cascade}</LogicRow>
           </Section>
           <Section q="Q3" label="Did our work make it happen? — PL contribution" accent={fa.accent}>
-            <div className="mb-3 flex flex-wrap items-center gap-2">
-              <ContributionChip level={point.contributionLevel} />
-              <span className="text-xs text-gray-500">{role.description}</span>
+            <div className="mb-3">
+              <RoleChips roles={point.roles} />
+              <ul className="mt-2 space-y-1">
+                {PL_ROLE_ORDER.filter((r) => point.roles.includes(r)).map((r) => (
+                  <li key={r} className="text-xs leading-relaxed text-gray-500">
+                    <span className="font-medium text-gray-700">{ROLE_META[r].label}:</span> {ROLE_META[r].description}
+                  </li>
+                ))}
+              </ul>
             </div>
             <div className="space-y-2.5">
               <LogicRow label="Inputs">{point.contribution.inputs}</LogicRow>
