@@ -11,15 +11,15 @@ const QUESTIONS: {
 }[] = [
   {
     q: 'Q1',
-    title: 'Did it happen?',
+    title: 'Did it matter?',
     stages: ['impact'],
-    body: 'We pre-register one observable threshold and report a simple yes/no plus a date when it is reached. It is externally observable — measured the same way whether or not PL is involved.',
+    body: 'A signal is only worth naming if it unlocks something. We name the second-order effects in advance and watch whether they follow. A threshold that is reached but unlocks nothing is itself a finding.',
   },
   {
     q: 'Q2',
-    title: 'Did it matter?',
+    title: 'Did it happen?',
     stages: ['outcomes'],
-    body: 'A signal is only worth naming if it unlocks something. We name the second-order effects in advance and watch whether they follow. A threshold that is reached but unlocks nothing is itself a finding.',
+    body: 'We pre-register one observable threshold and report a simple yes/no plus a date when it is reached. It is externally observable — measured the same way whether or not PL is involved.',
   },
   {
     q: 'Q3',

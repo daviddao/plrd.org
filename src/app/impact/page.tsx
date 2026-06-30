@@ -9,7 +9,7 @@ import { LOGIC_MODEL } from '@/lib/inflection-points'
 
 // Pull live output metrics for the Economies & Governance inflection points from
 // the same sources as the FA2 live dashboard. These are Q3 OUTPUTS (the work
-// PL-backed teams have produced) — never Q1 progress toward a threshold.
+// PL-backed teams have produced) — never Q2 progress toward a threshold.
 export const revalidate = 60
 
 async function fetchLiveOutputs(): Promise<LiveOutputs> {

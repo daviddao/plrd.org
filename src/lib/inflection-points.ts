@@ -5,15 +5,15 @@
 // as of 2026. They are hypotheses, not descriptions of the present. We judge our
 // work against three questions, mapped to the fields on every point:
 //
-//   Q1 (signal)       Did it happen?              A pre-registered threshold — yes/no + date.
-//   Q2 (cascade)      Did it matter?             The second-order effects it should unlock.
+//   Q1 (cascade)      Did it matter?              The second-order effects it should unlock.
+//   Q2 (signal)       Did it happen?              A pre-registered threshold — yes/no + date.
 //   Q3 (contribution) Did our work make it happen? PL's inputs -> activities -> outputs on the
 //                                                  critical path (the planned-work side of the
 //                                                  logic model), traced honestly.
 //
 // IMPORTANT — these are distinct jobs and are NOT collapsed into one score. A point
-// can be reached (Q1) and matter (Q2) with low PL contribution (Q3); that is still a
-// win for the field. So we track field progress (Q1 -> Q2) on one axis and PL's
+// can be reached (Q2) and matter (Q1) with low PL contribution (Q3); that is still a
+// win for the field. So we track field progress (Q1 & Q2) on one axis and PL's
 // contribution (Q3) on a separate, independent axis.
 //
 // Source: "Inflection points across PL R&D, and how we will measure them."
@@ -37,7 +37,7 @@ export type Contribution = {
   outputs: string
 }
 
-/** A pointer to live activity that is contribution evidence (Q3) — NOT a Q1 threshold reading. */
+/** A pointer to live activity that is contribution evidence (Q3) — NOT a Q2 threshold reading. */
 export type LiveEvidence = {
   label: string
   href: string
@@ -51,9 +51,9 @@ export type InflectionPoint = {
   opportunitySpace: string
   /** The inflection point, stated as a hypothesis. */
   title: string
-  /** Q1 — observable threshold that says it happened (not yet true). */
+  /** Q2 — observable threshold that says it happened (not yet true). */
   signal: string
-  /** Q2 — why it matters / the cascade to watch. */
+  /** Q1 — why it matters / the cascade to watch. */
   cascade: string
   /** Q3 — PL contribution to trace, as inputs -> activities -> outputs. */
   contribution: Contribution
@@ -61,7 +61,7 @@ export type InflectionPoint = {
   roles: PLRole[]
   /** Field-progress lifecycle state. All start 'watching' — none reached as of 2026. */
   status: InflectionStatus
-  /** Optional live activity from PL-backed teams — strictly Q3 evidence, never Q1 progress. */
+  /** Optional live activity from PL-backed teams — strictly Q3 evidence, never Q2 progress. */
   liveEvidence?: LiveEvidence
 }
 
@@ -101,7 +101,7 @@ export const LOGIC_MODEL = [
 ] as const
 export type LogicStageKey = (typeof LOGIC_MODEL)[number]['key']
 
-// ── Field-progress lifecycle (Q1 -> Q2). Deliberately separate from PL contribution. ──
+// ── Field-progress lifecycle (Q1 & Q2). Deliberately separate from PL contribution. ──
 export const FIELD_STAGES = ['Defined', 'Emerging', 'Reached', 'Scaling'] as const
 export type FieldStage = (typeof FIELD_STAGES)[number]
 
@@ -264,7 +264,7 @@ export const INFLECTION_POINTS: InflectionPoint[] = [
     liveEvidence: {
       label: 'Simocracy governance simulation — live participation',
       href: '/areas/economies-governance/impact/live-dashboard/',
-      note: 'Live activity from a PL-supported mechanism. This is contribution evidence (Q3) from a simulation — not the binding-decision-in-government threshold (Q1).',
+      note: 'Live activity from a PL-supported mechanism. This is contribution evidence (Q3) from a simulation — not the binding-decision-in-government threshold (Q2).',
     },
   },
   {
@@ -301,7 +301,7 @@ export const INFLECTION_POINTS: InflectionPoint[] = [
     liveEvidence: {
       label: 'GainForest & Glow — live verification activity',
       href: '/areas/economies-governance/impact/live-dashboard/',
-      note: 'Live output from PL-backed MRV teams on this critical path. Contribution evidence (Q3) — not the $1B-disbursed-against-verified-outcomes threshold (Q1).',
+      note: 'Live output from PL-backed MRV teams on this critical path. Contribution evidence (Q3) — not the $1B-disbursed-against-verified-outcomes threshold (Q2).',
     },
   },
 
