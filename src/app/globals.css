@@ -217,19 +217,10 @@ ul:not([class]) li li {
   .page-content .q-grid { grid-template-columns: repeat(3, 1fr); }
 }
 .page-content .fa-tile {
-  position: relative;
-  overflow: hidden;
   border: 1px solid #e6e8ec;
   border-radius: 0.75rem;
   background: var(--color-white);
-  padding: 1.1rem 1.2rem 1.1rem 1.4rem;
-}
-.page-content .fa-tile::before {
-  content: "";
-  position: absolute;
-  inset: 0 auto 0 0;
-  width: 4px;
-  background: var(--fa-accent, var(--color-blue));
+  padding: 1.1rem 1.2rem;
 }
 .page-content .fa-eyebrow {
   font-size: 0.7rem;

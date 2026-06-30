@@ -14,10 +14,10 @@ Our R&D pipeline aims to move frontier ideas from open research through producti
 Our work spans four *focus areas*:
 
 <div class="fa-grid">
-<div class="fa-tile" style="--fa-accent:#1982F4"><div class="fa-eyebrow">Freedom</div><div class="fa-title">Digital Human Rights</div><p>The digital foundations that fundamental rights now depend on.</p></div>
-<div class="fa-tile" style="--fa-accent:#12bfdf"><div class="fa-eyebrow">Coordination</div><div class="fa-title">Programmable Economies &amp; Governance</div><p>The open infrastructure that enables coordination among states, institutions, and individuals.</p></div>
-<div class="fa-tile" style="--fa-accent:#3966FE"><div class="fa-eyebrow">Intelligence</div><div class="fa-title">Safe AI &amp; Robotics</div><p>The frontier capabilities that keep machine intelligence under human direction.</p></div>
-<div class="fa-tile" style="--fa-accent:#E51A66"><div class="fa-eyebrow">Cognition</div><div class="fa-title">Neurotechnology</div><p>The interface that lets human cognition expand by connecting brains with the rest of computing.</p></div>
+<div class="fa-tile"><div class="fa-eyebrow">Freedom</div><div class="fa-title">Digital Human Rights</div><p>The digital foundations that fundamental rights now depend on.</p></div>
+<div class="fa-tile"><div class="fa-eyebrow">Coordination</div><div class="fa-title">Programmable Economies &amp; Governance</div><p>The open infrastructure that enables coordination among states, institutions, and individuals.</p></div>
+<div class="fa-tile"><div class="fa-eyebrow">Intelligence</div><div class="fa-title">Safe AI &amp; Robotics</div><p>The frontier capabilities that keep machine intelligence under human direction.</p></div>
+<div class="fa-tile"><div class="fa-eyebrow">Cognition</div><div class="fa-title">Neurotechnology</div><p>The interface that lets human cognition expand by connecting brains with the rest of computing.</p></div>
 </div>
 
 We break down each frontier field into no more than four *opportunity spaces*: tight clusters of technology and practice that often share expert networks, infrastructure, and bottlenecks.
