@@ -5,7 +5,7 @@ import MeasuringQuestions from '@/components/MeasuringQuestions'
 import { fetchSimocracyStats } from '@/lib/simocracy'
 import { fetchGainforestStats } from '@/lib/gainforest'
 import { fetchGlowStats } from '@/lib/glow'
-import { LOGIC_MODEL, FIELD_COLOR, HAND_COLOR } from '@/lib/inflection-points'
+import { FIELD_COLOR, HAND_COLOR } from '@/lib/inflection-points'
 
 // Pull live output metrics for the Economies & Governance inflection points from
 // the same sources as the FA2 live dashboard. These are Q3 OUTPUTS (the work
@@ -105,47 +105,13 @@ export default async function ImpactPage() {
       {/* Our methodology */}
       <div id="methodology" className="max-w-6xl mx-auto px-6 py-14 lg:py-16 scroll-mt-24">
         <h2 className="text-xl lg:text-2xl font-semibold tracking-tight mb-2">Our methodology</h2>
-        <p className="text-base text-gray-600 leading-relaxed max-w-3xl mb-7">
-          Every inflection point runs along one chain — from the work we plan to the change in the
-          world it aims at. We hold two axes apart and never collapse them into a single score:{' '}
+        <p className="text-base text-gray-600 leading-relaxed max-w-3xl mb-8">
+          For every inflection point we ask three questions — different jobs that should not be
+          collapsed into a single score. We hold two axes apart:{' '}
           <strong className="font-semibold" style={{ color: HAND_COLOR }}>our hand</strong> (the work
           we control) and{' '}
           <strong className="font-semibold" style={{ color: FIELD_COLOR }}>the field</strong> (the
           change that follows, with or without us).
-        </p>
-
-        {/* Logic-model chain — color-coded by axis */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-px bg-gray-200 rounded-xl overflow-hidden border border-gray-200">
-          {LOGIC_MODEL.map((stage, i) => {
-            const color = i >= 3 ? FIELD_COLOR : HAND_COLOR
-            return (
-              <div key={stage.key} className="bg-white px-5 py-5">
-                <div className="flex items-center gap-2 mb-2">
-                  <span
-                    className="flex h-6 w-6 items-center justify-center rounded-full text-xs font-semibold"
-                    style={{ backgroundColor: `${color}18`, color }}
-                  >
-                    {i + 1}
-                  </span>
-                  <span className="text-[11px] font-semibold uppercase tracking-wide" style={{ color }}>
-                    {stage.label}
-                  </span>
-                </div>
-                <p className="text-sm text-gray-500 leading-snug">{stage.body}</p>
-              </div>
-            )
-          })}
-        </div>
-        <div className="mt-2 flex justify-between text-xs font-medium uppercase tracking-wide text-gray-400">
-          <span>← Our planned work</span>
-          <span>The change in the world →</span>
-        </div>
-
-        {/* The three questions — always visible */}
-        <p className="text-base text-gray-600 leading-relaxed max-w-3xl mt-10 mb-6">
-          For frontier research, the hard part is the right edge of that chain. So for every
-          inflection point we ask three questions — different jobs that should not be collapsed into
-          one metric.
         </p>
         <MeasuringQuestions />
       </div>

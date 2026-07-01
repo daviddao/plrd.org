@@ -19,12 +19,12 @@ export default function MeasuringQuestions() {
 
   return (
     <>
-      <div className="grid grid-cols-1 gap-5 md:grid-cols-4">
-        {/* A — our hand (wide) */}
-        <div className="flex flex-col rounded-xl border border-gray-200 bg-white p-6 md:col-span-2">
+      <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
+        {/* A — our hand */}
+        <div className="flex flex-col rounded-xl border border-gray-200 bg-white p-6">
           <div className="mb-3 flex items-center gap-2.5">
             <Badge letter="A" color={HAND_COLOR} />
-            <h3 className="text-lg font-semibold tracking-tight text-black">Our contribution to field progress</h3>
+            <h3 className="text-lg font-semibold tracking-tight text-black">What difference are we making?</h3>
           </div>
           <div className="mb-2 text-[11px] font-semibold uppercase tracking-wide" style={{ color: HAND_COLOR }}>
             Inputs · Activities · Outputs
@@ -36,23 +36,10 @@ export default function MeasuringQuestions() {
           <p className="mt-4 border-t border-gray-100 pt-3 text-sm text-gray-500">
             <span className="font-semibold" style={{ color: HAND_COLOR }}>Ours.</span> The axis we control with our partners.
           </p>
-
-          {/* Role tags + subtle link to the full legend */}
-          <div className="mt-4 flex flex-wrap gap-1.5">
-            {PL_ROLE_ORDER.map((r) => (
-              <span
-                key={r}
-                className="inline-flex items-center rounded-full border px-2.5 py-1 text-xs font-medium"
-                style={{ color: HAND_COLOR, borderColor: `${HAND_COLOR}55`, backgroundColor: `${HAND_COLOR}12` }}
-              >
-                {ROLE_META[r].label}
-              </span>
-            ))}
-          </div>
           <button
             type="button"
             onClick={() => setRolesOpen(true)}
-            className="group mt-4 inline-flex items-center gap-1 self-start text-sm font-medium text-gray-400 transition-colors hover:text-blue"
+            className="group mt-3 inline-flex items-center gap-1 self-start text-sm font-medium text-gray-400 transition-colors hover:text-blue"
           >
             See the roles we play
             <svg className="h-4 w-4 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -64,7 +51,7 @@ export default function MeasuringQuestions() {
         {/* B — the field */}
         <FieldCard
           letter="B"
-          title="Did it happen?"
+          title="Did the inflection point happen?"
           eyebrow="Outcomes"
           body="One pre-registered, externally observable threshold. A yes/no plus a date, measured the same way with or without PL."
           footRest="Advances with or without us."
@@ -73,7 +60,7 @@ export default function MeasuringQuestions() {
         {/* C — the field */}
         <FieldCard
           letter="C"
-          title="Did it matter?"
+          title="Did reaching the inflection point matter?"
           eyebrow="Impact"
           body="A threshold that unlocks nothing is itself a finding. We name the second-order effects in advance and watch."
           footRest="The cascade the signal should trigger."
