@@ -27,10 +27,12 @@ export type PLRole = 'infrastructure' | 'legibility' | 'connection' | 'capital' 
 export const PL_ROLE_ORDER: PLRole[] = ['infrastructure', 'legibility', 'connection', 'capital', 'translation', 'permission']
 
 // Two-axis color system used across the impact dashboard:
-//   FIELD = the change in the world (outcomes + impact) — moves with or without us
-//   HAND  = our planned work / the PL toolkit — the only axis we control
-export const FIELD_COLOR = '#12bfdf'
-export const HAND_COLOR = '#7c5cf5'
+//   FIELD = the change in the world (outcomes + impact) — moves with or without us (purple)
+//   HAND  = our planned work / the PL toolkit — the only axis we control (PL blue)
+export const FIELD_COLOR = '#7c5cf5'
+export const HAND_COLOR = '#1982F4'
+/** Live-signal accent — the pulsing dot on points with live outputs (green). */
+export const LIVE_COLOR = '#22c55e'
 
 /**
  * Q3 contribution, structured along the planned-work side of the logic model.

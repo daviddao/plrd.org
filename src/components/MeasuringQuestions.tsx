@@ -15,7 +15,7 @@ const CARDS: {
     key: 'A',
     color: HAND_COLOR,
     eyebrow: 'Inputs · Activities · Outputs',
-    title: 'Did our work help?',
+    title: 'Is our work making a difference?',
     body: 'Which PL instruments were on the critical path, and would this have happened as fast, or at all, without us.',
     footLead: 'Ours.',
     footRest: 'The only axis we control.',
