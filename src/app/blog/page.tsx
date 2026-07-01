@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import { blogPosts } from '@/lib/content'
 import { formatDate } from '@/lib/format'
 import Breadcrumb from '@/components/Breadcrumb'
@@ -10,6 +11,18 @@ import { fetchAtproPosts, fetchPage, getSection } from '@/lib/indexer'
 const FALLBACK_HERO_TITLE = 'Blog'
 const FALLBACK_HERO_SUBTITLE =
   'Updates, insights, and reflections from the PL R&D team.'
+
+export const metadata: Metadata = {
+  title: 'Blog',
+  description: FALLBACK_HERO_SUBTITLE,
+  alternates: { canonical: '/blog/' },
+  openGraph: {
+    type: 'website',
+    url: '/blog/',
+    title: 'Blog',
+    description: FALLBACK_HERO_SUBTITLE,
+  },
+}
 
 export default async function BlogPage() {
   const [atprotoPosts, page] = await Promise.all([
