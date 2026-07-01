@@ -5,7 +5,7 @@ import MeasuringQuestions from '@/components/MeasuringQuestions'
 import { fetchSimocracyStats } from '@/lib/simocracy'
 import { fetchGainforestStats } from '@/lib/gainforest'
 import { fetchGlowStats } from '@/lib/glow'
-import { LOGIC_MODEL } from '@/lib/inflection-points'
+import { LOGIC_MODEL, ROLE_META, PL_ROLE_ORDER, FIELD_COLOR, HAND_COLOR } from '@/lib/inflection-points'
 
 // Pull live output metrics for the Economies & Governance inflection points from
 // the same sources as the FA2 live dashboard. These are Q3 OUTPUTS (the work
@@ -97,47 +97,89 @@ export default async function ImpactPage() {
       <div className="max-w-6xl mx-auto px-6 py-14 lg:py-16">
         <h2 className="text-xl lg:text-2xl font-semibold tracking-tight mb-2">Measuring impact</h2>
         <p className="text-base text-gray-600 leading-relaxed max-w-3xl mb-7">
-          Impact is the last link in a chain that runs from the work we plan to the results we
-          intend. Inputs and activities are our planned work; outcomes and impact are the change in
-          the world that follows. We only count something as impact when it is a durable shift in the
-          system — not just activity or output.
+          Every inflection point runs along one chain — from the work we plan to the change in the
+          world it aims at. We hold two axes apart and never collapse them into a single score:{' '}
+          <strong className="font-semibold" style={{ color: HAND_COLOR }}>our hand</strong> (the work
+          we control) and{' '}
+          <strong className="font-semibold" style={{ color: FIELD_COLOR }}>the field</strong> (the
+          change that follows, with or without us).
         </p>
 
-        <p className="text-sm text-gray-500 leading-relaxed max-w-3xl mb-6">
-          Each inflection point instantiates this chain. On its card, the Q3 detail tracks our
-          inputs, activities, and outputs; the field meter tracks the outcomes and impact they aim
-          at.
-        </p>
-
-        {/* Logic-model chain — labels styled like the detail cards */}
+        {/* Logic-model chain — color-coded by axis */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-px bg-gray-200 rounded-xl overflow-hidden border border-gray-200">
-          {LOGIC_MODEL.map((stage, i) => (
-            <div key={stage.key} className="bg-white px-5 py-5">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-100 text-xs font-semibold text-gray-400">
-                  {i + 1}
-                </span>
-                <span className="text-[11px] font-semibold uppercase tracking-wide text-gray-400">
-                  {stage.label}
-                </span>
+          {LOGIC_MODEL.map((stage, i) => {
+            const color = i >= 3 ? FIELD_COLOR : HAND_COLOR
+            return (
+              <div key={stage.key} className="bg-white px-5 py-5">
+                <div className="flex items-center gap-2 mb-2">
+                  <span
+                    className="flex h-6 w-6 items-center justify-center rounded-full text-xs font-semibold"
+                    style={{ backgroundColor: `${color}18`, color }}
+                  >
+                    {i + 1}
+                  </span>
+                  <span className="text-[11px] font-semibold uppercase tracking-wide" style={{ color }}>
+                    {stage.label}
+                  </span>
+                </div>
+                <p className="text-sm text-gray-500 leading-snug">{stage.body}</p>
               </div>
-              <p className="text-sm text-gray-500 leading-snug">{stage.body}</p>
-            </div>
-          ))}
+            )
+          })}
         </div>
         <div className="mt-2 flex justify-between text-xs font-medium uppercase tracking-wide text-gray-400">
           <span>← Our planned work</span>
-          <span>Our intended results →</span>
+          <span>The change in the world →</span>
         </div>
 
-        {/* The three questions — pick one to read its detail */}
+        {/* Legend — dots, not tick-boxes */}
+        <div className="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-sm text-gray-600">
+          <span className="inline-flex items-center gap-2">
+            <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: HAND_COLOR }} />
+            <span><strong className="font-semibold text-black">Our planned work</strong> — within our control</span>
+          </span>
+          <span className="inline-flex items-center gap-2">
+            <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: FIELD_COLOR }} />
+            <span><strong className="font-semibold text-black">The field</strong> — moves with or without us</span>
+          </span>
+        </div>
+
+        {/* The three questions — always visible */}
         <p className="text-base text-gray-600 leading-relaxed max-w-3xl mt-10 mb-6">
           For frontier research, the hard part is the right edge of that chain. So for every
           inflection point we ask three questions — different jobs that should not be collapsed into
-          one metric. Select one to read how we measure it.
+          one metric.
         </p>
         <MeasuringQuestions />
       </div>
+
+      {/* The toolkit — deep dive on the "our hand" roles */}
+      <section className="border-t border-gray-200 bg-gray-100">
+        <div className="max-w-6xl mx-auto px-6 py-14 lg:py-16">
+          <h2 className="text-xl lg:text-2xl font-semibold tracking-tight mb-2">
+            Six roles, matched to the bottleneck each one releases
+          </h2>
+          <p className="text-base text-gray-600 leading-relaxed max-w-3xl mb-8">
+            Every card tags the roles PL played — this is the legend those tags point to, and it is
+            our account of how we create value: match the instrument to the bottleneck. A bet can be
+            reached with little or no PL involvement, which is still a win for the field, and we
+            record our role honestly.
+          </p>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {PL_ROLE_ORDER.map((r) => (
+              <div key={r} className="rounded-xl border border-gray-200 bg-white p-5">
+                <span
+                  className="mb-2 inline-flex items-center rounded-full border px-2.5 py-1 text-xs font-medium"
+                  style={{ color: HAND_COLOR, borderColor: `${HAND_COLOR}55`, backgroundColor: `${HAND_COLOR}12` }}
+                >
+                  {ROLE_META[r].label}
+                </span>
+                <p className="text-sm leading-relaxed text-gray-600">{ROLE_META[r].description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
     </div>
   )
 }
