@@ -26,6 +26,12 @@ export type PLRole = 'infrastructure' | 'legibility' | 'connection' | 'capital' 
 /** Canonical display order for role pills, so cards read consistently. */
 export const PL_ROLE_ORDER: PLRole[] = ['infrastructure', 'legibility', 'connection', 'capital', 'translation', 'permission']
 
+// Two-axis color system used across the impact dashboard:
+//   FIELD = the change in the world (outcomes + impact) — moves with or without us
+//   HAND  = our planned work / the PL toolkit — the only axis we control
+export const FIELD_COLOR = '#12bfdf'
+export const HAND_COLOR = '#7c5cf5'
+
 /**
  * Q3 contribution, structured along the planned-work side of the logic model.
  * Inputs (resources committed) -> Activities (what we do) -> Outputs (what gets produced).
@@ -93,11 +99,11 @@ export const FOCUS_AREAS: FocusAreaMeta[] = [
 // questions explainer, and the per-point detail modal so the vocabulary lives
 // in one place.
 export const LOGIC_MODEL = [
-  { key: 'inputs', label: 'Inputs', body: 'The resources we commit — funding, teams, convenings, standards.' },
-  { key: 'activities', label: 'Activities', body: 'What we do with them — seeding teams, building primitives, setting standards.' },
-  { key: 'outputs', label: 'Outputs', body: 'The volume of work produced — teams funded, deployments, papers, ventures.' },
-  { key: 'outcomes', label: 'Outcomes', body: 'The changes that follow — adoption, capital inflows, new entrants.' },
-  { key: 'impact', label: 'Impact', body: 'The lasting shift in the system — an inflection point that holds.' },
+  { key: 'inputs', label: 'Inputs', body: 'Funding, teams, convenings, standards we commit.' },
+  { key: 'activities', label: 'Activities', body: 'Seeding teams, building primitives, setting standards.' },
+  { key: 'outputs', label: 'Outputs', body: 'Teams funded, deployments, papers, ventures.' },
+  { key: 'outcomes', label: 'Outcomes', body: 'Adoption, capital inflows, new entrants.' },
+  { key: 'impact', label: 'Impact', body: 'The lasting shift: an inflection point that holds.' },
 ] as const
 export type LogicStageKey = (typeof LOGIC_MODEL)[number]['key']
 
@@ -138,27 +144,27 @@ export const STATUS_META: Record<InflectionStatus, { label: string; description:
 export const ROLE_META: Record<PLRole, { label: string; description: string }> = {
   infrastructure: {
     label: 'Infrastructure',
-    description: 'The open, neutral rail this runs on did not exist — PL builds and maintains it (e.g. libp2p / IPFS / Filecoin).',
+    description: 'The open, neutral rail this runs on did not exist. PL builds and maintains it (libp2p / IPFS / Filecoin lineage).',
   },
   legibility: {
     label: 'Legibility',
-    description: 'The field lacked a shared map — PL increases visibility and navigability through roadmaps, taxonomies, benchmarks, and written artifacts.',
+    description: 'The field lacked a shared map. PL adds roadmaps, taxonomies, benchmarks, and written artifacts.',
   },
   connection: {
     label: 'Connection',
-    description: 'Progress was blocked by too few connections — PL convenes the right people (dinners, retreats, residencies, hackathons).',
+    description: 'Too few connections blocked progress. PL convenes the people who need to collide: dinners, retreats, residencies, hackathons.',
   },
   capital: {
     label: 'Capital',
-    description: 'Pre-commercial work needed patient funding — PL runs grants and prizes and helps peer funders deploy theirs.',
+    description: 'Pre-commercial work needed patient funding. PL runs grants and prizes and helps peer funders deploy theirs.',
   },
   translation: {
     label: 'Translation',
-    description: 'The work was ready to leave the lab — PL helps convert it into ventures, pilots, and deployments.',
+    description: 'The work was ready to leave the lab. PL helps convert it into ventures, pilots, and deployments.',
   },
   permission: {
     label: 'Permission',
-    description: 'The rules did not yet permit or recognize the technology — PL engages standards, policy, and regulatory pathways.',
+    description: 'The rules did not yet recognize the technology. PL engages standards, policy, and regulatory pathways.',
   },
 }
 
