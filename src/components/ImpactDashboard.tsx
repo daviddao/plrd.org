@@ -250,7 +250,7 @@ function InflectionCard({
           <span className="text-[11px] font-semibold uppercase tracking-wide" style={{ color: HAND_COLOR }}>
             Our hand
           </span>
-          <span className="text-[11px] text-gray-400">· is our work making a difference</span>
+          <span className="text-[11px] text-gray-400">· our contribution to field progress</span>
         </div>
         <RoleChips roles={point.roles} eyebrow={false} />
       </div>
@@ -359,7 +359,7 @@ function InflectionModal({
               <div className="mb-4 text-xs font-semibold uppercase tracking-wide" style={{ color: HAND_COLOR }}>Our hand</div>
               <div className="mb-3 flex items-center gap-2">
                 <QBadge letter="A" color={HAND_COLOR} />
-                <span className="text-sm font-semibold text-black">Is our work making a difference?</span>
+                <span className="text-sm font-semibold text-black">Our contribution to field progress</span>
               </div>
               <div className="mb-4"><RoleChips roles={point.roles} eyebrow={false} /></div>
               <div className="space-y-4">
