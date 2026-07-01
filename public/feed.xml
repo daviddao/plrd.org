@@ -7,6 +7,24 @@
     <atom:link href="https://plresearch.org/feed.xml" rel="self" type="application/rss+xml"/>
     
     <item>
+      <title><![CDATA[Can Quadratic Funding Go Mainstream? Ma Earth, Hypercerts & the Future of Public Goods]]></title>
+      <link>https://plresearch.org/talks/greenpill-quadratic-funding/</link>
+      <pubDate>Tue, 30 Jun 2026 00:00:00 GMT</pubDate>
+      <description><![CDATA[Kevin Owocki sits down with Matthew Monahan (Ma Earth) and Holke Brammer (Hypercerts Foundation) to discuss a bold new experiment: a $1 million Quadratic Funding round designed to bring public goods funding beyond the crypto ecosystem and into the mainstream.]]></description>
+    </item>
+    <item>
+      <title><![CDATA[Konrad Kording — The Power of a Single Neuron and a Path to Simulating the Brain]]></title>
+      <link>https://plresearch.org/talks/jbp-konrad-kording/</link>
+      <pubDate>Thu, 25 Jun 2026 00:00:00 GMT</pubDate>
+      <description><![CDATA[Juan Benet speaks with Konrad Kording of the University of Pennsylvania about the surprising computational power of a single neuron, reading the brain's wiring down to molecular detail, and building compilers and simulations as a path toward understanding — and ultimately simulating — the brain.]]></description>
+    </item>
+    <item>
+      <title><![CDATA[Tom Oxley — Reading the Brain Without Opening the Skull]]></title>
+      <link>https://plresearch.org/talks/jbp-tom-oxley/</link>
+      <pubDate>Thu, 11 Jun 2026 00:00:00 GMT</pubDate>
+      <description><![CDATA[Juan Benet speaks with Tom Oxley, co-founder and CEO of Synchron, about the Stentrode — a brain-computer interface that reaches the motor cortex through a blood vessel without opening the skull — restoring independence to people with motor impairment and the path toward higher-channel-count neural i]]></description>
+    </item>
+    <item>
       <title><![CDATA[Jacques Carolan — The Mission to Get Breakthrough Brain Treatments to Everyone]]></title>
       <link>https://plresearch.org/talks/jbp-jacques-carolan/</link>
       <pubDate>Fri, 29 May 2026 00:00:00 GMT</pubDate>
@@ -119,24 +137,6 @@
       <link>https://protocol.ai/blog/the-impact-of-our-innovation-network/</link>
       <pubDate>Wed, 29 Jan 2025 00:00:00 GMT</pubDate>
       <description><![CDATA[Reflecting on Protocol Labs' 2024 impact across neurotech, digital human rights, AI, and economies — and the vision for 2025 and beyond.]]></description>
-    </item>
-    <item>
-      <title><![CDATA[Applying Indigenous Wisdom to Create Sustainable Tech]]></title>
-      <link>https://plresearch.org/talks/voc-keolu-fox/</link>
-      <pubDate>Thu, 09 Jan 2025 00:00:00 GMT</pubDate>
-      <description><![CDATA[Keolu Fox, the first Native Hawaiian to earn a PhD in genome sciences, shares a visionary approach to technology inspired by Indigenous knowledge systems like the Hawaiian ahupuaʻa land management system. He applies the wisdom of circular, balanced systems perfected over generations to modern challe]]></description>
-    </item>
-    <item>
-      <title><![CDATA[FROs: The New Approach Solving Big Scientific Challenges]]></title>
-      <link>https://plresearch.org/talks/voc-anastasia-gamick/</link>
-      <pubDate>Thu, 12 Dec 2024 00:00:00 GMT</pubDate>
-      <description><![CDATA[Anastasia Gamick, co-founder and COO of Convergent Research, explains how Focused Research Organizations (FROs) address critical scientific and technological bottlenecks that fall between academic research and commercial markets. Examples include E11 Bio for neural mapping at scale and [C]Worthy for]]></description>
-    </item>
-    <item>
-      <title><![CDATA[Reversing Aging: Making 90 the New 50 with Epigenetic Rejuvenation]]></title>
-      <link>https://plresearch.org/talks/labweek24-yuri-deigin/</link>
-      <pubDate>Fri, 08 Nov 2024 00:00:00 GMT</pubDate>
-      <description><![CDATA[Yuri Deigin (CEO of YouthBio Therapeutics) presents the case for partial cellular reprogramming as a path to reversing biological ageing. He explains how Yamanaka factors can reset the epigenetic clock in cells without causing dedifferentiation, the evidence from mouse studies showing lifespan exten]]></description>
     </item>
     <item>
       <title><![CDATA[The Transformative Power of Neurotechnology]]></title>
