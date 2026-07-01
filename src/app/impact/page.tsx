@@ -5,7 +5,7 @@ import MeasuringQuestions from '@/components/MeasuringQuestions'
 import { fetchSimocracyStats } from '@/lib/simocracy'
 import { fetchGainforestStats } from '@/lib/gainforest'
 import { fetchGlowStats } from '@/lib/glow'
-import { LOGIC_MODEL, ROLE_META, PL_ROLE_ORDER, FIELD_COLOR, HAND_COLOR } from '@/lib/inflection-points'
+import { LOGIC_MODEL, FIELD_COLOR, HAND_COLOR } from '@/lib/inflection-points'
 
 // Pull live output metrics for the Economies & Governance inflection points from
 // the same sources as the FA2 live dashboard. These are Q3 OUTPUTS (the work
@@ -76,6 +76,15 @@ export default async function ImpactPage() {
             observable, falsifiable shifts we believe would be catalytic, and that have not yet
             happened.
           </p>
+          <a
+            href="#methodology"
+            className="mt-6 inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors font-medium text-[15px]"
+          >
+            Our methodology
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </a>
         </div>
       </div>
 
@@ -93,9 +102,9 @@ export default async function ImpactPage() {
         </div>
       </section>
 
-      {/* Measuring impact */}
-      <div className="max-w-6xl mx-auto px-6 py-14 lg:py-16">
-        <h2 className="text-xl lg:text-2xl font-semibold tracking-tight mb-2">Measuring impact</h2>
+      {/* Our methodology */}
+      <div id="methodology" className="max-w-6xl mx-auto px-6 py-14 lg:py-16 scroll-mt-24">
+        <h2 className="text-xl lg:text-2xl font-semibold tracking-tight mb-2">Our methodology</h2>
         <p className="text-base text-gray-600 leading-relaxed max-w-3xl mb-7">
           Every inflection point runs along one chain — from the work we plan to the change in the
           world it aims at. We hold two axes apart and never collapse them into a single score:{' '}
@@ -140,34 +149,6 @@ export default async function ImpactPage() {
         </p>
         <MeasuringQuestions />
       </div>
-
-      {/* The toolkit — deep dive on the "our hand" roles */}
-      <section className="border-t border-gray-200 bg-gray-100">
-        <div className="max-w-6xl mx-auto px-6 py-14 lg:py-16">
-          <h2 className="text-xl lg:text-2xl font-semibold tracking-tight mb-2">
-            Six roles, matched to the bottleneck each one releases
-          </h2>
-          <p className="text-base text-gray-600 leading-relaxed max-w-3xl mb-8">
-            Every card tags the roles PL played — this is the legend those tags point to, and it is
-            our account of how we create value: match the instrument to the bottleneck. A bet can be
-            reached with little or no PL involvement, which is still a win for the field, and we
-            record our role honestly.
-          </p>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {PL_ROLE_ORDER.map((r) => (
-              <div key={r} className="rounded-xl border border-gray-200 bg-white p-5">
-                <span
-                  className="mb-2 inline-flex items-center rounded-full border px-2.5 py-1 text-xs font-medium"
-                  style={{ color: HAND_COLOR, borderColor: `${HAND_COLOR}55`, backgroundColor: `${HAND_COLOR}12` }}
-                >
-                  {ROLE_META[r].label}
-                </span>
-                <p className="text-sm leading-relaxed text-gray-600">{ROLE_META[r].description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
     </div>
   )
 }
