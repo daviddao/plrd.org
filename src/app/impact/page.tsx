@@ -132,18 +132,6 @@ export default async function ImpactPage() {
           <span>The change in the world →</span>
         </div>
 
-        {/* Legend — dots, not tick-boxes */}
-        <div className="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-sm text-gray-600">
-          <span className="inline-flex items-center gap-2">
-            <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: HAND_COLOR }} />
-            <span><strong className="font-semibold text-black">Our planned work</strong> — within our control</span>
-          </span>
-          <span className="inline-flex items-center gap-2">
-            <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: FIELD_COLOR }} />
-            <span><strong className="font-semibold text-black">The field</strong> — moves with or without us</span>
-          </span>
-        </div>
-
         {/* The three questions — always visible */}
         <p className="text-base text-gray-600 leading-relaxed max-w-3xl mt-10 mb-6">
           For frontier research, the hard part is the right edge of that chain. So for every

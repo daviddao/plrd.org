@@ -186,7 +186,7 @@ export const INFLECTION_POINTS: InflectionPoint[] = [
       outputs: 'libp2p / IPFS deployments and the funded comms and messaging teams building on them.',
     },
     roles: ['infrastructure', 'capital'],
-    status: 'watching',
+    status: 'early-signal',
   },
   {
     area: 'digital-human-rights',
@@ -218,7 +218,7 @@ export const INFLECTION_POINTS: InflectionPoint[] = [
       outputs: 'Content-addressed provenance tooling and the PL-backed teams building it.',
     },
     roles: ['infrastructure', 'capital'],
-    status: 'watching',
+    status: 'early-signal',
   },
   {
     area: 'digital-human-rights',
@@ -289,7 +289,7 @@ export const INFLECTION_POINTS: InflectionPoint[] = [
       outputs: 'Hypercerts, Funding the Commons, and the ventures spun out of this lineage.',
     },
     roles: ['infrastructure', 'capital', 'translation'],
-    status: 'watching',
+    status: 'early-signal',
   },
   {
     area: 'economies-governance',
@@ -305,7 +305,7 @@ export const INFLECTION_POINTS: InflectionPoint[] = [
       outputs: 'GainForest, Glow, and the verification benchmarks and standards they inform.',
     },
     roles: ['legibility', 'connection', 'capital'],
-    status: 'watching',
+    status: 'early-signal',
     liveEvidence: {
       label: 'GainForest & Glow — live verification activity',
       href: '/areas/economies-governance/impact/live-dashboard/',
