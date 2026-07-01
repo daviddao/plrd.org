@@ -126,6 +126,9 @@ export default async function HomePage() {
           <h1 className="font-serif text-[36px] md:text-[48px] lg:text-[52px] font-normal leading-[1.06] tracking-tight mb-6 max-w-md md:max-w-lg lg:max-w-xl">
             Driving R&amp;D breakthroughs to push humanity forward.
           </h1>
+          <p className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-xl mb-8">
+            We de-risk frontier ideas in computing and help them cross from open research to deployment, expanding human freedom, coordination, intelligence, and cognition
+          </p>
           <div className="flex flex-wrap items-center gap-4">
             <Link
               href="/about"
