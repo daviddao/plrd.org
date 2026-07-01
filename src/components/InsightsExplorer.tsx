@@ -42,12 +42,16 @@ const DISPLAY_LIMIT = 12
 export default function InsightsExplorer({
   sections,
   areas,
+  initialArea,
 }: {
   sections: InsightSection[]
   areas: AreaDef[]
+  initialArea?: string
 }) {
   const [type, setType] = useState<string>(ALL)
-  const [area, setArea] = useState<string>(ALL)
+  const [area, setArea] = useState<string>(
+    initialArea && areas.some((a) => a.slug === initialArea) ? initialArea : ALL,
+  )
 
   const matchArea = (tile: InsightTile, a: string) => a === ALL || tile.areas.includes(a)
 
