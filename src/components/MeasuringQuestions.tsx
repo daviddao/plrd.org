@@ -29,7 +29,7 @@ export default function MeasuringQuestions() {
         >
           <div className="mb-3 flex items-center gap-2.5">
             <Badge letter="A" color={HAND_COLOR} />
-            <h3 className="text-lg font-semibold tracking-tight text-black">What difference are we making?</h3>
+            <h3 className="text-lg font-semibold tracking-tight text-black">Did PL&rsquo;s work make a difference?</h3>
           </div>
           <div className="mb-2 text-[11px] font-semibold uppercase tracking-wide" style={{ color: HAND_COLOR }}>
             Inputs · Activities · Outputs
@@ -52,7 +52,7 @@ export default function MeasuringQuestions() {
         {/* B — the field */}
         <FieldCard
           letter="B"
-          title="Did the inflection point happen?"
+          title="Were the inflection points reached?"
           eyebrow="Outcomes"
           body="One pre-registered, externally observable threshold. A yes/no plus a date, measured the same way with or without PL."
           footRest="Advances with or without us."

@@ -397,39 +397,51 @@ function InflectionModal({
           </div>
 
           {/* Live evidence (Q3 only — never a Q2 reading) */}
-          {point.liveEvidence && (
-            <a
-              href={point.liveEvidence.href}
-              className="mt-5 block rounded-xl border border-gray-200 bg-white p-4 transition-colors hover:border-blue/40 no-underline"
-            >
-              <div className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-gray-400">
-                Live signal
-              </div>
-              <div className="flex items-center gap-2 text-sm font-medium text-black">
-                <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full" style={{ backgroundColor: `${LIVE_COLOR}99` }} />
-                  <span className="relative inline-flex h-2 w-2 rounded-full" style={{ backgroundColor: LIVE_COLOR }} />
-                </span>
-                {point.liveEvidence.label}
-                <svg className="ml-auto h-4 w-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </div>
-              {metrics && metrics.length > 0 && (
-                <div className="mt-3 flex flex-wrap gap-x-6 gap-y-2">
-                  {metrics.map((m) => (
-                    <span key={m.label} className="flex items-baseline gap-1.5">
-                      <span className="text-lg font-semibold text-black">{m.value}</span>
-                      <span className="text-xs text-gray-500">{m.label}</span>
-                    </span>
-                  ))}
+          {/* Full-width band: live signal (when present) + latest insights for the area */}
+          <div className="mt-6 border-t border-gray-100 pt-5">
+            {point.liveEvidence && (
+              <a
+                href={point.liveEvidence.href}
+                className="mb-4 block rounded-xl border border-gray-200 bg-white p-4 transition-colors hover:border-blue/40 no-underline"
+              >
+                <div className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-gray-400">
+                  Live signal
                 </div>
-              )}
-              <p className="mt-3 text-xs leading-relaxed text-gray-500">
-                {LIVE_SIGNAL_NOTE}
-              </p>
+                <div className="flex items-center gap-2 text-sm font-medium text-black">
+                  <span className="relative flex h-2 w-2">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full" style={{ backgroundColor: `${LIVE_COLOR}99` }} />
+                    <span className="relative inline-flex h-2 w-2 rounded-full" style={{ backgroundColor: LIVE_COLOR }} />
+                  </span>
+                  {point.liveEvidence.label}
+                  <svg className="ml-auto h-4 w-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+                {metrics && metrics.length > 0 && (
+                  <div className="mt-3 flex flex-wrap gap-x-6 gap-y-2">
+                    {metrics.map((m) => (
+                      <span key={m.label} className="flex items-baseline gap-1.5">
+                        <span className="text-lg font-semibold text-black">{m.value}</span>
+                        <span className="text-xs text-gray-500">{m.label}</span>
+                      </span>
+                    ))}
+                  </div>
+                )}
+                <p className="mt-3 text-xs leading-relaxed text-gray-500">
+                  {LIVE_SIGNAL_NOTE}
+                </p>
+              </a>
+            )}
+            <a
+              href={`/insights/?area=${point.area}`}
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-blue hover:underline"
+            >
+              See the latest {fa.label} insights
+              <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
             </a>
-          )}
+          </div>
         </div>
       </div>
     </div>

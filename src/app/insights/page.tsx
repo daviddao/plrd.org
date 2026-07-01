@@ -18,7 +18,12 @@ const FALLBACK_CARDS = {
   'card-blog': { title: 'Blog' },
 }
 
-export default async function InsightsPage() {
+export default async function InsightsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ area?: string }>
+}) {
+  const { area: initialArea } = await searchParams
   const page = await fetchPage('insights')
   const hero = getSection(page, 'hero')
   const heroTitle = hero?.title || FALLBACK_HERO_TITLE
@@ -109,7 +114,7 @@ export default async function InsightsPage() {
         </div>
       )}
 
-      <InsightsExplorer sections={insightSections} areas={areaDefs} />
+      <InsightsExplorer sections={insightSections} areas={areaDefs} initialArea={initialArea} />
 
       <EditPageButton rkey="insights" />
     </div>
