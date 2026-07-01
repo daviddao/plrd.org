@@ -23,6 +23,10 @@ type Filter = FocusAreaKey
 export type LiveMetric = { value: string; label: string }
 export type LiveOutputs = Record<string, LiveMetric[]>
 
+// Generic footnote for cards/points that surface a live signal.
+const LIVE_SIGNAL_NOTE =
+  'Live signals from a PL-supported mechanism. This may be limited to contribution evidence — not evidence of inflection point crossing.'
+
 const FA_ICON: Record<FocusAreaKey, AreaIconType> = {
   'digital-human-rights': 'shield',
   'economies-governance': 'hexagon',
@@ -269,6 +273,7 @@ function InflectionCard({
               </span>
             ))}
           </div>
+          <p className="mt-2 text-[11px] leading-relaxed text-gray-400">{LIVE_SIGNAL_NOTE}</p>
         </div>
       )}
 
@@ -342,7 +347,7 @@ function InflectionModal({
           {/* Field progress — full width */}
           <div className="mb-6 rounded-xl border border-gray-200 bg-gray-50 p-5">
             <div className="mb-2 text-xs font-semibold uppercase tracking-wide" style={{ color: FIELD_COLOR }}>
-              Field progress
+              Progress against Inflection Point
             </div>
             <FieldMeter status={point.status} />
           </div>
@@ -351,24 +356,31 @@ function InflectionModal({
           <div className="grid gap-8 sm:grid-cols-2">
             {/* OUR HAND */}
             <div className="sm:border-r sm:border-gray-100 sm:pr-8">
-              <div className="text-xs font-semibold uppercase tracking-wide" style={{ color: HAND_COLOR }}>Our hand</div>
-              <p className="mb-4 mt-1 text-xs leading-relaxed text-gray-500">Is our work making a difference? The only axis we control.</p>
+              <div className="mb-4 text-xs font-semibold uppercase tracking-wide" style={{ color: HAND_COLOR }}>Our hand</div>
               <div className="mb-3 flex items-center gap-2">
                 <QBadge letter="A" color={HAND_COLOR} />
                 <span className="text-sm font-semibold text-black">Is our work making a difference?</span>
               </div>
               <div className="mb-4"><RoleChips roles={point.roles} eyebrow={false} /></div>
-              <div className="space-y-2.5">
-                <LogicRow label="Inputs">{point.contribution.inputs}</LogicRow>
-                <LogicRow label="Activities">{point.contribution.activities}</LogicRow>
-                <LogicRow label="Outputs">{point.contribution.outputs}</LogicRow>
+              <div className="space-y-4">
+                <div>
+                  <div className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-gray-400">Inputs</div>
+                  <p className="text-sm leading-relaxed text-gray-600">{point.contribution.inputs}</p>
+                </div>
+                <div>
+                  <div className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-gray-400">Activities</div>
+                  <p className="text-sm leading-relaxed text-gray-600">{point.contribution.activities}</p>
+                </div>
+                <div>
+                  <div className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-gray-400">Outputs</div>
+                  <p className="text-sm leading-relaxed text-gray-600">{point.contribution.outputs}</p>
+                </div>
               </div>
             </div>
 
             {/* THE FIELD */}
             <div>
-              <div className="text-xs font-semibold uppercase tracking-wide" style={{ color: FIELD_COLOR }}>The field</div>
-              <p className="mb-4 mt-1 text-xs leading-relaxed text-gray-500">Did it happen, did it matter. Moves with or without us.</p>
+              <div className="mb-4 text-xs font-semibold uppercase tracking-wide" style={{ color: FIELD_COLOR }}>The field</div>
               <div className="mb-2 flex items-center gap-2">
                 <QBadge letter="B" color={FIELD_COLOR} />
                 <span className="text-sm font-semibold text-black">Did it happen?</span>
@@ -414,23 +426,12 @@ function InflectionModal({
                 </div>
               )}
               <p className="mt-3 text-xs leading-relaxed text-gray-500">
-                {point.liveEvidence.note}
+                {LIVE_SIGNAL_NOTE}
               </p>
             </a>
           )}
         </div>
       </div>
-    </div>
-  )
-}
-
-function LogicRow({ label, children }: { label: string; children: React.ReactNode }) {
-  return (
-    <div className="flex gap-3">
-      <span className="w-20 shrink-0 pt-0.5 text-[11px] font-semibold uppercase tracking-wide text-gray-400">
-        {label}
-      </span>
-      <span className="flex-1 text-sm leading-relaxed text-gray-600">{children}</span>
     </div>
   )
 }
