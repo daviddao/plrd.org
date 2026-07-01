@@ -212,7 +212,7 @@ export default function GainforestImpact({ stats }: { stats: GainforestStats }) 
         >
           <TrendStat
             label="QF matching pool"
-            value={500000}
+            value={1000000}
             caption="Ma Earth Round 3 ↗"
             format={formatUsd}
             color={TEAL}
