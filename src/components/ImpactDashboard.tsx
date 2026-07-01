@@ -6,10 +6,10 @@ import {
   PL_ROLE_ORDER,
   FIELD_COLOR,
   HAND_COLOR,
+  LIVE_COLOR,
   FIELD_STAGES,
   FOCUS_AREAS,
   INFLECTION_POINTS,
-  STATUS_META,
   stageIndexForStatus,
   type FocusAreaKey,
   type InflectionPoint,
@@ -204,8 +204,16 @@ function InflectionCard({
       type="button"
       onClick={onOpen}
       aria-haspopup="dialog"
-      className="group flex flex-col rounded-xl border border-gray-200 bg-white p-6 text-left transition-all hover:border-gray-300 hover:shadow-md"
+      className="group relative flex flex-col rounded-xl border border-gray-200 bg-white p-6 text-left transition-all hover:border-gray-300 hover:shadow-md"
     >
+      {/* Subtle detail affordance */}
+      <span className="absolute right-4 top-4 inline-flex items-center gap-0.5 text-xs font-medium text-gray-300 transition-colors group-hover:text-blue">
+        Detail
+        <svg className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+        </svg>
+      </span>
+
       {/* Header: focus area (neutral — no per-area color) */}
       <div className="mb-3 flex items-center gap-1.5 text-xs font-medium text-gray-500">
         <span className="flex h-4 w-4 items-center justify-center text-gray-400">
@@ -238,7 +246,7 @@ function InflectionCard({
           <span className="text-[11px] font-semibold uppercase tracking-wide" style={{ color: HAND_COLOR }}>
             Our hand
           </span>
-          <span className="text-[11px] text-gray-400">· did our work help</span>
+          <span className="text-[11px] text-gray-400">· is our work making a difference</span>
         </div>
         <RoleChips roles={point.roles} eyebrow={false} />
       </div>
@@ -248,8 +256,8 @@ function InflectionCard({
         <div className="mt-4 rounded-lg bg-gray-50 px-4 py-3">
           <div className="mb-2 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-gray-500">
             <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full" style={{ backgroundColor: `${FIELD_COLOR}99` }} />
-              <span className="relative inline-flex h-2 w-2 rounded-full" style={{ backgroundColor: FIELD_COLOR }} />
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full" style={{ backgroundColor: `${LIVE_COLOR}99` }} />
+              <span className="relative inline-flex h-2 w-2 rounded-full" style={{ backgroundColor: LIVE_COLOR }} />
             </span>
             Live signal
           </div>
@@ -264,15 +272,6 @@ function InflectionCard({
         </div>
       )}
 
-      {/* Detail affordance — opens the per-point methodology modal */}
-      <div className="mt-4 flex items-center justify-end">
-        <span className="inline-flex items-center gap-1 text-sm font-medium text-gray-400 transition-colors group-hover:text-gray-700">
-          Methodology
-          <svg className="h-4 w-4 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-          </svg>
-        </span>
-      </div>
     </button>
   )
 }
@@ -287,7 +286,6 @@ function InflectionModal({
   onClose: () => void
 }) {
   const fa = FOCUS_AREAS.find((f) => f.key === point.area)!
-  const status = STATUS_META[point.status]
 
   // Close on Escape, and lock body scroll while open.
   useEffect(() => {
@@ -312,7 +310,7 @@ function InflectionModal({
       onClick={onClose}
     >
       <div
-        className="relative my-4 w-full max-w-2xl rounded-2xl bg-white shadow-2xl"
+        className="relative my-4 w-full max-w-3xl rounded-2xl bg-white shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close */}
@@ -341,48 +339,50 @@ function InflectionModal({
             {point.title}
           </h2>
 
-          {/* Field axis */}
+          {/* Field progress — full width */}
           <div className="mb-6 rounded-xl border border-gray-200 bg-gray-50 p-5">
-            <div className="mb-2 flex items-center justify-between">
-              <span className="text-xs font-semibold uppercase tracking-wide" style={{ color: FIELD_COLOR }}>
-                The field
-              </span>
-              <span
-                className="inline-flex items-center gap-1.5 text-xs font-medium text-gray-600"
-                title={status.description}
-              >
-                <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: status.color }} />
-                {status.label}
-              </span>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wide" style={{ color: FIELD_COLOR }}>
+              Field progress
             </div>
             <FieldMeter status={point.status} />
-            <p className="mt-3 text-xs leading-relaxed text-gray-500">
-              The field (did it happen & matter) moves with or without us — it can advance with
-              little or no PL involvement. Our hand is the separate axis below.
-            </p>
           </div>
 
-          {/* Our hand (A) + the field (B, C) */}
-          <Section q="A" label="Did our work help? — our hand" accent={HAND_COLOR}>
-            <div className="mb-3">
-              <RoleChips roles={point.roles} />
+          {/* Two axes: our hand | the field */}
+          <div className="grid gap-8 sm:grid-cols-2">
+            {/* OUR HAND */}
+            <div className="sm:border-r sm:border-gray-100 sm:pr-8">
+              <div className="text-xs font-semibold uppercase tracking-wide" style={{ color: HAND_COLOR }}>Our hand</div>
+              <p className="mb-4 mt-1 text-xs leading-relaxed text-gray-500">Is our work making a difference? The only axis we control.</p>
+              <div className="mb-3 flex items-center gap-2">
+                <QBadge letter="A" color={HAND_COLOR} />
+                <span className="text-sm font-semibold text-black">Is our work making a difference?</span>
+              </div>
+              <div className="mb-4"><RoleChips roles={point.roles} eyebrow={false} /></div>
+              <div className="space-y-2.5">
+                <LogicRow label="Inputs">{point.contribution.inputs}</LogicRow>
+                <LogicRow label="Activities">{point.contribution.activities}</LogicRow>
+                <LogicRow label="Outputs">{point.contribution.outputs}</LogicRow>
+              </div>
             </div>
-            <div className="space-y-2.5">
-              <LogicRow label="Inputs">{point.contribution.inputs}</LogicRow>
-              <LogicRow label="Activities">{point.contribution.activities}</LogicRow>
-              <LogicRow label="Outputs">{point.contribution.outputs}</LogicRow>
+
+            {/* THE FIELD */}
+            <div>
+              <div className="text-xs font-semibold uppercase tracking-wide" style={{ color: FIELD_COLOR }}>The field</div>
+              <p className="mb-4 mt-1 text-xs leading-relaxed text-gray-500">Did it happen, did it matter. Moves with or without us.</p>
+              <div className="mb-2 flex items-center gap-2">
+                <QBadge letter="B" color={FIELD_COLOR} />
+                <span className="text-sm font-semibold text-black">Did it happen?</span>
+              </div>
+              <div className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-gray-400">Outcome — the inflection point</div>
+              <p className="mb-5 text-sm leading-relaxed text-gray-600">{point.signal}</p>
+              <div className="mb-2 flex items-center gap-2">
+                <QBadge letter="C" color={FIELD_COLOR} />
+                <span className="text-sm font-semibold text-black">Did it matter?</span>
+              </div>
+              <div className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-gray-400">Impact — the cascade</div>
+              <p className="text-sm leading-relaxed text-gray-600">{point.cascade}</p>
             </div>
-            <p className="mt-3 text-xs leading-relaxed text-gray-400">
-              Inputs → activities → outputs are the only axis we control. Whether they move the
-              field (above) is what we watch — and reason about honestly against the counterfactual.
-            </p>
-          </Section>
-          <Section q="B" label="Did it happen? — the signal" accent={FIELD_COLOR}>
-            <LogicRow label="Outcome">{point.signal}</LogicRow>
-          </Section>
-          <Section q="C" label="Did it matter? — the cascade" accent={FIELD_COLOR}>
-            <LogicRow label="Impact">{point.cascade}</LogicRow>
-          </Section>
+          </div>
 
           {/* Live evidence (Q3 only — never a Q2 reading) */}
           {point.liveEvidence && (
@@ -391,12 +391,12 @@ function InflectionModal({
               className="mt-5 block rounded-xl border border-gray-200 bg-white p-4 transition-colors hover:border-blue/40 no-underline"
             >
               <div className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-gray-400">
-                Live outputs
+                Live signal
               </div>
               <div className="flex items-center gap-2 text-sm font-medium text-black">
                 <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-teal/60" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-teal" />
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full" style={{ backgroundColor: `${LIVE_COLOR}99` }} />
+                  <span className="relative inline-flex h-2 w-2 rounded-full" style={{ backgroundColor: LIVE_COLOR }} />
                 </span>
                 {point.liveEvidence.label}
                 <svg className="ml-auto h-4 w-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -435,30 +435,14 @@ function LogicRow({ label, children }: { label: string; children: React.ReactNod
   )
 }
 
-function Section({
-  q,
-  label,
-  accent,
-  children,
-}: {
-  q: string
-  label: string
-  accent: string
-  children: React.ReactNode
-}) {
+function QBadge({ letter, color }: { letter: string; color: string }) {
   return (
-    <div className="border-t border-gray-100 py-4 first:border-t-0">
-      <div className="mb-1.5 flex items-center gap-2">
-        <span
-          className="rounded px-1.5 py-0.5 text-[11px] font-bold text-white"
-          style={{ backgroundColor: accent }}
-        >
-          {q}
-        </span>
-        <span className="text-sm font-semibold text-black">{label}</span>
-      </div>
-      <div className="text-sm leading-relaxed text-gray-600">{children}</div>
-    </div>
+    <span
+      className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md text-xs font-bold text-white"
+      style={{ backgroundColor: color }}
+    >
+      {letter}
+    </span>
   )
 }
 
@@ -470,7 +454,7 @@ function EmptyState({ filter }: { filter: Filter }) {
         Inflection points for {fa?.label ?? 'this focus area'} are being defined.
       </p>
       <p className="mx-auto mt-2 max-w-md text-sm text-gray-500">
-        This focus area is still finalizing its plan of attack. Its pre-registered bets will appear
+        This focus area is still finalizing its plan of attack. Its inflection points will appear
         here once they are set.
       </p>
     </div>
