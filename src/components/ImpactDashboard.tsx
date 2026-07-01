@@ -4,6 +4,8 @@ import { useEffect, useMemo, useState } from 'react'
 import {
   ROLE_META,
   PL_ROLE_ORDER,
+  FIELD_COLOR,
+  HAND_COLOR,
   FIELD_STAGES,
   FOCUS_AREAS,
   INFLECTION_POINTS,
@@ -52,7 +54,6 @@ export default function ImpactDashboard({ liveOutputs = {} }: { liveOutputs?: Li
             label={fa.label}
             count={INFLECTION_POINTS.filter((p) => p.area === fa.key).length}
             icon={FA_ICON[fa.key]}
-            accent={fa.accent}
             active={filter === fa.key}
             onClick={() => setFilter(fa.key)}
           />
@@ -67,6 +68,7 @@ export default function ImpactDashboard({ liveOutputs = {} }: { liveOutputs?: Li
               <InflectionCard
                 key={`${p.area}-${p.title}`}
                 point={p}
+                metrics={liveOutputs[p.title]}
                 onOpen={() => setActive(p)}
               />
             ))}
@@ -92,14 +94,12 @@ function Tab({
   count,
   active,
   icon,
-  accent,
   onClick,
 }: {
   label: string
   count: number
   active: boolean
   icon?: AreaIconType
-  accent?: string
   onClick: () => void
 }) {
   return (
@@ -116,7 +116,7 @@ function Tab({
     >
       <span
         className="flex h-6 w-6 shrink-0 items-center justify-center"
-        style={{ color: active ? accent ?? '#131316' : '#9ca3af' }}
+        style={{ color: active ? '#131316' : '#9ca3af' }}
       >
         {icon && <AreaIcon type={icon} className="block h-5 w-5" />}
       </span>
@@ -126,14 +126,12 @@ function Tab({
   )
 }
 
-/** Field-progress lifecycle meter (Q1 & Q2). Colored in the focus-area accent. */
+/** Field-progress lifecycle meter — the “field” axis (teal). */
 function FieldMeter({
   status,
-  accent,
   compact = false,
 }: {
   status: InflectionPoint['status']
-  accent: string
   compact?: boolean
 }) {
   const reached = stageIndexForStatus(status)
@@ -144,7 +142,7 @@ function FieldMeter({
           <span
             key={i}
             className="h-1.5 flex-1 rounded-full"
-            style={{ backgroundColor: i <= reached ? accent : '#e5e7eb' }}
+            style={{ backgroundColor: i <= reached ? FIELD_COLOR : '#e5e7eb' }}
           />
         ))}
       </div>
@@ -167,11 +165,14 @@ function RoleChips({ roles, eyebrow = true }: { roles: PLRole[]; eyebrow?: boole
   return (
     <span className="inline-flex flex-wrap items-center gap-1.5">
       {eyebrow && (
-        <span className="text-[10px] uppercase tracking-wide text-dark-blue/60">PL role</span>
+        <span className="text-[10px] uppercase tracking-wide" style={{ color: HAND_COLOR }}>PL role</span>
       )}
       {ordered.map((r) => (
         <span key={r} className="group/role relative inline-flex">
-          <span className="inline-flex cursor-help items-center rounded-full border border-dark-blue/20 bg-dark-blue/[0.06] px-2.5 py-1 text-xs font-medium text-dark-blue">
+          <span
+            className="inline-flex cursor-help items-center rounded-full border px-2.5 py-1 text-xs font-medium"
+            style={{ color: HAND_COLOR, borderColor: `${HAND_COLOR}55`, backgroundColor: `${HAND_COLOR}12` }}
+          >
             {ROLE_META[r].label}
           </span>
           <span
@@ -188,24 +189,26 @@ function RoleChips({ roles, eyebrow = true }: { roles: PLRole[]; eyebrow?: boole
 
 function InflectionCard({
   point,
+  metrics,
   onOpen,
 }: {
   point: InflectionPoint
+  metrics?: LiveMetric[]
   onOpen: () => void
 }) {
   const fa = FOCUS_AREAS.find((f) => f.key === point.area)!
+  const stageLabel = FIELD_STAGES[stageIndexForStatus(point.status)]
 
   return (
     <button
       type="button"
       onClick={onOpen}
       aria-haspopup="dialog"
-      className="group flex flex-col rounded-xl border border-gray-200 border-l-[3px] bg-white p-6 text-left transition-all hover:border-blue/40 hover:shadow-md"
-      style={{ borderLeftColor: fa.accent }}
+      className="group flex flex-col rounded-xl border border-gray-200 bg-white p-6 text-left transition-all hover:border-gray-300 hover:shadow-md"
     >
-      {/* Header: area badge */}
+      {/* Header: focus area (neutral — no per-area color) */}
       <div className="mb-3 flex items-center gap-1.5 text-xs font-medium text-gray-500">
-        <span className="flex h-4 w-4 items-center justify-center" style={{ color: fa.accent }}>
+        <span className="flex h-4 w-4 items-center justify-center text-gray-400">
           <AreaIcon type={FA_ICON[fa.key]} className="block h-3.5 w-3.5" />
         </span>
         {fa.label}
@@ -214,33 +217,61 @@ function InflectionCard({
       <div className="mb-1 text-xs uppercase tracking-wide text-gray-400">
         {point.opportunitySpace}
       </div>
-      <h3 className="mb-4 text-lg font-medium leading-snug text-black">{point.title}</h3>
+      <h3 className="mb-2 text-lg font-medium leading-snug text-black">{point.title}</h3>
+      <p className="mb-5 line-clamp-3 text-sm leading-relaxed text-gray-600">{point.signal}</p>
 
-      {/* Field-progress axis */}
-      <FieldMeter status={point.status} accent={fa.accent} />
-
-      {/* Inflection point teaser */}
-      <div className="mt-4">
-        <div className="mb-0.5 text-xs font-semibold uppercase tracking-wide text-gray-500">
-          Inflection point
+      {/* THE FIELD — did it happen & matter (teal) */}
+      <div className="border-t border-gray-100 pt-4">
+        <div className="mb-2 flex items-center gap-2">
+          <span className="text-[11px] font-semibold uppercase tracking-wide" style={{ color: FIELD_COLOR }}>
+            The field
+          </span>
+          <span className="text-[11px] text-gray-400">· did it happen & matter</span>
+          <span className="ml-auto text-[11px] font-medium" style={{ color: FIELD_COLOR }}>{stageLabel}</span>
         </div>
-        <p className="line-clamp-3 text-sm leading-relaxed text-gray-600">{point.signal}</p>
+        <FieldMeter status={point.status} />
       </div>
 
-      {/* Footer: contribution axis + open hint */}
+      {/* OUR HAND — did our work help (violet) */}
       <div className="mt-4 border-t border-gray-100 pt-4">
-        <div className="flex items-center justify-between gap-3">
-          <span className="text-[10px] uppercase tracking-wide text-dark-blue/60">PL role</span>
-          <span className="inline-flex items-center gap-1 text-sm font-medium text-gray-400 transition-colors group-hover:text-blue">
-            Detail
-            <svg className="h-4 w-4 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
+        <div className="mb-2 flex items-center gap-2">
+          <span className="text-[11px] font-semibold uppercase tracking-wide" style={{ color: HAND_COLOR }}>
+            Our hand
           </span>
+          <span className="text-[11px] text-gray-400">· did our work help</span>
         </div>
-        <div className="mt-2">
-          <RoleChips roles={point.roles} eyebrow={false} />
+        <RoleChips roles={point.roles} eyebrow={false} />
+      </div>
+
+      {/* LIVE SIGNAL — present only for points with live outputs */}
+      {metrics && metrics.length > 0 && (
+        <div className="mt-4 rounded-lg bg-gray-50 px-4 py-3">
+          <div className="mb-2 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-gray-500">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full" style={{ backgroundColor: `${FIELD_COLOR}99` }} />
+              <span className="relative inline-flex h-2 w-2 rounded-full" style={{ backgroundColor: FIELD_COLOR }} />
+            </span>
+            Live signal
+          </div>
+          <div className="flex flex-wrap gap-x-6 gap-y-1">
+            {metrics.map((m) => (
+              <span key={m.label} className="flex items-baseline gap-1.5">
+                <span className="text-lg font-semibold text-black">{m.value}</span>
+                <span className="text-xs text-gray-500">{m.label}</span>
+              </span>
+            ))}
+          </div>
         </div>
+      )}
+
+      {/* Detail affordance — opens the per-point methodology modal */}
+      <div className="mt-4 flex items-center justify-end">
+        <span className="inline-flex items-center gap-1 text-sm font-medium text-gray-400 transition-colors group-hover:text-gray-700">
+          Methodology
+          <svg className="h-4 w-4 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+        </span>
       </div>
     </button>
   )
@@ -281,8 +312,7 @@ function InflectionModal({
       onClick={onClose}
     >
       <div
-        className="relative my-4 w-full max-w-2xl rounded-2xl border-t-4 bg-white shadow-2xl"
-        style={{ borderTopColor: fa.accent }}
+        className="relative my-4 w-full max-w-2xl rounded-2xl bg-white shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close */}
@@ -300,7 +330,7 @@ function InflectionModal({
         <div className="p-6 sm:p-8">
           {/* Header */}
           <div className="mb-2 flex items-center gap-2 text-sm font-medium text-gray-500">
-            <span className="flex h-5 w-5 items-center justify-center" style={{ color: fa.accent }}>
+            <span className="flex h-5 w-5 items-center justify-center text-gray-400">
               <AreaIcon type={FA_ICON[fa.key]} className="block h-4 w-4" />
             </span>
             {fa.label}
@@ -314,8 +344,8 @@ function InflectionModal({
           {/* Field axis */}
           <div className="mb-6 rounded-xl border border-gray-200 bg-gray-50 p-5">
             <div className="mb-2 flex items-center justify-between">
-              <span className="text-xs font-semibold uppercase tracking-wide text-gray-500">
-                Field progress
+              <span className="text-xs font-semibold uppercase tracking-wide" style={{ color: FIELD_COLOR }}>
+                The field
               </span>
               <span
                 className="inline-flex items-center gap-1.5 text-xs font-medium text-gray-600"
@@ -325,21 +355,15 @@ function InflectionModal({
                 {status.label}
               </span>
             </div>
-            <FieldMeter status={point.status} accent={fa.accent} />
+            <FieldMeter status={point.status} />
             <p className="mt-3 text-xs leading-relaxed text-gray-500">
-              The field axis (Q1 & Q2) is tracked independently of PL&rsquo;s contribution. It can
-              advance with little or no PL involvement.
+              The field (did it happen & matter) moves with or without us — it can advance with
+              little or no PL involvement. Our hand is the separate axis below.
             </p>
           </div>
 
-          {/* Three questions — each tagged with the logic-model stage it maps to */}
-          <Section q="Q1" label="Did it matter? — the cascade" accent={fa.accent}>
-            <LogicRow label="Impact">{point.cascade}</LogicRow>
-          </Section>
-          <Section q="Q2" label="Did it happen? — the signal" accent={fa.accent}>
-            <LogicRow label="Outcome">{point.signal}</LogicRow>
-          </Section>
-          <Section q="Q3" label="Did our work make it happen? — PL contribution" accent={fa.accent}>
+          {/* Our hand (A) + the field (B, C) */}
+          <Section q="A" label="Did our work help? — our hand" accent={HAND_COLOR}>
             <div className="mb-3">
               <RoleChips roles={point.roles} />
             </div>
@@ -349,9 +373,15 @@ function InflectionModal({
               <LogicRow label="Outputs">{point.contribution.outputs}</LogicRow>
             </div>
             <p className="mt-3 text-xs leading-relaxed text-gray-400">
-              Inputs → activities → outputs are PL&rsquo;s planned work. The outcomes and impact they
-              aim at are tracked on the field axis above (Q2, then Q1).
+              Inputs → activities → outputs are the only axis we control. Whether they move the
+              field (above) is what we watch — and reason about honestly against the counterfactual.
             </p>
+          </Section>
+          <Section q="B" label="Did it happen? — the signal" accent={FIELD_COLOR}>
+            <LogicRow label="Outcome">{point.signal}</LogicRow>
+          </Section>
+          <Section q="C" label="Did it matter? — the cascade" accent={FIELD_COLOR}>
+            <LogicRow label="Impact">{point.cascade}</LogicRow>
           </Section>
 
           {/* Live evidence (Q3 only — never a Q2 reading) */}
