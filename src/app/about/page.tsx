@@ -116,29 +116,31 @@ export default async function AboutPage() {
       </div>
 
       {/* Focus Areas */}
-      <div className="max-w-6xl mx-auto px-6 mb-28">
-        <h2 className="font-semibold text-xl lg:text-2xl mb-10">Our Four Focus Areas</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <FocusCard
-            slug="digital-human-rights"
-            title="Digital Human Rights"
-            description={FOCUS_AREA_DESCRIPTIONS['digital-human-rights']}
-          />
-          <FocusCard
-            slug="economies-governance"
-            title="Economies & Governance"
-            description={FOCUS_AREA_DESCRIPTIONS['economies-governance']}
-          />
-          <FocusCard
-            slug="ai-robotics"
-            title="AI & Robotics"
-            description={FOCUS_AREA_DESCRIPTIONS['ai-robotics']}
-          />
-          <FocusCard
-            slug="neurotech"
-            title="Neurotechnology"
-            description={FOCUS_AREA_DESCRIPTIONS.neurotech}
-          />
+      <div className="bg-gray-100 py-16 lg:py-20 mb-28">
+        <div className="max-w-6xl mx-auto px-6">
+          <h2 className="font-semibold text-xl lg:text-2xl mb-10">Our Four Focus Areas</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <FocusCard
+              slug="digital-human-rights"
+              title="Digital Human Rights"
+              description={FOCUS_AREA_DESCRIPTIONS['digital-human-rights']}
+            />
+            <FocusCard
+              slug="economies-governance"
+              title="Economies & Governance"
+              description={FOCUS_AREA_DESCRIPTIONS['economies-governance']}
+            />
+            <FocusCard
+              slug="ai-robotics"
+              title="AI & Robotics"
+              description={FOCUS_AREA_DESCRIPTIONS['ai-robotics']}
+            />
+            <FocusCard
+              slug="neurotech"
+              title="Neurotechnology"
+              description={FOCUS_AREA_DESCRIPTIONS.neurotech}
+            />
+          </div>
         </div>
       </div>
 
@@ -225,7 +227,7 @@ export default async function AboutPage() {
 function Section({ label, title, children }: { label: string; title: string; children: React.ReactNode }) {
   return (
     <div className="max-w-6xl mx-auto px-6 mb-28">
-      <p className="text-pink text-sm tracking-wide mb-3">{label}</p>
+      <p className="text-blue text-sm tracking-wide mb-3">{label}</p>
       <h2 className="font-semibold text-xl lg:text-2xl leading-relaxed mb-8 max-w-3xl">{title}</h2>
       {children}
     </div>
@@ -236,7 +238,7 @@ function FocusCard({ slug, title, description }: { slug: string; title: string; 
   const iconType = FOCUS_CARD_ICONS[slug] || 'shield'
 
   return (
-    <Link href={`/areas/${slug}`} className="group block border border-gray-300 p-8 hover:border-blue hover:shadow-sm transition-all">
+    <Link href={`/areas/${slug}`} className="group block bg-white border border-gray-300 p-8 hover:border-blue hover:shadow-sm transition-all">
       <div className="flex items-start gap-5">
         <AreaIcon type={iconType} />
         <div className="min-w-0 flex-1">
