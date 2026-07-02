@@ -58,9 +58,9 @@ Once the bottlenecks are named, the toolkit that releases them is plural by desi
 Ultimately, the success of PL R&D is the success of our focus areas and the breakthroughs they create over time. As we measure our impact in accelerating progress, we use three questions to measure the value of our contributions:
 
 <div class="q-grid">
-<div class="q-card"><span class="q-num">1</span><div class="q-q">Did the inflection points happen?</div><p>Did the inflection points we predicted within each field happen?</p></div>
-<div class="q-card"><span class="q-num">2</span><div class="q-q">Did they matter?</div><p>Did they matter (meaningfully accelerate progress in the field)?</p></div>
-<div class="q-card"><span class="q-num">3</span><div class="q-q">Did our work make it happen?</div><p>Did our work contribute to inflection point activation or other field-level progress?</p></div>
+<div class="q-card"><span class="q-num">1</span><div class="q-q">Did the inflection points we predicted within each field happen?</div></div>
+<div class="q-card"><span class="q-num">2</span><div class="q-q">Did they matter (meaningfully accelerate progress in the field)?</div></div>
+<div class="q-card"><span class="q-num">3</span><div class="q-q">Did our work contribute to inflection point activation or other field-level progress?</div></div>
 </div>
 
 How frontier R&D actually happens is, to us, itself an open research question. That is why we stay deliberately broad about what counts as a useful intervention and will expand our toolkit as we learn. Over time, we expect to produce breakthroughs not only across the four focus areas but in how R&D itself is done.
