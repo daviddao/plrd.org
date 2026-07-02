@@ -3,6 +3,15 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { ContentTile } from '@/components/ContentTile'
+import type { AreaIconType } from '@/components/AreaIcons'
+
+// Focus-area slug → icon, matching the mapping used on the /areas pages.
+const AREA_ICON: Record<string, AreaIconType> = {
+  'digital-human-rights': 'shield',
+  'economies-governance': 'hexagon',
+  'ai-robotics': 'neural',
+  neurotech: 'brain',
+}
 
 export type InsightTile = {
   key: string
@@ -134,9 +143,17 @@ export default function InsightsExplorer({
       ) : (
         <div className="mb-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {shown.map(({ key, areas: _areas, typeKey: _typeKey, typeLabel, allHref: _h, allLabel: _l, ...tile }) => (
-              <ContentTile key={key} {...tile} badge={type === ALL ? typeLabel : undefined} />
-            ))}
+            {shown.map(({ key, areas: tileAreas, typeKey: _typeKey, typeLabel, allHref: _h, allLabel: _l, ...tile }) => {
+              const iconSlug = tileAreas.find((a) => AREA_ICON[a])
+              return (
+                <ContentTile
+                  key={key}
+                  {...tile}
+                  badge={type === ALL ? typeLabel : undefined}
+                  areaIcon={iconSlug ? AREA_ICON[iconSlug] : undefined}
+                />
+              )
+            })}
           </div>
           {allLinks.length > 0 && (
             <div className="flex flex-wrap gap-x-6 gap-y-2 mt-8">

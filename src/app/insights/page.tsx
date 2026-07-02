@@ -6,6 +6,7 @@ import { PageEditHistoryByline } from '@/components/EditHistoryByline'
 import MarkdownContent from '@/components/MarkdownContent'
 import InsightsExplorer, { type InsightSection, type AreaDef } from '@/components/InsightsExplorer'
 import { fetchPage, getSection } from '@/lib/indexer'
+import { formatDate } from '@/lib/format'
 
 export const metadata: Metadata = { title: 'Insights' }
 
@@ -43,13 +44,11 @@ export default async function InsightsPage() {
       allLabel: 'All posts →',
       items: blogPosts.map((post) => {
         const isExternal = !!post.external_url
-        const dateLabel =
-          post.date && new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
         return {
           key: post.slug,
           href: post.external_url || `/blog/${post.slug}/`,
           external: isExternal,
-          eyebrow: [dateLabel, isExternal && 'protocol.ai'].filter(Boolean).join(' · '),
+          eyebrow: [formatDate(post.date), isExternal && 'protocol.ai'].filter(Boolean).join(' · '),
           title: post.title,
           description: post.summary,
           areas: post.areas ?? [],
@@ -66,7 +65,7 @@ export default async function InsightsPage() {
       items: publications.map((p) => ({
         key: p.slug,
         href: `/publications/${p.slug}/`,
-        eyebrow: [p.venue, p.date && new Date(p.date).getFullYear()].filter(Boolean).join(' · '),
+        eyebrow: [p.venue, formatDate(p.date)].filter(Boolean).join(' · '),
         title: p.title,
         areas: p.areas ?? [],
         date: p.date || '',
@@ -81,7 +80,7 @@ export default async function InsightsPage() {
       items: talks.map((t) => ({
         key: t.slug,
         href: `/talks/${t.slug}/`,
-        eyebrow: [t.venue, t.venue_location, t.date && new Date(t.date).getFullYear()].filter(Boolean).join(' · '),
+        eyebrow: [t.venue, t.venue_location, formatDate(t.date)].filter(Boolean).join(' · '),
         title: t.title,
         description: t.abstract,
         areas: t.areas ?? [],
