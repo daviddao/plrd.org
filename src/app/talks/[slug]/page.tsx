@@ -14,7 +14,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const talk = talks.find((t) => t.slug === slug)
   if (!talk) return { title: 'Not Found' }
-  return { title: talk.title }
+  const description = (talk.abstract || '').slice(0, 160)
+  const canonical = `/talks/${talk.slug}/`
+  return {
+    title: talk.title,
+    description,
+    alternates: { canonical },
+    openGraph: {
+      type: 'article',
+      url: canonical,
+      title: talk.title,
+      description,
+      publishedTime: talk.date || undefined,
+      authors: talk.authors,
+    },
+  }
 }
 
 function extractYoutubeId(html: string): string | null {

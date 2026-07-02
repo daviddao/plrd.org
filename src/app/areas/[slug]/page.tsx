@@ -102,7 +102,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const area = areas.find((a) => a.slug === slug)
   if (!area) return { title: 'Not Found' }
-  return { title: stripFaPrefix(area.title), description: area.summary }
+  const title = stripFaPrefix(area.title)
+  const canonical = `/areas/${area.slug}/`
+  return {
+    title,
+    description: area.summary,
+    alternates: { canonical },
+    openGraph: {
+      type: 'article',
+      url: canonical,
+      title,
+      description: area.summary,
+    },
+  }
 }
 
 export default async function AreaPage({ params }: Props) {

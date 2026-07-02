@@ -340,7 +340,7 @@ function escapeXml(str) {
 }
 
 function buildFeed(publications, talks, blog) {
-  const baseUrl = 'https://plresearch.org'
+  const baseUrl = 'https://www.plrd.org'
   const items = [
     ...publications.slice(0, 20).map((p) => ({
       title: p.title,
