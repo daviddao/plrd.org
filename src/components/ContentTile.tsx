@@ -25,7 +25,7 @@ export function ContentTile({ href, eyebrow, title, description, external, badge
       href={href}
       target={external ? '_blank' : undefined}
       rel={external ? 'noopener noreferrer' : undefined}
-      className="group flex flex-col h-full border border-gray-200 rounded-lg p-5 hover:border-blue hover:shadow-sm transition-all"
+      className="group flex flex-col justify-start h-full border border-gray-200 rounded-lg p-5 hover:border-blue hover:shadow-sm transition-all"
     >
       {(badge || areaIcon) && (
         <div className="flex items-start justify-between gap-2 mb-2">
