@@ -62,7 +62,7 @@ function getLatestUpdates(count: number): UpdateItem[] {
     return {
       title: t.title || t.slug,
       date: t.date || '',
-      type: 'Talk',
+      type: 'Talks & Podcasts',
       permalink: `/talks/${t.slug}`,
       slug: t.slug,
       areas: (t.areas || []).filter(Boolean) as string[],

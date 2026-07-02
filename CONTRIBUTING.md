@@ -309,6 +309,8 @@ A brief overview of the talk content.
 
 **YouTube videos:** Use the Hugo shortcode `{{< youtube VIDEO_ID >}}` in the body to embed a video. Extract the video ID from the YouTube URL (e.g., `https://www.youtube.com/watch?v=dQw4w9WgXcQ` -> `dQw4w9WgXcQ`).
 
+**Spotify episodes:** Use the shortcode `{{< spotify episode/EPISODE_ID >}}` in the body to embed a podcast episode. Extract the episode ID from the Spotify URL (e.g., `https://open.spotify.com/episode/4h2YB73QuiwO1lqsRsCcw8` -> `4h2YB73QuiwO1lqsRsCcw8`).
+
 **Cover image:** Place a `featured.jpg` or `featured.png` in the talk folder and reference it in the `resources` frontmatter.
 
 ### Add a Blog Post
