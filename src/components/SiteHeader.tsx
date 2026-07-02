@@ -7,6 +7,7 @@ import { mainNav } from '@/lib/site-config'
 import { useAuth } from '@/lib/atproto'
 import SearchBar from '@/components/SearchBar'
 import NavItem from '@/components/NavItem'
+import ThemeToggle from '@/components/ThemeToggle'
 
 type Props = {
   onMenuClick: () => void
@@ -74,6 +75,8 @@ export default function SiteHeader({ onMenuClick }: Props) {
             <div className="flex items-center gap-4 ml-4">
               <SearchBar variant="desktop" />
 
+              <ThemeToggle />
+
               {isAuthenticated && session ? (
                 <Link
                   href="/admin"
@@ -104,6 +107,7 @@ export default function SiteHeader({ onMenuClick }: Props) {
 
           {/* Mobile */}
           <div className="flex items-center gap-2 lg:hidden">
+            <ThemeToggle />
             <SearchBar variant="mobile" />
             <button
               onClick={onMenuClick}
