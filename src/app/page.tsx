@@ -148,15 +148,6 @@ export default async function HomePage() {
             </a>
           </div>
         </div>
-
-        <a
-          href="#focus-areas"
-          className="relative z-10 inline-flex flex-col items-center gap-1.5 mt-12 text-gray-400 hover:text-gray-600 transition-colors group"
-        >
-          <svg className="w-5 h-5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
-          </svg>
-        </a>
       </div>
 
     </div>
