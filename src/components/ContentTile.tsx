@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import type { ReactNode } from 'react'
+import { AreaIcon, type AreaIconType } from './AreaIcons'
 
 export type ContentTileData = {
   href: string
@@ -7,6 +8,10 @@ export type ContentTileData = {
   title: string
   description?: string
   external?: boolean
+  /** Optional content-type tag shown at the top of the card (e.g. in the unified Insights feed). */
+  badge?: string
+  /** Optional focus-area icon shown in the top-right corner of the card. */
+  areaIcon?: AreaIconType
 }
 
 /**
@@ -14,14 +19,31 @@ export type ContentTileData = {
  * on the Insights explorer and the /publications, /talks, /blog, /tutorials
  * listing pages so the tile view persists across "All …" links.
  */
-export function ContentTile({ href, eyebrow, title, description, external }: ContentTileData) {
+export function ContentTile({ href, eyebrow, title, description, external, badge, areaIcon }: ContentTileData) {
   return (
     <Link
       href={href}
       target={external ? '_blank' : undefined}
       rel={external ? 'noopener noreferrer' : undefined}
-      className="group flex flex-col h-full border border-gray-200 rounded-lg p-5 hover:border-blue hover:shadow-sm transition-all"
+      className="group flex flex-col justify-start h-full border border-gray-200 rounded-lg p-5 hover:border-blue hover:shadow-sm transition-all"
     >
+      {(badge || areaIcon) && (
+        <div className="flex items-start justify-between gap-2 mb-2">
+          {badge ? (
+            <span className="text-[10px] font-semibold uppercase tracking-wide text-gray-500 bg-gray-100 rounded-full px-2 py-0.5">
+              {badge}
+            </span>
+          ) : (
+            <span />
+          )}
+          {areaIcon && (
+            <AreaIcon
+              type={areaIcon}
+              className="w-6 h-6 shrink-0 text-gray-400 group-hover:text-blue transition-colors duration-200"
+            />
+          )}
+        </div>
+      )}
       {eyebrow && <div className="text-xs text-gray-400 mb-2">{eyebrow}</div>}
       <h3 className="text-base font-medium text-black leading-snug group-hover:text-blue transition-colors">
         {title}
