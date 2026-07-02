@@ -12,6 +12,8 @@ authors:
 
 Over the following decade, Protocol Labs' ambition expanded beyond any single protocol. By 2024, it had morphed into an [innovation network](https://directory.plnetwork.io/home) [organized around three fields](https://www.protocol.ai/blog/the-impact-of-our-innovation-network/) where computing's trajectory will most determine human civilization: securing digital human rights, upgrading economic and governance systems, and developing advanced technologies (AI, robotics, and brain-computer interfaces) safely.
 
+<figure class="post-figure"><img src="/images/blog/pl-innovation-network.png" alt="The Protocol Labs innovation network, spanning research, development, and deployment across its focus areas." /><figcaption>The Protocol Labs innovation network.</figcaption></figure>
+
 ## Why PL R&D exists and what we do
 
 Computing continues to reshape various dimensions of human agency and Protocol Labs has evolved to shape this trajectory. PL R&D exists to expand and safeguard human freedom, coordination, intelligence, and cognition by accelerating computing breakthroughs. PL R&D is not building the next protocol, product or service directly, but identifying where fields are stuck, creating the conditions for others to move faster, and compounding what gets learned across every frontier it touches. Our role within the broader Protocol Labs innovation network is to connect breakthrough R&D into capital formation and network platform support. The R&D pipeline aims to move frontier ideas from open research through productionizing and into deployed systems that scale globally – each stage compounding on the last.
@@ -56,9 +58,9 @@ Once the bottlenecks are named, the toolkit that releases them is plural by desi
 Ultimately, the success of PL R&D is the success of our focus areas and the breakthroughs they create over time. As we measure our impact in accelerating progress, we use three questions to measure the value of our contributions:
 
 <div class="q-grid">
-<div class="q-card"><span class="q-num">1</span><div class="q-q">Did the inflection points happen?</div><p>Did the inflection points we predicted within each field actually arrive?</p></div>
-<div class="q-card"><span class="q-num">2</span><div class="q-q">Did they matter?</div><p>Did they meaningfully accelerate progress in the field?</p></div>
-<div class="q-card"><span class="q-num">3</span><div class="q-q">Did our work make it happen?</div><p>Did our work contribute to inflection-point activation or other field-level progress?</p></div>
+<div class="q-card"><span class="q-num">1</span><div class="q-q">Did the inflection points happen?</div><p>Did the inflection points we predicted within each field happen?</p></div>
+<div class="q-card"><span class="q-num">2</span><div class="q-q">Did they matter?</div><p>Did they matter (meaningfully accelerate progress in the field)?</p></div>
+<div class="q-card"><span class="q-num">3</span><div class="q-q">Did our work make it happen?</div><p>Did our work contribute to inflection point activation or other field-level progress?</p></div>
 </div>
 
 How frontier R&D actually happens is, to us, itself an open research question. That is why we stay deliberately broad about what counts as a useful intervention and will expand our toolkit as we learn. Over time, we expect to produce breakthroughs not only across the four focus areas but in how R&D itself is done.
