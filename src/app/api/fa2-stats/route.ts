@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { fetchSimocracyStats } from '@/lib/simocracy'
 import { fetchGlowStats } from '@/lib/glow'
 import { fetchGainforestStats } from '@/lib/gainforest'
+import { fetchMaEarthStats } from '@/lib/maearth'
 import { fetchFtcStats } from '@/lib/ftc'
 
 export const dynamic = 'force-dynamic'
@@ -13,16 +14,18 @@ export const dynamic = 'force-dynamic'
  * This is the same data the FA2 live dashboard
  * (/areas/economies-governance/impact/live-dashboard/) renders, minus the
  * heavyweight trend series and event feeds: just the headline totals from
- * each ecosystem source (Simocracy, Glow, GainForest, Funding the Commons),
+ * each ecosystem source (Simocracy, Glow, GainForest, Ma Earth, Funding the
+ * Commons),
  * with per-source `degraded` flags and fetch timestamps. Intended for AI
  * agents (e.g. the PL Agent Village) and anyone who wants the numbers
  * without scraping the page.
  */
 export async function GET() {
-  const [sim, glow, gainforest, ftc] = await Promise.all([
+  const [sim, glow, gainforest, maEarth, ftc] = await Promise.all([
     fetchSimocracyStats(),
     fetchGlowStats(),
     fetchGainforestStats(),
+    fetchMaEarthStats(),
     fetchFtcStats(),
   ])
 
@@ -52,6 +55,16 @@ export async function GET() {
         observations: gainforest.observations,
         fetchedAt: gainforest.fetchedAt,
         degraded: gainforest.degraded,
+      },
+      maEarth: {
+        source: 'https://maearth.com',
+        round: maEarth.round,
+        donationsUsd: maEarth.donations,
+        donors: maEarth.donors,
+        projects: maEarth.projects,
+        matchingPoolUsd: maEarth.matchingPool,
+        fetchedAt: maEarth.fetchedAt,
+        degraded: maEarth.degraded,
       },
       fundingTheCommons: {
         source: 'https://fundingthecommons.io',
