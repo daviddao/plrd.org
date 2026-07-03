@@ -223,10 +223,26 @@ export default function GainforestImpact({
             caption={
               maearth.degraded
                 ? 'Ma Earth ↗'
-                : `${formatCount(maearth.donors)} donors · ${formatCount(maearth.projects)} projects ↗`
+                : `${formatCount(maearth.projects)} projects · Ma Earth ↗`
             }
             format={formatUsd}
             color={PINK}
+          />
+        </a>
+        {/* Live Ma Earth donor count across all round projects. */}
+        <a
+          href="https://maearth.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group block"
+          title={`Ma Earth ${maearth.round} — donors across all projects`}
+        >
+          <TrendStat
+            label={`${maearth.round} donors`}
+            value={maearth.donors}
+            caption={`Ma Earth ${maearth.round} ↗`}
+            format={formatCount}
+            color={BLUE}
           />
         </a>
         {/* Ma Earth quadratic-funding matching pool. */}
