@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import worldMap from '@/data/world-map.json'
 import gainforestSites from '@/data/gainforest-sites.json'
 import type { GainforestStats } from '@/lib/gainforest'
+import type { MaEarthStats } from '@/lib/maearth'
 import { MetricModal, TrendStat, formatCount, InfoTooltip } from '@/components/MetricTrend'
 import GainforestCarousel from '@/components/GainforestCarousel'
 
@@ -144,7 +145,13 @@ function formatUsd(n: number): string {
 
 type HcKey = 'certifiedOrgs' | 'bumicerts'
 
-export default function GainforestImpact({ stats }: { stats: GainforestStats }) {
+export default function GainforestImpact({
+  stats,
+  maearth,
+}: {
+  stats: GainforestStats
+  maearth: MaEarthStats
+}) {
   const [active, setActive] = useState<HcKey | null>(null)
   const [obsOpen, setObsOpen] = useState(false)
   const obsSeries = stats.trends.observations
@@ -202,18 +209,38 @@ export default function GainforestImpact({ stats }: { stats: GainforestStats }) 
             onExpand={() => setActive(m.key)}
           />
         ))}
-        {/* Static QF matching pool — links out to Ma Earth. */}
+        {/* Live Ma Earth crowdfunding donations across all round projects. */}
         <a
           href="https://maearth.com/"
           target="_blank"
           rel="noopener noreferrer"
           className="group block"
-          title="Ma Earth Round 3 quadratic-funding matching pool"
+          title={`Ma Earth ${maearth.round} — live crowdfunding donations across all projects`}
+        >
+          <TrendStat
+            label={`${maearth.round} donations`}
+            value={maearth.donations}
+            caption={
+              maearth.degraded
+                ? 'Ma Earth ↗'
+                : `${formatCount(maearth.donors)} donors · ${formatCount(maearth.projects)} projects ↗`
+            }
+            format={formatUsd}
+            color={PINK}
+          />
+        </a>
+        {/* Ma Earth quadratic-funding matching pool. */}
+        <a
+          href="https://maearth.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group block"
+          title={`Ma Earth ${maearth.round} quadratic-funding matching pool`}
         >
           <TrendStat
             label="QF matching pool"
-            value={1000000}
-            caption="Ma Earth Round 3 ↗"
+            value={maearth.matchingPool}
+            caption={`Ma Earth ${maearth.round} ↗`}
             format={formatUsd}
             color={TEAL}
           />
