@@ -32,7 +32,7 @@ Our work spans four [focus areas](https://www.plrd.org/areas):
 
 We break down each frontier field into no more than four active *opportunity spaces*: tight clusters of technology and practice that often share expert networks, infrastructure, and bottlenecks.
 
-Each opportunity space, in turn, names a small number of *inflection points*: specific, observable, falsifiable events whose arrival would tell us a field has irreversibly crossed over. We think of an inflection point as the moment when a capability becomes the default, when a market crosses a threshold of trust, and when a regulator can no longer pretend a technology does not exist.
+Each opportunity space, in turn, names a small number of *inflection points*: specific, observable, falsifiable events whose arrival would tell us a field has irreversibly crossed over. We think of an inflection point as the moment when a capability becomes the default, when a market crosses a threshold of trust, or when a regulator can no longer pretend a technology does not exist.
 
 Across the four focus areas, the work is already underway. 381 teams are active in the Digital Human Rights network, supported by over $30M in grants deployed in 2025 alone, with convenings ranging from the Cypherpunk Retreat to a d/acc Residency in Patagonia seeding the next generation of censorship-resistant infrastructure and agentic web3 builders.
 
