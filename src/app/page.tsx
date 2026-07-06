@@ -8,12 +8,12 @@ import { fetchPage, getSection } from "@/lib/indexer"
 import { FOCUS_AREA_DESCRIPTIONS } from '@/lib/focus-area-descriptions'
 import { type HexPattern } from "@/lib/hex-mosaic"
 
-/** Focus-area imagery shown floating above each card (replaces the hex cloud). */
+/** Focus-area hero illustrations floating above each card (replaces the hex cloud). */
 const FOCUS_AREA_IMAGES: Record<string, string> = {
-  'digital-human-rights': '/images/fa2/digital-human-rights.jpg',
-  'economies-governance': '/images/fa2/fa2.webp',
-  'ai-robotics': '/images/fa2/ai-robotics.jpg',
-  neurotech: '/images/fa2/neurotech.jpg',
+  'digital-human-rights': '/images/focus-areas/digital-human-rights.png',
+  'economies-governance': '/images/focus-areas/economies-governance.png',
+  'ai-robotics': '/images/focus-areas/ai-robotics.png',
+  neurotech: '/images/focus-areas/neurotech.png',
 }
 import RDPipeline from "@/components/RDPipeline"
 import InsightCarousel from "@/components/InsightCarousel"
@@ -283,7 +283,7 @@ function FocusAreaCard({
 
   return (
     <div className="group relative isolate">
-      {/* Focus-area image, floating above the card (replaces the hex cloud). */}
+      {/* Focus-area illustration floating above the card (replaces the hex cloud). */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute left-0 -top-32 sm:-top-36 lg:-top-40 w-[65%] sm:w-[62%] lg:w-[60%] h-56 sm:h-64 lg:h-64 select-none"
@@ -293,7 +293,7 @@ function FocusAreaCard({
           <img
             src={image}
             alt=""
-            className="absolute bottom-0 left-0 h-full w-full rounded-2xl object-cover shadow-lg ring-1 ring-black/5 transition-transform duration-500 ease-out group-hover:-translate-y-1.5 group-hover:scale-[1.02]"
+            className="absolute bottom-0 left-0 h-full w-full object-contain object-bottom [filter:drop-shadow(0_10px_18px_rgba(15,17,21,0.14))] transition-transform duration-500 ease-out group-hover:-translate-y-1.5 group-hover:scale-[1.02]"
           />
         )}
       </div>
