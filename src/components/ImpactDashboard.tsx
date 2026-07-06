@@ -459,8 +459,8 @@ function InflectionModal({
             </div>
           </div>
 
-          {/* OUR HAND — PL intervention pills (definition on hover) + real examples */}
-          <div className="mt-8 border-t border-gray-200 pt-8">
+          {/* OUR HAND — grey card: PL intervention pills (definition on hover) + real examples */}
+          <div className="mt-4 rounded-xl bg-gray-50 p-5 sm:p-6">
             <div className="mb-2 text-xs font-semibold uppercase tracking-wide" style={{ color: HAND_COLOR }}>
               Our hand
             </div>
@@ -473,18 +473,17 @@ function InflectionModal({
             </div>
           </div>
 
-          {/* Full-width Live-signal band: PL-backed live outputs (Q3) + crowd forecast (field axis). */}
-          <div className="mt-8 border-t border-gray-200 pt-8">
+          {/* LIVE SIGNAL — grey card: title, PL-backed live outputs (Q3), crowd forecast, latest insights */}
+          <div className="mt-4 rounded-xl bg-gray-50 p-5 sm:p-6">
+            <div className="mb-4 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-gray-500">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full" style={{ backgroundColor: `${LIVE_COLOR}99` }} />
+                <span className="relative inline-flex h-2 w-2 rounded-full" style={{ backgroundColor: LIVE_COLOR }} />
+              </span>
+              Live signal
+            </div>
             {(point.liveEvidence || (signal && signal.match !== 'gap')) && (
               <div className="mb-4 rounded-xl border border-gray-200 bg-white p-4">
-                <div className="mb-3 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-gray-400">
-                  <span className="relative flex h-2 w-2">
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full" style={{ backgroundColor: `${LIVE_COLOR}99` }} />
-                    <span className="relative inline-flex h-2 w-2 rounded-full" style={{ backgroundColor: LIVE_COLOR }} />
-                  </span>
-                  Live signal
-                </div>
-
                 {point.liveEvidence && (
                   <a
                     href={point.liveEvidence.href}
@@ -519,7 +518,7 @@ function InflectionModal({
             )}
 
             {signal && signal.match === 'gap' && (
-              <div className="mb-4 rounded-xl border border-dashed border-gray-200 bg-gray-50 px-4 py-3">
+              <div className="mb-4 rounded-xl border border-dashed border-gray-200 bg-white px-4 py-3">
                 <div className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-gray-400">
                   Crowd forecast
                 </div>
