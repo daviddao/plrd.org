@@ -46,7 +46,7 @@ In Neurotechnology, $2M in grants funded 9 teams in 2025. The BCI Founders Retre
 
 Today, much frontier work is too early, too interdisciplinary, or too radical for traditional capital structures to support alone. Additionally, even if money is available, a binding constraint is often coordination. Our role is to create the conditions for discovery rather than making discoveries directly ourselves: we help researchers, builders, funders, and institutions coordinate around technical primitives, open infrastructure, and deployment pathways.
 
-Each focus area is stewarded by a Focus Area Lead and has its own Scientific Advisory Board, a standing group of researchers and practitioners. Together, they map the field, define the opportunity spaces, name the inflection points within reach, and identify the bottlenecks blocking them.
+Each focus area is stewarded by a Focus Area Lead and has its own Scientific Advisory Board, a standing group of researchers and practitioners. Together, they map the field, define the opportunity spaces, name the inflection points within reach, and identify the bottlenecks blocking them. We start from the inflection point and work backwards to what's blocking it. This diagnosis-first logic is deliberately agnostic about which tool solves the problem.
 
 Once the bottlenecks are named, the toolkit that releases them is plural by design, because different bottlenecks respond to different interventions:
 
