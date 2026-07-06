@@ -19,7 +19,7 @@ Over the following decade, Protocol Labs' ambition expanded beyond any single pr
 
 ## Why PL R&D exists and what we do
 
-Computing continues to reshape various dimensions of human agency and Protocol Labs has evolved to shape this trajectory. PL R&D exists to expand and safeguard human freedom, coordination, intelligence, and cognition by accelerating computing breakthroughs. PL R&D is not building the next protocol, product or service directly, but identifying where fields are stuck, creating the conditions for others to move faster, and compounding what gets learned across every frontier it touches. Our role within the broader Protocol Labs innovation network is to connect breakthrough R&D into capital formation and network platform support. The R&D pipeline aims to move frontier ideas from open research through productionizing and into deployed systems that scale globally – each stage compounding on the last.
+PL R&D exists to expand and safeguard human freedom, coordination, intelligence, and cognition by accelerating computing breakthroughs. PL R&D is not building the next protocol, product or service directly, but identifying where fields are stuck, creating the conditions for others to move faster, and compounding what gets learned across every frontier it touches. Our role within the broader Protocol Labs innovation network is to connect breakthrough R&D into capital formation and network platform support.
 
 Our work spans four [focus areas](https://www.plrd.org/areas):
 
