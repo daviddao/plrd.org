@@ -324,27 +324,17 @@ function InflectionCard({
   )
 }
 
-/** Fuller crowd-odds read for the FIELD column of the modal (with market link). */
-function CrowdSignalBlock({ signal }: { signal: MarketSignal }) {
-  if (signal.match === 'gap') {
-    return (
-      <div className="mt-4 rounded-lg border border-dashed border-gray-200 bg-gray-50 px-4 py-3">
-        <div className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-gray-400">
-          Crowd forecast
-        </div>
-        <p className="text-sm leading-relaxed text-gray-500">{signal.note}</p>
-      </div>
-    )
-  }
+/** Crowd-forecast row for the modal's horizontal Live-signal band (with market link). */
+function CrowdForecast({ signal, divider = false }: { signal: MarketSignal; divider?: boolean }) {
   const pct = signal.prob != null ? Math.round(signal.prob * 100) : null
   return (
-    <div className="mt-4 rounded-lg border border-gray-200 bg-gray-50 px-4 py-3">
-      <div className="mb-2 flex items-center gap-2">
+    <div className={divider ? 'mt-3 border-t border-gray-100 pt-3' : ''}>
+      <div className="mb-1 flex items-center gap-2">
         <span className="text-[11px] font-semibold uppercase tracking-wide text-gray-400">
           Crowd forecast
         </span>
         {signal.platform && (
-          <span className="rounded-full border border-gray-200 bg-white px-2 py-0.5 text-[10px] font-medium text-gray-500">
+          <span className="rounded-full border border-gray-200 bg-gray-50 px-2 py-0.5 text-[10px] font-medium text-gray-500">
             {PLATFORM_LABEL[signal.platform]}
             {signal.viaFallback ? ' (fallback)' : ''}
           </span>
@@ -484,46 +474,63 @@ function InflectionModal({
               </div>
               <div className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-gray-400">Impact — the cascade</div>
               <p className="text-sm leading-relaxed text-gray-600">{point.cascade}</p>
-              {signal && <CrowdSignalBlock signal={signal} />}
             </div>
           </div>
 
-          {/* Live evidence (Q3 only — never a Q2 reading) */}
-          {/* Full-width band: live signal (when present) + latest insights for the area */}
+          {/* Full-width Live-signal band: PL-backed live outputs (Q3) + crowd forecast (field axis). */}
           <div className="mt-6 border-t border-gray-100 pt-5">
-            {point.liveEvidence && (
-              <a
-                href={point.liveEvidence.href}
-                className="mb-4 block rounded-xl border border-gray-200 bg-white p-4 transition-colors hover:border-blue/40 no-underline"
-              >
-                <div className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-gray-400">
-                  Live signal
-                </div>
-                <div className="flex items-center gap-2 text-sm font-medium text-black">
+            {(point.liveEvidence || (signal && signal.match !== 'gap')) && (
+              <div className="mb-4 rounded-xl border border-gray-200 bg-white p-4">
+                <div className="mb-3 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-gray-400">
                   <span className="relative flex h-2 w-2">
                     <span className="absolute inline-flex h-full w-full animate-ping rounded-full" style={{ backgroundColor: `${LIVE_COLOR}99` }} />
                     <span className="relative inline-flex h-2 w-2 rounded-full" style={{ backgroundColor: LIVE_COLOR }} />
                   </span>
-                  {point.liveEvidence.label}
-                  <svg className="ml-auto h-4 w-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
+                  Live signal
                 </div>
-                {metrics && metrics.length > 0 && (
-                  <div className="mt-3 flex flex-wrap gap-x-6 gap-y-2">
-                    {metrics.map((m) => (
-                      <span key={m.label} className="flex items-baseline gap-1.5">
-                        <span className="text-lg font-semibold text-black">{m.value}</span>
-                        <span className="text-xs text-gray-500">{m.label}</span>
-                      </span>
-                    ))}
-                  </div>
+
+                {point.liveEvidence && (
+                  <a
+                    href={point.liveEvidence.href}
+                    className="-m-1 block rounded-lg p-1 no-underline transition-colors hover:bg-gray-50"
+                  >
+                    <div className="flex items-center gap-2 text-sm font-medium text-black">
+                      {point.liveEvidence.label}
+                      <svg className="ml-auto h-4 w-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </div>
+                    {metrics && metrics.length > 0 && (
+                      <div className="mt-3 flex flex-wrap gap-x-6 gap-y-2">
+                        {metrics.map((m) => (
+                          <span key={m.label} className="flex items-baseline gap-1.5">
+                            <span className="text-lg font-semibold text-black">{m.value}</span>
+                            <span className="text-xs text-gray-500">{m.label}</span>
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                    <p className="mt-3 text-xs leading-relaxed text-gray-500">
+                      {LIVE_SIGNAL_NOTE}
+                    </p>
+                  </a>
                 )}
-                <p className="mt-3 text-xs leading-relaxed text-gray-500">
-                  {LIVE_SIGNAL_NOTE}
-                </p>
-              </a>
+
+                {signal && signal.match !== 'gap' && (
+                  <CrowdForecast signal={signal} divider={!!point.liveEvidence} />
+                )}
+              </div>
             )}
+
+            {signal && signal.match === 'gap' && (
+              <div className="mb-4 rounded-xl border border-dashed border-gray-200 bg-gray-50 px-4 py-3">
+                <div className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-gray-400">
+                  Crowd forecast
+                </div>
+                <p className="text-sm leading-relaxed text-gray-500">{signal.note}</p>
+              </div>
+            )}
+
             <a
               href={`/insights/?area=${point.area}`}
               className="inline-flex items-center gap-1.5 text-sm font-medium text-blue hover:underline"
