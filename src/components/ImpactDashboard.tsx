@@ -324,6 +324,13 @@ function InflectionCard({
   )
 }
 
+/** Compact USD, e.g. $15k, $1.2M. */
+function formatUSD(n: number): string {
+  if (n >= 1_000_000) return `$${(n / 1_000_000).toFixed(n >= 10_000_000 ? 0 : 1)}M`
+  if (n >= 1_000) return `$${Math.round(n / 1_000)}k`
+  return `$${Math.round(n)}`
+}
+
 /** Crowd-forecast row for the modal's horizontal Live-signal band (with market link). */
 function CrowdForecast({ signal, divider = false }: { signal: MarketSignal; divider?: boolean }) {
   const pct = signal.prob != null ? Math.round(signal.prob * 100) : null
@@ -337,6 +344,11 @@ function CrowdForecast({ signal, divider = false }: { signal: MarketSignal; divi
           <span className="rounded-full border border-gray-200 bg-gray-50 px-2 py-0.5 text-[10px] font-medium text-gray-500">
             {PLATFORM_LABEL[signal.platform]}
             {signal.viaFallback ? ' (fallback)' : ''}
+          </span>
+        )}
+        {signal.volume != null && (
+          <span className="text-[11px] tabular-nums text-gray-400" title="Total money traded through this market">
+            {formatUSD(signal.volume)} at stake
           </span>
         )}
         <span className="ml-auto text-2xl font-semibold tabular-nums" style={{ color: FIELD_COLOR }}>
