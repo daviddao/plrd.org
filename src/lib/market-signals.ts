@@ -34,6 +34,8 @@ export type MarketSignal = {
   platform: Platform | null
   /** 0..1 crowd "yes" probability, or null when unavailable. */
   prob: number | null
+  /** Total money traded through the market, in USD, or null when unavailable. */
+  volume: number | null
   question: string | null
   url: string | null
   /** True when prob came from the fallback rather than the best-match market. */
@@ -169,7 +171,9 @@ function distinctiveToken(s?: string): string | null {
   return num ? num[0].toLowerCase() : null
 }
 
-async function fetchPolymarket(slug: string, hint?: string): Promise<number | null> {
+type Quote = { prob: number; volume: number | null }
+
+async function fetchPolymarket(slug: string, hint?: string): Promise<Quote | null> {
   try {
     const res = await fetch(`${GAMMA}/events?slug=${encodeURIComponent(slug)}`, {
       next: { revalidate: REVALIDATE },
@@ -177,7 +181,7 @@ async function fetchPolymarket(slug: string, hint?: string): Promise<number | nu
     if (!res.ok) return null
     const events = (await res.json()) as Array<{
       title?: string
-      markets?: Array<{ question?: string; outcomes?: string; outcomePrices?: string }>
+      markets?: Array<{ question?: string; outcomes?: string; outcomePrices?: string; volumeNum?: number }>
     }>
     const markets = events?.[0]?.markets
     if (!markets?.length) return null
@@ -189,19 +193,21 @@ async function fetchPolymarket(slug: string, hint?: string): Promise<number | nu
         const yesIdx = outcomes.findIndex((o) => o.toLowerCase() === 'yes')
         if (yesIdx === -1) return null
         const yes = Number(prices[yesIdx])
-        return Number.isNaN(yes) ? null : { yes, q: (m.question || '').toLowerCase() }
+        if (Number.isNaN(yes)) return null
+        const volume = typeof m.volumeNum === 'number' && m.volumeNum > 0 ? m.volumeNum : null
+        return { yes, volume, q: (m.question || '').toLowerCase() }
       })
-      .filter((x): x is { yes: number; q: string } => x != null)
+      .filter((x): x is { yes: number; volume: number | null; q: string } => x != null)
     if (!parsed.length) return null
     const token = distinctiveToken(hint)
     const pick = (token && parsed.find((m) => m.q.includes(token))) || parsed[0]
-    return pick.yes
+    return { prob: pick.yes, volume: pick.volume }
   } catch {
     return null
   }
 }
 
-async function fetchKalshi(ticker: string): Promise<number | null> {
+async function fetchKalshi(ticker: string): Promise<Quote | null> {
   try {
     const res = await fetch(`${KALSHI}/markets/${encodeURIComponent(ticker)}`, {
       next: { revalidate: REVALIDATE },
@@ -209,13 +215,23 @@ async function fetchKalshi(ticker: string): Promise<number | null> {
     if (!res.ok) return null
     const m = ((await res.json()) as { market?: Record<string, number | null> }).market
     if (!m) return null
+    // dollar_volume is in USD; volume is in contracts (each settles $0-$1), so the
+    // contract count is a reasonable USD upper bound when no dollar figure is given.
+    const dollarVol = m.dollar_volume
+    const contractVol = m.volume
+    const volume =
+      typeof dollarVol === 'number' && dollarVol > 0
+        ? dollarVol
+        : typeof contractVol === 'number' && contractVol > 0
+          ? contractVol
+          : null
     // Prices are in cents (0-100). Prefer last trade, else the bid/ask midpoint.
     const last = m.last_price
-    if (typeof last === 'number' && last > 0) return last / 100
+    if (typeof last === 'number' && last > 0) return { prob: last / 100, volume }
     const bid = m.yes_bid
     const ask = m.yes_ask
     if (typeof bid === 'number' && typeof ask === 'number' && (bid > 0 || ask > 0)) {
-      return (bid + ask) / 2 / 100
+      return { prob: (bid + ask) / 2 / 100, volume }
     }
     return null
   } catch {
@@ -223,7 +239,7 @@ async function fetchKalshi(ticker: string): Promise<number | null> {
   }
 }
 
-async function fetchRef(ref: MarketRef): Promise<number | null> {
+async function fetchRef(ref: MarketRef): Promise<Quote | null> {
   return ref.platform === 'polymarket'
     ? fetchPolymarket(ref.slug, ref.hint)
     : fetchKalshi(ref.ticker)
@@ -232,14 +248,15 @@ async function fetchRef(ref: MarketRef): Promise<number | null> {
 /** Resolve one mapping into a display-ready signal (best-match, with fallback). */
 export async function resolveSignal(m: MarketMapping): Promise<MarketSignal> {
   if (m.match === 'gap' || !m.primary) {
-    return { match: 'gap', platform: null, prob: null, question: null, url: null, viaFallback: false, note: m.note }
+    return { match: 'gap', platform: null, prob: null, volume: null, question: null, url: null, viaFallback: false, note: m.note }
   }
-  const primaryProb = await fetchRef(m.primary)
-  if (primaryProb != null) {
+  const primary = await fetchRef(m.primary)
+  if (primary != null) {
     return {
       match: m.match,
       platform: m.primary.platform,
-      prob: primaryProb,
+      prob: primary.prob,
+      volume: primary.volume,
       question: m.primary.question,
       url: m.primary.url,
       viaFallback: false,
@@ -247,12 +264,13 @@ export async function resolveSignal(m: MarketMapping): Promise<MarketSignal> {
     }
   }
   if (m.fallback) {
-    const fbProb = await fetchRef(m.fallback)
-    if (fbProb != null) {
+    const fb = await fetchRef(m.fallback)
+    if (fb != null) {
       return {
         match: m.match,
         platform: m.fallback.platform,
-        prob: fbProb,
+        prob: fb.prob,
+        volume: fb.volume,
         question: m.fallback.question,
         url: m.fallback.url,
         viaFallback: true,
@@ -265,6 +283,7 @@ export async function resolveSignal(m: MarketMapping): Promise<MarketSignal> {
     match: m.match,
     platform: m.primary.platform,
     prob: null,
+    volume: null,
     question: m.primary.question,
     url: m.primary.url,
     viaFallback: false,
