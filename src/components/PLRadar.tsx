@@ -173,9 +173,7 @@ export default function PLRadar({ edition, items }: { edition: string; items: Ra
             aria-expanded={open}
           >
             {open ? 'Hide' : 'Show'}
-            <span className={`transition-transform ${open ? 'rotate-180' : ''}`} aria-hidden="true">
-              ⌃
-            </span>
+            <span className="text-[10px] leading-none" aria-hidden="true">{open ? '▲' : '▼'}</span>
           </button>
         </div>
       </div>
