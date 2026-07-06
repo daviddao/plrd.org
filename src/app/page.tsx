@@ -115,7 +115,12 @@ export default async function HomePage() {
           <img
             src="/images/hero.webp"
             alt="Glass cube containing colorful neural structures"
-            className="w-full h-auto"
+            className="w-full h-auto dark:hidden"
+          />
+          <img
+            src="/images/hero-dark.webp"
+            alt="Glass cube containing colorful neural structures"
+            className="w-full h-auto hidden dark:block"
           />
         </div>
 
