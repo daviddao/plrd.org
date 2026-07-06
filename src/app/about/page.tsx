@@ -116,29 +116,31 @@ export default async function AboutPage() {
       </div>
 
       {/* Focus Areas */}
-      <div className="max-w-6xl mx-auto px-6 mb-28">
-        <h2 className="font-semibold text-xl lg:text-2xl mb-10">Our Four Focus Areas</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <FocusCard
-            slug="digital-human-rights"
-            title="Digital Human Rights"
-            description={FOCUS_AREA_DESCRIPTIONS['digital-human-rights']}
-          />
-          <FocusCard
-            slug="economies-governance"
-            title="Economies & Governance"
-            description={FOCUS_AREA_DESCRIPTIONS['economies-governance']}
-          />
-          <FocusCard
-            slug="ai-robotics"
-            title="AI & Robotics"
-            description={FOCUS_AREA_DESCRIPTIONS['ai-robotics']}
-          />
-          <FocusCard
-            slug="neurotech"
-            title="Neurotechnology"
-            description={FOCUS_AREA_DESCRIPTIONS.neurotech}
-          />
+      <div className="bg-gray-100 py-16 lg:py-20 mb-28">
+        <div className="max-w-6xl mx-auto px-6">
+          <h2 className="font-semibold text-xl lg:text-2xl mb-10">Our Four Focus Areas</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <FocusCard
+              slug="digital-human-rights"
+              title="Digital Human Rights"
+              description={FOCUS_AREA_DESCRIPTIONS['digital-human-rights']}
+            />
+            <FocusCard
+              slug="economies-governance"
+              title="Economies & Governance"
+              description={FOCUS_AREA_DESCRIPTIONS['economies-governance']}
+            />
+            <FocusCard
+              slug="ai-robotics"
+              title="AI & Robotics"
+              description={FOCUS_AREA_DESCRIPTIONS['ai-robotics']}
+            />
+            <FocusCard
+              slug="neurotech"
+              title="Neurotechnology"
+              description={FOCUS_AREA_DESCRIPTIONS.neurotech}
+            />
+          </div>
         </div>
       </div>
 
@@ -159,13 +161,29 @@ export default async function AboutPage() {
       </Section>
 
       {/* Quote */}
-      <div className="max-w-6xl mx-auto px-6 py-20 flex flex-col items-center text-center">
-        <img className="mb-8 opacity-30 w-10" src="/images/about-page/quote-icon.svg" alt="" />
-        <MarkdownContent
-          content={quoteJuan?.body || quoteJuan?.title || "More innovation faster"}
-          className="font-semibold text-xl lg:text-2xl leading-relaxed mb-8 [&_p]:mb-0"
-        />
-        <AuthorCard slug="juan-benet" />
+      <div className="bg-gray-100 py-8 lg:py-10 mb-16 lg:mb-20">
+        <div className="max-w-4xl mx-auto px-6">
+          <div className="bg-white rounded-2xl p-6 lg:p-8 shadow-sm flex flex-col md:flex-row md:items-center gap-6">
+            <div className="flex-1">
+              {/* Large quotation mark */}
+              <svg 
+                className="w-10 h-10 lg:w-12 lg:h-12 text-gray-300 mb-4" 
+                viewBox="0 0 24 24" 
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179zm10 0C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179z" />
+              </svg>
+              <MarkdownContent
+                content={quoteJuan?.body || quoteJuan?.title || "More innovation faster"}
+                className="text-lg lg:text-xl text-gray-800 leading-relaxed [&_p]:mb-0"
+              />
+            </div>
+            <div className="md:pl-6 md:border-l md:border-gray-100">
+              <AuthorCard slug="juan-benet" variant="quote" />
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* The Future */}
@@ -177,13 +195,28 @@ export default async function AboutPage() {
       </Section>
 
       {/* Will Scott quote */}
-      <div className="max-w-6xl mx-auto px-6 pb-28">
-        <div className="border-l-2 border-pink pl-8 py-3">
-          <MarkdownContent
-            content={quoteWill?.body || "\u201cWe consistently bet, not only that the future could be a fantastic and wonderful place, but that it\u2019s worthwhile for us, as an organization, to work toward that future.\u201d"}
-            className="page-content text-lg text-gray-700 leading-relaxed mb-5 italic"
-          />
-          <AuthorCard slug="will-scott" />
+      <div className="bg-gray-100 py-8 lg:py-10 mb-12">
+        <div className="max-w-4xl mx-auto px-6">
+          <div className="bg-white rounded-2xl p-6 lg:p-8 shadow-sm flex flex-col md:flex-row md:items-center gap-6">
+            <div className="flex-1">
+              {/* Large quotation mark */}
+              <svg 
+                className="w-10 h-10 lg:w-12 lg:h-12 text-gray-300 mb-4" 
+                viewBox="0 0 24 24" 
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179zm10 0C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179z" />
+              </svg>
+              <MarkdownContent
+                content={quoteWill?.body || "\u201cWe consistently bet, not only that the future could be a fantastic and wonderful place, but that it\u2019s worthwhile for us, as an organization, to work toward that future.\u201d"}
+                className="text-lg lg:text-xl text-gray-800 leading-relaxed [&_p]:mb-0"
+              />
+            </div>
+            <div className="md:pl-6 md:border-l md:border-gray-100">
+              <AuthorCard slug="will-scott" variant="quote" />
+            </div>
+          </div>
         </div>
       </div>
       <EditPageButton rkey="about" />
@@ -194,7 +227,7 @@ export default async function AboutPage() {
 function Section({ label, title, children }: { label: string; title: string; children: React.ReactNode }) {
   return (
     <div className="max-w-6xl mx-auto px-6 mb-28">
-      <p className="text-pink text-sm tracking-wide mb-3">{label}</p>
+      <p className="text-blue text-sm tracking-wide mb-3">{label}</p>
       <h2 className="font-semibold text-xl lg:text-2xl leading-relaxed mb-8 max-w-3xl">{title}</h2>
       {children}
     </div>
@@ -205,7 +238,7 @@ function FocusCard({ slug, title, description }: { slug: string; title: string; 
   const iconType = FOCUS_CARD_ICONS[slug] || 'shield'
 
   return (
-    <Link href={`/areas/${slug}`} className="group block border border-gray-300 p-8 hover:border-blue hover:shadow-sm transition-all">
+    <Link href={`/areas/${slug}`} className="group block bg-white border border-gray-300 p-8 hover:border-blue hover:shadow-sm transition-all">
       <div className="flex items-start gap-5">
         <AreaIcon type={iconType} />
         <div className="min-w-0 flex-1">

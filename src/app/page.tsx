@@ -62,7 +62,7 @@ function getLatestUpdates(count: number): UpdateItem[] {
     return {
       title: t.title || t.slug,
       date: t.date || '',
-      type: 'Talk',
+      type: 'Talks & Podcasts',
       permalink: `/talks/${t.slug}`,
       slug: t.slug,
       areas: (t.areas || []).filter(Boolean) as string[],
@@ -126,6 +126,9 @@ export default async function HomePage() {
           <h1 className="font-serif text-[36px] md:text-[48px] lg:text-[52px] font-normal leading-[1.06] tracking-tight mb-6 max-w-md md:max-w-lg lg:max-w-xl">
             Driving R&amp;D breakthroughs to push humanity forward.
           </h1>
+          <p className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-xl mb-8">
+            We de-risk frontier ideas in computing and help them cross from open research to deployment, expanding human freedom, coordination, intelligence, and cognition
+          </p>
           <div className="flex flex-wrap items-center gap-4">
             <Link
               href="/about"
@@ -145,15 +148,6 @@ export default async function HomePage() {
             </a>
           </div>
         </div>
-
-        <a
-          href="#focus-areas"
-          className="relative z-10 inline-flex flex-col items-center gap-1.5 mt-12 text-gray-400 hover:text-gray-600 transition-colors group"
-        >
-          <svg className="w-5 h-5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
-          </svg>
-        </a>
       </div>
 
     </div>
