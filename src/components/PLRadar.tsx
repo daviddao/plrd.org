@@ -50,14 +50,8 @@ const TYPE_CTA: Record<string, string> = {
   Signal: 'Read the story',
 }
 
-const TYPE_BADGE: Record<string, string> = {
-  Talk: 'text-[#6c4bd8] bg-[#efeaff]',
-  Podcast: 'text-blue bg-[#eaf0ff]',
-  Publication: 'text-[#0f6b4c] bg-[#e7f7ef]',
-  Blog: 'text-pink bg-[#fdecec]',
-  // External/third-party field signal — amber to read as "from the field".
-  Signal: 'text-[#9a5b00] bg-[#fdefd0]',
-}
+// One neutral badge style for every type — the Radar no longer colour-codes by type.
+const TYPE_BADGE = 'text-gray-600 bg-gray-100'
 
 function grad(slug: string) {
   return AREA_GRADIENT[slug] || AREA_GRADIENT.default
@@ -184,8 +178,8 @@ export default function PLRadar({ edition, items }: { edition: string; items: Ra
       {/* Swiper */}
       {open && (
         <div className="relative rounded-2xl overflow-hidden border border-gray-200 bg-white shadow-[0_8px_30px_rgba(15,17,21,0.06)]">
-          {/* progress segments */}
-          <div className="absolute top-0 left-0 right-0 z-30 flex gap-1.5 p-3.5">
+          {/* progress segments — own band above the content so they never overlap it */}
+          <div className="relative z-30 flex gap-1.5 px-4 pt-4 pb-3 bg-white">
             {Array.from({ length: N }).map((_, idx) => (
               <div key={idx} className="flex-1 h-[3px] rounded-full bg-black/10 overflow-hidden">
                 <div
@@ -205,7 +199,7 @@ export default function PLRadar({ edition, items }: { edition: string; items: Ra
             {items.map((item, idx) => {
               const g = grad(item.areaSlug)
               const cta = TYPE_CTA[item.type] || 'Open'
-              const badge = TYPE_BADGE[item.type] || 'text-gray-700 bg-gray-100'
+              const badge = TYPE_BADGE
               return (
                 <div
                   key={item.key}
@@ -245,7 +239,7 @@ export default function PLRadar({ edition, items }: { edition: string; items: Ra
                   </div>
 
                   {/* body */}
-                  <div className="flex flex-col justify-center px-7 sm:px-10 py-8 pt-12 md:pt-8">
+                  <div className="flex flex-col justify-center px-7 sm:px-10 py-8">
                     <span
                       className={`self-start text-[11px] font-bold uppercase tracking-[0.09em] px-2.5 py-1 rounded-md mb-4 ${badge}`}
                     >
