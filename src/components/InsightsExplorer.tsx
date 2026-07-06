@@ -84,8 +84,9 @@ export default function InsightsExplorer({
 
   return (
     <div>
-      {/* Filter toolbar: focus-area pills | content-type pills */}
-      <div className="flex flex-col gap-4 border-b border-gray-200 mb-12 pb-5 sm:flex-row sm:items-center sm:gap-0">
+      {/* Filter toolbar: focus-area pills | content-type pills.
+         Sticks below the site header (h-16) so filters stay reachable while scrolling. */}
+      <div className="sticky top-16 z-30 -mx-6 bg-white flex flex-col gap-4 border-b border-gray-200 mb-12 px-6 pt-4 pb-5 sm:flex-row sm:items-center sm:gap-0">
         {/* Focus area */}
         <div className="flex flex-wrap gap-2">
           {areaChips.map((a) => {
@@ -193,7 +194,7 @@ function Pill({
         active
           ? 'bg-black text-white hover:bg-gray-800 cursor-pointer'
           : disabled
-            ? 'bg-gray-50 text-gray-300 cursor-not-allowed'
+            ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
             : 'bg-gray-100 text-gray-600 hover:bg-gray-200 cursor-pointer'
       }`}
     >
