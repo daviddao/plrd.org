@@ -5,6 +5,7 @@ import MeasuringQuestions from '@/components/MeasuringQuestions'
 import { fetchSimocracyStats } from '@/lib/simocracy'
 import { fetchGainforestStats } from '@/lib/gainforest'
 import { fetchGlowStats } from '@/lib/glow'
+import { resolveAllSignals } from '@/lib/market-signals'
 import { FIELD_COLOR, HAND_COLOR } from '@/lib/inflection-points'
 
 // Pull live output metrics for the Economies & Governance inflection points from
@@ -60,7 +61,10 @@ export const metadata: Metadata = {
 }
 
 export default async function ImpactPage() {
-  const liveOutputs = await fetchLiveOutputs()
+  const [liveOutputs, marketSignals] = await Promise.all([
+    fetchLiveOutputs(),
+    resolveAllSignals(),
+  ])
   return (
     <div>
       {/* Hero */}
@@ -98,7 +102,7 @@ export default async function ImpactPage() {
             Select a focus area. Each card shows the defined threshold (did it happen), the cascade we
             expect if it matters, and the PL contribution we would trace.
           </p>
-          <ImpactDashboard liveOutputs={liveOutputs} />
+          <ImpactDashboard liveOutputs={liveOutputs} marketSignals={marketSignals} />
         </div>
       </section>
 

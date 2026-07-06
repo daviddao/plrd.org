@@ -16,12 +16,20 @@ import {
   type PLRole,
 } from '@/lib/inflection-points'
 import { AreaIcon, type AreaIconType } from '@/components/AreaIcons'
+import type { MarketSignal } from '@/lib/market-signals'
 
 type Filter = FocusAreaKey
 
 /** Live output metrics for a point, keyed by the point's title. Fetched server-side. */
 export type LiveMetric = { value: string; label: string }
 export type LiveOutputs = Record<string, LiveMetric[]>
+/** Prediction-market crowd signal per point, keyed by title. Fetched server-side. */
+export type MarketSignals = Record<string, MarketSignal>
+
+const PLATFORM_LABEL: Record<'polymarket' | 'kalshi', string> = {
+  polymarket: 'Polymarket',
+  kalshi: 'Kalshi',
+}
 
 // Generic footnote for cards/points that surface a live signal.
 const LIVE_SIGNAL_NOTE =
@@ -34,7 +42,13 @@ const FA_ICON: Record<FocusAreaKey, AreaIconType> = {
   neurotech: 'brain',
 }
 
-export default function ImpactDashboard({ liveOutputs = {} }: { liveOutputs?: LiveOutputs }) {
+export default function ImpactDashboard({
+  liveOutputs = {},
+  marketSignals = {},
+}: {
+  liveOutputs?: LiveOutputs
+  marketSignals?: MarketSignals
+}) {
   const [filter, setFilter] = useState<FocusAreaKey>('digital-human-rights')
   const [active, setActive] = useState<InflectionPoint | null>(null)
 
@@ -73,6 +87,7 @@ export default function ImpactDashboard({ liveOutputs = {} }: { liveOutputs?: Li
                 key={`${p.area}-${p.title}`}
                 point={p}
                 metrics={liveOutputs[p.title]}
+                signal={marketSignals[p.title]}
                 onOpen={() => setActive(p)}
               />
             ))}
@@ -86,6 +101,7 @@ export default function ImpactDashboard({ liveOutputs = {} }: { liveOutputs?: Li
         <InflectionModal
           point={active}
           metrics={liveOutputs[active.title]}
+          signal={marketSignals[active.title]}
           onClose={() => setActive(null)}
         />
       )}
@@ -191,13 +207,39 @@ function RoleChips({ roles, eyebrow = true }: { roles: PLRole[]; eyebrow?: boole
   )
 }
 
+/** Compact crowd-odds read for the FIELD axis on a card (non-interactive). */
+function CrowdSignalInline({ signal }: { signal: MarketSignal }) {
+  if (signal.match === 'gap') {
+    return (
+      <div className="mt-2.5 flex items-center gap-1.5 text-[11px] text-gray-400">
+        <span className="inline-block h-1.5 w-1.5 rounded-full bg-gray-300" />
+        No market yet — unpriced bet
+      </div>
+    )
+  }
+  const pct = signal.prob != null ? Math.round(signal.prob * 100) : null
+  return (
+    <div className="mt-2.5 flex items-center gap-2 text-[11px]">
+      <span className="text-gray-400">
+        Crowd{signal.platform ? ` · ${PLATFORM_LABEL[signal.platform]}` : ''}
+      </span>
+      <span className="truncate text-gray-400">{signal.question}</span>
+      <span className="ml-auto shrink-0 font-semibold tabular-nums" style={{ color: FIELD_COLOR }}>
+        {pct != null ? `${pct}%` : 'live'}
+      </span>
+    </div>
+  )
+}
+
 function InflectionCard({
   point,
   metrics,
+  signal,
   onOpen,
 }: {
   point: InflectionPoint
   metrics?: LiveMetric[]
+  signal?: MarketSignal
   onOpen: () => void
 }) {
   const fa = FOCUS_AREAS.find((f) => f.key === point.area)!
@@ -242,6 +284,7 @@ function InflectionCard({
           <span className="ml-auto text-[11px] font-medium" style={{ color: FIELD_COLOR }}>{stageLabel}</span>
         </div>
         <FieldMeter status={point.status} />
+        {signal && <CrowdSignalInline signal={signal} />}
       </div>
 
       {/* OUR HAND — did our work help (violet) */}
@@ -281,13 +324,61 @@ function InflectionCard({
   )
 }
 
+/** Fuller crowd-odds read for the FIELD column of the modal (with market link). */
+function CrowdSignalBlock({ signal }: { signal: MarketSignal }) {
+  if (signal.match === 'gap') {
+    return (
+      <div className="mt-4 rounded-lg border border-dashed border-gray-200 bg-gray-50 px-4 py-3">
+        <div className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-gray-400">
+          Crowd forecast
+        </div>
+        <p className="text-sm leading-relaxed text-gray-500">{signal.note}</p>
+      </div>
+    )
+  }
+  const pct = signal.prob != null ? Math.round(signal.prob * 100) : null
+  return (
+    <div className="mt-4 rounded-lg border border-gray-200 bg-gray-50 px-4 py-3">
+      <div className="mb-2 flex items-center gap-2">
+        <span className="text-[11px] font-semibold uppercase tracking-wide text-gray-400">
+          Crowd forecast
+        </span>
+        {signal.platform && (
+          <span className="rounded-full border border-gray-200 bg-white px-2 py-0.5 text-[10px] font-medium text-gray-500">
+            {PLATFORM_LABEL[signal.platform]}
+            {signal.viaFallback ? ' (fallback)' : ''}
+          </span>
+        )}
+        <span className="ml-auto text-2xl font-semibold tabular-nums" style={{ color: FIELD_COLOR }}>
+          {pct != null ? `${pct}%` : '—'}
+        </span>
+      </div>
+      {signal.url && (
+        <a
+          href={signal.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block text-sm text-gray-700 hover:underline"
+        >
+          {signal.question}
+        </a>
+      )}
+      <p className="mt-2 text-[11px] leading-relaxed text-gray-400">
+        {signal.note} Independent estimate on the field axis — not PL contribution, not a settled outcome.
+      </p>
+    </div>
+  )
+}
+
 function InflectionModal({
   point,
   metrics,
+  signal,
   onClose,
 }: {
   point: InflectionPoint
   metrics?: LiveMetric[]
+  signal?: MarketSignal
   onClose: () => void
 }) {
   const fa = FOCUS_AREAS.find((f) => f.key === point.area)!
@@ -393,6 +484,7 @@ function InflectionModal({
               </div>
               <div className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-gray-400">Impact — the cascade</div>
               <p className="text-sm leading-relaxed text-gray-600">{point.cascade}</p>
+              {signal && <CrowdSignalBlock signal={signal} />}
             </div>
           </div>
 
