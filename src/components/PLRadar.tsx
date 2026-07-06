@@ -22,7 +22,7 @@ export type RadarItem = {
   description?: string
   href: string
   external?: boolean
-  /** Display type: Talk · Podcast · Publication · Blog */
+  /** Display type: Talk · Podcast · Publication · Blog · Signal */
   type: string
   areaLabel: string
   areaSlug: string
@@ -47,6 +47,7 @@ const TYPE_CTA: Record<string, string> = {
   Podcast: 'Listen now',
   Publication: 'Read the paper',
   Blog: 'Read the post',
+  Signal: 'Read the story',
 }
 
 const TYPE_BADGE: Record<string, string> = {
@@ -54,6 +55,8 @@ const TYPE_BADGE: Record<string, string> = {
   Podcast: 'text-blue bg-[#eaf0ff]',
   Publication: 'text-[#0f6b4c] bg-[#e7f7ef]',
   Blog: 'text-pink bg-[#fdecec]',
+  // External/third-party field signal — amber to read as "from the field".
+  Signal: 'text-[#9a5b00] bg-[#fdefd0]',
 }
 
 function grad(slug: string) {
