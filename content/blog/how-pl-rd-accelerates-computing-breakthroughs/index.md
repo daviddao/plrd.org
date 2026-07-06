@@ -44,7 +44,7 @@ In Neurotechnology, $2M in grants funded 9 teams in 2025. The BCI Founders Retre
 
 ## How PL R&D drives breakthroughs
 
-Today, much frontier work is too early, too interdisciplinary, or too radical for traditional capital structures to support alone. Additionally, even if money is available a binding constraint is often coordination. Our role is to create the conditions for discovery rather than discovery directly ourselves: we help researchers, builders, funders, and institutions coordinate around technical primitives, open infrastructure, and deployment pathways.
+Today, much frontier work is too early, too interdisciplinary, or too radical for traditional capital structures to support alone. Additionally, even if money is available, a binding constraint is often coordination. Our role is to create the conditions for discovery rather than making discoveries directly ourselves: we help researchers, builders, funders, and institutions coordinate around technical primitives, open infrastructure, and deployment pathways.
 
 Each focus area is stewarded by a Focus Area Lead and has its own Scientific Advisory Board, a standing group of researchers and practitioners. Together, they map the field, define the opportunity spaces, name the inflection points within reach, and identify the bottlenecks blocking them.
 
