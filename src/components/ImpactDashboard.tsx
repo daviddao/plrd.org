@@ -433,48 +433,48 @@ function InflectionModal({
             <span className="text-gray-300">·</span>
             <span className="text-gray-400">{point.opportunitySpace}</span>
           </div>
-          {/* THE FIELD — title, progress, outcome, impact */}
-          <div className="mb-2 text-xs font-semibold uppercase tracking-wide" style={{ color: FIELD_COLOR }}>
-            The field
-          </div>
-          <h2 className="mb-4 text-2xl font-semibold leading-tight tracking-tight text-black">
-            {point.title}
-          </h2>
-          <div className="mb-6 rounded-xl border border-gray-200 bg-gray-50 p-5">
+          {/* THE FIELD — title, outcome, impact, then progress (grey card) */}
+          <div className="rounded-xl bg-gray-50 p-5 sm:p-6">
             <div className="mb-2 text-xs font-semibold uppercase tracking-wide" style={{ color: FIELD_COLOR }}>
-              Progress against Inflection Point
+              The field
             </div>
-            <FieldMeter status={point.status} />
-          </div>
-          <div className="mb-8 space-y-5">
-            <div>
-              <div className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-gray-400">Outcome</div>
-              <p className="text-sm leading-relaxed text-gray-600">{point.signal}</p>
+            <h2 className="mb-4 text-2xl font-semibold leading-tight tracking-tight text-black">
+              {point.title}
+            </h2>
+            <div className="mb-6 space-y-5">
+              <div>
+                <div className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-gray-400">Outcome</div>
+                <p className="text-sm leading-relaxed text-gray-600">{point.signal}</p>
+              </div>
+              <div>
+                <div className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-gray-400">Impact</div>
+                <p className="text-sm leading-relaxed text-gray-600">{point.cascade}</p>
+              </div>
             </div>
-            <div>
-              <div className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-gray-400">Impact</div>
-              <p className="text-sm leading-relaxed text-gray-600">{point.cascade}</p>
+            <div className="rounded-xl border border-gray-200 bg-white p-5">
+              <div className="mb-2 text-xs font-semibold uppercase tracking-wide" style={{ color: FIELD_COLOR }}>
+                Progress against Inflection Point
+              </div>
+              <FieldMeter status={point.status} />
             </div>
           </div>
 
-          {/* OUR HAND — contribution categories as headers */}
-          <div className="mb-4 text-xs font-semibold uppercase tracking-wide" style={{ color: HAND_COLOR }}>
-            Our hand
-          </div>
-          <div className="mb-4 text-sm font-semibold text-black">How PL is making a difference</div>
-          <div className="space-y-4">
-            {PL_ROLE_ORDER.filter((r) => point.roles.includes(r)).map((r) => (
-              <div key={r}>
-                <div className="mb-1 text-[11px] font-semibold uppercase tracking-wide" style={{ color: HAND_COLOR }}>
-                  {ROLE_META[r].label}
-                </div>
-                <p className="text-sm leading-relaxed text-gray-600">{ROLE_META[r].description}</p>
-              </div>
-            ))}
+          {/* OUR HAND — PL intervention pills (definition on hover) + real examples */}
+          <div className="mt-8 border-t border-gray-200 pt-8">
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wide" style={{ color: HAND_COLOR }}>
+              Our hand
+            </div>
+            <div className="mb-4 text-sm font-semibold text-black">How PL is making a difference</div>
+            <RoleChips roles={point.roles} eyebrow={false} />
+            <div className="mt-5">
+              <div className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-gray-400">In practice</div>
+              <p className="text-sm leading-relaxed text-gray-600">{point.contribution.activities}</p>
+              <p className="mt-2 text-sm leading-relaxed text-gray-500">{point.contribution.outputs}</p>
+            </div>
           </div>
 
           {/* Full-width Live-signal band: PL-backed live outputs (Q3) + crowd forecast (field axis). */}
-          <div className="mt-6 border-t border-gray-100 pt-5">
+          <div className="mt-8 border-t border-gray-200 pt-8">
             {(point.liveEvidence || (signal && signal.match !== 'gap')) && (
               <div className="mb-4 rounded-xl border border-gray-200 bg-white p-4">
                 <div className="mb-3 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-gray-400">
