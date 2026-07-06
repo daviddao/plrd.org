@@ -15,19 +15,63 @@ const HERO_BODY_FALLBACK =
   "We believe in open collaboration. Whether you're a researcher, developer, institution, or visionary builder, there are many ways to work together on problems that matter."
 
 const SECTION_TITLE_FALLBACK =
-  'In addition to driving projects directly, we support and partner with the wider research community.'
-const SECTION_BODY_FALLBACK =
-  "Some of this support takes the form of grants and prizes for academic and independent research aligned with our focus areas. Other support comes through conference and event sponsorships — often including free, high-quality recordings of talks so the work reaches everyone, not just attendees.\n\nWe also partner directly with teams building open, decentralized, and human-centric technology: co-developing primitives, seeding new ventures, and helping promising research cross from the lab into deployment. If that sounds like your work, we'd love to hear from you."
+  'PL R&D collaborates with researchers, builders, funders, institutions, policymakers, founders, and domain experts.'
+
+// Mirrors the About page's "Collaborations and Support" section. Used as a
+// fallback if the CMS section can't be fetched, and to guarantee the pathways
+// always render on this dedicated page.
+const COLLAB_TYPES_FALLBACK: { title: string; body: string }[] = [
+  {
+    title: 'Co-fund a program',
+    body: 'We partner with foundations, philanthropists, public agencies, companies, and research funders on grant calls, prizes, fellowships, convenings, field maps, standards efforts, and pilot programs.',
+  },
+  {
+    title: 'Build with us',
+    body: 'We support builders and technical teams on open-source tools, protocols, datasets, reference architectures, prototypes, and infrastructure projects aligned with one of our focus areas.',
+  },
+  {
+    title: 'Pioneer research',
+    body: 'We help researchers define open questions, produce field maps, develop technical roadmaps, evaluate emerging systems, and turn frontier ideas into shared knowledge.',
+  },
+  {
+    title: 'Join a convening or working group',
+    body: 'We host experts, policymakers, funders, and operators for focused discussions on bottlenecks, opportunity spaces, and deployment pathways.',
+  },
+  {
+    title: 'Advise a focus area',
+    body: 'Our field-level Science Advisory Boards bring together domain experts to shape strategy, review opportunity spaces, identify promising teams, and connect PL R&D with important work happening across the field.',
+  },
+  {
+    title: 'Explore deployment partnerships',
+    body: 'We work closely with institutions, governments, nonprofits, and companies to explore pilots, standards, public-good infrastructure, and real-world applications for emerging technologies to accelerate field understanding & progress.',
+  },
+]
+
+/** Parse the About page's "collaborations" markdown (**Title:** body blocks) into cards. */
+function parseCollabTypes(md?: string | null): { title: string; body: string }[] {
+  if (!md) return []
+  const items: { title: string; body: string }[] = []
+  const re = /\*\*(.+?):?\*\*\s*([\s\S]*?)(?=\n\s*\n\s*\*\*|\s*$)/g
+  let m: RegExpExecArray | null
+  while ((m = re.exec(md)) !== null) {
+    const title = m[1].replace(/:$/, '').trim()
+    const body = m[2].replace(/\s+/g, ' ').trim()
+    if (title && body) items.push({ title, body })
+  }
+  return items
+}
 
 export default async function CollaborationPage() {
-  const page = await fetchPage('collaborate')
+  const [page, aboutPage] = await Promise.all([fetchPage('collaborate'), fetchPage('about')])
   const heroSection = getSection(page, 'hero')
-  const bodySection = getSection(page, 'body')
+  const collabs = getSection(aboutPage, 'collaborations')
 
   const heroTitle = heroSection?.title || HERO_TITLE_FALLBACK
   const heroBody = heroSection?.subtitle || HERO_BODY_FALLBACK
-  const sectionTitle = bodySection?.title || SECTION_TITLE_FALLBACK
-  const bodyContent = bodySection?.body || SECTION_BODY_FALLBACK
+  const sectionTitle = collabs?.title || SECTION_TITLE_FALLBACK
+
+  const parsed = parseCollabTypes(collabs?.body)
+  const collabTypes = parsed.length > 0 ? parsed : COLLAB_TYPES_FALLBACK
 
   return (
     <div className="max-w-6xl mx-auto px-6 pt-8 pb-16">
@@ -45,14 +89,21 @@ export default async function CollaborationPage() {
         <MarkdownContent content={heroBody} className="relative z-10 text-gray-600 leading-relaxed max-w-xl" />
       </div>
 
-      {/* Collaborations and Support (mirrors the About page section) */}
+      {/* Ways to collaborate — the pathways from the About page's Collaborations & Support */}
       <div className="mb-14">
         <p className="text-blue text-sm tracking-wide mb-3">COLLABORATIONS AND SUPPORT</p>
         <h2 className="font-semibold text-xl lg:text-2xl leading-relaxed mb-8 max-w-3xl">{sectionTitle}</h2>
-        <MarkdownContent
-          content={bodyContent}
-          className="page-content text-base text-gray-700 leading-relaxed lg:columns-2 lg:gap-14"
-        />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          {collabTypes.map((c) => (
+            <div
+              key={c.title}
+              className="rounded-xl border border-gray-200 bg-white p-6 hover:border-gray-300 hover:shadow-sm transition-all"
+            >
+              <h3 className="font-semibold text-lg mb-2">{c.title}</h3>
+              <p className="text-[15px] text-gray-600 leading-relaxed">{c.body}</p>
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* CTA: get in touch + follow on X */}
