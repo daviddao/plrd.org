@@ -289,6 +289,13 @@ ul:not([class]) li li {
   color: var(--color-gray-500);
   text-align: center;
 }
+.page-content .post-hero {
+  margin: 0 0 2rem;
+}
+.page-content .post-hero img {
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
 
 /* ===== Blog: CSS-only tabbed case studies ===== */
 .page-content .cs-tabs {

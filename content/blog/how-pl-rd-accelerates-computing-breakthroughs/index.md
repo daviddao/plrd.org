@@ -5,7 +5,10 @@ summary: "The first in a series: how PL R&D moves frontier ideas from open resea
 authors:
   - molly-mackinlay
   - lukas-bresser
+cover_image: "/images/blog/pl-rd-accelerates-hero.png"
 ---
+<figure class="post-figure post-hero"><img src="/images/blog/pl-rd-accelerates-hero.png" alt="How PL R&D accelerates computing breakthroughs." /></figure>
+
 ## Introduction to Protocol Labs (PL)
 
 [Protocol Labs](https://www.protocol.ai/) was founded in 2014 by Juan Benet as a research, development, and deployment lab for network protocols. Its mission then was to [improve the internet and computing](https://www.protocol.ai/blog/protocol-labs-creating-new-networks/), generally. Its first decade produced the foundational infrastructure of the decentralized web: IPFS (a content-addressed, distributed file system), Filecoin (a cryptographic storage market), libp2p, IPLD, and Multiformats. The organizing logic was direct: breakthroughs from research-only labs tend to stay buried as papers; closing the gap from idea to deployed infrastructure required running research, development, and deployment together, as a single operation.
