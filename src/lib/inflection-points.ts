@@ -69,8 +69,8 @@ export type InflectionPoint = {
   roles: PLRole[]
   /** Field-progress lifecycle state. All start 'watching' — none reached as of 2026. */
   status: InflectionStatus
-  /** Optional live activity from PL-backed teams — strictly Q3 evidence, never Q2 progress. */
-  liveEvidence?: LiveEvidence
+  /** Optional live activity / real-world signals — strictly Q3 evidence, never Q2 progress. */
+  liveEvidence?: LiveEvidence[]
 }
 
 export type FocusAreaKey =
@@ -219,6 +219,18 @@ export const INFLECTION_POINTS: InflectionPoint[] = [
     },
     roles: ['infrastructure', 'capital'],
     status: 'early-signal',
+    liveEvidence: [
+      {
+        label: 'Starling Lab — content-authenticity displays in newsrooms',
+        href: 'https://dispatch.starlinglab.org/p/verify-authenticity-displays',
+        note: 'Reuters, AP, Rolling Stone and others ship C2PA content credentials backed by content-addressed archives (IPFS / Filecoin) — early real-world provenance, not the default-everywhere threshold (Q2).',
+      },
+      {
+        label: 'Wikipedia kept online via IPFS during Turkey’s block',
+        href: 'https://observer.com/2017/05/turkey-wikipedia-ipfs/',
+        note: 'A content-addressed mirror kept Wikipedia reachable under a state block — a signal that provenance-bearing public knowledge can route around censorship.',
+      },
+    ],
   },
   {
     area: 'digital-human-rights',
@@ -269,11 +281,13 @@ export const INFLECTION_POINTS: InflectionPoint[] = [
     },
     roles: ['connection', 'capital'],
     status: 'watching',
-    liveEvidence: {
-      label: 'Simocracy governance simulation — live participation',
-      href: '/areas/economies-governance/impact/live-dashboard/',
-      note: 'Live activity from a PL-supported mechanism. This is contribution evidence (Q3) from a simulation — not the binding-decision-in-government threshold (Q2).',
-    },
+    liveEvidence: [
+      {
+        label: 'Simocracy governance simulation — live participation',
+        href: '/areas/economies-governance/impact/live-dashboard/',
+        note: 'Live activity from a PL-supported mechanism. This is contribution evidence (Q3) from a simulation — not the binding-decision-in-government threshold (Q2).',
+      },
+    ],
   },
   {
     area: 'economies-governance',
@@ -306,11 +320,13 @@ export const INFLECTION_POINTS: InflectionPoint[] = [
     },
     roles: ['legibility', 'connection', 'capital'],
     status: 'early-signal',
-    liveEvidence: {
-      label: 'GainForest & Glow — live verification activity',
-      href: '/areas/economies-governance/impact/live-dashboard/',
-      note: 'Live output from PL-backed MRV teams on this critical path. Contribution evidence (Q3) — not the $1B-disbursed-against-verified-outcomes threshold (Q2).',
-    },
+    liveEvidence: [
+      {
+        label: 'GainForest & Glow — live verification activity',
+        href: '/areas/economies-governance/impact/live-dashboard/',
+        note: 'Live output from PL-backed MRV teams on this critical path. Contribution evidence (Q3) — not the $1B-disbursed-against-verified-outcomes threshold (Q2).',
+      },
+    ],
   },
 
   // ── FA4 · Neurotech ──────────────────────────────────────────────────────

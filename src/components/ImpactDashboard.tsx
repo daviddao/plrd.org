@@ -31,10 +31,6 @@ const PLATFORM_LABEL: Record<'polymarket' | 'kalshi', string> = {
   kalshi: 'Kalshi',
 }
 
-// Generic footnote for cards/points that surface a live signal.
-const LIVE_SIGNAL_NOTE =
-  'Live signals from a PL-supported mechanism. This may be limited to contribution evidence — not evidence of inflection point crossing.'
-
 const FA_ICON: Record<FocusAreaKey, AreaIconType> = {
   'digital-human-rights': 'shield',
   'economies-governance': 'hexagon',
@@ -207,30 +203,6 @@ function RoleChips({ roles, eyebrow = true }: { roles: PLRole[]; eyebrow?: boole
   )
 }
 
-/** Compact crowd-odds read for the FIELD axis on a card (non-interactive). */
-function CrowdSignalInline({ signal }: { signal: MarketSignal }) {
-  if (signal.match === 'gap') {
-    return (
-      <div className="mt-2.5 flex items-center gap-1.5 text-[11px] text-gray-400">
-        <span className="inline-block h-1.5 w-1.5 rounded-full bg-gray-300" />
-        No market yet — unpriced bet
-      </div>
-    )
-  }
-  const pct = signal.prob != null ? Math.round(signal.prob * 100) : null
-  return (
-    <div className="mt-2.5 flex items-center gap-2 text-[11px]">
-      <span className="text-gray-400">
-        Crowd{signal.platform ? ` · ${PLATFORM_LABEL[signal.platform]}` : ''}
-      </span>
-      <span className="truncate text-gray-400">{signal.question}</span>
-      <span className="ml-auto shrink-0 font-semibold tabular-nums" style={{ color: FIELD_COLOR }}>
-        {pct != null ? `${pct}%` : 'live'}
-      </span>
-    </div>
-  )
-}
-
 function InflectionCard({
   point,
   metrics,
@@ -244,6 +216,13 @@ function InflectionCard({
 }) {
   const fa = FOCUS_AREAS.find((f) => f.key === point.area)!
   const stageLabel = FIELD_STAGES[stageIndexForStatus(point.status)]
+  // Whether this point has any live signal worth opening the card for. The
+  // preview only hints that something exists — the detail lives in the modal.
+  const hasLiveSignal = !!(
+    point.liveEvidence?.length ||
+    (metrics && metrics.length) ||
+    (signal && signal.match !== 'gap')
+  )
 
   return (
     <button
@@ -284,7 +263,6 @@ function InflectionCard({
           <span className="ml-auto text-[11px] font-medium" style={{ color: FIELD_COLOR }}>{stageLabel}</span>
         </div>
         <FieldMeter status={point.status} />
-        {signal && <CrowdSignalInline signal={signal} />}
       </div>
 
       {/* OUR HAND — did our work help (violet) */}
@@ -298,25 +276,14 @@ function InflectionCard({
         <RoleChips roles={point.roles} eyebrow={false} />
       </div>
 
-      {/* LIVE SIGNAL — present only for points with live outputs */}
-      {metrics && metrics.length > 0 && (
-        <div className="mt-4 rounded-lg bg-gray-50 px-4 py-3">
-          <div className="mb-2 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-gray-500">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full" style={{ backgroundColor: `${LIVE_COLOR}99` }} />
-              <span className="relative inline-flex h-2 w-2 rounded-full" style={{ backgroundColor: LIVE_COLOR }} />
-            </span>
-            Live signal
-          </div>
-          <div className="flex flex-wrap gap-x-6 gap-y-1">
-            {metrics.map((m) => (
-              <span key={m.label} className="flex items-baseline gap-1.5">
-                <span className="text-lg font-semibold text-black">{m.value}</span>
-                <span className="text-xs text-gray-500">{m.label}</span>
-              </span>
-            ))}
-          </div>
-          <p className="mt-2 text-[11px] leading-relaxed text-gray-400">{LIVE_SIGNAL_NOTE}</p>
+      {/* LIVE SIGNAL — preview only hints that something is here; detail is in the modal */}
+      {hasLiveSignal && (
+        <div className="mt-4 inline-flex items-center gap-1.5 self-start rounded-full bg-gray-50 px-2.5 py-1 text-[11px] font-medium text-gray-500">
+          <span className="relative flex h-2 w-2">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full" style={{ backgroundColor: `${LIVE_COLOR}99` }} />
+            <span className="relative inline-flex h-2 w-2 rounded-full" style={{ backgroundColor: LIVE_COLOR }} />
+          </span>
+          Live signal
         </div>
       )}
 
@@ -482,37 +449,51 @@ function InflectionModal({
               </span>
               Live signal
             </div>
-            {(point.liveEvidence || (signal && signal.match !== 'gap')) && (
+            {(point.liveEvidence?.length || (metrics && metrics.length) || (signal && signal.match !== 'gap')) && (
               <div className="mb-4 rounded-xl border border-gray-200 bg-white p-4">
-                {point.liveEvidence && (
-                  <a
-                    href={point.liveEvidence.href}
-                    className="-m-1 block rounded-lg p-1 no-underline transition-colors hover:bg-gray-50"
-                  >
-                    <div className="flex items-center gap-2 text-sm font-medium text-black">
-                      {point.liveEvidence.label}
-                      <svg className="ml-auto h-4 w-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </div>
-                    {metrics && metrics.length > 0 && (
-                      <div className="mt-3 flex flex-wrap gap-x-6 gap-y-2">
-                        {metrics.map((m) => (
-                          <span key={m.label} className="flex items-baseline gap-1.5">
-                            <span className="text-lg font-semibold text-black">{m.value}</span>
-                            <span className="text-xs text-gray-500">{m.label}</span>
-                          </span>
-                        ))}
+                {point.liveEvidence?.map((ev, i) => {
+                  const external = /^https?:\/\//.test(ev.href)
+                  return (
+                    <a
+                      key={ev.href}
+                      href={ev.href}
+                      {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                      className={`-m-1 block rounded-lg p-1 no-underline transition-colors hover:bg-gray-50 ${i > 0 ? 'mt-3 border-t border-gray-100 pt-3' : ''}`}
+                    >
+                      <div className="flex items-center gap-2 text-sm font-medium text-black">
+                        {ev.label}
+                        <svg className="ml-auto h-4 w-4 shrink-0 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
                       </div>
-                    )}
-                    <p className="mt-3 text-xs leading-relaxed text-gray-500">
-                      {LIVE_SIGNAL_NOTE}
-                    </p>
-                  </a>
+                      {i === 0 && metrics && metrics.length > 0 && (
+                        <div className="mt-3 flex flex-wrap gap-x-6 gap-y-2">
+                          {metrics.map((m) => (
+                            <span key={m.label} className="flex items-baseline gap-1.5">
+                              <span className="text-lg font-semibold text-black">{m.value}</span>
+                              <span className="text-xs text-gray-500">{m.label}</span>
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                      <p className="mt-2 text-xs leading-relaxed text-gray-500">{ev.note}</p>
+                    </a>
+                  )
+                })}
+
+                {!point.liveEvidence?.length && metrics && metrics.length > 0 && (
+                  <div className="flex flex-wrap gap-x-6 gap-y-2">
+                    {metrics.map((m) => (
+                      <span key={m.label} className="flex items-baseline gap-1.5">
+                        <span className="text-lg font-semibold text-black">{m.value}</span>
+                        <span className="text-xs text-gray-500">{m.label}</span>
+                      </span>
+                    ))}
+                  </div>
                 )}
 
                 {signal && signal.match !== 'gap' && (
-                  <CrowdForecast signal={signal} divider={!!point.liveEvidence} />
+                  <CrowdForecast signal={signal} divider={!!point.liveEvidence?.length} />
                 )}
               </div>
             )}
