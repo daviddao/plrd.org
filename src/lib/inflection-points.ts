@@ -187,6 +187,13 @@ export const INFLECTION_POINTS: InflectionPoint[] = [
     },
     roles: ['infrastructure', 'capital'],
     status: 'early-signal',
+    liveEvidence: [
+      {
+        label: 'Wikipedia kept online via IPFS during Turkey’s block',
+        href: 'https://observer.com/2017/05/turkey-wikipedia-ipfs/',
+        note: 'A content-addressed (IPFS) mirror kept Wikipedia reachable under Turkey’s state block — early evidence that information can route around a shutdown, not the population-scale-through-a-shutdown threshold (Q2).',
+      },
+    ],
   },
   {
     area: 'digital-human-rights',
@@ -224,11 +231,6 @@ export const INFLECTION_POINTS: InflectionPoint[] = [
         label: 'Starling Lab — content-authenticity displays in newsrooms',
         href: 'https://dispatch.starlinglab.org/p/verify-authenticity-displays',
         note: 'Reuters, AP, Rolling Stone and others ship C2PA content credentials backed by content-addressed archives (IPFS / Filecoin) — early real-world provenance, not the default-everywhere threshold (Q2).',
-      },
-      {
-        label: 'Wikipedia kept online via IPFS during Turkey’s block',
-        href: 'https://observer.com/2017/05/turkey-wikipedia-ipfs/',
-        note: 'A content-addressed mirror kept Wikipedia reachable under a state block — a signal that provenance-bearing public knowledge can route around censorship.',
       },
     ],
   },
