@@ -1,13 +1,13 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { FIELD_COLOR, HAND_COLOR, ROLE_META, PL_ROLE_ORDER } from '@/lib/inflection-points'
+import { FIELD_COLOR, FIELD_INK, HAND_COLOR, ROLE_META, PL_ROLE_ORDER } from '@/lib/inflection-points'
 
-function Badge({ letter, color }: { letter: string; color: string }) {
+function Badge({ letter, color, ink = '#ffffff' }: { letter: string; color: string; ink?: string }) {
   return (
     <span
-      className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg text-sm font-bold text-white"
-      style={{ backgroundColor: color }}
+      className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg text-sm font-bold"
+      style={{ backgroundColor: color, color: ink }}
     >
       {letter}
     </span>
@@ -89,7 +89,7 @@ function FieldCard({
   return (
     <div className="flex flex-col rounded-xl border border-gray-200 bg-white p-6">
       <div className="mb-3 flex items-center gap-2.5">
-        <Badge letter={letter} color={FIELD_COLOR} />
+        <Badge letter={letter} color={FIELD_COLOR} ink={FIELD_INK} />
         <h3 className="text-lg font-semibold tracking-tight text-black">{title}</h3>
       </div>
       <div className="mb-2 text-[11px] font-semibold uppercase tracking-wide" style={{ color: FIELD_COLOR }}>

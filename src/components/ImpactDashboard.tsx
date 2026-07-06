@@ -5,6 +5,7 @@ import {
   ROLE_META,
   PL_ROLE_ORDER,
   FIELD_COLOR,
+  FIELD_TRACK,
   HAND_COLOR,
   LIVE_COLOR,
   FIELD_STAGES,
@@ -132,7 +133,7 @@ function Tab({
     >
       <span
         className="flex h-6 w-6 shrink-0 items-center justify-center"
-        style={{ color: active ? '#131316' : '#9ca3af' }}
+        style={{ color: active ? 'var(--impact-field)' : '#9ca3af' }}
       >
         {icon && <AreaIcon type={icon} className="block h-5 w-5" />}
       </span>
@@ -158,7 +159,7 @@ function FieldMeter({
           <span
             key={i}
             className="h-1.5 flex-1 rounded-full"
-            style={{ backgroundColor: i <= reached ? FIELD_COLOR : '#e5e7eb' }}
+            style={{ backgroundColor: i <= reached ? FIELD_COLOR : FIELD_TRACK }}
           />
         ))}
       </div>
@@ -187,7 +188,11 @@ function RoleChips({ roles, eyebrow = true }: { roles: PLRole[]; eyebrow?: boole
         <span key={r} className="group/role relative inline-flex">
           <span
             className="inline-flex cursor-help items-center rounded-full border px-2.5 py-1 text-xs font-medium"
-            style={{ color: HAND_COLOR, borderColor: `${HAND_COLOR}55`, backgroundColor: `${HAND_COLOR}12` }}
+            style={{
+              color: HAND_COLOR,
+              borderColor: 'color-mix(in srgb, var(--impact-hand) 34%, transparent)',
+              backgroundColor: 'color-mix(in srgb, var(--impact-hand) 8%, transparent)',
+            }}
           >
             {ROLE_META[r].label}
           </span>

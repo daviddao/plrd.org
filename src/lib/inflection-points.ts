@@ -29,8 +29,14 @@ export const PL_ROLE_ORDER: PLRole[] = ['infrastructure', 'legibility', 'connect
 // Two-axis color system used across the impact dashboard:
 //   FIELD = the change in the world (outcomes + impact) — moves with or without us (black)
 //   HAND  = our planned work / the PL toolkit — the axis we control with partners (PL blue)
-export const FIELD_COLOR = '#131316'
-export const HAND_COLOR = '#1982F4'
+// These resolve to theme-aware CSS variables (see globals.css) so the black
+// “field” ink flips to a light tone in dark mode instead of vanishing.
+export const FIELD_COLOR = 'var(--impact-field)'
+export const HAND_COLOR = 'var(--impact-hand)'
+/** Text/ink color to place on a FIELD_COLOR fill (white in light, dark in dark). */
+export const FIELD_INK = 'var(--impact-field-ink)'
+/** Empty segment color for the field-progress meter. */
+export const FIELD_TRACK = 'var(--impact-field-track)'
 /** Live-signal accent — the pulsing dot on points with live outputs (green). */
 export const LIVE_COLOR = '#22c55e'
 
