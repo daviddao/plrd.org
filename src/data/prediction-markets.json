@@ -1,0 +1,121 @@
+{
+  "meta": {
+    "title": "Inflection points, priced by the crowd",
+    "subtitle": "An experiment: each PL R&D inflection point mapped to the closest live prediction market on Polymarket / Kalshi. Where a market exists, the crowd's probability is a running scoreboard for our bets. Where none exists, the gap is itself a signal of how early or contrarian the bet is.",
+    "disclaimer": "Prototype for discussion. Odds are fetched live from public prediction-market APIs and are proxies, not exact restatements of our inflection points. Not investment advice; nothing here endorses gambling."
+  },
+  "mappings": [
+    {
+      "area": "AI & Robotics",
+      "areaSlug": "ai-robotics",
+      "opportunitySpace": "Open Compute Networks",
+      "inflectionPoint": "A decentralized / open compute network trains a model competitive with the hyperscalers' frontier.",
+      "match": "proxy",
+      "market": {
+        "platform": "Polymarket",
+        "question": "Will an open-weights (Chinese) model be the best AI model by Dec 31?",
+        "slug": "will-a-chinese-company-have-the-best-ai-model-by-december-31",
+        "url": "https://polymarket.com/event/will-a-chinese-company-have-the-best-ai-model-by-december-31",
+        "note": "Open-weights momentum is the best available proxy for open/distributed compute reaching the frontier."
+      }
+    },
+    {
+      "area": "AI & Robotics",
+      "areaSlug": "ai-robotics",
+      "opportunitySpace": "Embodied AI & Robotics Data Networks",
+      "inflectionPoint": "Robotics datasets and embodied models reach the behavioral repertoire needed for real-world deployment.",
+      "match": "proxy",
+      "market": {
+        "platform": "Polymarket",
+        "question": "Will Tesla release a consumer Optimus humanoid by Dec 31, 2026?",
+        "slug": "will-tesla-release-optimus-by-june-30-2026",
+        "url": "https://polymarket.com/event/will-tesla-release-optimus-by-june-30-2026",
+        "note": "Commercial humanoid release is a visible downstream marker of embodied-AI data maturity. Figure F.03 reliability markets are a second proxy."
+      }
+    },
+    {
+      "area": "AI & Robotics",
+      "areaSlug": "ai-robotics",
+      "opportunitySpace": "Agent Coordination & Agent-Native Economic Infrastructure",
+      "inflectionPoint": "Autonomous agents coordinate and transact across organizations without human intermediation.",
+      "match": "gap",
+      "market": {
+        "platform": "—",
+        "question": "No direct market yet — agents already trade ON Polymarket, but none prices agent-to-agent economies.",
+        "slug": "",
+        "url": "",
+        "note": "A genuine white space. Could be worth proposing/seeding such a market."
+      }
+    },
+    {
+      "area": "Digital Human Rights",
+      "areaSlug": "digital-human-rights",
+      "opportunitySpace": "Portable Identity, Credentials & Trust",
+      "inflectionPoint": "A 100M+ service identifies users without state/platform KYC via self-sovereign identity.",
+      "match": "direct",
+      "market": {
+        "platform": "Polymarket",
+        "question": "Over 30M humans verified on World Network by Dec 31?",
+        "slug": "over-30m-humans-verified-on-world-network-by-december-31",
+        "url": "https://polymarket.com/event/over-30m-humans-verified-on-world-network-by-december-31",
+        "note": "Proof-of-human adoption at scale is the clearest live analogue to the portable-identity inflection."
+      }
+    },
+    {
+      "area": "Digital Human Rights",
+      "areaSlug": "digital-human-rights",
+      "opportunitySpace": "Verifiable Public Knowledge & Provenance",
+      "inflectionPoint": "Frontier AI + major institutions adopt cryptographic content provenance as a baseline.",
+      "match": "gap",
+      "market": {
+        "platform": "—",
+        "question": "No clean market yet (EU AI Act Art. 50 enforcement, Aug 2026, is a candidate to track).",
+        "slug": "",
+        "url": "",
+        "note": "C2PA / SynthID adoption is measurable but not yet a liquid market — another white space."
+      }
+    },
+    {
+      "area": "Neuro",
+      "areaSlug": "neurotech",
+      "opportunitySpace": "Neural Augmentation (BCI)",
+      "inflectionPoint": "An FDA-cleared BCI opens a third-party app layer, normalizing elective implantation.",
+      "match": "proxy",
+      "market": {
+        "platform": "Polymarket",
+        "question": "Will Neuralink's valuation hit $75B by Dec 31?",
+        "slug": "will-neuralinks-valuation-hit-by-december-31",
+        "url": "https://polymarket.com/event/will-neuralinks-valuation-hit-by-december-31",
+        "note": "Valuation / FDA-milestone markets track BCI momentum; a dedicated FDA-clearance market would be the direct measure."
+      }
+    },
+    {
+      "area": "Economies & Governance",
+      "areaSlug": "economies-governance",
+      "opportunitySpace": "Sovereign Digital Public Infrastructure",
+      "inflectionPoint": "A nation-state runs core systems (identity, payments, registries) on crypto rails.",
+      "match": "proxy",
+      "market": {
+        "platform": "Polymarket",
+        "question": "Over 30M humans verified on World Network by Dec 31?",
+        "slug": "over-30m-humans-verified-on-world-network-by-december-31",
+        "url": "https://polymarket.com/event/over-30m-humans-verified-on-world-network-by-december-31",
+        "note": "World becoming a mandated digital-identity layer is one of our own examples; shares the World market as a proxy."
+      }
+    },
+    {
+      "area": "Economies & Governance",
+      "areaSlug": "economies-governance",
+      "opportunitySpace": "Crypto-Native Governance & Decentralized Climate Finance",
+      "inflectionPoint": "A city/jurisdiction adopts crypto-native governance; a billion-dollar DePIN climate business emerges.",
+      "match": "gap",
+      "market": {
+        "platform": "—",
+        "question": "No liquid market yet for network-state governance adoption or DePIN climate scale.",
+        "slug": "",
+        "url": "",
+        "note": "Long-horizon, illiquid themes — the absence of a market underlines how contrarian these bets are."
+      }
+    }
+  ]
+}
