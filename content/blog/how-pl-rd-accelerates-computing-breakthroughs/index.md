@@ -40,7 +40,7 @@ In Economies & Governance, 22,000+ researchers, builders, and residents from ove
 
 In AI & Robotics, Prime Intellect trained a 100B+ parameter model that outperforms centrally-trained alternatives – a proof point for open, distributed compute as a viable path to frontier AI. EQTY Lab launched a verifiable-compute layer on Nvidia's Blackwell platform, and the field is producing the agent coordination infrastructure the next generation of AI deployment depends on.
 
-In Neurotechnology, $2M in grants funded 9 teams in 2025. The BCI Founders Retreat brought together 9 leading teams whose companies have collectively raised billions in VC; the [Connectomics Workshop](https://plneuro.xyz/events/connectomics-workshop/) has mapped brains for compute, emulation, and consciousness research; and [PL Neuro](https://plneuro.xyz/) launched as the field's organizing infrastructure — whitepapers, roadmaps, and a public brand at plneuro.xyz — making a nascent field legible and recruitable for the first time.
+In Neurotechnology, $2M in grants funded 9 teams in 2025. The BCI Founders Retreat brought together 9 leading teams whose companies have collectively raised billions in VC; the [Connectomics Workshop](https://plneuro.xyz/events/connectomics-workshop/) advanced the mapping of brains for compute, emulation, and consciousness research; and [PL Neuro](https://plneuro.xyz/) launched as the field's organizing infrastructure — whitepapers, roadmaps, and a public brand at plneuro.xyz — making a nascent field legible and recruitable for the first time.
 
 ## How PL R&D drives breakthroughs
 
