@@ -165,7 +165,7 @@ export const ROLE_META: Record<PLRole, { label: string; description: string }> =
     description: 'The work was ready to leave the lab. PL helps convert it into ventures, pilots, and deployments.',
   },
   permission: {
-    label: 'Permission',
+    label: 'Policy',
     description: 'The rules did not yet recognize the technology. PL engages standards, policy, and regulatory pathways.',
   },
 }

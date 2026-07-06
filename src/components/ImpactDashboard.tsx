@@ -433,60 +433,44 @@ function InflectionModal({
             <span className="text-gray-300">·</span>
             <span className="text-gray-400">{point.opportunitySpace}</span>
           </div>
-          <h2 className="mb-5 text-2xl font-semibold leading-tight tracking-tight text-black">
+          {/* THE FIELD — title, progress, outcome, impact */}
+          <div className="mb-2 text-xs font-semibold uppercase tracking-wide" style={{ color: FIELD_COLOR }}>
+            The field
+          </div>
+          <h2 className="mb-4 text-2xl font-semibold leading-tight tracking-tight text-black">
             {point.title}
           </h2>
-
-          {/* Field progress — full width */}
           <div className="mb-6 rounded-xl border border-gray-200 bg-gray-50 p-5">
             <div className="mb-2 text-xs font-semibold uppercase tracking-wide" style={{ color: FIELD_COLOR }}>
               Progress against Inflection Point
             </div>
             <FieldMeter status={point.status} />
           </div>
-
-          {/* Two axes: our hand | the field */}
-          <div className="grid gap-8 sm:grid-cols-2">
-            {/* OUR HAND */}
-            <div className="sm:border-r sm:border-gray-100 sm:pr-8">
-              <div className="mb-4 text-xs font-semibold uppercase tracking-wide" style={{ color: HAND_COLOR }}>Our hand</div>
-              <div className="mb-3 flex items-center gap-2">
-                <QBadge letter="A" color={HAND_COLOR} />
-                <span className="text-sm font-semibold text-black">How is PL making a difference?</span>
-              </div>
-              <div className="mb-4"><RoleChips roles={point.roles} eyebrow={false} /></div>
-              <div className="space-y-4">
-                <div>
-                  <div className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-gray-400">Inputs</div>
-                  <p className="text-sm leading-relaxed text-gray-600">{point.contribution.inputs}</p>
-                </div>
-                <div>
-                  <div className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-gray-400">Activities</div>
-                  <p className="text-sm leading-relaxed text-gray-600">{point.contribution.activities}</p>
-                </div>
-                <div>
-                  <div className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-gray-400">Outputs</div>
-                  <p className="text-sm leading-relaxed text-gray-600">{point.contribution.outputs}</p>
-                </div>
-              </div>
-            </div>
-
-            {/* THE FIELD */}
+          <div className="mb-8 space-y-5">
             <div>
-              <div className="mb-4 text-xs font-semibold uppercase tracking-wide" style={{ color: FIELD_COLOR }}>The field</div>
-              <div className="mb-2 flex items-center gap-2">
-                <QBadge letter="B" color={FIELD_COLOR} />
-                <span className="text-sm font-semibold text-black">Did it happen?</span>
-              </div>
-              <div className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-gray-400">Outcome — the inflection point</div>
-              <p className="mb-5 text-sm leading-relaxed text-gray-600">{point.signal}</p>
-              <div className="mb-2 flex items-center gap-2">
-                <QBadge letter="C" color={FIELD_COLOR} />
-                <span className="text-sm font-semibold text-black">Did it matter?</span>
-              </div>
-              <div className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-gray-400">Impact — the cascade</div>
+              <div className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-gray-400">Outcome</div>
+              <p className="text-sm leading-relaxed text-gray-600">{point.signal}</p>
+            </div>
+            <div>
+              <div className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-gray-400">Impact</div>
               <p className="text-sm leading-relaxed text-gray-600">{point.cascade}</p>
             </div>
+          </div>
+
+          {/* OUR HAND — contribution categories as headers */}
+          <div className="mb-4 text-xs font-semibold uppercase tracking-wide" style={{ color: HAND_COLOR }}>
+            Our hand
+          </div>
+          <div className="mb-4 text-sm font-semibold text-black">How PL is making a difference</div>
+          <div className="space-y-4">
+            {PL_ROLE_ORDER.filter((r) => point.roles.includes(r)).map((r) => (
+              <div key={r}>
+                <div className="mb-1 text-[11px] font-semibold uppercase tracking-wide" style={{ color: HAND_COLOR }}>
+                  {ROLE_META[r].label}
+                </div>
+                <p className="text-sm leading-relaxed text-gray-600">{ROLE_META[r].description}</p>
+              </div>
+            ))}
           </div>
 
           {/* Full-width Live-signal band: PL-backed live outputs (Q3) + crowd forecast (field axis). */}
@@ -556,17 +540,6 @@ function InflectionModal({
         </div>
       </div>
     </div>
-  )
-}
-
-function QBadge({ letter, color }: { letter: string; color: string }) {
-  return (
-    <span
-      className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md text-xs font-bold text-white"
-      style={{ backgroundColor: color }}
-    >
-      {letter}
-    </span>
   )
 }
 
