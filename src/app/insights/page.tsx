@@ -115,7 +115,7 @@ export default async function InsightsPage() {
         areaLabel: [areaTitle(t.areas?.[0]), t.venue].filter(Boolean).join(' · '),
         areaSlug: t.areas?.[0] || 'default',
         date: t.date || '',
-        image: youtubeThumb(t.html),
+        image: youtubeThumb(t.html) || (isPodcast ? '/images/podcast.webp' : undefined),
         _sort: t.date || '',
       }
     }),
