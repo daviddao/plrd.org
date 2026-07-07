@@ -55,21 +55,24 @@ export default function AreaFilteredListing({
 
   return (
     <div>
-      {/* Focus-area filter */}
-      <div className="flex flex-wrap gap-2 mb-8">
-        {areaChips.map((a) => {
-          const count = areaCount(a.slug)
-          return (
-            <FilterPill
-              key={a.slug}
-              label={a.title}
-              count={a.slug === ALL ? undefined : count}
-              active={area === a.slug}
-              disabled={a.slug !== ALL && count === 0}
-              onClick={() => setArea(a.slug)}
-            />
-          )
-        })}
+      {/* Focus-area filter. Sticks below the site header (h-16) so it stays
+         reachable while scrolling, matching the Insights explorer toolbar. */}
+      <div className="sticky top-16 z-30 -mx-6 bg-white border-b border-gray-200 mb-8 px-6 pt-4 pb-5">
+        <div className="flex flex-wrap gap-2">
+          {areaChips.map((a) => {
+            const count = areaCount(a.slug)
+            return (
+              <FilterPill
+                key={a.slug}
+                label={a.title}
+                count={a.slug === ALL ? undefined : count}
+                active={area === a.slug}
+                disabled={a.slug !== ALL && count === 0}
+                onClick={() => setArea(a.slug)}
+              />
+            )
+          })}
+        </div>
       </div>
 
       {shown.length === 0 ? (
