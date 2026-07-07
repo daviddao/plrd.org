@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { sections, publications, talks, blogPosts, areas } from '@/lib/content'
+import { sections, publications, talks, blogPosts, areas, focusAreaDefs } from '@/lib/content'
 import Breadcrumb from '@/components/Breadcrumb'
 import EditPageButton from '@/components/EditPageButton'
 import { PageEditHistoryByline } from '@/components/EditHistoryByline'
@@ -38,10 +38,7 @@ export default async function InsightsPage() {
   const cardBlog = getSection(page, 'card-blog')
 
   // Focus-area chips, ordered to match the site nav.
-  const AREA_ORDER = ['digital-human-rights', 'economies-governance', 'ai-robotics', 'neurotech']
-  const areaDefs: AreaDef[] = AREA_ORDER.map((slug) => areas.find((a) => a.slug === slug))
-    .filter((a): a is (typeof areas)[number] => Boolean(a))
-    .map((a) => ({ slug: a.slug, title: a.title }))
+  const areaDefs: AreaDef[] = focusAreaDefs
 
   const insightSections: InsightSection[] = [
     {

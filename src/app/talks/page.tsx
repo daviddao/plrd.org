@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
-import { talks } from '@/lib/content'
+import { talks, focusAreaDefs } from '@/lib/content'
 import Breadcrumb from '@/components/Breadcrumb'
 import EditPageButton from '@/components/EditPageButton'
 import { PageEditHistoryByline } from '@/components/EditHistoryByline'
 import MarkdownContent from '@/components/MarkdownContent'
-import { ContentTile, ContentTileGrid } from '@/components/ContentTile'
+import AreaFilteredListing, { type FilterableTile } from '@/components/AreaFilteredListing'
 import { fetchPage, getSection } from '@/lib/indexer'
 
 export const metadata: Metadata = { title: 'Talks' }
@@ -18,6 +18,17 @@ export default async function TalksPage() {
   const hero = getSection(page, 'hero')
   const heroTitle = hero?.title || FALLBACK_HERO_TITLE
   const heroSubtitle = hero?.subtitle || FALLBACK_HERO_SUBTITLE
+
+  const tiles: FilterableTile[] = talks.map((talk) => ({
+    key: talk.slug,
+    href: `/talks/${talk.slug}/`,
+    eyebrow: [talk.venue, talk.venue_location, talk.date && new Date(talk.date).getFullYear()]
+      .filter(Boolean)
+      .join(' · '),
+    title: talk.title,
+    description: talk.abstract,
+    areas: talk.areas ?? [],
+  }))
 
   return (
     <div className="max-w-6xl mx-auto px-6 pt-8 pb-16">
@@ -35,19 +46,7 @@ export default async function TalksPage() {
       </div>
 
       {/* Tiles */}
-      <ContentTileGrid>
-        {talks.map((talk) => (
-          <ContentTile
-            key={talk.slug}
-            href={`/talks/${talk.slug}/`}
-            eyebrow={[talk.venue, talk.venue_location, talk.date && new Date(talk.date).getFullYear()]
-              .filter(Boolean)
-              .join(' · ')}
-            title={talk.title}
-            description={talk.abstract}
-          />
-        ))}
-      </ContentTileGrid>
+      <AreaFilteredListing areas={focusAreaDefs} tiles={tiles} noun="talks" />
       <EditPageButton rkey="talks" />
     </div>
   )
