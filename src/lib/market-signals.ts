@@ -107,7 +107,7 @@ export const MARKET_MAPPINGS: MarketMapping[] = [
   {
     title: 'Capital that pays on verified outcomes',
     match: 'gap',
-    note: 'No market prices a $1B+ outcomes-verified climate fund. GainForest / Glow live outputs already appear here as Q3 evidence.',
+    note: 'No market prices a $1B+ outcomes-verified climate fund.',
   },
   {
     title: 'The BCI app store',
