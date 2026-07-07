@@ -313,7 +313,7 @@ function InflectionCard({
           <span className="text-[11px] font-semibold uppercase tracking-wide" style={{ color: HAND_COLOR }}>
             Our hand
           </span>
-          <span className="text-[11px] text-gray-400">· how is PL making a difference</span>
+          <span className="text-[11px] text-gray-400">· How PL is making a difference</span>
         </div>
         <RoleChips roles={point.roles} eyebrow={false} />
       </div>
