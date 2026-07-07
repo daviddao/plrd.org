@@ -34,6 +34,9 @@ export type RadarItem = {
 
 const STORAGE_KEY = 'plrd-radar-collapsed'
 
+/** How long each story slide dwells before auto-advancing (ms). */
+const SLIDE_MS = 7000
+
 const AREA_GRADIENT: Record<string, { from: string; via: string; to: string; dot: string }> = {
   'digital-human-rights': { from: '#0b1f4d', via: '#1e3a8a', to: '#3966FE', dot: '#3966FE' },
   'economies-governance': { from: '#0a3b2e', via: '#0f6b4c', to: '#12bfdf', dot: '#12bfdf' },
@@ -82,6 +85,8 @@ function CoverImage({ src, alt }: { src: string; alt: string }) {
 export default function PLRadar({ edition, items }: { edition: string; items: RadarItem[] }) {
   const [open, setOpen] = useState(true)
   const [i, setI] = useState(0)
+  const [progress, setProgress] = useState(0)
+  const [paused, setPaused] = useState(false)
   const sectionRef = useRef<HTMLElement>(null)
   const touchX = useRef<number | null>(null)
 
@@ -100,10 +105,40 @@ export default function PLRadar({ edition, items }: { edition: string; items: Ra
   const N = items.length + 1 // + "all caught up" slide
   const go = useCallback((n: number) => setI((prev) => Math.max(0, Math.min(N - 1, n))), [N])
 
+  const atEnd = i === items.length
+
+  // Story-style auto-advance: fill the current slide's bar over SLIDE_MS, then
+  // step to the next slide. Pauses while collapsed, held/hovered, or when the
+  // tab is hidden, and halts on the final "all caught up" slide.
+  useEffect(() => {
+    setProgress(0)
+    if (!open || paused || atEnd) return
+    let raf = 0
+    let start: number | null = null
+    const tick = (now: number) => {
+      if (start === null) start = now
+      const p = Math.min(1, (now - start) / SLIDE_MS)
+      setProgress(p)
+      if (p >= 1) go(i + 1)
+      else raf = requestAnimationFrame(tick)
+    }
+    raf = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(raf)
+  }, [i, open, paused, atEnd, go])
+
+  // Pause auto-advance when the tab loses focus (browsers throttle rAF anyway).
+  useEffect(() => {
+    const onVis = () => setPaused(document.hidden)
+    document.addEventListener('visibilitychange', onVis)
+    return () => document.removeEventListener('visibilitychange', onVis)
+  }, [])
+
   const onTouchStart = (e: React.TouchEvent) => {
     touchX.current = e.touches[0].clientX
+    setPaused(true) // press-and-hold pauses, like stories
   }
   const onTouchEnd = (e: React.TouchEvent) => {
+    setPaused(false)
     if (touchX.current === null) return
     const dx = e.changedTouches[0].clientX - touchX.current
     if (dx < -40) go(i + 1)
@@ -129,8 +164,6 @@ export default function PLRadar({ edition, items }: { edition: string; items: Ra
     )}&via=PL_RnD`
     window.open(intent, '_blank', 'noopener,noreferrer')
   }
-
-  const atEnd = i === items.length
 
   return (
     <section
@@ -180,20 +213,26 @@ export default function PLRadar({ edition, items }: { edition: string; items: Ra
         <div className="relative rounded-2xl overflow-hidden border border-gray-200 bg-white shadow-[0_8px_30px_rgba(15,17,21,0.06)]">
           {/* progress segments — own band above the content so they never overlap it */}
           <div className="relative z-30 flex gap-1.5 px-4 pt-4 pb-3 bg-white">
-            {Array.from({ length: N }).map((_, idx) => (
-              <div key={idx} className="flex-1 h-[3px] rounded-full bg-black/10 overflow-hidden">
-                <div
-                  className="h-full bg-black rounded-full transition-[width] duration-300"
-                  style={{ width: idx <= i ? '100%' : '0%' }}
-                />
-              </div>
-            ))}
+            {Array.from({ length: N }).map((_, idx) => {
+              // Past slides are full; the current slide fills as it plays; future slides are empty.
+              const fill = idx < i ? 1 : idx === i ? (atEnd ? 1 : progress) : 0
+              return (
+                <div key={idx} className="flex-1 h-[3px] rounded-full bg-black/10 overflow-hidden">
+                  <div
+                    className={`h-full bg-black rounded-full ${idx === i ? '' : 'transition-[width] duration-300'}`}
+                    style={{ width: `${fill * 100}%` }}
+                  />
+                </div>
+              )
+            })}
           </div>
 
           <div
             className="relative min-h-[300px] sm:min-h-[360px]"
             onTouchStart={onTouchStart}
             onTouchEnd={onTouchEnd}
+            onMouseEnter={() => setPaused(true)}
+            onMouseLeave={() => setPaused(false)}
           >
             {/* content slides */}
             {items.map((item, idx) => {
