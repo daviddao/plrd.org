@@ -389,7 +389,7 @@ function CrowdForecast({ signal, divider = false }: { signal: MarketSignal; divi
           </span>
         )}
         <span className="ml-auto text-2xl font-semibold tabular-nums" style={{ color: FIELD_COLOR }}>
-          {pct != null ? `${pct}%` : '—'}
+          {signal.readout ?? (pct != null ? `${pct}%` : '—')}
         </span>
       </div>
       {signal.url && (

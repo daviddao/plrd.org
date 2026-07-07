@@ -21,7 +21,7 @@ export type SignalMatch = 'direct' | 'proxy' | 'gap'
 type MarketRef =
   | { platform: 'polymarket'; slug: string; hint?: string; question: string; url: string }
   | { platform: 'kalshi'; ticker: string; question: string; url: string }
-  | { platform: 'metaculus'; id: number; question: string; url: string }
+  | { platform: 'metaculus'; id: number; kind?: 'binary' | 'date'; question: string; url: string }
 
 export type MarketMapping = {
   /** Must match InflectionPoint.title exactly. */
@@ -43,6 +43,8 @@ export type MarketSignal = {
   volume: number | null
   question: string | null
   url: string | null
+  /** Pre-formatted headline reading for non-probability markets (e.g. a Metaculus date estimate, “~2068”). */
+  readout?: string
   /** True when prob came from the fallback rather than the best-match market. */
   viaFallback: boolean
   note: string
@@ -90,14 +92,8 @@ export const MARKET_MAPPINGS: MarketMapping[] = [
   },
   {
     title: 'Programmable government in production',
-    match: 'proxy',
-    primary: {
-      platform: 'polymarket',
-      slug: 'over-30m-humans-verified-on-world-network-by-december-31',
-      question: 'Over 30M humans verified on World Network by Dec 31?',
-      url: 'https://polymarket.com/event/over-30m-humans-verified-on-world-network-by-december-31',
-    },
-    note: 'Shares the World market — “World becomes a mandated digital-identity layer” is one of our own DPI examples. No market yet prices $1B/yr on programmable rails directly.',
+    match: 'gap',
+    note: 'No liquid market prices $1B/yr of public funds moving through programmable, real-time-auditable rails, or selective-disclosure credentials at national scale — a genuine white space.',
   },
   {
     title: 'A binding decision at scale',
@@ -134,8 +130,14 @@ export const MARKET_MAPPINGS: MarketMapping[] = [
   },
   {
     title: 'Neural distillation',
-    match: 'gap',
-    note: 'No market prices neural-data distillation matching frontier reasoning — too early to be liquid.',
+    match: 'proxy',
+    primary: {
+      platform: 'metaculus',
+      id: 372,
+      question: 'Will brain emulation be the first successful route to human-level AI?',
+      url: 'https://www.metaculus.com/questions/372/brain-emulation-produces-first-human-ai/',
+    },
+    note: 'The closest live forecast: Metaculus’ long-running question on whether brain emulation is the first route to human-level AI — a reputation-weighted proxy for how seriously the crowd takes neural-data-driven paths to frontier AI. No money at stake, and the crowd prices it in the low single digits.',
   },
   {
     title: 'The neuromorphic energy pivot',
@@ -147,11 +149,12 @@ export const MARKET_MAPPINGS: MarketMapping[] = [
     match: 'proxy',
     primary: {
       platform: 'metaculus',
-      id: 372,
-      question: 'Will brain emulation be the first successful route to human-level AI?',
-      url: 'https://www.metaculus.com/questions/372/brain-emulation-produces-first-human-ai/',
+      id: 2813,
+      kind: 'date',
+      question: 'When will the first human whole-brain emulation happen?',
+      url: 'https://www.metaculus.com/questions/2813/date-of-first-human-whole-brain-emulation/',
     },
-    note: 'The closest live forecast: Metaculus’ long-running question on whether whole-brain emulation is the first route to human-level AI. A reputation-weighted community estimate (no money at stake), and the crowd prices this contrarian path in the low single digits.',
+    note: 'The closest live forecast: Metaculus’ community estimate for the date of the first human whole-brain emulation — the crowd currently places it decades out. A reputation-weighted forecast, no money at stake.',
   },
 ]
 
@@ -184,7 +187,7 @@ function distinctiveToken(s?: string): string | null {
   return num ? num[0].toLowerCase() : null
 }
 
-type Quote = { prob: number; volume: number | null }
+type Quote = { prob: number | null; volume: number | null; readout?: string }
 
 async function fetchPolymarket(slug: string, hint?: string): Promise<Quote | null> {
   try {
@@ -256,7 +259,7 @@ async function fetchKalshi(ticker: string): Promise<Quote | null> {
 // the recency-weighted community prediction for a binary question; without it,
 // or on any failure, we return null and the caller still links the question
 // (prob shows as “—”). Metaculus has no money at stake, so volume is always null.
-async function fetchMetaculus(id: number): Promise<Quote | null> {
+async function fetchMetaculus(id: number, kind: 'binary' | 'date' = 'binary'): Promise<Quote | null> {
   if (!METACULUS_TOKEN) return null
   try {
     const res = await fetch(`${METACULUS}/posts/${id}/`, {
@@ -265,13 +268,26 @@ async function fetchMetaculus(id: number): Promise<Quote | null> {
     })
     if (!res.ok) return null
     const d = (await res.json()) as {
-      question?: { aggregations?: { recency_weighted?: { latest?: { centers?: number[]; means?: number[] } } } }
+      question?: {
+        scaling?: { range_min?: number; range_max?: number }
+        aggregations?: { recency_weighted?: { latest?: { centers?: number[]; means?: number[] } } }
+      }
     }
-    const latest = d.question?.aggregations?.recency_weighted?.latest
+    const q = d.question
+    const latest = q?.aggregations?.recency_weighted?.latest
     const center = latest?.centers?.[0] ?? latest?.means?.[0]
-    const prob = typeof center === 'number' ? center : NaN
-    if (Number.isNaN(prob)) return null
-    return { prob, volume: null }
+    if (typeof center !== 'number') return null
+    if (kind === 'date') {
+      // Date questions report the community CDF location in 0..1; unscale it
+      // linearly across the question's range (unix seconds) to a median year.
+      const min = q?.scaling?.range_min
+      const max = q?.scaling?.range_max
+      if (typeof min !== 'number' || typeof max !== 'number') return null
+      const year = new Date((min + center * (max - min)) * 1000).getFullYear()
+      if (!Number.isFinite(year)) return null
+      return { prob: null, volume: null, readout: `~${year}` }
+    }
+    return { prob: center, volume: null }
   } catch {
     return null
   }
@@ -284,7 +300,7 @@ async function fetchRef(ref: MarketRef): Promise<Quote | null> {
     case 'kalshi':
       return fetchKalshi(ref.ticker)
     case 'metaculus':
-      return fetchMetaculus(ref.id)
+      return fetchMetaculus(ref.id, ref.kind)
   }
 }
 
@@ -300,6 +316,7 @@ export async function resolveSignal(m: MarketMapping): Promise<MarketSignal> {
       platform: m.primary.platform,
       prob: primary.prob,
       volume: primary.volume,
+      readout: primary.readout,
       question: m.primary.question,
       url: m.primary.url,
       viaFallback: false,
@@ -314,6 +331,7 @@ export async function resolveSignal(m: MarketMapping): Promise<MarketSignal> {
         platform: m.fallback.platform,
         prob: fb.prob,
         volume: fb.volume,
+        readout: fb.readout,
         question: m.fallback.question,
         url: m.fallback.url,
         viaFallback: true,
