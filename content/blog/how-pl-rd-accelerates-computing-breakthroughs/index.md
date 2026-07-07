@@ -13,7 +13,7 @@ cover_image: "/images/blog/pl-rd-accelerates-hero.png"
 
 Across the fields that will most shape the next few decades of computing, frontier work is often too early, too interdisciplinary, or too radical for traditional capital structures to back, and even when money is available, no one has done the coordination that lets it be spent well. As a result, teams might exist but cannot find each other, a primitive that would unlock a field has no owner, and capital is willing but has nowhere legible to go.
 
-That gap is where PL Research & Development (R&D) operates: we identify where a field is stuck, create the conditions for others to move faster, and compound what gets learned across every frontier we touch. Our role inside the broader Protocol Labs network is to turn breakthrough R&D into a form that capital and builders can act on: mapping the field, naming the bottleneck, and routing the right intervention at it. Our role within the broader Protocol Labs innovation network is to connect breakthrough R&D into capital formation and network platform support.
+That gap is where PL Research & Development (R&D) operates: we identify where a field is stuck, create the conditions for others to move faster, and compound what gets learned across every frontier we touch. Our role inside the broader Protocol Labs innovation network is to turn breakthrough R&D into a form that capital and builders can act on — mapping the field, naming the bottleneck, and routing the right intervention at it — connecting breakthrough R&D into capital formation and network platform support.
 
 PL R&D exists to expand and safeguard human freedom, coordination, intelligence, and cognition by accelerating computing breakthroughs. Our work spans four [focus areas](https://www.plrd.org/areas), one for each of those dimensions of human agency:
 
@@ -42,7 +42,7 @@ Ultimately, the success of PL R&D is the success of our focus areas and the brea
 <div class="q-card"><span class="q-num">3</span><div class="q-q">Did our work contribute to inflection point activation or other field-level progress?</div></div>
 </div>
 
-The first two are questions about the field and can be checked by anyone. The third is the attribution question. We publish progress against each field on our [impact dashboard](https://plrdorg-git-fork-lksbrssr-lukas-impact-dashboard-plrd.vercel.app/impact/), where every inflection point carries its defined threshold, our stated contribution, and the live evidence for (and against) it. We will continue to measure and publish our progress in each field on our impact dashboard.
+The first two are questions about the field and can be checked by anyone. The third is the attribution question. We will continue to measure and publish our progress against each field on our [impact dashboard](https://plrdorg-git-fork-lksbrssr-lukas-impact-dashboard-plrd.vercel.app/impact/), where every inflection point carries its defined threshold, our stated contribution, and the live evidence for (and against) it.
 
 We hold ourselves to this standard because we have met it before. Content addressing and the peer-to-peer and verifiable-compute primitives beneath it were inflection points PL named early, built toward, and saw arrive (see below).
 
