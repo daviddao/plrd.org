@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { publications, authors, focusAreaDefs } from '@/lib/content'
 import { slugToName } from '@/lib/format'
 import Breadcrumb from '@/components/Breadcrumb'
+import BackToInsights from '@/components/BackToInsights'
 import EditPageButton from '@/components/EditPageButton'
 import { PageEditHistoryByline } from '@/components/EditHistoryByline'
 import MarkdownContent from '@/components/MarkdownContent'
@@ -39,6 +40,7 @@ export default async function PublicationsPage() {
       <div className="mt-4 empty:hidden">
         <PageEditHistoryByline rkey="publications" />
       </div>
+      <BackToInsights />
       {/* Hero */}
       <div className="relative pt-6 pb-10 mb-10 overflow-hidden">
         <PageGeo />
