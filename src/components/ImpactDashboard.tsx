@@ -295,13 +295,13 @@ function InflectionCard({
       <h3 className="mb-2 text-lg font-medium leading-snug text-black">{point.title}</h3>
       <p className="mb-5 line-clamp-3 text-sm leading-relaxed text-gray-600">{point.signal}</p>
 
-      {/* THE FIELD — did it happen & matter (teal) */}
+      {/* THE FIELD — inflection point status and impact (teal) */}
       <div className="border-t border-gray-100 pt-4">
         <div className="mb-2 flex items-center gap-2">
           <span className="text-[11px] font-semibold uppercase tracking-wide" style={{ color: FIELD_COLOR }}>
             The field
           </span>
-          <span className="text-[11px] text-gray-400">· did it happen & matter</span>
+          <span className="text-[11px] text-gray-400">· Inflection point status and impact</span>
           <span className="ml-auto text-[11px] font-medium" style={{ color: FIELD_COLOR }}>{stageLabel}</span>
         </div>
         <FieldMeter status={point.status} />
