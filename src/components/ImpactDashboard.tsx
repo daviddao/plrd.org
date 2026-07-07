@@ -30,9 +30,10 @@ export type LiveOutputs = Record<string, LiveMetric[]>
 /** Prediction-market crowd signal per point, keyed by title. Fetched server-side. */
 export type MarketSignals = Record<string, MarketSignal>
 
-const PLATFORM_LABEL: Record<'polymarket' | 'kalshi', string> = {
+const PLATFORM_LABEL: Record<'polymarket' | 'kalshi' | 'metaculus', string> = {
   polymarket: 'Polymarket',
   kalshi: 'Kalshi',
+  metaculus: 'Metaculus',
 }
 
 const FA_ICON: Record<FocusAreaKey, AreaIconType> = {

@@ -5,18 +5,23 @@
 // point on match quality, NOT convenience:
 //   - Polymarket — deepest liquidity for crypto/AI/identity/BCI-valuation themes.
 //   - Kalshi     — regulated venue; better for US-regulatory / adoption-count themes.
+//   - Metaculus  — reputation-weighted community forecasts for long-horizon,
+//                  research-heavy bets no money market prices (e.g. WBE). Its API
+//                  requires a token (METACULUS_API_TOKEN); without one we still
+//                  link the question but show no live number.
 //
 // A market read is an *external, independent* estimate on the FIELD axis
 // ("will it happen?") — it is never PL contribution (Q3) and never a settled Q2.
 // Where no market exists, that gap is itself informative: the bet is early or
 // contrarian enough that no one is pricing it yet.
 
-export type Platform = 'polymarket' | 'kalshi'
+export type Platform = 'polymarket' | 'kalshi' | 'metaculus'
 export type SignalMatch = 'direct' | 'proxy' | 'gap'
 
 type MarketRef =
   | { platform: 'polymarket'; slug: string; hint?: string; question: string; url: string }
   | { platform: 'kalshi'; ticker: string; question: string; url: string }
+  | { platform: 'metaculus'; id: number; question: string; url: string }
 
 export type MarketMapping = {
   /** Must match InflectionPoint.title exactly. */
@@ -77,11 +82,11 @@ export const MARKET_MAPPINGS: MarketMapping[] = [
     match: 'proxy',
     primary: {
       platform: 'polymarket',
-      slug: 'will-a-chinese-company-have-the-best-ai-model-by-december-31',
-      question: 'Will an open-weights model be the best AI model by Dec 31?',
-      url: 'https://polymarket.com/event/will-a-chinese-company-have-the-best-ai-model-by-december-31',
+      slug: 'us-government-removes-public-access-to-another-major-ai-model-in-2026-20260703202936862',
+      question: 'US government removes public access to another major AI model in 2026?',
+      url: 'https://polymarket.com/event/us-government-removes-public-access-to-another-major-ai-model-in-2026-20260703202936862',
     },
-    note: 'Open-weights reaching the frontier is the best proxy for open/decentralized rails; Kalshi KXTOPAI (LM Arena) is the regulated alternative.',
+    note: 'A contrarian, inverse read: if Washington moves to cut off public access to a major (open, largely Chinese) AI model, that is a headwind for open, permissionless rails — high odds here cut against this inflection point, not for it.',
   },
   {
     title: 'Programmable government in production',
@@ -139,8 +144,14 @@ export const MARKET_MAPPINGS: MarketMapping[] = [
   },
   {
     title: 'Memory retrieval in simulation',
-    match: 'gap',
-    note: 'No market prices whole-organism emulation reproducing learned behavior — the most contrarian bet, unpriced.',
+    match: 'proxy',
+    primary: {
+      platform: 'metaculus',
+      id: 372,
+      question: 'Will brain emulation be the first successful route to human-level AI?',
+      url: 'https://www.metaculus.com/questions/372/brain-emulation-produces-first-human-ai/',
+    },
+    note: 'The closest live forecast: Metaculus’ long-running question on whether whole-brain emulation is the first route to human-level AI. A reputation-weighted community estimate (no money at stake), and the crowd prices this contrarian path in the low single digits.',
   },
 ]
 
@@ -151,6 +162,8 @@ export function mappingByTitle(): Record<string, MarketMapping> {
 // ── Fetchers ─────────────────────────────────────────────────────────────────
 const GAMMA = 'https://gamma-api.polymarket.com'
 const KALSHI = 'https://api.elections.kalshi.com/trade-api/v2'
+const METACULUS = 'https://www.metaculus.com/api'
+const METACULUS_TOKEN = process.env.METACULUS_API_TOKEN
 const REVALIDATE = 3600
 
 function safeParse(s?: string): string[] | null {
@@ -239,10 +252,40 @@ async function fetchKalshi(ticker: string): Promise<Quote | null> {
   }
 }
 
+// Metaculus gates its API behind a token. With METACULUS_API_TOKEN set we read
+// the recency-weighted community prediction for a binary question; without it,
+// or on any failure, we return null and the caller still links the question
+// (prob shows as “—”). Metaculus has no money at stake, so volume is always null.
+async function fetchMetaculus(id: number): Promise<Quote | null> {
+  if (!METACULUS_TOKEN) return null
+  try {
+    const res = await fetch(`${METACULUS}/posts/${id}/`, {
+      headers: { Authorization: `Token ${METACULUS_TOKEN}` },
+      next: { revalidate: REVALIDATE },
+    })
+    if (!res.ok) return null
+    const d = (await res.json()) as {
+      question?: { aggregations?: { recency_weighted?: { latest?: { centers?: number[]; means?: number[] } } } }
+    }
+    const latest = d.question?.aggregations?.recency_weighted?.latest
+    const center = latest?.centers?.[0] ?? latest?.means?.[0]
+    const prob = typeof center === 'number' ? center : NaN
+    if (Number.isNaN(prob)) return null
+    return { prob, volume: null }
+  } catch {
+    return null
+  }
+}
+
 async function fetchRef(ref: MarketRef): Promise<Quote | null> {
-  return ref.platform === 'polymarket'
-    ? fetchPolymarket(ref.slug, ref.hint)
-    : fetchKalshi(ref.ticker)
+  switch (ref.platform) {
+    case 'polymarket':
+      return fetchPolymarket(ref.slug, ref.hint)
+    case 'kalshi':
+      return fetchKalshi(ref.ticker)
+    case 'metaculus':
+      return fetchMetaculus(ref.id)
+  }
 }
 
 /** Resolve one mapping into a display-ready signal (best-match, with fallback). */
