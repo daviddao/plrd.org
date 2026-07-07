@@ -41,6 +41,14 @@ export const FIELD_TRACK = 'var(--impact-field-track)'
 export const LIVE_COLOR = '#22c55e'
 
 /**
+ * The one-line contract for reading the whole dashboard. Shared by the
+ * "How to read this" overlay (near the cards) and the methodology callout so
+ * the framing lives in exactly one place.
+ */
+export const HOW_TO_READ =
+  'We don’t claim credit for outcomes. We name a falsifiable threshold, state what we contributed, and show live signal for and against. Judge us on whether our thresholds prove right and our contributions prove load-bearing.'
+
+/**
  * Q3 contribution, structured along the planned-work side of the logic model.
  * Inputs (resources committed) -> Activities (what we do) -> Outputs (what gets produced).
  * The outcomes and impact these aim at are tracked on the field axis (Q2, Q1).
@@ -93,12 +101,14 @@ export type FocusAreaMeta = {
   href: string
   /** Accent color (hex from the theme) for badges and the field-progress meter. */
   accent: string
+  /** True when the focus area's inflection points are deliberately not-yet-defined (not empty). */
+  forthcoming?: boolean
 }
 
 export const FOCUS_AREAS: FocusAreaMeta[] = [
   { key: 'digital-human-rights', label: 'Digital Human Rights', code: 'FA1', href: '/areas/digital-human-rights/', accent: '#1982F4' },
   { key: 'economies-governance', label: 'Economies & Governance', code: 'FA2', href: '/areas/economies-governance/', accent: '#12bfdf' },
-  { key: 'ai-robotics', label: 'AI & Robotics', code: 'FA3', href: '/areas/ai-robotics/', accent: '#3966FE' },
+  { key: 'ai-robotics', label: 'AI & Robotics', code: 'FA3', href: '/areas/ai-robotics/', accent: '#3966FE', forthcoming: true },
   { key: 'neurotech', label: 'Neurotech', code: 'FA4', href: '/areas/neurotech/', accent: '#E51A66' },
 ]
 

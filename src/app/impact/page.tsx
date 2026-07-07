@@ -6,7 +6,7 @@ import { fetchSimocracyStats } from '@/lib/simocracy'
 import { fetchGainforestStats } from '@/lib/gainforest'
 import { fetchGlowStats } from '@/lib/glow'
 import { resolveAllSignals } from '@/lib/market-signals'
-import { FIELD_COLOR, HAND_COLOR } from '@/lib/inflection-points'
+import { FIELD_COLOR, HAND_COLOR, HOW_TO_READ } from '@/lib/inflection-points'
 
 // Pull live output metrics for the Economies & Governance inflection points from
 // the same sources as the FA2 live dashboard. These are Q3 OUTPUTS (the work
@@ -117,6 +117,12 @@ export default async function ImpactPage() {
           <strong className="font-semibold" style={{ color: FIELD_COLOR }}>the field</strong> (the
           change that follows, with or without us).
         </p>
+        <figure className="mb-10 border-l-2 border-gray-900 pl-5 sm:pl-6">
+          <div className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-gray-400">How to read this</div>
+          <blockquote className="text-lg lg:text-xl font-medium leading-relaxed tracking-tight text-black max-w-3xl">
+            {HOW_TO_READ}
+          </blockquote>
+        </figure>
         <MeasuringQuestions />
       </div>
     </div>
