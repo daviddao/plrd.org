@@ -79,6 +79,10 @@ export default function InsightsExplorer({
     s.items.some((t) => matchArea(t, area))
   )
 
+  // Carry the selected focus area onto the listing subpages so the pill stays
+  // selected there. No query when "All areas" is active → plain subpage.
+  const areaQuery = area === ALL ? '' : `?area=${encodeURIComponent(area)}`
+
   const typeTabs = [{ key: ALL, label: 'All types' }, ...sections.map((s) => ({ key: s.key, label: s.label }))]
   const areaChips = [{ slug: ALL, title: 'All areas' }, ...areas]
   const activeAreaTitle = areas.find((a) => a.slug === area)?.title
@@ -160,7 +164,7 @@ export default function InsightsExplorer({
           {allLinks.length > 0 && (
             <div className="flex flex-wrap gap-x-6 gap-y-2 mt-8">
               {allLinks.map((s) => (
-                <Link key={s.key} href={s.allHref} className="text-base text-blue hover:underline">
+                <Link key={s.key} href={`${s.allHref}${areaQuery}`} className="text-base text-blue hover:underline">
                   {s.allLabel}
                 </Link>
               ))}

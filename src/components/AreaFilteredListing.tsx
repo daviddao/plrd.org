@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ContentTile, ContentTileGrid, type ContentTileData } from '@/components/ContentTile'
 import { FilterPill } from '@/components/FilterPill'
 import type { AreaIconType } from '@/components/AreaIcons'
@@ -36,6 +36,14 @@ export default function AreaFilteredListing({
   showAreaIcon?: boolean
 }) {
   const [area, setArea] = useState<string>(ALL)
+
+  // Preselect the focus area passed via ?area=<slug> (e.g. arriving from the
+  // Insights "All …" links). Done in an effect so SSR/hydration both start on
+  // ALL and static prerendering is preserved. Unknown slugs are ignored.
+  useEffect(() => {
+    const requested = new URLSearchParams(window.location.search).get('area')
+    if (requested && areas.some((a) => a.slug === requested)) setArea(requested)
+  }, [areas])
 
   const matchArea = (t: FilterableTile, a: string) => a === ALL || t.areas.includes(a)
   const areaCount = (slug: string) =>
