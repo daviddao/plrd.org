@@ -1,12 +1,20 @@
 import type { Metadata } from 'next'
-import { sections, publications, talks, blogPosts, areas } from '@/lib/content'
+import { sections, publications, talks, blogPosts, areas, focusAreaDefs } from '@/lib/content'
 import Breadcrumb from '@/components/Breadcrumb'
 import EditPageButton from '@/components/EditPageButton'
 import { PageEditHistoryByline } from '@/components/EditHistoryByline'
 import MarkdownContent from '@/components/MarkdownContent'
 import InsightsExplorer, { type InsightSection, type AreaDef } from '@/components/InsightsExplorer'
+import PLRadar, { type RadarItem } from '@/components/PLRadar'
+import { FIELD_SIGNALS } from '@/lib/radar-signals'
 import { fetchPage, getSection } from '@/lib/indexer'
 import { formatDate } from '@/lib/format'
+
+/** Pull a YouTube id out of a talk body ({{< youtube ID >}}) for its thumbnail. */
+function youtubeThumb(html: string): string | undefined {
+  const m = html?.match(/\{\{[<&].*?youtube\s+([a-zA-Z0-9_-]+)\s*[>&].*?\}\}/)
+  return m ? `https://i.ytimg.com/vi/${m[1]}/maxresdefault.jpg` : undefined
+}
 
 export const metadata: Metadata = { title: 'Insights' }
 
@@ -30,10 +38,7 @@ export default async function InsightsPage() {
   const cardBlog = getSection(page, 'card-blog')
 
   // Focus-area chips, ordered to match the site nav.
-  const AREA_ORDER = ['digital-human-rights', 'economies-governance', 'ai-robotics', 'neurotech']
-  const areaDefs: AreaDef[] = AREA_ORDER.map((slug) => areas.find((a) => a.slug === slug))
-    .filter((a): a is (typeof areas)[number] => Boolean(a))
-    .map((a) => ({ slug: a.slug, title: a.title }))
+  const areaDefs: AreaDef[] = focusAreaDefs
 
   const insightSections: InsightSection[] = [
     {
@@ -89,12 +94,97 @@ export default async function InsightsPage() {
     },
   ].filter((s) => s.items.length > 0)
 
+  // --- PL R&D Radar: a monthly "catch up in a minute" digest of the newest items ---
+  const areaTitle = (slug?: string) => areas.find((a) => a.slug === slug)?.title || 'PL R&D'
+  type Dated = { date: string }
+  const byDateDesc = (a: Dated, b: Dated) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0)
+
+  const contentPool = [
+    ...talks.map((t) => {
+      const isPodcast = /podcast/i.test(`${t.venue} ${t.venue_location}`)
+      return {
+        key: `talk-${t.slug}`,
+        title: t.title,
+        description: t.abstract as string | undefined,
+        href: `/talks/${t.slug}/`,
+        external: false,
+        type: isPodcast ? 'Podcast' : 'Talk',
+        areaLabel: [areaTitle(t.areas?.[0]), t.venue].filter(Boolean).join(' · '),
+        areaSlug: t.areas?.[0] || 'default',
+        date: t.date || '',
+        image: youtubeThumb(t.html) || (isPodcast ? '/images/podcast.webp' : undefined),
+        _sort: t.date || '',
+      }
+    }),
+    ...publications.map((p) => ({
+      key: `pub-${p.slug}`,
+      title: p.title,
+      description: undefined as string | undefined,
+      href: `/publications/${p.slug}/`,
+      external: false,
+      type: 'Publication',
+      areaLabel: [areaTitle(p.areas?.[0]), p.venue].filter(Boolean).join(' · '),
+      areaSlug: p.areas?.[0] || 'default',
+      date: p.date || '',
+      image: undefined as string | undefined,
+      _sort: p.date || '',
+    })),
+    ...blogPosts.map((b) => ({
+      key: `blog-${b.slug}`,
+      title: b.title,
+      description: b.summary as string | undefined,
+      href: b.external_url || `/blog/${b.slug}/`,
+      external: !!b.external_url,
+      type: 'Blog',
+      areaLabel: areaTitle(b.areas?.[0]),
+      areaSlug: b.areas?.[0] || 'default',
+      date: b.date || '',
+      image: b.coverImage || undefined,
+      _sort: b.date || '',
+    })),
+  ].sort(byDateDesc)
+
+  // Curated third-party "field signals" — external reads we're watching, shown
+  // alongside our own output but clearly marked. Newest first.
+  const signalPool = FIELD_SIGNALS.map((s) => ({
+    key: s.key,
+    title: s.title,
+    description: s.description as string | undefined,
+    href: s.href,
+    external: true,
+    type: 'Signal',
+    areaLabel: ['Field signal', s.source].filter(Boolean).join(' · '),
+    areaSlug: s.areaSlug,
+    date: s.date,
+    image: undefined as string | undefined,
+    _sort: s.date,
+  })).sort(byDateDesc)
+
+  // Reserve one slot for the newest field signal so the Radar always carries at
+  // least one external read, then fill the rest with our newest content.
+  const signalItems = signalPool.slice(0, 1)
+  const radarPool: RadarItem[] = [...contentPool.slice(0, 6 - signalItems.length), ...signalItems]
+    .sort(byDateDesc)
+    .map(({ _sort, ...item }) => ({ ...item, date: formatDate(item.date) }))
+
+  const radarEdition = (() => {
+    const newest = radarPool[0]?.date
+    const d = newest ? new Date(newest) : new Date()
+    return `${d.toLocaleDateString('en-US', { month: 'long' })} Radar`
+  })()
+
   return (
     <div className="max-w-6xl mx-auto px-6 pt-8 pb-16">
       <Breadcrumb items={[{ label: 'Insights' }]} />
       <div className="mt-4 empty:hidden">
         <PageEditHistoryByline rkey="insights" />
       </div>
+
+      {radarPool.length > 0 && (
+        <div className="mt-6">
+          <PLRadar edition={radarEdition} items={radarPool} />
+        </div>
+      )}
       {/* Hero */}
       <div className="relative pt-8 pb-12 mb-12 overflow-hidden">
         <PageGeo />

@@ -59,6 +59,7 @@ function getLatestUpdates(count: number): UpdateItem[] {
 
   const talkItems = talks.map((t) => {
     const youtubeId = extractYouTubeId(t.html || '')
+    const isPodcast = /podcast/i.test(`${t.venue ?? ''} ${t.venue_location ?? ''}`)
     return {
       title: t.title || t.slug,
       date: t.date || '',
@@ -66,7 +67,12 @@ function getLatestUpdates(count: number): UpdateItem[] {
       permalink: `/talks/${t.slug}`,
       slug: t.slug,
       areas: (t.areas || []).filter(Boolean) as string[],
-      coverImage: youtubeId ? getYouTubeThumbnail(youtubeId) : undefined,
+      // Podcasts rarely have a YouTube thumbnail — fall back to the studio-mic image.
+      coverImage: youtubeId
+        ? getYouTubeThumbnail(youtubeId)
+        : isPodcast
+          ? '/images/podcast.webp'
+          : undefined,
     }
   })
 
@@ -115,7 +121,12 @@ export default async function HomePage() {
           <img
             src="/images/hero.webp"
             alt="Glass cube containing colorful neural structures"
-            className="w-full h-auto"
+            className="w-full h-auto dark:hidden"
+          />
+          <img
+            src="/images/hero-dark.webp"
+            alt="Glass cube containing colorful neural structures"
+            className="w-full h-auto hidden dark:block"
           />
         </div>
 

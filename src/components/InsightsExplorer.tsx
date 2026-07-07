@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { ContentTile } from '@/components/ContentTile'
+import { FilterPill } from '@/components/FilterPill'
 import type { AreaIconType } from '@/components/AreaIcons'
 
 // Focus-area slug → icon, matching the mapping used on the /areas pages.
@@ -78,20 +79,25 @@ export default function InsightsExplorer({
     s.items.some((t) => matchArea(t, area))
   )
 
+  // Carry the selected focus area onto the listing subpages so the pill stays
+  // selected there. No query when "All areas" is active → plain subpage.
+  const areaQuery = area === ALL ? '' : `?area=${encodeURIComponent(area)}`
+
   const typeTabs = [{ key: ALL, label: 'All types' }, ...sections.map((s) => ({ key: s.key, label: s.label }))]
   const areaChips = [{ slug: ALL, title: 'All areas' }, ...areas]
   const activeAreaTitle = areas.find((a) => a.slug === area)?.title
 
   return (
     <div>
-      {/* Filter toolbar: focus-area pills | content-type pills */}
-      <div className="flex flex-col gap-4 border-b border-gray-200 mb-12 pb-5 sm:flex-row sm:items-center sm:gap-0">
+      {/* Filter toolbar: focus-area pills | content-type pills.
+         Sticks below the site header (h-16) so filters stay reachable while scrolling. */}
+      <div className="sticky top-16 z-30 -mx-6 bg-white flex flex-col gap-4 border-b border-gray-200 mb-12 px-6 pt-4 pb-5 sm:flex-row sm:items-center sm:gap-0">
         {/* Focus area */}
         <div className="flex flex-wrap gap-2">
           {areaChips.map((a) => {
             const count = areaCount(a.slug)
             return (
-              <Pill
+              <FilterPill
                 key={a.slug}
                 label={a.title}
                 count={a.slug === ALL ? undefined : count}
@@ -112,7 +118,7 @@ export default function InsightsExplorer({
           {typeTabs.map((f) => {
             const count = typeCount(f.key)
             return (
-              <Pill
+              <FilterPill
                 key={f.key}
                 label={f.label}
                 count={f.key === ALL ? undefined : count}
@@ -158,7 +164,7 @@ export default function InsightsExplorer({
           {allLinks.length > 0 && (
             <div className="flex flex-wrap gap-x-6 gap-y-2 mt-8">
               {allLinks.map((s) => (
-                <Link key={s.key} href={s.allHref} className="text-base text-blue hover:underline">
+                <Link key={s.key} href={`${s.allHref}${areaQuery}`} className="text-base text-blue hover:underline">
                   {s.allLabel}
                 </Link>
               ))}
@@ -167,41 +173,6 @@ export default function InsightsExplorer({
         </div>
       )}
     </div>
-  )
-}
-
-function Pill({
-  label,
-  count,
-  active,
-  disabled,
-  onClick,
-}: {
-  label: string
-  count?: number
-  active: boolean
-  disabled?: boolean
-  onClick: () => void
-}) {
-  return (
-    <button
-      type="button"
-      disabled={disabled}
-      onClick={onClick}
-      aria-pressed={active}
-      className={`rounded-full px-3 py-1 text-[13px] transition-colors ${
-        active
-          ? 'bg-black text-white hover:bg-gray-800 cursor-pointer'
-          : disabled
-            ? 'bg-gray-50 text-gray-300 cursor-not-allowed'
-            : 'bg-gray-100 text-gray-600 hover:bg-gray-200 cursor-pointer'
-      }`}
-    >
-      {label}
-      {typeof count === 'number' && (
-        <span className={`ml-1.5 ${active ? 'text-white/70' : 'text-gray-400'}`}>{count}</span>
-      )}
-    </button>
   )
 }
 
