@@ -11,6 +11,7 @@ import {
   FIELD_STAGES,
   FOCUS_AREAS,
   INFLECTION_POINTS,
+  TEAM_LINKS,
   stageIndexForStatus,
   type FocusAreaKey,
   type InflectionPoint,
@@ -103,6 +104,42 @@ export default function ImpactDashboard({
         />
       )}
     </div>
+  )
+}
+
+// Turn any team/venture name present in TEAM_LINKS into a link, wherever it
+// appears in contribution copy. Names are matched longest-first so multi-word
+// names (e.g. "Funding the Commons") win over any shorter substring.
+const TEAM_LINK_PATTERN = new RegExp(
+  '(' +
+    Object.keys(TEAM_LINKS)
+      .sort((a, b) => b.length - a.length)
+      .map((name) => name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
+      .join('|') +
+    ')',
+  'g',
+)
+
+function Linkify({ text }: { text: string }) {
+  const parts = text.split(TEAM_LINK_PATTERN)
+  return (
+    <>
+      {parts.map((part, i) =>
+        TEAM_LINKS[part] ? (
+          <a
+            key={i}
+            href={TEAM_LINKS[part]}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline decoration-dotted underline-offset-2 hover:text-black"
+          >
+            {part}
+          </a>
+        ) : (
+          <span key={i}>{part}</span>
+        ),
+      )}
+    </>
   )
 }
 
@@ -440,8 +477,8 @@ function InflectionModal({
             <RoleChips roles={point.roles} eyebrow={false} />
             <div className="mt-5">
               <div className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-gray-400">In practice</div>
-              <p className="text-sm leading-relaxed text-gray-600">{point.contribution.activities}</p>
-              <p className="mt-2 text-sm leading-relaxed text-gray-500">{point.contribution.outputs}</p>
+              <p className="text-sm leading-relaxed text-gray-600"><Linkify text={point.contribution.activities} /></p>
+              <p className="mt-2 text-sm leading-relaxed text-gray-500"><Linkify text={point.contribution.outputs} /></p>
             </div>
           </div>
 

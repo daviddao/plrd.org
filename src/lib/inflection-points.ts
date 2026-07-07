@@ -149,6 +149,35 @@ export const STATUS_META: Record<InflectionStatus, { label: string; description:
   },
 }
 
+/**
+ * Team / venture display name -> canonical website. Used to linkify the named
+ * examples that appear in contribution copy (activities / outputs) so each
+ * mentioned team points to its own site. Keep names exactly as they are written
+ * in the copy (minus trailing qualifiers like "(World)").
+ */
+export const TEAM_LINKS: Record<string, string> = {
+  'Funding the Commons': 'https://fundingthecommons.io/',
+  'Tools for Humanity': 'https://www.toolsforhumanity.com/',
+  'Impossible Cloud': 'https://www.impossiblecloud.com/',
+  Hypercerts: 'https://hypercerts.org/',
+  GainForest: 'https://gainforest.earth/',
+  WeatherXM: 'https://weatherxm.com/',
+  Molecule: 'https://www.molecule.xyz/',
+  'EQTY Lab': 'https://eqtylab.io/',
+  SpruceID: 'https://spruceid.com/',
+  Huddle01: 'https://huddle01.com/',
+  Spheron: 'https://spheron.network/',
+  Filecoin: 'https://filecoin.io/',
+  Fluence: 'https://fluence.network/',
+  Expanso: 'https://www.expanso.io/',
+  libp2p: 'https://libp2p.io/',
+  Privy: 'https://privy.io/',
+  Fleek: 'https://fleek.co/',
+  Glow: 'https://glowlabs.org/',
+  Lava: 'https://www.lavanet.xyz/',
+  IPFS: 'https://ipfs.io/',
+}
+
 export const ROLE_META: Record<PLRole, { label: string; description: string }> = {
   infrastructure: {
     label: 'Infrastructure',
@@ -189,7 +218,7 @@ export const INFLECTION_POINTS: InflectionPoint[] = [
     contribution: {
       inputs: 'The libp2p / IPFS open-source networking stack; funding for resilient-comms and private-messaging teams.',
       activities: 'Maintaining the substrate, funding teams, and contributing to interoperability standards.',
-      outputs: 'libp2p / IPFS deployments and the funded comms / messaging teams building on them — network members such as Fluence and Huddle01 (funding relationship to be confirmed).',
+      outputs: 'libp2p / IPFS deployments and the funded comms / messaging teams building on them, such as Fluence and Huddle01.',
     },
     roles: ['infrastructure', 'capital'],
     status: 'early-signal',
@@ -212,7 +241,7 @@ export const INFLECTION_POINTS: InflectionPoint[] = [
     contribution: {
       inputs: 'Convening capacity across identity protocols; seed funding for portable-credential initiatives.',
       activities: 'Convening identity-protocol teams and seeding / funding portable-credential work.',
-      outputs: 'The identity and credential initiatives PL has seeded or funded — network members such as Tools for Humanity (World), SpruceID, and Privy (funding relationship to be confirmed).',
+      outputs: 'The identity and credential initiatives PL has seeded or funded, such as Tools for Humanity (World), SpruceID, and Privy.',
     },
     roles: ['connection', 'capital'],
     status: 'watching',
@@ -228,7 +257,7 @@ export const INFLECTION_POINTS: InflectionPoint[] = [
     contribution: {
       inputs: 'Content addressing (IPFS) as the provenance substrate; funding for provenance and verifiable-compute teams.',
       activities: 'Providing the content-addressing substrate and backing provenance / verifiable-compute teams.',
-      outputs: 'Content-addressed provenance tooling and the PL-backed teams building it — e.g. network member EQTY Lab (funding relationship to be confirmed).',
+      outputs: 'Content-addressed provenance tooling and the PL-backed teams building it, such as EQTY Lab.',
     },
     roles: ['infrastructure', 'capital'],
     status: 'early-signal',
