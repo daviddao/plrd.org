@@ -189,7 +189,7 @@ export const INFLECTION_POINTS: InflectionPoint[] = [
     contribution: {
       inputs: 'The libp2p / IPFS open-source networking stack; funding for resilient-comms and private-messaging teams.',
       activities: 'Maintaining the substrate, funding teams, and contributing to interoperability standards.',
-      outputs: 'libp2p / IPFS deployments and the funded comms and messaging teams building on them.',
+      outputs: 'libp2p / IPFS deployments and the funded comms / messaging teams building on them — network members such as Fluence and Huddle01 (funding relationship to be confirmed).',
     },
     roles: ['infrastructure', 'capital'],
     status: 'early-signal',
@@ -212,7 +212,7 @@ export const INFLECTION_POINTS: InflectionPoint[] = [
     contribution: {
       inputs: 'Convening capacity across identity protocols; seed funding for portable-credential initiatives.',
       activities: 'Convening identity-protocol teams and seeding / funding portable-credential work.',
-      outputs: 'The identity and credential initiatives PL has seeded or funded.',
+      outputs: 'The identity and credential initiatives PL has seeded or funded — network members such as Tools for Humanity (World), SpruceID, and Privy (funding relationship to be confirmed).',
     },
     roles: ['connection', 'capital'],
     status: 'watching',
@@ -228,7 +228,7 @@ export const INFLECTION_POINTS: InflectionPoint[] = [
     contribution: {
       inputs: 'Content addressing (IPFS) as the provenance substrate; funding for provenance and verifiable-compute teams.',
       activities: 'Providing the content-addressing substrate and backing provenance / verifiable-compute teams.',
-      outputs: 'Content-addressed provenance tooling and the PL-backed teams building it.',
+      outputs: 'Content-addressed provenance tooling and the PL-backed teams building it — e.g. network member EQTY Lab (funding relationship to be confirmed).',
     },
     roles: ['infrastructure', 'capital'],
     status: 'early-signal',
@@ -251,7 +251,7 @@ export const INFLECTION_POINTS: InflectionPoint[] = [
     contribution: {
       inputs: 'The Filecoin / open-compute portfolio; PL capital and coordination across storage, compute, and identity.',
       activities: 'Building open compute and storage rails and bridging them with identity for agents.',
-      outputs: 'Filecoin and the open-compute portfolio; integrations across storage, compute, and identity.',
+      outputs: 'Filecoin and the open-compute portfolio — Fluence, Spheron, Expanso, Impossible Cloud, Lava, Fleek — with integrations across storage, compute, and identity.',
     },
     roles: ['infrastructure', 'connection', 'capital'],
     status: 'watching',
@@ -308,7 +308,7 @@ export const INFLECTION_POINTS: InflectionPoint[] = [
     contribution: {
       inputs: 'Hypercerts (PL origin) and the Gitcoin / Funding-the-Commons lineage; PL evidence and standards work.',
       activities: 'Originating allocation mechanisms, building evidence and standards, and converting work into ventures.',
-      outputs: 'Hypercerts, Funding the Commons, and the ventures spun out of this lineage.',
+      outputs: 'Hypercerts, Funding the Commons, and ventures spun out of / funded across this lineage such as Molecule.',
     },
     roles: ['infrastructure', 'capital', 'translation'],
     status: 'early-signal',
@@ -324,7 +324,7 @@ export const INFLECTION_POINTS: InflectionPoint[] = [
     contribution: {
       inputs: 'Funding for MRV / outcome-verification teams (e.g. GainForest, Glow); benchmark and standards convening.',
       activities: 'Backing MRV teams and convening benchmark and standards work for outcome verification.',
-      outputs: 'GainForest, Glow, and the verification benchmarks and standards they inform.',
+      outputs: 'GainForest, Glow, WeatherXM, and the verification benchmarks and standards they inform.',
     },
     roles: ['legibility', 'connection', 'capital'],
     status: 'early-signal',
