@@ -49,8 +49,6 @@ PL R&D bridges this gap. Rather than making discoveries ourselves, we create the
 * **Infrastructure – Primitives & rails.** Sometimes the missing piece is open protocols, public-good infrastructure, or neutral rails that no single company has sufficient incentive to build alone. When a missing primitive or shared infrastructure layer is blocking a field, PL R&D may help build it directly, support the teams building it, or coordinate an ecosystem capable of maintaining it over time.
 * **Translation – Venture conversion.** Some work reaches the point where the bottleneck is no longer research but translation into pilot, production, and scale. PL R&D connects projects within the broader Protocol Labs network - including venture, capital, platform, and ecosystem support - to help promising work find the right deployment path, talent, and resources to succeed.
 
-We believe effective field-building is also an open research domain. That is why we stay deliberately broad about what counts as a useful intervention and aim to expand our toolkit as we evolve. Over time, we expect to produce breakthroughs not only across our main focus areas - but in how R&D itself accelerates.
-
 ## How we measure success
 
 Ultimately, the success of PL R&D is the success of our focus areas and the breakthroughs they create over time. As we observe our impact in accelerating progress, we use three questions to measure our own success in each focus area:
