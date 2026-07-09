@@ -250,6 +250,7 @@ async function buildBlog() {
       title: b.title || '',
       date: b.date || '',
       summary: b.summary || '',
+      description: b.description || '',
       authors: b.authors || [],
       areas: b.areas || [],
       external_url: b.external_url || '',
