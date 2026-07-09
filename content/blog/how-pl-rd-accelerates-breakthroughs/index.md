@@ -1,6 +1,6 @@
 ---
 title: "How PL R&D Accelerates Breakthroughs"
-date: 2026-06-24
+date: 2026-07-10
 summary: "The first in a series: how PL R&D moves frontier ideas from open research into deployed systems across four focus areas — how we drive, measure, and sustain breakthroughs, and what our track record teaches us."
 authors:
   - molly-mackinlay
