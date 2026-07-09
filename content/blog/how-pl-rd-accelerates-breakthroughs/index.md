@@ -1,5 +1,5 @@
 ---
-title: "How PL R&D accelerates computing breakthroughs"
+title: "How PL R&D Accelerates Breakthroughs"
 date: 2026-06-24
 summary: "The first in a series: how PL R&D moves frontier ideas from open research into deployed systems across four focus areas — how we drive, measure, and sustain breakthroughs, and what our track record teaches us."
 authors:
@@ -34,7 +34,7 @@ We do not begin with a list of projects. We begin with a field-level question: W
 
 To answer this question, we organize each focus area into a small number of opportunity spaces – [ARIA's (Advanced Research and Invention Agency) term](https://aria.org.uk/opportunity-spaces) for "critically important but underexplored areas of research that we believe are ripe for breakthroughs". Within each opportunity space, we identify inflection points: specific, observable milestones that would indicate a field has crossed an important threshold that lifts progress and momentum onto a new trajectory.
 
-Inflection points can be technical demonstrations that shift public perception, adoption thresholds for new technologies, or any other specific milestone compelling enough to organize effort around - the point is to be explicit about what we think will matter, what evidence would prove it, and what bottlenecks stand in the way. We want to be explicit about what we think will matter, what evidence would prove it, and what bottlenecks stand in the way. Once we identify the bottleneck, we can choose the intervention.
+Inflection points can be technical demonstrations that shift public perception, adoption thresholds for new technologies, or any other specific milestone compelling enough to organize effort around. We want to be explicit about what we think will matter, what evidence would prove it, and what bottlenecks stand in the way. Once we identify the bottleneck, we can choose the intervention.
 
 ## How we accelerate fields
 
