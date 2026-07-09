@@ -138,15 +138,11 @@ Frontier R&D is itself an evolving field. We expect to learn as much about how t
 
 PL R&D is built for collaboration.
 
-If you are a researcher, we want to hear where your field is blocked, what primitives are missing, what research directions deserve more attention, and what would help your work reach deployment.
-
-If you are a potential founder or builder, we want to help you understand which opportunity spaces are opening, which bottlenecks are ready for company formation, and where open infrastructure can support new products and markets.
-
-If you are a funder, LP, or philanthropist, we want to help make frontier fields more legible, identify high-leverage funding opportunities, and coordinate capital around shared bottlenecks.
-
-If you are an institution, policymaker, or standards leader, we want to work together on the rules, pilots, procurement pathways, and standards that help responsible technologies reach the world.
-
-If you are part of the broader Protocol Labs network, PL R&D is a way to connect your work to deeper field strategy: the opportunity spaces, inflection points, and infrastructure that can make your efforts compound.
+* **Researchers:** Field maps, grants, and connections to adjacent teams — and a clearer path from research to deployment.
+* **Founders and builders:** Signal on which opportunity spaces are opening and which bottlenecks are ready for company formation, plus open infrastructure to build on.
+* **Funders, LPs, and philanthropists:** A more legible view of frontier fields, higher-signal funding opportunities, and a way to coordinate capital around shared bottlenecks.
+* **Institutions, policymakers, and standards leaders:** A working partner on the rules, pilots, procurement pathways, and standards that let responsible technologies reach users.
+* **Protocol Labs network:** Deeper field strategy: the opportunity spaces, inflection points, and infrastructure context that can make your existing work compound further.
 
 Please get in touch with us at [research@protocol.ai](mailto:research@protocol.ai) or follow us on [X](https://x.com/PL_RnD) or [Bluesky](https://bsky.app/profile/plrd.org) to continue the conversation.
 
