@@ -16,7 +16,9 @@ They may start as a primitive that only a few researchers understand, a protocol
 
 That stage is difficult for traditional institutions. Academic labs can produce deep insight, but often lack the infrastructure, capital, and deployment channels to turn that insight into widely used systems. Venture capital can scale companies, but usually enters after a market becomes legible. Governments can set standards, create demand, and fund ambitious work, but often move after a frontier has already taken shape. PL Research & Development (PL R&D) exists for this stage in between fundamental research & venture creation.
 
-PL R&D is the field-building arm of the [Protocol Labs](https://www.protocol.ai/) (PL) innovation network. We map frontier computing fields, identify the bottlenecks blocking progress, and coordinate the research, capital, infrastructure, talent, and deployment pathways that help breakthroughs reach the world.
+## What is PL R&D
+
+**PL R&D is the field-building arm of the [Protocol Labs](https://www.protocol.ai/) (PL) innovation network.** We map frontier computing fields, identify the bottlenecks blocking progress, and coordinate the research, capital, infrastructure, talent, and deployment pathways that help breakthroughs reach the world.
 
 Our mission is to accelerate computing breakthroughs that expand human freedom, coordination, intelligence, and cognition. We do that through our focus areas:
 
@@ -31,11 +33,13 @@ PL R&D exists to help these fields accelerate faster.
 
 ## How we choose opportunities
 
-We do not begin with a list of projects. We begin with a field-level question: What would need to be true for this field to move much faster?
+We do not begin with a list of projects. We begin with a field-level question: **What would need to be true for this field to progress much faster?**
 
-To answer this question, we organize each focus area into a small number of opportunity spaces – [ARIA's (Advanced Research and Invention Agency) term](https://aria.org.uk/opportunity-spaces) for "critically important but underexplored areas of research that we believe are ripe for breakthroughs". Within each opportunity space, we identify inflection points: specific, observable milestones that would indicate a field has crossed an important threshold that lifts progress and momentum onto a new trajectory.
+To answer this question, we organize each focus area into a small number of *opportunity spaces* – [ARIA's term](https://aria.org.uk/opportunity-spaces) for "critically important but underexplored areas of research that we believe are ripe for breakthroughs". Within each opportunity space, we identify *inflection points*: specific, observable milestones that indicate a field has crossed an important threshold that lifts progress and momentum onto a new trajectory.
 
-Inflection points can be technical demonstrations that shift public perception, adoption thresholds for new technologies, or any other specific milestone compelling enough to organize effort around. We want to be explicit about what we think will matter, what evidence would prove it, and what bottlenecks stand in the way. Once we identify the bottleneck, we can choose the intervention.
+Inflection points can be technical demonstrations that shift the [Overton window](https://en.wikipedia.org/wiki/Overton_window), adoption thresholds for new technologies, or another specific milestone that can shape field policy, legitimacy, access, or resources. The point is to be explicit about what we think will matter, what evidence would prove it, and what bottlenecks stand in the way. We want to be **explicit** about what we think will matter, what evidence would prove it, and what bottlenecks stand in the way. Once we identify the bottleneck, we can choose the intervention.
+
+To shape strategy and interventions within opportunity spaces and inflection points, each focus area is stewarded by a Focus Area Lead and advised by its own Scientific Advisory Board of field experts. Together, they identify the field bottlenecks that can have the greatest impact, and the tools to use to unblock progress.
 
 ## How we accelerate fields
 
@@ -50,9 +54,11 @@ PL R&D bridges this gap. Rather than making discoveries ourselves, we create the
 * **Infrastructure – Primitives & rails.** Sometimes the missing piece is open protocols, public-good infrastructure, or neutral rails that no single company has sufficient incentive to build alone. When a missing primitive or shared infrastructure layer is blocking a field, PL R&D may help build it directly, support the teams building it, or coordinate an ecosystem capable of maintaining it over time.
 * **Translation – Venture conversion.** Some work reaches the point where the bottleneck is no longer research but translation into pilot, production, and scale. PL R&D connects projects within the broader Protocol Labs network - including venture, capital, platform, and ecosystem support - to help promising work find the right deployment path, talent, and resources to succeed.
 
+Effective field-building is itself an open research domain, so part of our work will be refining new types of interventions. Over time, PL R&D aims to innovate not only within our focus areas - but in how R&D itself accelerates field progress faster.
+
 ## How we measure success
 
-Ultimately, the success of PL R&D is the success of our focus areas and the breakthroughs they create over time. As we observe our impact in accelerating progress, we use three questions to measure our own success in each focus area:
+Ultimately, the success of PL R&D is the success of our focus areas and the breakthroughs they create over time. As we reflect on our impact in accelerating progress, we use three questions to measure our own success in each focus area:
 
 <div class="q-grid">
 <div class="q-card"><span class="q-num">1</span><div class="q-q">Did the inflection points we predicted actually happen?</div></div>
@@ -64,19 +70,13 @@ The first two questions are about the world. The third is about attribution. We 
 
 Over time, we intend to publish progress against each field: the opportunity spaces we chose, the inflection points we tracked, the interventions we ran, the evidence for and against our contribution, and what we learned.
 
-## A decade of track record
+## Our impact so far
 
 Protocol Labs was founded in 2014 by Juan Benet as a [research, development, and deployment lab for network protocols](https://www.protocol.ai/blog/protocol-labs-creating-new-networks/). The premise was simple: many breakthroughs fail to matter because the gap between research and deployment is too large.
 
-PL's first decade focused on the decentralized web. That work helped produce IPFS, Filecoin, libp2p, IPLD, and Multiformats: open infrastructure for addressing, storing, verifying, moving, and organizing information across distributed networks.
+PL's first decade focused on the decentralized web. That work helped produce IPFS, Filecoin, libp2p, IPLD, and Multiformats: open infrastructure for addressing, storing, verifying, moving, and organizing information across distributed networks. Our R&D work helped establish content addressing as a standard with papers, protocols, implementations, developer adoption, storage markets, and a community that could carry the work forward; peer-to-peer networking as reusable libraries rather than every team rebuilding the same stack; and cryptographic infrastructure as production systems that forced theoretical primitives to become efficient enough for real-world use.
 
-From our work in Digital Human Rights as well as Economies and Governance, we learned that frontier computing crosses the chasm faster when research, engineering, capital, standards, community, and deployment are treated as parts of a single connected system. Content addressing needed papers, protocols, implementations, developer adoption, storage markets, and a community that could carry the work forward. Peer-to-peer networking needed reusable libraries rather than every team rebuilding the same stack. Cryptographic infrastructure needed production systems that forced theoretical primitives to become efficient enough for real-world use.
-
-PL R&D applies that operating philosophy to the next set of fields where computing will shape civilization most directly: digital rights, economic coordination, machine intelligence, and human cognition.
-
-## PL R&D progress so far
-
-Across the four focus areas, the work is already underway.
+PL R&D is now applying that operating philosophy to the next set of fields where computing will shape civilization most directly: digital rights, economic coordination, machine intelligence, and human cognition.
 
 In Digital Human Rights, 381 teams are active in the network, supported by more than $30M in grants in 2025, with convenings from the Cypherpunk Retreat to a d/acc Residency in Patagonia seeding the next generation of censorship-resistant infrastructure and agentic builders.
 
@@ -86,7 +86,7 @@ In AI & Robotics, open and distributed compute reached frontier scale: Prime Int
 
 In Neurotechnology, $2M in grants funded 9 teams in 2025. The BCI (brain-computer interface) Founders Retreat convened 9 leading teams whose companies have collectively raised billions in venture capital; the [Connectomics Workshop](https://plneuro.xyz/events/connectomics-workshop/) advanced the mapping of brains for compute, emulation, and consciousness research; and [PL Neuro](https://plneuro.xyz/) launched as the field's organizing infrastructure, with whitepapers, roadmaps, and a public brand at plneuro.xyz, making a nascent field legible and recruitable for the first time.
 
-We are pointing this approach at emerging fields because it has already worked in the ones PL knows best. The two cases below show what this looked like in practice.
+We are pointing this approach at emerging fields because it has already worked in the ones PL knows best. The two case studies below show what this looked like in practice.
 
 <div class="cs-tabs">
 <input class="cs-radio" type="radio" name="case-study" id="cs-1" checked="checked" />
@@ -115,35 +115,33 @@ We are pointing this approach at emerging fields because it has already worked i
 
 ## How our model compounds
 
-PL R&D is designed to create leverage as part of the wider Protocol Labs innovation network.
+PL R&D is designed to create leverage for many different stakeholders within the wider Protocol Labs innovation network: A good field map can help researchers orient their work, help founders find company ideas, help funders deploy capital more intelligently, and help institutions understand where policy or procurement can accelerate progress. A well-timed grant can create the proof point that makes a company fundable. A convening can create the trust needed for a pilot. A shared infrastructure primitive can let many teams build faster than they could alone.
 
-A good field map can help researchers orient their work, help founders find company ideas, help funders deploy capital more intelligently, and help institutions understand where policy or procurement can accelerate progress. A well-timed grant can create the proof point that makes a company fundable. A convening can create the trust needed for a pilot. A shared infrastructure primitive can let many teams build faster than they could alone.
-
-While PL R&D helps make frontier areas more legible and connected, venture programs like PLVS can help turn validated opportunities into companies, capital funds like PL Capital can invest with more context and conviction, and PL Platform tools & support can help early projects reach users, contributors, and markets. When those systems scale, a portion of returns can be reinvested into the next generation of R&D breakthroughs.
-
-While the primary measure of success for PL R&D is whether a field accelerates, durable institutions also need durable funding models. One of PL's advantages is the ability to connect early invention, expert talent, venture formation, and long-term capital into a compounding loop.
+While PL R&D helps make frontier areas more legible and connected, its outputs are public goods: the same field maps, primitives, and proof points are available to any founder or funder, and founders we have supported have raised more than $1B from investors outside PL. Within the network, venture programs like PLVS help turn validated opportunities into companies, PL Capital invests alongside that outside capital, and PL Platform tools & support help early projects reach users, contributors, and markets. When those systems scale, a portion of returns can be reinvested into the next generation of R&D breakthroughs. While the primary measure of success for PL R&D is whether a field accelerates, durable institutions also need durable funding models. One of PL's advantages is the ability to connect early invention, expert talent, venture formation, and long-term capital into a compounding loop.
 
 <figure class="post-figure"><img src="/images/blog/pl-innovation-network.png" alt="The Protocol Labs innovation network, spanning research, development, and deployment across its focus areas." /><figcaption>The Protocol Labs innovation network.</figcaption></figure>
 
-## Where this can fail
+## The risks we're managing
 
 The model is ambitious, and it should be judged seriously.
 
 We see several risks: We could spread ourselves too thin across too many fields. We could choose familiar interventions instead of the ones a bottleneck actually requires. We could publish maps and host convenings without moving the underlying bottlenecks. We could fail to measure attribution well enough to learn and iterate. We could produce useful work that does not reach the researchers, founders, funders, and institutions who need it.
 
-Each one is a reason to be precise about hypotheses, public about evidence, and willing to update, but not a reason to shrink the mission.
-
-Frontier R&D is itself an evolving field. We expect to learn as much about how to run this kind of organization as we do about digital human rights, governance, AI, robotics, and neurotechnology.
+Instead of shrinking from risk - we face it head on by being precise about our hypotheses, public about progress, open to criticism, and willing to update our thinking. Frontier R&D is itself an evolving field. We expect to learn as much about how to run this kind of organization as we do about digital human rights, governance, AI, robotics, and neurotechnology.
 
 ## How to work with PL R&D
 
 PL R&D is built for collaboration.
 
-* **Researchers:** Field maps, grants, and connections to adjacent teams — and a clearer path from research to deployment.
-* **Founders and builders:** Signal on which opportunity spaces are opening and which bottlenecks are ready for company formation, plus open infrastructure to build on.
-* **Funders, LPs, and philanthropists:** A more legible view of frontier fields, higher-signal funding opportunities, and a way to coordinate capital around shared bottlenecks.
-* **Institutions, policymakers, and standards leaders:** A working partner on the rules, pilots, procurement pathways, and standards that let responsible technologies reach users.
-* **Protocol Labs network:** Deeper field strategy: the opportunity spaces, inflection points, and infrastructure context that can make your existing work compound further.
+**Researchers** - we want to hear where your field is blocked, what primitives are missing, what research directions deserve more attention, and what would help your work reach deployment. We can connect your expertise to field maps, grant programs, and talent gaps, and shaping the path from research to deployment.
+
+**Founders & builders** - our field-mapping can help inform which opportunity spaces are ripe for innovation, how new businesses can unlock field bottlenecks, which expert talent can help accelerate breakthroughs, and how open infrastructure can support new products and markets.
+
+**Funders, LPs, & philanthropists** - PL R&D can help make frontier fields more legible, identify high-leverage funding opportunities, and coordinate capital around shared bottlenecks.
+
+**Institutions, policymakers, & standards bodies -** our field experts can help inform the rules, pilots, procurement pathways, and standards that help responsible technologies reach the world.
+
+**Protocol Labs network members -** PL R&D is a way to connect your work to deeper field strategy: the opportunity spaces, inflection points, and infrastructure that can make your efforts compound.
 
 Please get in touch with us at [research@protocol.ai](mailto:research@protocol.ai) or follow us on [X](https://x.com/PL_RnD) or [Bluesky](https://bsky.app/profile/plrd.org) to continue the conversation.
 
