@@ -66,7 +66,6 @@ export default async function OpportunityDetailPage({ params }: Props) {
         items={[
           { label: 'Areas', href: '/areas' },
           { label: 'Economies & Governance', href: '/areas/economies-governance' },
-          { label: 'Opportunity Spaces', href: '/areas/economies-governance/#opportunity-spaces' },
           { label: opp.title },
         ]}
       />
@@ -83,6 +82,9 @@ export default async function OpportunityDetailPage({ params }: Props) {
       {/* Hero */}
       <div className="relative pt-12 pb-12 mb-12 overflow-hidden">
         <OppGeo />
+        <p className="relative z-10 text-xs text-blue uppercase tracking-widest mb-3">
+          Economies & Governance
+        </p>
         <h1 className="relative z-10 text-2xl lg:text-[40px] font-semibold leading-[1.1] tracking-tight mb-4 max-w-xl">
           {opp.title}
         </h1>
@@ -99,6 +101,17 @@ export default async function OpportunityDetailPage({ params }: Props) {
                 {sf}
               </span>
             ))}
+          </div>
+        )}
+
+        {/* Opportunity space image */}
+        {opp.image && (
+          <div className="relative z-10 mt-8 h-64 lg:h-80 bg-gray-100 overflow-hidden rounded-sm">
+            <img
+              src={opp.image}
+              alt={opp.title}
+              className="w-full h-full object-cover"
+            />
           </div>
         )}
 
