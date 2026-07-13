@@ -91,7 +91,19 @@ export default async function OpportunityDetailPage({ params }: Props) {
         {opp.tagline && (
           <p className="relative z-10 text-base text-gray-400 mb-5">{opp.tagline}</p>
         )}
-        <p className="relative z-10 text-lg text-gray-600 leading-relaxed max-w-2xl">{opp.description}</p>
+
+        {/* Opportunity space image */}
+        {opp.image && (
+          <div className="relative z-10 mb-8 h-64 lg:h-80 bg-gray-100 overflow-hidden rounded-sm">
+            <img
+              src={opp.image}
+              alt={opp.title}
+              className="w-full h-full object-cover"
+            />
+          </div>
+        )}
+
+        <p className="relative z-10 text-lg text-gray-600 leading-relaxed">{opp.description}</p>
 
         {/* Subfields */}
         {opp.subfields.length > 0 && (
@@ -101,17 +113,6 @@ export default async function OpportunityDetailPage({ params }: Props) {
                 {sf}
               </span>
             ))}
-          </div>
-        )}
-
-        {/* Opportunity space image */}
-        {opp.image && (
-          <div className="relative z-10 mt-8 h-64 lg:h-80 bg-gray-100 overflow-hidden rounded-sm">
-            <img
-              src={opp.image}
-              alt={opp.title}
-              className="w-full h-full object-cover"
-            />
           </div>
         )}
 
