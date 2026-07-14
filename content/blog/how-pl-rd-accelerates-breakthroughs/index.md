@@ -1,6 +1,6 @@
 ---
 title: "How PL R&D Accelerates Breakthroughs"
-date: 2026-07-10
+date: 2026-07-14
 summary: "The first in a series: how PL R&D moves frontier ideas from open research into deployed systems across four focus areas — how we drive, measure, and sustain breakthroughs, and what our track record teaches us."
 description: "PL R&D is the field-building arm of the Protocol Labs innovation network. We map frontier computing fields, identify bottlenecks, and coordinate research, capital, infrastructure, and deployment pathways across digital human rights, economies and governance, AI and robotics, and neurotechnology."
 authors:
