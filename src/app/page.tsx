@@ -2,11 +2,9 @@ import Link from 'next/link'
 import EditPageButton from '@/components/EditPageButton'
 import { PageEditHistoryByline } from '@/components/EditHistoryByline'
 import { publications, talks, blogPosts } from '@/lib/content'
-import { AreaIcon } from '@/components/AreaIcons'
 import MarkdownContent from '@/components/MarkdownContent'
 import { fetchPage, getSection } from "@/lib/indexer"
 import { FOCUS_AREA_DESCRIPTIONS } from '@/lib/focus-area-descriptions'
-import { type HexPattern } from "@/lib/hex-mosaic"
 
 /** Focus-area hero illustrations floating above each card (replaces the hex cloud). */
 const FOCUS_AREA_IMAGES: Record<string, string> = {
@@ -173,7 +171,7 @@ export default async function HomePage() {
     {/* ── Focus Areas (full-bleed gray) ── */}
     <div id="focus-areas" className="bg-gray-100 scroll-mt-20">
       <div className="max-w-6xl mx-auto px-6 pb-20 lg:pb-28 pt-16 lg:pt-24">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start mb-44 sm:mb-48 lg:mb-52">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start mb-10 lg:mb-14">
           <h2 className="text-[28px] md:text-[36px] font-normal leading-[1.1] tracking-tight">
             {approach?.title || "Use-inspired research across four frontiers"}
           </h2>
@@ -183,31 +181,28 @@ export default async function HomePage() {
           />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-44 md:gap-y-48 lg:gap-y-52">
+        <div className="grid grid-cols-1 md:grid-cols-2 md:auto-rows-fr gap-6 lg:gap-8">
           <FocusAreaCard
             href="/areas/digital-human-rights"
-            iconType="shield"
             slug="digital-human-rights"
             title={dhr?.title || "Digital Human Rights"}
             body={FOCUS_AREA_DESCRIPTIONS['digital-human-rights']}
           />
           <FocusAreaCard
             href="/areas/economies-governance"
-            iconType="hexagon"
             slug="economies-governance"
             title={eg?.title || "Economies & Governance"}
             body={FOCUS_AREA_DESCRIPTIONS['economies-governance']}
           />
           <FocusAreaCard
             href="/areas/ai-robotics"
-            iconType="neural"
             slug="ai-robotics"
             title={ai?.title || "AI & Robotics"}
             body={FOCUS_AREA_DESCRIPTIONS['ai-robotics']}
+            imgClassName="h-[73px]"
           />
           <FocusAreaCard
             href="/areas/neurotech"
-            iconType="brain"
             slug="neurotech"
             title={neuro?.title || "Neurotechnology"}
             body={FOCUS_AREA_DESCRIPTIONS.neurotech}
@@ -274,49 +269,51 @@ export default async function HomePage() {
 
 function FocusAreaCard({
   href,
-  iconType,
   slug,
   title,
   body,
+  imgClassName = "h-[104px]",
+  imageColClass = "w-[32%] sm:w-[34%]",
 }: {
   href: string
-  iconType: HexPattern
   slug: string
   title: string
   body: string
+  imgClassName?: string
+  imageColClass?: string
 }) {
   const image = FOCUS_AREA_IMAGES[slug]
 
   return (
-    <div className="group relative isolate">
-      {/* Focus-area illustration floating above the card (replaces the hex cloud). */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute left-0 -top-28 sm:-top-28 lg:-top-32 w-[37%] sm:w-[34%] lg:w-[34%] h-32 sm:h-36 lg:h-36 select-none"
-      >
+    <Link
+      href={href}
+      className="group flex h-full items-stretch bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md hover:border-gray-300 transition-all duration-200"
+    >
+      {/* Content on the left. */}
+      <div className="flex-1 p-5 sm:p-6 flex flex-col justify-center">
+        <h3 className="text-xl font-serif font-normal tracking-tight mb-3">{title}</h3>
+        <MarkdownContent
+          content={body}
+          className="text-[15px] text-gray-600 leading-relaxed [&_p]:mb-0"
+        />
+      </div>
+
+      {/* Vertical divider. */}
+      <div aria-hidden="true" className="my-6 w-px self-stretch bg-gray-200" />
+
+      {/* Illustration fully contained (not cropped) on the right. */}
+      <div className={`flex-shrink-0 ${imageColClass} flex items-center justify-center p-4 sm:p-5`}>
         {image && (
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src={image}
             alt=""
-            className="absolute bottom-0 left-0 h-full w-full object-contain object-bottom [filter:drop-shadow(0_10px_18px_rgba(15,17,21,0.14))] transition-transform duration-500 ease-out group-hover:-translate-y-1.5 group-hover:scale-[1.02]"
+            /* Fixed height + w-auto so every illustration renders at the same
+               vertical height regardless of its aspect ratio. */
+            className={`mx-auto ${imgClassName} w-auto max-w-full object-contain [filter:drop-shadow(0_10px_18px_rgba(15,17,21,0.12))] transition-transform duration-500 ease-out group-hover:scale-[1.03]`}
           />
         )}
       </div>
-
-      <Link
-        href={href}
-        className="relative z-10 block bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-md hover:border-gray-300 transition-all duration-200"
-      >
-        <div className="flex items-center gap-3 mb-3">
-          <AreaIcon type={iconType} className="w-6 h-6 text-gray-400" />
-          <h3 className="text-xl font-serif font-normal tracking-tight">{title}</h3>
-        </div>
-        <MarkdownContent
-          content={body}
-          className="text-[15px] text-gray-600 leading-relaxed [&_p]:mb-0"
-        />
-      </Link>
-    </div>
+    </Link>
   )
 }
