@@ -173,7 +173,7 @@ export default async function HomePage() {
     {/* ── Focus Areas (full-bleed gray) ── */}
     <div id="focus-areas" className="bg-gray-100 scroll-mt-20">
       <div className="max-w-6xl mx-auto px-6 pb-20 lg:pb-28 pt-16 lg:pt-24">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start mb-44 sm:mb-48 lg:mb-52">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start mb-10 lg:mb-14">
           <h2 className="text-[28px] md:text-[36px] font-normal leading-[1.1] tracking-tight">
             {approach?.title || "Use-inspired research across four frontiers"}
           </h2>
@@ -183,7 +183,7 @@ export default async function HomePage() {
           />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-44 md:gap-y-48 lg:gap-y-52">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
           <FocusAreaCard
             href="/areas/digital-human-rights"
             iconType="shield"
@@ -288,26 +288,27 @@ function FocusAreaCard({
   const image = FOCUS_AREA_IMAGES[slug]
 
   return (
-    <div className="group relative isolate">
-      {/* Focus-area illustration floating above the card (replaces the hex cloud). */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute left-0 -top-28 sm:-top-28 lg:-top-32 w-[37%] sm:w-[34%] lg:w-[34%] h-32 sm:h-36 lg:h-36 select-none"
-      >
+    <Link
+      href={href}
+      className="group flex items-stretch bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md hover:border-gray-300 transition-all duration-200"
+    >
+      {/* Illustration fully contained (not cropped) on the left. */}
+      <div className="flex-shrink-0 w-[38%] sm:w-[40%] flex items-center justify-center p-4 sm:p-5">
         {image && (
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src={image}
             alt=""
-            className="absolute bottom-0 left-0 h-full w-full object-contain object-bottom [filter:drop-shadow(0_10px_18px_rgba(15,17,21,0.14))] transition-transform duration-500 ease-out group-hover:-translate-y-1.5 group-hover:scale-[1.02]"
+            className="max-h-32 sm:max-h-44 w-full object-contain [filter:drop-shadow(0_10px_18px_rgba(15,17,21,0.12))] transition-transform duration-500 ease-out group-hover:scale-[1.03]"
           />
         )}
       </div>
 
-      <Link
-        href={href}
-        className="relative z-10 block bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-md hover:border-gray-300 transition-all duration-200"
-      >
+      {/* Vertical divider. */}
+      <div aria-hidden="true" className="my-6 w-px self-stretch bg-gray-200" />
+
+      {/* Content on the right. */}
+      <div className="flex-1 p-5 sm:p-6 flex flex-col justify-center">
         <div className="flex items-center gap-3 mb-3">
           <AreaIcon type={iconType} className="w-6 h-6 text-gray-400" />
           <h3 className="text-xl font-serif font-normal tracking-tight">{title}</h3>
@@ -316,7 +317,7 @@ function FocusAreaCard({
           content={body}
           className="text-[15px] text-gray-600 leading-relaxed [&_p]:mb-0"
         />
-      </Link>
-    </div>
+      </div>
+    </Link>
   )
 }
