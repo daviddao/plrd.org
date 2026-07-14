@@ -242,8 +242,12 @@ export default function PLRadar({ edition, items }: { edition: string; items: Ra
               return (
                 <div
                   key={item.key}
-                  className={`absolute inset-0 grid grid-cols-1 md:grid-cols-2 transition-all duration-300 ${
-                    idx === i ? 'opacity-100 translate-x-0' : 'opacity-0 pointer-events-none translate-x-4'
+                  // `pointer-events-none` lets clicks on the empty parts of the
+                  // active slide fall through to the tap zones below, while the
+                  // CTA (which re-enables pointer events) stays clickable. The
+                  // active slide sits above the tap zones (z-20) so its CTA wins.
+                  className={`absolute inset-0 grid grid-cols-1 md:grid-cols-2 transition-all duration-300 pointer-events-none ${
+                    idx === i ? 'opacity-100 translate-x-0 z-20' : 'opacity-0 translate-x-4'
                   }`}
                   aria-hidden={idx !== i}
                 >
@@ -297,14 +301,14 @@ export default function PLRadar({ edition, items }: { edition: string; items: Ra
                         href={item.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="mt-6 self-start inline-flex items-center gap-2 bg-black text-white text-sm font-semibold px-5 py-2.5 rounded-full hover:bg-gray-800 transition-colors"
+                        className="mt-6 self-start inline-flex items-center gap-2 bg-black text-white text-sm font-semibold px-5 py-2.5 rounded-full hover:bg-gray-800 transition-colors pointer-events-auto"
                       >
                         {cta} →
                       </a>
                     ) : (
                       <Link
                         href={item.href}
-                        className="mt-6 self-start inline-flex items-center gap-2 bg-black text-white text-sm font-semibold px-5 py-2.5 rounded-full hover:bg-gray-800 transition-colors"
+                        className="mt-6 self-start inline-flex items-center gap-2 bg-black text-white text-sm font-semibold px-5 py-2.5 rounded-full hover:bg-gray-800 transition-colors pointer-events-auto"
                       >
                         {cta} →
                       </Link>
@@ -316,8 +320,8 @@ export default function PLRadar({ edition, items }: { edition: string; items: Ra
 
             {/* end slide */}
             <div
-              className={`absolute inset-0 flex items-center justify-center text-center px-6 transition-all duration-300 ${
-                atEnd ? 'opacity-100 translate-x-0' : 'opacity-0 pointer-events-none translate-x-4'
+              className={`absolute inset-0 flex items-center justify-center text-center px-6 transition-all duration-300 pointer-events-none ${
+                atEnd ? 'opacity-100 translate-x-0 z-20' : 'opacity-0 translate-x-4'
               }`}
               aria-hidden={!atEnd}
             >
@@ -329,7 +333,7 @@ export default function PLRadar({ edition, items }: { edition: string; items: Ra
                 <p className="text-[15px] text-gray-600 leading-relaxed">
                   That&apos;s the {edition}. Browse everything below, or come back next month.
                 </p>
-                <div className="mt-6 flex items-center justify-center gap-3">
+                <div className="mt-6 flex items-center justify-center gap-3 pointer-events-auto">
                   <button
                     onClick={shareOnX}
                     className="inline-flex items-center gap-2 bg-black text-white text-sm font-semibold px-5 py-2.5 rounded-full hover:bg-gray-800 transition-colors"
@@ -354,14 +358,14 @@ export default function PLRadar({ edition, items }: { edition: string; items: Ra
               <button
                 onClick={() => go(i - 1)}
                 aria-label="Previous"
-                className="absolute left-0 top-14 bottom-14 w-[38%] z-20 cursor-pointer"
+                className="absolute left-0 top-14 bottom-14 w-[38%] z-10 cursor-pointer"
               />
             )}
             {i < N - 1 && (
               <button
                 onClick={() => go(i + 1)}
                 aria-label="Next"
-                className="absolute right-0 top-14 bottom-14 w-[52%] z-20 cursor-pointer"
+                className="absolute right-0 top-14 bottom-14 w-[52%] z-10 cursor-pointer"
               />
             )}
           </div>

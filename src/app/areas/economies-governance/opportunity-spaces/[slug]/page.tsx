@@ -29,7 +29,7 @@ async function loadOpp(slug: string): Promise<Opportunity | null> {
       id: remote.id,
       title: remote.title,
       tagline: remote.tagline ?? '',
-      image: remote.image ?? staticOpp?.image ?? '',
+      image: staticOpp?.image ?? remote.image ?? '',
       description: remote.description,
       inflectionPoint: remote.inflectionPoint ?? '',
       shift: remote.shift ?? '',
@@ -66,7 +66,6 @@ export default async function OpportunityDetailPage({ params }: Props) {
         items={[
           { label: 'Areas', href: '/areas' },
           { label: 'Economies & Governance', href: '/areas/economies-governance' },
-          { label: 'Opportunity Spaces', href: '/areas/economies-governance/#opportunity-spaces' },
           { label: opp.title },
         ]}
       />
@@ -83,13 +82,28 @@ export default async function OpportunityDetailPage({ params }: Props) {
       {/* Hero */}
       <div className="relative pt-12 pb-12 mb-12 overflow-hidden">
         <OppGeo />
-        <h1 className="relative z-10 text-2xl lg:text-[40px] font-semibold leading-[1.1] tracking-tight mb-4 max-w-xl">
+        <p className="relative z-10 text-xs text-blue uppercase tracking-widest mb-3">
+          Economies & Governance
+        </p>
+        <h1 className="relative z-10 text-2xl lg:text-[40px] font-semibold leading-[1.1] tracking-tight mb-4 whitespace-nowrap">
           {opp.title}
         </h1>
         {opp.tagline && (
           <p className="relative z-10 text-base text-gray-400 mb-5">{opp.tagline}</p>
         )}
-        <p className="relative z-10 text-lg text-gray-600 leading-relaxed max-w-2xl">{opp.description}</p>
+
+        {/* Opportunity space image */}
+        {opp.image && (
+          <div className="relative z-10 mb-8 h-64 lg:h-80 bg-gray-100 overflow-hidden rounded-sm">
+            <img
+              src={opp.image}
+              alt={opp.title}
+              className="w-full h-full object-cover"
+            />
+          </div>
+        )}
+
+        <p className="relative z-10 text-lg text-gray-600 leading-relaxed">{opp.description}</p>
 
         {/* Subfields */}
         {opp.subfields.length > 0 && (

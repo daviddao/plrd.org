@@ -8,7 +8,7 @@
       "id": "neural-augmentation",
       "title": "Neural Augmentation (BCI)",
       "tagline": "Low-cost, scalable, high-bandwidth bidirectional interfaces that expand human cognitive capabilities",
-      "image": "https://images.unsplash.com/photo-1559757175-5700dde675bc?w=1200&q=80",
+      "image": "/images/fa2/opportunity-spaces/neural-augmentation.jpg",
       "description": "Brain-computer interfaces represent the most direct path to expanding human cognitive capabilities beyond biological limits. The near-term target is approved medical devices with life-changing effects for paralyzed and aphasic patients—the foundation for a broader ecosystem of open BCI platforms, third-party applications, and eventually elective non-medical augmentation.",
       "inflectionPoint": "An FDA-cleared BCI device opens a standardized third-party application layer, triggering exponential utility growth as a global developer community innovates on BCI use cases—normalizing elective implantation and demonstrating off-label value.",
       "tippingSignals": [
@@ -45,7 +45,7 @@
       "id": "biologically-inspired-intelligence",
       "title": "Biologically-Inspired Intelligence (NeuroAI)",
       "tagline": "Harnessing the brain's representational, architectural, and algorithmic insights to build cognitively advanced, energy-efficient AI",
-      "image": "/images/fa2/neuroai.jpg",
+      "image": "/images/fa2/opportunity-spaces/biologically-inspired-intelligence.jpg",
       "description": "The AI industry's current scaling paradigm is running into fundamental constraints—energy costs, architectural limitations, and the gap between mimicking human behavior and thinking like a human brain. Neurally-derived inductive biases, at the representational, architectural, algorithmic, and hardware levels, offer a path to 3+ orders of magnitude improvement in useful information per unit of energy.",
       "inflectionPoint": "A major AI lab demonstrates that fine-tuning on vast neural recording datasets enables a smaller model to match frontier performance at a fraction of the energy cost—making high-fidelity human neural data as universally valuable to the tech industry as text and video training data are today.",
       "tippingSignals": [
@@ -82,7 +82,7 @@
       "id": "whole-organism-emulation",
       "title": "Whole Organism Emulation (WBE)",
       "tagline": "Simulating minds and bodies to pave a path to digital humans",
-      "image": "https://images.unsplash.com/photo-1576086213369-97a306d36557?w=1200&q=80",
+      "image": "/images/fa2/opportunity-spaces/whole-organism-emulation.jpg",
       "description": "Whole brain emulation—simulating complete nervous systems in silico—offers the most direct path to understanding intelligence at the systems level and, eventually, to digital continuation of human minds. Progress requires connectomics at scale, precise biophysical neuron models, and in-silico simulations that can exhibit the behavioral and memory properties of the organisms they model.",
       "inflectionPoint": "A reconstructed mouse connectome simulated in silico with neuromechanically realistic bodies exhibits idiosyncratic behaviors learned by the specific mouse prior to connectome harvesting—demonstrating memory retrieval in simulation and validating WBE as a viable engineering discipline.",
       "tippingSignals": [

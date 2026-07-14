@@ -1,11 +1,12 @@
 import type { Metadata } from 'next'
-import { blogPosts } from '@/lib/content'
+import { blogPosts, focusAreaDefs } from '@/lib/content'
 import { formatDate } from '@/lib/format'
 import Breadcrumb from '@/components/Breadcrumb'
+import BackToInsights from '@/components/BackToInsights'
 import EditPageButton from '@/components/EditPageButton'
 import { PageEditHistoryByline } from '@/components/EditHistoryByline'
 import MarkdownContent from '@/components/MarkdownContent'
-import { ContentTile, ContentTileGrid } from '@/components/ContentTile'
+import AreaFilteredListing, { type FilterableTile } from '@/components/AreaFilteredListing'
 import { fetchAtproPosts, fetchPage, getSection } from '@/lib/indexer'
 
 const FALLBACK_HERO_TITLE = 'Blog'
@@ -33,12 +34,42 @@ export default async function BlogPage() {
   const heroTitle = hero?.title || FALLBACK_HERO_TITLE
   const heroSubtitle = hero?.subtitle || FALLBACK_HERO_SUBTITLE
 
+  // Merge curated + ATProto posts into one focus-area–filterable list.
+  const tiles: FilterableTile[] = [
+    ...blogPosts.map((post) => {
+      const isExternal = !!post.external_url
+      return {
+        key: post.slug,
+        href: post.external_url || `/blog/${post.slug}/`,
+        external: isExternal,
+        eyebrow: [isExternal ? 'protocol.ai' : 'PL R&D', formatDate(post.date)].filter(Boolean).join(' · '),
+        title: post.title,
+        description: post.summary,
+        areas: post.areas ?? [],
+      }
+    }),
+    ...atprotoPosts.map((post) => {
+      const tag = post.tags?.find((t) => t !== 'blog') || 'blog'
+      return {
+        key: post.rkey,
+        href: post.path || `/blog/${post.rkey}`,
+        eyebrow: ['PL R&D', formatDate(post.publishedAt), tag !== 'blog' ? tag : '']
+          .filter(Boolean)
+          .join(' · '),
+        title: post.title,
+        description: post.description ?? undefined,
+        areas: [] as string[],
+      }
+    }),
+  ]
+
   return (
     <div className="max-w-6xl mx-auto px-6 pt-8 pb-16">
       <Breadcrumb items={[{ label: 'Blog' }]} />
       <div className="mt-4 empty:hidden">
         <PageEditHistoryByline rkey="blog" />
       </div>
+      <BackToInsights />
       {/* Hero */}
       <div className="relative pt-6 pb-10 mb-10 overflow-hidden">
         <PageGeo />
@@ -49,46 +80,7 @@ export default async function BlogPage() {
       </div>
 
       {/* Blog posts */}
-      {blogPosts.length > 0 && (
-        <ContentTileGrid>
-          {blogPosts.map((post) => {
-            const href = post.external_url || `/blog/${post.slug}/`
-            const isExternal = !!post.external_url
-            return (
-              <ContentTile
-                key={post.slug}
-                href={href}
-                external={isExternal}
-                eyebrow={[isExternal ? 'protocol.ai' : 'PL R&D', formatDate(post.date)].filter(Boolean).join(' · ')}
-                title={post.title}
-                description={post.summary}
-              />
-            )
-          })}
-        </ContentTileGrid>
-      )}
-
-      {atprotoPosts.length > 0 && (
-        <div className="mt-5">
-          <ContentTileGrid>
-            {atprotoPosts.map((post) => {
-              const href = post.path || `/blog/${post.rkey}`
-              const tag = post.tags?.find(t => t !== "blog") || "blog"
-              return (
-                <ContentTile
-                  key={post.rkey}
-                  href={href}
-                  eyebrow={['PL R&D', formatDate(post.publishedAt), tag !== "blog" ? tag : '']
-                    .filter(Boolean)
-                    .join(' · ')}
-                  title={post.title}
-                  description={post.description ?? undefined}
-                />
-              )
-            })}
-          </ContentTileGrid>
-        </div>
-      )}
+      {tiles.length > 0 && <AreaFilteredListing areas={focusAreaDefs} tiles={tiles} noun="posts" />}
       <EditPageButton rkey="blog" />
     </div>
   )

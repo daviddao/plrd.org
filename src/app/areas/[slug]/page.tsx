@@ -52,7 +52,7 @@ async function loadOpportunityCards(slug: string): Promise<{
         id: o.id,
         title: o.title,
         tagline: o.tagline ?? '',
-        image: o.image ?? dataset.opportunities.find((s) => s.id === o.id)?.image ?? '',
+        image: dataset.opportunities.find((s) => s.id === o.id)?.image ?? o.image ?? '',
         description: o.description,
         subfields: o.subfields ?? [],
       })),

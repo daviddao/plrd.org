@@ -31,7 +31,7 @@ async function loadOpportunityCards(): Promise<OpportunityCard[]> {
       id: o.id,
       title: o.title,
       tagline: o.tagline ?? '',
-      image: o.image ?? opportunityData.opportunities.find((s) => s.id === o.id)?.image ?? '',
+      image: opportunityData.opportunities.find((s) => s.id === o.id)?.image ?? o.image ?? '',
       description: o.description,
       subfields: o.subfields ?? [],
     }))
