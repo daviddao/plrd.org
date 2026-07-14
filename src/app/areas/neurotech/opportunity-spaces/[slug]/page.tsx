@@ -84,7 +84,7 @@ export default async function OpportunityDetailPage({ params }: Props) {
         <p className="relative z-10 text-xs text-blue uppercase tracking-widest mb-3">
           Neurotech
         </p>
-        <h1 className="relative z-10 text-2xl lg:text-[40px] font-semibold leading-[1.1] tracking-tight mb-4 max-w-xl">
+        <h1 className="relative z-10 text-2xl lg:text-[40px] font-semibold leading-[1.1] tracking-tight mb-4 whitespace-nowrap">
           {opp.title}
         </h1>
         {opp.tagline && (
