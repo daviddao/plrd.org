@@ -1,4 +1,3 @@
-import type { CSSProperties } from 'react'
 import Link from 'next/link'
 import EditPageButton from '@/components/EditPageButton'
 import { PageEditHistoryByline } from '@/components/EditHistoryByline'
@@ -7,7 +6,15 @@ import { AreaIcon } from '@/components/AreaIcons'
 import MarkdownContent from '@/components/MarkdownContent'
 import { fetchPage, getSection } from "@/lib/indexer"
 import { FOCUS_AREA_DESCRIPTIONS } from '@/lib/focus-area-descriptions'
-import { loadHexMosaic, type HexPattern } from "@/lib/hex-mosaic"
+import { type HexPattern } from "@/lib/hex-mosaic"
+
+/** Focus-area hero illustrations floating above each card (replaces the hex cloud). */
+const FOCUS_AREA_IMAGES: Record<string, string> = {
+  'digital-human-rights': '/images/focus-areas/digital-human-rights.png',
+  'economies-governance': '/images/focus-areas/economies-governance.png',
+  'ai-robotics': '/images/focus-areas/ai-robotics.png',
+  neurotech: '/images/focus-areas/neurotech.png',
+}
 import RDPipeline from "@/components/RDPipeline"
 import InsightCarousel from "@/components/InsightCarousel"
 
@@ -180,28 +187,28 @@ export default async function HomePage() {
           <FocusAreaCard
             href="/areas/digital-human-rights"
             iconType="shield"
-            mosaicSlug="digital-human-rights"
+            slug="digital-human-rights"
             title={dhr?.title || "Digital Human Rights"}
             body={FOCUS_AREA_DESCRIPTIONS['digital-human-rights']}
           />
           <FocusAreaCard
             href="/areas/economies-governance"
             iconType="hexagon"
-            mosaicSlug="economies-governance"
+            slug="economies-governance"
             title={eg?.title || "Economies & Governance"}
             body={FOCUS_AREA_DESCRIPTIONS['economies-governance']}
           />
           <FocusAreaCard
             href="/areas/ai-robotics"
             iconType="neural"
-            mosaicSlug="ai-robotics"
+            slug="ai-robotics"
             title={ai?.title || "AI & Robotics"}
             body={FOCUS_AREA_DESCRIPTIONS['ai-robotics']}
           />
           <FocusAreaCard
             href="/areas/neurotech"
             iconType="brain"
-            mosaicSlug="neurotech"
+            slug="neurotech"
             title={neuro?.title || "Neurotechnology"}
             body={FOCUS_AREA_DESCRIPTIONS.neurotech}
           />
@@ -268,42 +275,33 @@ export default async function HomePage() {
 function FocusAreaCard({
   href,
   iconType,
-  mosaicSlug,
+  slug,
   title,
   body,
 }: {
   href: string
   iconType: HexPattern
-  mosaicSlug: string
+  slug: string
   title: string
   body: string
 }) {
-  const mosaic = loadHexMosaic(mosaicSlug, iconType)
+  const image = FOCUS_AREA_IMAGES[slug]
 
   return (
-    <div className="hex-cloud-card relative isolate">
+    <div className="group relative isolate">
+      {/* Focus-area illustration floating above the card (replaces the hex cloud). */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute left-0 -top-32 sm:-top-36 lg:-top-40 w-[65%] sm:w-[62%] lg:w-[60%] h-56 sm:h-64 lg:h-64 overflow-hidden select-none"
+        className="pointer-events-none absolute left-0 -top-28 sm:-top-28 lg:-top-32 w-[37%] sm:w-[34%] lg:w-[34%] h-32 sm:h-36 lg:h-36 select-none"
       >
-        <svg
-          viewBox={mosaic.viewBox}
-          width={mosaic.width}
-          height={mosaic.height}
-          xmlns="http://www.w3.org/2000/svg"
-          className="hex-cloud-svg absolute bottom-0 left-0 w-full h-auto"
-          preserveAspectRatio="xMidYMax meet"
-        >
-          {mosaic.polygons.map((p, i) => (
-            <polygon
-              key={i}
-              points={p.points}
-              fill={p.fill}
-              className="hex-cloud-hex"
-              style={{ '--hex-op': p.opacity, animationDelay: `${p.delayMs}ms` } as CSSProperties}
-            />
-          ))}
-        </svg>
+        {image && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={image}
+            alt=""
+            className="absolute bottom-0 left-0 h-full w-full object-contain object-bottom [filter:drop-shadow(0_10px_18px_rgba(15,17,21,0.14))] transition-transform duration-500 ease-out group-hover:-translate-y-1.5 group-hover:scale-[1.02]"
+          />
+        )}
       </div>
 
       <Link
