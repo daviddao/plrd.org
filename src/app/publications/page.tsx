@@ -32,7 +32,6 @@ export default async function PublicationsPage() {
     title: pub.title,
     description: pub.authors?.map(resolveAuthorName).join(', '),
     areas: pub.areas ?? [],
-    image: '/images/publication-cover.png',
   }))
 
   return (
