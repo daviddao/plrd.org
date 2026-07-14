@@ -202,7 +202,7 @@ export const ROLE_META: Record<PLRole, { label: string; description: string }> =
     description: 'Too few connections blocked progress. PL convenes the people who need to collide: dinners, retreats, residencies, hackathons.',
   },
   capital: {
-    label: 'Capital',
+    label: 'Funding',
     description: 'Pre-commercial work needed patient funding. PL runs grants and prizes and helps peer funders deploy theirs.',
   },
   translation: {
