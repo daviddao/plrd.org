@@ -46,6 +46,7 @@ export default async function BlogPage() {
         title: post.title,
         description: post.summary,
         areas: post.areas ?? [],
+        image: post.coverImage || '',
       }
     }),
     ...atprotoPosts.map((post) => {
@@ -59,6 +60,7 @@ export default async function BlogPage() {
         title: post.title,
         description: post.description ?? undefined,
         areas: [] as string[],
+        image: '',
       }
     }),
   ]

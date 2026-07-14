@@ -57,6 +57,7 @@ export default async function InsightsPage() {
           title: post.title,
           description: post.summary,
           areas: post.areas ?? [],
+          image: post.coverImage || '',
           date: post.date || '',
         }
       }),
@@ -73,6 +74,7 @@ export default async function InsightsPage() {
         eyebrow: [p.venue, formatDate(p.date)].filter(Boolean).join(' · '),
         title: p.title,
         areas: p.areas ?? [],
+        image: '/images/publication-cover.png',
         date: p.date || '',
       })),
     },
@@ -89,6 +91,7 @@ export default async function InsightsPage() {
         title: t.title,
         description: t.abstract,
         areas: t.areas ?? [],
+        image: youtubeThumb(t.html) || (/podcast/i.test(`${t.venue} ${t.venue_location}`) ? '/images/podcast.webp' : ''),
         date: t.date || '',
       })),
     },
