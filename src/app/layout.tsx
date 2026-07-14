@@ -4,7 +4,7 @@ import { siteConfig } from '@/lib/site-config'
 import { AuthProvider } from '@/lib/atproto'
 import SiteShell from '@/components/SiteShell'
 import GoatCounter from '@/components/GoatCounter'
-import { GoogleAnalytics } from '@next/third-parties/google'
+import CookieConsent from '@/components/CookieConsent'
 import './globals.css'
 
 const inter = Inter({
@@ -114,7 +114,7 @@ export default function RootLayout({
         </AuthProvider>
         <GoatCounter />
         {process.env.NEXT_PUBLIC_GA_ID && (
-          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+          <CookieConsent gaId={process.env.NEXT_PUBLIC_GA_ID} />
         )}
       </body>
     </html>
