@@ -183,7 +183,7 @@ export default async function HomePage() {
           />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 md:auto-rows-fr gap-6 lg:gap-8">
           <FocusAreaCard
             href="/areas/digital-human-rights"
             iconType="shield"
@@ -204,6 +204,7 @@ export default async function HomePage() {
             slug="ai-robotics"
             title={ai?.title || "AI & Robotics"}
             body={FOCUS_AREA_DESCRIPTIONS['ai-robotics']}
+            imgClassName="h-[73px]"
           />
           <FocusAreaCard
             href="/areas/neurotech"
@@ -211,6 +212,7 @@ export default async function HomePage() {
             slug="neurotech"
             title={neuro?.title || "Neurotechnology"}
             body={FOCUS_AREA_DESCRIPTIONS.neurotech}
+            imageColClass="w-[32%] sm:w-[34%]"
           />
         </div>
       </div>
@@ -278,22 +280,26 @@ function FocusAreaCard({
   slug,
   title,
   body,
+  imgClassName = "h-[104px]",
+  imageColClass = "w-[38%] sm:w-[42%]",
 }: {
   href: string
   iconType: HexPattern
   slug: string
   title: string
   body: string
+  imgClassName?: string
+  imageColClass?: string
 }) {
   const image = FOCUS_AREA_IMAGES[slug]
 
   return (
     <Link
       href={href}
-      className="group flex items-stretch bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md hover:border-gray-300 transition-all duration-200"
+      className="group flex h-full items-stretch bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md hover:border-gray-300 transition-all duration-200"
     >
       {/* Illustration fully contained (not cropped) on the left. */}
-      <div className="flex-shrink-0 w-[38%] sm:w-[42%] flex items-center justify-center p-4 sm:p-5">
+      <div className={`flex-shrink-0 ${imageColClass} flex items-center justify-center p-4 sm:p-5`}>
         {image && (
           // eslint-disable-next-line @next/next/no-img-element
           <img
@@ -301,7 +307,7 @@ function FocusAreaCard({
             alt=""
             /* Fixed height + w-auto so every illustration renders at the same
                vertical height regardless of its aspect ratio. */
-            className="mx-auto h-[104px] w-auto max-w-full object-contain [filter:drop-shadow(0_10px_18px_rgba(15,17,21,0.12))] transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+            className={`mx-auto ${imgClassName} w-auto max-w-full object-contain [filter:drop-shadow(0_10px_18px_rgba(15,17,21,0.12))] transition-transform duration-500 ease-out group-hover:scale-[1.03]`}
           />
         )}
       </div>
