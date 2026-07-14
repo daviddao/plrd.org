@@ -286,7 +286,7 @@ function FocusAreaCard({
       {/* Focus-area illustration floating above the card (replaces the hex cloud). */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute left-0 -top-40 sm:-top-44 lg:-top-48 w-[65%] sm:w-[62%] lg:w-[60%] h-56 sm:h-64 lg:h-64 select-none"
+        className="pointer-events-none absolute left-0 -top-24 sm:-top-24 lg:-top-28 w-[46%] sm:w-[43%] lg:w-[42%] h-40 sm:h-44 lg:h-44 select-none"
       >
         {image && (
           // eslint-disable-next-line @next/next/no-img-element
