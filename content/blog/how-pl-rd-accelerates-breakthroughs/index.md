@@ -31,6 +31,8 @@ Our mission is to accelerate computing breakthroughs that expand human freedom, 
 
 PL R&D exists to help these fields accelerate faster.
 
+<figure class="post-figure"><img src="/images/blog/pl-rd-pipeline.png" alt="PL R&D: driving focused research and development across the R&D pipeline." /></figure>
+
 ## How we choose opportunities
 
 To shape strategy and interventions within opportunity spaces and inflection points, each focus area is stewarded by a Focus Area Lead and advised by its own Scientific Advisory Board of field experts. Together, they identify the field bottlenecks that can have the greatest impact, and the tools to use to unblock progress. We begin with a field-level question: **What would need to be true for this field to progress much faster?**
@@ -51,6 +53,8 @@ Much of today's most promising frontier work struggles to find a home: it is oft
 * **Policy – Standards & regulatory engagement.** Frontier technologies often reach a point where the rules do not yet recognize what is possible. That can block adoption even when the technology works. In those cases, progress may require standards bodies, regulatory sandboxes, procurement pathways, model frameworks, or partnerships with public institutions. PL R&D engages in research, thought leadership, and participation in policy and standards-setting discussions with the goal of creating better rules, which, in turn, help responsible technologies reach users faster.
 * **Infrastructure – Primitives & rails.** Sometimes the missing piece is open protocols, public-good infrastructure, or neutral rails that no single company has sufficient incentive to build alone. When a missing primitive or shared infrastructure layer is blocking a field, PL R&D may help build it directly, support the teams building it, or coordinate an ecosystem capable of maintaining it over time.
 * **Translation – Venture conversion.** Some work reaches the point where the bottleneck is no longer research but translation into pilot, production, and scale. PL R&D connects projects within the broader Protocol Labs network - including venture, capital, platform, and ecosystem support - to help promising work find the right deployment path, talent, and resources to succeed.
+
+<br />
 
 Effective field-building is itself an open research domain, so part of our work will be refining new types of interventions. Over time, PL R&D aims to innovate not only within our focus areas - but in how R&D itself accelerates field progress faster.
 
