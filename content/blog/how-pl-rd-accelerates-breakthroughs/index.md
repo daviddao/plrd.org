@@ -10,7 +10,7 @@ cover_image: "/images/blog/pl-rd-accelerates-hero.png"
 ---
 <figure class="post-figure post-hero"><img src="/images/blog/pl-rd-accelerates-hero.png" alt="How PL R&D accelerates computing breakthroughs." /></figure>
 
-Some of the most important breakthroughs begin before there is a market, a field, or a clear institutional home.
+The most important breakthroughs often begin before there is a market to fund them, a field to organize them, or an institution to back them.
 
 They may start as a primitive that only a few researchers understand, a protocol that lacks a deployment path, a scientific result with no obvious business model, a regulatory gap that prevents adoption, or a community of builders who can see the future before capital knows how to underwrite it.
 
