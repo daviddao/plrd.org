@@ -212,7 +212,6 @@ export default async function HomePage() {
             slug="neurotech"
             title={neuro?.title || "Neurotechnology"}
             body={FOCUS_AREA_DESCRIPTIONS.neurotech}
-            imageColClass="w-[32%] sm:w-[34%]"
           />
         </div>
       </div>
@@ -281,7 +280,7 @@ function FocusAreaCard({
   title,
   body,
   imgClassName = "h-[104px]",
-  imageColClass = "w-[38%] sm:w-[42%]",
+  imageColClass = "w-[32%] sm:w-[34%]",
 }: {
   href: string
   iconType: HexPattern
