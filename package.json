@@ -15,6 +15,7 @@
     "@atproto/jwk-jose": "^0.1.11",
     "@atproto/oauth-client-node": "^0.3.15",
     "@atproto/syntax": "^0.4.3",
+    "@next/third-parties": "^15.5.20",
     "d3-force": "^3.0.0",
     "envalid": "^8.1.1",
     "fuse.js": "^7.0.0",
