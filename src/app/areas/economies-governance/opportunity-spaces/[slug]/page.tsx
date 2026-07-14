@@ -29,7 +29,7 @@ async function loadOpp(slug: string): Promise<Opportunity | null> {
       id: remote.id,
       title: remote.title,
       tagline: remote.tagline ?? '',
-      image: remote.image ?? staticOpp?.image ?? '',
+      image: staticOpp?.image ?? remote.image ?? '',
       description: remote.description,
       inflectionPoint: remote.inflectionPoint ?? '',
       shift: remote.shift ?? '',
