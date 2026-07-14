@@ -10,6 +10,12 @@ import { fetchPage, getSection } from '@/lib/indexer'
 
 export const metadata: Metadata = { title: 'Talks' }
 
+/** Pull a YouTube id out of a talk body ({{< youtube ID >}}) for its thumbnail. */
+function youtubeThumb(html: string): string | undefined {
+  const m = html?.match(/\{\{[<&].*?youtube\s+([a-zA-Z0-9_-]+)\s*[>&].*?\}\}/)
+  return m ? `https://i.ytimg.com/vi/${m[1]}/maxresdefault.jpg` : undefined
+}
+
 const FALLBACK_HERO_TITLE = 'Talks'
 const FALLBACK_HERO_SUBTITLE =
   'Presentations and lectures from conferences and events around the world.'
@@ -29,6 +35,9 @@ export default async function TalksPage() {
     title: talk.title,
     description: talk.abstract,
     areas: talk.areas ?? [],
+    image:
+      youtubeThumb(talk.html) ||
+      (/podcast/i.test(`${talk.venue ?? ''} ${talk.venue_location ?? ''}`) ? '/images/podcast.webp' : ''),
   }))
 
   return (

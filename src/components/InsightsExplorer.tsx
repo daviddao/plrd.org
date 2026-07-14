@@ -22,6 +22,12 @@ export type InsightTile = {
   description?: string
   external?: boolean
   areas: string[]
+  /**
+   * Optional cover/hero image for the card media header. `''` renders the
+   * procedural gradient fallback; a URL renders that image; `undefined` keeps
+   * the card text-only.
+   */
+  image?: string
   /** ISO date string used to sort the unified "All types" feed newest-first. */
   date: string
 }
