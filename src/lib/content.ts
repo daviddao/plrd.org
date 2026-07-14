@@ -62,6 +62,8 @@ export type BlogPost = {
   title: string
   date: string
   summary: string
+  /** Optional dedicated meta/OG description; falls back to `summary` when empty. */
+  description?: string
   authors: string[]
   /** Focus-area slugs (e.g. 'neurotech') — drives the Insights focus-area filter. */
   areas: string[]

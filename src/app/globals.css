@@ -248,6 +248,186 @@ ul:not([class]) li li {
   padding-bottom: 1rem;
 }
 
+/* ===== Blog: designed focus-area tiles & three-question cards ===== */
+.page-content .fa-grid,
+.page-content .q-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin: 0.5rem 0 1.5rem;
+}
+@media (min-width: 640px) {
+  .page-content .fa-grid { grid-template-columns: 1fr 1fr; }
+  .page-content .q-grid { grid-template-columns: repeat(3, 1fr); }
+}
+.page-content .fa-tile {
+  border: 1px solid #e6e8ec;
+  border-radius: 0.75rem;
+  background: var(--color-white);
+  padding: 1.1rem 1.2rem;
+}
+.page-content .fa-eyebrow {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-gray-500);
+  margin-bottom: 0.25rem;
+}
+.page-content .fa-title {
+  font-weight: 600;
+  color: var(--color-black);
+  margin-bottom: 0.3rem;
+}
+.page-content .q-card {
+  border: 1px solid #e6e8ec;
+  border-radius: 0.75rem;
+  background: var(--color-gray-100);
+  padding: 1.2rem;
+}
+.page-content .q-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 9999px;
+  background: var(--color-blue);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-bottom: 0.55rem;
+}
+.page-content .q-q {
+  font-weight: 600;
+  color: var(--color-black);
+  line-height: 1.3;
+  margin-bottom: 0.3rem;
+}
+.page-content .fa-tile p,
+.page-content .q-card p {
+  margin: 0;
+  padding-bottom: 0;
+  color: var(--color-gray-600);
+  font-size: var(--font-size-sm);
+  line-height: 1.55;
+}
+
+/* ===== Blog: responsive figures ===== */
+.page-content img {
+  max-width: 100%;
+  height: auto;
+}
+.page-content .post-figure {
+  margin: 0.5rem 0 1.5rem;
+}
+.page-content .post-figure img {
+  display: block;
+  width: 100%;
+  border: 1px solid #e6e8ec;
+  border-radius: 0.75rem;
+  background: var(--color-white);
+}
+.page-content .post-figure figcaption {
+  margin-top: 0.55rem;
+  font-size: 0.8rem;
+  color: var(--color-gray-500);
+  text-align: center;
+}
+.page-content .post-hero {
+  margin: 0 0 2rem;
+}
+.page-content .post-hero img {
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+/* ===== Blog: CSS-only tabbed case studies ===== */
+.page-content .cs-tabs {
+  margin: 0.75rem 0 1.5rem;
+}
+.page-content .cs-radio {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+.page-content .cs-tablist {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.5rem;
+  border-bottom: 1px solid #e6e8ec;
+  margin-bottom: 1.1rem;
+}
+.page-content .cs-tab {
+  cursor: pointer;
+  padding: 0.5rem 0.15rem;
+  margin-bottom: -1px;
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-500);
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.page-content .cs-tab:hover {
+  color: var(--color-black);
+}
+.page-content .cs-radio:focus-visible + .cs-radio + .cs-tablist .cs-tab,
+.page-content .cs-radio:focus-visible ~ .cs-tablist .cs-tab {
+  outline: none;
+}
+.page-content #cs-1:checked ~ .cs-tablist .cs-tab[for="cs-1"],
+.page-content #cs-2:checked ~ .cs-tablist .cs-tab[for="cs-2"] {
+  color: var(--color-black);
+  border-bottom-color: var(--color-blue);
+}
+.page-content .cs-panels {
+  border: 1px solid #e6e8ec;
+  border-radius: 0.75rem;
+  background: var(--color-white);
+  padding: 1.25rem 1.35rem;
+}
+.page-content .cs-panel {
+  display: none;
+}
+.page-content #cs-1:checked ~ .cs-panels .cs-panel:nth-child(1),
+.page-content #cs-2:checked ~ .cs-panels .cs-panel:nth-child(2) {
+  display: block;
+}
+.page-content .cs-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.15rem;
+  padding: 0.7rem 0;
+  border-top: 1px solid #f0f1f3;
+}
+.page-content .cs-row:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+.page-content .cs-row:last-child {
+  padding-bottom: 0;
+}
+@media (min-width: 640px) {
+  .page-content .cs-row {
+    grid-template-columns: 160px 1fr;
+    gap: 1.25rem;
+  }
+}
+.page-content .cs-key {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  color: var(--color-gray-500);
+  padding-top: 0.12rem;
+}
+.page-content .cs-val {
+  color: var(--color-gray-600);
+  font-size: var(--font-size-sm);
+  line-height: 1.55;
+}
+
 /* Minimal markdown rendered from editable page text. */
 .markdown-content > :last-child {
   margin-bottom: 0;

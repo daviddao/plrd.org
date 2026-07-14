@@ -17,15 +17,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!post) return { title: 'Not Found' }
   // External stubs live on their original home — point search engines there.
   const canonical = post.external_url || `/blog/${post.slug}/`
+  const metaDescription = post.description || post.summary
   return {
     title: post.title,
-    description: post.summary,
+    description: metaDescription,
     alternates: { canonical },
     openGraph: {
       type: 'article',
       url: canonical,
       title: post.title,
-      description: post.summary,
+      description: metaDescription,
       publishedTime: post.date || undefined,
       authors: post.authors,
       images: post.coverImage ? [post.coverImage] : undefined,
