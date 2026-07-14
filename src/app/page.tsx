@@ -2,11 +2,9 @@ import Link from 'next/link'
 import EditPageButton from '@/components/EditPageButton'
 import { PageEditHistoryByline } from '@/components/EditHistoryByline'
 import { publications, talks, blogPosts } from '@/lib/content'
-import { AreaIcon } from '@/components/AreaIcons'
 import MarkdownContent from '@/components/MarkdownContent'
 import { fetchPage, getSection } from "@/lib/indexer"
 import { FOCUS_AREA_DESCRIPTIONS } from '@/lib/focus-area-descriptions'
-import { type HexPattern } from "@/lib/hex-mosaic"
 
 /** Focus-area hero illustrations floating above each card (replaces the hex cloud). */
 const FOCUS_AREA_IMAGES: Record<string, string> = {
@@ -186,21 +184,18 @@ export default async function HomePage() {
         <div className="grid grid-cols-1 md:grid-cols-2 md:auto-rows-fr gap-6 lg:gap-8">
           <FocusAreaCard
             href="/areas/digital-human-rights"
-            iconType="shield"
             slug="digital-human-rights"
             title={dhr?.title || "Digital Human Rights"}
             body={FOCUS_AREA_DESCRIPTIONS['digital-human-rights']}
           />
           <FocusAreaCard
             href="/areas/economies-governance"
-            iconType="hexagon"
             slug="economies-governance"
             title={eg?.title || "Economies & Governance"}
             body={FOCUS_AREA_DESCRIPTIONS['economies-governance']}
           />
           <FocusAreaCard
             href="/areas/ai-robotics"
-            iconType="neural"
             slug="ai-robotics"
             title={ai?.title || "AI & Robotics"}
             body={FOCUS_AREA_DESCRIPTIONS['ai-robotics']}
@@ -208,7 +203,6 @@ export default async function HomePage() {
           />
           <FocusAreaCard
             href="/areas/neurotech"
-            iconType="brain"
             slug="neurotech"
             title={neuro?.title || "Neurotechnology"}
             body={FOCUS_AREA_DESCRIPTIONS.neurotech}
@@ -275,7 +269,6 @@ export default async function HomePage() {
 
 function FocusAreaCard({
   href,
-  iconType,
   slug,
   title,
   body,
@@ -283,7 +276,6 @@ function FocusAreaCard({
   imageColClass = "w-[32%] sm:w-[34%]",
 }: {
   href: string
-  iconType: HexPattern
   slug: string
   title: string
   body: string
@@ -297,7 +289,19 @@ function FocusAreaCard({
       href={href}
       className="group flex h-full items-stretch bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md hover:border-gray-300 transition-all duration-200"
     >
-      {/* Illustration fully contained (not cropped) on the left. */}
+      {/* Content on the left. */}
+      <div className="flex-1 p-5 sm:p-6 flex flex-col justify-center">
+        <h3 className="text-xl font-serif font-normal tracking-tight mb-3">{title}</h3>
+        <MarkdownContent
+          content={body}
+          className="text-[15px] text-gray-600 leading-relaxed [&_p]:mb-0"
+        />
+      </div>
+
+      {/* Vertical divider. */}
+      <div aria-hidden="true" className="my-6 w-px self-stretch bg-gray-200" />
+
+      {/* Illustration fully contained (not cropped) on the right. */}
       <div className={`flex-shrink-0 ${imageColClass} flex items-center justify-center p-4 sm:p-5`}>
         {image && (
           // eslint-disable-next-line @next/next/no-img-element
@@ -309,21 +313,6 @@ function FocusAreaCard({
             className={`mx-auto ${imgClassName} w-auto max-w-full object-contain [filter:drop-shadow(0_10px_18px_rgba(15,17,21,0.12))] transition-transform duration-500 ease-out group-hover:scale-[1.03]`}
           />
         )}
-      </div>
-
-      {/* Vertical divider. */}
-      <div aria-hidden="true" className="my-6 w-px self-stretch bg-gray-200" />
-
-      {/* Content on the right. */}
-      <div className="flex-1 p-5 sm:p-6 flex flex-col justify-center">
-        <div className="flex items-center gap-3 mb-3">
-          <AreaIcon type={iconType} className="w-6 h-6 text-gray-400" />
-          <h3 className="text-xl font-serif font-normal tracking-tight">{title}</h3>
-        </div>
-        <MarkdownContent
-          content={body}
-          className="text-[15px] text-gray-600 leading-relaxed [&_p]:mb-0"
-        />
       </div>
     </Link>
   )
