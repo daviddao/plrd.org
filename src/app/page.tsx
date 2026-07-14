@@ -293,13 +293,15 @@ function FocusAreaCard({
       className="group flex items-stretch bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md hover:border-gray-300 transition-all duration-200"
     >
       {/* Illustration fully contained (not cropped) on the left. */}
-      <div className="flex-shrink-0 w-[38%] sm:w-[40%] flex items-center justify-center p-4 sm:p-5">
+      <div className="flex-shrink-0 w-[38%] sm:w-[42%] flex items-center justify-center p-4 sm:p-5">
         {image && (
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src={image}
             alt=""
-            className="max-h-32 sm:max-h-44 w-full object-contain [filter:drop-shadow(0_10px_18px_rgba(15,17,21,0.12))] transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+            /* Fixed height + w-auto so every illustration renders at the same
+               vertical height regardless of its aspect ratio. */
+            className="mx-auto h-[104px] w-auto max-w-full object-contain [filter:drop-shadow(0_10px_18px_rgba(15,17,21,0.12))] transition-transform duration-500 ease-out group-hover:scale-[1.03]"
           />
         )}
       </div>
