@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import Breadcrumb from '@/components/Breadcrumb'
 import EditPageButton from '@/components/EditPageButton'
 import EditHistoryByline from '@/components/EditHistoryByline'
-import opportunityData from '@/data/fa2/dhr-opportunityspaces.json'
+import opportunityData from '@/data/fa2/ai-opportunityspaces.json'
 import { fetchOpportunitySpace } from '@/lib/indexer'
 import { ADMIN_DID, OPPORTUNITY_COLLECTION, opportunitySpaceRkey } from '@/lib/lexicons'
 
@@ -19,9 +19,14 @@ export function generateStaticParams() {
   }))
 }
 
+/**
+ * Prefer live data from the indexer (org.plresearch.opportunitySpace record),
+ * fall back to the static JSON checked into git if the indexer is unreachable
+ * or the record isn't there. Same pattern as /areas/[slug]/page.tsx.
+ */
 async function loadOpp(slug: string): Promise<Opportunity | null> {
   const staticOpp = opportunityData.opportunities.find((o) => o.id === slug)
-  const rkey = opportunitySpaceRkey('digital-human-rights', slug)
+  const rkey = opportunitySpaceRkey('ai-robotics', slug)
   const remote = await fetchOpportunitySpace(rkey)
   if (remote) {
     return {
@@ -48,7 +53,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const opp = await loadOpp(slug)
   if (!opp) return { title: 'Not Found' }
   return {
-    title: `${opp.title} – Digital Human Rights`,
+    title: `${opp.title} – AI & Robotics`,
     description: opp.description.slice(0, 160),
   }
 }
@@ -57,20 +62,20 @@ export default async function OpportunityDetailPage({ params }: Props) {
   const { slug } = await params
   const opp = await loadOpp(slug)
   if (!opp) notFound()
-  const rkey = opportunitySpaceRkey('digital-human-rights', slug)
+  const rkey = opportunitySpaceRkey('ai-robotics', slug)
 
   return (
     <div className="max-w-6xl mx-auto px-6 pt-8 pb-16">
       <Breadcrumb
         items={[
           { label: 'Areas', href: '/areas' },
-          { label: 'Digital Human Rights', href: '/areas/digital-human-rights' },
+          { label: 'AI & Robotics', href: '/areas/ai-robotics' },
           { label: opp.title },
         ]}
       />
       <EditPageButton
         rkey={rkey}
-        href={`/areas/digital-human-rights/opportunity-spaces/${slug}/edit`}
+        href={`/areas/ai-robotics/${slug}/edit`}
       />
       <div className="mt-4 empty:hidden">
         <EditHistoryByline
@@ -82,7 +87,7 @@ export default async function OpportunityDetailPage({ params }: Props) {
       <div className="relative pt-12 pb-12 mb-12 overflow-hidden">
         <OppGeo />
         <p className="relative z-10 text-xs text-blue uppercase tracking-widest mb-3">
-          Digital Human Rights
+          AI & Robotics
         </p>
         <h1 className="relative z-10 text-2xl lg:text-[40px] font-semibold leading-[1.1] tracking-tight mb-4 whitespace-nowrap">
           {opp.title}
@@ -204,19 +209,26 @@ function OppGeo() {
       fill="none"
       aria-hidden="true"
     >
-      <rect x="400" y="80" width="120" height="120" stroke="#C3E1FF" strokeWidth="0.75" />
-      <rect x="520" y="200" width="100" height="100" stroke="#C3E1FF" strokeWidth="0.75" />
-      <rect x="380" y="240" width="80" height="80" stroke="#C3E1FF" strokeWidth="0.75" />
-      <rect x="460" y="340" width="110" height="110" stroke="#C3E1FF" strokeWidth="0.75" />
-      <line x1="460" y1="140" x2="570" y2="250" stroke="#C3E1FF" strokeWidth="0.5" />
-      <line x1="520" y1="200" x2="460" y2="280" stroke="#C3E1FF" strokeWidth="0.5" />
-      <line x1="460" y1="320" x2="515" y2="340" stroke="#C3E1FF" strokeWidth="0.5" />
-      <line x1="400" y1="200" x2="520" y2="200" stroke="#C3E1FF" strokeWidth="0.5" />
-      <circle cx="460" cy="140" r="3" fill="#C3E1FF" />
-      <circle cx="520" cy="200" r="3" fill="#C3E1FF" />
-      <circle cx="460" cy="280" r="3" fill="#C3E1FF" />
-      <circle cx="570" cy="250" r="3" fill="#C3E1FF" />
-      <circle cx="515" cy="340" r="3" fill="#C3E1FF" />
+      <circle cx="500" cy="100" r="40" stroke="#C3E1FF" strokeWidth="0.75" />
+      <circle cx="420" cy="220" r="30" stroke="#C3E1FF" strokeWidth="0.75" />
+      <circle cx="580" cy="200" r="35" stroke="#C3E1FF" strokeWidth="0.75" />
+      <circle cx="380" cy="350" r="25" stroke="#C3E1FF" strokeWidth="0.75" />
+      <circle cx="470" cy="370" r="28" stroke="#C3E1FF" strokeWidth="0.75" />
+      <circle cx="560" cy="340" r="32" stroke="#C3E1FF" strokeWidth="0.75" />
+      <circle cx="620" cy="400" r="20" stroke="#C3E1FF" strokeWidth="0.75" />
+      <line x1="500" y1="140" x2="420" y2="190" stroke="#C3E1FF" strokeWidth="0.5" />
+      <line x1="500" y1="140" x2="580" y2="165" stroke="#C3E1FF" strokeWidth="0.5" />
+      <line x1="420" y1="250" x2="380" y2="325" stroke="#C3E1FF" strokeWidth="0.5" />
+      <line x1="420" y1="250" x2="470" y2="342" stroke="#C3E1FF" strokeWidth="0.5" />
+      <line x1="580" y1="235" x2="560" y2="308" stroke="#C3E1FF" strokeWidth="0.5" />
+      <line x1="580" y1="235" x2="620" y2="380" stroke="#C3E1FF" strokeWidth="0.5" />
+      <circle cx="500" cy="100" r="3" fill="#C3E1FF" />
+      <circle cx="420" cy="220" r="3" fill="#C3E1FF" />
+      <circle cx="580" cy="200" r="3" fill="#C3E1FF" />
+      <circle cx="380" cy="350" r="3" fill="#C3E1FF" />
+      <circle cx="470" cy="370" r="3" fill="#C3E1FF" />
+      <circle cx="560" cy="340" r="3" fill="#C3E1FF" />
+      <circle cx="620" cy="400" r="3" fill="#C3E1FF" />
     </svg>
   )
 }
