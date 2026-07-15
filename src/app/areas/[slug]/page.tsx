@@ -219,7 +219,7 @@ export default async function AreaPage({ params }: Props) {
             {opportunities.map((opp) => (
               <Link
                 key={opp.id}
-                href={`/areas/${slug}/opportunity-spaces/${opp.id}/`}
+                href={`/areas/${slug}/${opp.id}/`}
                 className="bg-white p-8 hover:bg-gray-50 transition-colors relative overflow-hidden group no-underline"
               >
                 <OppCardGeo />

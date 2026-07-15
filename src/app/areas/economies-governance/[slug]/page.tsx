@@ -71,7 +71,7 @@ export default async function OpportunityDetailPage({ params }: Props) {
       />
       <EditPageButton
         rkey={rkey}
-        href={`/areas/economies-governance/opportunity-spaces/${slug}/edit`}
+        href={`/areas/economies-governance/${slug}/edit`}
       />
       <div className="mt-4 empty:hidden">
         <EditHistoryByline
