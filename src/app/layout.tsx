@@ -4,6 +4,7 @@ import { siteConfig } from '@/lib/site-config'
 import { AuthProvider } from '@/lib/atproto'
 import SiteShell from '@/components/SiteShell'
 import GoatCounter from '@/components/GoatCounter'
+import { GoogleAnalytics } from '@next/third-parties/google'
 import './globals.css'
 
 const inter = Inter({
@@ -112,6 +113,9 @@ export default function RootLayout({
           <SiteShell>{children}</SiteShell>
         </AuthProvider>
         <GoatCounter />
+        {process.env.NEXT_PUBLIC_GA_ID && (
+          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+        )}
       </body>
     </html>
   )
