@@ -2,6 +2,8 @@
 
 This guide explains how focus area leads and contributors can add and edit content on the Protocol Labs R&D website (https://plresearch.org).
 
+> **Publishing a post?** See [docs/analytics.md](docs/analytics.md) for how to build UTM-tagged links for the social/newsletter push so campaign attribution stays clean.
+
 ## Focus Area Pages
 
 Three focus areas are fully managed through Markdown: **Digital Human Rights**, **AI & Robotics**, and **Neurotech**. Each focus area lead can update their page by editing a single file.
