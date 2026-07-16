@@ -31,6 +31,9 @@ export const metadata: Metadata = {
       'application/rss+xml': '/feed.xml',
     },
   },
+  verification: {
+    google: 'XG_TWMgF2o6dAIwddnRHH3bXN6ewPoC6Savtyb_cltU',
+  },
   robots: {
     index: true,
     follow: true,
