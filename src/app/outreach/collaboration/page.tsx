@@ -120,7 +120,7 @@ export default async function CollaborationPage() {
             </svg>
           </a>
           <a
-            href="https://x.com/PL_RnD"
+            href="https://x.com/protocollabs_rd"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-5 py-2.5 border border-gray-300 text-gray-800 rounded-full hover:border-black hover:text-black transition-colors font-semibold text-sm"

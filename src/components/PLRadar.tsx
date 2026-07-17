@@ -126,7 +126,7 @@ export default function PLRadar({ edition, items }: { edition: string; items: Ra
     const text = `PL R&D Radar — ${edition}\nA one-minute swipe through what's new across our research, talks & ideas.`
     const intent = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(
       url,
-    )}&via=PL_RnD`
+    )}&via=protocollabs_rd`
     window.open(intent, '_blank', 'noopener,noreferrer')
   }
 
