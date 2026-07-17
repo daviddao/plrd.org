@@ -145,7 +145,7 @@ PL R&D is built for collaboration.
 
 **Protocol Labs network members -** PL R&D is a way to connect your work to deeper field strategy: the opportunity spaces, inflection points, and infrastructure that can make your efforts compound.
 
-Please get in touch with us at [research@protocol.ai](mailto:research@protocol.ai) or follow us on [X](https://x.com/PL_RnD) or [Bluesky](https://bsky.app/profile/plrd.org) to continue the conversation.
+Please get in touch with us at [research@protocol.ai](mailto:research@protocol.ai) or follow us on [X](https://x.com/protocollabs_rd) or [Bluesky](https://bsky.app/profile/plrd.org) to continue the conversation.
 
 ## What comes next
 
