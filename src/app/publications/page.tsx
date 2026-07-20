@@ -1,11 +1,12 @@
 import type { Metadata } from 'next'
-import { publications, authors } from '@/lib/content'
+import { publications, authors, focusAreaDefs } from '@/lib/content'
 import { slugToName } from '@/lib/format'
 import Breadcrumb from '@/components/Breadcrumb'
+import BackToInsights from '@/components/BackToInsights'
 import EditPageButton from '@/components/EditPageButton'
 import { PageEditHistoryByline } from '@/components/EditHistoryByline'
 import MarkdownContent from '@/components/MarkdownContent'
-import { ContentTile, ContentTileGrid } from '@/components/ContentTile'
+import AreaFilteredListing, { type FilterableTile } from '@/components/AreaFilteredListing'
 import { fetchPage, getSection } from '@/lib/indexer'
 
 function resolveAuthorName(slug: string): string {
@@ -24,12 +25,22 @@ export default async function PublicationsPage() {
   const heroTitle = hero?.title || FALLBACK_HERO_TITLE
   const heroSubtitle = hero?.subtitle || FALLBACK_HERO_SUBTITLE
 
+  const tiles: FilterableTile[] = publications.map((pub) => ({
+    key: pub.slug,
+    href: `/publications/${pub.slug}/`,
+    eyebrow: [pub.venue, pub.date && new Date(pub.date).getFullYear()].filter(Boolean).join(' · '),
+    title: pub.title,
+    description: pub.authors?.map(resolveAuthorName).join(', '),
+    areas: pub.areas ?? [],
+  }))
+
   return (
     <div className="max-w-6xl mx-auto px-6 pt-8 pb-16">
       <Breadcrumb items={[{ label: 'Research', href: '/research/' }, { label: 'Publications' }]} />
       <div className="mt-4 empty:hidden">
         <PageEditHistoryByline rkey="publications" />
       </div>
+      <BackToInsights />
       {/* Hero */}
       <div className="relative pt-6 pb-10 mb-10 overflow-hidden">
         <PageGeo />
@@ -40,17 +51,7 @@ export default async function PublicationsPage() {
       </div>
 
       {/* Tiles */}
-      <ContentTileGrid>
-        {publications.map((pub) => (
-          <ContentTile
-            key={pub.slug}
-            href={`/publications/${pub.slug}/`}
-            eyebrow={[pub.venue, pub.date && new Date(pub.date).getFullYear()].filter(Boolean).join(' · ')}
-            title={pub.title}
-            description={pub.authors?.map(resolveAuthorName).join(', ')}
-          />
-        ))}
-      </ContentTileGrid>
+      <AreaFilteredListing areas={focusAreaDefs} tiles={tiles} noun="publications" />
       <EditPageButton rkey="publications" />
     </div>
   )

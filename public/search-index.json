@@ -553,6 +553,27 @@
     "relpermalink": "/publications/benet2014/"
   },
   {
+    "title": "Can Quadratic Funding Go Mainstream? Ma Earth, Hypercerts & the Future of Public Goods",
+    "summary": "Kevin Owocki sits down with Matthew Monahan (Ma Earth) and Holke Brammer (Hypercerts Foundation) to discuss a bold new experiment: a $1 million Quadratic Funding round designed to bring public goods funding beyond the crypto ecosystem and into the mainstream.",
+    "date": "2026-06-30T00:00:00.000Z",
+    "type": "talk",
+    "relpermalink": "/talks/greenpill-quadratic-funding/"
+  },
+  {
+    "title": "Konrad Kording — The Power of a Single Neuron and a Path to Simulating the Brain",
+    "summary": "Juan Benet speaks with Konrad Kording of the University of Pennsylvania about the surprising computational power of a single neuron, reading the brain's wiring down to molecular detail, and building compilers and simulations as a path toward understanding — and ultimately simulating — the brain.",
+    "date": "2026-06-25T00:00:00.000Z",
+    "type": "talk",
+    "relpermalink": "/talks/jbp-konrad-kording/"
+  },
+  {
+    "title": "Tom Oxley — Reading the Brain Without Opening the Skull",
+    "summary": "Juan Benet speaks with Tom Oxley, co-founder and CEO of Synchron, about the Stentrode — a brain-computer interface that reaches the motor cortex through a blood vessel without opening the skull — restoring independence to people with motor impairment and the path toward higher-channel-count neural interfaces.",
+    "date": "2026-06-11T00:00:00.000Z",
+    "type": "talk",
+    "relpermalink": "/talks/jbp-tom-oxley/"
+  },
+  {
     "title": "Jacques Carolan — The Mission to Get Breakthrough Brain Treatments to Everyone",
     "summary": "Juan Benet speaks with Jacques Carolan, a founding Programme Director at ARIA, about getting breakthrough brain treatments to everyone, how ambitious science programs can accelerate neurotechnology, and what it takes to move hard neurotech ideas toward patient impact.",
     "date": "2026-05-29T00:00:00.000Z",
@@ -1659,6 +1680,13 @@
     "relpermalink": "/authors/zixuan-zhang/"
   },
   {
+    "title": "How PL R&D Accelerates Breakthroughs",
+    "summary": "The first in a series: how PL R&D moves frontier ideas from open research into deployed systems across four focus areas — how we drive, measure, and sustain breakthroughs, and what our track record teaches us.",
+    "date": "2026-07-14T00:00:00.000Z",
+    "type": "blog",
+    "relpermalink": "/blog/how-pl-rd-accelerates-breakthroughs/"
+  },
+  {
     "title": "Announcing the Juan Benet Podcast: Launching With First Guest Max Hodak, CEO of Science Corp",
     "summary": "Juan Benet Podcast launches with Max Hodak on neurotech, brain interfaces, Fast R&D, and more.",
     "date": "2026-04-08T00:00:00.000Z",
@@ -1831,7 +1859,7 @@
     "summary": "Convergence zones for systemic change in economies and governance",
     "date": "",
     "type": "page",
-    "relpermalink": "/areas/economies-governance/opportunity-spaces/"
+    "relpermalink": "/areas/economies-governance/#opportunity-spaces"
   },
   {
     "title": "FA2 Subareas",

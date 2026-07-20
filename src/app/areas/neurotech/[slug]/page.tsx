@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import Breadcrumb from '@/components/Breadcrumb'
 import EditPageButton from '@/components/EditPageButton'
 import EditHistoryByline from '@/components/EditHistoryByline'
-import opportunityData from '@/data/fa2/dhr-opportunityspaces.json'
+import opportunityData from '@/data/fa2/neuro-opportunityspaces.json'
 import { fetchOpportunitySpace } from '@/lib/indexer'
 import { ADMIN_DID, OPPORTUNITY_COLLECTION, opportunitySpaceRkey } from '@/lib/lexicons'
 
@@ -21,14 +21,14 @@ export function generateStaticParams() {
 
 async function loadOpp(slug: string): Promise<Opportunity | null> {
   const staticOpp = opportunityData.opportunities.find((o) => o.id === slug)
-  const rkey = opportunitySpaceRkey('digital-human-rights', slug)
+  const rkey = opportunitySpaceRkey('neurotech', slug)
   const remote = await fetchOpportunitySpace(rkey)
   if (remote) {
     return {
       id: remote.id,
       title: remote.title,
       tagline: remote.tagline ?? '',
-      image: remote.image ?? staticOpp?.image ?? '',
+      image: staticOpp?.image ?? remote.image ?? '',
       description: remote.description,
       inflectionPoint: remote.inflectionPoint ?? '',
       shift: remote.shift ?? '',
@@ -48,7 +48,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const opp = await loadOpp(slug)
   if (!opp) return { title: 'Not Found' }
   return {
-    title: `${opp.title} – Digital Human Rights`,
+    title: `${opp.title} – Neurotech`,
     description: opp.description.slice(0, 160),
   }
 }
@@ -57,21 +57,20 @@ export default async function OpportunityDetailPage({ params }: Props) {
   const { slug } = await params
   const opp = await loadOpp(slug)
   if (!opp) notFound()
-  const rkey = opportunitySpaceRkey('digital-human-rights', slug)
+  const rkey = opportunitySpaceRkey('neurotech', slug)
 
   return (
     <div className="max-w-6xl mx-auto px-6 pt-8 pb-16">
       <Breadcrumb
         items={[
           { label: 'Areas', href: '/areas' },
-          { label: 'Digital Human Rights', href: '/areas/digital-human-rights' },
-          { label: 'Opportunity Spaces', href: '/areas/digital-human-rights/#opportunity-spaces' },
+          { label: 'Neurotech', href: '/areas/neurotech' },
           { label: opp.title },
         ]}
       />
       <EditPageButton
         rkey={rkey}
-        href={`/areas/digital-human-rights/opportunity-spaces/${slug}/edit`}
+        href={`/areas/neurotech/${slug}/edit`}
       />
       <div className="mt-4 empty:hidden">
         <EditHistoryByline
@@ -82,13 +81,28 @@ export default async function OpportunityDetailPage({ params }: Props) {
       {/* Hero */}
       <div className="relative pt-12 pb-12 mb-12 overflow-hidden">
         <OppGeo />
-        <h1 className="relative z-10 text-2xl lg:text-[40px] font-semibold leading-[1.1] tracking-tight mb-4 max-w-xl">
+        <p className="relative z-10 text-xs text-blue uppercase tracking-widest mb-3">
+          Neurotech
+        </p>
+        <h1 className="relative z-10 text-2xl lg:text-[40px] font-semibold leading-[1.1] tracking-tight mb-4 whitespace-nowrap">
           {opp.title}
         </h1>
         {opp.tagline && (
           <p className="relative z-10 text-base text-gray-400 mb-5">{opp.tagline}</p>
         )}
-        <p className="relative z-10 text-lg text-gray-600 leading-relaxed max-w-2xl">{opp.description}</p>
+
+        {/* Opportunity space image */}
+        {opp.image && (
+          <div className="relative z-10 mb-8 h-64 lg:h-80 bg-gray-100 overflow-hidden rounded-sm">
+            <img
+              src={opp.image}
+              alt={opp.title}
+              className="w-full h-full object-cover"
+            />
+          </div>
+        )}
+
+        <p className="relative z-10 text-lg text-gray-600 leading-relaxed">{opp.description}</p>
 
         {/* Subfields */}
         {opp.subfields.length > 0 && (
@@ -190,19 +204,20 @@ function OppGeo() {
       fill="none"
       aria-hidden="true"
     >
-      <rect x="400" y="80" width="120" height="120" stroke="#C3E1FF" strokeWidth="0.75" />
-      <rect x="520" y="200" width="100" height="100" stroke="#C3E1FF" strokeWidth="0.75" />
-      <rect x="380" y="240" width="80" height="80" stroke="#C3E1FF" strokeWidth="0.75" />
-      <rect x="460" y="340" width="110" height="110" stroke="#C3E1FF" strokeWidth="0.75" />
-      <line x1="460" y1="140" x2="570" y2="250" stroke="#C3E1FF" strokeWidth="0.5" />
-      <line x1="520" y1="200" x2="460" y2="280" stroke="#C3E1FF" strokeWidth="0.5" />
-      <line x1="460" y1="320" x2="515" y2="340" stroke="#C3E1FF" strokeWidth="0.5" />
-      <line x1="400" y1="200" x2="520" y2="200" stroke="#C3E1FF" strokeWidth="0.5" />
-      <circle cx="460" cy="140" r="3" fill="#C3E1FF" />
-      <circle cx="520" cy="200" r="3" fill="#C3E1FF" />
-      <circle cx="460" cy="280" r="3" fill="#C3E1FF" />
-      <circle cx="570" cy="250" r="3" fill="#C3E1FF" />
-      <circle cx="515" cy="340" r="3" fill="#C3E1FF" />
+      <ellipse cx="480" cy="150" rx="60" ry="45" stroke="#C3E1FF" strokeWidth="0.75" />
+      <ellipse cx="560" cy="280" rx="50" ry="40" stroke="#C3E1FF" strokeWidth="0.75" />
+      <ellipse cx="420" cy="320" rx="55" ry="35" stroke="#C3E1FF" strokeWidth="0.75" />
+      <ellipse cx="520" cy="420" rx="45" ry="38" stroke="#C3E1FF" strokeWidth="0.75" />
+      <path d="M 480 195 Q 520 230 560 240" stroke="#C3E1FF" strokeWidth="0.5" fill="none" />
+      <path d="M 450 185 Q 420 250 420 285" stroke="#C3E1FF" strokeWidth="0.5" fill="none" />
+      <path d="M 540 310 Q 530 360 520 382" stroke="#C3E1FF" strokeWidth="0.5" fill="none" />
+      <path d="M 440 350 Q 470 380 500 400" stroke="#C3E1FF" strokeWidth="0.5" fill="none" />
+      <circle cx="480" cy="150" r="3" fill="#C3E1FF" />
+      <circle cx="560" cy="280" r="3" fill="#C3E1FF" />
+      <circle cx="420" cy="320" r="3" fill="#C3E1FF" />
+      <circle cx="520" cy="420" r="3" fill="#C3E1FF" />
+      <circle cx="480" cy="195" r="2" fill="#C3E1FF" />
+      <circle cx="560" cy="240" r="2" fill="#C3E1FF" />
     </svg>
   )
 }

@@ -15,6 +15,7 @@ type InsightItem = {
 const TYPE_COLORS: Record<string, string> = {
   Publication: '#1982F4',
   Talk: '#12bfdf',
+  'Talks & Podcasts': '#12bfdf',
   Blog: '#E51A66',
 }
 

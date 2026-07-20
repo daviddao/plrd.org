@@ -8,7 +8,7 @@ import { type MetricSeries, cumulativeOnAxis, dayAxis, ms } from "./trends"
  *   · certified organizations  → `appCertifiedActorOrganization`
  *   · Bumicerts (hypercerts)   → `orgHypercertsClaimActivity`
  *
- * from the Hyperindex GraphQL API (dev.hi.gainforest.app, CORS-open), cached via
+ * from the Hyperindex GraphQL API (api.hi.gainforest.app, CORS-open), cached via
  * Next ISR. A flaky upstream yields 0 + `degraded: true` rather than failing
  * the page. The dashboard *map* is a build-time snapshot of certified-org
  * locations (see `scripts/generate-gainforest-sites.mjs` →
@@ -16,7 +16,7 @@ import { type MetricSeries, cumulativeOnAxis, dayAxis, ms } from "./trends"
  */
 
 const GAINFOREST_INDEXER_URL =
-  process.env.GAINFOREST_INDEXER_URL ?? "https://dev.hi.gainforest.app/graphql"
+  process.env.GAINFOREST_INDEXER_URL ?? "https://api.hi.gainforest.app/graphql"
 
 // 15-minute ISR — matches gainforest-app / Bumiscan's own cadence.
 const REVALIDATE = 60 * 15
@@ -105,16 +105,21 @@ export async function fetchGainforestStats(): Promise<GainforestStats> {
       next: { revalidate: REVALIDATE, tags: ["gainforest"] },
       body: JSON.stringify({ query: TOTALS_QUERY }),
     })
-    if (!res.ok) throw new Error(`status ${res.status}`)
-    const json = (await res.json()) as {
+    // Hyperindex can return HTTP 400 with a *valid partial* `data` payload when
+    // a batch references a dangling strongRef (a record missing a non-nullable
+    // field). Honour GraphQL partial-data semantics — parse regardless of
+    // status and only fail when `data` is truly absent (matches
+    // gainforest-collections.ts + generate-gainforest-sites.mjs). Throwing on
+    // every 400 is what falsely marked the dashboard `degraded`.
+    const json = (await res.json().catch(() => null)) as {
       data?: {
         actorOrg?: ({ totalCount?: number | null } & EdgeList) | null
         act?: ({ totalCount?: number | null } & EdgeList) | null
         occ?: ({ totalCount?: number | null } & EdgeList) | null
-      }
-    }
-    const d = json.data
-    if (!d) throw new Error("no data")
+      } | null
+    } | null
+    const d = json?.data
+    if (!d) throw new Error(`status ${res.status}: no data`)
 
     const orgTimes = times(d.actorOrg ?? undefined)
     const actTimes = times(d.act ?? undefined)

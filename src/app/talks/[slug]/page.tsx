@@ -14,11 +14,30 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const talk = talks.find((t) => t.slug === slug)
   if (!talk) return { title: 'Not Found' }
-  return { title: talk.title }
+  const description = (talk.abstract || '').slice(0, 160)
+  const canonical = `/talks/${talk.slug}/`
+  return {
+    title: talk.title,
+    description,
+    alternates: { canonical },
+    openGraph: {
+      type: 'article',
+      url: canonical,
+      title: talk.title,
+      description,
+      publishedTime: talk.date || undefined,
+      authors: talk.authors,
+    },
+  }
 }
 
 function extractYoutubeId(html: string): string | null {
   const match = html.match(/\{\{[<&].*?youtube\s+([a-zA-Z0-9_-]+)\s*[>&].*?\}\}/)
+  return match ? match[1] : null
+}
+
+function extractSpotifyEpisodeId(html: string): string | null {
+  const match = html.match(/\{\{[<&].*?spotify\s+(?:episode\/)?([a-zA-Z0-9]+)\s*[>&].*?\}\}/)
   return match ? match[1] : null
 }
 
@@ -28,6 +47,7 @@ export default async function TalkPage({ params }: Props) {
   if (!talk) notFound()
 
   const youtubeId = talk.html ? extractYoutubeId(talk.html) : null
+  const spotifyEpisodeId = talk.html ? extractSpotifyEpisodeId(talk.html) : null
 
   return (
     <div className="max-w-6xl mx-auto px-6 pt-8 pb-16">
@@ -57,6 +77,19 @@ export default async function TalkPage({ params }: Props) {
               allowFullScreen
             />
           </div>
+        </div>
+      )}
+      {spotifyEpisodeId && (
+        <div className="mb-6 rounded-lg overflow-hidden">
+          <iframe
+            className="w-full"
+            style={{ borderRadius: '12px' }}
+            src={`https://open.spotify.com/embed/episode/${spotifyEpisodeId}`}
+            height={352}
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy"
+            title={talk.title}
+          />
         </div>
       )}
       {talk.venue_url && (

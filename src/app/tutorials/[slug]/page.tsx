@@ -13,7 +13,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const tutorial = tutorials.find((t) => t.slug === slug)
   if (!tutorial) return { title: 'Not Found' }
-  return { title: tutorial.title || slug }
+  const canonical = `/tutorials/${tutorial.slug}/`
+  return {
+    title: tutorial.title || slug,
+    description: tutorial.summary || undefined,
+    alternates: { canonical },
+    openGraph: {
+      type: 'article',
+      url: canonical,
+      title: tutorial.title || slug,
+      description: tutorial.summary || undefined,
+      publishedTime: tutorial.date || undefined,
+    },
+  }
 }
 
 export default async function TutorialPage({ params }: Props) {

@@ -19,7 +19,7 @@ export type OpportunitySpaceEditorProps = {
 
 /**
  * Shared inline editor for org.plresearch.opportunitySpace records.
- * Each area's /areas/<area>/opportunity-spaces/[slug]/edit route renders
+ * Each area's /areas/<area>/[slug]/edit route renders
  * this component with the appropriate areaSlug + areaLabel.
  */
 export default function OpportunitySpaceEditor({
@@ -195,16 +195,16 @@ export default function OpportunitySpaceEditor({
   }, [original])
 
   const areaRoot = `/areas/${areaSlug}`
-  const listRoot = `${areaRoot}/opportunity-spaces`
+  const detailRoot = `${areaRoot}/${slug}`
   const breadcrumb = (
     <Breadcrumb
       items={[
         { label: 'Areas', href: '/areas' },
         { label: areaLabel, href: areaRoot },
-        { label: 'Opportunity Spaces', href: listRoot },
+        { label: 'Opportunity Spaces', href: `${areaRoot}/#opportunity-spaces` },
         ...(record?.title
-          ? [{ label: record.title, href: `${listRoot}/${slug}` }]
-          : [{ label: slug, href: `${listRoot}/${slug}` }]),
+          ? [{ label: record.title, href: detailRoot }]
+          : [{ label: slug, href: detailRoot }]),
         { label: 'Edit' },
       ]}
     />

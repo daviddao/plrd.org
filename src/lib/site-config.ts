@@ -1,7 +1,7 @@
 export const siteConfig = {
   title: 'PL R&D',
   description: 'Driving Breakthroughs in Computing to Push Humanity Forward.',
-  baseUrl: 'https://plresearch.org',
+  baseUrl: 'https://www.plrd.org',
   author: 'PL R&D',
   locale: 'en_US',
   twitterUser: '@ProtoResearch',

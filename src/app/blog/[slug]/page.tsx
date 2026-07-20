@@ -15,7 +15,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const post = blogPosts.find((p) => p.slug === slug)
   if (!post) return { title: 'Not Found' }
-  return { title: post.title, description: post.summary }
+  // External stubs live on their original home — point search engines there.
+  const canonical = post.external_url || `/blog/${post.slug}/`
+  const metaDescription = post.description || post.summary
+  return {
+    title: post.title,
+    description: metaDescription,
+    alternates: { canonical },
+    openGraph: {
+      type: 'article',
+      url: canonical,
+      title: post.title,
+      description: metaDescription,
+      publishedTime: post.date || undefined,
+      authors: post.authors,
+      images: post.coverImage ? [post.coverImage] : undefined,
+    },
+  }
 }
 
 export default async function BlogPostPage({ params }: Props) {

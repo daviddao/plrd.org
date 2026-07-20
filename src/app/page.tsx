@@ -1,13 +1,18 @@
-import type { CSSProperties } from 'react'
 import Link from 'next/link'
 import EditPageButton from '@/components/EditPageButton'
 import { PageEditHistoryByline } from '@/components/EditHistoryByline'
 import { publications, talks, blogPosts } from '@/lib/content'
-import { AreaIcon } from '@/components/AreaIcons'
 import MarkdownContent from '@/components/MarkdownContent'
 import { fetchPage, getSection } from "@/lib/indexer"
 import { FOCUS_AREA_DESCRIPTIONS } from '@/lib/focus-area-descriptions'
-import { loadHexMosaic, type HexPattern } from "@/lib/hex-mosaic"
+
+/** Focus-area hero illustrations floating above each card (replaces the hex cloud). */
+const FOCUS_AREA_IMAGES: Record<string, string> = {
+  'digital-human-rights': '/images/focus-areas/digital-human-rights.png',
+  'economies-governance': '/images/focus-areas/economies-governance.png',
+  'ai-robotics': '/images/focus-areas/ai-robotics.png',
+  neurotech: '/images/focus-areas/neurotech.png',
+}
 import RDPipeline from "@/components/RDPipeline"
 import InsightCarousel from "@/components/InsightCarousel"
 
@@ -59,14 +64,20 @@ function getLatestUpdates(count: number): UpdateItem[] {
 
   const talkItems = talks.map((t) => {
     const youtubeId = extractYouTubeId(t.html || '')
+    const isPodcast = /podcast/i.test(`${t.venue ?? ''} ${t.venue_location ?? ''}`)
     return {
       title: t.title || t.slug,
       date: t.date || '',
-      type: 'Talk',
+      type: 'Talks & Podcasts',
       permalink: `/talks/${t.slug}`,
       slug: t.slug,
       areas: (t.areas || []).filter(Boolean) as string[],
-      coverImage: youtubeId ? getYouTubeThumbnail(youtubeId) : undefined,
+      // Podcasts rarely have a YouTube thumbnail — fall back to the studio-mic image.
+      coverImage: youtubeId
+        ? getYouTubeThumbnail(youtubeId)
+        : isPodcast
+          ? '/images/podcast.webp'
+          : undefined,
     }
   })
 
@@ -115,7 +126,12 @@ export default async function HomePage() {
           <img
             src="/images/hero.webp"
             alt="Glass cube containing colorful neural structures"
-            className="w-full h-auto"
+            className="w-full h-auto dark:hidden"
+          />
+          <img
+            src="/images/hero-dark.webp"
+            alt="Glass cube containing colorful neural structures"
+            className="w-full h-auto hidden dark:block"
           />
         </div>
 
@@ -126,6 +142,9 @@ export default async function HomePage() {
           <h1 className="font-serif text-[36px] md:text-[48px] lg:text-[52px] font-normal leading-[1.06] tracking-tight mb-6 max-w-md md:max-w-lg lg:max-w-xl">
             Driving R&amp;D breakthroughs to push humanity forward.
           </h1>
+          <p className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-xl mb-8">
+            We de-risk frontier ideas in computing and help them cross from open research to deployment, expanding human freedom, coordination, intelligence, and cognition
+          </p>
           <div className="flex flex-wrap items-center gap-4">
             <Link
               href="/about"
@@ -145,15 +164,6 @@ export default async function HomePage() {
             </a>
           </div>
         </div>
-
-        <a
-          href="#focus-areas"
-          className="relative z-10 inline-flex flex-col items-center gap-1.5 mt-12 text-gray-400 hover:text-gray-600 transition-colors group"
-        >
-          <svg className="w-5 h-5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
-          </svg>
-        </a>
       </div>
 
     </div>
@@ -161,7 +171,7 @@ export default async function HomePage() {
     {/* ── Focus Areas (full-bleed gray) ── */}
     <div id="focus-areas" className="bg-gray-100 scroll-mt-20">
       <div className="max-w-6xl mx-auto px-6 pb-20 lg:pb-28 pt-16 lg:pt-24">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start mb-44 sm:mb-48 lg:mb-52">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start mb-10 lg:mb-14">
           <h2 className="text-[28px] md:text-[36px] font-normal leading-[1.1] tracking-tight">
             {approach?.title || "Use-inspired research across four frontiers"}
           </h2>
@@ -171,32 +181,29 @@ export default async function HomePage() {
           />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-44 md:gap-y-48 lg:gap-y-52">
+        <div className="grid grid-cols-1 md:grid-cols-2 md:auto-rows-fr gap-6 lg:gap-8">
           <FocusAreaCard
             href="/areas/digital-human-rights"
-            iconType="shield"
-            mosaicSlug="digital-human-rights"
+            slug="digital-human-rights"
             title={dhr?.title || "Digital Human Rights"}
             body={FOCUS_AREA_DESCRIPTIONS['digital-human-rights']}
           />
           <FocusAreaCard
             href="/areas/economies-governance"
-            iconType="hexagon"
-            mosaicSlug="economies-governance"
+            slug="economies-governance"
             title={eg?.title || "Economies & Governance"}
             body={FOCUS_AREA_DESCRIPTIONS['economies-governance']}
           />
           <FocusAreaCard
             href="/areas/ai-robotics"
-            iconType="neural"
-            mosaicSlug="ai-robotics"
+            slug="ai-robotics"
             title={ai?.title || "AI & Robotics"}
             body={FOCUS_AREA_DESCRIPTIONS['ai-robotics']}
+            imgClassName="h-[73px]"
           />
           <FocusAreaCard
             href="/areas/neurotech"
-            iconType="brain"
-            mosaicSlug="neurotech"
+            slug="neurotech"
             title={neuro?.title || "Neurotechnology"}
             body={FOCUS_AREA_DESCRIPTIONS.neurotech}
           />
@@ -262,58 +269,51 @@ export default async function HomePage() {
 
 function FocusAreaCard({
   href,
-  iconType,
-  mosaicSlug,
+  slug,
   title,
   body,
+  imgClassName = "h-[104px]",
+  imageColClass = "w-[32%] sm:w-[34%]",
 }: {
   href: string
-  iconType: HexPattern
-  mosaicSlug: string
+  slug: string
   title: string
   body: string
+  imgClassName?: string
+  imageColClass?: string
 }) {
-  const mosaic = loadHexMosaic(mosaicSlug, iconType)
+  const image = FOCUS_AREA_IMAGES[slug]
 
   return (
-    <div className="hex-cloud-card relative isolate">
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute left-0 -top-32 sm:-top-36 lg:-top-40 w-[65%] sm:w-[62%] lg:w-[60%] h-56 sm:h-64 lg:h-64 overflow-hidden select-none"
-      >
-        <svg
-          viewBox={mosaic.viewBox}
-          width={mosaic.width}
-          height={mosaic.height}
-          xmlns="http://www.w3.org/2000/svg"
-          className="hex-cloud-svg absolute bottom-0 left-0 w-full h-auto"
-          preserveAspectRatio="xMidYMax meet"
-        >
-          {mosaic.polygons.map((p, i) => (
-            <polygon
-              key={i}
-              points={p.points}
-              fill={p.fill}
-              className="hex-cloud-hex"
-              style={{ '--hex-op': p.opacity, animationDelay: `${p.delayMs}ms` } as CSSProperties}
-            />
-          ))}
-        </svg>
-      </div>
-
-      <Link
-        href={href}
-        className="relative z-10 block bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-md hover:border-gray-300 transition-all duration-200"
-      >
-        <div className="flex items-center gap-3 mb-3">
-          <AreaIcon type={iconType} className="w-6 h-6 text-gray-400" />
-          <h3 className="text-xl font-serif font-normal tracking-tight">{title}</h3>
-        </div>
+    <Link
+      href={href}
+      className="group flex h-full items-stretch bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md hover:border-gray-300 transition-all duration-200"
+    >
+      {/* Content on the left. */}
+      <div className="flex-1 p-5 sm:p-6 flex flex-col justify-center">
+        <h3 className="text-xl font-serif font-normal tracking-tight mb-3">{title}</h3>
         <MarkdownContent
           content={body}
           className="text-[15px] text-gray-600 leading-relaxed [&_p]:mb-0"
         />
-      </Link>
-    </div>
+      </div>
+
+      {/* Vertical divider. */}
+      <div aria-hidden="true" className="my-6 w-px self-stretch bg-gray-200" />
+
+      {/* Illustration fully contained (not cropped) on the right. */}
+      <div className={`flex-shrink-0 ${imageColClass} flex items-center justify-center p-4 sm:p-5`}>
+        {image && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={image}
+            alt=""
+            /* Fixed height + w-auto so every illustration renders at the same
+               vertical height regardless of its aspect ratio. */
+            className={`mx-auto ${imgClassName} w-auto max-w-full object-contain [filter:drop-shadow(0_10px_18px_rgba(15,17,21,0.12))] transition-transform duration-500 ease-out group-hover:scale-[1.03]`}
+          />
+        )}
+      </div>
+    </Link>
   )
 }
