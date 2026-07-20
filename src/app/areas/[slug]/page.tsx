@@ -52,7 +52,7 @@ async function loadOpportunityCards(slug: string): Promise<{
         id: o.id,
         title: o.title,
         tagline: o.tagline ?? '',
-        image: o.image ?? dataset.opportunities.find((s) => s.id === o.id)?.image ?? '',
+        image: dataset.opportunities.find((s) => s.id === o.id)?.image ?? o.image ?? '',
         description: o.description,
         subfields: o.subfields ?? [],
       })),
@@ -102,7 +102,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const area = areas.find((a) => a.slug === slug)
   if (!area) return { title: 'Not Found' }
-  return { title: stripFaPrefix(area.title), description: area.summary }
+  const title = stripFaPrefix(area.title)
+  const canonical = `/areas/${area.slug}/`
+  return {
+    title,
+    description: area.summary,
+    alternates: { canonical },
+    openGraph: {
+      type: 'article',
+      url: canonical,
+      title,
+      description: area.summary,
+    },
+  }
 }
 
 export default async function AreaPage({ params }: Props) {
@@ -207,7 +219,7 @@ export default async function AreaPage({ params }: Props) {
             {opportunities.map((opp) => (
               <Link
                 key={opp.id}
-                href={`/areas/${slug}/opportunity-spaces/${opp.id}/`}
+                href={`/areas/${slug}/${opp.id}/`}
                 className="bg-white p-8 hover:bg-gray-50 transition-colors relative overflow-hidden group no-underline"
               >
                 <OppCardGeo />

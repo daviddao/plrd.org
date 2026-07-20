@@ -184,13 +184,13 @@ function OpportunitySpacesPreview({ areaSlug }: { areaSlug: string }) {
             )}
             <div className="mt-auto flex flex-wrap gap-3 pt-2 border-t border-gray-100">
               <Link
-                href={`/areas/${areaSlug}/opportunity-spaces/${opp.id}/`}
+                href={`/areas/${areaSlug}/${opp.id}/`}
                 className="text-xs text-gray-500 hover:text-blue"
               >
                 View →
               </Link>
               <Link
-                href={`/areas/${areaSlug}/opportunity-spaces/${opp.id}/edit`}
+                href={`/areas/${areaSlug}/${opp.id}/edit`}
                 className="text-xs text-blue hover:underline"
               >
                 Edit this card →

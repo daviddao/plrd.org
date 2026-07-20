@@ -1,2 +1,9 @@
 User-agent: *
-Sitemap: https://plresearch.org/sitemap.xml
+Allow: /
+
+Disallow: /admin
+Disallow: /edit
+Disallow: /write
+Disallow: /api/
+
+Sitemap: https://www.plrd.org/sitemap.xml

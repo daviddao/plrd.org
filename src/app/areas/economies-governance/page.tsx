@@ -31,7 +31,7 @@ async function loadOpportunityCards(): Promise<OpportunityCard[]> {
       id: o.id,
       title: o.title,
       tagline: o.tagline ?? '',
-      image: o.image ?? opportunityData.opportunities.find((s) => s.id === o.id)?.image ?? '',
+      image: opportunityData.opportunities.find((s) => s.id === o.id)?.image ?? o.image ?? '',
       description: o.description,
       subfields: o.subfields ?? [],
     }))
@@ -218,7 +218,7 @@ export default async function FA2MainPage() {
           {opportunities.map((opp) => (
             <Link
               key={opp.id}
-              href={`/areas/economies-governance/opportunity-spaces/${opp.id}/`}
+              href={`/areas/economies-governance/${opp.id}/`}
               className="bg-white p-8 hover:bg-gray-50 transition-colors relative overflow-hidden group no-underline"
             >
               <OppCardGeo />

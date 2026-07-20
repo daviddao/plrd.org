@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import CookieSettingsLink from './CookieSettingsLink'
 
 export default function SiteFooter() {
   return (
@@ -58,7 +59,7 @@ export default function SiteFooter() {
             <ul className="space-y-1.5 list-none m-0 p-0">
               <li><a href="https://github.com/protocol/plrd" className="text-sm text-[#cfd1da] hover:text-white transition-colors block py-1">GitHub</a></li>
               <li><a href="https://bsky.app/profile/plrd.org" className="text-sm text-[#cfd1da] hover:text-white transition-colors block py-1">Bluesky</a></li>
-              <li><a href="https://twitter.com/ProtoResearch" className="text-sm text-[#cfd1da] hover:text-white transition-colors block py-1">X / Twitter</a></li>
+              <li><a href="https://x.com/protocollabs_rd" target="_blank" rel="noopener noreferrer" className="text-sm text-[#cfd1da] hover:text-white transition-colors block py-1">X / Twitter</a></li>
               <li><a href="/feed.xml" className="text-sm text-[#cfd1da] hover:text-white transition-colors block py-1">RSS</a></li>
             </ul>
           </div>
@@ -70,6 +71,9 @@ export default function SiteFooter() {
               <li><a href="https://www.protocol.ai/legal/#privacy-policy" target="_blank" rel="noopener noreferrer" className="text-sm text-[#cfd1da] hover:text-white transition-colors block py-1">Privacy Policy</a></li>
               <li><a href="https://creativecommons.org/licenses/by/4.0/" className="text-sm text-[#cfd1da] hover:text-white transition-colors block py-1">CC-BY 4.0 License</a></li>
               <li><a href="mailto:research@protocol.ai" className="text-sm text-[#cfd1da] hover:text-white transition-colors block py-1">Contact</a></li>
+              {process.env.NEXT_PUBLIC_GA_ID && (
+                <li><CookieSettingsLink className="text-sm text-[#cfd1da] hover:text-white transition-colors block py-1 text-left" /></li>
+              )}
             </ul>
           </div>
         </div>
@@ -82,7 +86,7 @@ export default function SiteFooter() {
           <div className="flex gap-5 text-[13px]">
             <a href="https://github.com/protocol/plrd" className="text-[#cfd1da] hover:text-white transition-colors">GitHub</a>
             <a href="https://bsky.app/profile/plrd.org" className="text-[#cfd1da] hover:text-white transition-colors">Bluesky</a>
-            <a href="https://twitter.com/ProtoResearch" className="text-[#cfd1da] hover:text-white transition-colors">X</a>
+            <a href="https://x.com/protocollabs_rd" target="_blank" rel="noopener noreferrer" className="text-[#cfd1da] hover:text-white transition-colors">X</a>
             <a href="/feed.xml" className="text-[#cfd1da] hover:text-white transition-colors">RSS</a>
           </div>
         </div>

@@ -6,6 +6,7 @@ import GlowImpact from '@/components/GlowImpact'
 import FtcImpact from '@/components/FtcImpact'
 import { fetchSimocracyStats } from '@/lib/simocracy'
 import { fetchGainforestStats } from '@/lib/gainforest'
+import { fetchMaEarthStats } from '@/lib/maearth'
 import { fetchGlowStats } from '@/lib/glow'
 import { fetchFtcStats } from '@/lib/ftc'
 
@@ -19,9 +20,10 @@ export const metadata: Metadata = {
 export const revalidate = 60
 
 export default async function LiveDashboardPage() {
-  const [stats, gainforest, glow, ftc] = await Promise.all([
+  const [stats, gainforest, maearth, glow, ftc] = await Promise.all([
     fetchSimocracyStats(),
     fetchGainforestStats(),
+    fetchMaEarthStats(),
     fetchGlowStats(),
     fetchFtcStats(),
   ])
@@ -94,7 +96,7 @@ export default async function LiveDashboardPage() {
         .
       </p>
 
-      <GainforestImpact stats={gainforest} />
+      <GainforestImpact stats={gainforest} maearth={maearth} />
 
       <GlowImpact stats={glow} />
 

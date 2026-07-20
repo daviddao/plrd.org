@@ -2,37 +2,61 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Protocol Labs R&amp;D</title>
-    <link>https://plresearch.org</link>
+    <link>https://www.plrd.org</link>
     <description>Driving Breakthroughs in Computing to Push Humanity Forward.</description>
-    <atom:link href="https://plresearch.org/feed.xml" rel="self" type="application/rss+xml"/>
+    <atom:link href="https://www.plrd.org/feed.xml" rel="self" type="application/rss+xml"/>
     
     <item>
       <title><![CDATA[Programmable Economies & Governance: Upgrading Society's Operating System]]></title>
-      <link>https://plresearch.org/blog/better-economies-governance-systems/</link>
+      <link>https://www.plrd.org/blog/better-economies-governance-systems/</link>
       <pubDate>Mon, 27 Jul 2026 00:00:00 GMT</pubDate>
       <description><![CDATA[An overview of PL R&D's Programmable Economies & Governance focus area — the programmable infrastructure societies use to decide, allocate, verify, and coordinate — and the four opportunity spaces and inflection points we believe are within reach.]]></description>
     </item>
     <item>
+      <title><![CDATA[How PL R&D Accelerates Breakthroughs]]></title>
+      <link>https://www.plrd.org/blog/how-pl-rd-accelerates-breakthroughs/</link>
+      <pubDate>Tue, 14 Jul 2026 00:00:00 GMT</pubDate>
+      <description><![CDATA[The first in a series: how PL R&D moves frontier ideas from open research into deployed systems across four focus areas — how we drive, measure, and sustain breakthroughs, and what our track record teaches us.]]></description>
+    </item>
+    <item>
+      <title><![CDATA[Can Quadratic Funding Go Mainstream? Ma Earth, Hypercerts & the Future of Public Goods]]></title>
+      <link>https://www.plrd.org/talks/greenpill-quadratic-funding/</link>
+      <pubDate>Tue, 30 Jun 2026 00:00:00 GMT</pubDate>
+      <description><![CDATA[Kevin Owocki sits down with Matthew Monahan (Ma Earth) and Holke Brammer (Hypercerts Foundation) to discuss a bold new experiment: a $1 million Quadratic Funding round designed to bring public goods funding beyond the crypto ecosystem and into the mainstream.]]></description>
+    </item>
+    <item>
+      <title><![CDATA[Konrad Kording — The Power of a Single Neuron and a Path to Simulating the Brain]]></title>
+      <link>https://www.plrd.org/talks/jbp-konrad-kording/</link>
+      <pubDate>Thu, 25 Jun 2026 00:00:00 GMT</pubDate>
+      <description><![CDATA[Juan Benet speaks with Konrad Kording of the University of Pennsylvania about the surprising computational power of a single neuron, reading the brain's wiring down to molecular detail, and building compilers and simulations as a path toward understanding — and ultimately simulating — the brain.]]></description>
+    </item>
+    <item>
+      <title><![CDATA[Tom Oxley — Reading the Brain Without Opening the Skull]]></title>
+      <link>https://www.plrd.org/talks/jbp-tom-oxley/</link>
+      <pubDate>Thu, 11 Jun 2026 00:00:00 GMT</pubDate>
+      <description><![CDATA[Juan Benet speaks with Tom Oxley, co-founder and CEO of Synchron, about the Stentrode — a brain-computer interface that reaches the motor cortex through a blood vessel without opening the skull — restoring independence to people with motor impairment and the path toward higher-channel-count neural i]]></description>
+    </item>
+    <item>
       <title><![CDATA[Jacques Carolan — The Mission to Get Breakthrough Brain Treatments to Everyone]]></title>
-      <link>https://plresearch.org/talks/jbp-jacques-carolan/</link>
+      <link>https://www.plrd.org/talks/jbp-jacques-carolan/</link>
       <pubDate>Fri, 29 May 2026 00:00:00 GMT</pubDate>
       <description><![CDATA[Juan Benet speaks with Jacques Carolan, a founding Programme Director at ARIA, about getting breakthrough brain treatments to everyone, how ambitious science programs can accelerate neurotechnology, and what it takes to move hard neurotech ideas toward patient impact.]]></description>
     </item>
     <item>
       <title><![CDATA[Ben Rapoport — Treating Paralysis and Digitizing Brain Data]]></title>
-      <link>https://plresearch.org/talks/jbp-ben-rapoport/</link>
+      <link>https://www.plrd.org/talks/jbp-ben-rapoport/</link>
       <pubDate>Mon, 11 May 2026 00:00:00 GMT</pubDate>
       <description><![CDATA[Juan Benet speaks with Ben Rapoport of Precision Neuroscience about treating paralysis, building scalable brain-computer-interface platforms, and how high-quality neural data can transform both clinical care and computational neuroscience.]]></description>
     </item>
     <item>
       <title><![CDATA[How to Obtain a Complete Human Connectome at Synaptic Resolution Within the Next Decade]]></title>
-      <link>https://plresearch.org/publications/how-to-obtain-complete-human-connectome/</link>
+      <link>https://www.plrd.org/publications/how-to-obtain-complete-human-connectome/</link>
       <pubDate>Fri, 24 Apr 2026 00:00:00 GMT</pubDate>
       <description><![CDATA[A PL Neuro whitepaper outlining what it would take to obtain a complete human connectome at synaptic resolution within the next decade, including the technical and organizational bottlenecks facing large-scale human brain mapping.]]></description>
     </item>
     <item>
       <title><![CDATA[Max Hodak — Restoring Sight, Growing Neurons on Silicon, and Expanding Human Intelligence]]></title>
-      <link>https://plresearch.org/talks/jbp-max-hodak/</link>
+      <link>https://www.plrd.org/talks/jbp-max-hodak/</link>
       <pubDate>Wed, 08 Apr 2026 00:00:00 GMT</pubDate>
       <description><![CDATA[Juan Benet speaks with Max Hodak of Science Corporation about restoring sight with retinal implants, biohybrid neural interfaces that grow neurons on silicon, the Science BCI ecosystem, and paths toward expanding human intelligence.]]></description>
     </item>
@@ -44,31 +68,31 @@
     </item>
     <item>
       <title><![CDATA[Models to Markets: BCI, Neural Data, and Business Innovation in the AI Era]]></title>
-      <link>https://plresearch.org/publications/models-to-markets-bci-neural-data/</link>
+      <link>https://www.plrd.org/publications/models-to-markets-bci-neural-data/</link>
       <pubDate>Sat, 28 Mar 2026 00:00:00 GMT</pubDate>
       <description><![CDATA[The first issue in Representations, a limited series produced in partnership with PL Neuro, exploring how BCI companies are becoming neural-data and AI companies. It surveys emerging neuroAI business models, data strategy, clinical-commercial pathways, and the market dynamics that may expand neurote]]></description>
     </item>
     <item>
       <title><![CDATA[Compiling Molecular Ultrastructure Into Neural Dynamics]]></title>
-      <link>https://plresearch.org/publications/molecular-ultrastructure-neural-dynamics/</link>
+      <link>https://www.plrd.org/publications/molecular-ultrastructure-neural-dynamics/</link>
       <pubDate>Thu, 26 Mar 2026 00:00:00 GMT</pubDate>
       <description><![CDATA[A proposal for an ultrastructure-to-dynamics compiler: a learned mapping from molecularly annotated neural ultrastructure to simulator-ready, uncertainty-aware physiological parameters. The paper outlines the paired structure and perturbation-response data needed to make high-resolution brain maps p]]></description>
     </item>
     <item>
       <title><![CDATA[Smoothing the Path to Clinical Revenue]]></title>
-      <link>https://plresearch.org/publications/pl-bci-roadmap-clinical-revenue/</link>
+      <link>https://www.plrd.org/publications/pl-bci-roadmap-clinical-revenue/</link>
       <pubDate>Thu, 26 Mar 2026 00:00:00 GMT</pubDate>
       <description><![CDATA[Roadmap 1 in the Protocol Labs Brain–Computer Interface Roadmap Series, focused on the translational, regulatory, reimbursement, and business-model work needed to help BCI companies reach sustainable clinical revenue.]]></description>
     </item>
     <item>
       <title><![CDATA[Overview: A Strategic Vision for the Future of Brain–Computer Interfaces]]></title>
-      <link>https://plresearch.org/publications/pl-bci-roadmap-overview/</link>
+      <link>https://www.plrd.org/publications/pl-bci-roadmap-overview/</link>
       <pubDate>Thu, 26 Mar 2026 00:00:00 GMT</pubDate>
       <description><![CDATA[Roadmap 0 in the Protocol Labs Brain–Computer Interface Roadmap Series, setting out a strategic vision for the future of BCIs and the field-level milestones needed to move promising neural-interface research toward broad deployment.]]></description>
     </item>
     <item>
       <title><![CDATA[Cognitive Dark Matter: Measuring What AI Misses]]></title>
-      <link>https://plresearch.org/publications/cognitive-dark-matter/</link>
+      <link>https://www.plrd.org/publications/cognitive-dark-matter/</link>
       <pubDate>Tue, 03 Mar 2026 00:00:00 GMT</pubDate>
       <description><![CDATA[This paper argues that modern AI systems miss important training signals — cognitive dark matter — for domains such as metacognition, cognitive flexibility, episodic memory, lifelong learning, abductive reasoning, social reasoning, common-sense reasoning, and emotional intelligence. It proposes pair]]></description>
     </item>
@@ -86,7 +110,7 @@
     </item>
     <item>
       <title><![CDATA[Universal Data Income: Paying Contributors on-Chain]]></title>
-      <link>https://plresearch.org/talks/voc-david-dao/</link>
+      <link>https://www.plrd.org/talks/voc-david-dao/</link>
       <pubDate>Wed, 08 Oct 2025 00:00:00 GMT</pubDate>
       <description><![CDATA[AI was trained on us. How do we value data and pay the people who create it? David Dao, co-founder and Chief Scientist of GainForest, unpacks data valuation, Shapley values as a mechanism for attributing data contributions, and how a green data marketplace could fund conservation while improving AI ]]></description>
     </item>
@@ -98,19 +122,19 @@
     </item>
     <item>
       <title><![CDATA[AI Safety and Governance: Hard Rules, Real Evaluations, and Risk]]></title>
-      <link>https://plresearch.org/talks/voc-evan-miyazono/</link>
+      <link>https://www.plrd.org/talks/voc-evan-miyazono/</link>
       <pubDate>Wed, 01 Oct 2025 00:00:00 GMT</pubDate>
       <description><![CDATA[Evan Miyazono, founder and CEO of Atlas Computing, discusses how US and Chinese approaches to AI regulation are diverging and what that means for global AI safety. While the US moves toward a largely unregulated model, China requires mandatory evaluations for large-scale AI training runs. The conver]]></description>
     </item>
     <item>
       <title><![CDATA[Quantum Computing and Bitcoin: The Security Threat No One's Talking About]]></title>
-      <link>https://plresearch.org/talks/voc-quantum-bitcoin/</link>
+      <link>https://www.plrd.org/talks/voc-quantum-bitcoin/</link>
       <pubDate>Wed, 24 Sep 2025 00:00:00 GMT</pubDate>
       <description><![CDATA[Bolton Bailey, a researcher specializing in post-quantum cryptography, explains how Grover's algorithm could enable a quantum-powered miner to dominate the Bitcoin network, rewrite transaction history, and undermine its consensus mechanism — not by stealing private keys, but by breaking the proof-of]]></description>
     </item>
     <item>
       <title><![CDATA[How Edge Cities Could Redesign Human Civilization]]></title>
-      <link>https://plresearch.org/talks/voc-timour-kosters/</link>
+      <link>https://www.plrd.org/talks/voc-timour-kosters/</link>
       <pubDate>Wed, 24 Sep 2025 00:00:00 GMT</pubDate>
       <description><![CDATA[Timour Kosters, co-founder of Edge City, discusses why current institutions are too rigid to adapt to accelerating technological change and why humanity needs new frontiers to flourish. He explores designing governance systems from first principles, the role of experimental pop-up cities as living l]]></description>
     </item>
@@ -127,24 +151,6 @@
       <description><![CDATA[Reflecting on Protocol Labs' 2024 impact across neurotech, digital human rights, AI, and economies — and the vision for 2025 and beyond.]]></description>
     </item>
     <item>
-      <title><![CDATA[Applying Indigenous Wisdom to Create Sustainable Tech]]></title>
-      <link>https://plresearch.org/talks/voc-keolu-fox/</link>
-      <pubDate>Thu, 09 Jan 2025 00:00:00 GMT</pubDate>
-      <description><![CDATA[Keolu Fox, the first Native Hawaiian to earn a PhD in genome sciences, shares a visionary approach to technology inspired by Indigenous knowledge systems like the Hawaiian ahupuaʻa land management system. He applies the wisdom of circular, balanced systems perfected over generations to modern challe]]></description>
-    </item>
-    <item>
-      <title><![CDATA[FROs: The New Approach Solving Big Scientific Challenges]]></title>
-      <link>https://plresearch.org/talks/voc-anastasia-gamick/</link>
-      <pubDate>Thu, 12 Dec 2024 00:00:00 GMT</pubDate>
-      <description><![CDATA[Anastasia Gamick, co-founder and COO of Convergent Research, explains how Focused Research Organizations (FROs) address critical scientific and technological bottlenecks that fall between academic research and commercial markets. Examples include E11 Bio for neural mapping at scale and [C]Worthy for]]></description>
-    </item>
-    <item>
-      <title><![CDATA[Reversing Aging: Making 90 the New 50 with Epigenetic Rejuvenation]]></title>
-      <link>https://plresearch.org/talks/labweek24-yuri-deigin/</link>
-      <pubDate>Fri, 08 Nov 2024 00:00:00 GMT</pubDate>
-      <description><![CDATA[Yuri Deigin (CEO of YouthBio Therapeutics) presents the case for partial cellular reprogramming as a path to reversing biological ageing. He explains how Yamanaka factors can reset the epigenetic clock in cells without causing dedifferentiation, the evidence from mouse studies showing lifespan exten]]></description>
-    </item>
-    <item>
       <title><![CDATA[The Transformative Power of Neurotechnology]]></title>
       <link>https://protocol.ai/blog/the-transformative-power-of-neurotechnology/</link>
       <pubDate>Wed, 05 Jun 2024 00:00:00 GMT</pubDate>
@@ -158,85 +164,85 @@
     </item>
     <item>
       <title><![CDATA[A finality calculator for Filecoin’s Expected Consensus]]></title>
-      <link>https://plresearch.org/publications/goren2024/</link>
+      <link>https://www.plrd.org/publications/goren2024/</link>
       <pubDate>Thu, 01 Feb 2024 00:00:00 GMT</pubDate>
       <description><![CDATA[]]></description>
     </item>
     <item>
       <title><![CDATA[Filecoin Proof of Useful Space]]></title>
-      <link>https://plresearch.org/publications/giacomelli2023/</link>
+      <link>https://www.plrd.org/publications/giacomelli2023/</link>
       <pubDate>Wed, 30 Aug 2023 00:00:00 GMT</pubDate>
       <description><![CDATA[]]></description>
     </item>
     <item>
       <title><![CDATA[Security analysis of Filecoin's Expected Consensus in the Byzantine vs honest model]]></title>
-      <link>https://plresearch.org/publications/wang2023/</link>
+      <link>https://www.plrd.org/publications/wang2023/</link>
       <pubDate>Mon, 14 Aug 2023 00:00:00 GMT</pubDate>
       <description><![CDATA[]]></description>
     </item>
     <item>
       <title><![CDATA[Base fee manipulation in Ethereum's EIP-1559 transaction fee mechanism]]></title>
-      <link>https://plresearch.org/publications/azouvi2023/</link>
+      <link>https://www.plrd.org/publications/azouvi2023/</link>
       <pubDate>Sat, 22 Apr 2023 00:00:00 GMT</pubDate>
       <description><![CDATA[]]></description>
     </item>
     <item>
       <title><![CDATA[SpaceVDF: Verifiable delay functions using cryptographic satellites]]></title>
-      <link>https://plresearch.org/publications/winetraub2023/</link>
+      <link>https://www.plrd.org/publications/winetraub2023/</link>
       <pubDate>Tue, 21 Mar 2023 00:00:00 GMT</pubDate>
       <description><![CDATA[]]></description>
     </item>
     <item>
       <title><![CDATA[LURK: Lambda, the ultimate recursive knowledge]]></title>
-      <link>https://plresearch.org/publications/amin2023/</link>
+      <link>https://www.plrd.org/publications/amin2023/</link>
       <pubDate>Thu, 16 Mar 2023 00:00:00 GMT</pubDate>
       <description><![CDATA[]]></description>
     </item>
     <item>
       <title><![CDATA[tlock: Practical timelock encryption from threshold BLS]]></title>
-      <link>https://plresearch.org/publications/gailly2023/</link>
+      <link>https://www.plrd.org/publications/gailly2023/</link>
       <pubDate>Mon, 13 Feb 2023 00:00:00 GMT</pubDate>
       <description><![CDATA[]]></description>
     </item>
     <item>
       <title><![CDATA[Generalized Impact Evaluators]]></title>
-      <link>https://plresearch.org/publications/plnetworkgoods2023/</link>
+      <link>https://www.plrd.org/publications/plnetworkgoods2023/</link>
       <pubDate>Tue, 10 Jan 2023 00:00:00 GMT</pubDate>
       <description><![CDATA[]]></description>
     </item>
     <item>
       <title><![CDATA[Pikachu: Securing PoS blockchains from long-range attacks by checkpointing into Bitcoin PoW using Taproot]]></title>
-      <link>https://plresearch.org/publications/azouvi2022b/</link>
+      <link>https://www.plrd.org/publications/azouvi2022b/</link>
       <pubDate>Tue, 13 Dec 2022 00:00:00 GMT</pubDate>
       <description><![CDATA[]]></description>
     </item>
     <item>
       <title><![CDATA[Enriching Kademlia by partitioning]]></title>
-      <link>https://plresearch.org/publications/monteiro2022/</link>
+      <link>https://www.plrd.org/publications/monteiro2022/</link>
       <pubDate>Tue, 13 Dec 2022 00:00:00 GMT</pubDate>
       <description><![CDATA[]]></description>
     </item>
     <item>
       <title><![CDATA[To the InterPlanetary File System – and beyond!: Peer-to-peer file sharing would make the Internet far more efficient]]></title>
-      <link>https://plresearch.org/publications/psaras2022/</link>
+      <link>https://www.plrd.org/publications/psaras2022/</link>
       <pubDate>Mon, 07 Nov 2022 00:00:00 GMT</pubDate>
       <description><![CDATA[]]></description>
     </item>
     <item>
       <title><![CDATA[Structure-preserving compilers from new notions of obfuscations]]></title>
-      <link>https://plresearch.org/publications/campanelli2022f/</link>
+      <link>https://www.plrd.org/publications/campanelli2022f/</link>
       <pubDate>Tue, 01 Nov 2022 00:00:00 GMT</pubDate>
       <description><![CDATA[]]></description>
     </item>
     <item>
       <title><![CDATA[Mir-BFT: Scalable and robust BFT for decentralized networks]]></title>
-      <link>https://plresearch.org/publications/vukolic2022/</link>
+      <link>https://www.plrd.org/publications/vukolic2022/</link>
       <pubDate>Mon, 24 Oct 2022 00:00:00 GMT</pubDate>
       <description><![CDATA[]]></description>
     </item>
     <item>
       <title><![CDATA[Decentralized hole punching]]></title>
-      <link>https://plresearch.org/publications/seemann2022/</link>
+      <link>https://www.plrd.org/publications/seemann2022/</link>
       <pubDate>Wed, 28 Sep 2022 00:00:00 GMT</pubDate>
       <description><![CDATA[]]></description>
     </item>

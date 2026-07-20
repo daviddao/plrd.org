@@ -14,7 +14,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const author = authors.find((a) => a.slug === slug)
   if (!author) return { title: 'Not Found' }
-  return { title: author.name }
+  const description =
+    author.role ||
+    (author.quote || '').slice(0, 160) ||
+    `${author.name} at Protocol Labs R&D`
+  const canonical = `/authors/${author.slug}/`
+  return {
+    title: author.name,
+    description,
+    alternates: { canonical },
+    openGraph: {
+      type: 'profile',
+      url: canonical,
+      title: author.name,
+      description,
+      images: author.avatarPath ? [author.avatarPath] : undefined,
+    },
+  }
 }
 
 export default async function AuthorPage({ params }: Props) {
@@ -25,8 +41,24 @@ export default async function AuthorPage({ params }: Props) {
   const authorPubs = publications.filter((p) => p.authors.includes(slug))
   const authorTalks = talks.filter((t) => t.authors.includes(slug))
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: author.name,
+    ...(author.role ? { jobTitle: author.role } : {}),
+    worksFor: { '@type': 'Organization', name: 'Protocol Labs R&D' },
+    ...(author.avatarPath ? { image: author.avatarPath } : {}),
+    ...(Array.isArray(author.social) && author.social.length
+      ? { sameAs: author.social.map((s) => s.link).filter(Boolean) }
+      : {}),
+  }
+
   return (
     <div className="max-w-6xl mx-auto px-6 pt-8 pb-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Breadcrumb items={[{ label: 'Team', href: '/authors/' }, { label: author.name }]} />
       {/* Hero */}
       <div className="relative pt-6 pb-10 mb-10 overflow-hidden">

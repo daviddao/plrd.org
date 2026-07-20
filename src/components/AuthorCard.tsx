@@ -4,7 +4,7 @@ import { slugToName } from '@/lib/format'
 
 type AuthorCardProps = {
   slug: string
-  variant?: 'default' | 'lead' | 'advisor'
+  variant?: 'default' | 'lead' | 'advisor' | 'quote'
 }
 
 export default function AuthorCard({ slug, variant = 'default' }: AuthorCardProps) {
@@ -52,6 +52,27 @@ export default function AuthorCard({ slug, variant = 'default' }: AuthorCardProp
         <span className="flex flex-col leading-tight">
           <span className="text-sm font-medium text-black group-hover:text-blue transition-colors">{name}</span>
           {institution && <span className="text-xs text-gray-500 mt-0.5">{institution}</span>}
+        </span>
+      </Link>
+    )
+  }
+
+  if (variant === 'quote') {
+    return (
+      <Link
+        href={`/authors/${slug}`}
+        className="inline-flex items-center gap-4 no-underline group"
+      >
+        {avatar ? (
+          <img src={avatar} alt={name} className="w-14 h-14 rounded-full object-cover shrink-0 ring-2 ring-gray-100" />
+        ) : (
+          <span className="w-14 h-14 rounded-full bg-gray-200 shrink-0 ring-2 ring-gray-100 flex items-center justify-center text-gray-400 text-xl font-medium">
+            {name.charAt(0)}
+          </span>
+        )}
+        <span className="flex flex-col leading-tight">
+          <span className="text-base font-semibold text-gray-900 group-hover:text-blue transition-colors">{name}</span>
+          {role && <span className="text-sm text-gray-500 mt-0.5">{role}</span>}
         </span>
       </Link>
     )

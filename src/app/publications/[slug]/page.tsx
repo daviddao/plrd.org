@@ -14,7 +14,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const pub = publications.find((p) => p.slug === slug)
   if (!pub) return { title: 'Not Found' }
-  return { title: pub.title, description: (pub.abstract || '').slice(0, 160) }
+  const description = (pub.abstract || '').slice(0, 160)
+  const canonical = `/publications/${pub.slug}/`
+  return {
+    title: pub.title,
+    description,
+    alternates: { canonical },
+    openGraph: {
+      type: 'article',
+      url: canonical,
+      title: pub.title,
+      description,
+      publishedTime: pub.date || undefined,
+      authors: pub.authors,
+    },
+  }
 }
 
 export default async function PublicationPage({ params }: Props) {
@@ -22,8 +36,24 @@ export default async function PublicationPage({ params }: Props) {
   const pub = publications.find((p) => p.slug === slug)
   if (!pub) notFound()
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ScholarlyArticle',
+    headline: pub.title,
+    abstract: pub.abstract || undefined,
+    datePublished: pub.date || undefined,
+    author: (pub.authors || []).map((name) => ({ '@type': 'Person', name })),
+    publisher: { '@type': 'Organization', name: 'Protocol Labs R&D' },
+    ...(pub.venue ? { isPartOf: { '@type': 'Periodical', name: pub.venue } } : {}),
+    ...(pub.doi ? { sameAs: `https://doi.org/${pub.doi}` } : {}),
+  }
+
   return (
     <div className="max-w-6xl mx-auto px-6 pt-8 pb-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Breadcrumb items={[{ label: 'Publications', href: '/publications/' }, { label: pub.title }]} />
       <div className="mb-2 text-sm text-gray-500 mt-6">
         {pub.date && <span>{new Date(pub.date).getFullYear()}</span>}

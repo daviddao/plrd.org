@@ -4,7 +4,7 @@ type AreaWebsiteLink = {
 }
 
 const AREA_WEBSITE_LINKS: Record<string, AreaWebsiteLink> = {
-  neurotech: { label: 'Website', href: 'https://plneuro.xyz/' },
+  neurotech: { label: 'Website', href: 'https://www.plneuro.xyz/' },
 }
 
 export function getAreaWebsiteLink(areaSlug: string) {

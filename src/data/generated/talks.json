@@ -1,5 +1,57 @@
 [
   {
+    "slug": "greenpill-quadratic-funding",
+    "title": "Can Quadratic Funding Go Mainstream? Ma Earth, Hypercerts & the Future of Public Goods",
+    "date": "2026-06-30T00:00:00.000Z",
+    "venue": "GreenPill",
+    "venue_url": "https://open.spotify.com/episode/4h2YB73QuiwO1lqsRsCcw8",
+    "venue_location": "GreenPill Podcast",
+    "authors": [
+      "Kevin Owocki",
+      "Matthew Monahan",
+      "Holke Brammer"
+    ],
+    "areas": [
+      "economies-governance"
+    ],
+    "abstract": "Kevin Owocki sits down with Matthew Monahan (Ma Earth) and Holke Brammer (Hypercerts Foundation) to discuss a bold new experiment: a $1 million Quadratic Funding round designed to bring public goods funding beyond the crypto ecosystem and into the mainstream.",
+    "html": "<p>{{&#x3C; spotify episode/4h2YB73QuiwO1lqsRsCcw8 >}}</p>\n"
+  },
+  {
+    "slug": "jbp-konrad-kording",
+    "title": "Konrad Kording — The Power of a Single Neuron and a Path to Simulating the Brain",
+    "date": "2026-06-25T00:00:00.000Z",
+    "venue": "Juan Benet Podcast",
+    "venue_url": "https://www.youtube.com/@JuanBenetPodcast",
+    "venue_location": "Podcast",
+    "authors": [
+      "juan-benet",
+      "konrad-kording"
+    ],
+    "areas": [
+      "neurotech"
+    ],
+    "abstract": "Juan Benet speaks with Konrad Kording of the University of Pennsylvania about the surprising computational power of a single neuron, reading the brain's wiring down to molecular detail, and building compilers and simulations as a path toward understanding — and ultimately simulating — the brain.",
+    "html": "<p>{{&#x3C; youtube FHQfmJEpRmU >}}</p>\n"
+  },
+  {
+    "slug": "jbp-tom-oxley",
+    "title": "Tom Oxley — Reading the Brain Without Opening the Skull",
+    "date": "2026-06-11T00:00:00.000Z",
+    "venue": "Juan Benet Podcast",
+    "venue_url": "https://www.youtube.com/@JuanBenetPodcast",
+    "venue_location": "Podcast",
+    "authors": [
+      "juan-benet",
+      "tom-oxley"
+    ],
+    "areas": [
+      "neurotech"
+    ],
+    "abstract": "Juan Benet speaks with Tom Oxley, co-founder and CEO of Synchron, about the Stentrode — a brain-computer interface that reaches the motor cortex through a blood vessel without opening the skull — restoring independence to people with motor impairment and the path toward higher-channel-count neural interfaces.",
+    "html": "<p>{{&#x3C; youtube 0gvHqRv8gTg >}}</p>\n"
+  },
+  {
     "slug": "jbp-jacques-carolan",
     "title": "Jacques Carolan — The Mission to Get Breakthrough Brain Treatments to Everyone",
     "date": "2026-05-29T00:00:00.000Z",

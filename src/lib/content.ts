@@ -62,6 +62,8 @@ export type BlogPost = {
   title: string
   date: string
   summary: string
+  /** Optional dedicated meta/OG description; falls back to `summary` when empty. */
+  description?: string
   authors: string[]
   /** Focus-area slugs (e.g. 'neurotech') — drives the Insights focus-area filter. */
   areas: string[]
@@ -120,5 +122,15 @@ export const talks = talksData as Talk[]
 export const tutorials = tutorialsData as Tutorial[]
 export const blogPosts = blogData as BlogPost[]
 export const areas = areasData as Area[]
+
+/**
+ * Focus-area filter definitions, ordered to match the site nav. Shared by the
+ * Insights explorer and the /blog, /publications, /talks listing pages so the
+ * focus-area filter stays consistent everywhere.
+ */
+const FOCUS_AREA_ORDER = ['digital-human-rights', 'economies-governance', 'ai-robotics', 'neurotech']
+export const focusAreaDefs = FOCUS_AREA_ORDER.map((slug) => areas.find((a) => a.slug === slug))
+  .filter((a): a is Area => Boolean(a))
+  .map((a) => ({ slug: a.slug, title: a.title }))
 export const sections = sectionsData as Record<string, Section>
 export const dependencyGraphs = depGraphData as Record<string, DependencyGraphEntry>
