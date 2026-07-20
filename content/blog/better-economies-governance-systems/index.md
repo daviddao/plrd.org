@@ -5,9 +5,12 @@ summary: "An overview of PL R&D's Programmable Economies & Governance focus area
 authors:
   - david-dao
   - james-tunningley
+cover_image: "/images/blog/economies-governance-hero.png"
 areas:
   - economies-governance
 ---
+<figure class="post-figure post-hero"><img src="/images/blog/economies-governance-hero.png" alt="Programmable Economies & Governance: upgrading society's operating system." /></figure>
+
 At PL R&D, we focus on fields that have the potential to unlock transformative new capabilities for humanity. The Programmable Economies & Governance Focus Area aims to accelerate the infrastructure societies use to decide, allocate, verify, and coordinate.
 
 Every society depends on a set of basic systems: systems to make decisions, allocate capital, enforce rules, establish trust, and coordinate people who may not know one another or share the same interests. These systems shape almost everything else. They determine how public goods are funded, how institutions learn, how resources flow, how legitimacy is built, and how collective action becomes possible.
