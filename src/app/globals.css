@@ -60,6 +60,15 @@ body {
   background-color: var(--color-white);
 }
 
+/* Impact dashboard two-axis accents — theme-aware so the “field” ink and the
+   progress track stay legible in dark mode (ImpactDashboard / MeasuringQuestions). */
+:root {
+  --impact-field: #131316;        /* the field axis (neutral ink) */
+  --impact-field-ink: #ffffff;    /* text on a field-accent fill */
+  --impact-field-track: #e5e7eb;  /* empty progress segment */
+  --impact-hand: #1982f4;         /* our-hand axis (blue) */
+}
+
 /* ===== Dark mode =====
    Rather than annotating every component, we remap the semantic color
    tokens. Because Tailwind v4 utilities compile to var(--color-*),
@@ -85,6 +94,13 @@ html.dark {
   --color-gray: #9A9EAB;
 
   --color-blue: #3B96F6;         /* slightly brighter accents on dark */
+
+  /* Two-axis accents: light ink reads on dark surfaces; the field fill flips
+     to light so white badge text is swapped for dark ink. */
+  --impact-field: #e9e9ee;
+  --impact-field-ink: #15171c;
+  --impact-field-track: #3a3f4b;
+  --impact-hand: #3b96f6;
 }
 
 /* Keep the footer's intentional dark design in both themes by
