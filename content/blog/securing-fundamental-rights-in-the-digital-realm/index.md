@@ -4,7 +4,10 @@ date: 2026-06-30
 summary: "The digital foundations our fundamental rights now depend on."
 authors:
   - will-scott
+cover_image: "/images/blog/securing-fundamental-rights-in-the-digital-realm/hero.png"
 ---
+<figure class="post-figure post-hero"><img src="/images/blog/securing-fundamental-rights-in-the-digital-realm/hero.png" alt="Securing fundamental rights in the digital realm." /></figure>
+
 *Part of a series introducing the focus areas of PL R&D.*
 
 Our information environment is being reshaped in real time by algorithms, networks, protocols, platforms, and adversaries that move faster than the institutions meant to govern them. Digital infrastructure like core internet protocols, already shapes how we speak, gather, and keep our lives private. We now need to ensure we build the infrastructure to protect those freedoms faster, and more wisely, than that same infrastructure can be turned against them.
