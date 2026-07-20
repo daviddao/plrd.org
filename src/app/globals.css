@@ -8,9 +8,44 @@
   &::-webkit-scrollbar { display: none; }
 }
 
+/* ===== Aileron (self-hosted, static @font-face — avoids next/font
+   CSS-variable scoping issues where --font-body inherits an unresolved
+   var() before the body-scoped custom property is defined) ===== */
+@font-face {
+  font-family: 'Aileron';
+  src: url('/fonts/Aileron-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Aileron';
+  src: url('/fonts/Aileron-Italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Aileron';
+  src: url('/fonts/Aileron-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Aileron';
+  src: url('/fonts/Aileron-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ===== Theme (Tailwind v4 CSS-first config) ===== */
 @theme {
-  --font-body: var(--font-inter), sans-serif;
+  --font-body: 'Aileron', sans-serif;
   --font-serif: var(--font-serif), Georgia, "Times New Roman", serif;
 
   --breakpoint-sm: 640px;
