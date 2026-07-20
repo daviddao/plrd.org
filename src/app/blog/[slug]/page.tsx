@@ -45,7 +45,7 @@ export default async function BlogPostPage({ params }: Props) {
       <div className="mt-6 mb-2 text-sm text-gray-500">
         {formatDate(post.date)}
       </div>
-      <h1 className="text-lg md:text-[32px] mb-6 leading-tight font-semibold">
+      <h1 className="text-lg md:text-[32px] mb-6 leading-tight font-semibold max-w-3xl">
         {post.title}
       </h1>
       {post.authors.length > 0 && (
