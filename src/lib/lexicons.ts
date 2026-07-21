@@ -35,6 +35,27 @@ export type PostRecord = {
   createdAt: string
 }
 
+// Comment collection — reader comments on blog posts.
+// Records live in the plresearch.org service repo (single-writer, written
+// server-side after verifying the commenter's Bluesky OAuth session), so the
+// read path is a single listRecords call with no firehose/indexer dependency.
+export const COMMENT_COLLECTION = 'org.plresearch.comment'
+
+export type CommentAuthor = {
+  did: string
+  handle: string
+  displayName?: string
+  avatar?: string
+}
+
+export type CommentRecord = {
+  $type: string
+  subject: string        // blog post slug, e.g. "my-post"
+  text: string           // plain-text comment body
+  author: CommentAuthor  // verified from the OAuth session, not user input
+  createdAt: string      // ISO datetime
+}
+
 // standard.site lexicons for long-form publishing
 export const STANDARD_PUBLICATION_COLLECTION = "site.standard.publication"
 export const STANDARD_DOCUMENT_COLLECTION = "site.standard.document"

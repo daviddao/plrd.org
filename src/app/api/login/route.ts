@@ -10,6 +10,12 @@ export async function POST(request: NextRequest) {
     const client = await getGlobalOAuthClient()
     const body = await request.json()
     const handle = body?.handle
+    // Optional same-origin path to return to after login (e.g. the blog post
+    // the reader was on when they clicked "Sign in to comment").
+    const returnTo =
+      typeof body?.returnTo === 'string' && body.returnTo.startsWith('/')
+        ? body.returnTo
+        : undefined
 
     if (typeof handle !== 'string' || !isValidHandle(handle)) {
       return NextResponse.json({ error: 'Invalid handle' }, { status: 400 })
@@ -17,6 +23,7 @@ export async function POST(request: NextRequest) {
 
     const url = await client.authorize(handle, {
       scope: 'atproto transition:generic',
+      state: returnTo,
     })
 
     return NextResponse.json({ redirectUrl: url.toString() })

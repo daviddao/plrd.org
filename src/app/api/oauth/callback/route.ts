@@ -13,12 +13,17 @@ export async function GET(request: NextRequest) {
 
     // Retry OAuth callback up to 3 times for network errors
     let oauthSession
+    let returnTo: string | undefined
     let lastError
 
     for (let attempt = 1; attempt <= 3; attempt++) {
       try {
         const result = await client.callback(params)
         oauthSession = result.session
+        // `state` carries the optional same-origin return path set at login.
+        if (typeof result.state === 'string' && result.state.startsWith('/')) {
+          returnTo = result.state
+        }
         break
       } catch (error) {
         lastError = error
@@ -68,11 +73,13 @@ export async function GET(request: NextRequest) {
     session.avatar = avatar
     await session.save()
 
-    // Redirect to home
+    // Redirect back to where the user started (if a safe same-origin path was
+    // provided), otherwise home.
     const requestUrl = new URL(request.url)
     const origin = requestUrl.origin
-    
-    return Response.redirect(`${origin}/`, 303)
+    const destination = returnTo ? `${origin}${returnTo}` : `${origin}/`
+
+    return Response.redirect(destination, 303)
   } catch (error) {
     console.error('OAuth callback failed:', error)
     const requestUrl = new URL(request.url)

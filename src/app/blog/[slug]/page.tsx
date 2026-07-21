@@ -4,6 +4,7 @@ import { blogPosts } from '@/lib/content'
 import { formatDate } from '@/lib/format'
 import AuthorCard from '@/components/AuthorCard'
 import Breadcrumb from '@/components/Breadcrumb'
+import Comments from '@/components/Comments'
 
 type Props = { params: Promise<{ slug: string }> }
 
@@ -58,6 +59,9 @@ export default async function BlogPostPage({ params }: Props) {
       {post.html && (
         <div className="page-content text-base text-gray-700 leading-relaxed max-w-3xl" dangerouslySetInnerHTML={{ __html: post.html }} />
       )}
+      {/* External stub posts live on their original home; only host comments
+          for posts that actually live on this site. */}
+      {!post.external_url && <Comments subject={post.slug} />}
     </div>
   )
 }
