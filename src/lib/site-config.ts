@@ -4,7 +4,7 @@ export const siteConfig = {
   baseUrl: 'https://www.plrd.org',
   author: 'PL R&D',
   locale: 'en_US',
-  twitterUser: '@ProtoResearch',
+  twitterUser: '@protocollabs_rd',
   avatar: '/images/pl_research_card.png',
   logo: '/images/pl_research_logo.svg',
   copyright: '© Protocol Labs, Inc. Except as noted, content licensed CC-BY 3.0.',
