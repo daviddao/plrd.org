@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import localFont from 'next/font/local'
 import { Newsreader } from 'next/font/google'
 import { siteConfig } from '@/lib/site-config'
 import { AuthProvider } from '@/lib/atproto'
@@ -7,17 +6,6 @@ import SiteShell from '@/components/SiteShell'
 import GoatCounter from '@/components/GoatCounter'
 import CookieConsent from '@/components/CookieConsent'
 import './globals.css'
-
-const aileron = localFont({
-  src: [
-    { path: '../../public/fonts/Aileron-Regular.woff2', weight: '400', style: 'normal' },
-    { path: '../../public/fonts/Aileron-Italic.woff2', weight: '400', style: 'italic' },
-    { path: '../../public/fonts/Aileron-SemiBold.woff2', weight: '600', style: 'normal' },
-    { path: '../../public/fonts/Aileron-Bold.woff2', weight: '700', style: 'normal' },
-  ],
-  variable: '--font-inter',
-  display: 'swap',
-})
 
 const newsreader = Newsreader({
   subsets: ['latin'],
@@ -110,7 +98,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${aileron.variable} ${newsreader.variable} font-body min-w-[320px] text-base text-black leading-normal antialiased`}>
+      <body className={`${newsreader.variable} font-body min-w-[320px] text-base text-black leading-normal antialiased`}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
