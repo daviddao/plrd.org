@@ -25,7 +25,7 @@ interface AuthState {
 // Auth context
 const AuthContext = createContext<{
   state: AuthState
-  login: (handle: string) => Promise<void>
+  login: (handle: string, returnTo?: string) => Promise<void>
   logout: () => Promise<void>
 } | null>(null)
 
@@ -72,7 +72,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, [])
 
   // Login function - initiates OAuth flow
-  const login = useCallback(async (handle: string) => {
+  const login = useCallback(async (handle: string, returnTo?: string) => {
     setState(prev => ({ ...prev, status: 'authorizing', isLoading: true, error: null }))
 
     try {
@@ -81,7 +81,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const response = await fetch('/api/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ handle: normalizedHandle }),
+        body: JSON.stringify({ handle: normalizedHandle, returnTo }),
       })
 
       if (!response.ok) {
