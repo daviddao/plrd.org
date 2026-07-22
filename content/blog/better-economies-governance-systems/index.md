@@ -1,6 +1,6 @@
 ---
 title: "Programmable Economies & Governance: Upgrading Society's Operating System"
-date: 2026-07-27
+date: 2026-07-23
 summary: "An overview of PL R&D's Programmable Economies & Governance focus area — the programmable infrastructure societies use to decide, allocate, verify, and coordinate — and the four opportunity spaces and inflection points we believe are within reach."
 authors:
   - david-dao
