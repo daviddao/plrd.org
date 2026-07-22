@@ -7,6 +7,7 @@ import MarkdownContent from '@/components/MarkdownContent'
 import InsightsExplorer, { type InsightSection, type AreaDef } from '@/components/InsightsExplorer'
 import PLRadar, { type RadarItem } from '@/components/PLRadar'
 import { FIELD_SIGNALS } from '@/lib/radar-signals'
+import { fetchCuratedRadar } from '@/lib/radar-curator'
 import { fetchPage, getSection } from '@/lib/indexer'
 import { formatDate } from '@/lib/format'
 
@@ -164,17 +165,26 @@ export default async function InsightsPage() {
   })).sort(byDateDesc)
 
   // Reserve one slot for the newest field signal so the Radar always carries at
-  // least one external read, then fill the rest with our newest content.
+  // least one external read, then fill the rest with our newest content. This is
+  // the FALLBACK cut, used only if the live curator service is unreachable.
   const signalItems = signalPool.slice(0, 1)
-  const radarPool: RadarItem[] = [...contentPool.slice(0, 6 - signalItems.length), ...signalItems]
+  const fallbackRadarPool: RadarItem[] = [...contentPool.slice(0, 6 - signalItems.length), ...signalItems]
     .sort(byDateDesc)
     .map(({ _sort, ...item }) => ({ ...item, date: formatDate(item.date) }))
 
-  const radarEdition = (() => {
-    const newest = radarPool[0]?.date
+  const fallbackEdition = (() => {
+    const newest = fallbackRadarPool[0]?.date
     const d = newest ? new Date(newest) : new Date()
     return `${d.toLocaleDateString('en-US', { month: 'long' })} Radar`
   })()
+
+  // Prefer the live, crowd-curated Radar — whatever curators have voted onto the
+  // current edition in the dashboard (https://plrd-radar-curator.fly.dev/
+  // dashboard#radar). Falls back to the locally-computed pool if the service is
+  // unreachable so the page always renders.
+  const curated = await fetchCuratedRadar(6)
+  const radarPool: RadarItem[] = curated?.items ?? fallbackRadarPool
+  const radarEdition = curated?.edition ?? fallbackEdition
 
   return (
     <div className="max-w-6xl mx-auto px-6 pt-8 pb-16">
