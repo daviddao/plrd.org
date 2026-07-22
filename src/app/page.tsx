@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import EditPageButton from '@/components/EditPageButton'
 import { PageEditHistoryByline } from '@/components/EditHistoryByline'
-import { publications, talks, blogPosts } from '@/lib/content'
+import { publications, talks, listedBlogPosts as blogPosts } from '@/lib/content'
 import MarkdownContent from '@/components/MarkdownContent'
 import { fetchPage, getSection } from "@/lib/indexer"
 import { FOCUS_AREA_DESCRIPTIONS } from '@/lib/focus-area-descriptions'
