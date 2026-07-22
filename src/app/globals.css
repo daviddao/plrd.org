@@ -358,7 +358,7 @@ ul:not([class]) li li {
   display: block;
   width: 100%;
   height: auto;
-  max-width: 620px;
+  max-width: 680px;
   margin: 0 auto;
 }
 .page-content .loop-box {
@@ -366,6 +366,35 @@ ul:not([class]) li li {
   stroke: var(--color-gray-500);
   stroke-opacity: 0.3;
   stroke-width: 1;
+}
+/* Digital Public Infrastructure — the substrate the other layers run on. */
+.page-content .loop-substrate {
+  fill: var(--color-gray-100);
+  stroke: var(--color-gray-500);
+  stroke-opacity: 0.22;
+  stroke-width: 1;
+}
+.page-content .loop-pill {
+  fill: var(--color-blue);
+}
+.page-content .loop-pill-text {
+  fill: #fff;
+  font-weight: 600;
+}
+/* Verification feedback path — the loop that closes back to governance. */
+.page-content .loop-verify {
+  fill: none;
+  stroke: #16a34a;
+  stroke-width: 2;
+}
+.page-content .loop-verify-head {
+  fill: #16a34a;
+}
+html.dark .page-content .loop-verify {
+  stroke: #4ade80;
+}
+html.dark .page-content .loop-verify-head {
+  fill: #4ade80;
 }
 .page-content .loop-bubble {
   fill: var(--color-blue);
@@ -399,11 +428,62 @@ ul:not([class]) li li {
 }
 .page-content .loop-caption {
   margin: 0 auto 1.5rem;
-  max-width: 620px;
+  max-width: 680px;
   font-size: var(--font-size-sm);
   color: var(--color-gray-500);
   text-align: center;
   font-style: italic;
+}
+
+/* ===== Blog: collapsible live-dashboard embed ===== */
+.page-content details.fa2-dashboard {
+  border: 1px solid #e6e8ec;
+  border-radius: 0.75rem;
+  background: var(--color-white);
+  margin: 1.5rem 0;
+  overflow: hidden;
+}
+html.dark .page-content details.fa2-dashboard {
+  border-color: rgb(255 255 255 / 0.12);
+}
+.page-content details.fa2-dashboard > summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.9rem 1.1rem;
+  font-weight: 600;
+  color: var(--color-black);
+  user-select: none;
+}
+.page-content details.fa2-dashboard > summary::-webkit-details-marker {
+  display: none;
+}
+.page-content details.fa2-dashboard > summary .fa2-chev {
+  flex: 0 0 auto;
+  transition: transform 0.15s ease;
+  color: var(--color-gray-500);
+}
+.page-content details.fa2-dashboard[open] > summary .fa2-chev {
+  transform: rotate(90deg);
+}
+.page-content details.fa2-dashboard > summary .fa2-sub {
+  font-weight: 400;
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-500);
+}
+.page-content details.fa2-dashboard > summary .fa2-cta {
+  margin-left: auto;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-blue);
+}
+.page-content details.fa2-dashboard[open] > summary .fa2-cta {
+  display: none;
+}
+.page-content details.fa2-dashboard .fa2-body {
+  padding: 0 1.1rem 1.1rem;
 }
 
 /* ===== Blog: responsive figures ===== */

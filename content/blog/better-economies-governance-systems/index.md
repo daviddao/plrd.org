@@ -43,49 +43,62 @@ We focus on four opportunity spaces that together form a societal coordination s
 Together, these layers form a continuous feedback loop:
 
 <div class="loop-diagram">
-<svg viewBox="0 0 660 620" role="img" aria-label="The four opportunity spaces form a continuous feedback loop: sovereign digital public infrastructure, computational coordination and governance, programmable capital allocation, and verifiable real-world infrastructure, whose verified outcomes feed back into the next round of decisions.">
+<svg viewBox="0 0 720 540" role="img" aria-label="Sovereign Digital Public Infrastructure is the substrate that the other layers run on. On top of it, computational coordination and governance produces decisions, which fund programmable capital allocation, which produces outcomes measured by verifiable real-world infrastructure; verification then feeds back to governance, closing the loop.">
   <defs>
     <marker id="loopArrow" markerWidth="9" markerHeight="9" refX="6.5" refY="4.5" orient="auto-start-reverse">
       <path class="loop-flow-head" d="M0,0 L7.5,4.5 L0,9 z" />
     </marker>
+    <marker id="verifyArrow" markerWidth="9" markerHeight="9" refX="6.5" refY="4.5" orient="auto-start-reverse">
+      <path class="loop-verify-head" d="M0,0 L7.5,4.5 L0,9 z" />
+    </marker>
   </defs>
 
-  <!-- Layer 1 -->
-  <rect class="loop-box" x="24" y="24" width="524" height="116" rx="16" />
-  <circle class="loop-bubble" cx="62" cy="82" r="19" />
-  <text class="loop-bubble-num" x="62" y="83" font-size="18" text-anchor="middle" dominant-baseline="central">1</text>
-  <text class="loop-title" x="94" y="78" font-size="16">Sovereign Digital Public Infrastructure</text>
-  <text class="loop-desc" x="94" y="100" font-size="13">the systems that public systems run on</text>
+  <!-- Layer 1: the substrate underpinning the whole stack -->
+  <rect class="loop-substrate" x="16" y="16" width="280" height="508" rx="18" />
+  <circle class="loop-bubble" cx="48" cy="48" r="17" />
+  <text class="loop-bubble-num" x="48" y="49" font-size="17" text-anchor="middle" dominant-baseline="central">1</text>
+  <text class="loop-title" x="126" y="250" font-size="16" text-anchor="middle">Digital Public</text>
+  <text class="loop-title" x="126" y="272" font-size="16" text-anchor="middle">Infrastructure</text>
+  <text class="loop-desc" x="126" y="298" font-size="12.5" text-anchor="middle">The systems public</text>
+  <text class="loop-desc" x="126" y="315" font-size="12.5" text-anchor="middle">systems run on</text>
 
-  <!-- Layer 2 -->
-  <rect class="loop-box" x="24" y="180" width="524" height="116" rx="16" />
-  <circle class="loop-bubble" cx="62" cy="238" r="19" />
-  <text class="loop-bubble-num" x="62" y="239" font-size="18" text-anchor="middle" dominant-baseline="central">2</text>
-  <text class="loop-title" x="94" y="234" font-size="16">Computational Coordination &amp; Governance</text>
-  <text class="loop-desc" x="94" y="256" font-size="13">how those systems listen, deliberate, and decide</text>
+  <!-- Layer 2: sits on top of the substrate -->
+  <rect class="loop-box" x="236" y="16" width="300" height="136" rx="14" />
+  <text class="loop-title" x="276" y="68" font-size="15.5">Computational Coordination</text>
+  <text class="loop-title" x="276" y="88" font-size="15.5">&amp; Governance</text>
+  <text class="loop-desc" x="276" y="114" font-size="12.5">Deliberate &amp; decide</text>
+  <circle class="loop-bubble" cx="236" cy="50" r="17" />
+  <text class="loop-bubble-num" x="236" y="51" font-size="17" text-anchor="middle" dominant-baseline="central">2</text>
 
   <!-- Layer 3 -->
-  <rect class="loop-box" x="24" y="336" width="524" height="116" rx="16" />
-  <circle class="loop-bubble" cx="62" cy="394" r="19" />
-  <text class="loop-bubble-num" x="62" y="395" font-size="18" text-anchor="middle" dominant-baseline="central">3</text>
-  <text class="loop-title" x="94" y="390" font-size="16">Programmable Capital Allocation</text>
-  <text class="loop-desc" x="94" y="412" font-size="13">how capital follows those decisions</text>
+  <rect class="loop-box" x="236" y="196" width="300" height="136" rx="14" />
+  <text class="loop-title" x="276" y="250" font-size="15.5">Programmable Capital</text>
+  <text class="loop-title" x="276" y="270" font-size="15.5">Allocation</text>
+  <text class="loop-desc" x="276" y="296" font-size="12.5">Fund what was decided</text>
+  <circle class="loop-bubble" cx="236" cy="230" r="17" />
+  <text class="loop-bubble-num" x="236" y="231" font-size="17" text-anchor="middle" dominant-baseline="central">3</text>
 
   <!-- Layer 4 -->
-  <rect class="loop-box" x="24" y="492" width="524" height="116" rx="16" />
-  <circle class="loop-bubble" cx="62" cy="550" r="19" />
-  <text class="loop-bubble-num" x="62" y="551" font-size="18" text-anchor="middle" dominant-baseline="central">4</text>
-  <text class="loop-title" x="94" y="546" font-size="16">Verifiable Real-World Infrastructure &amp; Systems</text>
-  <text class="loop-desc" x="94" y="568" font-size="13">how outcomes get measured and trusted</text>
+  <rect class="loop-box" x="236" y="376" width="300" height="136" rx="14" />
+  <text class="loop-title" x="276" y="430" font-size="15.5">Verifiable Real-World</text>
+  <text class="loop-title" x="276" y="450" font-size="15.5">Infra &amp; Systems</text>
+  <text class="loop-desc" x="276" y="476" font-size="12.5">Measure &amp; verify</text>
+  <circle class="loop-bubble" cx="236" cy="410" r="17" />
+  <text class="loop-bubble-num" x="236" y="411" font-size="17" text-anchor="middle" dominant-baseline="central">4</text>
 
-  <!-- Downward flow between layers -->
-  <path class="loop-flow" d="M286,146 L286,172" marker-end="url(#loopArrow)" />
-  <path class="loop-flow" d="M286,302 L286,328" marker-end="url(#loopArrow)" />
-  <path class="loop-flow" d="M286,458 L286,484" marker-end="url(#loopArrow)" />
+  <!-- Downward flow with labelled pills -->
+  <path class="loop-flow" d="M386,152 L386,192" marker-end="url(#loopArrow)" />
+  <rect class="loop-pill" x="340" y="159" width="92" height="30" rx="15" />
+  <text class="loop-pill-text" x="386" y="174" font-size="13" text-anchor="middle" dominant-baseline="central">Decisions</text>
 
-  <!-- Return loop: verified outcomes feed the next round of decisions -->
-  <path class="loop-flow" d="M548,550 L590,550 Q606,550 606,534 L606,98 Q606,82 590,82 L552,82" marker-end="url(#loopArrow)" />
-  <text class="loop-label" x="634" y="316" font-size="11" text-anchor="middle" transform="rotate(90 634 316)">Continuous feedback loop</text>
+  <path class="loop-flow" d="M386,332 L386,372" marker-end="url(#loopArrow)" />
+  <rect class="loop-pill" x="344" y="339" width="84" height="30" rx="15" />
+  <text class="loop-pill-text" x="386" y="354" font-size="13" text-anchor="middle" dominant-baseline="central">Outcomes</text>
+
+  <!-- Verification feedback: outcomes are measured, then close the loop back to governance -->
+  <path class="loop-verify" d="M536,444 L600,444 Q612,444 612,432 L612,96 Q612,84 600,84 L540,84" marker-end="url(#verifyArrow)" />
+  <rect class="loop-pill" x="560" y="249" width="104" height="30" rx="15" />
+  <text class="loop-pill-text" x="612" y="264" font-size="13" text-anchor="middle" dominant-baseline="central">Verification</text>
 </svg>
 </div>
 
