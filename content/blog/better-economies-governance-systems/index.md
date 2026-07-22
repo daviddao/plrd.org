@@ -42,8 +42,10 @@ We focus on four opportunity spaces that together form a societal coordination s
 
 Together, these layers form a continuous feedback loop:
 
+<div class="stack-figure">
+<div class="stack-figure-viz">
 <div class="loop-diagram">
-<svg viewBox="0 0 720 540" role="img" aria-label="Sovereign Digital Public Infrastructure is the substrate that the other layers run on. On top of it, computational coordination and governance produces decisions, which fund programmable capital allocation, which produces outcomes measured by verifiable real-world infrastructure; verification then feeds back to governance, closing the loop.">
+<svg viewBox="0 0 540 540" role="img" aria-label="Sovereign Digital Public Infrastructure is the substrate that the other layers run on. On top of it, computational coordination and governance produces decisions, which fund programmable capital allocation, which produces outcomes measured by verifiable real-world infrastructure; verification then feeds back to governance, closing the loop.">
   <defs>
     <marker id="loopArrow" markerWidth="9" markerHeight="9" refX="6.5" refY="4.5" orient="auto-start-reverse">
       <path class="loop-flow-head" d="M0,0 L7.5,4.5 L0,9 z" />
@@ -54,61 +56,65 @@ Together, these layers form a continuous feedback loop:
   </defs>
 
   <!-- Layer 1: the substrate underpinning the whole stack -->
-  <rect class="loop-substrate" x="16" y="16" width="280" height="508" rx="18" />
-  <circle class="loop-bubble" cx="48" cy="48" r="17" />
-  <text class="loop-bubble-num" x="48" y="49" font-size="17" text-anchor="middle" dominant-baseline="central">1</text>
-  <text class="loop-title" x="126" y="250" font-size="16" text-anchor="middle">Digital Public</text>
-  <text class="loop-title" x="126" y="272" font-size="16" text-anchor="middle">Infrastructure</text>
-  <text class="loop-desc" x="126" y="298" font-size="12.5" text-anchor="middle">The systems public</text>
-  <text class="loop-desc" x="126" y="315" font-size="12.5" text-anchor="middle">systems run on</text>
+  <rect class="loop-substrate" x="12" y="16" width="196" height="508" rx="16" />
+  <circle class="loop-bubble" cx="40" cy="44" r="16" />
+  <text class="loop-bubble-num" x="40" y="44" dy="0.34em" font-size="16" text-anchor="middle">1</text>
+  <text class="loop-title" x="110" y="248" font-size="14" text-anchor="middle">Digital Public</text>
+  <text class="loop-title" x="110" y="267" font-size="14" text-anchor="middle">Infrastructure</text>
+  <text class="loop-desc" x="110" y="291" font-size="11.5" text-anchor="middle">The systems public</text>
+  <text class="loop-desc" x="110" y="307" font-size="11.5" text-anchor="middle">systems run on</text>
 
   <!-- Layer 2: sits on top of the substrate -->
-  <rect class="loop-box" x="236" y="16" width="300" height="136" rx="14" />
-  <text class="loop-title" x="276" y="68" font-size="15.5">Computational Coordination</text>
-  <text class="loop-title" x="276" y="88" font-size="15.5">&amp; Governance</text>
-  <text class="loop-desc" x="276" y="114" font-size="12.5">Deliberate &amp; decide</text>
-  <circle class="loop-bubble" cx="236" cy="50" r="17" />
-  <text class="loop-bubble-num" x="236" y="51" font-size="17" text-anchor="middle" dominant-baseline="central">2</text>
+  <rect class="loop-box" x="188" y="16" width="232" height="134" rx="13" />
+  <text class="loop-title" x="222" y="64" font-size="14">Computational Coordination</text>
+  <text class="loop-title" x="222" y="83" font-size="14">&amp; Governance</text>
+  <text class="loop-desc" x="222" y="108" font-size="11.5">Deliberate &amp; decide</text>
+  <circle class="loop-bubble" cx="188" cy="46" r="16" />
+  <text class="loop-bubble-num" x="188" y="46" dy="0.34em" font-size="16" text-anchor="middle">2</text>
 
   <!-- Layer 3 -->
-  <rect class="loop-box" x="236" y="196" width="300" height="136" rx="14" />
-  <text class="loop-title" x="276" y="250" font-size="15.5">Programmable Capital</text>
-  <text class="loop-title" x="276" y="270" font-size="15.5">Allocation</text>
-  <text class="loop-desc" x="276" y="296" font-size="12.5">Fund what was decided</text>
-  <circle class="loop-bubble" cx="236" cy="230" r="17" />
-  <text class="loop-bubble-num" x="236" y="231" font-size="17" text-anchor="middle" dominant-baseline="central">3</text>
+  <rect class="loop-box" x="188" y="190" width="232" height="134" rx="13" />
+  <text class="loop-title" x="222" y="238" font-size="14">Programmable Capital</text>
+  <text class="loop-title" x="222" y="257" font-size="14">Allocation</text>
+  <text class="loop-desc" x="222" y="282" font-size="11.5">Fund what was decided</text>
+  <circle class="loop-bubble" cx="188" cy="220" r="16" />
+  <text class="loop-bubble-num" x="188" y="220" dy="0.34em" font-size="16" text-anchor="middle">3</text>
 
   <!-- Layer 4 -->
-  <rect class="loop-box" x="236" y="376" width="300" height="136" rx="14" />
-  <text class="loop-title" x="276" y="430" font-size="15.5">Verifiable Real-World</text>
-  <text class="loop-title" x="276" y="450" font-size="15.5">Infra &amp; Systems</text>
-  <text class="loop-desc" x="276" y="476" font-size="12.5">Measure &amp; verify</text>
-  <circle class="loop-bubble" cx="236" cy="410" r="17" />
-  <text class="loop-bubble-num" x="236" y="411" font-size="17" text-anchor="middle" dominant-baseline="central">4</text>
+  <rect class="loop-box" x="188" y="364" width="232" height="134" rx="13" />
+  <text class="loop-title" x="222" y="412" font-size="14">Verifiable Real-World</text>
+  <text class="loop-title" x="222" y="431" font-size="14">Infra &amp; Systems</text>
+  <text class="loop-desc" x="222" y="456" font-size="11.5">Measure &amp; verify</text>
+  <circle class="loop-bubble" cx="188" cy="394" r="16" />
+  <text class="loop-bubble-num" x="188" y="394" dy="0.34em" font-size="16" text-anchor="middle">4</text>
 
   <!-- Downward flow with labelled pills -->
-  <path class="loop-flow" d="M386,152 L386,192" marker-end="url(#loopArrow)" />
-  <rect class="loop-pill" x="340" y="159" width="92" height="30" rx="15" />
-  <text class="loop-pill-text" x="386" y="174" font-size="13" text-anchor="middle" dominant-baseline="central">Decisions</text>
+  <path class="loop-flow" d="M304,150 L304,184" marker-end="url(#loopArrow)" />
+  <rect class="loop-pill" x="260" y="153" width="88" height="28" rx="14" />
+  <text class="loop-pill-text" x="304" y="167" dy="0.34em" font-size="12.5" text-anchor="middle">Decisions</text>
 
-  <path class="loop-flow" d="M386,332 L386,372" marker-end="url(#loopArrow)" />
-  <rect class="loop-pill" x="344" y="339" width="84" height="30" rx="15" />
-  <text class="loop-pill-text" x="386" y="354" font-size="13" text-anchor="middle" dominant-baseline="central">Outcomes</text>
+  <path class="loop-flow" d="M304,324 L304,358" marker-end="url(#loopArrow)" />
+  <rect class="loop-pill" x="262" y="327" width="84" height="28" rx="14" />
+  <text class="loop-pill-text" x="304" y="341" dy="0.34em" font-size="12.5" text-anchor="middle">Outcomes</text>
 
   <!-- Verification feedback: outcomes are measured, then close the loop back to governance -->
-  <path class="loop-verify" d="M536,444 L600,444 Q612,444 612,432 L612,96 Q612,84 600,84 L540,84" marker-end="url(#verifyArrow)" />
-  <rect class="loop-pill" x="560" y="249" width="104" height="30" rx="15" />
-  <text class="loop-pill-text" x="612" y="264" font-size="13" text-anchor="middle" dominant-baseline="central">Verification</text>
+  <path class="loop-verify" d="M420,431 L464,431 Q476,431 476,419 L476,95 Q476,83 464,83 L424,83" marker-end="url(#verifyArrow)" />
+  <rect class="loop-pill" x="430" y="243" width="92" height="28" rx="14" />
+  <text class="loop-pill-text" x="476" y="257" dy="0.34em" font-size="12.5" text-anchor="middle">Verification</text>
 </svg>
 </div>
-
+</div>
+<div class="stack-figure-copy">
 <p class="loop-caption">Infrastructure enables decisions → decisions direct capital → capital produces outcomes → verified outcomes improve the next round of decisions.</p>
-
-The opportunity is not only in each layer individually. It is in how they reinforce one another. Better infrastructure expands what institutions can do. Better governance improves how priorities are chosen. Better capital allocation directs resources toward those priorities. Better verification shows whether the work actually happened and whether it mattered.
+<p>The opportunity is not only in each layer individually. It is in how they reinforce one another. Better infrastructure expands what institutions can do. Better governance improves how priorities are chosen. Better capital allocation directs resources toward those priorities. Better verification shows whether the work actually happened and whether it mattered.</p>
+</div>
+</div>
 
 The result is a new feedback loop for institutional learning and collective intelligence.
 
-## Opportunity Space 1: Sovereign Digital Public Infrastructure
+<h2 class="os-heading"><span class="os-num">1</span> Opportunity Space 1: Sovereign Digital Public Infrastructure</h2>
+
+<figure class="post-figure os-banner"><img src="/images/fa2/opportunity-spaces/sovereign-dpi.jpg" alt="Sovereign Digital Public Infrastructure" /></figure>
 
 Sovereign Digital Public Infrastructure (DPI) focuses on the systems governments use to deliver essential public services in the digital age. This includes identity, payments, registries, credentials, and the infrastructure that allows citizens to interact with public institutions.
 
@@ -149,7 +155,9 @@ Imagine a citizen proving eligibility for a benefit using credentials they contr
 
 When public infrastructure becomes both programmable and verifiable, digital government shifts from digitization to transformation.
 
-## Opportunity Space 2: Computational Coordination & Governance
+<h2 class="os-heading"><span class="os-num">2</span> Opportunity Space 2: Computational Coordination &amp; Governance</h2>
+
+<figure class="post-figure os-banner"><img src="/images/fa2/opportunity-spaces/governance-democracy.jpg" alt="Computational Coordination & Governance" /></figure>
 
 Every major institution faces the same challenge: how to make good decisions with limited attention, incomplete information, diverse stakeholder interests, and contested values.
 
@@ -194,7 +202,9 @@ A meaningful inflection point could look like:
 
 When these systems move from consultation to execution, they become part of society's decision-making infrastructure.
 
-## Opportunity Space 3: Programmable Capital Allocation
+<h2 class="os-heading"><span class="os-num">3</span> Opportunity Space 3: Programmable Capital Allocation</h2>
+
+<figure class="post-figure os-banner"><img src="/images/fa2/opportunity-spaces/public-goods-funding.jpg" alt="Programmable Capital Allocation" /></figure>
 
 Programmable capital allocation focuses on helping societies direct resources toward shared priorities more effectively.
 
@@ -234,7 +244,9 @@ This inflection point depends on three linked breakthroughs:
 
 The critical flywheel is that efficacy unlocks legitimacy, legitimacy unlocks larger-scale capital, and larger-scale capital creates the incentives for standards, measurement, and adoption. At that point, public-goods funding becomes a scalable economic system rather than a niche innovation.
 
-## Opportunity Space 4: Verifiable Real-World Infrastructure & Systems
+<h2 class="os-heading"><span class="os-num">4</span> Opportunity Space 4: Verifiable Real-World Infrastructure &amp; Systems</h2>
+
+<figure class="post-figure os-banner"><img src="/images/fa2/opportunity-spaces/climate-infrastructure.jpg" alt="Verifiable Real-World Infrastructure & Systems" /></figure>
 
 Many of society's most important decisions depend on understanding what is actually happening in the world. *Did the project happen? Was energy produced? Was biodiversity protected? Did the intervention achieve the intended outcome?*
 

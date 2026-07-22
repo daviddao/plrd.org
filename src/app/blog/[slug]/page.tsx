@@ -81,35 +81,8 @@ function renderBody(html: string) {
   return (
     <div className={cls}>
       <div dangerouslySetInnerHTML={{ __html: before }} />
-      {/* Collapsed by default — the full dashboard is tall, so it's opt-in. */}
-      <details className="fa2-dashboard">
-        <summary>
-          <svg
-            className="fa2-chev"
-            width="14"
-            height="14"
-            viewBox="0 0 16 16"
-            fill="none"
-            aria-hidden="true"
-          >
-            <path
-              d="M6 4l4 4-4 4"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-          <span>
-            Live impact dashboard{' '}
-            <span className="fa2-sub">— network metrics, maps &amp; trends</span>
-          </span>
-          <span className="fa2-cta">Show</span>
-        </summary>
-        <div className="fa2-body">
-          <Fa2LiveDashboardEmbed />
-        </div>
-      </details>
+      {/* Themed collapsibles, each collapsed by default. */}
+      <Fa2LiveDashboardEmbed />
       <div dangerouslySetInnerHTML={{ __html: after }} />
     </div>
   )

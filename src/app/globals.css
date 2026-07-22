@@ -358,8 +358,58 @@ ul:not([class]) li li {
   display: block;
   width: 100%;
   height: auto;
-  max-width: 680px;
+  max-width: 460px;
   margin: 0 auto;
+}
+/* Two-column figure: diagram on the left, explanatory copy on the right. */
+.page-content .stack-figure {
+  margin: 1rem 0 1.5rem;
+}
+@media (min-width: 768px) {
+  .page-content .stack-figure {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+  .page-content .stack-figure-viz {
+    flex: 0 0 46%;
+  }
+  .page-content .stack-figure-copy {
+    flex: 1;
+  }
+}
+.page-content .stack-figure .loop-diagram {
+  margin: 0;
+}
+.page-content .stack-figure-copy p {
+  padding-bottom: 0.75rem;
+}
+.page-content .stack-figure-copy p:last-child {
+  padding-bottom: 0;
+}
+.page-content .stack-figure-copy .loop-caption {
+  text-align: left;
+  margin: 0 0 0.75rem;
+  max-width: none;
+}
+/* Numbered section headings + opportunity-space banner images. */
+.page-content .os-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.page-content .os-heading .os-num {
+  width: 1.9rem;
+  height: 1.9rem;
+  font-size: 0.95rem;
+  margin-top: 0;
+}
+.page-content .os-banner {
+  margin-top: 0.25rem;
+}
+.page-content .os-banner img {
+  aspect-ratio: 3 / 1;
+  object-fit: cover;
 }
 .page-content .loop-box {
   fill: var(--color-white);
@@ -483,7 +533,25 @@ html.dark .page-content details.fa2-dashboard {
   display: none;
 }
 .page-content details.fa2-dashboard .fa2-body {
-  padding: 0 1.1rem 1.1rem;
+  padding: 0.25rem 1.1rem 1.1rem;
+}
+/* Neutralize each partner component's own section chrome (divider + big
+   bottom margin) when it sits inside a collapsible. */
+.page-content details.fa2-dashboard .fa2-body > div {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+.page-content .fa2-dashboard-group {
+  margin: 1.5rem 0;
+}
+.page-content .fa2-dashboard-group .fa2-dashboard {
+  margin: 0 0 0.6rem;
+}
+.page-content .fa2-dashboard-note {
+  margin-top: 0.5rem;
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-500);
 }
 
 /* ===== Blog: responsive figures ===== */
