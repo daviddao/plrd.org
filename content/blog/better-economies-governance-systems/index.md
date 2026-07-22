@@ -23,13 +23,13 @@ Yet current institutional infrastructure is largely outdated, slow, and fragment
 * Advances in AI are creating entirely new possibilities for governance, deliberation, and collective intelligence.
 * Cryptographic verification, decentralized infrastructure, and sensing technologies (e.g. IoT devices, satellites, and real-world sensors) are making it possible to connect digital systems to real-world outcomes.
 
-Integrating technological advancements offer a path toward future institutions that are more transparent, efficient, responsive, and trustworthy by effectively connecting digital systems to physical outcomes.
+Integrating technological advancements offer a path toward future institutions that are more transparent, efficient, responsive and trustworthy by effectively connecting digital systems to physical outcomes.
 
 ## What We Do
 
 PL Economies & Governance's mission is to help build the programmable infrastructure that enables states, organizations, and communities to make better decisions for more people under greater degrees of trust.
 
-By "programmable infrastructure", we mean systems where rules, transactions, and coordination can be executed, verified, and improved through software like cryptography, AI, and open networks. This includes everything from digital identity and payment rails to public goods funding, verifiable climate finance, and new forms of institutional coordination. Digital infrastructure replaces paper-based processes and lets institutions issue credentials, and maintain records electronically, while programmable infrastructure enables them to coordinate and respond through explicit, verifiable rules that can be automated or iterated.
+By "programmable infrastructure", we mean systems where rules, transactions, and coordination can be executed, verified, and improved through software like cryptography, AI, and open networks. This includes everything from digital identity and payment rails to public goods funding, verifiable climate finance, and new forms of institutional coordination. Digital infrastructure replaces paper-based processes and lets institutions issue credentials, and maintain records electronically, while programmable infrastructure enables to coordinate and respond through explicit, verifiable rules that can be automated or iterated.
 
 We focus on four opportunity spaces that together form a societal coordination stack:
 
@@ -292,7 +292,7 @@ Technical breakthroughs alone are not enough. Progress requires ecosystems capab
 
 <div id="fa2-live-dashboard"></div>
 
-PL R&D's role is to connect a network of experiments into field-level momentum. We work to map emerging opportunity spaces, forecast where the field is heading, and help the most promising ideas move from experiments into real-world deployment.
+PL R&D's role is to connect a network of experiments into field-level momentum. We work to map emerging opportunity spaces, forecast where we believe the field is heading, and help the most promising ideas move from experiments into real-world deployment.
 
 That means supporting research, convening communities, funding early breakthroughs, helping new ventures emerge, developing shared standards, and partnering with governments, multilaterals, funders, and builders around the world.
 
@@ -328,3 +328,5 @@ Over the coming months, we will publish deep dives on each opportunity space, th
 The future of programmable economies and governance remains unwritten. That is precisely what makes it worth building.
 
 Join us.
+
+*This post is for informational purposes only. It is not an offer, solicitation, or recommendation of any security or investment product, and nothing here is a commitment or guarantee of any future performance or any outcome.*
