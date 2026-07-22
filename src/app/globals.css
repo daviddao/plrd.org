@@ -340,6 +340,7 @@ ul:not([class]) li li {
   color: #fff;
   font-size: 0.85rem;
   font-weight: 700;
+  line-height: 1;
   margin-top: 0.05rem;
 }
 .page-content .os-list li > span:last-child {
@@ -393,16 +394,16 @@ ul:not([class]) li li {
   max-width: none;
 }
 /* Numbered section headings + opportunity-space banner images. */
-.page-content .os-heading {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-}
+/* Number ball sits inline in the heading, replacing the numeral. */
 .page-content .os-heading .os-num {
-  width: 1.9rem;
-  height: 1.9rem;
-  font-size: 0.95rem;
-  margin-top: 0;
+  width: 1.6rem;
+  height: 1.6rem;
+  font-size: 0.85rem;
+  line-height: 1;
+  margin: 0 0.18rem;
+  vertical-align: middle;
+  position: relative;
+  top: -0.08em;
 }
 .page-content .os-banner {
   margin-top: 0.25rem;

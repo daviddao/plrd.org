@@ -45,7 +45,7 @@ Together, these layers form a continuous feedback loop:
 <div class="stack-figure">
 <div class="stack-figure-viz">
 <div class="loop-diagram">
-<svg viewBox="0 0 540 540" role="img" aria-label="Sovereign Digital Public Infrastructure is the substrate that the other layers run on. On top of it, computational coordination and governance produces decisions, which fund programmable capital allocation, which produces outcomes measured by verifiable real-world infrastructure; verification then feeds back to governance, closing the loop.">
+<svg viewBox="0 0 540 564" role="img" aria-label="Sovereign Digital Public Infrastructure is the substrate that the other layers run on. On top of it, computational coordination and governance produces decisions, which fund programmable capital allocation, which produces outcomes measured by verifiable real-world infrastructure; verification then feeds back to governance, closing the loop.">
   <defs>
     <marker id="loopArrow" markerWidth="9" markerHeight="9" refX="6.5" refY="4.5" orient="auto-start-reverse">
       <path class="loop-flow-head" d="M0,0 L7.5,4.5 L0,9 z" />
@@ -56,51 +56,52 @@ Together, these layers form a continuous feedback loop:
   </defs>
 
   <!-- Layer 1: the substrate underpinning the whole stack -->
-  <rect class="loop-substrate" x="12" y="16" width="196" height="508" rx="16" />
-  <circle class="loop-bubble" cx="40" cy="44" r="16" />
-  <text class="loop-bubble-num" x="40" y="44" dy="0.34em" font-size="16" text-anchor="middle">1</text>
-  <text class="loop-title" x="110" y="248" font-size="14" text-anchor="middle">Digital Public</text>
-  <text class="loop-title" x="110" y="267" font-size="14" text-anchor="middle">Infrastructure</text>
-  <text class="loop-desc" x="110" y="291" font-size="11.5" text-anchor="middle">The systems public</text>
-  <text class="loop-desc" x="110" y="307" font-size="11.5" text-anchor="middle">systems run on</text>
+  <rect class="loop-substrate" x="12" y="12" width="196" height="540" rx="16" />
+  <circle class="loop-bubble" cx="40" cy="40" r="16" />
+  <text class="loop-bubble-num" x="40" y="40" dy="0.34em" font-size="16" text-anchor="middle">1</text>
+  <text class="loop-title" x="110" y="262" font-size="14" text-anchor="middle">Digital Public</text>
+  <text class="loop-title" x="110" y="281" font-size="14" text-anchor="middle">Infrastructure</text>
+  <text class="loop-desc" x="110" y="305" font-size="11.5" text-anchor="middle">The systems public</text>
+  <text class="loop-desc" x="110" y="321" font-size="11.5" text-anchor="middle">systems run on</text>
 
-  <!-- Layer 2: sits on top of the substrate -->
-  <rect class="loop-box" x="188" y="16" width="232" height="134" rx="13" />
-  <text class="loop-title" x="222" y="64" font-size="14">Computational Coordination</text>
-  <text class="loop-title" x="222" y="83" font-size="14">&amp; Governance</text>
-  <text class="loop-desc" x="222" y="108" font-size="11.5">Deliberate &amp; decide</text>
-  <circle class="loop-bubble" cx="188" cy="46" r="16" />
-  <text class="loop-bubble-num" x="188" y="46" dy="0.34em" font-size="16" text-anchor="middle">2</text>
+  <!-- Layers 2–4 sit on top of the substrate, vertically centered against it -->
+  <!-- Layer 2 -->
+  <rect class="loop-box" x="188" y="25" width="232" height="134" rx="13" />
+  <text class="loop-title" x="222" y="73" font-size="14">Computational Coordination</text>
+  <text class="loop-title" x="222" y="92" font-size="14">&amp; Governance</text>
+  <text class="loop-desc" x="222" y="117" font-size="11.5">Deliberate &amp; decide</text>
+  <circle class="loop-bubble" cx="188" cy="55" r="16" />
+  <text class="loop-bubble-num" x="188" y="55" dy="0.34em" font-size="16" text-anchor="middle">2</text>
 
   <!-- Layer 3 -->
-  <rect class="loop-box" x="188" y="190" width="232" height="134" rx="13" />
-  <text class="loop-title" x="222" y="238" font-size="14">Programmable Capital</text>
-  <text class="loop-title" x="222" y="257" font-size="14">Allocation</text>
-  <text class="loop-desc" x="222" y="282" font-size="11.5">Fund what was decided</text>
-  <circle class="loop-bubble" cx="188" cy="220" r="16" />
-  <text class="loop-bubble-num" x="188" y="220" dy="0.34em" font-size="16" text-anchor="middle">3</text>
+  <rect class="loop-box" x="188" y="215" width="232" height="134" rx="13" />
+  <text class="loop-title" x="222" y="263" font-size="14">Programmable Capital</text>
+  <text class="loop-title" x="222" y="282" font-size="14">Allocation</text>
+  <text class="loop-desc" x="222" y="307" font-size="11.5">Fund what was decided</text>
+  <circle class="loop-bubble" cx="188" cy="245" r="16" />
+  <text class="loop-bubble-num" x="188" y="245" dy="0.34em" font-size="16" text-anchor="middle">3</text>
 
   <!-- Layer 4 -->
-  <rect class="loop-box" x="188" y="364" width="232" height="134" rx="13" />
-  <text class="loop-title" x="222" y="412" font-size="14">Verifiable Real-World</text>
-  <text class="loop-title" x="222" y="431" font-size="14">Infra &amp; Systems</text>
-  <text class="loop-desc" x="222" y="456" font-size="11.5">Measure &amp; verify</text>
-  <circle class="loop-bubble" cx="188" cy="394" r="16" />
-  <text class="loop-bubble-num" x="188" y="394" dy="0.34em" font-size="16" text-anchor="middle">4</text>
+  <rect class="loop-box" x="188" y="405" width="232" height="134" rx="13" />
+  <text class="loop-title" x="222" y="453" font-size="14">Verifiable Real-World</text>
+  <text class="loop-title" x="222" y="472" font-size="14">Infra &amp; Systems</text>
+  <text class="loop-desc" x="222" y="497" font-size="11.5">Measure &amp; verify</text>
+  <circle class="loop-bubble" cx="188" cy="435" r="16" />
+  <text class="loop-bubble-num" x="188" y="435" dy="0.34em" font-size="16" text-anchor="middle">4</text>
 
-  <!-- Downward flow with labelled pills -->
-  <path class="loop-flow" d="M304,150 L304,184" marker-end="url(#loopArrow)" />
-  <rect class="loop-pill" x="260" y="153" width="88" height="28" rx="14" />
-  <text class="loop-pill-text" x="304" y="167" dy="0.34em" font-size="12.5" text-anchor="middle">Decisions</text>
+  <!-- Downward flow with labelled pills (arrows extend clear of the pills) -->
+  <path class="loop-flow" d="M304,159 L304,211" marker-end="url(#loopArrow)" />
+  <rect class="loop-pill" x="260" y="173" width="88" height="28" rx="14" />
+  <text class="loop-pill-text" x="304" y="187" dy="0.34em" font-size="12.5" text-anchor="middle">Decisions</text>
 
-  <path class="loop-flow" d="M304,324 L304,358" marker-end="url(#loopArrow)" />
-  <rect class="loop-pill" x="262" y="327" width="84" height="28" rx="14" />
-  <text class="loop-pill-text" x="304" y="341" dy="0.34em" font-size="12.5" text-anchor="middle">Outcomes</text>
+  <path class="loop-flow" d="M304,349 L304,401" marker-end="url(#loopArrow)" />
+  <rect class="loop-pill" x="262" y="363" width="84" height="28" rx="14" />
+  <text class="loop-pill-text" x="304" y="377" dy="0.34em" font-size="12.5" text-anchor="middle">Outcomes</text>
 
   <!-- Verification feedback: outcomes are measured, then close the loop back to governance -->
-  <path class="loop-verify" d="M420,431 L464,431 Q476,431 476,419 L476,95 Q476,83 464,83 L424,83" marker-end="url(#verifyArrow)" />
-  <rect class="loop-pill" x="430" y="243" width="92" height="28" rx="14" />
-  <text class="loop-pill-text" x="476" y="257" dy="0.34em" font-size="12.5" text-anchor="middle">Verification</text>
+  <path class="loop-verify" d="M420,472 L464,472 Q476,472 476,460 L476,104 Q476,92 464,92 L424,92" marker-end="url(#verifyArrow)" />
+  <rect class="loop-pill" x="430" y="268" width="92" height="28" rx="14" />
+  <text class="loop-pill-text" x="476" y="282" dy="0.34em" font-size="12.5" text-anchor="middle">Verification</text>
 </svg>
 </div>
 </div>
@@ -112,7 +113,7 @@ Together, these layers form a continuous feedback loop:
 
 The result is a new feedback loop for institutional learning and collective intelligence.
 
-<h2 class="os-heading"><span class="os-num">1</span> Opportunity Space 1: Sovereign Digital Public Infrastructure</h2>
+<h2 class="os-heading">Opportunity Space <span class="os-num">1</span> Sovereign Digital Public Infrastructure</h2>
 
 <figure class="post-figure os-banner"><img src="/images/fa2/opportunity-spaces/sovereign-dpi.jpg" alt="Sovereign Digital Public Infrastructure" /></figure>
 
@@ -155,7 +156,7 @@ Imagine a citizen proving eligibility for a benefit using credentials they contr
 
 When public infrastructure becomes both programmable and verifiable, digital government shifts from digitization to transformation.
 
-<h2 class="os-heading"><span class="os-num">2</span> Opportunity Space 2: Computational Coordination &amp; Governance</h2>
+<h2 class="os-heading">Opportunity Space <span class="os-num">2</span> Computational Coordination &amp; Governance</h2>
 
 <figure class="post-figure os-banner"><img src="/images/fa2/opportunity-spaces/governance-democracy.jpg" alt="Computational Coordination & Governance" /></figure>
 
@@ -202,7 +203,7 @@ A meaningful inflection point could look like:
 
 When these systems move from consultation to execution, they become part of society's decision-making infrastructure.
 
-<h2 class="os-heading"><span class="os-num">3</span> Opportunity Space 3: Programmable Capital Allocation</h2>
+<h2 class="os-heading">Opportunity Space <span class="os-num">3</span> Programmable Capital Allocation</h2>
 
 <figure class="post-figure os-banner"><img src="/images/fa2/opportunity-spaces/public-goods-funding.jpg" alt="Programmable Capital Allocation" /></figure>
 
@@ -244,7 +245,7 @@ This inflection point depends on three linked breakthroughs:
 
 The critical flywheel is that efficacy unlocks legitimacy, legitimacy unlocks larger-scale capital, and larger-scale capital creates the incentives for standards, measurement, and adoption. At that point, public-goods funding becomes a scalable economic system rather than a niche innovation.
 
-<h2 class="os-heading"><span class="os-num">4</span> Opportunity Space 4: Verifiable Real-World Infrastructure &amp; Systems</h2>
+<h2 class="os-heading">Opportunity Space <span class="os-num">4</span> Verifiable Real-World Infrastructure &amp; Systems</h2>
 
 <figure class="post-figure os-banner"><img src="/images/fa2/opportunity-spaces/climate-infrastructure.jpg" alt="Verifiable Real-World Infrastructure & Systems" /></figure>
 
