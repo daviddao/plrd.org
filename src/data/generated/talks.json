@@ -1,5 +1,22 @@
 [
   {
+    "slug": "jbp-allison-duettmann",
+    "title": "Allison Duettmann — Why We Don't Have to Die: Cryonics, Uploading, and Existential Hope",
+    "date": "2026-07-21T00:00:00.000Z",
+    "venue": "Juan Benet Podcast",
+    "venue_url": "https://www.youtube.com/@JuanBenetPodcast",
+    "venue_location": "Podcast",
+    "authors": [
+      "juan-benet",
+      "allison-duettmann"
+    ],
+    "areas": [
+      "neurotech"
+    ],
+    "abstract": "Juan Benet speaks with Allison Duettmann, CEO of the Foresight Institute, about why cryonics and mind emulation could mean we don't have to die, how whole-brain emulation and connectomics could keep humans compatible with superintelligent AI, how nanotechnology could rebuild the physical world, and the case for Existential Hope — imagining flourishing futures as a precondition for building them.",
+    "html": "<p>{{&#x3C; youtube knM7yHFH67o >}}</p>\n"
+  },
+  {
     "slug": "greenpill-quadratic-funding",
     "title": "Can Quadratic Funding Go Mainstream? Ma Earth, Hypercerts & the Future of Public Goods",
     "date": "2026-06-30T00:00:00.000Z",
