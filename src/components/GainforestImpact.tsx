@@ -148,10 +148,15 @@ type HcKey = 'certifiedOrgs' | 'bumicerts'
 export default function GainforestImpact({
   stats,
   maearth,
+  section = 'all',
 }: {
   stats: GainforestStats
   maearth: MaEarthStats
+  /** Render both sub-sections, or just one (for use in separate collapsibles). */
+  section?: 'all' | 'hypercerts' | 'biodiversity'
 }) {
+  const showHyper = section === 'all' || section === 'hypercerts'
+  const showBio = section === 'all' || section === 'biodiversity'
   const [active, setActive] = useState<HcKey | null>(null)
   const [obsOpen, setObsOpen] = useState(false)
   const obsSeries = stats.trends.observations
@@ -180,6 +185,8 @@ export default function GainforestImpact({
 
   return (
     <div className="mb-16 pb-14 border-b border-gray-100">
+      {showHyper && (
+      <>
       <h2 className="flex items-center gap-2.5 text-sm text-gray-500 uppercase tracking-wide mb-6">
         <span className="flex items-center gap-1.5">
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -273,13 +280,16 @@ export default function GainforestImpact({
         ’s Hypercerts Indexer; the map shows certified organization locations
         {stats.degraded && ' · counts temporarily unavailable'}.
       </p>
+      </>
+      )}
 
       {/* Live carousel of the most recent biodiversity data collections
           (Darwin Core occurrence records with field photos), fetched
           dynamically from the GainForest indexer in the browser. The total
           species-observation count + recent-activity tail (newest 1,000
           records) sits on top, mirroring the gainforest-explorer landing band. */}
-      <div className="mt-12">
+      {showBio && (
+      <div className={showHyper ? 'mt-12' : ''}>
         <h3 className="flex items-center gap-2.5 text-sm text-gray-500 uppercase tracking-wide mb-6">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/images/partner-logos/gainforest.png" alt="GainForest" className="h-5 w-5 object-contain" />
@@ -310,6 +320,7 @@ export default function GainforestImpact({
           .
         </p>
       </div>
+      )}
 
       {activeMeta && (
         <MetricModal
