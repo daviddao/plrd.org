@@ -4,9 +4,9 @@ date: 2026-06-30
 summary: "The digital foundations our fundamental rights now depend on."
 authors:
   - will-scott
-cover_image: "/images/blog/securing-fundamental-rights-in-the-digital-realm/hero.png"
+cover_image: "/images/blog/securing-fundamental-rights-in-the-digital-realm/hero.webp"
 ---
-<figure class="post-figure post-hero"><img src="/images/blog/securing-fundamental-rights-in-the-digital-realm/hero.png" alt="Securing fundamental rights in the digital realm." /></figure>
+<figure class="post-figure post-hero"><img src="/images/blog/securing-fundamental-rights-in-the-digital-realm/hero.webp" alt="Securing fundamental rights in the digital realm." /></figure>
 
 *Part of a series introducing the focus areas of PL R&D.*
 
