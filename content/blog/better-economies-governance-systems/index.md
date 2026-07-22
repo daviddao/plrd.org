@@ -17,26 +17,79 @@ Every society depends on a set of basic systems: systems to make decisions, allo
 
 Yet current institutional infrastructure is largely outdated, slow, and fragmented, struggling to meet the demands of a modern world defined by AI and digital networks. A new wave of technology is creating potential for more sophisticated governance and collective intelligence:
 
-Digital public infrastructure is operating at population scale. Stablecoins are moving trillions of dollars globally. New funding mechanisms are directing capital toward public goods. Advances in AI are creating entirely new possibilities for governance, deliberation, and collective intelligence. Cryptographic verification, decentralized infrastructure, and sensing technologies (e.g. IoT devices, satellites, and real-world sensors) are making it possible to connect digital systems to real-world outcomes.
+* Digital public infrastructure now operates at population scale.
+* Stablecoins are moving trillions of dollars globally.
+* New funding mechanisms can efficiently direct capital toward public goods.
+* Advances in AI are creating entirely new possibilities for governance, deliberation, and collective intelligence.
+* Cryptographic verification, decentralized infrastructure, and sensing technologies (e.g. IoT devices, satellites, and real-world sensors) are making it possible to connect digital systems to real-world outcomes.
 
-Integrating these new tools offers a path toward future institutions that are more transparent, efficient, responsive, and trustworthy by effectively connecting digital systems to physical outcomes.
+Integrating technological advancements offer a path toward future institutions that are more transparent, efficient, responsive, and trustworthy by effectively connecting digital systems to physical outcomes.
 
 ## What We Do
 
 PL Economies & Governance's mission is to help build the programmable infrastructure that enables states, organizations, and communities to make better decisions for more people under greater degrees of trust.
 
-By "programmable infrastructure", we mean systems where rules, transactions, and coordination can be executed, verified, and improved through software like cryptography, AI, and open networks. This includes everything from digital identity and payment rails to public goods funding, verifiable climate finance, and new forms of institutional coordination.
+By "programmable infrastructure", we mean systems where rules, transactions, and coordination can be executed, verified, and improved through software like cryptography, AI, and open networks. This includes everything from digital identity and payment rails to public goods funding, verifiable climate finance, and new forms of institutional coordination. Digital infrastructure replaces paper-based processes and lets institutions issue credentials, and maintain records electronically, while programmable infrastructure enables them to coordinate and respond through explicit, verifiable rules that can be automated or iterated.
 
 We focus on four opportunity spaces that together form a societal coordination stack:
 
-1. Sovereign Digital Public Infrastructure = the systems that public systems run on
-2. Computational Coordination & Governance = how those systems listen, deliberate, and decide
-3. Programmable Capital Allocation = how capital follows those decisions
-4. Verifiable Real-World Infrastructure & Systems = how outcomes get measured and trusted
+<ol class="os-list">
+  <li><span class="os-num">1</span><span><strong>Sovereign Digital Public Infrastructure</strong> = the systems that public systems run on</span></li>
+  <li><span class="os-num">2</span><span><strong>Computational Coordination &amp; Governance</strong> = how those systems listen, deliberate, and decide</span></li>
+  <li><span class="os-num">3</span><span><strong>Programmable Capital Allocation</strong> = how capital follows those decisions</span></li>
+  <li><span class="os-num">4</span><span><strong>Verifiable Real-World Infrastructure &amp; Systems</strong> = how outcomes get measured and trusted</span></li>
+</ol>
 
 Together, these layers form a continuous feedback loop:
 
-Infrastructure enables decisions → decisions direct capital → capital produces outcomes → verified outcomes improve the next round of decisions.
+<div class="loop-diagram">
+<svg viewBox="0 0 660 620" role="img" aria-label="The four opportunity spaces form a continuous feedback loop: sovereign digital public infrastructure, computational coordination and governance, programmable capital allocation, and verifiable real-world infrastructure, whose verified outcomes feed back into the next round of decisions.">
+  <defs>
+    <marker id="loopArrow" markerWidth="9" markerHeight="9" refX="6.5" refY="4.5" orient="auto-start-reverse">
+      <path class="loop-flow-head" d="M0,0 L7.5,4.5 L0,9 z" />
+    </marker>
+  </defs>
+
+  <!-- Layer 1 -->
+  <rect class="loop-box" x="24" y="24" width="524" height="116" rx="16" />
+  <circle class="loop-bubble" cx="62" cy="82" r="19" />
+  <text class="loop-bubble-num" x="62" y="83" font-size="18" text-anchor="middle" dominant-baseline="central">1</text>
+  <text class="loop-title" x="94" y="78" font-size="16">Sovereign Digital Public Infrastructure</text>
+  <text class="loop-desc" x="94" y="100" font-size="13">the systems that public systems run on</text>
+
+  <!-- Layer 2 -->
+  <rect class="loop-box" x="24" y="180" width="524" height="116" rx="16" />
+  <circle class="loop-bubble" cx="62" cy="238" r="19" />
+  <text class="loop-bubble-num" x="62" y="239" font-size="18" text-anchor="middle" dominant-baseline="central">2</text>
+  <text class="loop-title" x="94" y="234" font-size="16">Computational Coordination &amp; Governance</text>
+  <text class="loop-desc" x="94" y="256" font-size="13">how those systems listen, deliberate, and decide</text>
+
+  <!-- Layer 3 -->
+  <rect class="loop-box" x="24" y="336" width="524" height="116" rx="16" />
+  <circle class="loop-bubble" cx="62" cy="394" r="19" />
+  <text class="loop-bubble-num" x="62" y="395" font-size="18" text-anchor="middle" dominant-baseline="central">3</text>
+  <text class="loop-title" x="94" y="390" font-size="16">Programmable Capital Allocation</text>
+  <text class="loop-desc" x="94" y="412" font-size="13">how capital follows those decisions</text>
+
+  <!-- Layer 4 -->
+  <rect class="loop-box" x="24" y="492" width="524" height="116" rx="16" />
+  <circle class="loop-bubble" cx="62" cy="550" r="19" />
+  <text class="loop-bubble-num" x="62" y="551" font-size="18" text-anchor="middle" dominant-baseline="central">4</text>
+  <text class="loop-title" x="94" y="546" font-size="16">Verifiable Real-World Infrastructure &amp; Systems</text>
+  <text class="loop-desc" x="94" y="568" font-size="13">how outcomes get measured and trusted</text>
+
+  <!-- Downward flow between layers -->
+  <path class="loop-flow" d="M286,146 L286,172" marker-end="url(#loopArrow)" />
+  <path class="loop-flow" d="M286,302 L286,328" marker-end="url(#loopArrow)" />
+  <path class="loop-flow" d="M286,458 L286,484" marker-end="url(#loopArrow)" />
+
+  <!-- Return loop: verified outcomes feed the next round of decisions -->
+  <path class="loop-flow" d="M548,550 L590,550 Q606,550 606,534 L606,98 Q606,82 590,82 L552,82" marker-end="url(#loopArrow)" />
+  <text class="loop-label" x="634" y="316" font-size="11" text-anchor="middle" transform="rotate(90 634 316)">Continuous feedback loop</text>
+</svg>
+</div>
+
+<p class="loop-caption">Infrastructure enables decisions → decisions direct capital → capital produces outcomes → verified outcomes improve the next round of decisions.</p>
 
 The opportunity is not only in each layer individually. It is in how they reinforce one another. Better infrastructure expands what institutions can do. Better governance improves how priorities are chosen. Better capital allocation directs resources toward those priorities. Better verification shows whether the work actually happened and whether it mattered.
 
@@ -65,23 +118,21 @@ Areas we find particularly promising include:
 * Programmable public-service delivery
 * Sovereign data infrastructure
 
-### Progress so far
+### Progress so far / case studies of momentum
 
-Across Protocol Labs, teams have been building the foundations that make next-generation programmable public infrastructure possible.
+Programmable government depends on three primitives that were not practical at scale until recently: 1) verifiable personhood (proving a unique human without a state ID), 2) portable credentials, and 3) encrypted computation (keeping data private while still verifying results). We now see serious teams building these missing primitives in the PL network: [World](https://world.org/) is scaling privacy-preserving proof of personhood, with tens of millions of verifications; [Spruce](https://spruceid.com/) builds open identity and credential infrastructure for the internet; and [Zama](https://www.zama.org/) advances encrypted computation, so data can stay private under public verification.
 
-Programmable government depends on three primitives that were not practical at scale until recently: verifiable personhood (proving a unique human without a state ID), portable credentials, and encrypted computation (keeping data private while still verifying results). Each now has a serious team building it, all of which are part of the PL network: [World](https://world.org/) is scaling privacy-preserving proof of personhood, with tens of millions of verifications on its own reporting. [Spruce](https://spruceid.com/) builds open identity and credential infrastructure for the internet. [Zama](https://www.zama.org/) advances encrypted computation, so data can stay private under public verification.
-
-Beyond the technical stack, movements such as [Crecimiento](https://crecimiento.build/) in Latin America have demonstrated how networked communities can help shape national conversations around economic development, digital infrastructure, and institutional renewal. Public-goods funding routes real money through programmable allocation (Ma Earth: ~$502k from 9,300+ donors, 202 projects), verifiable real-world infrastructure runs at field scale (GainForest: 1,160+ certified orgs, ~48k observations; Glow: 150+ audited solar farms), and the builder pipeline is substantial (Funding the Commons: 1,650+ builders, 300+ projects).
+Beyond the technical stack, movements such as [Crecimiento](https://crecimiento.build/) in Latin America have demonstrated how networked communities can help shape national conversations around economic development, digital infrastructure, and institutional renewal.
 
 ### The Inflection Point: Programmable Government in Production
 
 We believe a major milestone will occur when governments begin running meaningful public functions on programmable and verifiable infrastructure. This could include:
 
-* **Capital rails**: 1+ sovereign runs >$1B annual public treasury disbursement or management through programmable infrastructure
-* **Identity/voting**: 3+ jurisdictions using verifiable credentials for major public functions such as passports, public benefits, citizen engagement, or elections
-* **Privacy**: 1+ nation-state using programmable infrastructure to advance data sovereignty, privacy-preserving administration, or trusted public registries
+* **Capital**: A sovereign nation runs >$1B annual public treasury disbursement or management through programmable infrastructure.
+* **Identity and voting**: Multiple jurisdictions with 100K+ members use verifiable credentials for major public functions such as passports, public benefits, citizen engagement, or elections.
+* **Privacy**: A nation-state using programmable infrastructure to advance data sovereignty, privacy-preserving administration, or trusted public registries
 
-Imagine a citizen proving eligibility for a benefit using credentials they control, without exposing unnecessary personal information – not as a one-off pilot, but reliably across nationwide public infrastructure. Or a government auditing service delivery in real time through transparent software systems embedded across agencies and operating at population scale.
+Imagine a citizen proving eligibility for a benefit using credentials they control, without exposing unnecessary personal information — not as a one-off pilot, but reliably across nationwide public infrastructure. Or a government auditing service delivery in real time through transparent software systems embedded across agencies and operating at population scale.
 
 When public infrastructure becomes both programmable and verifiable, digital government shifts from digitization to transformation.
 
@@ -114,31 +165,21 @@ Areas we find particularly promising include:
 * Novel collective-decision mechanisms
 * Real-world governance experimentation
 
-### Progress so far
+### Progress so far / case studies of momentum
 
-Several efforts have been exploring how institutions can listen, deliberate, and decide in new ways.
+Structured deliberation at scale is being tested by [Simocracy](https://simocracy.org/), which uses simulated citizens and participatory mechanisms to help groups reason through tradeoffs and allocate resources. Real-world governance experimentation has a home at [Edge City](https://www.edgecity.live/), a live environment where new coordination mechanisms are tested with real participants. The public-goods funding and governance community has been convened and grown through [Funding the Commons](https://www.fundingthecommons.io/), which brings together researchers, builders, funders, and institutions. This work builds on a longer lineage of digital-democracy experiments, including Polis, vTaiwan, and participatory budgeting, that show institutions can listen and decide differently.
 
-* [Simocracy](https://simocracy.org/) is experimenting with new approaches to collective decision-making, including the use of simulated citizens, structured deliberation, and participatory mechanisms to help groups reason through tradeoffs and allocate resources.
-* [Edge City](https://www.edgecity.live/) has become a living laboratory for governance and institutional experimentation, giving new coordination mechanisms a real-world environment in which to be tested.
-* [Funding the Commons](https://www.fundingthecommons.io/) has helped convene and grow the public goods funding and governance ecosystem, bringing together researchers, builders, funders, and institutions working on new models for coordination and capital allocation.
+### The Inflection Point: Binding Decisions at Scale
 
-These efforts build on a broader lineage of digital democracy and participatory governance experiments, including Polis, vTaiwan, participatory budgeting, and other systems that show how institutions can listen and decide differently.
-
-### The Inflection Point: Binding Decisions at Massive Scale
-
-Many governance experiments today remain advisory. They produce insight, but not authority.
-
-A major breakthrough occurs when a city, institution, network, or government uses a computational governance mechanism to make a consequential decision with participation from tens of thousands of people.
+Many governance experiments today remain advisory. They produce insight, but not authority. A major breakthrough occurs when a city, institution, network, or government trusts and adopts a computational governance mechanism to make a consequential decision with participation from tens of thousands of people.
 
 A meaningful inflection point could look like:
 
-* **Engagement**: A 10,000+ person deliberation process leading to a consequential public or institutional decision, that's materially better than legacy systems today
-* **Trusted decision-making**: a network using Simocracy or related systems to allocate funding among competing public goods
-* **Democracy**: a public institution adopting computational governance as part of its normal decision-making infrastructure which in turn strengthens democracy / decision-making
+* **Engagement**: A 10,000+ person deliberation process leads to a consequential public or institutional decision, that's measurably better than the legacy process today
+* **Allocation:** a >$10M market cap network uses a collaborative decision-making system like Simocracy to allocate funding among competing public goods
+* **Adoption**: a public institution uses computational governance as part of its default decision-making infrastructure, which in turn strengthens democracy & decision-making
 
 When these systems move from consultation to execution, they become part of society's decision-making infrastructure.
-
-This is one of the first inflection points on the horizon, and therefore where we are spending significant Focus Area time to unlock momentum.
 
 ## Opportunity Space 3: Programmable Capital Allocation
 
@@ -162,13 +203,9 @@ These mechanisms suggest that funding itself can become more adaptive, transpare
 * Open infrastructure for funding allocation
 * New capital markets for public goods
 
-### Progress so far
+### Progress so far / case studies of momentum
 
-Several efforts across Protocol Labs and the broader public goods ecosystem have already demonstrated that new allocation mechanisms can work in practice.
-
-* [Gitcoin](https://gitcoin.co/) pioneered programmable public goods funding at scale, using mechanisms such as quadratic funding to direct capital toward open-source software and community-driven projects.
-* [Hypercerts](https://hypercerts.org/) is exploring new market structures for funding public goods, science, and long-term outcomes by making claims about impact more legible, composable, and tradable.
-* New AI-enabled public goods funding (PGF) mechanisms like those pioneered by Optimism ([RetroPGF](https://round3.optimism.io/)), Ethereum ([Deep Funding](https://www.deepfunding.org/)), and Filecoin ([ProPGF](https://filpgf.io/propgf/)) can point toward a future where valuable contributions can be identified, rewarded, and scaled more effectively.
+Programmable public-goods funding has run at scale through [Gitcoin](https://gitcoin.co/), which used quadratic funding to direct capital to open-source software and community projects. New market structures for funding public goods, science, and long-term outcomes are being built by [Hypercerts](https://hypercerts.org/), which makes impact claims legible, composable, and tradable. AI-assisted public-goods funding is being tested by Optimism ([RetroPGF](https://round3.optimism.io/)), Ethereum ([Deep Funding](https://www.deepfunding.org/)), and Filecoin ([ProPGF](https://filpgf.io/propgf/)), each a route toward identifying and rewarding contributions more reliably. Real money already moves through programmable allocation: Ma Earth has routed more than $1.7M from 11,000+ donors to 202 projects through quadratic funding and hypercerts.
 
 ### The Inflection Point: Public Goods Become an Asset Class
 
@@ -182,17 +219,13 @@ This inflection point depends on three linked breakthroughs:
 * **Legitimacy**: credible institutions trust these mechanisms enough to use them.
 * **Capital Scale**: large pools of public, philanthropic, and private capital begin flowing through them.
 
-The critical flywheel is that efficacy unlocks legitimacy, legitimacy unlocks larger-scale capital, and larger-scale capital creates the incentives for standards, measurement, and adoption.
-
-At that point, public-goods funding becomes a scalable economic system rather than a niche innovation.
+The critical flywheel is that efficacy unlocks legitimacy, legitimacy unlocks larger-scale capital, and larger-scale capital creates the incentives for standards, measurement, and adoption. At that point, public-goods funding becomes a scalable economic system rather than a niche innovation.
 
 ## Opportunity Space 4: Verifiable Real-World Infrastructure & Systems
 
-Verifiable real-world infrastructure focuses on turning measurements of the physical world into trustworthy digital signals.
-
 Many of society's most important decisions depend on understanding what is actually happening in the world. *Did the project happen? Was energy produced? Was biodiversity protected? Did the intervention achieve the intended outcome?*
 
-Today, answering these questions is often expensive, slow, fragmented, and difficult to trust.
+Today, answering these questions is often expensive, slow, fragmented, and difficult to trust. Verifiable real-world infrastructure focuses on turning measurements of the physical world into trustworthy digital signals.
 
 ### Why it matters
 
@@ -213,64 +246,37 @@ Areas we find particularly promising include:
 * Public-goods and infrastructure measurement systems
 * Real-time monitoring and adaptive infrastructure systems
 
-### Progress so far
+### Progress so far / case studies of momentum
 
-Across Protocol Labs teams are exploring how verifiable data can connect capital more directly to environmental outcomes, infrastructure delivery, and real-world systems.
+Transparent measurement of ecological outcomes is being advanced by [GainForest](https://www.gainforest.earth/), which combines AI, remote sensing, and community monitoring; it reports more than 1,160 certified organizations and roughly 48,000 observations. Verification tied to energy production and incentives is being tested by [Glow](https://glow.org/), which reports more than 150 audited solar farms, pointing toward infrastructure that can be financed and rewarded through transparent data. As these systems get better at sensing, reporting, and responding in real time, verification can move from a retrospective audit to a live infrastructure layer.
 
-* [GainForest](https://www.gainforest.earth/) is exploring how AI, remote sensing, and community-based monitoring can support more transparent measurement of ecological and environmental outcomes.
-* [Glow](https://glow.org/) is experimenting with new ways to connect energy production, verification, and incentives, pointing toward a future where real-world infrastructure can be financed and rewarded through more transparent data systems.
+### The Inflection Point: Verification Becomes Shared Trustworthy Infrastructure
 
-This opportunity space also connects to emerging work on autonomous and adaptive real-world infrastructure. As systems become more capable of sensing, reporting, and responding in real time, verification can move from a retrospective audit function to a live infrastructure layer.
+The key transition occurs when trusted information about real-world conditions is no longer produced through occasional manual audits, but becomes a continuous and reusable infrastructure layer that governments, markets, and organizations can routinely build upon.
 
-### The Inflection Point: Verification Becomes a Public Utility
+Reaching that point requires more than better sensors and analytical capacity. These systems must operate at scale while providing useful insight across multiple modalities, from global patterns to individual projects, assets, ecosystems and organisms. They must be decentralized enough to avoid dependency on a single provider, resilient to failures and manipulation, and designed such that countries, institutions and communities can retain meaningful control over data and infrastructure.
 
-The key transition occurs when trusted verification becomes a foundational layer that governments, markets, and organizations can routinely build upon.
+Open standards, independent validation, privacy safeguards and community participation can make these systems more trustworthy, sovereign and resilient. Imagine biodiversity outcomes being continuously measured and verified to decide policy. Energy production automatically triggering payments and rebates. Public infrastructure projects releasing funds based on verified progress rather than self-reported updates.
 
-Imagine biodiversity outcomes being continuously measured and verified to decide policy. Energy production automatically triggering payments and rebates. Public infrastructure projects releasing funds based on verified progress rather than self-reported updates.
-
-When verification becomes cheap, trusted, and widely available, it transforms from compliance overhead into core societal infrastructure.
-
-More importantly, it closes the loop. Better verification enables better decisions. Better decisions enable better capital allocation. Better capital allocation produces better outcomes. And those outcomes generate the data needed to improve the system again.
-
-## How the Opportunity Spaces Stack
-
-These four opportunity spaces are not separate bets. They are interdependent layers of a broader coordination system.
-
-* Sovereign Digital Public Infrastructure provides the rails for coordination.
-* Computational Coordination & Governance helps institutions make decisions.
-* Programmable Capital Allocation helps move resources toward those decisions.
-* Verifiable Real-World Infrastructure measures whether the intended outcomes occurred.
-
-Together the stack improves how institutions understand what matters, decide priorities, allocate resources, and verify they worked.
+When verification becomes affordable, trusted, and widely available, it transforms from compliance overhead into core societal infrastructure.
 
 ## PL R&D: Building the Field
 
-Technical breakthroughs alone are not enough. Progress requires ecosystems capable of turning promising ideas into durable institutions.
+Technical breakthroughs alone are not enough. Progress requires ecosystems capable of turning promising ideas into durable institutions. For more than a decade, nearly 400 teams across Protocol Labs have worked across digital identity, public-goods funding, governance, climate coordination, open infrastructure, and institutional innovation.
 
-For more than a decade, teams across the broader Protocol Labs ecosystem have been working on different pieces of this puzzle. Nearly 400 teams across Protocol Labs have worked across digital identity, public-goods funding, governance, climate coordination, open infrastructure, and institutional innovation.
+<div id="fa2-live-dashboard"></div>
 
-<!-- TODO: add FA2 impact dashboard link/image -->
-
-Taken together, these efforts suggest something larger:
-
-* New ways of funding public goods
-* New approaches to verifying outcomes
-* New models of collective decision-making
-* New infrastructure for trust, coordination, and institutional capacity
-
-PL R&D's role is not to build every piece ourselves. Our role is to connect a network of experiments into field-level momentum.
-
-We work to map emerging opportunity spaces, forecast where the field is heading, and help the most promising ideas move from experiments into real-world deployment.
+PL R&D's role is to connect a network of experiments into field-level momentum. We work to map emerging opportunity spaces, forecast where the field is heading, and help the most promising ideas move from experiments into real-world deployment.
 
 That means supporting research, convening communities, funding early breakthroughs, helping new ventures emerge, developing shared standards, and partnering with governments, multilaterals, funders, and builders around the world.
 
 A stronger ecosystem increases the likelihood that progress across all four opportunity spaces reinforces one another rather than developing in isolation.
 
-## The Near-Term Big Bet: Broad Listening & Simocracy
+## The Near-Term Bet: Broad Listening & Simocracy
 
-We believe several important inflection points are approaching. But one is especially near-term: computational governance moving from advisory experiments to consequential institutional decisionmaking.
+We believe several important inflection points are approaching. But one is especially near-term: computational governance moving from advisory experiments to consequential institutional decision-making.
 
-That is why we are particularly focused on Broad Listening, Simocracy, and related AI-assisted governance systems that can help institutions listen, deliberate, and allocate resources in new ways.
+That is why we are particularly focused on [Broad Listening](https://www.broadlistening.org/), [Simocracy](https://simocracy.org/), and related AI-assisted governance systems that can help institutions listen, deliberate, and allocate resources in new ways.
 
 The bet is simple: if institutions can listen at scale, deliberate more intelligently, allocate capital more transparently, and verify outcomes more reliably - then governance itself can become more adaptive, trustworthy, and effective.
 
@@ -279,17 +285,17 @@ Concrete inflection points could look like the following:
 * A government uses Broad Listening to understand citizen priorities across a contested public issue.
 * Simocracy helps model tradeoffs, structure deliberation, and generate allocation recommendations.
 * A programmable funding mechanism directs capital toward the selected priorities.
-* Verifiable real-world infrastructure measures whether the funded projects actually delivered. Those results feed back into the next cycle of decision-making.
+* Verifiable real-world infrastructure measures whether the funded projects actually delivered, and those results feed back into the next cycle of decision-making.
 
 If this works, the outcome is not just a better consultation process. It is a new institutional capability: the ability to listen, decide, fund, verify, and improve in a continuous loop.
 
 ## Get Involved
 
-This field will not be built by any single organization. It will emerge through the combined efforts of researchers, builders, policymakers, funders, entrepreneurs, and public institutions working across disciplines. PL R&D exists to help accelerate that process.
+This field will emerge through the combined efforts of researchers, builders, policymakers, funders, entrepreneurs, and public institutions working across disciplines. PL R&D exists to help accelerate that process.
 
 If you are building sovereign public infrastructure, governance systems, funding mechanisms, verification technologies, or related coordination tools, we would love to hear from you.
 
-We invite you to explore the [projects already contributing to this vision](/areas/economies-governance/), and see their [collective impact](/areas/economies-governance/impact/live-dashboard/).
+We invite you to explore the [projects already contributing to this vision](/areas/economies-governance/) and review their [collective impact](/areas/economies-governance/impact/live-dashboard/).
 
 Over the coming months, we will publish deep dives on each opportunity space, the bottlenecks slowing progress, and the specific inflection points we believe are within reach.
 

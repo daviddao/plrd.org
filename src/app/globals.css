@@ -312,6 +312,100 @@ ul:not([class]) li li {
   line-height: 1.55;
 }
 
+/* ===== Blog: opportunity-space stack (numbered bubbles + loop diagram) ===== */
+/* Numbered bubble — shared style used by the list above the diagram and by
+   the bubbles inside the SVG, so the two read as one system. */
+.page-content .os-list {
+  list-style: none;
+  margin: 0.75rem 0 1.5rem;
+  padding: 0;
+  display: grid;
+  gap: 0.6rem;
+}
+.page-content .os-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  line-height: 1.45;
+}
+.page-content .os-num {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 9999px;
+  background: var(--color-blue);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-top: 0.05rem;
+}
+.page-content .os-list li > span:last-child {
+  color: var(--color-gray-600);
+}
+.page-content .os-list li strong {
+  color: var(--color-black);
+  font-weight: 600;
+}
+
+/* The feedback-loop "stack" diagram (inline SVG). */
+.page-content .loop-diagram {
+  margin: 0.5rem 0 1rem;
+}
+.page-content .loop-diagram svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 620px;
+  margin: 0 auto;
+}
+.page-content .loop-box {
+  fill: var(--color-white);
+  stroke: var(--color-gray-500);
+  stroke-opacity: 0.3;
+  stroke-width: 1;
+}
+.page-content .loop-bubble {
+  fill: var(--color-blue);
+}
+.page-content .loop-bubble-num {
+  fill: #fff;
+  font-weight: 700;
+}
+.page-content .loop-title {
+  fill: var(--color-black);
+  font-weight: 600;
+}
+.page-content .loop-desc {
+  fill: var(--color-gray-500);
+}
+.page-content .loop-flow {
+  fill: none;
+  stroke: var(--color-blue);
+  stroke-opacity: 0.55;
+  stroke-width: 2;
+}
+.page-content .loop-flow-head {
+  fill: var(--color-blue);
+  fill-opacity: 0.55;
+}
+.page-content .loop-label {
+  fill: var(--color-gray-500);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.page-content .loop-caption {
+  margin: 0 auto 1.5rem;
+  max-width: 620px;
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-500);
+  text-align: center;
+  font-style: italic;
+}
+
 /* ===== Blog: responsive figures ===== */
 .page-content img {
   max-width: 100%;

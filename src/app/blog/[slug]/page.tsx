@@ -4,8 +4,18 @@ import { blogPosts } from '@/lib/content'
 import { formatDate } from '@/lib/format'
 import AuthorCard from '@/components/AuthorCard'
 import Breadcrumb from '@/components/Breadcrumb'
+import Fa2LiveDashboardEmbed from '@/components/Fa2LiveDashboardEmbed'
 
 type Props = { params: Promise<{ slug: string }> }
+
+// Marker a post can drop into its body to pull the live FA2 impact dashboard
+// inline at that exact spot. The build passes raw HTML through untouched, so
+// the empty div survives and we split on it here.
+const FA2_DASHBOARD_MARKER = '<div id="fa2-live-dashboard"></div>'
+
+// Refresh embedded live data on the same 60s window as the standalone
+// dashboard page. Harmless for static posts (they just re-render).
+export const revalidate = 60
 
 export function generateStaticParams() {
   return blogPosts.map((p) => ({ slug: p.slug }))
@@ -55,9 +65,24 @@ export default async function BlogPostPage({ params }: Props) {
           ))}
         </div>
       )}
-      {post.html && (
-        <div className="page-content text-base text-gray-700 leading-relaxed max-w-3xl" dangerouslySetInnerHTML={{ __html: post.html }} />
-      )}
+      {post.html && renderBody(post.html)}
+    </div>
+  )
+}
+
+// Render the post body, splicing the live dashboard in at the marker if present.
+function renderBody(html: string) {
+  const cls =
+    'page-content text-base text-gray-700 leading-relaxed max-w-3xl'
+  if (!html.includes(FA2_DASHBOARD_MARKER)) {
+    return <div className={cls} dangerouslySetInnerHTML={{ __html: html }} />
+  }
+  const [before, after] = html.split(FA2_DASHBOARD_MARKER)
+  return (
+    <div className={cls}>
+      <div dangerouslySetInnerHTML={{ __html: before }} />
+      <Fa2LiveDashboardEmbed />
+      <div dangerouslySetInnerHTML={{ __html: after }} />
     </div>
   )
 }
