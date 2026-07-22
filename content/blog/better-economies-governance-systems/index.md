@@ -29,7 +29,7 @@ Integrating technological advancements offer a path toward future institutions t
 
 PL Economies & Governance's mission is to help build the programmable infrastructure that enables states, organizations, and communities to make better decisions for more people under greater degrees of trust.
 
-By "programmable infrastructure", we mean systems where rules, transactions, and coordination can be executed, verified, and improved through software like cryptography, AI, and open networks. This includes everything from digital identity and payment rails to public goods funding, verifiable climate finance, and new forms of institutional coordination. Digital infrastructure replaces paper-based processes and lets institutions issue credentials, and maintain records electronically, while programmable infrastructure enables to coordinate and respond through explicit, verifiable rules that can be automated or iterated.
+By "programmable infrastructure", we mean systems where rules, transactions, and coordination can be executed, verified, and improved through software like cryptography, AI, and open networks. This includes everything from digital identity and payment rails to public goods funding, verifiable climate finance, and new forms of institutional coordination. Digital infrastructure replaces paper-based processes and lets institutions issue credentials, and maintain records electronically, while programmable infrastructure enables coordination and response through explicit, verifiable rules that can be automated or iterated.
 
 We focus on four opportunity spaces that together form a societal coordination stack:
 
