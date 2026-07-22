@@ -74,7 +74,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Only native blog posts get a detail page worth indexing; external stubs
   // link straight out to their canonical home (e.g. protocol.ai).
   const blogRoutes: MetadataRoute.Sitemap = blogPosts
-    .filter((b) => b.slug && !b.external_url)
+    .filter((b) => b.slug && !b.external_url && !b.unlisted)
     .map((b) => ({
       url: url(`blog/${b.slug}`),
       lastModified: lastMod(b.date),

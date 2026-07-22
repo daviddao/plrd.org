@@ -256,6 +256,7 @@ async function buildBlog() {
       external_url: b.external_url || '',
       coverImage,
       html: renderMd(b.content),
+      unlisted: b.unlisted === true,
     })
   }
 
@@ -357,7 +358,7 @@ function buildFeed(publications, talks, blog) {
     })),
     // Blog posts: external stubs (e.g. protocol.ai imports) link to their
     // original URL; native posts link to /blog/<slug>/ on plresearch.org.
-    ...blog.slice(0, 20).map((b) => ({
+    ...blog.filter((b) => !b.unlisted).slice(0, 20).map((b) => ({
       title: b.title,
       link: b.external_url || `${baseUrl}/blog/${b.slug}/`,
       date: b.date,
@@ -412,8 +413,8 @@ function buildSearchIndex(publications, talks, authors, blog, tutorials, areas) 
       type: 'author',
       relpermalink: `/authors/${a.slug}/`,
     })),
-    // Blog posts
-    ...blog.map((b) => ({
+    // Blog posts (unlisted/preview posts stay out of search)
+    ...blog.filter((b) => !b.unlisted).map((b) => ({
       title: b.title,
       summary: (b.summary || '').slice(0, 500),
       date: b.date,

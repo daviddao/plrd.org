@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { sections, publications, talks, blogPosts, areas, focusAreaDefs } from '@/lib/content'
+import { sections, publications, talks, listedBlogPosts as blogPosts, areas, focusAreaDefs } from '@/lib/content'
 import Breadcrumb from '@/components/Breadcrumb'
 import EditPageButton from '@/components/EditPageButton'
 import { PageEditHistoryByline } from '@/components/EditHistoryByline'

@@ -1,5 +1,10 @@
 ---
 title: "Programmable Economies & Governance: Upgrading Society's Operating System"
+# Preview-only: hidden from all listings, sitemap, RSS & search; noindex.
+# Reachable solely via this cryptic slug. To publish for real, delete both
+# `unlisted` and `slug` below (the URL reverts to /blog/better-economies-governance-systems/).
+unlisted: true
+slug: "better-economies-governance-systems-preview-6a9f852b77"
 date: 2026-07-27
 summary: "An overview of PL R&D's Programmable Economies & Governance focus area — the programmable infrastructure societies use to decide, allocate, verify, and coordinate — and the four opportunity spaces and inflection points we believe are within reach."
 authors:

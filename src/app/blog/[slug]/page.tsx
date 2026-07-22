@@ -32,6 +32,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: post.title,
     description: metaDescription,
     alternates: { canonical },
+    // Unlisted/preview posts render but must stay out of every index.
+    robots: post.unlisted
+      ? { index: false, follow: false, googleBot: { index: false, follow: false } }
+      : undefined,
     openGraph: {
       type: 'article',
       url: canonical,

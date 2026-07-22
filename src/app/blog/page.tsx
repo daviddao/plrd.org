@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { blogPosts, focusAreaDefs } from '@/lib/content'
+import { listedBlogPosts as blogPosts, focusAreaDefs } from '@/lib/content'
 import { formatDate } from '@/lib/format'
 import Breadcrumb from '@/components/Breadcrumb'
 import BackToInsights from '@/components/BackToInsights'
