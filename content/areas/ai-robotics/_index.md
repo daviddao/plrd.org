@@ -5,6 +5,6 @@ summary: "Building open compute, coordination, data, and economic rails for auto
 leads:
   - molly-mackinlay
 ---
-This focus area encompasses AI, Robotics, and other nascent technological breakthroughs. We are exploring diverse areas of computing that promise radical transformations in how we interact with the world, including Artificial General Intelligence (AGI), Augmented Reality (AR), and Virtual Reality (VR).
+AI agents and robots are becoming economic participants at scale, transacting and coordinating on behalf of people and organizations. The substrate they run on is either open or it centralizes, and whether the agent era stays open or closes gets decided at the infrastructure layer: compute, coordination, data, and economic rails.
 
-Our goal is to ensure responsible advancement in these fields by fostering effective resource allocation and a robust R&D pipeline. By accelerating the innovation network, we aim to overcome challenges faster than conventional systems and shape a future where these transformative technologies empower humanity.
+We treat safety as resilience: no single point of failure, and many independent actors rather than a few gatekeepers. That makes decentralization both the competitive bet and the safety strategy. Our role is to support the research and early builders whose work lets an open version of each layer emerge.
