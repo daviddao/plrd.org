@@ -15,6 +15,11 @@ const FOCUS_AREA_IMAGES: Record<string, string> = {
 }
 import RDPipeline from "@/components/RDPipeline"
 import InsightCarousel from "@/components/InsightCarousel"
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  alternates: { canonical: '/' },
+}
 
 type UpdateItem = {
   title: string
