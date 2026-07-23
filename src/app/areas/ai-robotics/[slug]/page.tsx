@@ -55,6 +55,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${opp.title} – AI & Robotics`,
     description: opp.description.slice(0, 160),
+    alternates: { canonical: `/areas/ai-robotics/${slug}/` },
   }
 }
 

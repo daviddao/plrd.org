@@ -50,6 +50,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${opp.title} – Neurotech`,
     description: opp.description.slice(0, 160),
+    alternates: { canonical: `/areas/neurotech/${slug}/` },
   }
 }
 
