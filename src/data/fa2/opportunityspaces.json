@@ -8,7 +8,7 @@
       "id": "sovereign-dpi",
       "title": "Sovereign Digital Public Infrastructure",
       "tagline": "Open, verifiable, privacy-preserving rails for nation-states",
-      "image": "/images/fa2/opportunity-spaces/sovereign-dpi.jpg",
+      "image": "/images/opportunity-spaces/sovereign-dpi.jpg",
       "description": "A new category of infrastructure is emerging. Nation-states, multilateral institutions, and regional blocs are recognizing that their core public systems need to be rebuilt on open, verifiable, privacy-preserving foundations. This is the promise of sovereign-grade Digital Public Infrastructure (DPI).",
       "inflectionPoint": "A nation-state successfully runs core systems (identity, payment, registries) on crypto-rails and gains measurable advantages (e.g. World becomes mandated digital identity layer, or Anden digital zone catalyses Argentina's economic growth).",
       "tippingSignals": [
@@ -63,7 +63,7 @@
       "id": "public-goods-funding",
       "title": "AI & Crypto-Native Public Goods Funding at Nation-Scale",
       "tagline": "Sustainable funding mechanisms connecting crypto innovation to institutional capital",
-      "image": "/images/fa2/opportunity-spaces/public-goods-funding.jpg",
+      "image": "/images/opportunity-spaces/public-goods-funding.jpg",
       "description": "Public Goods Funding mechanisms have matured from quadratic funding experiments to sophisticated retroactive funding, hypercerts, and impact certificates. Yet they remain disconnected from the institutional capital and legitimacy needed for scale.",
       "inflectionPoint": "Large-scale adoption of AI/crypto-native PGF mechanism for national public goods funding in the billions of dollars (e.g. Hypercerts getting adopted as default certificate for global philanthropy).",
       "tippingSignals": [
@@ -118,7 +118,7 @@
       "id": "governance-democracy",
       "title": "Crypto-Native Governance & Democracy",
       "tagline": "New coordination mechanisms for collective decision-making",
-      "image": "/images/fa2/opportunity-spaces/governance-democracy.jpg",
+      "image": "/images/opportunity-spaces/governance-democracy.jpg",
       "description": "Traditional governance systems struggle with scale, legitimacy, and responsiveness. Crypto-native governance mechanisms offer new primitives for collective decision-making: quadratic voting, conviction voting, futarchy, and novel delegation systems.",
       "inflectionPoint": "Crypto-native governance is adopted because existing institutions can no longer credibly claim authority (e.g. Edge City-derived governance frameworks adopted by a city or jurisdiction).",
       "tippingSignals": [
@@ -172,7 +172,7 @@
       "id": "climate-infrastructure",
       "title": "Decentralized Climate Infrastructure & Finance",
       "tagline": "DePIN networks and ReFi mechanisms for climate action at scale",
-      "image": "/images/fa2/opportunity-spaces/climate-infrastructure.jpg",
+      "image": "/images/opportunity-spaces/climate-infrastructure.jpg",
       "description": "Decentralized Physical Infrastructure Networks (DePIN) are demonstrating that compute, energy, sensing, mapping, and telecommunications can be coordinated through crypto-native mechanisms. Combined with Regenerative Finance (ReFi), this creates new possibilities for funding and operating climate infrastructure at global scale.",
       "inflectionPoint": "There exists a billion-dollar DePIN-enabled climate business (e.g. Glow scaling to control large parts of the solar market).",
       "tippingSignals": [
