@@ -12,7 +12,6 @@ import AreaHeroActions from '@/components/AreaHeroActions'
 import AuthorCard from '@/components/AuthorCard'
 import Breadcrumb from '@/components/Breadcrumb'
 import MarkdownContent from '@/components/MarkdownContent'
-import { fetchPage, getSection, fetchOpportunitySpaces } from '@/lib/indexer'
 import aiOpportunityData from '@/data/fa2/ai-opportunityspaces.json'
 import dhrOpportunityData from '@/data/fa2/dhr-opportunityspaces.json'
 import neuroOpportunityData from '@/data/fa2/neuro-opportunityspaces.json'
@@ -44,20 +43,7 @@ async function loadOpportunityCards(slug: string): Promise<{
   const dataset = SLUG_TO_OPPORTUNITY_DATA[slug]
   if (!dataset) return { meta: { title: '', subtitle: '' }, cards: [] }
 
-  const remote = await fetchOpportunitySpaces(slug)
-  if (remote.length > 0) {
-    return {
-      meta: dataset.meta,
-      cards: remote.map((o) => ({
-        id: o.id,
-        title: o.title,
-        tagline: o.tagline ?? '',
-        image: dataset.opportunities.find((s) => s.id === o.id)?.image ?? o.image ?? '',
-        description: o.description,
-        subfields: o.subfields ?? [],
-      })),
-    }
-  }
+  // Source of truth is the repo (src/data/fa2/*.json), edited via PRs.
   return {
     meta: dataset.meta,
     cards: dataset.opportunities.map((o) => ({
@@ -122,18 +108,12 @@ export default async function AreaPage({ params }: Props) {
   const area = areas.find((a) => a.slug === slug)
   if (!area) notFound()
 
-  const pageRkey = `area-${slug}`
-  const page = await fetchPage(pageRkey)
-  const heroSection = getSection(page, "hero")
-
-  // Fallback chain: indexer-edited subtitle wins (so /areas/<slug>/edit/ shows
-  // up), then the canonical FOCUS_AREA_DESCRIPTIONS constant (matches the
-  // landing page + About when the indexer record is empty), then the markdown
-  // frontmatter summary as a final safety net.
-  const summary = heroSection?.subtitle || FOCUS_AREA_DESCRIPTIONS[slug as FocusAreaSlug] || area.summary
-  const bodyFromIndexer = heroSection?.body ?? null
-  const leads = page?.leads || area.leads
-  const advisors = page?.advisors || area.advisors
+  // Content is sourced from the repo (Markdown frontmatter + src/data/fa2),
+  // edited via PRs. FOCUS_AREA_DESCRIPTIONS is the canonical subtitle; the
+  // Markdown frontmatter summary is the fallback.
+  const summary = FOCUS_AREA_DESCRIPTIONS[slug as FocusAreaSlug] || area.summary
+  const leads = area.leads
+  const advisors = area.advisors
 
   const areaPubs = publications.filter((p) => p.areas.includes(slug)).slice(0, 8)
   const areaTalks = talks.filter((t) => t.areas.includes(slug)).slice(0, 6)
@@ -182,14 +162,10 @@ export default async function AreaPage({ params }: Props) {
         )}
       </div>
 
-      {/* Content */}
-      {(bodyFromIndexer || area.html) && (
+      {/* Content (from the area's Markdown body) */}
+      {area.html && (
         <div className="mb-12 pb-12 border-b border-gray-100">
-          {bodyFromIndexer ? (
-            <MarkdownContent content={bodyFromIndexer} className="page-content text-base text-gray-700 leading-relaxed max-w-3xl" />
-          ) : (
-            <div className="page-content text-base text-gray-700 leading-relaxed max-w-3xl" dangerouslySetInnerHTML={{ __html: area.html! }} />
-          )}
+          <div className="page-content text-base text-gray-700 leading-relaxed max-w-3xl" dangerouslySetInnerHTML={{ __html: area.html }} />
         </div>
       )}
 

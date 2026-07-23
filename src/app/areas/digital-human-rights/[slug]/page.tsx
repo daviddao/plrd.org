@@ -4,7 +4,6 @@ import Breadcrumb from '@/components/Breadcrumb'
 import EditPageButton from '@/components/EditPageButton'
 import EditHistoryByline from '@/components/EditHistoryByline'
 import opportunityData from '@/data/fa2/dhr-opportunityspaces.json'
-import { fetchOpportunitySpace } from '@/lib/indexer'
 import { ADMIN_DID, OPPORTUNITY_COLLECTION, opportunitySpaceRkey } from '@/lib/lexicons'
 
 type Props = {
@@ -20,27 +19,8 @@ export function generateStaticParams() {
 }
 
 async function loadOpp(slug: string): Promise<Opportunity | null> {
-  const staticOpp = opportunityData.opportunities.find((o) => o.id === slug)
-  const rkey = opportunitySpaceRkey('digital-human-rights', slug)
-  const remote = await fetchOpportunitySpace(rkey)
-  if (remote) {
-    return {
-      id: remote.id,
-      title: remote.title,
-      tagline: remote.tagline ?? '',
-      image: staticOpp?.image ?? remote.image ?? '',
-      description: remote.description,
-      inflectionPoint: remote.inflectionPoint ?? '',
-      shift: remote.shift ?? '',
-      theOpportunity: remote.theOpportunity ?? '',
-      subfields: remote.subfields ?? [],
-      tippingSignals: remote.tippingSignals ?? [],
-      keyAssumptions: remote.keyAssumptions ?? [],
-      observations: remote.observations ?? [],
-      fieldSignals: remote.fieldSignals ?? [],
-    } as Opportunity
-  }
-  return staticOpp ?? null
+  // Source of truth is the repo JSON, edited via PRs.
+  return opportunityData.opportunities.find((o) => o.id === slug) ?? null
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

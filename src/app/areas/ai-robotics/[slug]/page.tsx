@@ -4,7 +4,6 @@ import Breadcrumb from '@/components/Breadcrumb'
 import EditPageButton from '@/components/EditPageButton'
 import EditHistoryByline from '@/components/EditHistoryByline'
 import opportunityData from '@/data/fa2/ai-opportunityspaces.json'
-import { fetchOpportunitySpace } from '@/lib/indexer'
 import { ADMIN_DID, OPPORTUNITY_COLLECTION, opportunitySpaceRkey } from '@/lib/lexicons'
 
 type Props = {
@@ -20,32 +19,11 @@ export function generateStaticParams() {
 }
 
 /**
- * Prefer live data from the indexer (org.plresearch.opportunitySpace record),
- * fall back to the static JSON checked into git if the indexer is unreachable
- * or the record isn't there. Same pattern as /areas/[slug]/page.tsx.
+ * Source of truth is the repo JSON (src/data/fa2/ai-opportunityspaces.json),
+ * edited via PRs. Same pattern as /areas/[slug]/page.tsx.
  */
 async function loadOpp(slug: string): Promise<Opportunity | null> {
-  const staticOpp = opportunityData.opportunities.find((o) => o.id === slug)
-  const rkey = opportunitySpaceRkey('ai-robotics', slug)
-  const remote = await fetchOpportunitySpace(rkey)
-  if (remote) {
-    return {
-      id: remote.id,
-      title: remote.title,
-      tagline: remote.tagline ?? '',
-      image: staticOpp?.image ?? remote.image ?? '',
-      description: remote.description,
-      inflectionPoint: remote.inflectionPoint ?? '',
-      shift: remote.shift ?? '',
-      theOpportunity: remote.theOpportunity ?? '',
-      subfields: remote.subfields ?? [],
-      tippingSignals: remote.tippingSignals ?? [],
-      keyAssumptions: remote.keyAssumptions ?? [],
-      observations: remote.observations ?? [],
-      fieldSignals: remote.fieldSignals ?? [],
-    } as Opportunity
-  }
-  return staticOpp ?? null
+  return opportunityData.opportunities.find((o) => o.id === slug) ?? null
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
