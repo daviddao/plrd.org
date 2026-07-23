@@ -8,7 +8,7 @@
       "id": "censorship-resistant-communications",
       "title": "Censorship-Resistant Communications & Media",
       "tagline": "Resilient protocols for speech, publishing, and information that cannot be deplatformed",
-      "image": "/images/fa2/opportunity-spaces/censorship-resistant-communications.jpg",
+      "image": "/images/opportunity-spaces/censorship-resistant-communications.jpg",
       "description": "Speech, association, and information distribution are the first rights constrained in adversarial environments. Resilient messaging, portable social graphs, and censorship-resistant publishing must become the default infrastructure—not the exception. The goal is not to build a better social app but to build protocols and data primitives that make deplatforming non-fatal.",
       "inflectionPoint": "A major incident of takedown or suppression fails because content and coordination survive across decentralized networks, demonstrating that deplatforming is no longer a viable tool of control at low cost.",
       "tippingSignals": [
@@ -45,7 +45,7 @@
       "id": "portable-identity-credentials",
       "title": "Portable Identity, Credentials & Trust",
       "tagline": "User-held identity that escapes platforms and institutions",
-      "image": "/images/fa2/opportunity-spaces/portable-identity-credentials.jpg",
+      "image": "/images/opportunity-spaces/portable-identity-credentials.jpg",
       "description": "Without portable identity, users remain trapped in platforms and institutions they do not control. Identity must become a user-held coordination layer—carrying credentials, reputation, and permissions across ecosystems without depending on any dominant intermediary. This includes human identity, agent identity, and everything in between.",
       "inflectionPoint": "A 100M+ service identifies users without KYC, or autonomous agents begin transacting using self-sovereign identity primitives, signaling that identity is no longer exclusively issued by nation-states or platforms.",
       "tippingSignals": [
@@ -82,7 +82,7 @@
       "id": "verifiable-public-knowledge",
       "title": "Verifiable Public Knowledge & Provenance",
       "tagline": "Cryptographic provenance as civilizational infrastructure against synthetic reality",
-      "image": "/images/fa2/opportunity-spaces/verifiable-public-knowledge.jpg",
+      "image": "/images/opportunity-spaces/verifiable-public-knowledge.jpg",
       "description": "As AI floods the information environment with synthetic content, provenance and authenticity become core civilizational infrastructure. The coming war is not just over speech—it is over reality verification. Content addressing, durable storage, and verifiable retrieval must underpin the next generation of knowledge infrastructure.",
       "inflectionPoint": "Two generations of frontier AI models ship with attested provenance tooling, or major media and scientific institutions adopt cryptographic provenance as a baseline requirement—signaling that the information environment now requires proof, not just trust.",
       "tippingSignals": [
@@ -119,7 +119,7 @@
       "id": "sovereign-infrastructure-ai-agents",
       "title": "Sovereign Infrastructure for AI & Agents",
       "tagline": "Open, verifiable rails for the agent economy—before it gets locked up",
-      "image": "/images/fa2/opportunity-spaces/sovereign-infrastructure-ai-agents.jpg",
+      "image": "/images/opportunity-spaces/sovereign-infrastructure-ai-agents.jpg",
       "description": "AI will either deepen digital human rights or destroy them. The difference will be set at the infrastructure layer. Agent economies need open data rails, verifiable compute, self-sovereign identity, and permissionless coordination—before centralized providers make these choices by default. This is a first-class DHR priority, not a separate AI strategy.",
       "inflectionPoint": "Autonomous agents begin transacting across organizational boundaries using open coordination infrastructure, demonstrating that agent economies can emerge without depending on centralized APIs as the sole coordination mechanism.",
       "tippingSignals": [

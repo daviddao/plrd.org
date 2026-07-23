@@ -8,7 +8,7 @@
       "id": "open-compute-networks",
       "title": "Open Compute Networks",
       "tagline": "Distributed AI training and inference, sited where power is, beyond the hyperscalers",
-      "image": "/images/fa2/opportunity-spaces/open-compute-networks.jpg",
+      "image": "/images/opportunity-spaces/open-compute-networks.jpg",
       "description": "AI compute infrastructure is concentrated within a handful of hyperscalers and large labs, limiting experimentation and participation. The binding constraint is increasingly power, not chips: new data centers face multi-year grid interconnection queues and transformer and turbine backlogs, while the cheapest new generation, wind and solar, sits stranded and curtailed where the grid cannot absorb it. Distributed compute markets can place capacity where power is, providing scalable access to training and inference across decentralized infrastructure rather than a handful of centralized clouds.",
       "inflectionPoint": "A decentralized compute network trains a competitive model—demonstrating that distributed infrastructure can match centralized systems for meaningful AI workloads, breaking the assumption that only hyperscalers can develop frontier AI.",
       "tippingSignals": [
@@ -48,7 +48,7 @@
       "id": "agent-coordination-infrastructure",
       "title": "Agent Coordination Infrastructure",
       "tagline": "Identity, reputation, and coordination protocols for persistent autonomous agents",
-      "image": "/images/fa2/opportunity-spaces/agent-coordination-infrastructure.jpg",
+      "image": "/images/opportunity-spaces/agent-coordination-infrastructure.jpg",
       "description": "Agents currently operate as isolated tools rather than persistent entities capable of coordination, negotiation, and cooperation. The emergence of large-scale agent economies depends on open protocols for agent identity, reputation, task coordination, and skill exchange—infrastructure that no single lab or platform should control.",
       "inflectionPoint": "Large numbers of long-running autonomous agents coordinate across organizational boundaries through open protocols—demonstrating that agent economies can emerge without centralized orchestration as the primary coordination mechanism.",
       "tippingSignals": [
@@ -84,7 +84,7 @@
       "id": "embodied-ai-robotics-data",
       "title": "Embodied AI & Robotics Data Networks",
       "tagline": "Robot fleets generating the continuous real-world training data that embodied intelligence requires",
-      "image": "/images/fa2/opportunity-spaces/embodied-ai-robotics-data.jpg",
+      "image": "/images/opportunity-spaces/embodied-ai-robotics-data.jpg",
       "description": "Embodied AI systems require vast quantities of real-world interaction data that is today scarce, fragmented, and expensive to generate. Large-scale robotics networks capable of generating continuous training data streams are the missing infrastructure for embodied intelligence—and the foundation for automation across industries.",
       "inflectionPoint": "Robotics datasets rival internet-scale datasets in size and diversity, enabling embodied AI to demonstrate the complete behavioral repertoire required for deployment across real-world industrial and service environments.",
       "tippingSignals": [
@@ -122,7 +122,7 @@
       "id": "agent-native-economic-infrastructure",
       "title": "Agent-Native Economic Infrastructure",
       "tagline": "Financial and coordination systems designed from the ground up for machine participants",
-      "image": "/images/fa2/opportunity-spaces/agent-native-economic-infrastructure.jpg",
+      "image": "/images/opportunity-spaces/agent-native-economic-infrastructure.jpg",
       "description": "Existing digital economies are designed for human participation. Autonomous agents lack the infrastructure for autonomous payments, contracting, and coordination—primitives that are prerequisites for agent economies to emerge. New financial and coordination systems designed for machine participants must be built before agent economies arrive at scale.",
       "inflectionPoint": "Autonomous organizations composed primarily of AI agents emerge, completing transactions, managing resources, and coordinating production without requiring human intermediation at each step.",
       "tippingSignals": [

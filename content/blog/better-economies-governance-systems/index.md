@@ -115,7 +115,7 @@ The result is a new feedback loop for institutional learning and collective inte
 
 <h2 class="os-heading">Opportunity Space <span class="os-num">1</span> Sovereign Digital Public Infrastructure</h2>
 
-<figure class="post-figure os-banner"><img src="/images/fa2/opportunity-spaces/sovereign-dpi.jpg" alt="Sovereign Digital Public Infrastructure" /></figure>
+<figure class="post-figure os-banner"><img src="/images/opportunity-spaces/sovereign-dpi.jpg" alt="Sovereign Digital Public Infrastructure" /></figure>
 
 Sovereign Digital Public Infrastructure (DPI) focuses on the systems governments use to deliver essential public services in the digital age. This includes identity, payments, registries, credentials, and the infrastructure that allows citizens to interact with public institutions.
 
@@ -158,7 +158,7 @@ When public infrastructure becomes both programmable and verifiable, digital gov
 
 <h2 class="os-heading">Opportunity Space <span class="os-num">2</span> Computational Coordination &amp; Governance</h2>
 
-<figure class="post-figure os-banner"><img src="/images/fa2/opportunity-spaces/governance-democracy.jpg" alt="Computational Coordination & Governance" /></figure>
+<figure class="post-figure os-banner"><img src="/images/opportunity-spaces/governance-democracy.jpg" alt="Computational Coordination & Governance" /></figure>
 
 Every major institution faces the same challenge: how to make good decisions with limited attention, incomplete information, diverse stakeholder interests, and contested values.
 
@@ -205,7 +205,7 @@ When these systems move from consultation to execution, they become part of soci
 
 <h2 class="os-heading">Opportunity Space <span class="os-num">3</span> Programmable Capital Allocation</h2>
 
-<figure class="post-figure os-banner"><img src="/images/fa2/opportunity-spaces/public-goods-funding.jpg" alt="Programmable Capital Allocation" /></figure>
+<figure class="post-figure os-banner"><img src="/images/opportunity-spaces/public-goods-funding.jpg" alt="Programmable Capital Allocation" /></figure>
 
 Programmable capital allocation focuses on helping societies direct resources toward shared priorities more effectively.
 
@@ -247,7 +247,7 @@ The critical flywheel is that efficacy unlocks legitimacy, legitimacy unlocks la
 
 <h2 class="os-heading">Opportunity Space <span class="os-num">4</span> Verifiable Real-World Infrastructure &amp; Systems</h2>
 
-<figure class="post-figure os-banner"><img src="/images/fa2/opportunity-spaces/climate-infrastructure.jpg" alt="Verifiable Real-World Infrastructure & Systems" /></figure>
+<figure class="post-figure os-banner"><img src="/images/opportunity-spaces/climate-infrastructure.jpg" alt="Verifiable Real-World Infrastructure & Systems" /></figure>
 
 Many of society's most important decisions depend on understanding what is actually happening in the world. *Did the project happen? Was energy produced? Was biodiversity protected? Did the intervention achieve the intended outcome?*
 

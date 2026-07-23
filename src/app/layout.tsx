@@ -21,7 +21,10 @@ export const metadata: Metadata = {
   description: siteConfig.description,
   metadataBase: new URL(siteConfig.baseUrl),
   alternates: {
-    canonical: '/',
+    // No site-wide canonical: a root-level canonical to '/' is inherited by
+    // every page that doesn't set its own, which points all subpages at the
+    // homepage and deindexes them. Each page declares its own canonical; the
+    // homepage sets canonical: '/' in src/app/page.tsx.
     types: {
       'application/rss+xml': '/feed.xml',
     },
