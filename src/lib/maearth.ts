@@ -23,8 +23,12 @@ import "server-only"
  * maearth.com's headline banner, which adds donor-covered processing fees via
  * the operator-only (auth-gated) `rounds.getStats`.
  *
- * A flaky/empty upstream yields 0 + `degraded: true` rather than failing the
- * page — same contract as fetchGainforestStats / fetchGlowStats / fetchFtcStats.
+ * When the round is closed, `rounds.getCurrent` answers `{"json": null}` and
+ * the live path has nothing to sum. In that case (or any upstream failure) we
+ * fall back to CLOSED_ROUND_SNAPSHOT — the final headline totals from
+ * maearth.com's homepage banner — with `degraded: true`, rather than showing
+ * zeros. Same never-fail contract as fetchGainforestStats / fetchGlowStats /
+ * fetchFtcStats.
  */
 
 const MAEARTH_RPC_BASE =
@@ -41,6 +45,22 @@ const REVALIDATE = 60 * 15
 
 // Fallback pool when the pool record can't be read: Round 3 base is $1M.
 const FALLBACK_POOL_USD = 1_000_000
+
+/**
+ * Final Round 3 totals, snapshotted from maearth.com's homepage banner
+ * ("$745,949 raised · 11,692 donors · 201 projects funded") after the round
+ * closed. Used whenever the live RPC has no current round (round closed) or
+ * is unreachable, so the dashboard never regresses to 0/0.
+ * Snapshot taken: see `SNAPSHOT_AS_OF`.
+ */
+const SNAPSHOT_AS_OF = "2026-02-25"
+const CLOSED_ROUND_SNAPSHOT = {
+  round: "Round 3",
+  donations: 745_949,
+  donors: 11_692,
+  projects: 201,
+  matchingPool: FALLBACK_POOL_USD,
+} as const
 
 export type MaEarthStats = {
   /** Active round name, e.g. "Round 3". */
@@ -109,13 +129,12 @@ export async function fetchMaEarthStats(): Promise<MaEarthStats> {
       degraded: false,
     }
   } catch (err) {
-    console.warn("[maearth] stats fetch failed:", err)
+    console.warn(
+      `[maearth] live stats unavailable, using closed-round snapshot (${SNAPSHOT_AS_OF}):`,
+      err,
+    )
     return {
-      round: "Round 3",
-      donations: 0,
-      donors: 0,
-      projects: 0,
-      matchingPool: FALLBACK_POOL_USD,
+      ...CLOSED_ROUND_SNAPSHOT,
       fetchedAt: new Date().toISOString(),
       degraded: true,
     }

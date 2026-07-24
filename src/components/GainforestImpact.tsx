@@ -228,9 +228,9 @@ export default function GainforestImpact({
             label={`${maearth.round} donations`}
             value={maearth.donations}
             caption={
-              maearth.degraded
-                ? 'Ma Earth ↗'
-                : `${formatCount(maearth.projects)} projects · Ma Earth ↗`
+              maearth.projects > 0
+                ? `${formatCount(maearth.projects)} projects · Ma Earth ↗`
+                : 'Ma Earth ↗'
             }
             format={formatUsd}
             color={PINK}
