@@ -5,6 +5,8 @@ import { AuthProvider } from '@/lib/atproto'
 import SiteShell from '@/components/SiteShell'
 import GoatCounter from '@/components/GoatCounter'
 import CookieConsent from '@/components/CookieConsent'
+import { GoogleAnalytics } from '@next/third-parties/google'
+import { COOKIE_CONSENT_ENABLED } from '@/lib/cookie-consent'
 import './globals.css'
 
 const newsreader = Newsreader({
@@ -114,9 +116,13 @@ export default function RootLayout({
           <SiteShell>{children}</SiteShell>
         </AuthProvider>
         <GoatCounter />
-        {process.env.NEXT_PUBLIC_GA_ID && (
-          <CookieConsent gaId={process.env.NEXT_PUBLIC_GA_ID} />
-        )}
+        {process.env.NEXT_PUBLIC_GA_ID &&
+          (COOKIE_CONSENT_ENABLED ? (
+            <CookieConsent gaId={process.env.NEXT_PUBLIC_GA_ID} />
+          ) : (
+            // Banner disabled: load analytics directly.
+            <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+          ))}
       </body>
     </html>
   )
