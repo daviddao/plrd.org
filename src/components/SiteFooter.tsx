@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import CookieSettingsLink from './CookieSettingsLink'
+import { COOKIE_CONSENT_ENABLED } from '@/lib/cookie-consent'
 
 export default function SiteFooter() {
   return (
@@ -71,7 +72,7 @@ export default function SiteFooter() {
               <li><a href="https://www.protocol.ai/legal/#privacy-policy" target="_blank" rel="noopener noreferrer" className="text-sm text-[#cfd1da] hover:text-white transition-colors block py-1">Privacy Policy</a></li>
               <li><a href="https://creativecommons.org/licenses/by/4.0/" className="text-sm text-[#cfd1da] hover:text-white transition-colors block py-1">CC-BY 4.0 License</a></li>
               <li><a href="mailto:research@protocol.ai" className="text-sm text-[#cfd1da] hover:text-white transition-colors block py-1">Contact</a></li>
-              {process.env.NEXT_PUBLIC_GA_ID && (
+              {process.env.NEXT_PUBLIC_GA_ID && COOKIE_CONSENT_ENABLED && (
                 <li><CookieSettingsLink className="text-sm text-[#cfd1da] hover:text-white transition-colors block py-1 text-left" /></li>
               )}
             </ul>

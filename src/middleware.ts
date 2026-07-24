@@ -1,4 +1,5 @@
 import { NextResponse, type NextRequest } from 'next/server'
+import { COOKIE_CONSENT_ENABLED } from '@/lib/cookie-consent'
 
 // Countries where prior consent is legally required before setting non-essential
 // (analytics) cookies: the EU/EEA under the ePrivacy Directive + GDPR, and the
@@ -18,6 +19,10 @@ const CONSENT_REQUIRED_COUNTRIES = new Set([
 const REGION_COOKIE = 'pl-consent-region'
 
 export function middleware(req: NextRequest) {
+  const res0 = NextResponse.next()
+  // Consent banner disabled: no need to detect the region or set its cookie.
+  if (!COOKIE_CONSENT_ENABLED) return res0
+
   // Vercel injects the visitor's country here at the edge.
   const country = (req.headers.get('x-vercel-ip-country') || '').toUpperCase()
 
