@@ -10,6 +10,8 @@ For content authoring (adding a paper, author, talk, blog post) read
 
 ## 0. TL;DR for agents
 
+- **Canonical repo:** `github.com/protocol/plrd.org`. The project moved here from `daviddao/plrd.org` (earlier `plresearch.org`). All work — branches, PRs, pushes — targets `protocol/plrd.org`.
+
 - **Stack:** Next.js 15 App Router + React 19 + Tailwind **v4 CSS-first** + TypeScript. No ESLint, no test runner. Verify with `npx tsc --noEmit` and `npm run build`.
 - **Content pipeline:** Markdown in `content/` → `scripts/build-content.mjs` (prebuild) → JSON in `src/data/generated/` → typed arrays in `src/lib/content.ts` → pages. JSON is **checked into git**.
 - **Trailing slashes are mandatory** on every internal `href`. `skipTrailingSlashRedirect: true` means missing slashes 404 silently.
@@ -423,7 +425,7 @@ Only `COOKIE_SECRET`, `PUBLIC_URL`, `ATPROTO_JWK_PRIVATE`, `ATPROTO_HANDLE`, `AT
 
 ## 10. Deployment
 
-Deployed to Vercel from `daviddao/plrd-v2`; `main` auto-deploys. `vercel.json` sets only `framework: nextjs` + `buildCommand: npm run build`. `*.pdf` is gitignored.
+The repo lives at `github.com/protocol/plrd.org` (moved from `daviddao/plrd.org`; `daviddao/plrd-v2` was an earlier name). `main` auto-deploys to Vercel. `vercel.json` sets only `framework: nextjs` + `buildCommand: npm run build`. `*.pdf` is gitignored.
 
 ---
 
